@@ -28,7 +28,7 @@ app.use(
 		extended: false,
 	}),
 );
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
 	if (req.url.indexOf(".css") >= 0 || req.url.indexOf(".js") >= 0) return next();
 	if (
 		req.get("User-Agent").indexOf("MSIE") >= 0 ||
@@ -44,21 +44,21 @@ app.get("/old", (_, res) => {
 	res.sendFile(__dirname + "/views/old.html");
 });
 async function sendResponse(data, req, res) {
-	const url = req.query.url;
+	const url = req.query.url||req.query.state;
 	const retro = retronid();
 	await db.set("RETRIEVE_" + retro, data);
 	try {
 		const host = new URL(url).host;
-	} catch {
-		return res.status(400).send("Malformed URL: " + url);
+		res.render(__dirname + "/views/allow.html", {
+			url: url,
+			host: host,
+			data: `${data}`,
+			code: retro,
+			paramJoiner: url.indexOf("?") > -1 ? "&" : "?",
+		});
+	} catch (e) {
+		return res.status(400).send("Error:<br> " + e);
 	}
-	res.render(__dirname + "/views/allow.html", {
-		url: url,
-		host: host,
-		data: `${data}`,
-		code: retro,
-		paramJoiner: url.indexOf("?") > -1 ? "&" : "?",
-	});
 }
 // tailwind css
 app.get("/bundle.css", (_, res) => {
@@ -237,7 +237,7 @@ Doesn't work? Maybe it's been too long. Try starting over!
 
 Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, // this is the text version
 			},
-			function (error) {
+			function(error) {
 				if (error) {
 					return res.status(500).json({
 						ok: 0,
@@ -250,7 +250,7 @@ Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, //
 	}
 });
 // scratch
-app.get("/backend/scratch/:url", (req, res) => {
+app.get("/backend/scratch/https:/:url", (req, res) => {
 	axios({
 		method: "get",
 		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
@@ -258,7 +258,24 @@ app.get("/backend/scratch/:url", (req, res) => {
 		const data = response.data;
 		console.log(data);
 		if (data.valid) {
-			req.query.url = req.params.url;
+			req.query.url = `https://${req.params.url}`;
+			sendResponse(data, req, res);
+		} else {
+			return res.json({
+				ok: 0,
+			});
+		}
+	});
+});
+app.get("/backend/scratch/http:/:url", (req, res) => {
+	axios({
+		method: "get",
+		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
+	}).then((response) => {
+		const data = response.data;
+		console.log(data);
+		if (data.valid) {
+			req.query.url = `https://${req.params.url}`;
 			sendResponse(data, req, res);
 		} else {
 			return res.json({
@@ -288,4 +305,4 @@ app.post("/backend/remove_data", async (req, res) => {
 	res.json(await db.set("RETRIEVE_" + req.body.code), { error: "Denied access" });
 });
 // listen on port 8080, but we could do any port
-app.listen(8080, () => {});
+app.listen(8080, () => { });
