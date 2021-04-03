@@ -88,7 +88,7 @@ app.get("/backend/google/:token", (req, res) => {
 		var PAYLOAD = ticket.getPayload();
 		sendResponse(PAYLOAD, req, res);
 	}
-	verify(req.params.token).catch(e => {
+	verify(req.params.token).catch((e) => {
 		console.error(e);
 		res.json({
 			ok: 0,
@@ -112,8 +112,8 @@ app.get("/backend/github", (req, res) => {
 				},
 			},
 		)
-		.then(res => res.data.access_token)
-		.then(token => {
+		.then((res) => res.data.access_token)
+		.then((token) => {
 			axios({
 				method: "get",
 				url: `https://api.github.com/user`,
@@ -121,17 +121,17 @@ app.get("/backend/github", (req, res) => {
 					Authorization: "token " + token,
 				},
 			})
-				.then(response => {
+				.then((response) => {
 					sendResponse(response.data, req, res);
 				})
-				.catch(err =>
+				.catch((err) =>
 					res.status(500).json({
 						ok: 0,
 						message: err.message,
 					}),
 				);
 		})
-		.catch(err =>
+		.catch((err) =>
 			res.status(500).json({
 				ok: 0,
 				message: err.message,
@@ -254,7 +254,7 @@ app.get("/backend/scratch/https:/:url", (req, res) => {
 	axios({
 		method: "get",
 		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
-	}).then(response => {
+	}).then((response) => {
 		const data = response.data;
 		console.log(data);
 		if (data.valid) {
@@ -271,7 +271,7 @@ app.get("/backend/scratch/http:/:url", (req, res) => {
 	axios({
 		method: "get",
 		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
-	}).then(response => {
+	}).then((response) => {
 		const data = response.data;
 		console.log(data);
 		if (data.valid) {
