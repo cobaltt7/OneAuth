@@ -28,7 +28,7 @@ app.use(
 		extended: false,
 	}),
 );
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	if (req.url.indexOf(".css") >= 0 || req.url.indexOf(".js") >= 0) return next();
 	if (
 		req.get("User-Agent").indexOf("MSIE") >= 0 ||
@@ -44,7 +44,7 @@ app.get("/old", (_, res) => {
 	res.sendFile(__dirname + "/views/old.html");
 });
 async function sendResponse(data, req, res) {
-	const url = req.query.url||req.query.state;
+	const url = req.query.url || req.query.state;
 	const retro = retronid();
 	await db.set("RETRIEVE_" + retro, data);
 	try {
@@ -237,7 +237,7 @@ Doesn't work? Maybe it's been too long. Try starting over!
 
 Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, // this is the text version
 			},
-			function(error) {
+			function (error) {
 				if (error) {
 					return res.status(500).json({
 						ok: 0,
@@ -305,4 +305,4 @@ app.post("/backend/remove_data", async (req, res) => {
 	res.json(await db.set("RETRIEVE_" + req.body.code), { error: "Denied access" });
 });
 // listen on port 8080, but we could do any port
-app.listen(8080, () => { });
+app.listen(8080, () => {});
