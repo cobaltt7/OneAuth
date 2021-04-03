@@ -1,0 +1,106 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Sign in with email</title>
+		<link rel="shortcut icon" href="/logo.png" />
+		<link rel="stylesheet" href="/bundle.css" />
+		<noscript>
+			<meta http-equiv="refresh" content="0; url=/old/" />
+		</noscript>
+	</head>
+	<body class="bg-white text-black antialiased">
+		<nav class="sticky w-full top-0 overflow-x-auto h-20" id="top">
+			<div class="container my-4 mx-auto flex flex-wrap items-center text-gray-100">
+				<a href="/" class="text-white flex w-full justify-center font-light">
+					<img
+						src="https://cdn.onedot.cf/brand/SVG%20No%20BG/1%20AUTH.svg"
+						alt="1 Auth logo"
+						class="w-full inline-block"
+					/>
+				</a>
+			</div>
+		</nav>
+		<div class="flex flex-col space-y-10 justify-center items-center">
+			<!-- Layout  -->
+			<div id="main" class="w-96 shadow-xl rounded p-5 h-full w-full">
+				<h1 class="text-3xl font-medium">Sign in with email</h1>
+				<label>
+					<p id="note" class="text-sm">Enter your email to continue</p>
+				</label>
+				<form action="" method="POST">
+					<div class="rounded-sm shadow-sm -space-y-px">
+						<div>
+							<label for="email-address" class="sr-only">Email address</label>
+							<input
+								id="email-address"
+								name="email"
+								type="email"
+								autocomplete="email"
+								required
+								class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+								placeholder="Email address"
+							/>
+						</div>
+					</div>
+					<div class="my-2">
+						<button
+							type="submit"
+							class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+						>
+							<span class="absolute left-0 inset-y-0 flex items-center pl-3">
+								<!-- Heroicon name: solid/lock-closed -->
+							</span>
+							Submit
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<style>
+			input {
+				color: black;
+			}
+		</style>
+		<script>
+			document.querySelector("form").addEventListener("submit", (e) => {
+				e.preventDefault();
+				const email = document.querySelector("input").value;
+				fetch("https://auth.onedot.cf/backend/email", {
+					headers: {
+						"content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+					},
+					body: "email=" + email,
+					method: "POST",
+				});
+				document.querySelector("form").remove();
+				var form = Object.assign(document.createElement("form"), {
+					action: "",
+					method: "POST",
+					autocomplete: "off",
+				});
+				var code = Object.assign(document.createElement("input"), {
+					type: "password",
+					name: "code",
+					placeholder: "abcde12345",
+					autocomplete: "off", // chrome, this is not a password
+					required: "true",
+				});
+				var hiddenemail = Object.assign(document.createElement("input"), {
+					type: "hidden",
+					name: "email",
+					value: email,
+				});
+				var submit = Object.assign(document.createElement("input"), {
+					type: "submit",
+				});
+				document.querySelector("#note").innerText = "Enter the code we sent to you to continue";
+				form.appendChild(code);
+				form.appendChild(document.createElement("br"));
+				form.appendChild(submit);
+				form.appendChild(hiddenemail);
+				document.querySelector("#main").appendChild(form);
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Login With Repl.it</title>
+		<link rel="stylesheet" href="/bundle.css" />
+		<noscript>
+			<meta http-equiv="refresh" content="0; url=/old/" />
+		</noscript>
+	</head>
+
+	<body>
+		<script
+			crossorigin="anonymous"
+			src="https://cdn.jsdelivr.net/gh/cursorweb/cursorweb-cdn/repl-auth/repl-auth.min.js"
+		></script>
+		<script>
+			/*
+		  Go here: https://github.com/cursorweb/replit-auth-html to learn more.
+		*/
+			Auth.onerror = function (e) {
+				location.reload();
+			};
+			Auth.ondone = function (e) {
+				location.reload();
+			};
+			new Auth("iframe").append();
+		</script>
+	</body>
+</html>

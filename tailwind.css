@@ -1,0 +1,18 @@
+input {
+	color: black;
+}
+
+iframe {
+	width: 100vw;
+	height: 100vh;
+	box-shadow: 0 0 0 #fff;
+	border: 0px solid white;
+}
+
+a,
+a * {
+	cursor: pointer;
+}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

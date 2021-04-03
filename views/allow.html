@@ -1,0 +1,58 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Allow access?</title>
+		<link rel="shortcut icon" href="/logo.png" />
+		<script src="https://kit.fontawesome.com/2a2d30d602.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="/bundle.css" />
+		<noscript>
+			<meta http-equiv="refresh" content="0; url=/old/" />
+		</noscript>
+	</head>
+
+	<body class="bg-white text-black antialiased">
+		<nav class="sticky w-full top-0 overflow-x-auto h-20" id="top">
+			<div class="container my-4 mx-auto flex flex-wrap items-center text-gray-100">
+				<a href="/" class="text-white flex w-full justify-center font-light">
+					<img
+						src="https://cdn.onedot.cf/brand/SVG%20No%20BG/1%20AUTH.svg"
+						alt="1 Auth logo"
+						class="w-full inline-block"
+					/>
+				</a>
+			</div>
+		</nav>
+		<div class="flex flex-col space-y-10 justify-center items-center">
+			<!-- Layout  -->
+			<div id="main" class="w-96 shadow-xl rounded p-5 h-full w-full">
+				<h1 class="text-3xl font-medium">Allow access?</h1>
+				<p id="note" class="text-sm">Do you want {{host}} to access your data?</p>
+				<br />
+				<a
+					href="{{url}}{{paramJoiner}}code={{code}}"
+					class="flex bg-green-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-green-600 mr-6"
+					>Allow
+					<i class="far fa-check-circle inline ml-2"></i>
+				</a>
+				<a
+					href="{{url}}{{paramJoiner}}code={{code}}"
+					id="deny"
+					class="flex bg-red-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-red-600 mr-6"
+					>Deny
+					<i class="far fa-times-circle inline ml-2"></i>
+				</a>
+			</div>
+		</div>
+		<script>
+			const deny = document.querySelector("#deny");
+			deny.addEventListner("click", () => {
+				fetch("https://auth.onedot.cf/backend/remove_data", {
+					body: "code=" + new URL(deny.href).searchParams.get("code"),
+					method: "POST",
+				});
+				return true;
+			});
+		</script>
+	</body>
+</html>
