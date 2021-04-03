@@ -13,7 +13,6 @@ app.set("views", "./views");
 app.set("view engine", "html");
 app.disable("view cache");
 var base64 = require("base-64");
-
 // google auth id token setup
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(process.env.googleAppUrl);
@@ -256,7 +255,6 @@ app.get("/backend/scratch/https:/:url", (req, res) => {
 		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
 	}).then((response) => {
 		const data = response.data;
-		console.log(data);
 		if (data.valid) {
 			req.query.url = `https://${req.params.url}`;
 			sendResponse(data, req, res);
@@ -273,7 +271,6 @@ app.get("/backend/scratch/http:/:url", (req, res) => {
 		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
 	}).then((response) => {
 		const data = response.data;
-		console.log(data);
 		if (data.valid) {
 			req.query.url = `https://${req.params.url}`;
 			sendResponse(data, req, res);
@@ -291,18 +288,24 @@ app.get("/backend/scratchredirect", (req, res) => {
 		)}`,
 	);
 });
-app.post("/backend/get_data", async (req, res) => {
-	if (!req.body.code) {
-		res.status(400).send("Missing code");
+app.get("/backend/get_data/:code", bodyParser.json(), async (req, res) => {
+	// client is retriving data
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	if (!req.params.code) {
+		return res.status(400).send("Missing code");
 	}
-	res.json(await db.get("RETRIEVE_" + req.body.code));
-	await db.delete("RETRIEVE_" + req.body.code);
+	res.json(await db.get("RETRIEVE_" + req.params.code));
+	await db.delete("RETRIEVE_" + req.params.code);
+
+	//the problem is it's not reciving the code
 });
-app.post("/backend/remove_data", async (req, res) => {
-	if (!req.body.code) {
-		res.status(400).send("Missing code");
+app.get("/backend/remove_data/:code", async (req, res) => {
+	// user denies sharing data
+	if (!req.params.code) {
+		return res.status(400).send("Missing code");
 	}
-	res.json(await db.set("RETRIEVE_" + req.body.code), { error: "Denied access" });
+	res.json(await db.set("RETRIEVE_" + req.params.code), { error: "Denied access" });
 });
 // listen on port 8080, but we could do any port
-app.listen(8080, () => {});
+app.listen(8080);
