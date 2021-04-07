@@ -75,8 +75,6 @@ h6 {
 .main section {
 	@apply w-full;
 }
-/* ℹ️ Base selector: #clients #auth-list */
-/* ✨ TailwindCSS: "justify-start" */
 #clients #auth-list {
 	@apply justify-start;
 }
