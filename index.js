@@ -47,56 +47,6 @@ const retronid = require("retronid").generate;
 const db = new (require("@replit/database"))();
 
 // AUTH STUFF
-const { document } = new (require("jsdom").JSDOM)("").window;
-const auth_clients = require("./auth/clients.js");
-
-let auth_list = Object.assign(document.createElement("ul"), {
-	id: "auth-list",
-}); // this is the list on /about without links
-let auth_buttons = Object.assign(document.createElement("ul"), {
-	id: "auth-list",
-}); // this is the list on / with links
-auth_clients.forEach((client) => {
-	// add the link
-	let link = Object.assign(document.createElement("a"), {
-		href: client.link,
-	});
-	auth_buttons.append(link);
-
-	// add the list item
-	let li = Object.assign(document.createElement("li"), {
-		class: "auth-buttons",
-	});
-
-	// add the icon
-	let icon;
-	if (client.iconProvider === "fa") {
-		icon = Object.assign(document.createElement("i"), {
-			className: "fas fa-" + client.icon,
-		});
-	} else if (client.iconProvider === "svg") {
-		icon = Object.assign(document.createElement("img"), {
-			className: "svg-inline--fa",
-			src: client.icon + ".svg",
-			alt: client.name + " logo",
-			name: client.name,
-			width: "16",
-			height: "16",
-		});
-	} else {
-		throw new Error(client.iconProvider + " is not a valid icon provider for " + client.name);
-	}
-	li.append(icon);
-	auth_list.append(li); // this is appended here and not at L61 because if it was at L61, L81 would only append to auth_list and not to link
-	link.append(li.cloneNode(true));
-	// add text
-	link.firstElementChild.append(document.createTextNode("Sign in with " + client.name));
-	li.append(document.createTextNode(client.name));
-
-	// save
-	console.log(auth_buttons.outerHTML);
-	console.log(auth_list.outerHTML);
-});
 
 var base64 = require("base-64"); // scratch
 const nodemailer = require("nodemailer"); // email
@@ -338,9 +288,6 @@ app.get("/backend/get_data/:code", async (req, res) => {
 	// client is retriving data
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	if (!req.params.code) {
-		return res.status(400).send("Missing code");
-	}
 	res.json(await db.get("RETRIEVE_" + req.params.code));
 	await db.delete("RETRIEVE_" + req.params.code);
 });

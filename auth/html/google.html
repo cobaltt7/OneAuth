@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="google-signin-client_id"
+			content="808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com"
+		/>
+		<title>1Auth</title>
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<script
+			src="https://apis.google.com/js/platform.js"
+			onload="auth()"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="/bundle-beta.css" />
+		<noscript>
+			<meta http-equiv="refresh" content="0; url=/old/" />
+		</noscript>
+	</head>
+
+	<body>
+		<script>
+			function auth() {
+				gapi.client.setApiKey(/* i need the client secret here*/);
+				gapi.auth.authorize(
+					{
+						client_id: "808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com",
+						cookiepolicy: "single_host_origin",
+     				    immediate: false,
+					}, function(googleUser) {
+						if (googleUser && !googleUser.error) {
+							const id_token = googleUser.getAuthResponse().id_token;
+							window.location.assign(`/backend/google/${id_token}?url={{url}}`);
+						} else {
+							console.error(googleUser.error);
+						},
+					}
+					);
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -3,12 +3,61 @@ var minify = new CleanCSS();
 const zlib = require("zlib");
 const fs = require("fs");
 var router = require("express").Router();
+
+const { document } = new (require("jsdom").JSDOM)("").window;
+const auth_clients = require("./auth/clients.js");
+
+let auth_list = Object.assign(document.createElement("ul"), {
+	id: "auth-list",
+}); // this is the list on /about without links
+let auth_buttons = Object.assign(document.createElement("ul"), {
+	id: "auth-list",
+}); // this is the list on / with links
+auth_clients.forEach((client) => {
+	// add the link
+	let link = Object.assign(document.createElement("a"), {
+		href: client.link,
+	});
+	auth_buttons.append(link);
+
+	// add the list item
+	let li = Object.assign(document.createElement("li"), {
+		class: "auth-buttons",
+	});
+
+	// add the icon
+	let icon;
+	if (client.iconProvider === "fa") {
+		icon = Object.assign(document.createElement("i"), {
+			className: "fas fa-" + client.icon,
+		});
+	} else if (client.iconProvider === "svg") {
+		icon = Object.assign(document.createElement("img"), {
+			className: "svg-inline--fa",
+			src: client.icon + ".svg",
+			alt: client.name + " logo",
+			name: client.name,
+			width: "16",
+			height: "16",
+		});
+	} else {
+		throw new Error(client.iconProvider + " is not a valid icon provider for " + client.name);
+	}
+	li.append(icon);
+	auth_list.append(li); // this is appended here and not at L21 because if it was at L21, L47 would only append to auth_list and not to link
+	link.append(li.cloneNode(true));
+	// add text
+	link.firstElementChild.append(document.createTextNode("Sign in with " + client.name));
+	li.append(document.createTextNode(client.name));
+});
+
 router.get("/", (req, res) => {
 	if (!req.query.url) {
 		return res.redirect("https://auth.onedot.cf/about");
 	}
 	res.render(__dirname + "/index.html", {
 		url: encodeURIComponent(req.query.url),
+		buttons: auth_buttons.outerHTML,
 	});
 });
 // css
@@ -23,7 +72,9 @@ router.get("/bundle-beta.css", (_, res) => {
 
 // about
 router.get("/about", (_, res) => {
-	res.render(__dirname + "/about.html");
+	res.render(__dirname + "/about.html", {
+		clients: auth_list_outerHTML,
+	});
 });
 
 //logo
