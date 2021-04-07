@@ -29,7 +29,7 @@
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
-		"google-auth-library": "^7.0.3",
+		"google-auth-library": "^7.0.4",
 		"jsdom": "^16.5.2",
 		"mustache-express": "^1.3.0",
 		"nodemailer": "^6.5.0",
@@ -43,7 +43,8 @@
 		"@types/node": "^14.14.37",
 		"nodemon": "^2.0.7",
 		"postcss": "^8.2.9",
-		"prettier": "^2.2.1"
+		"prettier": "^2.2.1",
+		"tailwindcss": "^2.1.1"
 	},
 	"bugs": {
 		"url": "https://github.com/onedotprojects/auth/issues/new",
