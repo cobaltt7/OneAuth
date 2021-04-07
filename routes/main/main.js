@@ -1,6 +1,6 @@
-const CleanCSS = require('clean-css')
-var minify = new CleanCSS()
-const fs = require('fs')
+const CleanCSS = require("clean-css");
+var minify = new CleanCSS();
+const fs = require("fs");
 var router = require("express").Router();
 router.get("/", (req, res) => {
 	if (!req.query.url) {
@@ -15,8 +15,8 @@ router.get("/bundle.css", (_, res) => {
 	res.sendFile(__dirname + "/bundle.css");
 });
 router.get("/bundle-beta.css", (_, res) => {
-  text = fs.readFileSync(__dirname + "/bundle-beta.css","utf-8");
-  res.setHeader('content-type', 'text/css');
+	text = fs.readFileSync(__dirname + "/bundle-beta.css", "utf-8");
+	res.setHeader("content-type", "text/css");
 
 	res.send(minify.minify(text).styles);
 });
