@@ -39,12 +39,15 @@ main {
 #allow {
 	@apply mr-8 bg-green-500;
 }
+#allow:hover {
+	@apply bg-green-600;
+}
 
 #deny {
-	background-color: rgba(239, 68, 68, 1);
+	@apply mr-8 bg-green-500;
 }
 #deny:hover {
-	background-color: rgba(220, 38, 38, 1);
+	@apply mr-8 bg-red-500;
 }
 .button-container {
 	@apply inline-flex p-2 w-full;
