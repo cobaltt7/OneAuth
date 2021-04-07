@@ -1,10 +1,11 @@
 {
 	"name": "1Auth",
 	"version": "1.0.0",
-	"description": "Authorization website",
+	"description": "All-In-One Authorization",
 	"main": "index.js",
 	"scripts": {
-		"start": "TAILWIND_MODE=watch postcss tailwind.css -o bundle.css & node --trace-warnings ."
+		"start": "TAILWIND_MODE=watch postcss tailwind.css -o routes/main/bundle-beta.css & node --trace-warnings .",
+		"test": "npm install && npx prettier -w . && nodemon --trace-warnings ."
 	},
 	"keywords": [
 		"auth",
@@ -18,34 +19,110 @@
 	"dependencies": {
 		"@replit/database": "^2.0.1",
 		"@tailwindcss/forms": "^0.3.2",
+		"@tailwindcss/jit": "^0.1.18",
 		"autoprefixer": "^10.2.5",
 		"axios": "^0.21.1",
 		"base-64": "^1.0.0",
 		"body-parser": "^1.19.0",
+		"clean-css": "^5.1.2",
 		"cookie-parser": "^1.4.5",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"google-auth-library": "^7.0.3",
+		"jsdom": "^16.5.2",
 		"mustache-express": "^1.3.0",
 		"nodemailer": "^6.5.0",
 		"postcss-cli": "^8.3.1",
-		"retronid": "^1.0.2"
+		"retronid": "^1.0.2",
+		"tailwindcss": "^2.1.1"
 	},
 	"devDependencies": {
-		"@tailwindcss/jit": "^0.1.18",
+		"@types/express": "^4.17.11",
+		"@types/jsdom": "^16.2.10",
 		"@types/node": "^14.14.37",
+		"nodemon": "^2.0.7",
 		"postcss": "^8.2.9",
-		"prettier": "^2.2.1",
-		"tailwindcss": "^2.0.4"
+		"prettier": "^2.2.1"
 	},
 	"bugs": {
-		"url": "https://discord.gg/xguCVrSkAt",
+		"url": "https://github.com/onedotprojects/auth/issues/new",
 		"email": "1auth.wgyt@gmail.com"
 	},
 	"homepage": "https://auth.onedot.cf",
 	"private": true,
 	"engines": {
 		"node": "*"
+	},
+	"jshintConfig": {
+		"maxerr": 50,
+		"bitwise": true,
+		"camelcase": true,
+		"curly": true,
+		"eqeqeq": true,
+		"forin": true,
+		"freeze": true,
+		"immed": true,
+		"latedef": true,
+		"newcap": false,
+		"noarg": true,
+		"noempty": true,
+		"nonbsp": true,
+		"nonew": false,
+		"plusplus": false,
+		"quotmark": true,
+		"undef": true,
+		"unused": true,
+		"strict": false,
+		"maxparams": false,
+		"maxdepth": 5,
+		"maxstatements": false,
+		"maxcomplexity": 30,
+		"maxlen": 120,
+		"varstmt": false,
+		"asi": false,
+		"boss": false,
+		"debug": false,
+		"eqnull": false,
+		"esversion": 9,
+		"moz": false,
+		"evil": false,
+		"expr": true,
+		"funcscope": true,
+		"globalstrict": false,
+		"iterator": true,
+		"lastsemic": false,
+		"laxbreak": false,
+		"laxcomma": true,
+		"loopfunc": false,
+		"multistr": true,
+		"noyield": false,
+		"notypeof": true,
+		"proto": true,
+		"scripturl": true,
+		"shadow": false,
+		"sub": false,
+		"supernew": true,
+		"node": true
+	},
+	"prettier": {
+		"tabWidth": 4,
+		"useTabs": true,
+		"trailingComma": "all",
+		"jsxBracketSameLine": true,
+		"vueIndentScriptAndStyle": true,
+		"embeddedLanguageFormatting": "auto",
+		"printWidth": 120
+	},
+	"nodemonConfig": {
+		"ignore": [
+			".git",
+			"node_modules/**/node_modules"
+		],
+		"verbose": true,
+		"events": {
+			"restart": "if [ $FILENAME == 'package.json' ] || [ $FILENAME == 'package-lock.json' ]\nthen\nnpm install\nfi\nprettier -w $FILENAME"
+		},
+		"ext": "*"
 	}
 }

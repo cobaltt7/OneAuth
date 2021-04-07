@@ -1,5 +1,5 @@
 module.exports = {
-	purge: ["./views/**.html"],
+	purge: ["./views/**.html","./routes/main/**.html", "./tailwind.css"],
 	theme: {
 		// ...
 	},
