@@ -44,4 +44,7 @@ router.get("/old", (_, res) => {
 	res.render(__dirname + "/old.html");
 });
 
+router.use((_, res) => {
+	res.status(404).sendFile(__dirname + "/404.html");
+});
 module.exports = router;
