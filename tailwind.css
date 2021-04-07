@@ -1,6 +1,10 @@
+/* Import tailwind */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+/* Custom styling using @apply for the most part 
+ * Should be migrated entirely to @apply
+*/
 
 iframe {
 	@apply border-white border-solid border-0 h-screen w-screen;
@@ -14,13 +18,14 @@ label {
 nav {
 	@apply h-20 sticky top-0 w-full;
 	background-color: rgba(238, 238, 238, 1);
+	border-bottom: 1px solid hsl(359deg 58% 27%);
 }
 
 nav > img {
 	@apply h-20 m-auto p-1;
 }
 main {
-	@apply rounded flex flex-col items-center p-3 w-full;
+	@apply rounded flex flex-col p-3 w-full;
 	box-shadow: 0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
@@ -29,9 +34,6 @@ main {
 }
 #auth-list {
 	@apply flex flex-wrap justify-center w-full;
-}
-.auth-button {
-	@apply rounded-full border cursor-pointer m-1 p-4;
 }
 #email-address,
 #code {
@@ -78,13 +80,21 @@ h6 {
 #clients #auth-list {
 	@apply justify-start;
 }
-h1 {
-	@apply text-2xl;
+main.prose {
+	max-width: revert !important;
 }
-pre,
-code {
-	@apply rounded border-solid border text-base px-1 py-px;
-	background-color: rgba(199, 199, 199, 1);
-	border-color: rgba(105, 105, 105, 1);
-	font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+.prose ul > li.auth-button::before {
+	@apply hidden;
+}
+.auth-button {
+	@apply rounded-full border cursor-pointer m-1;
+	position: revert !important;
+	padding: 1em !important;
+}
+
+.prose > :first-child {
+	@apply self-center;
+}
+.prose section h2{
+	apply @mt-0
 }

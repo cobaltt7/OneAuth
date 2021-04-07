@@ -1,2 +1,4 @@
 .github/workflows
 .upm
+routes/main/bundle-beta.css
+routes/main/bundle.css
