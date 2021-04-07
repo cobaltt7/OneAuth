@@ -13,6 +13,6 @@ module.exports = [
 		link: "/auth/google.html?url={{url}}",
 		icon: "google",
 		iconProvider: "fa",
-		backendPage: "/backend/google"
+		backendPage: "/backend/google",
 	},
 ];
