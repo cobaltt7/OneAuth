@@ -1,12 +1,19 @@
 // SET UP EXPRESS
 const app = require("express")(); // Initialize server
-const mustacheExpress = require("mustache-express");
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
-app.engine("html", mustacheExpress());
+//express config
 app.set("views", "./views");
 app.set("view engine", "html");
 app.disable("view cache");
+// mustache
+const mustacheExpress = require("mustache-express");
+app.engine("html", mustacheExpress());
+// cookies
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+// compress
+var compression = require("compression");
+app.use(compression());
+// post request bodies
 const bodyParser = require("body-parser");
 app.use(
 	bodyParser.urlencoded({
@@ -18,8 +25,8 @@ app.use(
 		extended: false,
 	}),
 );
+// old browsers
 app.use(function (req, res, next) {
-	// disalow old browsers
 	if (req.url.indexOf(".css") >= 0 || req.url.indexOf(".js") >= 0) return next();
 	if (
 		req.get("User-Agent").indexOf("MSIE") >= 0 ||
@@ -31,7 +38,8 @@ app.use(function (req, res, next) {
 	}
 	return next();
 });
-app.use("/", require("./routes/main/main.js")); // static-ish pages
+// static-ish pages
+app.use("/", require("./routes/main/main.js"));
 
 // OTHER SETUP
 require("dotenv").config();
@@ -343,6 +351,8 @@ app.get("/backend/remove_data/:code", async (req, res) => {
 	}
 	res.json(await db.set("RETRIEVE_" + req.params.code), { error: "Denied access" });
 });
-
+app.use((_, res) => {
+	res.status(404).sendFile(__dirname + "/routes/main/404.html");
+});
 // LISTEN
 app.listen(3000);

@@ -8,25 +8,17 @@
 
 iframe {
 	@apply border-white border-solid border-0 h-screen w-screen;
-	box-shadow: 0 0 0 #fff;
 }
 
-p,
-label {
-	@apply text-sm leading-5;
-}
 nav {
-	@apply h-20 sticky top-0 w-full;
-	background-color: rgba(238, 238, 238, 1);
-	border-bottom: 1px solid hsl(359deg 58% 27%);
+	@apply h-20 sticky top-0 w-full bg-gray-50 border-red-900;
 }
 
 nav > img {
 	@apply h-20 m-auto p-1;
 }
 main {
-	@apply rounded flex flex-col p-3 w-full;
-	box-shadow: 0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	@apply rounded flex flex-col p-3 w-full prose max-w-none shadow-xl;
 }
 
 .auth-button svg {
@@ -36,16 +28,8 @@ main {
 	@apply flex flex-wrap justify-center w-full;
 }
 #email-address,
-#code {
-	@apply appearance-none rounded-sm border block text-sm leading-5 py-2 px-3 relative w-full;
-	box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	color: rgba(17, 24, 39, 1);
-	border-color: rgba(209, 213, 219, 1);
-}
-
 #submit {
-	@apply border-transparent rounded-sm border flex justify-center font-medium text-sm leading-5 mx-0 my-2 py-2 px-4 relative text-white w-full;
-	background-color: rgba(220, 38, 38, 1);
+	@apply border-transparent rounded-sm border flex justify-center font-medium text-sm leading-5 mx-0 my-2 py-2 px-4 relative text-white w-full bg-green-500;
 }
 
 #allow,
@@ -53,8 +37,7 @@ main {
 	@apply rounded-full py-3 px-4 text-white w-full transition ease-in-out duration-300;
 }
 #allow {
-	@apply mr-8;
-	background-color: rgba(16, 185, 129, 1);
+	@apply mr-8 bg-green-500;
 }
 
 #deny {
@@ -80,21 +63,27 @@ h6 {
 #clients #auth-list {
 	@apply justify-start;
 }
-main.prose {
-	max-width: revert !important;
-}
 .prose ul > li.auth-button::before {
 	@apply hidden;
 }
 .auth-button {
 	@apply rounded-full border cursor-pointer m-1;
-	position: revert !important;
-	padding: 1em !important;
+	position: revert !important; /* Can't use @apply because it needs !important */
+	padding: 1em !important; /* Can't use @apply because it needs !important */
 }
 
 .prose > :first-child {
 	@apply self-center;
 }
-.prose section h2{
-	apply @mt-0
+.prose section h2 {
+	@apply mt-0;
+}
+main .auth-button a {
+	color: inherit;
+	@apply no-underline font-normal;
+}
+
+main p:first-of-type:last-of-type,
+main h1:first-of-type {
+	@apply self-center m-0;
 }
