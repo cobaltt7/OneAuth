@@ -1,22 +1,12 @@
-const app = require("express")();
+// SET UP EXPRESS
+const app = require("express")(); // Initialize server
 const mustacheExpress = require("mustache-express");
 const cookieParser = require("cookie-parser");
-const nodemailer = require("nodemailer");
-require("dotenv").config();
-const retronid = require("retronid").generate;
-const axios = require("axios");
-const Database = require("@replit/database");
-const db = new Database();
 app.use(cookieParser());
 app.engine("html", mustacheExpress());
 app.set("views", "./views");
 app.set("view engine", "html");
 app.disable("view cache");
-var base64 = require("base-64");
-
-// google auth id token setup
-const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client(process.env.googleAppUrl);
 const bodyParser = require("body-parser");
 app.use(
 	bodyParser.urlencoded({
@@ -29,6 +19,7 @@ app.use(
 	}),
 );
 app.use(function (req, res, next) {
+	// disalow old browsers
 	if (req.url.indexOf(".css") >= 0 || req.url.indexOf(".js") >= 0) return next();
 	if (
 		req.get("User-Agent").indexOf("MSIE") >= 0 ||
@@ -36,48 +27,75 @@ app.use(function (req, res, next) {
 		req.get("User-Agent").indexOf("Netscape") >= 0 ||
 		req.get("User-Agent").indexOf("Navigator") >= 0
 	) {
-		return res.sendFile(__dirname + "/views/old.html");
+		return res.render(__dirname + "/routes/old/old.html");
 	}
 	return next();
 });
-app.get("/old", (_, res) => {
-	res.sendFile(__dirname + "/views/old.html");
-});
-async function sendResponse(data, req, res) {
-	const url = req.query.url || req.query.state;
-	const retro = retronid();
-	await db.set("RETRIEVE_" + retro, data);
-	try {
-		const host = new URL(url).host;
-		res.render(__dirname + "/views/allow.html", {
-			url: url,
-			host: host,
-			data: `${data}`,
-			code: retro,
-			paramJoiner: url.indexOf("?") > -1 ? "&" : "?",
+app.use("/", require("./routes/main/main.js")); // static-ish pages
+
+// OTHER SETUP
+require("dotenv").config();
+const retronid = require("retronid").generate;
+const db = new (require("@replit/database"))();
+
+// AUTH STUFF
+const { document } = new (require("jsdom").JSDOM)("").window;
+const auth_clients = require("./auth/clients.js");
+
+let auth_list = Object.assign(document.createElement("ul"), {
+	id: "auth-list",
+}); // this is the list on /about without links
+let auth_buttons = Object.assign(document.createElement("ul"), {
+	id: "auth-list",
+}); // this is the list on / with links
+auth_clients.forEach((client) => {
+	// add the link
+	let link = Object.assign(document.createElement("a"), {
+		href: client.link,
+	});
+	auth_buttons.append(link);
+
+	// add the list item
+	let li = Object.assign(document.createElement("li"), {
+		class: "auth-buttons",
+	});
+
+	// add the icon
+	let icon;
+	if (client.iconProvider === "fa") {
+		icon = Object.assign(document.createElement("i"), {
+			className: "fas fa-" + client.icon,
 		});
-	} catch (e) {
-		return res.status(400).send("Error:<br> " + e);
+	} else if (client.iconProvider === "svg") {
+		icon = Object.assign(document.createElement("img"), {
+			className: "svg-inline--fa",
+			src: client.icon + ".svg",
+			alt: client.name + " logo",
+			name: client.name,
+			width: "16",
+			height: "16",
+		});
+	} else {
+		throw new Error(client.iconProvider + " is not a valid icon provider for " + client.name);
 	}
-}
-// tailwind css
-app.get("/bundle.css", (_, res) => {
-	res.sendFile(__dirname + "/bundle.css");
+	li.append(icon);
+	auth_list.append(li); // this is appended here and not at L61 because if it was at L61, L81 would only append to auth_list and not to link
+	link.append(li.cloneNode(true));
+	// add text
+	link.firstElementChild.append(document.createTextNode("Sign in with " + client.name));
+	li.append(document.createTextNode(client.name));
+
+	// save
+	console.log(auth_buttons.outerHTML);
+	console.log(auth_list.outerHTML);
 });
 
-//logo
-app.get("/logo.png", (_, res) => {
-	res.redirect("https://cdn.onedot.cf/brand/PNG%20No%20BG/Auth.png");
-});
-app.get("/favicon.ico", (_, res) => {
-	res.redirect("https://cdn.onedot.cf/brand/PNG%20No%20BG/Auth.png");
-});
-// main page
-app.get("/", (req, res) => {
-	res.render(__dirname + "/views/index.html", {
-		url: encodeURIComponent(req.query.url),
-	});
-});
+var base64 = require("base-64"); // scratch
+const nodemailer = require("nodemailer"); // email
+const axios = require("axios"); // github, scratch
+const { OAuth2Client } = require("google-auth-library"); // google
+const client = new OAuth2Client(process.env.googleAppUrl); // google
+
 // google
 app.get("/backend/google/:token", (req, res) => {
 	async function verify(idtoken) {
@@ -149,12 +167,12 @@ app.get("/backend/repl", (req, res) => {
 		};
 		sendResponse(data, req, res);
 	} else {
-		res.sendFile(__dirname + "/views/repl.html");
+		res.render(__dirname + "/views/repl.html");
 	}
 });
 // email
 app.get("/backend/email", (_, res) => {
-	res.sendFile(__dirname + "/views/email.html");
+	res.render(__dirname + "/views/email.html");
 });
 app.post("/backend/email", async (req, res) => {
 	if (req.body.code && req.body.email) {
@@ -183,7 +201,7 @@ app.post("/backend/email", async (req, res) => {
 	});
 	if (req.body.email && !req.body.code) {
 		// send email
-		const transporter = nodemailer.createTransport({
+		const Mail = nodemailer.createTransport({
 			service: "gmail",
 			auth: {
 				user: process.env.GMAIL_EMAIL,
@@ -196,7 +214,7 @@ app.post("/backend/email", async (req, res) => {
 			date: Date.now(),
 		});
 
-		transporter.sendMail(
+		Mail.sendMail(
 			{
 				from: process.env.GMAIL_EMAIL,
 				to: req.body.email,
@@ -207,7 +225,7 @@ app.post("/backend/email", async (req, res) => {
 						<meta name="viewport" content="width=device-width, initial-scale=1">
 					</head>
 					<body style="font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;;">
-						<img src="https://cdn.onedot.cf/brand/SVG%20No%20BG/1%20AUTH.svg" alt="1 Auth logo" style="max-width: 550px;">
+						<img src="/logo.svg" alt="1Auth logo" style="max-width: 550px;">
 						<div style="font-size: 1.3em;">
 							<h1>1Auth Email Verification</h1>
 							<h2>Your code is ${id}. <u>Don't share it with anyone else.</u></h2>
@@ -244,9 +262,9 @@ Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, //
 						message: error,
 					});
 				}
+				return;
 			},
 		);
-		return;
 	}
 });
 // scratch
@@ -256,7 +274,6 @@ app.get("/backend/scratch/https:/:url", (req, res) => {
 		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
 	}).then((response) => {
 		const data = response.data;
-		console.log(data);
 		if (data.valid) {
 			req.query.url = `https://${req.params.url}`;
 			sendResponse(data, req, res);
@@ -273,7 +290,6 @@ app.get("/backend/scratch/http:/:url", (req, res) => {
 		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
 	}).then((response) => {
 		const data = response.data;
-		console.log(data);
 		if (data.valid) {
 			req.query.url = `https://${req.params.url}`;
 			sendResponse(data, req, res);
@@ -291,18 +307,42 @@ app.get("/backend/scratchredirect", (req, res) => {
 		)}`,
 	);
 });
-app.post("/backend/get_data", async (req, res) => {
-	if (!req.body.code) {
-		res.status(400).send("Missing code");
+
+// HANDLE DATA
+const sendResponse = async function (data, req, res) {
+	const url = req.query.url || req.query.state;
+	const retro = retronid();
+	await db.set("RETRIEVE_" + retro, data);
+	try {
+		const host = new URL(url).host;
+		res.render(__dirname + "/views/allow.html", {
+			url: url,
+			host: host,
+			data: `${data}`,
+			code: retro,
+			paramJoiner: url.indexOf("?") > -1 ? "&" : "?",
+		});
+	} catch (e) {
+		return res.status(400).send("Error:<br> " + e);
 	}
-	res.json(await db.get("RETRIEVE_" + req.body.code));
-	await db.delete("RETRIEVE_" + req.body.code);
-});
-app.post("/backend/remove_data", async (req, res) => {
-	if (!req.body.code) {
-		res.status(400).send("Missing code");
+};
+app.get("/backend/get_data/:code", async (req, res) => {
+	// client is retriving data
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	if (!req.params.code) {
+		return res.status(400).send("Missing code");
 	}
-	res.json(await db.set("RETRIEVE_" + req.body.code), { error: "Denied access" });
+	res.json(await db.get("RETRIEVE_" + req.params.code));
+	await db.delete("RETRIEVE_" + req.params.code);
 });
-// listen on port 8080, but we could do any port
-app.listen(8080, () => {});
+app.get("/backend/remove_data/:code", async (req, res) => {
+	// user denies sharing data
+	if (!req.params.code) {
+		return res.status(400).send("Missing code");
+	}
+	res.json(await db.set("RETRIEVE_" + req.params.code), { error: "Denied access" });
+});
+
+// LISTEN
+app.listen(3000);
