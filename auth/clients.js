@@ -31,7 +31,8 @@ module.exports = [
 	},
 	{
 		name: "GitHub",
-		link: "https://github.com/login/oauth/authorize?client_id=Iv1.1db69635c026c31d&redirect_uri=https://auth.onedot.cf/auth/github&state=https%3A%2F%2Fgoogle.com",
+		link:
+			"https://github.com/login/oauth/authorize?client_id=Iv1.1db69635c026c31d&redirect_uri=https://auth.onedot.cf/auth/github&state=https%3A%2F%2Fgoogle.com",
 		icon: "github",
 		iconProvider: "fa",
 		backendPage: "/auth/github",
