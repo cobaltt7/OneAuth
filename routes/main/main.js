@@ -27,28 +27,41 @@ auth_clients.forEach((client) => {
 
 	// add the icon
 	let icon;
-	if (client.iconProvider === "fa") {
+	if (client.iconProvider.indexOf("fa") === 0) {
 		icon = Object.assign(document.createElement("i"), {
-			className: "fab fa-" + client.icon,
+			className: `${client.iconProvider} fa-${client.icon}`,
 		});
 	} else if (client.iconProvider === "svg") {
 		icon = Object.assign(document.createElement("img"), {
-			className: "svg-inline--fa",
-			src: client.icon + ".svg",
-			alt: client.name + " logo",
-			name: client.name,
-			width: "16",
-			height: "16",
+			src: "svg/"+client.icon,
+		});
+	}else if (client.iconProvider === "url") {
+		icon = Object.assign(document.createElement("img"), {
+			src: client.icon,
 		});
 	} else {
 		throw new Error(client.iconProvider + " is not a valid icon provider for " + client.name);
 	}
+	Object.assign(icon, {
+		alt: client.name + " logo",
+		name: client.name,
+		width: "18",
+		height: "18",
+	})
 	li.append(icon);
 	auth_list.append(li); // this is appended here and not at L21 because if it was at L21, L47 would only append to auth_list and not to link
 	link.append(li.cloneNode(true));
 	// add text
-	link.firstElementChild.append(document.createTextNode("Sign in with " + client.name));
-	li.append(document.createTextNode(" " + client.name));
+	let span = document.createElement("span");
+	let span2 = span.cloneNode(true);
+	span.innerHTML = "Sign in with " + client.name;
+	span2.innerHTML = client.name;
+	link.firstElementChild.append(span);
+	li.append(span2);
+});
+
+router.get('/svg/:img', (req, res) => {
+	res.sendFile(`/home/runner/auth/auth/svg/${req.params.img}.svg`);
 });
 
 router.get("/", (req, res) => {

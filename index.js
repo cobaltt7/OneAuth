@@ -307,4 +307,4 @@ app.use((_, res) => {
 	res.status(404).sendFile(__dirname + "/routes/main/404.html");
 });
 // LISTEN
-app.listen(3000);
+app.listen(3000, () => console.log("App Ready"));

@@ -2,59 +2,65 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-/* Custom styling using @apply for the most part 
- * Should be migrated entirely to @apply
-*/
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
 iframe {
-	@apply border-white border-solid border-0 h-screen w-screen;
+	@apply border-white
+		border-solid
+		border-0
+		h-screen
+		w-screen;
 }
 
 nav {
-	@apply h-20 sticky top-0 w-full bg-gray-100 border-red-900 border-b;
+	@apply h-20
+		sticky
+		top-0
+		w-full
+		bg-gray-100
+		border-red-900
+		border-b;
+
+	a {
+		@apply w-full;
+
+		img {
+			@apply m-auto
+				p-1
+				h-20;
+		}
+	}
 }
 
-nav > a > img {
-	@apply m-auto p-1 h-20;
-}
-nav > a {
-	@apply w-full;
-}
 main {
-	@apply rounded flex flex-col p-3 w-full prose max-w-none shadow-xl;
+	@apply max-w-none
+		rounded
+		flex
+		flex-col
+		p-3
+		w-full
+		prose
+		max-w-none
+		shadow-xl;
+
+	h1:first-of-type,
+	p:only-of-type {
+		@apply self-center
+			m-0;
+	}
 }
 
-.auth-button svg {
-	@apply h-4 w-4;
-}
-#auth-list {
-	@apply flex flex-wrap justify-center w-full;
-}
-#email-address,
-#submit {
-	@apply border-transparent rounded-sm border flex justify-center font-medium text-sm leading-5 mx-0 my-2 py-2 px-4 relative w-full text-[#fff] bg-green-500;
+.prose {
+	&:first-child {
+		@apply self-center;
+	}
+
+	section h2 {
+		@apply mt-0;
+	}
 }
 
-#allow,
-#deny {
-	@apply rounded-full py-3 px-4 text-[#fff] w-full transition ease-in-out duration-300;
-}
-#allow {
-	@apply mr-8 bg-green-500;
-}
-#allow:hover {
-	@apply bg-green-600;
-}
-
-#deny {
-	@apply mr-8 bg-green-500;
-}
-#deny:hover {
-	@apply mr-8 bg-red-500;
-}
-.button-container {
-	@apply inline-flex p-2 w-full;
-}
 h1,
 h2,
 h3,
@@ -63,31 +69,118 @@ h5,
 h6 {
 	@apply font-medium;
 }
-main {
-	@apply max-w-none;
-}
+
 #clients #auth-list {
 	@apply justify-start;
 }
-.auth-button::before {
-	@apply hidden;
+
+#auth-list {
+	@apply flex
+		flex-wrap
+		justify-center
+		w-full;
+
+	a {
+		@apply no-underline
+			font-normal
+			text-inherit;
+	}
 }
+
 .auth-button {
-	@apply rounded-full border cursor-pointer m-1;
-	@apply static p-4 !important; /* Can't use the first @apply because it needs !important */
+	@apply rounded-full
+		border
+		cursor-pointer
+		m-1
+		font-sans
+		h-[40px]
+		p-[8px];
+	font-family: "Roboto";
+	@apply static
+		!important;
+
+	&::before {
+		@apply hidden;
+	}
+
+	svg,
+	img {
+		@apply m-0
+			bg-white
+			inline;
+		vertical-align: sub;
+		@apply h-[18px]
+			w-[18px]
+			!important;
+		/* Per Google's guidlines, the background color always has to be #fff, even in dark mode */
+	}
+
+	span {
+		@apply text-black
+			text-[14px]
+			pl-[24px];
+	}
+
+	/* Per Google's guidlines, the dark mode color needs to be #4285F4 if we ever make a dark mode */
 }
 
-.prose > :first-child {
-	@apply self-center;
-}
-.prose section h2 {
-	@apply mt-0;
-}
-main .auth-button a {
-	@apply no-underline font-normal text-inherit;
+#email-address,
+#submit {
+	@apply border-transparent
+		rounded-sm
+		border
+		flex
+		justify-center
+		font-medium
+		text-sm
+		leading-5
+		mx-0
+		my-2
+		py-2
+		px-4
+		relative
+		w-full
+		text-white
+		bg-green-500;
 }
 
-main p:first-of-type:last-of-type,
-main h1:first-of-type {
-	@apply self-center m-0;
+.button-container {
+	@apply inline-flex
+		p-2
+		w-full;
+}
+
+#allow,
+#deny {
+	@apply rounded-full
+		py-3
+		px-4
+		text-white
+		w-full
+		transition
+		ease-in-out
+		duration-300;
+}
+
+#allow {
+	@apply mr-8
+		bg-green-500;
+
+	&:hover {
+		@apply bg-green-600;
+	}
+}
+
+#deny {
+	@apply mr-8
+		bg-green-500;
+
+	&:hover {
+		@apply bg-red-600;
+	}
+}
+
+body {
+	@apply block
+		!important;
 }

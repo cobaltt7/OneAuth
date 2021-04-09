@@ -1,11 +1,13 @@
 module.exports = {
-	purge: ["./views/**.html", "./routes/main/**.html", "./tailwind.css"],
 	theme: {
-		textColor: {
-			inherit: "inherit",
+		extend: {
+			colors: {
+				inherit: "inherit",
+			},
 		},
 	},
-	darkMode: "media",
+	purge: ["./views/**.html", "./routes/main/**.html", "./tailwind.css"],
+	darkMode: "class",
 	plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 	mode: "jit",
 };
