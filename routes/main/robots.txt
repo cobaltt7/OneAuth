@@ -1,0 +1,5 @@
+User-agent: * # for all
+Disallow: / # start by blocking everything
+Allow: /about # allow pages under /about/
+Allow: /$ # allow the root page (it redirects to /about)
+Disallow: /? # disallow the "select a login method" page

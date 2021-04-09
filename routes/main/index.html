@@ -8,21 +8,32 @@
 			content="808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com"
 		/>
 		<title>1Auth</title>
-		<link rel="shortcut icon" href="/favicon.ico" />
 		<script
 			src="https://apis.google.com/js/platform.js"
 			onload="setUpGoogle()"
 			defer
 			crossorigin="anonymous"
 		></script>
-		<script src="https://kit.fontawesome.com/2a2d30d602.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="/bundle-beta.css" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-5WN6THR");
+		</script>
+		<!-- End Google Tag Manager -->
 	</head>
 
-	<body>
+	<body style="display: none">
 		<nav>
 			<a href="/">
 				<img src="/logo.svg" alt="1Auth logo" />
@@ -31,6 +42,7 @@
 		<main>
 			<h1>Login</h1>
 			<p>Choose an option to continue</p>
+			{{{ buttons }}}
 			<ul id="auth-list">
 				<li class="auth-button">
 					<a

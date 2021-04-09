@@ -5,7 +5,7 @@ const fs = require("fs");
 var router = require("express").Router();
 
 const { document } = new (require("jsdom").JSDOM)("").window;
-const auth_clients = require("./auth/clients.js");
+const auth_clients = require("../../auth/clients.js");
 
 let auth_list = Object.assign(document.createElement("ul"), {
 	id: "auth-list",
@@ -22,14 +22,14 @@ auth_clients.forEach((client) => {
 
 	// add the list item
 	let li = Object.assign(document.createElement("li"), {
-		class: "auth-buttons",
+		className: "auth-button",
 	});
 
 	// add the icon
 	let icon;
 	if (client.iconProvider === "fa") {
 		icon = Object.assign(document.createElement("i"), {
-			className: "fas fa-" + client.icon,
+			className: "fab fa-" + client.icon,
 		});
 	} else if (client.iconProvider === "svg") {
 		icon = Object.assign(document.createElement("img"), {
@@ -48,7 +48,7 @@ auth_clients.forEach((client) => {
 	link.append(li.cloneNode(true));
 	// add text
 	link.firstElementChild.append(document.createTextNode("Sign in with " + client.name));
-	li.append(document.createTextNode(client.name));
+	li.append(document.createTextNode(" " + client.name));
 });
 
 router.get("/", (req, res) => {
@@ -57,8 +57,14 @@ router.get("/", (req, res) => {
 	}
 	res.render(__dirname + "/index.html", {
 		url: encodeURIComponent(req.query.url),
-		buttons: auth_buttons.outerHTML,
+		buttons: auth_buttons.outerHTML.replace(/{{url}}/g, encodeURIComponent(req.query.url)),
 	});
+});
+router.get("/googleb9551735479dd7b0.html", (req, res) => {
+	res.sendFile(__dirname + "/googleb9551735479dd7b0.html");
+});
+router.get("/robots.txt", (req, res) => {
+	res.sendFile(__dirname + "/robots.txt");
 });
 // css
 router.get("/bundle.css", (_, res) => {
@@ -73,7 +79,7 @@ router.get("/bundle-beta.css", (_, res) => {
 // about
 router.get("/about", (_, res) => {
 	res.render(__dirname + "/about.html", {
-		clients: auth_list_outerHTML,
+		clients: auth_list.outerHTML,
 	});
 });
 
@@ -95,7 +101,4 @@ router.get("/old", (_, res) => {
 	res.render(__dirname + "/old.html");
 });
 
-router.use((_, res) => {
-	res.status(404).sendFile(__dirname + "/404.html");
-});
 module.exports = router;

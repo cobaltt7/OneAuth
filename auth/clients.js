@@ -10,7 +10,7 @@
 module.exports = [
 	{
 		name: "Google",
-		link: "/auth/google.html?url={{url}}",
+		link: "/backend/google?url={{url}}",
 		icon: "google",
 		iconProvider: "fa",
 		backendPage: "/backend/google",

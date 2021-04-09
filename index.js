@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
 		req.get("User-Agent").indexOf("Netscape") >= 0 ||
 		req.get("User-Agent").indexOf("Navigator") >= 0
 	) {
-		return res.render(__dirname + "/routes/old/old.html");
+		return res.render(__dirname + "/routes/main/old.html");
 	}
 	return next();
 });
@@ -55,6 +55,11 @@ const { OAuth2Client } = require("google-auth-library"); // google
 const client = new OAuth2Client(process.env.googleAppUrl); // google
 
 // google
+app.get("/backend/google", (req, res) => {
+	res.render(__dirname + "/auth/html/google.html", {
+		url: req.query.url,
+	});
+});
 app.get("/backend/google/:token", (req, res) => {
 	async function verify(idtoken) {
 		const ticket = await client.verifyIdToken({
@@ -249,7 +254,7 @@ app.get("/backend/scratch/http:/:url", (req, res) => {
 	}).then((response) => {
 		const data = response.data;
 		if (data.valid) {
-			req.query.url = `https://${req.params.url}`;
+			req.query.url = `http://${req.params.url}`;
 			sendResponse(data, req, res);
 		} else {
 			return res.json({

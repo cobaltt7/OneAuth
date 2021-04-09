@@ -8,34 +8,54 @@
 			content="808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com"
 		/>
 		<title>1Auth</title>
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<script src="https://apis.google.com/js/platform.js" onload="auth()" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="/bundle-beta.css" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-5WN6THR");
+		</script>
+		<!-- End Google Tag Manager -->
 	</head>
 
-	<body>
+	<body style="display: none">
 		<script>
-			function auth() {
-				gapi.client.setApiKey(/* i need the client secret here*/);
-				gapi.auth.authorize(
-					{
-						client_id: "808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com",
-						cookiepolicy: "single_host_origin",
-			  				    immediate: false,
-					}, function(googleUser) {
-						if (googleUser && !googleUser.error) {
-							const id_token = googleUser.getAuthResponse().id_token;
-							window.location.assign(`/backend/google/${id_token}?url={{url}}`);
-						} else {
-							console.error(googleUser.error);
-						},
-					}
-					);
+			async function initClient() {
+				// Initialize the gapi.client object, which app uses to make API requests.
+				// 'scope' field specifies space-delimited list of access scopes.
+				await gapi.client.init({
+					apiKey: "I8Wr-B-Ykt4Kmo4dmg5LLgm9",
+					clientId: "808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com",
+					scope:
+						"openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.profile",
+					ux_mode: "redirect",
 				});
+
+				const google = gapi.auth2.getAuthInstance();
+
+				google.isSignedIn.listen(function () {
+					// this will run on auth completion
+					var id = google.currentUser.get().getId();
+				});
+				// Open popup
+				google.signIn();
 			}
 		</script>
+		<script
+			async
+			defer
+			src="https://apis.google.com/js/api.js"
+			onload="this.onload=function(){};gapi.load('client:auth2', initClient)"
+			onreadystatechange="if (this.readyState === 'complete') this.onload()"
+		></script>
 	</body>
 </html>
