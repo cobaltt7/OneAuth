@@ -33,9 +33,9 @@ auth_clients.forEach((client) => {
 		});
 	} else if (client.iconProvider === "svg") {
 		icon = Object.assign(document.createElement("img"), {
-			src: "svg/"+client.icon,
+			src: "svg/" + client.icon,
 		});
-	}else if (client.iconProvider === "url") {
+	} else if (client.iconProvider === "url") {
 		icon = Object.assign(document.createElement("img"), {
 			src: client.icon,
 		});
@@ -47,7 +47,7 @@ auth_clients.forEach((client) => {
 		name: client.name,
 		width: "18",
 		height: "18",
-	})
+	});
 	li.append(icon);
 	auth_list.append(li); // this is appended here and not at L21 because if it was at L21, L47 would only append to auth_list and not to link
 	link.append(li.cloneNode(true));
@@ -60,7 +60,7 @@ auth_clients.forEach((client) => {
 	li.append(span2);
 });
 
-router.get('/svg/:img', (req, res) => {
+router.get("/svg/:img", (req, res) => {
 	res.sendFile(`/home/runner/auth/auth/svg/${req.params.img}.svg`);
 });
 
