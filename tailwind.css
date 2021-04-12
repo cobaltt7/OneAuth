@@ -13,26 +13,6 @@ iframe {
 		w-screen;
 }
 
-nav {
-	@apply h-20
-		sticky
-		top-0
-		w-full
-		bg-gray-100
-		border-red-900
-		border-b;
-
-	a {
-		@apply w-full;
-
-		img {
-			@apply m-auto
-				p-1
-				h-20;
-		}
-	}
-}
-
 main {
 	@apply max-w-none
 		rounded

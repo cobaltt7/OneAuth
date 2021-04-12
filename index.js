@@ -3,11 +3,13 @@ const app = require("express")(); // Initialize server
 //express config
 app.set("views", "./views");
 app.set("view engine", "html");
+
 app.disable("view cache");
 console.log("Express ready");
 // mustache
 const mustacheExpress = require("mustache-express");
-app.engine("html", mustacheExpress());
+app.engine("html", mustacheExpress(__dirname + "/routes/main/partials", ".html"));
+
 // cookies
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
@@ -239,40 +241,6 @@ app.get("/backend/scratchredirect", (req, res) => {
 });
 console.log("Auth pages ready");
 
-// HANDLE DATA
-const sendResponse = async function (data, req, res) {
-	const url = req.query.url || req.query.state;
-	const retro = retronid();
-	await db.set("RETRIEVE_" + retro, data);
-	try {
-		const host = new URL(url).host;
-		res.render(__dirname + "/views/allow.html", {
-			url: url,
-			host: host,
-			data: `${data}`,
-			code: retro,
-			paramJoiner: url.indexOf("?") > -1 ? "&" : "?",
-		});
-	} catch (e) {
-		return res.status(400).send("Error:<br> " + e);
-	}
-};
-app.get("/backend/get_data/:code", async (req, res) => {
-	// client is retriving data
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	res.json(await db.get("RETRIEVE_" + req.params.code));
-	await db.delete("RETRIEVE_" + req.params.code);
-});
-app.get("/backend/remove_data/:code", async (req, res) => {
-	// user denies sharing data
-	if (!req.params.code) {
-		return res.status(400).send("Missing code");
-	}
-	res.json(await db.set("RETRIEVE_" + req.params.code), { error: "Denied access" });
-});
-console.log("Data retrievel process ready");
-
 // 404 PAGE
 app.use((_, res) => {
 	res.status(404).sendFile(__dirname + "/routes/main/404.html");
@@ -280,4 +248,4 @@ app.use((_, res) => {
 console.log("404 page ready");
 
 // LISTEN
-app.listen(3000, () => console.log("App Ready"));
+app.listen(3000, () => console.log("App ready"));

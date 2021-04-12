@@ -1,7 +1,3 @@
-const CleanCSS = require("clean-css");
-var minify = new CleanCSS();
-const zlib = require("zlib");
-const fs = require("fs");
 var router = require("express").Router();
 
 const { document } = new (require("jsdom").JSDOM)("").window;
@@ -59,10 +55,19 @@ auth_clients.forEach((client) => {
 	link.firstElementChild.append(span);
 	li.append(span2);
 });
-
+console.log("Dynamic buttons ready");
+//logo
+router.get("/logo.svg", (_, res) => {
+	res.sendFile(__dirname + "/1Auth NoPad.svg");
+});
+router.get("/favicon.ico", (_, res) => {
+	res.redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
+});
 router.get("/svg/:img", (req, res) => {
 	res.sendFile(`/home/runner/auth/auth/svg/${req.params.img}.svg`);
 });
+
+console.log("Logos ready");
 
 router.get("/", (req, res) => {
 	if (!req.query.url) {
@@ -73,45 +78,41 @@ router.get("/", (req, res) => {
 		buttons: auth_buttons.outerHTML.replace(/{{url}}/g, encodeURIComponent(req.query.url)),
 	});
 });
-router.get("/googleb9551735479dd7b0.html", (req, res) => {
-	res.sendFile(__dirname + "/googleb9551735479dd7b0.html");
-});
-router.get("/robots.txt", (req, res) => {
-	res.sendFile(__dirname + "/robots.txt");
-});
-// css
-router.get("/bundle.css", (_, res) => {
-	res.sendFile(__dirname + "/bundle.css");
-});
-router.get("/bundle-beta.css", (_, res) => {
-	text = fs.readFileSync(__dirname + "/bundle-beta.css", "utf-8");
-	res.setHeader("content-type", "text/css");
-	res.send(minify.minify(text).styles);
-});
-
-// about
 router.get("/about", (_, res) => {
 	res.render(__dirname + "/about.html", {
 		clients: auth_list.outerHTML,
 	});
 });
+console.log("Main pages ready");
 
-//logo
-router.get("/logo.svg", (_, res) => {
-	res.sendFile(__dirname + "/1Auth NoPad.svg");
+router.get("/googleb9551735479dd7b0.html", (req, res) => {
+	res.send("google-site-verification: googleb9551735479dd7b0.html");
 });
-router.get("/favicon.ico", (_, res) => {
-	res.redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
+router.get("/robots.txt", (req, res) => {
+	res.sendFile(__dirname + "/robots.txt");
 });
+console.log("SEO ready");
+// css
+router.get("/bundle.css", (_, res) => {
+	res.sendFile(__dirname + "/bundle.css");
+});
+const fs = require("fs");
+const cleanCSS = require("clean-css");
+const minify = new cleanCSS();
+router.get("/bundle-beta.css", (_, res) => {
+	text = fs.readFileSync(__dirname + "/bundle-beta.css", "utf-8");
+	res.setHeader("content-type", "text/css");
+	res.send(minify.minify(text).styles);
+});
+console.log("CSS ready");
 
-// error
+// error/old
 router.get("/error", (_, res) => {
 	res.render(__dirname + "/error.html");
 });
-
-// old
 router.get("/old", (_, res) => {
 	res.render(__dirname + "/old.html");
 });
+console.log("Error pages ready");
 
 module.exports = router;
