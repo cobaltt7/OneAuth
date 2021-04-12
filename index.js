@@ -40,6 +40,8 @@ app.use(function (req, res, next) {
 });
 // static-ish pages
 app.use("/", require("./routes/main/main.js"));
+// auth pages
+app.use("/", require("./auth/auth.js"));
 
 // OTHER SETUP
 require("dotenv").config();
@@ -51,31 +53,6 @@ const db = new (require("@replit/database"))();
 var base64 = require("base-64"); // scratch
 const nodemailer = require("nodemailer"); // email
 const axios = require("axios"); // github, scratch
-const { OAuth2Client } = require("google-auth-library"); // google
-const client = new OAuth2Client(process.env.googleAppUrl); // google
-
-// google
-app.get("/backend/google", (req, res) => {
-	res.render(__dirname + "/auth/html/google.html", {
-		url: req.query.url,
-	});
-});
-app.get("/backend/google/:token", (req, res) => {
-	async function verify(idtoken) {
-		const ticket = await client.verifyIdToken({
-			idToken: idtoken,
-			audience: process.env.googleAppUrl,
-		});
-		var PAYLOAD = ticket.getPayload();
-		sendResponse(PAYLOAD, req, res);
-	}
-	verify(req.params.token).catch((e) => {
-		console.error(e);
-		res.json({
-			ok: 0,
-		});
-	});
-});
 // github
 app.get("/backend/github", (req, res) => {
 	axios
@@ -231,21 +208,10 @@ Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, //
 	}
 });
 // scratch
-app.get("/backend/scratch/https:/:url", (req, res) => {
-	axios({
-		method: "get",
-		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
-	}).then((response) => {
-		const data = response.data;
-		if (data.valid) {
-			req.query.url = `https://${req.params.url}`;
-			sendResponse(data, req, res);
-		} else {
-			return res.json({
-				ok: 0,
-			});
-		}
-	});
+app.get("/backend/scratch/", (req, res) => {
+	if (req.query.verified) {
+		sendResponse({ username: req.query.username }, req, res);
+	}
 });
 app.get("/backend/scratch/http:/:url", (req, res) => {
 	axios({
@@ -265,9 +231,7 @@ app.get("/backend/scratch/http:/:url", (req, res) => {
 });
 app.get("/backend/scratchredirect", (req, res) => {
 	res.redirect(
-		`https://fluffyscratch.hampton.pw/auth/getKeys/v2?redirect=${base64.encode(
-			`auth.onedot.cf/backend/scratch/${req.query.url}/`,
-		)}`,
+		`https://scratchcommentauth.onedotprojects.repl.co/?url=https://auth.onedot.cf/backend/scratch?url=${req.query.url}`,
 	);
 });
 

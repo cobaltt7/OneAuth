@@ -33,6 +33,7 @@
 		"google-auth-library": "^7.0.4",
 		"jsdom": "^16.5.2",
 		"mustache-express": "^1.3.0",
+		"node-fetch": "^2.6.1",
 		"nodemailer": "^6.5.0",
 		"retronid": "^1.0.2"
 	},
@@ -47,6 +48,7 @@
 		"@types/jsdom": "^16.2.10",
 		"@types/mustache-express": "^1.2.1",
 		"@types/node": "^14.14.37",
+		"@types/node-fetch": "^2.5.10",
 		"@types/nodemailer": "^6.4.1",
 		"@types/nodemon": "^1.19.0",
 		"@types/postcss-import": "^12.0.0",
