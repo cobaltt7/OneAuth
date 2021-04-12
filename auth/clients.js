@@ -28,7 +28,10 @@ module.exports = [
 						body: `code=${req.query.code}&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com&client_secret=I8Wr-B-Ykt4Kmo4dmg5LLgm9&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle&grant_type=authorization_code`,
 					})
 						.then((res) => res.json())
-						.then(({ id_token: jwt }) => JSON.parse(Buffer.from(jwt, "base64").toString("ascii")));
+						.then(({ id_token: jwt }) => {
+							const jwtBuffer = new Buffer(jwt);
+							return Buffer.from(jwtBuffer, "base64").toString("ascii");
+						});
 
 					return res.json(info);
 				},

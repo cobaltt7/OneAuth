@@ -4,6 +4,7 @@ const app = require("express")(); // Initialize server
 app.set("views", "./views");
 app.set("view engine", "html");
 app.disable("view cache");
+console.log("Express ready");
 // mustache
 const mustacheExpress = require("mustache-express");
 app.engine("html", mustacheExpress());
@@ -38,8 +39,10 @@ app.use(function (req, res, next) {
 	}
 	return next();
 });
+console.log("Express plugins ready");
 // static-ish pages
 app.use("/", require("./routes/main/main.js"));
+console.log("Main pages ready");
 // auth pages
 app.use("/", require("./auth/auth.js"));
 
@@ -234,6 +237,7 @@ app.get("/backend/scratchredirect", (req, res) => {
 		`https://scratchcommentauth.onedotprojects.repl.co/?url=https://auth.onedot.cf/backend/scratch?url=${req.query.url}`,
 	);
 });
+console.log("Auth pages ready");
 
 // HANDLE DATA
 const sendResponse = async function (data, req, res) {
@@ -267,8 +271,13 @@ app.get("/backend/remove_data/:code", async (req, res) => {
 	}
 	res.json(await db.set("RETRIEVE_" + req.params.code), { error: "Denied access" });
 });
+console.log("Data retrievel process ready");
+
+// 404 PAGE
 app.use((_, res) => {
 	res.status(404).sendFile(__dirname + "/routes/main/404.html");
 });
+console.log("404 page ready");
+
 // LISTEN
 app.listen(3000, () => console.log("App Ready"));
