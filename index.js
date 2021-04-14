@@ -1,7 +1,6 @@
 // SET UP EXPRESS
 const app = require("express")(); // Initialize server
 //express config
-app.set("views", "./views");
 app.set("view engine", "html");
 
 app.disable("view cache");

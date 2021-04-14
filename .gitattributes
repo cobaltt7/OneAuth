@@ -1,0 +1,9 @@
+/ eol=crlf working-tree-encoding=UTF-8 diff whitespace
+LICENSE text
+*.txt text
+.* text export-ignore
+.github export-ignore
+*.md diff=markdown
+*.html diff=html
+*.svg diff=html
+*.css diff=css
