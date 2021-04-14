@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Allow access?</title>
+		<title>Allow access? | 1Auth</title>
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
@@ -24,16 +24,12 @@
 	</head>
 
 	<body style="display: none">
-		<nav class="h-20 sticky top-0 w-full bg-gray-100 border-red-900 border-b">
-			<a class="w-full" href="/">
-				<img class="m-auto p-1 h-20" src="/logo.svg" alt="1Auth logo" />
-			</a>
-		</nav>
+		{{> nav}}
 		<main>
 			<h1>Allow access?</h1>
 			<p>Do you want {{host}} to access your data?</p>
 			<div class="buttons-container">
-				<a href="{{url}}{{paramJoiner}}code={{code}}" id="alow"
+				<a href="{{url}}{{paramJoiner}}code={{code}}" id="allow"
 					>Allow
 					<i class="far fa-check-circle inline ml-2"></i>
 				</a>
@@ -45,7 +41,7 @@
 		</main>
 		<script>
 			const deny = document.querySelector("#deny");
-			deny.addEventListner("click", async () => {
+			deny.addEventListener("click", async () => {
 				await fetch("/backend/remove_data" + new URL(deny.href).searchParams.get("code"));
 				return true;
 			});

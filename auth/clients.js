@@ -4,8 +4,8 @@
 	icon: icon of client, should be the name of a SVG file, the name of a FontAwesome icon or an absolute url
 	iconProvider: determines which of the above the icon is. Should be one of url, fa, or svg
 	pages: array of objects. each object can have these properties:
-		post: function that runs on a post request to backendPage. Takes two arguments: req and res
-		get: function that runs on a get request to backendPage. Takes two arguments: req and res
+		post: function that runs on a post request to backendPage. Takes three arguments: req and res
+		get: function that runs on a get request to backendPage. Takes three arguments: req and res
 		backendPage: Page that handles the said GET and POST requests. Relative to https://auth.onedot.cf/auth/
 */
 module.exports = [
@@ -35,7 +35,25 @@ module.exports = [
 					if (info.error) {
 						return res.render("/home/runner/auth/routes/main/error.html");
 					}
-					res.json(info);
+					returnVal = {};
+					for (a in info) {
+						if (
+							[
+								"sub",
+								"email",
+								"email_verified",
+								"family_name",
+								"given_name",
+								"locale",
+								"name",
+								"picture",
+								"profile",
+							].includes(a)
+						)
+							returnVal[a] = info[a];
+					}
+					console.log(returnVal);
+					sendResponse(returnVal, req.query.state, res);
 				},
 			},
 		],

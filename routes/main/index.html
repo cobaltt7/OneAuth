@@ -3,17 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta
-			name="google-signin-client_id"
-			content="808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com"
-		/>
-		<title>1Auth</title>
-		<script
-			src="https://apis.google.com/js/platform.js"
-			onload="setUpGoogle()"
-			defer
-			crossorigin="anonymous"
-		></script>
+		<title>Login | 1Auth</title>
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
@@ -40,29 +30,5 @@
 			<p>Choose an option to continue</p>
 			{{{ buttons }}}
 		</main>
-		<script>
-			function setUpGoogle() {
-				gapi.load("auth2", function () {
-					// Retrieve the singleton for the GoogleAuth library and set up the client.
-					auth2 = gapi.auth2.init({
-						client_id: "808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com",
-						cookiepolicy: "single_host_origin",
-						// Request scopes in addition to 'profile' and 'email'
-						//scope: 'additional_scope'
-					});
-					auth2.attachClickHandler(
-						document.getElementById("g-signin2"),
-						{},
-						function (googleUser) {
-							const id_token = googleUser.getAuthResponse().id_token;
-							window.location.assign(`/backend/google/${id_token}?url={{url}}`);
-						},
-						function (error) {
-							console.warn(JSON.stringify(error, undefined, 2));
-						},
-					);
-				});
-			}
-		</script>
 	</body>
 </html>

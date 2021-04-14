@@ -41,6 +41,7 @@ app.use(function (req, res, next) {
 	}
 	return next();
 });
+
 console.log("Express plugins ready");
 // static-ish pages
 app.use("/", require("./routes/main/main.js"));

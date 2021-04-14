@@ -124,7 +124,7 @@ h6 {
 		bg-green-500;
 }
 
-.button-container {
+.buttons-container {
 	@apply inline-flex
 		p-2
 		w-full;
@@ -139,11 +139,12 @@ h6 {
 		w-full
 		transition
 		ease-in-out
-		duration-300;
+		duration-300
+		no-underline;
 }
 
 #allow {
-	@apply mr-8
+	@apply mr-4
 		bg-green-500;
 
 	&:hover {
@@ -152,8 +153,8 @@ h6 {
 }
 
 #deny {
-	@apply mr-8
-		bg-green-500;
+	@apply ml-4
+		bg-red-500;
 
 	&:hover {
 		@apply bg-red-600;

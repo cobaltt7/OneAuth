@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const retronid = require("retronid");
+const retronid = require("retronid").generate;
+const db = new (require("@replit/database"))();
 
 const auth_clients = require("./clients.js");
 const get_client = (client) => {
@@ -8,13 +9,12 @@ const get_client = (client) => {
 		if (r) return r;
 	}
 };
-const sendResponse = async function (data, req, res) {
-	const url = req.query.url || req.query.state;
+const sendResponse = async function (data, url, res) {
 	const retro = retronid();
 	await db.set("RETRIEVE_" + retro, data);
 	try {
 		const host = new URL(url).host;
-		res.render(__dirname + "/views/allow.html", {
+		res.render("/home/runner/auth/views/allow.html", {
 			url: url,
 			host: host,
 			data: `${data}`,
