@@ -175,9 +175,9 @@ Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, //
 								return res.status(500).render("/home/runner/auth/routes/main/error.html");
 							},
 						);
-						return res.status(200)
+						return res.status(200);
 					}
-					return res.status(400)
+					return res.status(400);
 				},
 			},
 		],

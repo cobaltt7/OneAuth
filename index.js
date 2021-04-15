@@ -86,13 +86,9 @@ app.get("/backend/github", (req, res) => {
 				.then((response) => {
 					sendResponse(response.data, req, res);
 				})
-				.catch((err) =>
-					res.status(502)
-				);
+				.catch((err) => res.status(502));
 		})
-		.catch((err) =>
-			res.status(502)
-		);
+		.catch((err) => res.status(502));
 });
 // scratch
 app.get("/backend/scratch/", (req, res) => {
@@ -110,7 +106,7 @@ app.get("/backend/scratch/http:/:url", (req, res) => {
 			req.query.url = `http://${req.params.url}`;
 			sendResponse(data, req, res);
 		} else {
-			return res.status(502)
+			return res.status(502);
 		}
 	});
 });
