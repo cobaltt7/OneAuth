@@ -32,13 +32,14 @@
 			/*
 		  Go here: https://github.com/cursorweb/replit-auth-html to learn more.
 		*/
-			Auth.onerror = function (e) {
-				location.reload();
-			};
 			Auth.ondone = function (e) {
 				location.reload();
 			};
-			new Auth("iframe").append();
+			Auth.onerror = function (e) {
+				console.error(e);
+				location.href = "/error";
+			};
+			new Auth().append();
 		</script>
 	</body>
 </html>

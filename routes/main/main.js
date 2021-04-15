@@ -61,7 +61,7 @@ router.get("/logo.svg", (_, res) => {
 	res.sendFile(__dirname + "/1Auth NoPad.svg");
 });
 router.get("/favicon.ico", (_, res) => {
-	res.redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
+	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
 });
 router.get("/svg/:img", (req, res) => {
 	res.sendFile(`/home/runner/auth/auth/svg/${req.params.img}.svg`);
@@ -71,7 +71,7 @@ console.log("Logos ready");
 
 router.get("/", (req, res) => {
 	if (!req.query.url) {
-		return res.redirect("https://auth.onedot.cf/about");
+		return res.status(303).redirect("https://auth.onedot.cf/about");
 	}
 	res.render(__dirname + "/index.html", {
 		url: encodeURIComponent(req.query.url),
@@ -93,9 +93,6 @@ router.get("/robots.txt", (req, res) => {
 });
 console.log("SEO ready");
 // css
-router.get("/bundle.css", (_, res) => {
-	res.sendFile(__dirname + "/bundle.css");
-});
 const fs = require("fs");
 const cleanCSS = require("clean-css");
 const minify = new cleanCSS();
@@ -108,10 +105,10 @@ console.log("CSS ready");
 
 // error/old
 router.get("/error", (_, res) => {
-	res.render(__dirname + "/error.html");
+	res.status(500).render(__dirname + "/error.html");
 });
 router.get("/old", (_, res) => {
-	res.render(__dirname + "/old.html");
+	res.status(400).render(__dirname + "/old.html");
 });
 console.log("Error pages ready");
 

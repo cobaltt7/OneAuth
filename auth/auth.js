@@ -14,7 +14,7 @@ const sendResponse = async function (data, url, res) {
 	await db.set("RETRIEVE_" + retro, data);
 	try {
 		const host = new URL(url).host;
-		res.render("/home/runner/auth/views/allow.html", {
+		res.status(300).render("/home/runner/auth/views/allow.html", {
 			url: url,
 			host: host,
 			data: `${data}`,
@@ -22,20 +22,26 @@ const sendResponse = async function (data, url, res) {
 			paramJoiner: url.indexOf("?") > -1 ? "&" : "?",
 		});
 	} catch (e) {
-		return res.render("/home/runner/auth/routes/main/error.html");
+		return res.status(400).render("/home/runner/auth/routes/main/error.html");
 	}
 };
 router.get("/auth/:client", (req, res) => {
 	let client = get_client(req.params.client);
 	if (typeof client === "undefined") {
-		return res.status(404).sendFile("/home/runner/auth/routes/main/404.html");
+		return res.status(404).render("/home/runner/auth/routes/main/404.html");
+	}
+	if (typeof client.get !== "function") {
+		return res.status(405).render("/home/runner/auth/routes/main/405.html");
 	}
 	client.get(req, res, sendResponse);
 });
 router.post("/auth/:client", (req, res) => {
 	let client = get_client(req.params.client);
 	if (typeof client === "undefined") {
-		return res.status(404).sendFile("/home/runner/auth/routes/main/404.html");
+		return res.status(404).render("/home/runner/auth/routes/main/404.html");
+	}
+	if (typeof client.post !== "function") {
+		return res.status(405).render("/home/runner/auth/routes/main/405.html");
 	}
 	client.post(req, res, sendResponse);
 });

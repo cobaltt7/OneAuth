@@ -44,7 +44,7 @@
 			document.querySelector("form").addEventListener("submit", async (e) => {
 				e.preventDefault();
 				const email = document.querySelector("input").value;
-				await fetch("/backend/email", {
+				await fetch("", {
 					headers: {
 						"content-type": "application/x-www-form-urlencoded; charset=UTF-8",
 					},
@@ -54,7 +54,7 @@
 				document.querySelector("form").remove();
 				document.querySelector("#note").remove();
 				var label = Object.assign(document.createElement("label"), {
-					for: "",
+					htmlFor: "code",
 					id: "note",
 					innerText: "Enter the code we sent to you to continue",
 				});
@@ -81,9 +81,9 @@
 					id: "submit",
 				});
 				form.appendChild(code);
-				form.appendChild(document.createElement("br"));
 				form.appendChild(submit);
 				form.appendChild(hiddenemail);
+				document.querySelector("main").appendChild(label);
 				document.querySelector("main").appendChild(form);
 			});
 		</script>

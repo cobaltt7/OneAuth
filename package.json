@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "TAILWIND_MODE=watch postcss tailwind.css -o routes/main/bundle-beta.css & node --trace-warnings .",
-		"test": "npm install && npx prettier -w . && nodemon --trace-warnings ."
+		"test": "nodemon --trace-warnings ."
 	},
 	"keywords": [
 		"auth",
@@ -102,7 +102,7 @@
 		"boss": false,
 		"debug": false,
 		"eqnull": false,
-		"esversion": 9,
+		"esversion": 12,
 		"moz": false,
 		"evil": false,
 		"expr": true,
