@@ -61,7 +61,7 @@
 		"postcss-import": "^14.0.1",
 		"postcss-nested": "^5.0.5",
 		"prettier": "^2.2.1",
-		"tailwindcss": "^2.1.1"
+		"tailwindcss": "^2.1.2"
 	},
 	"bugs": {
 		"url": "https://github.com/onedotprojects/auth/issues/new",
