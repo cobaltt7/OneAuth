@@ -1,62 +1,88 @@
+"use strict";
+
 /*
 	name: name of the client
-	link: link that users are directed to when they click the button. Relative to https://auth.onedot.cf
-	icon: icon of client, should be the name of a SVG file, the name of a FontAwesome icon or an absolute url
-	iconProvider: determines which of the above the icon is. Should be one of url, fa, or svg
+	link: link that users are directed to when they click the button.
+		{{url}} will be replaced with the uri-encoded url to be redirected to.
+		Each client is responsible for storring it in some way.
+		Relative to https://auth.onedot.cf
+	icon: icon of client, should be the name of
+		a SVG file in the routes/svg directory (without the .svg extention),
+		the name of a FontAwesome icon,
+		or an absolute url
+	iconProvider: determines which of the above the icon is. Should be one of svg, url, or fa
 	pages: array of objects. each object can have these properties:
-		post: function that runs on a post request to backendPage. Takes three arguments: req and res
-		get: function that runs on a get request to backendPage. Takes three arguments: req and res
-		backendPage: Page that handles the said GET and POST requests. Relative to https://auth.onedot.cf/auth/
+		post: function that runs on a HTTP POST request to backendPage. Takes three arguments:
+			req: express request object
+			res: express response object
+			sendResponse: function that takes three arguments:
+				data: data to send
+				url: url to redirect to afterwards
+				res: express response object
+		get: function that runs on a HTTP GET request to backendPage. Takes the same three arguments as post.
+		backendPage: Page that handles the said HTTP requests. Relative to https://auth.onedot.cf/auth/
 */
 module.exports = [
 	{
 		name: "Google",
 		link:
-			"https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com&scope=openid%20email%20profile&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle&state={{url}}&nonce=hellojrnfdignrtigrig",
+			"https://accounts.google.com/o/oauth2/v2/auth" +
+			"?response_type=code" +
+			"&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com" +
+			"&scope=openid%20email%20profile" +
+			"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
+			"&state={{url}}" +
+			"&nonce={{nonce}}",
 		icon: "google",
 		iconProvider: "svg",
 		pages: [
 			{
 				backendPage: "google",
 				get: async (req, res, sendResponse) => {
-					const fetch = require("node-fetch");
-					const atob = require("atob");
-					const info = await fetch("https://oauth2.googleapis.com/token", {
-						headers: {
-							"Content-Type": "application/x-www-form-urlencoded",
-						},
-						method: "POST",
-						body: `code=${req.query.code}&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com&client_secret=I8Wr-B-Ykt4Kmo4dmg5LLgm9&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle&grant_type=authorization_code`,
-					})
-						.then((res) => res.json())
-						.then(({ id_token = ".eyJlcnJvciI6InRvbyBzbG93In0=." }) =>
-							JSON.parse(atob(id_token.split(".")[1])),
-						);
-					if (info.error) {
-						return res.status(500).render("/home/runner/auth/routes/main/error.html");
-					}
-					returnVal = {};
-					for (a in info) {
-						if (
-							[
-								"sub",
-								"email",
-								"email_verified",
-								"family_name",
-								"given_name",
-								"locale",
-								"name",
-								"picture",
-								"profile",
-							].includes(a)
-						)
-							returnVal[a] = info[a];
-					}
-					console.log(returnVal);
-					sendResponse(returnVal, req.query.state, res);
+					sendResponse(req.query.code, req.query.state, res);
 				},
 			},
 		],
+		getData: async (token) => {
+			const fetch = require("node-fetch");
+			const atob = require("atob");
+			const info = await fetch("https://oauth2.googleapis.com/token", {
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
+				},
+				method: "POST",
+				body:
+					`code=${token}` +
+					"&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com" +
+					"&client_secret=I8Wr-B-Ykt4Kmo4dmg5LLgm9" +
+					"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
+					"&grant_type=authorization_code",
+			})
+				.then((res) => res.json())
+				.then(({ idToken = ".eyJlcnJvciI6InRvbyBzbG93In0=." }) => JSON.parse(atob(idToken.split(".")[1])));
+			if (info.error) {
+				return "error";
+			}
+			var returnVal = {};
+			for (const a in info) {
+				if (
+					[
+						"sub",
+						"email",
+						"email_verified",
+						"family_name",
+						"given_name",
+						"locale",
+						"name",
+						"picture",
+						"profile",
+					].includes(a)
+				) {
+					returnVal[a] = info[a];
+				}
+				return returnVal;
+			}
+		},
 	},
 	{
 		name: "Replit",
@@ -96,6 +122,7 @@ module.exports = [
 				},
 				post: async (req, res, sendResponse) => {
 					const db = new (require("@replit/database"))();
+					console.log(req.body);
 					if (req.body.code && req.body.email) {
 						const { email = null, date = null } = (await db.get("EMAIL_" + req.body.code)) || {};
 						if (Date.now() - date > 900000) {
@@ -128,12 +155,13 @@ module.exports = [
 							email: req.body.email,
 							date: Date.now(),
 						});
+						res.status(201);
 
 						Mail.sendMail(
 							{
 								from: process.env.GMAIL_EMAIL,
 								to: req.body.email,
-								subject: "1Auth Email Verification",
+								subject: "1Auth Email Verification", // TODO: move email to it's own file
 								html: `<html>
 	<head>
 		<meta charset="utf-8">
@@ -170,12 +198,14 @@ Doesn't work? Maybe it's been too long. Try starting over!
 
 Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, // this is the text version
 							},
-							(error) => {
-								console.error(error);
-								return res.status(500).render("/home/runner/auth/routes/main/error.html");
+							(error, info) => {
+								if (error) {
+									console.error(error);
+									return res.status(500).render("/home/runner/auth/routes/main/error.html");
+								}
+								res.json(info);
 							},
 						);
-						return res.status(200);
 					}
 					return res.status(400);
 				},
@@ -185,9 +215,21 @@ Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, //
 	{
 		name: "GitHub",
 		link:
-			"https://github.com/login/oauth/authorize?client_id=Iv1.1db69635c026c31d&redirect_uri=https://auth.onedot.cf/auth/github&state=https%3A%2F%2Fgoogle.com",
+			"https://github.com/login/oauth/authorize" +
+			"?client_id=Iv1.1db69635c026c31d" +
+			"&redirect_uri=https://auth.onedot.cf/backend/github" +
+			"&state={{url}}",
 		icon: "github",
 		iconProvider: "fa",
-		pages: [{ backendPage: "github" }],
+		pages: [{ backendPage: "github" }], // to be migrated
+	},
+	{
+		name: "Scratch",
+		// this uses the old backend page (/backend/scratch) (to be moved)
+		link:
+			"https://scratchcommentauth.onedotprojects.repl.co" +
+			"?url=https://auth.onedot.cf/backend/scratch%3Furl={{url}}",
+		icon: "https://repl.it/public/images/logo.svg",
+		iconProvider: "url", // use svg
 	},
 ];

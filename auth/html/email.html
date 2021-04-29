@@ -7,20 +7,7 @@
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
-		<!-- Google Tag Manager -->
-		<script>
-			(function (w, d, s, l, i) {
-				w[l] = w[l] || [];
-				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-				var f = d.getElementsByTagName(s)[0],
-					j = d.createElement(s),
-					dl = l != "dataLayer" ? "&l=" + l : "";
-				j.async = true;
-				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-				f.parentNode.insertBefore(j, f);
-			})(window, document, "script", "dataLayer", "GTM-5WN6THR");
-		</script>
-		<!-- End Google Tag Manager -->
+		{{> googletagmanager}}
 	</head>
 
 	<body style="display: none">
@@ -43,7 +30,20 @@
 		<script>
 			document.querySelector("form").addEventListener("submit", async (e) => {
 				e.preventDefault();
+
+				// Show loading icon
+				const submit = document.querySelector('[type="submit"]');
+				submit.firstChild.remove();
+				submit.append(
+					Object.assign(document.createElement("img"), {
+						src: "/svg/loading",
+					}),
+				);
+
+				// Save email for later
 				const email = document.querySelector("input").value;
+
+				// Send the email
 				await fetch("", {
 					headers: {
 						"content-type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -51,40 +51,46 @@
 					body: "email=" + email,
 					method: "POST",
 				});
-				document.querySelector("form").remove();
-				document.querySelector("#note").remove();
-				var label = Object.assign(document.createElement("label"), {
-					htmlFor: "code",
-					id: "note",
-					innerText: "Enter the code we sent to you to continue",
-				});
+
+				// Create new form
 				var form = Object.assign(document.createElement("form"), {
+					// main form
 					action: "",
 					method: "POST",
 					autocomplete: "off",
 				});
-				var code = Object.assign(document.createElement("input"), {
-					type: "password",
-					name: "code",
-					placeholder: "abcde12345",
-					autocomplete: "off", // chrome, this is not a password
-					required: "true",
-					id: "code",
-				});
-				var hiddenemail = Object.assign(document.createElement("input"), {
-					type: "hidden",
-					name: "email",
-					value: email,
-				});
-				var submit = Object.assign(document.createElement("input"), {
-					type: "submit",
-					id: "submit",
-				});
-				form.appendChild(code);
-				form.appendChild(submit);
-				form.appendChild(hiddenemail);
-				document.querySelector("main").appendChild(label);
-				document.querySelector("main").appendChild(form);
+				form.appendChild(
+					Object.assign(document.createElement("input"), {
+						// code box
+						type: "password",
+						name: "code",
+						placeholder: "abcde12345",
+						autocomplete: "off",
+						required: "true",
+						id: "code",
+					}),
+					Object.assign(document.createElement("input"), {
+						// hidden email box
+						type: "hidden",
+						name: "email",
+						value: email,
+					}),
+					Object.assign(document.createElement("input"), {
+						// submit button
+						type: "submit",
+						id: "submit",
+					}),
+				);
+				document.querySelector("form").remove();
+				document.querySelector("#note").remove();
+				document.querySelector("main").appendChild(
+					Object.assign(document.createElement("label"), {
+						htmlFor: "code",
+						id: "note",
+						innerText: "Enter the code we sent to you to continue",
+					}),
+					form,
+				);
 			});
 		</script>
 	</body>

@@ -1,20 +1,22 @@
+"use strict";
+
 var router = require("express").Router();
 
 const { document } = new (require("jsdom").JSDOM)("").window;
-const auth_clients = require("../../auth/clients.js");
+const authClients = require("../../auth/clients.js");
 
-let auth_list = Object.assign(document.createElement("ul"), {
+let authList = Object.assign(document.createElement("ul"), {
 	id: "auth-list",
 }); // this is the list on /about without links
-let auth_buttons = Object.assign(document.createElement("ul"), {
+let authButtons = Object.assign(document.createElement("ul"), {
 	id: "auth-list",
 }); // this is the list on / with links
-auth_clients.forEach((client) => {
+authClients.forEach((client) => {
 	// add the link
 	let link = Object.assign(document.createElement("a"), {
 		href: client.link,
 	});
-	auth_buttons.append(link);
+	authButtons.append(link);
 
 	// add the list item
 	let li = Object.assign(document.createElement("li"), {
@@ -45,7 +47,7 @@ auth_clients.forEach((client) => {
 		height: "18",
 	});
 	li.append(icon);
-	auth_list.append(li); // this is appended here and not at L21 because if it was at L21, L47 would only append to auth_list and not to link
+	authList.append(li);
 	link.append(li.cloneNode(true));
 	// add text
 	let span = document.createElement("span");
@@ -64,7 +66,7 @@ router.get("/favicon.ico", (_, res) => {
 	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
 });
 router.get("/svg/:img", (req, res) => {
-	res.sendFile(`/home/runner/auth/auth/svg/${req.params.img}.svg`);
+	res.sendFile(`/home/runner/auth/routes/svg/${req.params.img}.svg`);
 });
 
 console.log("Logos ready");
@@ -75,12 +77,12 @@ router.get("/", (req, res) => {
 	}
 	res.render(__dirname + "/index.html", {
 		url: encodeURIComponent(req.query.url),
-		buttons: auth_buttons.outerHTML.replace(/{{url}}/g, encodeURIComponent(req.query.url)),
+		buttons: authButtons.outerHTML.replace(/{{url}}/g, encodeURIComponent(req.query.url)),
 	});
 });
 router.get("/about", (_, res) => {
 	res.render(__dirname + "/about.html", {
-		clients: auth_list.outerHTML,
+		clients: authList.outerHTML,
 	});
 });
 console.log("Main pages ready");
@@ -97,7 +99,7 @@ const fs = require("fs");
 const cleanCSS = require("clean-css");
 const minify = new cleanCSS();
 router.get("/bundle-beta.css", (_, res) => {
-	text = fs.readFileSync(__dirname + "/bundle-beta.css", "utf-8");
+	const text = fs.readFileSync(__dirname + "/bundle-beta.css", "utf-8");
 	res.setHeader("content-type", "text/css");
 	res.send(minify.minify(text).styles);
 });

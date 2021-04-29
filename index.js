@@ -1,14 +1,14 @@
+"use strict";
+
 // SET UP EXPRESS
 const app = require("express")(); // Initialize server
 //express config
 app.set("view engine", "html");
-
 app.disable("view cache");
 console.log("Express ready");
 // mustache
 const mustacheExpress = require("mustache-express");
 app.engine("html", mustacheExpress(__dirname + "/routes/main/partials", ".html"));
-
 // cookies
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
@@ -29,7 +29,9 @@ app.use(
 );
 // old browsers
 app.use(function (req, res, next) {
-	if (req.url.indexOf(".css") >= 0 || req.url.indexOf(".js") >= 0) return next();
+	if (req.url.indexOf(".css") >= 0 || req.url.indexOf(".js") >= 0) {
+		return next();
+	}
 	if (
 		req.get("User-Agent").indexOf("MSIE") >= 0 ||
 		req.get("User-Agent").indexOf("Trident") >= 0 ||
@@ -40,22 +42,33 @@ app.use(function (req, res, next) {
 	}
 	return next();
 });
-
-console.log("Express plugins ready");
 // static-ish pages
 app.use("/", require("./routes/main/main.js"));
 console.log("Main pages ready");
 // auth pages
 app.use("/", require("./auth/auth.js"));
-
 // OTHER SETUP
 require("dotenv").config();
 const retronid = require("retronid").generate;
 const db = new (require("@replit/database"))();
-
+const URL = require("url").URL;
 // AUTH STUFF
-
-var base64 = require("base-64"); // scratch
+const sendResponse = async function (data, url, res) {
+	const retro = retronid();
+	await db.set("RETRIEVE_" + retro, data);
+	try {
+		const host = new URL(url).host;
+		res.status(300).render("/home/runner/auth/views/allow.html", {
+			url: url,
+			host: host,
+			data: `${data}`,
+			code: retro,
+			paramJoiner: url.indexOf("?") > -1 ? "&" : "?",
+		});
+	} catch (e) {
+		return res.status(400).render("/home/runner/auth/routes/main/error.html");
+	}
+};
 const axios = require("axios"); // github, scratch
 // github
 app.get("/backend/github", (req, res) => {
@@ -84,35 +97,22 @@ app.get("/backend/github", (req, res) => {
 				},
 			})
 				.then((response) => {
-					sendResponse(response.data, req, res);
+					sendResponse(response.data, req.query.state, res);
 				})
-				.catch((err) => res.status(502));
+				.catch((err) => res.status(502).json(err));
 		})
-		.catch((err) => res.status(502));
+		.catch((err) => res.status(502).json(err));
 });
 // scratch
 app.get("/backend/scratch/", (req, res) => {
 	if (req.query.verified) {
-		sendResponse({ username: req.query.username }, req, res);
+		sendResponse({ username: req.query.username }, req.query.url, res);
 	}
-});
-app.get("/backend/scratch/http:/:url", (req, res) => {
-	axios({
-		method: "get",
-		url: `https://fluffyscratch.hampton.pw/auth/verify/v2/${req.query.privateCode}`,
-	}).then((response) => {
-		const data = response.data;
-		if (data.valid) {
-			req.query.url = `http://${req.params.url}`;
-			sendResponse(data, req, res);
-		} else {
-			return res.status(502);
-		}
-	});
 });
 app.get("/backend/scratchredirect", (req, res) => {
 	res.redirect(
-		`https://scratchcommentauth.onedotprojects.repl.co/?url=https://auth.onedot.cf/backend/scratch?url=${req.query.url}`,
+		"https://scratchcommentauth.onedotprojects.repl.co" +
+			`?url=https://auth.onedot.cf/backend/scratch%3Furl=${req.query.url}`,
 	);
 });
 console.log("Auth pages ready");

@@ -63,6 +63,7 @@ h6 {
 	a {
 		@apply no-underline
 			font-normal
+			cursor-pointer
 			text-inherit;
 	}
 }
@@ -70,7 +71,6 @@ h6 {
 .auth-button {
 	@apply rounded-full
 		border
-		cursor-pointer
 		m-1
 		font-sans
 		h-[40px]
@@ -123,7 +123,12 @@ h6 {
 }
 
 [type="submit"] {
-	@apply text-white;
+	@apply text-white
+		h-10;
+	img {
+		@apply m-auto
+			h-full;
+	}
 }
 
 .buttons-container {

@@ -7,20 +7,7 @@
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
-		<!-- Google Tag Manager -->
-		<script>
-			(function (w, d, s, l, i) {
-				w[l] = w[l] || [];
-				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-				var f = d.getElementsByTagName(s)[0],
-					j = d.createElement(s),
-					dl = l != "dataLayer" ? "&l=" + l : "";
-				j.async = true;
-				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-				f.parentNode.insertBefore(j, f);
-			})(window, document, "script", "dataLayer", "GTM-5WN6THR");
-		</script>
-		<!-- End Google Tag Manager -->
+		{{> googletagmanager}}
 	</head>
 
 	<body style="display: none">
@@ -29,11 +16,11 @@
 			<h1>Allow access?</h1>
 			<p>Do you want {{host}} to access your data?</p>
 			<div class="buttons-container">
-				<a href="{{url}}{{paramJoiner}}code={{code}}" id="allow"
+				<a href="/backend/send_data?client={{client}}&url={{encoded-url}}&token={{code}}" id="allow"
 					>Allow
 					<i class="far fa-check-circle inline ml-2"></i>
 				</a>
-				<a href="{{url}}{{paramJoiner}}code={{code}}" id="deny"
+				<a href="{{url}}" id="deny"
 					>Deny
 					<i class="far fa-times-circle inline ml-2"></i>
 				</a>
@@ -42,7 +29,7 @@
 		<script>
 			const deny = document.querySelector("#deny");
 			deny.addEventListener("click", async () => {
-				await fetch("/backend/remove_data" + new URL(deny.href).searchParams.get("code"));
+				await fetch("/backend/remove_data/{{code}}");
 				return true;
 			});
 		</script>
