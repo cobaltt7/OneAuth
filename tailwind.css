@@ -3,24 +3,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* Import Roboto per Google's guidlines */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
 main {
 	@apply flex flex-col w-full p-3 prose rounded shadow-xl max-w-none;
-}
-
-.prose {
-	&:first-child {
-		@apply self-center;
-	}
-
-	section h2 {
-		@apply mt-0;
-	}
-	h1:first-of-type,
-	p:only-of-type {
-		@apply self-center m-0;
-	}
 }
 
 h1,
@@ -32,8 +19,19 @@ h6 {
 	@apply font-medium;
 }
 
-#clients #auth-list {
-	@apply justify-start;
+.prose {
+	&:first-child {
+		@apply self-center;
+	}
+
+	section h2 {
+		@apply mt-0;
+	}
+
+	h1:first-of-type,
+	p:only-of-type {
+		@apply self-center m-0;
+	}
 }
 
 #auth-list {
@@ -44,6 +42,10 @@ h6 {
 	}
 }
 
+#clients #auth-list {
+	@apply justify-start;
+}
+
 .auth-button {
 	@apply rounded-full
 		border
@@ -51,7 +53,9 @@ h6 {
 		font-sans
 		h-[40px]
 		p-[8px];
+
 	font-family: "Roboto";
+
 	@apply static
 		!important;
 
@@ -61,11 +65,14 @@ h6 {
 
 	svg,
 	img {
-		@apply inline m-0 bg-white;
 		vertical-align: sub;
+
+		@apply inline m-0 bg-white;
+
 		@apply h-[18px]
 			w-[18px]
 			!important;
+
 		/* Per Google's guidlines, the background color always has to be #fff, even in dark mode */
 	}
 
@@ -80,12 +87,15 @@ h6 {
 
 #email-address,
 #code,
-[type="submit"] {
+input[type="submit"],
+button {
 	@apply w-full py-3 pl-4 mt-2 text-sm font-medium leading-5 transition duration-300 ease-in-out border rounded-full;
 }
 
-[type="submit"] {
+input[type="submit"],
+button {
 	@apply h-10 text-white;
+
 	img {
 		@apply h-full m-auto;
 	}
@@ -93,6 +103,7 @@ h6 {
 
 .buttons-container {
 	@apply inline-flex w-full p-2;
+	
 	i.far {
 		@apply inline ml-2;
 	}
@@ -120,11 +131,12 @@ h6 {
 	}
 }
 
-hml,
+html,
 body,
 iframe {
 	@apply block
 		!important;
 	@apply w-screen h-screen border-0 border-white border-solid;
+
 	scroll-behavior: smooth;
 }

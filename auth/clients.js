@@ -1,32 +1,32 @@
 "use strict";
 
 /*
- *TODO: move comment to wiki
+ * TODO: move comment to wiki
  *
- *name: name of the client
- *link: link that users are directed to when they click the button.
- *	{{url}} will be replaced with the uri-encoded url to be redirected to.
- *	Each client is responsible for storring it in some way.
- *	Relative to https://auth.onedot.cf
- *icon: icon of client, should be the name of
- *	a SVG file in the routes/svg directory (without the .svg extention),*
- *	the name of a FontAwesome icon,
- *	or an absolute url
- *iconProvider: determines which of the above the icon is. Should be one of svg, url, or fa
- *pages: array of objects. each object can have these properties:
- *	post: function that runs on a HTTP POST request to backendPage. Takes three arguments:
- *		req: express request object
- *		res: express response object
- *		sendResponse: function that takes three arguments:
- *			tokenOrData: token that can be passed to the getData function. the token should be supplied by the client.
- *				alternatively you can pass user data (see rawData).
- *			url: url to redirect to afterwards
- *			res: express response object
- *	get: function that runs on a HTTP GET request to backendPage. Takes the same three arguments as post.
- *	backendPage: Page that handles the said HTTP requests. Relative to https://auth.onedot.cf/auth/
- *getData: function that take a "token" parameter and outputs a users' data.
- *rawData: boolean. determines if instead of passing a token to sendResponse, you will send the users' data directly.
- *	ONLY USE IF ALL THE DATA YOU RE SENDING CAN BE VIEWED BY ANYONE ANYWHERE ANYTIME
+ * name: name of the client
+ * link: link that users are directed to when they click the button.
+ * 	{{url}} will be replaced with the uri-encoded url to be redirected to.
+ * 	Each client is responsible for storring it in some way.
+ * 	Relative to https://auth.onedot.cf
+ * icon: icon of client, should be the name of
+ * 	a SVG file in the routes/svg directory (without the .svg extention),*
+ * 	the name of a FontAwesome icon,
+ * 	or an absolute url
+ * iconProvider: determines which of the above the icon is. Should be one of svg, url, or fa
+ * pages: array of objects. each object can have these properties:
+ * 	post: function that runs on a HTTP POST request to backendPage. Takes three arguments:
+ * 		req: express request object
+ * 		res: express response object
+ * 		sendResponse: function that takes three arguments:
+ * 			tokenOrData: token that can be passed to the getData function. the token should be supplied by the client.
+ * 				alternatively you can pass user data (see rawData).
+ * 			url: url to redirect to afterwards
+ * 			res: express response object
+ * 	get: function that runs on a HTTP GET request to backendPage. Takes the same three arguments as post.
+ * 	backendPage: Page that handles the said HTTP requests. Relative to https://auth.onedot.cf/auth/
+ * getData: function that take a "token" parameter and outputs a users' data.
+ * rawData: boolean. determines if instead of passing a token to sendResponse, you will send the users' data directly.
+ * 	ONLY USE IF ALL THE DATA YOU RE SENDING CAN BE VIEWED BY ANYONE ANYWHERE ANYTIME
  */
 module.exports = [
 	{
@@ -55,22 +55,22 @@ module.exports = [
 				{ id_token = ".eyJlcnJvciI6InRvbyBzbG93In0=." } = await fetch(
 					"https://oauth2.googleapis.com/token",
 					{
-						headers: {
-							"Content-Type": "application/x-www-form-urlencoded",
-						},
-						method: "POST",
 						body:
 							`code=${token}` +
 							"&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com" +
 							"&client_secret=I8Wr-B-Ykt4Kmo4dmg5LLgm9" +
 							"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
 							"&grant_type=authorization_code",
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded",
+						},
+						method: "POST",
 					},
 				).then((res) => res.json());
 
 			const info = JSON.parse(atob(id_token.split(".")[1])),
 				returnVal = {};
-			for (const a in info) {
+			for (const item in info) {
 				if (
 					[
 						"sub",
@@ -83,9 +83,9 @@ module.exports = [
 						"picture",
 						"profile",
 						"error",
-					].includes(a)
+					].includes(item)
 				) {
-					returnVal[a] = info[a];
+					returnVal[`${item}`] = info[item];
 				}
 			}
 			return returnVal;
@@ -136,7 +136,7 @@ module.exports = [
 					console.log(req.body);
 					if (req.body.code && req.body.email) {
 						const { email = null, date = null } =
-							await database.get(`EMAIL_${req.body.code}`) ||
+							(await database.get(`EMAIL_${req.body.code}`)) ||
 							{};
 						if (Date.now() - date > 900000) {
 							await database.delete(`EMAIL_${req.body.code}`);
@@ -171,7 +171,7 @@ module.exports = [
 								},
 								service: "gmail",
 							}),
-						 id = require("retronid").generate();
+							id = require("retronid").generate();
 						await database.set(`EMAIL_${id}`, {
 							email: req.body.email,
 							date: Date.now(),
@@ -238,15 +238,17 @@ Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, //
 		],
 	},
 	{
-		name: "GitHub",
+		icon: "github",
+		iconProvider: "fa",
 		link:
 			"https://github.com/login/oauth/authorize" +
 			"?client_id=Iv1.1database69635c026c31d" +
 			"&redirect_uri=https://auth.onedot.cf/backend/github" +
 			"&state={{url}}",
-		icon: "github",
-		iconProvider: "fa",
-		pages: [{ backendPage: "github" }], // To be migrated
+		name: "GitHub",
+
+		// To be migrated
+		pages: [{ backendPage: "github" }],
 	},
 	{
 		icon: "https://repl.it/public/images/logo.svg",

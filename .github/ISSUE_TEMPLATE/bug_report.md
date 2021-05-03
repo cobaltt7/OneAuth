@@ -18,16 +18,16 @@ _Steps to reproduce the behavior_
 
 ## Expected behavior
 
-_A clear and concise description of what you expected to happen._
+_A clear and concise description of what should have happened._
 
 ## Screenshots
 
-_If applicable, add screenshots to help explain your problem._
+_Screenshots to help explain the problem._
 
 ## Device info
 
-_What device are you using?_
+_What device was the behavior reccorded on?_
 
 ## Additional context
 
-_Add any other context about the problem here._
+_Any other context about the problem_
