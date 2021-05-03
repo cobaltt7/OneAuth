@@ -43,8 +43,7 @@ authClients.forEach((client) => {
 		});
 	} else {
 		throw new Error(
-			`${client.iconProvider} is not a ` +
-				`valid icon provider for ${client.name}`,
+			`${client.iconProvider} is not a valid icon provider for ${client.name}`,
 		);
 	}
 	Object.assign(icon, {
@@ -70,9 +69,7 @@ router.get("/logo.svg", (_, res) => {
 	res.sendFile(`${__dirname}/1Auth NoPad.svg`);
 });
 router.get("/favicon.ico", (_, res) => {
-	res.status(302).redirect(
-		"https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg",
-	);
+	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
 });
 router.get("/svg/:img", (req, res) => {
 	res.sendFile(`/home/runner/auth/routes/svg/${req.params.img}.svg`);
@@ -85,10 +82,7 @@ router.get("/", (req, res) => {
 		return res.status(303).redirect("https://auth.onedot.cf/about");
 	}
 	return res.render(`${__dirname}/index.html`, {
-		buttons: authButtons.outerHTML.replace(
-			/{{url}}/g,
-			encodeURIComponent(req.query.url),
-		),
+		buttons: authButtons.outerHTML.replace(/{{url}}/g, encodeURIComponent(req.query.url)),
 		url: encodeURIComponent(req.query.url),
 	});
 });

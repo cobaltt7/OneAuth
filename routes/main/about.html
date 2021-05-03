@@ -17,9 +17,8 @@
 			<section id="about">
 				<h2>About</h2>
 				<p>
-					1Auth is an all-in-one authentication client that is
-					designed to work seamlessly with any website. It currrently
-					supports 5 clients with many more to come.
+					1Auth is an all-in-one authentication client that is designed to work seamlessly
+					with any website. It currrently supports 5 clients with many more to come.
 				</p>
 			</section>
 			<section id="clients">
@@ -28,25 +27,18 @@
 			</section>
 			<section id="developers">
 				<h2>For Developers</h2>
-				<p>
-					To implement this in your site is easy. Simply direct your
-					users to this URL:
-				</p>
+				<p>To implement this in your site is easy. Simply direct your users to this URL:</p>
 				<pre>https://auth.onedot.cf/?url=&lt;CALLBACK_URL&gt;</pre>
 				<p>
-					After the user clicks on the link and finishes
-					authentication with us, they will be redirected to whatever
-					url you specified in <code>&lt;CALLBACK_URL&gt;</code>.
-					There will be an extra search parameter on the URL:
-					<code>code</code>. To retrive the users information, send
-					the following http request:
+					After the user clicks on the link and finishes authentication with us, they will
+					be redirected to whatever url you specified in
+					<code>&lt;CALLBACK_URL&gt;</code>. There will be an extra search parameter on
+					the URL: <code>code</code>. To retrive the users information, send the following
+					http request:
 				</p>
-				<pre>
-GET https://auth.onedot.cf/backend/get_data/&lt;CODE&gt;</pre
-				>
+				<pre>GET https://auth.onedot.cf/backend/get_data/&lt;CODE&gt;</pre>
 				<p>
-					where <code>&lt;CODE&gt;</code> is the value of the appended
-					search parameter.
+					where <code>&lt;CODE&gt;</code> is the value of the appended search parameter.
 				</p>
 				<br />
 				<p>More configuration options will come soon.</p>

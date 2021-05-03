@@ -7,9 +7,7 @@ const authClients = require("./clients.js"),
 	{ URL } = require("url");
 const getClient = (requestedClient) =>
 		authClients.find((currentClient) =>
-			currentClient.pages.find(
-				({ backendPage }) => backendPage === requestedClient,
-			),
+			currentClient.pages.find(({ backendPage }) => backendPage === requestedClient),
 		),
 	getPageHandler = (requestedClient) => {
 		for (const currentClient of authClients) {
@@ -44,37 +42,26 @@ const getClient = (requestedClient) =>
 				url,
 			});
 		} catch (_) {
-			return res
-				.status(400)
-				.render("/home/runner/auth/routes/main/error.html");
+			return res.status(400).render("/home/runner/auth/routes/main/error.html");
 		}
 	};
 for (const http of ["post", "get"]) {
 	router[http]("/auth/:client", (req, res) => {
 		const client = getPageHandler(req.params.client);
 		if (typeof client === "undefined") {
-			return res
-				.status(404)
-				.render("/home/runner/auth/routes/main/404.html");
+			return res.status(404).render("/home/runner/auth/routes/main/404.html");
 		}
 		if (typeof client.get !== "function") {
-			return res
-				.status(405)
-				.render("/home/runner/auth/routes/main/405.html");
+			return res.status(405).render("/home/runner/auth/routes/main/405.html");
 		}
-		return client[http](req, res, (...args) =>
-			sendResponse(req.params.client, ...args),
-		);
+		return client[http](req, res, (...args) => sendResponse(req.params.client, ...args));
 	});
 }
 
 router.get("/backend/get_data", async (req, res) => {
 	// When data is being retrieved
 	res.header("Access-Control-Allow-Origin", "*");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin, X-Requested-With, Content-Type, Accept",
-	);
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.status(200).json(await database.get(`RETRIEVE_${req.query.code}`));
 	await database.delete(`RETRIEVE_${req.query.code}`);
 });

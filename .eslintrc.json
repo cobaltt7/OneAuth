@@ -64,7 +64,7 @@
 		"max-lines-per-function": [
 			2,
 			{
-				"max": 80,
+				"max": 100,
 				"skipBlankLines": true,
 				"skipComments": true,
 				"IIFEs": true
@@ -163,10 +163,8 @@
 		"array-element-newline": 0,
 		"no-mixed-operators": 0,
 		"no-console": 1,
-		"multiline-ternary": [
-			1,
-			"always-multiline"
-		],
-		"no-ternary": 0
+		"multiline-ternary": [1, "always-multiline"],
+		"no-ternary": 0,
+		"max-len": [1, { "code": 100, "tabWidth": 2, "ignoreRegExpLiterals": true }]
 	}
 }

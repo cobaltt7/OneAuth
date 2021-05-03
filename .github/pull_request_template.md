@@ -10,8 +10,8 @@ _Please describe the changes._
 
 ## Reason for changes
 
-_Why should they be made?_
+_Why did you make them?_
 
 ## Tests
 
-_Has this PR been tested? If so, how? If not, please do so before the PR is submited._
+_Have you tested this PR? If so, how? If not, please do so before submitting the PR._

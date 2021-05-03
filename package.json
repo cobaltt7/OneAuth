@@ -22,7 +22,7 @@
 	},
 	"main": "index.js",
 	"scripts": {
-		"lint": "npx prettier --write . && npx eslint . & npx jshint .",
+		"lint": "npx prettier --write . && npx eslint --fix . & npx jshint .",
 		"start": "TAILWIND_MODE=watch npx postcss tailwind.css -o routes/main/style.css & node --trace-warnings .",
 		"test": "npx nodemon --trace-warnings ."
 	},
@@ -75,7 +75,7 @@
 		"jsxBracketSameLine": true,
 		"vueIndentScriptAndStyle": true,
 		"embeddedLanguageFormatting": "auto",
-		"printWidth": 80
+		"printWidth": 100
 	},
 	"nodemonConfig": {
 		"verbose": false,
