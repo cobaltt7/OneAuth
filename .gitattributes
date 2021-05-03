@@ -1,9 +1,13 @@
 / eol=crlf working-tree-encoding=UTF-8 diff whitespace
 LICENSE text
 *.txt text
-.* text export-ignore
+.env text export-ignore
+.* json diff=js export-ignore
+.replit text
 .github export-ignore
 *.md diff=markdown
 *.html diff=html
+*.json diff=js
+*.js diff=js
 *.svg diff=html
 *.css diff=css

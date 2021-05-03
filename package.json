@@ -1,13 +1,7 @@
 {
-	"name": "1Auth",
-	"version": "1.0.0",
+	"name": "@onedotprojects/auth",
 	"description": "All-In-One Authorization",
-	"main": "index.js",
-	"scripts": {
-		"lint": "npm install && npx prettier -w . && npx jshint .",
-		"start": "TAILWIND_MODE=watch postcss tailwind.css -o routes/main/bundle-beta.css & node --trace-warnings .",
-		"test": "nodemon --trace-warnings ."
-	},
+	"author": "William Horning and Contributors",
 	"keywords": [
 		"auth",
 		"login",
@@ -15,18 +9,30 @@
 		"signin",
 		"authorization"
 	],
-	"author": "William Horning and Contributors",
+	"homepage": "https://auth.onedot.cf",
+	"private": true,
 	"license": "MIT",
+	"version": "1.0.0",
+	"engines": {
+		"node": "12.16.1"
+	},
+	"bugs": {
+		"url": "https://github.com/onedotprojects/auth/issues/new",
+		"email": "1auth.wgyt@gmail.com"
+	},
+	"main": "index.js",
+	"scripts": {
+		"lint": "npx prettier --write . && npx eslint . & npx jshint .",
+		"start": "TAILWIND_MODE=watch npx postcss tailwind.css -o routes/main/style.css & node --trace-warnings .",
+		"test": "npx nodemon --trace-warnings ."
+	},
 	"dependencies": {
 		"@replit/database": "^2.0.1",
 		"atob": "^2.1.2",
-		"autoprefixer": "^10.2.5",
-		"axios": "^0.21.1",
 		"body-parser": "^1.19.0",
 		"clean-css": "^5.1.2",
 		"compression": "^1.7.4",
 		"cookie-parser": "^1.4.5",
-		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"google-auth-library": "^7.0.4",
@@ -36,9 +42,6 @@
 		"nodemailer": "^6.6.0",
 		"retronid": "^1.0.2"
 	},
-	"engines": {
-		"node": "*"
-	},
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.3.2",
 		"@tailwindcss/typography": "^0.4.0",
@@ -46,13 +49,16 @@
 		"@types/clean-css": "^4.2.4",
 		"@types/compression": "^1.7.0",
 		"@types/cookie-parser": "^1.4.2",
-		"@types/cors": "^2.8.5",
 		"@types/express": "^4.17.1",
 		"@types/jsdom": "^16.2.10",
 		"@types/mustache-express": "^1.2.1",
-		"@types/node": "^15.0.1",
+		"@types/node": "12.12.70",
 		"@types/node-fetch": "^2.5.10",
 		"@types/nodemailer": "^6.4.1",
+		"@types/postcss-import": "^12.0.0",
+		"autoprefixer": "^10.2.5",
+		"eslint": "^7.25.0",
+		"eslint-plugin-html": "^6.1.2",
 		"jshint": "^2.12.0",
 		"nodemon": "^2.0.7",
 		"postcss": "^8.2.13",
@@ -60,64 +66,8 @@
 		"postcss-import": "^14.0.1",
 		"postcss-nested": "^5.0.5",
 		"prettier": "^2.2.1",
+		"stylelint": "^13.13.1",
 		"tailwindcss": "^2.1.2"
-	},
-	"bugs": {
-		"url": "https://github.com/onedotprojects/auth/issues/new",
-		"email": "1auth.wgyt@gmail.com"
-	},
-	"homepage": "https://auth.onedot.cf",
-	"private": true,
-	"jshintConfig": {
-		"maxerr": 50,
-		"bitwise": true,
-		"camelcase": true,
-		"curly": true,
-		"eqeqeq": true,
-		"forin": true,
-		"freeze": true,
-		"immed": true,
-		"latedef": true,
-		"newcap": false,
-		"noarg": true,
-		"noempty": true,
-		"nonbsp": true,
-		"nonew": false,
-		"plusplus": false,
-		"quotmark": true,
-		"undef": true,
-		"unused": true,
-		"strict": true,
-		"maxparams": false,
-		"maxdepth": 5,
-		"maxstatements": false,
-		"maxcomplexity": 30,
-		"maxlen": 120,
-		"varstmt": false,
-		"asi": false,
-		"boss": false,
-		"debug": false,
-		"eqnull": false,
-		"esversion": 12,
-		"moz": false,
-		"evil": false,
-		"expr": true,
-		"funcscope": true,
-		"globalstrict": false,
-		"iterator": true,
-		"lastsemic": false,
-		"laxbreak": false,
-		"laxcomma": true,
-		"loopfunc": false,
-		"multistr": true,
-		"noyield": false,
-		"notypeof": true,
-		"proto": true,
-		"scripturl": true,
-		"shadow": false,
-		"sub": false,
-		"supernew": true,
-		"node": true
 	},
 	"prettier": {
 		"tabWidth": 4,
@@ -126,13 +76,13 @@
 		"jsxBracketSameLine": true,
 		"vueIndentScriptAndStyle": true,
 		"embeddedLanguageFormatting": "auto",
-		"printWidth": 120
+		"printWidth": 80
 	},
 	"nodemonConfig": {
-		"verbose": true,
+		"verbose": false,
+		"ext": "*",
 		"events": {
-			"restart": "if [ $FILENAME == 'package.json' ] || [ $FILENAME == 'package-lock.json' ]\nthen\nnpm install\nfi\nprettier -w $FILENAME"
-		},
-		"ext": "*"
+			"restart": "npx prettier --write $FILENAME"
+		}
 	}
 }

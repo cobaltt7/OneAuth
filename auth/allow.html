@@ -16,22 +16,19 @@
 			<h1>Allow access?</h1>
 			<p>Do you want {{host}} to access your data?</p>
 			<div class="buttons-container">
-				<a href="/backend/send_data?client={{client}}&url={{encoded-url}}&token={{code}}" id="allow"
+				<a
+					id="allow"
+					href="/backend/send_data?client={{client}}&url={{encodedUrl}}&token={{token}}"
 					>Allow
-					<i class="far fa-check-circle inline ml-2"></i>
+					<i class="far fa-check-circle"></i>
 				</a>
-				<a href="{{url}}" id="deny"
+				<a id="deny" href="{{url}}"
 					>Deny
-					<i class="far fa-times-circle inline ml-2"></i>
+					<i class="far fa-times-circle"></i>
 				</a>
 			</div>
+			<p>Here is what would be sent:</p>
+			<pre>{{data}}</pre>
 		</main>
-		<script>
-			const deny = document.querySelector("#deny");
-			deny.addEventListener("click", async () => {
-				await fetch("/backend/remove_data/{{code}}");
-				return true;
-			});
-		</script>
 	</body>
 </html>

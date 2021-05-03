@@ -1,0 +1,205 @@
+{
+	"cSpell.allowCompoundWords": true,
+	"cSpell.diagnosticLevel": "Warning",
+	"cSpell.enableFiletypes": [
+		"markdown",
+		"yaml",
+		"plaintext",
+		"html",
+		"javascript",
+		"jsonc",
+		"xml",
+		"css",
+		"dotenv",
+		"properties",
+		"ignore",
+		"json"
+	],
+	"cSpell.enabled": true,
+	"cSpell.fixSpellingWithRenameProvider": true,
+	"cSpell.ignorePaths": [],
+	"cSpell.language": "en,en-US",
+	"cSpell.minWordLength": 2,
+	"checkpoints.locale": "en-US",
+	"codemetrics.basics.DiagnosticsEnabled": true,
+	"compile-hero.config": "",
+	"compile-hero.generate-minified-css": true,
+	"compile-hero.generate-minified-javascript": true,
+	"compile-hero.ignore": "",
+	"compile-hero.jade-output-directory": "",
+	"compile-hero.javascript-output-directory": "",
+	"compile-hero.language": {
+		"js": {
+			"type": ["javascript", "json", "jsonc"],
+			"filename": [".jshintrc", ".jsbeautifyrc"]
+		},
+		"css": ["css", "less", "scss"],
+		"html": ["htm", "html"]
+	},
+	"compile-hero.less-output-directory": "./",
+	"compile-hero.pug-output-directory": "",
+	"compile-hero.sass-output-directory": "",
+	"compile-hero.scss-output-directory": "",
+	"compile-hero.stylus-output-directory": "",
+	"compile-hero.typescript-output-directory": "",
+	"compile-hero.typescriptx-output-directory": "",
+	"css.fileExtensions": ["html", "css"],
+	"css.lint.compatibleVendorPrefixes": "warning",
+	"css.lint.duplicateProperties": "warning",
+	"css.lint.hexColorLength": "warning",
+	"css.lint.importStatement": "warning",
+	"css.lint.unknownVendorSpecificProperties": "ignore",
+	"css.lint.zeroUnits": "error",
+	"doiuse.browsers": [
+		"unreleased versions and not dead and > 0% and not operamini 0",
+		"maintained node versions and not dead and > 0% and not operamini 0",
+		"last 5 versions and not dead and > 0% and not operamini 0"
+	],
+	"doiuse.enable": true,
+	"doiuse.messageLevel": "Warning",
+	"editor.detectIndentation": true,
+	"editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'zero', 'onum'",
+	"editor.insertSpaces": false,
+	"editor.renderWhitespace": "all",
+	"errorLens.enabledDiagnosticLevels": ["error", "warning", "info", "hint"],
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"es6-css-minify.minifyOnSave": "exists",
+	"eslint.format.enable": true,
+	"eslint.lintTask.enable": true,
+	"files.eol": "\n",
+	"files.insertFinalNewline": true,
+	"files.trimTrailingWhitespace": true,
+	"gremlins.characters": {
+		"2013": {
+			"description": "en dash",
+			"level": "warning"
+		},
+		"2018": {
+			"description": "left single quotation mark",
+			"level": "warning"
+		},
+		"2019": {
+			"description": "right single quotation mark",
+			"level": "warning"
+		},
+		"2029": {
+			"zeroWidth": true,
+			"description": "paragraph separator",
+			"level": "error"
+		},
+		"0003": {
+			"description": "end of text",
+			"level": "warning"
+		},
+		"000b": {
+			"description": "line tabulation",
+			"level": "warning"
+		},
+		"00a0": {
+			"description": "non breaking space",
+			"level": "info"
+		},
+		"00ad": {
+			"description": "soft hyphen",
+			"level": "info"
+		},
+		"200b": {
+			"zeroWidth": true,
+			"description": "zero width space",
+			"level": "error"
+		},
+		"200c": {
+			"zeroWidth": true,
+			"description": "zero width non-joiner",
+			"level": "warning"
+		},
+		"200e": {
+			"zeroWidth": true,
+			"description": "left-to-right mark",
+			"level": "error"
+		},
+		"201c": {
+			"description": "left double quotation mark",
+			"level": "warning"
+		},
+		"201d": {
+			"description": "right double quotation mark",
+			"level": "warning"
+		},
+		"202c": {
+			"zeroWidth": true,
+			"description": "pop directional formatting",
+			"level": "error"
+		},
+		"202d": {
+			"zeroWidth": true,
+			"description": "left-to-right override",
+			"level": "error"
+		},
+		"202e": {
+			"zeroWidth": true,
+			"description": "right-to-left override",
+			"level": "error"
+		},
+		"fffc": {
+			"zeroWidth": true,
+			"description": "object replacement character",
+			"level": "error"
+		}
+	},
+	"gremlins.showInProblemPane": true,
+	"html.format.indentHandlebars": true,
+	"html.format.indentInnerHtml": true,
+	"html.format.maxPreserveNewLines": 0,
+	"html.format.preserveNewLines": false,
+	"html.format.wrapAttributes": "aligned-multiple",
+	"html.format.wrapLineLength": 80,
+	"javascript.format.insertSpaceAfterConstructor": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+	"javascript.format.semicolons": "insert",
+	"javascript.preferences.importModuleSpecifier": "relative",
+	"javascript.preferences.importModuleSpecifierEnding": "minimal",
+	"javascript.preferences.quoteStyle": "single",
+	"javascript.referencesCodeLens.enabled": true,
+	"javascript.referencesCodeLens.showOnAllFunctions": true,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"js/ts.implicitProjectConfig.checkJs": true,
+	"js/ts.implicitProjectConfig.experimentalDecorators": true,
+	"jshint.options": {
+		"esversion": 6
+	},
+	"multiclip.formatAfterPaste": true,
+	"todo-tree.filtering.includeHiddenFiles": true,
+	"todo-tree.general.tags": [
+		"FIX",
+		"IMPROVE",
+		"ADD",
+		"TEST",
+		"REMOVE",
+		"BOOKMARK",
+		"ROP"
+	],
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"typescript.format.insertSpaceAfterConstructor": true,
+	"typescript.format.insertSpaceAfterTypeAssertion": true,
+	"typescript.format.semicolons": "remove",
+	"typescript.implementationsCodeLens.enabled": true,
+	"typescript.preferences.importModuleSpecifierEnding": "minimal",
+	"typescript.preferences.includePackageJsonAutoImports": "on",
+	"typescript.preferences.quoteStyle": "single",
+	"typescript.referencesCodeLens.enabled": true,
+	"typescript.referencesCodeLens.showOnAllFunctions": true,
+	"typescript.suggest.completeFunctionCalls": true,
+	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
+	"xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+	"xmlTools.removeCommentsOnMinify": true,
+	"xmlTools.splitAttributesOnFormat": true,
+	"workbench.editor.wrapTabs": true,
+	"todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^)\\s*($TAGS))",
+	"intelephense.environment.phpVersion": "7.4.15",
+	"jshint.lintHTML": true,
+	"markdownlint.config": {
+		"MD013": false,
+		"MD030": false
+	}
+}

@@ -14,8 +14,10 @@
 		{{> nav}}
 		<main>
 			<h1>Login with Email</h1>
-			<label for="email-address" id="note">Enter your email to continue</label>
-			<form action="" method="POST">
+			<label id="note" for="email-address"
+				>Enter your email to continue</label
+			>
+			<form action method="POST">
 				<input
 					id="email-address"
 					name="email"
@@ -24,74 +26,89 @@
 					required="true"
 					placeholder="Email address"
 				/>
-				<button type="submit" id="submit">Submit</button>
+				<button id="submit" type="submit">Submit</button>
 			</form>
 		</main>
 		<script>
-			document.querySelector("form").addEventListener("submit", async (e) => {
-				e.preventDefault();
+			"use strict";
+			(function () {
+				document
+					.querySelector("form")
+					.addEventListener("submit", async (event) => {
+						event.preventDefault();
 
-				// Show loading icon
-				const submit = document.querySelector('[type="submit"]');
-				submit.firstChild.remove();
-				submit.append(
-					Object.assign(document.createElement("img"), {
-						src: "/svg/loading",
-					}),
-				);
+						// Show loading icon
+						const submit = document.querySelector(
+							'[type="submit"]',
+						);
+						submit.firstChild.remove();
+						submit.append(
+							Object.assign(document.createElement("img"), {
+								src: "/svg/loading",
+							}),
+						);
 
-				// Save email for later
-				const email = document.querySelector("input").value;
+						// Save email for later
+						const email = document.querySelector("input").value;
 
-				// Send the email
-				await fetch("", {
-					headers: {
-						"content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-					},
-					body: "email=" + email,
-					method: "POST",
-				});
+						// Send the email
+						await fetch("", {
+							body: `email=${email}`,
+							headers: {
+								"content-type":
+									"application/x-www-form-urlencoded; charset=UTF-8",
+							},
+							method: "POST",
+						});
 
-				// Create new form
-				var form = Object.assign(document.createElement("form"), {
-					// main form
-					action: "",
-					method: "POST",
-					autocomplete: "off",
-				});
-				form.appendChild(
-					Object.assign(document.createElement("input"), {
-						// code box
-						type: "password",
-						name: "code",
-						placeholder: "abcde12345",
-						autocomplete: "off",
-						required: "true",
-						id: "code",
-					}),
-					Object.assign(document.createElement("input"), {
-						// hidden email box
-						type: "hidden",
-						name: "email",
-						value: email,
-					}),
-					Object.assign(document.createElement("input"), {
-						// submit button
-						type: "submit",
-						id: "submit",
-					}),
-				);
-				document.querySelector("form").remove();
-				document.querySelector("#note").remove();
-				document.querySelector("main").appendChild(
-					Object.assign(document.createElement("label"), {
-						htmlFor: "code",
-						id: "note",
-						innerText: "Enter the code we sent to you to continue",
-					}),
-					form,
-				);
-			});
+						// Create new form
+						const form = Object.assign(
+							document.createElement("form"),
+							{
+								// Create form element
+								action: "",
+								autocomplete: "off",
+								method: "POST",
+							},
+						);
+						form.appendChild(
+							Object.assign(document.createElement("input"), {
+								// Code box
+								autocomplete: "off",
+								// eslint-disable-next-line id-length
+								id: "code",
+								name: "code",
+								placeholder: "abcde12345",
+								required: "true",
+								type: "password",
+							}),
+							Object.assign(document.createElement("input"), {
+								// Hidden email box
+								name: "email",
+								type: "hidden",
+								value: email,
+							}),
+							Object.assign(document.createElement("input"), {
+								// Submit button
+								// eslint-disable-next-line id-length
+								id: "submit",
+								type: "submit",
+							}),
+						);
+						document.querySelector("form").remove();
+						document.querySelector("#note").remove();
+						document.querySelector("main").appendChild(
+							Object.assign(document.createElement("label"), {
+								htmlFor: "code",
+								// eslint-disable-next-line id-length
+								id: "note",
+								innerText:
+									"Enter the code we sent to you to continue",
+							}),
+							form,
+						);
+					});
+			})();
 		</script>
 	</body>
 </html>

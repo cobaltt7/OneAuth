@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="cursor-pointer" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Sign In With Repl.it | 1Auth</title>
+		<title>Sign in with Replit | 1Auth</title>
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
@@ -11,22 +11,49 @@
 	</head>
 
 	<body style="display: none">
-		<script
-			crossorigin="anonymous"
-			src="https://cdn.jsdelivr.net/gh/cursorweb/cursorweb-cdn/repl-auth/repl-auth.min.js"
-		></script>
+		{{> nav}}
+		<main>
+			<h1>Sign in with Replit</h1>
+			<h2>Click anywhere to get started</h2>
+		</main>
 		<script>
-			/*
-		  Go here: https://github.com/cursorweb/replit-auth-html to learn more.
-		*/
-			Auth.ondone = function (e) {
-				location.reload();
-			};
-			Auth.onerror = function (e) {
-				console.error(e);
-				location.href = "/error";
-			};
-			new Auth().append();
+			"use strict";
+			(function () {
+				let authWindow, interval;
+				function authComplete(event) {
+					if (event.data !== "auth_complete") {
+						return;
+					}
+
+					removeEventListener("message", authComplete);
+					clearInterval(interval);
+					authWindow.close();
+					location.reload();
+				}
+
+				document.documentElement.addEventListener("click", () => {
+					authWindow = open(
+						`https://repl.it/auth_with_repl_site?domain=${location.host}`,
+						"Sign in with Replit",
+						`channelmode=yes,directories=no,fullscreen=no,height=500,left=${
+							screen.width / 2 - 175
+						},location=no,menubar=no,resizable=no,scrollbars=no,status=no,ti` +
+							`tlebar=no,toolbar=no,top=${
+								screen.height / 2 - 250
+							},width=350`,
+					);
+					addEventListener("message", authComplete);
+					interval = setInterval(() => {
+						if (authWindow.closed) {
+							clearInterval(interval);
+							alert(
+								"If you close the window, we can't authenticate you!\n" +
+									"Please reopen the window by clicking anywhere.",
+							);
+						}
+					}, 100);
+				});
+			})();
 		</script>
 	</body>
 </html>

@@ -1,13 +1,15 @@
 "use strict";
 
 /*
+	TODO: move comment to wiki
+
 	name: name of the client
 	link: link that users are directed to when they click the button.
 		{{url}} will be replaced with the uri-encoded url to be redirected to.
 		Each client is responsible for storring it in some way.
 		Relative to https://auth.onedot.cf
 	icon: icon of client, should be the name of
-		a SVG file in the routes/svg directory (without the .svg extention),
+		a SVG file in the routes/svg directory (without the .svg extention),*
 		the name of a FontAwesome icon,
 		or an absolute url
 	iconProvider: determines which of the above the icon is. Should be one of svg, url, or fa
@@ -16,11 +18,15 @@
 			req: express request object
 			res: express response object
 			sendResponse: function that takes three arguments:
-				data: data to send
+				tokenOrData: token that can be passed to the getData function. the token should be supplied by the client.
+					alternatively you can pass user data (see rawData).
 				url: url to redirect to afterwards
 				res: express response object
 		get: function that runs on a HTTP GET request to backendPage. Takes the same three arguments as post.
 		backendPage: Page that handles the said HTTP requests. Relative to https://auth.onedot.cf/auth/
+	getData: function that take a "token" parameter and outputs a users' data.
+	rawData: boolean. determines if instead of passing a token to sendResponse, you will send the users' data directly.
+		ONLY USE IF ALL THE DATA YOU RE SENDING CAN BE VIEWED BY ANYONE ANYWHERE ANYTIME
 */
 module.exports = [
 	{
@@ -38,33 +44,33 @@ module.exports = [
 		pages: [
 			{
 				backendPage: "google",
-				get: async (req, res, sendResponse) => {
+				get: (req, res, sendResponse) => {
 					sendResponse(req.query.code, req.query.state, res);
 				},
 			},
 		],
 		getData: async (token) => {
-			const fetch = require("node-fetch");
-			const atob = require("atob");
-			const info = await fetch("https://oauth2.googleapis.com/token", {
-				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-				},
-				method: "POST",
-				body:
-					`code=${token}` +
-					"&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com" +
-					"&client_secret=I8Wr-B-Ykt4Kmo4dmg5LLgm9" +
-					"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
-					"&grant_type=authorization_code",
-			})
-				.then((res) => res.json())
-				.then(({ idToken = ".eyJlcnJvciI6InRvbyBzbG93In0=." }) => JSON.parse(atob(idToken.split(".")[1])));
-			if (info.error) {
-				return "error";
-			}
-			var returnVal = {};
-			for (const a in info) {
+			const atob = require("atob"),
+				fetch = require("node-fetch"),
+				{ id_token = ".eyJlcnJvciI6InRvbyBzbG93In0=." } = await fetch(
+					"https://oauth2.googleapis.com/token",
+					{
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded",
+						},
+						method: "POST",
+						body:
+							`code=${token}` +
+							"&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com" +
+							"&client_secret=I8Wr-B-Ykt4Kmo4dmg5LLgm9" +
+							"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
+							"&grant_type=authorization_code",
+					},
+				).then((res) => res.json());
+
+			const info = JSON.parse(atob(id_token.split(".")[1])),
+				returnVal = {};
+			for (var a in info) {
 				if (
 					[
 						"sub",
@@ -76,38 +82,43 @@ module.exports = [
 						"name",
 						"picture",
 						"profile",
+						"error",
 					].includes(a)
 				) {
 					returnVal[a] = info[a];
 				}
-				return returnVal;
 			}
+			return returnVal;
 		},
 	},
 	{
-		name: "Replit",
-		link: "/auth/replit?url={{url}}",
 		icon: "https://repl.it/public/images/logo.svg",
 		iconProvider: "url",
+		link: "/auth/replit?url={{url}}",
+		name: "Replit",
 		pages: [
 			{
 				backendPage: "replit",
-				get: async (req, res, sendResponse) => {
+				get: (req, res, sendResponse) => {
 					if (req.get("X-Replit-User-Id")) {
 						return sendResponse(
 							{
-								"X-Replit-User-Id": req.headers["X-Replit-User-Id"],
-								"X-Replit-User-Name": req.headers["X-Replit-User-Name"],
-								"X-Replit-User-Roles": req.headers["X-Replit-User-Roles"],
+								"X-Replit-User-Id":
+									req.headers["X-Replit-User-Id"],
+								"X-Replit-User-Name":
+									req.headers["X-Replit-User-Name"],
+								"X-Replit-User-Roles":
+									req.headers["X-Replit-User-Roles"],
 							},
 							req.query.url,
 							res,
 						);
 					}
-					res.render(__dirname + "/html/replit.html");
+					return res.render(__dirname + "/html/replit.html");
 				},
 			},
 		],
+		rawData: true,
 	},
 	{
 		name: "Email",
@@ -117,22 +128,32 @@ module.exports = [
 		pages: [
 			{
 				backendPage: "email",
-				get: (req, res) => {
+				get: (_, res) => {
 					res.render(__dirname + "/html/email.html");
 				},
 				post: async (req, res, sendResponse) => {
-					const db = new (require("@replit/database"))();
+					const database = new (require("@replit/database"))();
 					console.log(req.body);
 					if (req.body.code && req.body.email) {
-						const { email = null, date = null } = (await db.get("EMAIL_" + req.body.code)) || {};
+						const { email = null, date = null } =
+							(await database.get("EMAIL_" + req.body.code)) ||
+							{};
 						if (Date.now() - date > 900000) {
-							await db.delete("EMAIL_" + req.body.code);
-							return res.status(410).render("/home/runner/auth/routes/main/error.html");
+							await database.delete("EMAIL_" + req.body.code);
+							return res
+								.status(410)
+								.render(
+									"/home/runner/auth/routes/main/error.html",
+								);
 						}
 						if (req.body.email !== email) {
-							return res.status(401).render("/home/runner/auth/routes/main/error.html");
+							return res
+								.status(401)
+								.render(
+									"/home/runner/auth/routes/main/error.html",
+								);
 						}
-						await db.delete("EMAIL_" + req.body.code);
+						await database.delete("EMAIL_" + req.body.code);
 						return sendResponse(
 							{
 								email: email,
@@ -144,14 +165,14 @@ module.exports = [
 					if (req.body.email && !req.body.code) {
 						// send email
 						const Mail = require("nodemailer").createTransport({
-							service: "gmail",
 							auth: {
-								user: process.env.GMAIL_EMAIL,
 								pass: process.env.GMAIL_PASS,
+								user: process.env.GMAIL_EMAIL,
 							},
+							service: "gmail",
 						});
 						const id = require("retronid").generate();
-						await db.set("EMAIL_" + id, {
+						await database.set("EMAIL_" + id, {
 							email: req.body.email,
 							date: Date.now(),
 						});
@@ -201,7 +222,11 @@ Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, //
 							(error, info) => {
 								if (error) {
 									console.error(error);
-									return res.status(500).render("/home/runner/auth/routes/main/error.html");
+									return res
+										.status(500)
+										.render(
+											"/home/runner/auth/routes/main/error.html",
+										);
 								}
 								res.json(info);
 							},
@@ -216,20 +241,20 @@ Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, //
 		name: "GitHub",
 		link:
 			"https://github.com/login/oauth/authorize" +
-			"?client_id=Iv1.1db69635c026c31d" +
+			"?client_id=Iv1.1database69635c026c31d" +
 			"&redirect_uri=https://auth.onedot.cf/backend/github" +
 			"&state={{url}}",
 		icon: "github",
 		iconProvider: "fa",
-		pages: [{ backendPage: "github" }], // to be migrated
+		pages: [{ backendPage: "github" }], // To be migrated
 	},
 	{
-		name: "Scratch",
-		// this uses the old backend page (/backend/scratch) (to be moved)
+		icon: "https://repl.it/public/images/logo.svg",
+		iconProvider: "url",
+		// This uses the old backend page (/backend/scratch) (to be moved)
 		link:
 			"https://scratchcommentauth.onedotprojects.repl.co" +
 			"?url=https://auth.onedot.cf/backend/scratch%3Furl={{url}}",
-		icon: "https://repl.it/public/images/logo.svg",
-		iconProvider: "url", // use svg
+		name: "Scratch",
 	},
 ];

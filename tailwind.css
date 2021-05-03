@@ -5,30 +5,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
-iframe {
-	@apply border-white
-		border-solid
-		border-0
-		h-screen
-		w-screen;
-}
-
 main {
-	@apply max-w-none
-		rounded
-		flex
-		flex-col
-		p-3
-		w-full
-		prose
-		max-w-none
-		shadow-xl;
-
-	h1:first-of-type,
-	p:only-of-type {
-		@apply self-center
-			m-0;
-	}
+	@apply flex flex-col w-full p-3 prose rounded shadow-xl max-w-none;
 }
 
 .prose {
@@ -38,6 +16,10 @@ main {
 
 	section h2 {
 		@apply mt-0;
+	}
+	h1:first-of-type,
+	p:only-of-type {
+		@apply self-center m-0;
 	}
 }
 
@@ -55,16 +37,10 @@ h6 {
 }
 
 #auth-list {
-	@apply flex
-		flex-wrap
-		justify-center
-		w-full;
+	@apply flex flex-wrap justify-center w-full;
 
 	a {
-		@apply no-underline
-			font-normal
-			cursor-pointer
-			text-inherit;
+		@apply font-normal no-underline cursor-pointer text-inherit;
 	}
 }
 
@@ -85,9 +61,7 @@ h6 {
 
 	svg,
 	img {
-		@apply m-0
-			bg-white
-			inline;
+		@apply inline m-0 bg-white;
 		vertical-align: sub;
 		@apply h-[18px]
 			w-[18px]
@@ -107,53 +81,31 @@ h6 {
 #email-address,
 #code,
 [type="submit"] {
-	@apply py-3
-		pl-4
-		transition
-		ease-in-out
-		duration-300
-		rounded-full
-		border
-		font-medium
-		text-sm
-		leading-5
-		mt-2
-		pl-4
-		w-full;
+	@apply w-full py-3 pl-4 mt-2 text-sm font-medium leading-5 transition duration-300 ease-in-out border rounded-full;
 }
 
 [type="submit"] {
-	@apply text-white
-		h-10;
+	@apply h-10 text-white;
 	img {
-		@apply m-auto
-			h-full;
+		@apply h-full m-auto;
 	}
 }
 
 .buttons-container {
-	@apply inline-flex
-		p-2
-		w-full;
+	@apply inline-flex w-full p-2;
+	i.far {
+		@apply inline ml-2;
+	}
 }
 
 #allow,
 #deny {
-	@apply rounded-full
-		py-3
-		px-4
-		text-white
-		w-full
-		transition
-		ease-in-out
-		duration-300
-		no-underline;
+	@apply w-full px-4 py-3 text-white no-underline transition duration-300 ease-in-out rounded-full;
 }
 
 #allow,
 [type="submit"] {
-	@apply mr-4
-		bg-green-500;
+	@apply mr-4 bg-green-500;
 
 	&:hover {
 		@apply bg-green-600;
@@ -161,15 +113,18 @@ h6 {
 }
 
 #deny {
-	@apply ml-4
-		bg-red-500;
+	@apply ml-4 bg-red-500;
 
 	&:hover {
 		@apply bg-red-600;
 	}
 }
 
-body {
+hml,
+body,
+iframe {
 	@apply block
 		!important;
+	@apply w-screen h-screen border-0 border-white border-solid;
+	scroll-behavior: smooth;
 }
