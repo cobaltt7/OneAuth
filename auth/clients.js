@@ -136,7 +136,7 @@ module.exports = [
 					console.log(req.body);
 					if (req.body.code && req.body.email) {
 						const { email = null, date = null } =
-							(await database.get(`EMAIL_${req.body.code}`)) ||
+							await database.get(`EMAIL_${req.body.code}`) ||
 							{};
 						if (Date.now() - date > 900000) {
 							await database.delete(`EMAIL_${req.body.code}`);
