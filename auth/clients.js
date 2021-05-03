@@ -100,15 +100,15 @@ module.exports = [
 			{
 				backendPage: "replit",
 				get: (req, res, sendResponse) => {
+					const userID = req.get("X-Replit-User-Id"),
+						username = req.get("X-Replit-User-Name"),
+						roles = req.get("X-Replit-User-Roles").split(",") || [];
 					if (req.get("X-Replit-User-Id")) {
 						return sendResponse(
 							{
-								"X-Replit-User-Id":
-									req.headers["X-Replit-User-Id"],
-								"X-Replit-User-Name":
-									req.headers["X-Replit-User-Name"],
-								"X-Replit-User-Roles":
-									req.headers["X-Replit-User-Roles"],
+								userID,
+								username,
+								roles,
 							},
 							req.query.url,
 							res,
@@ -136,7 +136,7 @@ module.exports = [
 					console.log(req.body);
 					if (req.body.code && req.body.email) {
 						const { email = null, date = null } =
-							await database.get(`EMAIL_${req.body.code}`) ||
+							(await database.get(`EMAIL_${req.body.code}`)) ||
 							{};
 						if (Date.now() - date > 900000) {
 							await database.delete(`EMAIL_${req.body.code}`);
