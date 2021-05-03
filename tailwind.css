@@ -103,7 +103,7 @@ button {
 
 .buttons-container {
 	@apply inline-flex w-full p-2;
-	
+
 	i.far {
 		@apply inline ml-2;
 	}

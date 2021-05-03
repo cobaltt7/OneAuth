@@ -24,7 +24,7 @@ Examples of unacceptable behavior by participants include:
 
 ## Our Responsibilities
 
-Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
+Project maintainers are responsible for clarifying the standards of acceptable behavior and should take appropriate and fair corrective action in response to any instances of unacceptable behavior.
 Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
 
 ## Scope
@@ -33,7 +33,7 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 
 ## Enforcement
 
-You may report instances of abusive, harassing, or otherwise unacceptable behavior by contacting the project team at 1auth.wgyt@gmail.com. They will review and investigate all complaints and will result in a response that they deem necessary and appropriate for the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+You may report instances of abusive, harassing, or otherwise unacceptable behavior by contacting the project team at 1auth.wgyt@gmail.com. They will review and investigate all complaints and will result in a response that they deem necessary and appropriate for the circumstances. The project team will maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
 ## Attribution

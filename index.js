@@ -67,9 +67,7 @@ async function sendResponse(data, url, res) {
 			url,
 		});
 	} catch (_) {
-		return res
-			.status(400)
-			.render("/home/runner/auth/routes/main/error.html");
+		return res.status(400).render("/home/runner/auth/routes/main/error.html");
 	}
 }
 // GitHub
@@ -110,9 +108,7 @@ app.get("/backend/scratch/", (req, res) => {
 app.get("/backend/scratchredirect", (req, res) => {
 	res.redirect(
 		`https://scratch.auth.onedot.cf?url=${encodeURIComponent(
-			`https://auth.onedot.cf/backend/scratch?url=${encodeURIComponent(
-				req.query.url,
-			)}`,
+			`https://auth.onedot.cf/backend/scratch?url=${encodeURIComponent(req.query.url)}`,
 		)}`,
 	);
 });

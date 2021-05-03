@@ -2,27 +2,29 @@ name: Lint
 on: [push, pull_request]
 
 jobs:
-    run-linters:
-        name: Run linters
+    run:
+        name: Run Prettier and ESLint
         runs-on: ubuntu-latest
 
         steps:
             - name: Check out Git repository
-              uses: actions/checkout@v2
+            - uses: actions/checkout@v2
 
             - name: Set up Node.js
               uses: actions/setup-node@v1
               with:
-                  node-version: 12
+                  node-version: 12.16.1
 
-            - name: Install Node.js dependencies
-              run: npm i prettier stylelint eslint --save-dev
+            - name: Install Prettier and ESLint
+              run: npm i prettier eslint --save-dev
 
-            - name: Run linters
-              uses: wearerequired/lint-action@v1
+            - name: Format code
+              run: npx prettier --write .
+
+            - name: Fix style issues
+              run: npx eslint --fix .
+
+            - name: Commit changed files
+              uses: stefanzweifel/git-auto-commit-action@v4
               with:
-                  prettier: true
-                  stylelint: true
-                  eslint: true
-                  auto_fix: true
-                  continue_on_error: false
+                  commit_message: "Lint and format code using Prettier and ESLint"
