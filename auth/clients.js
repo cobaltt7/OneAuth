@@ -1,33 +1,33 @@
 "use strict";
 
 /*
-	TODO: move comment to wiki
-
-	name: name of the client
-	link: link that users are directed to when they click the button.
-		{{url}} will be replaced with the uri-encoded url to be redirected to.
-		Each client is responsible for storring it in some way.
-		Relative to https://auth.onedot.cf
-	icon: icon of client, should be the name of
-		a SVG file in the routes/svg directory (without the .svg extention),*
-		the name of a FontAwesome icon,
-		or an absolute url
-	iconProvider: determines which of the above the icon is. Should be one of svg, url, or fa
-	pages: array of objects. each object can have these properties:
-		post: function that runs on a HTTP POST request to backendPage. Takes three arguments:
-			req: express request object
-			res: express response object
-			sendResponse: function that takes three arguments:
-				tokenOrData: token that can be passed to the getData function. the token should be supplied by the client.
-					alternatively you can pass user data (see rawData).
-				url: url to redirect to afterwards
-				res: express response object
-		get: function that runs on a HTTP GET request to backendPage. Takes the same three arguments as post.
-		backendPage: Page that handles the said HTTP requests. Relative to https://auth.onedot.cf/auth/
-	getData: function that take a "token" parameter and outputs a users' data.
-	rawData: boolean. determines if instead of passing a token to sendResponse, you will send the users' data directly.
-		ONLY USE IF ALL THE DATA YOU RE SENDING CAN BE VIEWED BY ANYONE ANYWHERE ANYTIME
-*/
+ *TODO: move comment to wiki
+ *
+ *name: name of the client
+ *link: link that users are directed to when they click the button.
+ *	{{url}} will be replaced with the uri-encoded url to be redirected to.
+ *	Each client is responsible for storring it in some way.
+ *	Relative to https://auth.onedot.cf
+ *icon: icon of client, should be the name of
+ *	a SVG file in the routes/svg directory (without the .svg extention),*
+ *	the name of a FontAwesome icon,
+ *	or an absolute url
+ *iconProvider: determines which of the above the icon is. Should be one of svg, url, or fa
+ *pages: array of objects. each object can have these properties:
+ *	post: function that runs on a HTTP POST request to backendPage. Takes three arguments:
+ *		req: express request object
+ *		res: express response object
+ *		sendResponse: function that takes three arguments:
+ *			tokenOrData: token that can be passed to the getData function. the token should be supplied by the client.
+ *				alternatively you can pass user data (see rawData).
+ *			url: url to redirect to afterwards
+ *			res: express response object
+ *	get: function that runs on a HTTP GET request to backendPage. Takes the same three arguments as post.
+ *	backendPage: Page that handles the said HTTP requests. Relative to https://auth.onedot.cf/auth/
+ *getData: function that take a "token" parameter and outputs a users' data.
+ *rawData: boolean. determines if instead of passing a token to sendResponse, you will send the users' data directly.
+ *	ONLY USE IF ALL THE DATA YOU RE SENDING CAN BE VIEWED BY ANYONE ANYWHERE ANYTIME
+ */
 module.exports = [
 	{
 		name: "Google",
@@ -70,7 +70,7 @@ module.exports = [
 
 			const info = JSON.parse(atob(id_token.split(".")[1])),
 				returnVal = {};
-			for (var a in info) {
+			for (const a in info) {
 				if (
 					[
 						"sub",
@@ -114,7 +114,7 @@ module.exports = [
 							res,
 						);
 					}
-					return res.render(__dirname + "/html/replit.html");
+					return res.render(`${__dirname}/html/replit.html`);
 				},
 			},
 		],
@@ -129,17 +129,17 @@ module.exports = [
 			{
 				backendPage: "email",
 				get: (_, res) => {
-					res.render(__dirname + "/html/email.html");
+					res.render(`${__dirname}/html/email.html`);
 				},
 				post: async (req, res, sendResponse) => {
 					const database = new (require("@replit/database"))();
 					console.log(req.body);
 					if (req.body.code && req.body.email) {
 						const { email = null, date = null } =
-							(await database.get("EMAIL_" + req.body.code)) ||
+							await database.get(`EMAIL_${req.body.code}`) ||
 							{};
 						if (Date.now() - date > 900000) {
-							await database.delete("EMAIL_" + req.body.code);
+							await database.delete(`EMAIL_${req.body.code}`);
 							return res
 								.status(410)
 								.render(
@@ -153,26 +153,26 @@ module.exports = [
 									"/home/runner/auth/routes/main/error.html",
 								);
 						}
-						await database.delete("EMAIL_" + req.body.code);
+						await database.delete(`EMAIL_${req.body.code}`);
 						return sendResponse(
 							{
-								email: email,
+								email,
 							},
 							req,
 							res,
 						);
 					}
 					if (req.body.email && !req.body.code) {
-						// send email
+						// Send email
 						const Mail = require("nodemailer").createTransport({
-							auth: {
-								pass: process.env.GMAIL_PASS,
-								user: process.env.GMAIL_EMAIL,
-							},
-							service: "gmail",
-						});
-						const id = require("retronid").generate();
-						await database.set("EMAIL_" + id, {
+								auth: {
+									pass: process.env.GMAIL_PASS,
+									user: process.env.GMAIL_EMAIL,
+								},
+								service: "gmail",
+							}),
+						 id = require("retronid").generate();
+						await database.set(`EMAIL_${id}`, {
 							email: req.body.email,
 							date: Date.now(),
 						});
@@ -206,7 +206,7 @@ module.exports = [
 			<i>Not expecting this email? Just ignore it. Don't worry, nothing will happen.</i>
 		</b>
 	</body>
-</html>`, // this is the html version
+</html>`, // This is the html version
 								text: `1Auth Email Verification
 Your code is ${id}. Don't share it with anyone else.
 
@@ -217,7 +217,7 @@ What now?
 ->	You are now logged in!
 Doesn't work? Maybe it's been too long. Try starting over!
 
-Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, // this is the text version
+Not expecting this email? Just ignore it. Don't worry, nothing will happen.`, // This is the text version
 							},
 							(error, info) => {
 								if (error) {
