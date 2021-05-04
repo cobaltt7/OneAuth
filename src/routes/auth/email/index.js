@@ -1,8 +1,8 @@
 "use strict";
 
-const
-fileSystem = require("fs"),
-	getURL = require("../../getUrl.js"),mustache = require("mustache");
+const fileSystem = require("fs"),
+	getURL = require("../../getUrl.js"),
+	mustache = require("mustache");
 
 module.exports = {
 	icon: "envelope",
@@ -17,7 +17,6 @@ module.exports = {
 			},
 			post: async (req, res, sendResponse) => {
 				const database = new (require("@replit/database"))();
-				console.log(req.body);
 				if (req.body.code && req.body.email) {
 					const { email = null, date = null } =
 						await database.get(`EMAIL_${req.body.code}`) || {};

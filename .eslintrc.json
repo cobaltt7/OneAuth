@@ -125,5 +125,5 @@
 		"no-ternary": 0,
 		"max-len": [1, { "code": 100, "tabWidth": 2, "ignoreRegExpLiterals": true }],
 		"linebreak-style": 0
-	},
+	}
 }
