@@ -1,2 +1,2 @@
-language = "bash"
+language = "bash" # this should be bash so new clones that has latest nodejs
 run = "npm start"
