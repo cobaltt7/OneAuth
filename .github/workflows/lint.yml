@@ -7,8 +7,8 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Check out Git repository
-            - uses: actions/checkout@v2
+            - name: Checkout Git repository
+              uses: actions/checkout@v2
 
             - name: Set up Node.js
               uses: actions/setup-node@v1
@@ -28,3 +28,9 @@ jobs:
               uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: "Lint and format code using Prettier and ESLint"
+                  branch: main
+                  commit_options: '--signoff'
+                  commit_user_name: wgytbot
+                  commit_user_email: 83586655+wgytbot@users.noreply.github.com
+                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com> # defaults to author of the commit that triggered the run
+   
