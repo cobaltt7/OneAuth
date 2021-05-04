@@ -7,9 +7,12 @@ const authClients = [],
 	router = require("express").Router();
 
 (async () => {
-	const paths = await globby("js/*.js");
+	// Idk why this is relative to the root dir but it is
+	const base = getURL("").split("src/")[0],
+		paths = await globby("src/routes/auth/*/index.js");
+
 	paths.forEach((path) => {
-		authClients.push(require(`./js/${path}`));
+		authClients.push(require(`${base}${path}`));
 	});
 })();
 

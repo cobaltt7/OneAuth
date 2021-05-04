@@ -9,15 +9,14 @@ const authClients = [],
 	{ URL } = require("url");
 
 (async () => {
-	// idk why this is relative to the root dir but it is
+	// Idk why this is relative to the root dir but it is
 	const base = getURL("").split("src/")[0],
 		paths = await globby("src/routes/auth/*/index.js");
-	console.log(getURL(""))
 
 	paths.forEach((path) => {
 		authClients.push(require(`${base}${path}`));
 	});
-})()
+})();
 
 const getClient = (requestedClient) =>
 		authClients.find((currentClient) =>
