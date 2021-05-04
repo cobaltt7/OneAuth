@@ -1,78 +1,80 @@
 "use strict";
 
-const authClients = [],
-	{ document } = new (require("jsdom").JSDOM)("").window,
+const { document } = new (require("jsdom").JSDOM)("").window,
 	getURL = require("../../getUrl.js"),
 	globby = require("globby"),
 	router = require("express").Router();
-
-(async () => {
-	// Idk why this is relative to the root dir but it is
-	const base = getURL("").split("src/")[0],
-		paths = await globby("src/routes/auth/*/index.js");
-		
-	paths.forEach((path) => {
-		authClients.push(require(`${base}${path}`));
-	});
 
 // This is the list on / with links
 const authButtons = Object.assign(document.createElement("ul"), {
 		// eslint-disable-next-line id-length
 		id: "auth-list",
 	}),
+	authClients = [],
 	// This is the list on /about without links
 	authList = Object.assign(document.createElement("ul"), {
 		// eslint-disable-next-line id-length
 		id: "auth-list",
 	});
 
-authClients.forEach((client) => {
-	// Add the link
-	const link = Object.assign(document.createElement("a"), {
-		href: client.link,
-	});
-	authButtons.append(link);
+(async () => {
+	// Idk why this is relative to the root dir but it is
+	const [base] = getURL("").split("src/"),
+		paths = await globby("src/routes/auth/*/index.js");
 
-	// Add the list item
-	const listItem = Object.assign(document.createElement("li"), {
-		className: "auth-button",
+	paths.forEach((path) => {
+		authClients.push(require(`${base}${path}`));
 	});
 
-	// Add the icon
-	let icon;
-	if (client.iconProvider.indexOf("fa") === 0) {
-		icon = Object.assign(document.createElement("i"), {
-			className: `${client.iconProvider} fa-${client.icon}`,
+	authClients.forEach((client) => {
+		// Add the link
+		const link = Object.assign(document.createElement("a"), {
+			href: client.link,
 		});
-	} else if (client.iconProvider === "svg") {
-		icon = Object.assign(document.createElement("img"), {
-			src: `svg/${client.icon}`,
+		authButtons.append(link);
+
+		// Add the list item
+		const listItem = Object.assign(document.createElement("li"), {
+			className: "auth-button",
 		});
-	} else if (client.iconProvider === "url") {
-		icon = Object.assign(document.createElement("img"), {
-			src: client.icon,
+
+		// Add the icon
+		let icon;
+		if (client.iconProvider.indexOf("fa") === 0) {
+			icon = Object.assign(document.createElement("i"), {
+				className: `${client.iconProvider} fa-${client.icon}`,
+			});
+		} else if (client.iconProvider === "svg") {
+			icon = Object.assign(document.createElement("img"), {
+				src: `svg/${client.icon}`,
+			});
+		} else if (client.iconProvider === "url") {
+			icon = Object.assign(document.createElement("img"), {
+				src: client.icon,
+			});
+		} else {
+			throw new Error(
+				`${client.iconProvider} is not a valid icon provider for ${client.name}`,
+			);
+		}
+		Object.assign(icon, {
+			alt: `${client.name} logo`,
+			height: "18",
+			name: client.name,
+			width: "18",
 		});
-	} else {
-		throw new Error(`${client.iconProvider} is not a valid icon provider for ${client.name}`);
-	}
-	Object.assign(icon, {
-		alt: `${client.name} logo`,
-		height: "18",
-		name: client.name,
-		width: "18",
+		listItem.append(icon);
+		authList.append(listItem);
+		link.append(listItem.cloneNode(true));
+		// Add text
+		const span = document.createElement("span"),
+			span2 = span.cloneNode(true);
+		span.innerHTML = `Sign in with ${client.name}`;
+		span2.innerHTML = client.name;
+		link.firstElementChild.append(span);
+		listItem.append(span2);
 	});
-	listItem.append(icon);
-	authList.append(listItem);
-	link.append(listItem.cloneNode(true));
-	// Add text
-	const span = document.createElement("span"),
-		span2 = span.cloneNode(true);
-	span.innerHTML = `Sign in with ${client.name}`;
-	span2.innerHTML = client.name;
-	link.firstElementChild.append(span);
-	listItem.append(span2);
-});
-console.log("Dynamic buttons ready");
+	console.log("Dynamic buttons ready");
 })();
 // Logo
 router.get("/logo.svg", (_, res) => {

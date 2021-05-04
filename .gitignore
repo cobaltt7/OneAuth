@@ -3,6 +3,7 @@
 src/routes/main/style.css
 
 # Logs
+.bashrc
 logs
 *.log
 npm-debug.log*
@@ -13,6 +14,7 @@ node_modules/
 
 # Optional npm cache directory
 .npm
+.nvm
 
 # Optional eslint cache
 .eslintcache

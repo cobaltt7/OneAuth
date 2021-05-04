@@ -10,7 +10,7 @@ const authClients = [],
 
 (async () => {
 	// Idk why this is relative to the root dir but it is
-	const base = getURL("").split("src/")[0],
+	const [base] = getURL("").split("src/"),
 		paths = await globby("src/routes/auth/*/index.js");
 
 	paths.forEach((path) => {
