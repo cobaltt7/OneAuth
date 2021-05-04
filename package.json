@@ -20,11 +20,11 @@
 		"url": "https://github.com/onedotprojects/auth/issues/new",
 		"email": "1auth.wgyt@gmail.com"
 	},
-	"main": "index.js",
+	"main": "src/index.js",
 	"scripts": {
 		"lint": "npx prettier --write . && npx eslint --fix . & npx jshint .",
-		"start": "TAILWIND_MODE=watch npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings .",
-		"test": "npx nodemon --trace-warnings ."
+		"start": "TAILWIND_MODE=watch npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings src/index.js",
+		"test": "npx nodemon --trace-warnings src/index.js"
 	},
 	"dependencies": {
 		"@replit/database": "^2.0.1",

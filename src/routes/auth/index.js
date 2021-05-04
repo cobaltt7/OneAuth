@@ -7,13 +7,15 @@ const authClients = [],
 	retronid = require("retronid"),
 	router = require("express").Router(),
 	{ URL } = require("url");
-
 (async () => {
-	const paths = await globby("./**/index.js");
+	// idk why this is relative to the root dir but it is
+	const paths = await globby("./src/routes/auth/*/index.js");
+	console.log(paths)
+	
 	paths.forEach((path) => {
-		authClients.push(require(`./js/${path}`));
+		authClients.push(require(`${path}`));
 	});
-})();
+})()
 const getClient = (requestedClient) =>
 		authClients.find((currentClient) =>
 			currentClient.pages.find(({ backendPage }) => backendPage === requestedClient),

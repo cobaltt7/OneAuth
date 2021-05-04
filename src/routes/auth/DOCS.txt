@@ -1,4 +1,4 @@
-TODO: move to wiki
+TODO: move to wiki or our own docs
 
 name: Name of the client
 link: Absoolute URI that users are directed to when they click the button. {{url}} will be replaced with the uri-encoded url to be redirected to. Each client is responsible for storring it in some way.

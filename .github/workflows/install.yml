@@ -1,0 +1,30 @@
+name: Install dependencies
+on: [push, pull_request]
+branches: main
+
+jobs:
+    install:
+        name: Install dependencies
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Git repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12.16.1
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Commit changed files
+              uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: "Install dependecies"
+                  branch: main
+                  commit_options: '--signoff'
+                  commit_user_name: wgytbot
+                  commit_user_email: 83586655+wgytbot@users.noreply.github.com
+                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com> # defaults to author of the commit that triggered the run
