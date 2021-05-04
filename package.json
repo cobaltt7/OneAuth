@@ -14,7 +14,7 @@
 	"license": "MIT",
 	"version": "1.0.0",
 	"engines": {
-		"node": "12.16.1"
+		"node":">=13.3.0"
 	},
 	"bugs": {
 		"url": "https://github.com/onedotprojects/auth/issues/new",
@@ -66,6 +66,7 @@
 		"eslint-plugin-html": "^6.1.2",
 		"jshint": "^2.12.0",
 		"nodemon": "^2.0.7",
+		"npm": "^7.11.2",
 		"postcss": "^8.2.13",
 		"postcss-advanced-variables": "^3.0.1",
 		"postcss-cli": "^8.3.1",
