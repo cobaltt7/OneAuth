@@ -10,11 +10,10 @@ const authClients = [],
 	// Idk why this is relative to the root dir but it is
 	const base = getURL("").split("src/")[0],
 		paths = await globby("src/routes/auth/*/index.js");
-
+		
 	paths.forEach((path) => {
 		authClients.push(require(`${base}${path}`));
 	});
-})();
 
 // This is the list on / with links
 const authButtons = Object.assign(document.createElement("ul"), {
@@ -74,6 +73,7 @@ authClients.forEach((client) => {
 	listItem.append(span2);
 });
 console.log("Dynamic buttons ready");
+})();
 // Logo
 router.get("/logo.svg", (_, res) => {
 	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg");
