@@ -7,14 +7,11 @@ app.set("view engine", "html");
 app.disable("view cache");
 console.log("Express ready");
 // Mustache
-const mustache = require("mustache-express");
-app.engine("html", mustache(`${__dirname}/routes/main/partials`, ".html"));
+app.engine("html", require("mustache-express")(`${__dirname}/routes/partials`, ".html"));
 // Cookies
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
+app.use(require("cookie-parser")());
 // Compress
-const compression = require("compression");
-app.use(compression());
+app.use(require("compression")());
 // Post request bodies
 app.use(
 	express.urlencoded({
@@ -38,16 +35,16 @@ app.use((req, res, next) => {
 		req.get("User-Agent").indexOf("Netscape") >= 0 ||
 		req.get("User-Agent").indexOf("Navigator") >= 0
 	) {
-		return res.status(400).render(`${__dirname}/routes/main/old.html`);
+		return res.status(400).render(`${__dirname}/routes/errors/old.html`);
 	}
 	return next();
 });
 
 // Main pages
-app.use("/", require("./routes/main/main.js"));
+app.use(require("./routes/main/index.js"));
 console.log("Main pages ready");
 // Auth pages
-app.use("/", require("./auth/auth.js"));
+app.use(require("./routes/auth/index.js"));
 // OTHER SETUP
 require("dotenv").config();
 const { URL } = require("url"),
@@ -59,7 +56,7 @@ async function sendResponse(data, url, res) {
 	await database.set(`RETRIEVE_${retro}`, data);
 	try {
 		const { host } = new URL(url);
-		return res.status(300).render("/home/runner/auth/views/allow.html", {
+		return res.status(300).render(`${__dirname}/views/allow.html`, {
 			code: retro,
 			data: `${data}`,
 			host,
@@ -67,7 +64,7 @@ async function sendResponse(data, url, res) {
 			url,
 		});
 	} catch (_) {
-		return res.status(400).render("/home/runner/auth/routes/main/error.html");
+		return res.status(400).render(`${__dirname}/routes/errors/error.html`);
 	}
 }
 // GitHub
@@ -114,11 +111,9 @@ app.get("/backend/scratchredirect", (req, res) => {
 });
 console.log("Auth pages ready");
 
-// 404 PAGE
-app.use((_, res) => {
-	res.status(404).render(`${__dirname}/routes/main/404.html`);
-});
-console.log("404 page ready");
+// Errors
+app.use(require("./routes/errors/index.js"));
+console.log("Error pages ready");
 
 // LISTEN
 app.listen(3000, () => console.log("App ready"));

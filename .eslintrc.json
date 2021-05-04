@@ -13,9 +13,7 @@
 	"root": true,
 	"overrides": [
 		{
-			"files": [
-				"*.html"
-			],
+			"files": ["*.html"],
 			"env": {
 				"browser": true,
 				"node": false,
@@ -31,24 +29,12 @@
 		}
 	],
 	"reportUnusedDisableDirectives": true,
-	"ignorePatterns": [
-		"node_modules",
-		".upm",
-		"routes/main/style.css"
-	],
-	"plugins": [
-		"html"
-	],
+	"ignorePatterns": ["node_modules", ".upm", "src/routes/main/style.css"],
+	"plugins": ["html"],
 	"rules": {
-		"indent": [
-			1,
-			"tab"
-		],
+		"indent": [1, "tab"],
 		"no-tabs": 0,
-		"quote-props": [
-			1,
-			"as-needed"
-		],
+		"quote-props": [1, "as-needed"],
 		"comma-dangle": [
 			1,
 			{
@@ -57,10 +43,7 @@
 				"functions": "always-multiline"
 			}
 		],
-		"strict": [
-			2,
-			"global"
-		],
+		"strict": [2, "global"],
 		"max-lines-per-function": [
 			2,
 			{
@@ -70,15 +53,9 @@
 				"IIFEs": true
 			}
 		],
-		"function-call-argument-newline": [
-			1,
-			"consistent"
-		],
+		"function-call-argument-newline": [1, "consistent"],
 		"max-statements": 0,
-		"padded-blocks": [
-			1,
-			"never"
-		],
+		"padded-blocks": [1, "never"],
 		"quotes": [
 			1,
 			"double",
@@ -95,15 +72,9 @@
 			}
 		],
 		"init-declarations": 0,
-		"wrap-iife": [
-			1,
-			"inside"
-		],
+		"wrap-iife": [1, "inside"],
 		"func-names": 0,
-		"dot-location": [
-			1,
-			"property"
-		],
+		"dot-location": [1, "property"],
 		"space-before-function-paren": [
 			1,
 			{
@@ -117,17 +88,12 @@
 		"id-length": [
 			1,
 			{
-				"exceptions": [
-					"_"
-				],
+				"exceptions": ["_"],
 				"max": 20,
 				"min": 3
 			}
 		],
-		"object-curly-spacing": [
-			1,
-			"always"
-		],
+		"object-curly-spacing": [1, "always"],
 		"implicit-arrow-linebreak": 0,
 		"max-params": [
 			1,
@@ -147,16 +113,8 @@
 			{
 				"newIsCap": true,
 				"capIsNew": true,
-				"newIsCapExceptions": [
-					"app",
-					"Router",
-					"database"
-				],
-				"capIsNewExceptions": [
-					"app",
-					"Router",
-					"database"
-				],
+				"newIsCapExceptions": ["app", "Router", "database"],
+				"capIsNewExceptions": ["app", "Router", "database"],
 				"properties": true
 			}
 		],
@@ -165,6 +123,7 @@
 		"no-console": 1,
 		"multiline-ternary": [1, "always-multiline"],
 		"no-ternary": 0,
-		"max-len": [1, { "code": 100, "tabWidth": 2, "ignoreRegExpLiterals": true }]
+		"max-len": [1, { "code": 100, "tabWidth": 2, "ignoreRegExpLiterals": true }],
+		"linebreak-style": 0
 	}
 }

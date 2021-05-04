@@ -5,11 +5,11 @@ module.exports = {
 	mode: "jit",
 	plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 	purge: [
-		"./auth/**.html",
-		"./auth/html/**.html",
-		"./routes/main/**.html",
-		"./routes/main/partials/**.html",
-		"./tailwind.css",
+		"./src/auth/**.html",
+		"./src/auth/html/**.html",
+		"./src/routes/main/**.html",
+		"./src/routes/main/partials/**.html",
+		"./src/tailwind.css",
 	],
 	theme: {
 		extend: {

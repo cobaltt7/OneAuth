@@ -1,10 +1,19 @@
 "use strict";
 
-const authClients = require("./clients.js"),
+const authClients = [],
 	database = new (require("@replit/database"))(),
+	getURL = require("../../getUrl.js"),
+	globby = require("globby"),
 	retronid = require("retronid"),
 	router = require("express").Router(),
 	{ URL } = require("url");
+
+(async () => {
+	const paths = await globby("./**/index.js");
+	paths.forEach((path) => {
+		authClients.push(require(`./js/${path}`));
+	});
+})();
 const getClient = (requestedClient) =>
 		authClients.find((currentClient) =>
 			currentClient.pages.find(({ backendPage }) => backendPage === requestedClient),
@@ -42,17 +51,17 @@ const getClient = (requestedClient) =>
 				url,
 			});
 		} catch (_) {
-			return res.status(400).render("/home/runner/auth/routes/main/error.html");
+			return res.status(400).render(getURL("/routes/errors/error.html"));
 		}
 	};
 for (const http of ["post", "get"]) {
 	router[http]("/auth/:client", (req, res) => {
 		const client = getPageHandler(req.params.client);
 		if (typeof client === "undefined") {
-			return res.status(404).render("/home/runner/auth/routes/main/404.html");
+			return res.status(404).render(getURL("/routes/errors/404.html"));
 		}
 		if (typeof client.get !== "function") {
-			return res.status(405).render("/home/runner/auth/routes/main/405.html");
+			return res.status(405).render(getURL("/routes/errors/405.html"));
 		}
 		return client[http](req, res, (...args) => sendResponse(req.params.client, ...args));
 	});
@@ -81,7 +90,7 @@ router.get("/backend/send_data", async (req, res) => {
 		return res.status(400);
 	}
 	redirect.searchParams.set("code", code);
-	res.status(303).redirect(redirect);
+	return res.status(303).redirect(redirect);
 });
 
 module.exports = router;

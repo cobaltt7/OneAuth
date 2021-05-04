@@ -1,5 +1,5 @@
 .DS_STORE
-routes/main/style.css
+src/routes/main/style.css
 
 # Logs
 logs

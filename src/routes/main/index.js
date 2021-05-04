@@ -1,8 +1,17 @@
 "use strict";
 
-const authClients = require("../../auth/clients.js"),
+const authClients = [],
 	{ document } = new (require("jsdom").JSDOM)("").window,
+	getURL = require("../../getUrl.js"),
+	globby = require("globby"),
 	router = require("express").Router();
+
+(async () => {
+	const paths = await globby("js/*.js");
+	paths.forEach((path) => {
+		authClients.push(require(`./js/${path}`));
+	});
+})();
 
 // This is the list on / with links
 const authButtons = Object.assign(document.createElement("ul"), {
@@ -42,9 +51,7 @@ authClients.forEach((client) => {
 			src: client.icon,
 		});
 	} else {
-		throw new Error(
-			`${client.iconProvider} is not a valid icon provider for ${client.name}`,
-		);
+		throw new Error(`${client.iconProvider} is not a valid icon provider for ${client.name}`);
 	}
 	Object.assign(icon, {
 		alt: `${client.name} logo`,
@@ -66,13 +73,13 @@ authClients.forEach((client) => {
 console.log("Dynamic buttons ready");
 // Logo
 router.get("/logo.svg", (_, res) => {
-	res.sendFile(`${__dirname}/1Auth NoPad.svg`);
+	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg");
 });
 router.get("/favicon.ico", (_, res) => {
 	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
 });
 router.get("/svg/:img", (req, res) => {
-	res.sendFile(`/home/runner/auth/routes/svg/${req.params.img}.svg`);
+	res.sendFile(getURL(`/routes/svg/${req.params.img}.svg`));
 });
 
 console.log("Logos ready");
@@ -97,7 +104,7 @@ router.get("/googleb9551735479dd7b0.html", (_, res) => {
 	res.send("google-site-verification: googleb9551735479dd7b0.html");
 });
 router.get("/robots.txt", (_, res) => {
-	res.sendFile(`${__dirname}/robots.txt`);
+	res.send("User-agent: *\nAllow: /\nCrawl-delay: 10\nHost: auth.onedot.cf\n");
 });
 console.log("SEO ready");
 // CSS
@@ -110,14 +117,5 @@ router.get("/style.css", (_, res) => {
 	res.send(minify.minify(text).styles);
 });
 console.log("CSS ready");
-
-// Errors
-router.get("/error", (_, res) => {
-	res.status(500).render(`${__dirname}/error.html`);
-});
-router.get("/old", (_, res) => {
-	res.status(400).render(`${__dirname}/old.html`);
-});
-console.log("Error pages ready");
 
 module.exports = router;

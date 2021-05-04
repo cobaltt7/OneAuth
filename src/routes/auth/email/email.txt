@@ -1,0 +1,11 @@
+1Auth Email Verification
+Your code is {{code}}. Don't share it with anyone else.
+
+What now?
+->	Copy your code
+->	Go back to 1Auth
+->	Paste it in the box
+->	You are now logged in!
+Doesn't work? Maybe it's been too long. Try starting over!
+
+Not expecting this email? Just ignore it. Don't worry, nothing will happen.

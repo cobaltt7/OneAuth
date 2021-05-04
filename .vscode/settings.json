@@ -193,5 +193,6 @@
 	"markdownlint.config": {
 		"MD013": false,
 		"MD030": false
-	}
+	},
+	"prettier.requireConfig": true
 }

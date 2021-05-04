@@ -7,7 +7,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
 main {
-	@apply flex flex-col w-full p-3 prose rounded shadow-xl max-w-none;
+	@apply flex
+		flex-col
+		p-3
+		prose
+		rounded
+		shadow-xl
+		h-full
+		max-w-none;
 }
 
 h1,
@@ -30,28 +37,41 @@ h6 {
 
 	h1:first-of-type,
 	p:only-of-type {
-		@apply self-center m-0;
+		@apply self-center
+			m-0;
+	}
+
+	h1:only-of-type {
+		@apply text-3xl;
 	}
 }
 
 #auth-list {
-	@apply flex flex-wrap justify-center w-full;
+	@apply flex
+		flex-wrap
+		justify-center
+		w-full;
 
 	a {
-		@apply font-normal no-underline cursor-pointer text-inherit;
+		@apply font-normal
+			no-underline
+			cursor-pointer
+			text-inherit;
 	}
 }
 
-#clients #auth-list {
-	@apply justify-start;
+#clients {
+	#auth-list {
+		@apply justify-start;
+	}
 }
 
 .auth-button {
-	@apply rounded-full
-		border
+	@apply h-[40px]
 		m-1
 		font-sans
-		h-[40px]
+		border
+		rounded-full
 		p-[8px];
 
 	font-family: "Roboto";
@@ -67,7 +87,9 @@ h6 {
 	img {
 		vertical-align: sub;
 
-		@apply inline m-0 bg-white;
+		@apply inline
+			m-0
+			bg-white;
 
 		@apply h-[18px]
 			w-[18px]
@@ -89,34 +111,59 @@ h6 {
 #code,
 input[type="submit"],
 button {
-	@apply w-full py-3 pl-4 mt-2 text-sm font-medium leading-5 transition duration-300 ease-in-out border rounded-full;
+	@apply w-full
+		py-3
+		pl-4
+		mt-2
+		text-sm
+		font-medium
+		leading-5
+		transition
+		duration-300
+		ease-in-out
+		border
+		rounded-full;
 }
 
 input[type="submit"],
 button {
-	@apply h-10 text-white;
+	@apply h-10
+		text-white;
 
 	img {
-		@apply h-full m-auto;
+		@apply h-full
+			m-auto;
 	}
 }
 
 .buttons-container {
-	@apply inline-flex w-full p-2;
+	@apply inline-flex
+		w-full
+		p-2;
 
 	i.far {
-		@apply inline ml-2;
+		@apply inline
+			ml-2;
 	}
 }
 
 #allow,
 #deny {
-	@apply w-full px-4 py-3 text-white no-underline transition duration-300 ease-in-out rounded-full;
+	@apply w-full
+		px-4
+		py-3
+		text-white
+		no-underline
+		transition
+		duration-300
+		ease-in-out
+		rounded-full;
 }
 
 #allow,
 [type="submit"] {
-	@apply mr-4 bg-green-500;
+	@apply mr-4
+		bg-green-500;
 
 	&:hover {
 		@apply bg-green-600;
@@ -124,7 +171,8 @@ button {
 }
 
 #deny {
-	@apply ml-4 bg-red-500;
+	@apply ml-4
+		bg-red-500;
 
 	&:hover {
 		@apply bg-red-600;
@@ -136,7 +184,12 @@ body,
 iframe {
 	@apply block
 		!important;
-	@apply w-screen h-screen border-0 border-white border-solid;
+
+	@apply w-screen
+		h-screen
+		border-0
+		border-white
+		border-solid;
 
 	scroll-behavior: smooth;
 }

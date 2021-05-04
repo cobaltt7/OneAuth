@@ -1,4 +1,4 @@
-/ eol=crlf working-tree-encoding=UTF-8 diff whitespace
+/ eol=lf working-tree-encoding=UTF-8 diff whitespace
 LICENSE text
 *.txt text
 .env text export-ignore
