@@ -7,15 +7,18 @@ const authClients = [],
 	retronid = require("retronid"),
 	router = require("express").Router(),
 	{ URL } = require("url");
+
 (async () => {
 	// idk why this is relative to the root dir but it is
-	const paths = await globby("./src/routes/auth/*/index.js");
-	console.log(paths)
-	
+	const base = getURL("").split("src/")[0],
+		paths = await globby("src/routes/auth/*/index.js");
+	console.log(getURL(""))
+
 	paths.forEach((path) => {
-		authClients.push(require(`${path}`));
+		authClients.push(require(`${base}${path}`));
 	});
 })()
+
 const getClient = (requestedClient) =>
 		authClients.find((currentClient) =>
 			currentClient.pages.find(({ backendPage }) => backendPage === requestedClient),
@@ -53,17 +56,17 @@ const getClient = (requestedClient) =>
 				url,
 			});
 		} catch (_) {
-			return res.status(400).render(getURL("/routes/errors/error.html"));
+			return res.status(400).render(getURL("routes/errors/error.html"));
 		}
 	};
 for (const http of ["post", "get"]) {
 	router[http]("/auth/:client", (req, res) => {
 		const client = getPageHandler(req.params.client);
 		if (typeof client === "undefined") {
-			return res.status(404).render(getURL("/routes/errors/404.html"));
+			return res.status(404).render(getURL("routes/errors/404.html"));
 		}
 		if (typeof client.get !== "function") {
-			return res.status(405).render(getURL("/routes/errors/405.html"));
+			return res.status(405).render(getURL("routes/errors/405.html"));
 		}
 		return client[http](req, res, (...args) => sendResponse(req.params.client, ...args));
 	});

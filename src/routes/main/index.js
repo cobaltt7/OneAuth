@@ -79,7 +79,7 @@ router.get("/favicon.ico", (_, res) => {
 	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
 });
 router.get("/svg/:img", (req, res) => {
-	res.sendFile(getURL(`/routes/svg/${req.params.img}.svg`));
+	res.sendFile(getURL(`routes/svg/${req.params.img}.svg`));
 });
 
 console.log("Logos ready");
