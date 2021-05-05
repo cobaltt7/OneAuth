@@ -17,6 +17,7 @@
 			<h1>Sign in with Replit</h1>
 			<h2>Click anywhere to get started</h2>
 		</main>
+		<h3 id="authError" style="display:none">If you close the window, we can't authenticate you!<br>Please reopen the window by clicking anywhere.</h3>
 		<script>
 			"use strict";
 			(function () {
@@ -45,10 +46,8 @@
 					interval = setInterval(() => {
 						if (authWindow.closed) {
 							clearInterval(interval);
-							alert(
-								"If you close the window, we can't authenticate you!\n" +
-									"Please reopen the window by clicking anywhere.",
-							);
+							const element = document.getElementById('authError');
+							element.style.display="block"
 						}
 					}, 100);
 				});
