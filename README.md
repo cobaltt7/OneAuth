@@ -9,8 +9,8 @@
 ## Supported Clients
 
 -  Email
-- Google
-- Replit
+-  Google
+-  Replit
 -  GitHub
 -  Scratch
 
@@ -18,11 +18,15 @@
 
 To implement this in your site is easy. Simply direct your users to this URL:
 
-```https://auth.onedot.cf/?url=<CALLBACK_URL>```
+```http
+https://auth.onedot.cf/?url=<CALLBACK_URL>
+```
 
 After the user clicks on the link and finishes authentication with us, they will be redirected to whatever url you specified in  `<CALLBACK_URL>`. There will be an extra search parameter on the URL:  `code`. To retrive the users information, send the following http request:
 
-```GET https://auth.onedot.cf/backend/get_data/<CODE>```
+```http
+GET https://auth.onedot.cf/backend/get_data/<CODE>
+```
 
 where  `<CODE>`  is the value of the appended search parameter.
 
