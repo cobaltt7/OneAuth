@@ -75,7 +75,8 @@
 		"postcss-scss": "^3.0.5",
 		"postcss-sort-media-queries": "^3.9.10",
 		"prettier": "^2.2.1",
-		"tailwindcss": "^2.1.2"
+		"tailwindcss": "^2.1.2",
+		"write-good": "^1.0.8"
 	},
 	"prettier": {
 		"tabWidth": 4,
