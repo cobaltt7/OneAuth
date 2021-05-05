@@ -14,7 +14,7 @@ module.exports = {
 					username = req.get("X-Replit-User-Name");
 				return res.render(`${__dirname}/index.html`);
 				if (username && userID) {
-					return res.send("just for test")
+					return res.send("just for test");
 					return sendResponse(
 						{
 							roles,

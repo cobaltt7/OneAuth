@@ -17,11 +17,47 @@
 			<h1>Sign in with Replit</h1>
 			<h2>Click anywhere to get started</h2>
 		</main>
-		<h3 id="authError" style="display:none">If you close the window, we can't authenticate you!<br>Please reopen the window by clicking anywhere.</h3>
+		<h3
+			id="modal"
+			style="
+				display: none;
+				border: 1px solid #888;
+				margin: auto;
+				padding: 20px;
+				width: 80%;
+				background-color: #fefefe;
+			"
+		>
+			<button
+				id="closeModal"
+				style="
+					padding: 7px 9px 10px;
+					color: #aaa;
+					float: right;
+					font-size: 28px;
+					font-weight: bold;
+					width: 40px;
+				"
+			>
+				&times;
+			</button>
+			<p>If you close the window, we can't authenticate you!</p>
+			<p>Please reopen the window by clicking anywhere.</p>
+		</h3>
 		<script>
 			"use strict";
 			(function () {
 				let authWindow, interval;
+				// Get the <span> element that closes the modal
+				const close = document.getElementById("closeModal")[0],
+					// Get the modal
+					modal = document.getElementById("modal");
+
+				// When the user clicks on <span> (x), close the modal
+				close.addEventListener("click", function () {
+					modal.style.display = "none";
+				});
+
 				function authComplete(event) {
 					if (event.data !== "auth_complete") {
 						return;
@@ -29,6 +65,7 @@
 
 					removeEventListener("message", authComplete);
 					clearInterval(interval);
+					modal.style.display = "none";
 					authWindow.close();
 					location.reload();
 				}
@@ -45,9 +82,9 @@
 					addEventListener("message", authComplete);
 					interval = setInterval(() => {
 						if (authWindow.closed) {
+							removeEventListener("message", authComplete);
+							modal.style.display = "block";
 							clearInterval(interval);
-							const element = document.getElementById('authError');
-							element.style.display="block"
 						}
 					}, 100);
 				});

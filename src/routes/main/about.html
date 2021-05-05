@@ -28,12 +28,17 @@
 			</section>
 			<section id="developers">
 				<h2>For Developers</h2>
-				<p>Implementing this in your own site is very easy. Simply direct your users to this URL:</p>
+				<p>
+					Implementing this in your own site is very easy. Simply direct your users to
+					this URL:
+				</p>
 				<pre>https://auth.onedot.cf/?url=&lt;CALLBACK_URL&gt;</pre>
 				<p>
-					After the user clicks on the link and finishes authentication with us, we will redirect them to whatever url you specified in <code>&lt;CALLBACK_URL&gt;</code>. There will be an extra search parameter on
-					the URL: <code>code</code>. To retrive the user's information, send the following
-					HTTP request:
+					After the user clicks on the link and finishes authentication with us, we will
+					redirect them to whatever url you specified in
+					<code>&lt;CALLBACK_URL&gt;</code>. There will be an extra search parameter on
+					the URL: <code>code</code>. To retrive the user's information, send the
+					following HTTP request:
 				</p>
 				<pre>GET https://auth.onedot.cf/backend/get_data/&lt;CODE&gt;</pre>
 				<p>
