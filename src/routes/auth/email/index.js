@@ -1,8 +1,19 @@
 "use strict";
 
-const fileSystem = require("fs"),
+require("dotenv").config();
+
+const database = new (require("@replit/database"))(),
+	fileSystem = require("fs"),
 	getURL = require("../../../getUrl.js"),
-	mustache = require("mustache");
+	mail = require("nodemailer").createTransport({
+		auth: {
+			pass: process.env.GMAIL_PASS,
+			user: process.env.GMAIL_EMAIL,
+		},
+		service: "gmail",
+	}),
+	mustache = require("mustache"),
+	retronid = require("retronid").generate;
 
 module.exports = {
 	icon: "envelope",
@@ -16,7 +27,6 @@ module.exports = {
 				res.render(`${__dirname}/index.html`);
 			},
 			post: async (req, res, sendResponse) => {
-				const database = new (require("@replit/database"))();
 				if (req.body.code && req.body.email) {
 					const { email = null, date = null } =
 						await database.get(`EMAIL_${req.body.code}`) || {};
@@ -32,36 +42,40 @@ module.exports = {
 						{
 							email,
 						},
-						req,
+						req.query.url,
 						res,
 					);
 				}
 				if (req.body.email && !req.body.code) {
 					// Send email
-					const Mail = require("nodemailer").createTransport({
-							auth: {
-								pass: process.env.GMAIL_PASS,
-								user: process.env.GMAIL_EMAIL,
-							},
-							service: "gmail",
-						}),
-						code = require("retronid").generate();
+					const code = retronid();
 					await database.set(`EMAIL_${code}`, {
 						date: Date.now(),
 						email: req.body.email,
 					});
-					res.status(201);
 
-					Mail.sendMail(
+					mail.sendMail(
 						{
 							from: process.env.GMAIL_EMAIL,
-							html: mustache.render(fileSystem.readFileSync("./email.html", "utf8"), {
-								code,
-							}),
+							html: mustache.render(
+								fileSystem.readFileSync(
+									getURL("routes/auth/email/email.html"),
+									"utf8",
+								),
+								{
+									code,
+								},
+							),
 							subject: "1Auth Email Verification",
-							text: mustache.render(fileSystem.readFileSync("./email.txt", "utf8"), {
-								code,
-							}),
+							text: mustache.render(
+								fileSystem.readFileSync(
+									getURL("routes/auth/email/email.txt"),
+									"utf8",
+								),
+								{
+									code,
+								},
+							),
 							// eslint-disable-next-line id-length
 							to: req.body.email,
 						},
@@ -70,7 +84,7 @@ module.exports = {
 								console.error(error);
 								return res.status(500).render(getURL("routes/errors/error.html"));
 							}
-							return res.json(info);
+							return res.status(200).json(info);
 						},
 					);
 				}
@@ -78,4 +92,5 @@ module.exports = {
 			},
 		},
 	],
+	rawData: true,
 };

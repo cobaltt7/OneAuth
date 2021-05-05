@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Sign in with email | 1Auth</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
+		<link rel="preload" href="/svg/loading" as="image" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
@@ -31,7 +32,9 @@
 		<script>
 			"use strict";
 			(function () {
-				document.querySelector("form").addEventListener("submit", async (event) => {
+				const form = document.querySelector("form");
+				async function eventListener(event) {
+					form.removeEventListener("submit", eventListener);
 					event.preventDefault();
 
 					// Show loading icon
@@ -56,13 +59,13 @@
 					});
 
 					// Create new form
-					const form = Object.assign(document.createElement("form"), {
+					const newForm = Object.assign(document.createElement("form"), {
 						// Create form element
 						action: "",
 						autocomplete: "off",
 						method: "POST",
 					});
-					form.appendChild(
+					newForm.append(
 						Object.assign(document.createElement("input"), {
 							// Code box
 							autocomplete: "off",
@@ -86,18 +89,19 @@
 							type: "submit",
 						}),
 					);
-					document.querySelector("form").remove();
+					form.remove();
 					document.querySelector("#note").remove();
-					document.querySelector("main").appendChild(
+					document.querySelector("main").append(
 						Object.assign(document.createElement("label"), {
 							htmlFor: "code",
 							// eslint-disable-next-line id-length
 							id: "note",
 							innerText: "Enter the code we sent to you to continue",
 						}),
-						form,
+						newForm,
 					);
-				});
+				}
+				form.addEventListener("submit", eventListener);
 			})();
 		</script>
 	</body>

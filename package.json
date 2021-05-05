@@ -1,7 +1,7 @@
 {
 	"name": "@onedotprojects/auth",
 	"description": "All-In-One Authorization",
-	"author": "William Horning and Contributors",
+	"author": "OneDot",
 	"keywords": [
 		"auth",
 		"login",
@@ -14,7 +14,7 @@
 	"license": "MIT",
 	"version": "1.0.0",
 	"engines": {
-		"node":">=13.3.0"
+		"node": "14.16.1"
 	},
 	"bugs": {
 		"url": "https://github.com/onedotprojects/auth/issues/new",
@@ -57,7 +57,7 @@
 		"@types/jsdom": "^16.2.10",
 		"@types/mustache": "^4.1.1",
 		"@types/mustache-express": "^1.2.1",
-		"@types/node": "12.12.70",
+		"@types/node": "14.14.44",
 		"@types/node-fetch": "^2.5.10",
 		"@types/nodemailer": "^6.4.1",
 		"@types/postcss-import": "^12.0.0",
@@ -66,7 +66,6 @@
 		"eslint-plugin-html": "^6.1.2",
 		"jshint": "^2.12.0",
 		"nodemon": "^2.0.7",
-		"npm": "^7.11.2",
 		"postcss": "^8.2.13",
 		"postcss-advanced-variables": "^3.0.1",
 		"postcss-cli": "^8.3.1",

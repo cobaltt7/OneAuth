@@ -15,6 +15,24 @@ main {
 		shadow-xl
 		h-full
 		max-w-none;
+	
+	:first-child {
+		@apply self-center;
+	}
+
+	section h2 {
+		@apply mt-0;
+	}
+
+	h1:only-of-type {
+		@apply text-3xl;
+	}
+
+	h1:first-of-type,
+	p:only-of-type {
+		@apply self-center
+			m-0;
+	}
 }
 
 h1,
@@ -24,26 +42,6 @@ h4,
 h5,
 h6 {
 	@apply font-medium;
-}
-
-.prose {
-	&:first-child {
-		@apply self-center;
-	}
-
-	section h2 {
-		@apply mt-0;
-	}
-
-	h1:first-of-type,
-	p:only-of-type {
-		@apply self-center
-			m-0;
-	}
-
-	h1:only-of-type {
-		@apply text-3xl;
-	}
 }
 
 #auth-list {

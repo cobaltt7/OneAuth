@@ -61,7 +61,7 @@ const getClient = (requestedClient) =>
 for (const http of ["post", "get"]) {
 	router[http]("/auth/:client", (req, res) => {
 		const client = getPageHandler(req.params.client);
-		if (typeof client === "undefined") {
+		if (typeof client === "undefined" || client === null) {
 			return res.status(404).render(getURL("routes/errors/404.html"));
 		}
 		if (typeof client.get !== "function") {
