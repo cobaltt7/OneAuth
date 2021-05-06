@@ -113,8 +113,6 @@
 			{
 				"newIsCap": true,
 				"capIsNew": true,
-				"newIsCapExceptions": ["app", "Router", "database"],
-				"capIsNewExceptions": ["app", "Router", "database"],
 				"properties": true
 			}
 		],

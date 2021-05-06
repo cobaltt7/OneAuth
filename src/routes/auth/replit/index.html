@@ -17,10 +17,7 @@
 			<h1>Sign in with Replit</h1>
 			<h2>Click anywhere to get started</h2>
 		</main>
-		<div
-			id="modalContainer"
-			class="hidden fixed top-0 w-full h-full bg-white bg-opacity-5"
-		>
+		<div id="modalContainer" class="hidden fixed top-0 w-full h-full bg-white bg-opacity-50">
 			<div
 				id="modalContent"
 				class="-translate-y-1/2 transform border border-solid border-current m-auto p-5 relative w-4/5 top-1/2 bg-gray-200"
@@ -38,19 +35,6 @@
 		<script>
 			"use strict";
 			(function () {
-				let authWindow, interval;
-				// Get the <span> element that closes the modal
-				const close = document.getElementById("closeModal"),
-				html = document.documentElement,
-					// Get the modal
-					modal = document.getElementById("modalContainer");
-
-				// When the user clicks on (x), close the modal
-				close.addEventListener("click", function () {
-					modal.style.display = "none";
-				html.addEventListener("click", openPopup);
-				});
-
 				function authComplete(event) {
 					if (event.data !== "auth_complete") {
 						return;
@@ -75,13 +59,26 @@
 					addEventListener("message", authComplete);
 					interval = setInterval(() => {
 						if (authWindow.closed) {
-				html.removeEventListener("click", openPopup);
+							html.removeEventListener("click", openPopup);
 							removeEventListener("message", authComplete);
 							modal.style.display = "block";
 							clearInterval(interval);
 						}
 					}, 100);
 				}
+
+				let authWindow, interval;
+				// Get the <span> element that closes the modal
+				const close = document.getElementById("closeModal"),
+					html = document.documentElement,
+					// Get the modal
+					modal = document.getElementById("modalContainer");
+
+				// When the user clicks on (x), close the modal
+				close.addEventListener("click", () => {
+					modal.style.display = "none";
+					html.addEventListener("click", openPopup);
+				});
 
 				html.addEventListener("click", openPopup);
 			})();

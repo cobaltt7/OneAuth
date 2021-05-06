@@ -16,22 +16,22 @@ main {
 		h-full
 		max-w-none;
 	
-	:first-child {
-		@apply self-center;
-	}
 
 	section h2 {
 		@apply mt-0;
+	}
+
+	h1 {
+		@apply m-2;
 	}
 
 	h1:only-of-type {
 		@apply text-3xl;
 	}
 
-	h1:first-of-type,
+	:first-child,h1:first-of-type,
 	p:only-of-type {
-		@apply self-center
-			m-0;
+		@apply self-center;
 	}
 }
 
@@ -70,7 +70,9 @@ h6 {
 		font-sans
 		border
 		rounded-full
-		p-[8px];
+		p-[8px]
+		min-h-[30px]
+		min-w-[140px];
 
 	font-family: "Roboto";
 
@@ -102,7 +104,7 @@ h6 {
 			pl-[24px];
 	}
 
-	/* Per Google's guidlines, the dark mode color needs to be #4285F4 if we ever make a dark mode */
+	/* Per Google's guidlines, the dark mode color needs to be #4285F4 if we ever make a dark mode. but Apple says white or black only... */
 }
 
 #email-address,

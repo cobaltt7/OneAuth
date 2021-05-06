@@ -12,7 +12,7 @@ module.exports = {
 				const roles = req.get("X-Replit-User-Roles").split(",") || [],
 					userID = req.get("X-Replit-User-Id"),
 					username = req.get("X-Replit-User-Name");
-				return res.render(`${__dirname}/index.html`); // move this after the if when done testing
+
 				if (username && userID) {
 					return sendResponse(
 						{
@@ -24,6 +24,7 @@ module.exports = {
 						res,
 					);
 				}
+				return res.render(`${__dirname}/index.html`);
 			},
 		},
 	],
