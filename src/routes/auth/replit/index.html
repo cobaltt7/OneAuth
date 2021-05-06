@@ -56,6 +56,9 @@
 						return;
 					}
 
+					removeEventListener("message", authComplete);
+					clearInterval(interval);
+					modal.style.display = "none";
 					authWindow.close();
 					location.reload();
 				}

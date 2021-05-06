@@ -1,5 +1,6 @@
 name: Install dependencies
 on:
+    workflow_dispatch:
     push:
         branches:
             - main
@@ -10,23 +11,29 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout Git repository
-              uses: actions/checkout@v2
+            - name: Checkout
+              uses: actions/checkout@main
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v1
+            - name: Setup Node.JS
+              uses: actions/setup-node@main
               with:
-                  node-version: 12.16.1
+                  node-version: 12.22.1
 
-            - name: Install dependencies
+            - name: Install
               run: npm install
 
-            - name: Commit changed files
-              uses: stefanzweifel/git-auto-commit-action@v4
+            - name: Commit
+              uses: stefanzweifel/git-auto-commit-action@master
               with:
-                  commit_message: "Install dependecies"
+                  commit_message: "Install dependencies"
                   branch: main
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
-                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com> # defaults to author of the commit that triggered the run
+                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
+
+            - name: Repository Dispatch
+              uses: peter-evans/repository-dispatch@v1
+              with:
+                  token: ${{ secrets.WGYTBOT }}
+                  event-type: lint

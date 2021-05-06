@@ -43,6 +43,7 @@
 		"retronid": "^1.0.2"
 	},
 	"devDependencies": {
+		"@actions/github": "^4.0.0",
 		"@tailwindcss/forms": "^0.3.2",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/clean-css": "^4.2.4",
@@ -62,7 +63,7 @@
 		"eslint-plugin-html": "^6.1.2",
 		"jshint": "^2.12.0",
 		"nodemon": "^2.0.7",
-		"postcss": "^8.2.13",
+		"postcss": "^8.2.14",
 		"postcss-advanced-variables": "^3.0.1",
 		"postcss-cli": "^8.3.1",
 		"postcss-import": "^14.0.1",

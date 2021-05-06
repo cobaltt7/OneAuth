@@ -1,35 +1,54 @@
-name: Lint
-on: [push, pull_request, workflow_dispatch]
+name: Format and lint
+on:
+    workflow_dispatch:
+    repository_dispatch:
+        types: [lint]
 
 jobs:
     run:
-        name: Run Prettier and ESLint
+        name: Run linters
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout Git repository
-              uses: actions/checkout@v2
+            - name: Checkout
+              if: always()
+              uses: actions/checkout@main
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v1
+            - name: Setup Node.JS
+              if: always()
+              uses: actions/setup-node@main
               with:
-                  node-version: 12.16.1
+                  node-version: 12.22.1
 
-            - name: Install Prettier and ESLint
-              run: npm i eslint eslint-plugin-html prettier --save-dev
+            - name: Install
+              if: always()
+              run: npm install eslint eslint-plugin-html jshint prettier write-good --save-dev
 
-            - name: Format code
+            - name: Prettier
+              if: always()
               run: npx prettier --write .
 
-            - name: Fix style issues
+            - name: ESLint
+              if: always()
               run: npx eslint --fix .
 
-            - name: Commit changed files
-              uses: stefanzweifel/git-auto-commit-action@v4
+            - name: JSHint
+              if: always()
+              run: npx jshint .
+
+            - name: write good
+              if: always()
+              run: npx write-good --yes-eprime --parse .
+
+            - name: Commit
+              if: always()
+              uses: stefanzweifel/git-auto-commit-action@master
               with:
-                  commit_message: "Lint and format code using Prettier and ESLint"
+                  commit_message: "Lint and format code using Prettier, ESLint, JSHint, and write good"
+
                   branch: main
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
-                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com> # defaults to author of the commit that triggered the run
+                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
+

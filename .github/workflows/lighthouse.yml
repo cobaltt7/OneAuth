@@ -1,0 +1,41 @@
+name: Run Lighthouse
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+
+jobs:
+    lighthouse:
+        name: Run Lighthouse
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              if: always()
+              uses: actions/checkout@main
+
+            - name: Run
+              uses: foo-software/lighthouse-check-action@master
+              id: lighthouse
+              with:
+                  emulatedFormFactor: all
+                  locale: en
+                  prCommentEnabled: false
+                  urls: >-
+                      https://auth.onedot.cf/about,
+                      https://auth.onedot.cf?url=https%3A%2F%2Fauth.onedot.cf%2F,
+                      https://auth.onedot.cf/auth/email?url=https%3A%2F%2Fauth.onedot.cf%2F,
+                      https://auth.onedot.cf/auth/replit?url=https%3A%2F%2Fauth.onedot.cf%2F
+                  verbose: true
+
+            - name: Setup Node.JS
+              uses: actions/setup-node@main
+              with:
+                  node-version: 12.22.1
+
+            - name: Install
+              run: npm install @actions/github --save-dev
+
+            - name: Comment
+              run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }} '${{ join(steps.lighthouse.outputs.*, '\n') }}'
