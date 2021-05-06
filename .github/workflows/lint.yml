@@ -8,29 +8,37 @@ jobs:
 
         steps:
             - name: Checkout
+              if: always()
               uses: actions/checkout@main
 
             - name: Setup Node.JS
+              if: always()
               uses: actions/setup-node@main
               with:
                   node-version: 12.22.1
 
             - name: Install
+              if: always()
               run: npm install eslint eslint-plugin-html jslint prettier write-good --save-dev
 
             - name: Prettier
+              if: always()
               run: npx prettier --write .
 
             - name: ESLint
+              if: always()
               run: npx eslint --fix .
 
             - name: JSLint
+              if: always()
               run: npx jslint .
 
             - name: write good
+              if: always()
               run: npx write-good --yes-eprime --parse .
 
             - name: Commit
+              if: always()
               uses: stefanzweifel/git-auto-commit-action@master
               with:
                   commit_message: "Lint and format code using Prettier and ESLint"
