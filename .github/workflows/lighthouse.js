@@ -4,7 +4,9 @@ const github = require("@actions/github");
 
 const octokit = github.getOctokit(process.argv[2]);
 
-const { data } = JSON.parse(process.argv[3]);
+console.log(process.argv[3])
+const {data} = JSON.parse(process.argv[3]);
+
 
 let OUTPUT =
 	`# This week's Lighthouse scores\n` +

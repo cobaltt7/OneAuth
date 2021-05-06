@@ -33,4 +33,4 @@ jobs:
               run: npm install @actions/github --save-dev
 
             - name: Comment
-              run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }} "${{ fromJson(steps.lighthouseCheck.outputs.*).data }}"
+              run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }} "${{ steps.lighthouseCheck.outputs.* }}"
