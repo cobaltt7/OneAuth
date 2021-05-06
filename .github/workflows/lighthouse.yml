@@ -13,13 +13,13 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v2
 
-            - name: Run Lighthouse
+            - name: Run
               uses: foo-software/lighthouse-check-action@master
               id: lighthouseCheck
               with:
                   accessToken: ${{ secrets.GITHUB_TOKEN }}
                   commentUrl: https://api.github.com/repos/onedotprojects/auth/issues/27
-                  locale: en_US
+                  locale: en
                   prCommentEnabled: false
                   urls: >-
                       https://auth.onedot.cf,
