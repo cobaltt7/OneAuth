@@ -14,8 +14,6 @@ jobs:
               uses: foo-software/lighthouse-check-action@master
               id: lighthouseCheck
               with:
-                  accessToken: ${{ secrets.GITHUB_TOKEN }}
-                  commentUrl: https://api.github.com/repos/onedotprojects/auth/issues/27
                   locale: en
                   prCommentEnabled: false
                   urls: >-
@@ -26,5 +24,13 @@ jobs:
                       https://auth.onedot.cf/auth/replit?url=https://google.com
                   verbose: true
 
+            - name: Setup Node.JS
+              uses: actions/setup-node@main
+              with:
+                  node-version: 12.22.1
+
+            - name: Install
+              run: npm install @actions/github --save-dev
+
             - name: Comment
-              run: node  -trace-warnings --harmony lighthouse.js ${{ secrets.GITHUB_TOKEN }} "${{ fromJson(steps.lighthouseCheck.outputs.*).data }}"
+              run: node -trace-warnings --harmony lighthouse.js ${{ secrets.GITHUB_TOKEN }} "${{ fromJson(steps.lighthouseCheck.outputs.*).data }}"
