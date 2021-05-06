@@ -1,4 +1,4 @@
-name: Lint
+name: Lint and format
 on: [push, pull_request, workflow_dispatch]
 
 jobs:

@@ -1,4 +1,4 @@
-name: Lighthouse
+name: Run Lighthouse
 on:
     push:
         branches:
@@ -6,7 +6,7 @@ on:
 
 jobs:
     lighthouse:
-        name: Lighthouse
+        name: Run Lighthouse
         runs-on: ubuntu-latest
 
         steps:
@@ -17,7 +17,7 @@ jobs:
                   locale: en
                   prCommentEnabled: false
                   urls: >-
-                      https://auth.onedot.cf
+                      https://auth.onedot.cf,
                   verbose: true
 
             - name: Setup Node.JS
@@ -29,4 +29,4 @@ jobs:
               run: npm install @actions/github --save-dev
 
             - name: Comment
-              run: node lighthouse.js ${{ secrets.GITHUB_TOKEN }} ${{ fromJson(steps.lighthouse.outputs.*).data }}
+              run: node --trace-warnings --harmony lighthouse.js
