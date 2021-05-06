@@ -37,9 +37,9 @@ module.exports = {
 	getData: async (token) => {
 		return await fetch("https://api.github.com/user", {
 			headers: {
-						accept: "application/json",
+				accept: "application/json",
 				Authorization: `token ${token}`,
 			},
-		}).then(res=>res.json())
+		}).then((res) => res.json());
 	},
 };
