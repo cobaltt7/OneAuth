@@ -12,7 +12,7 @@ jobs:
         steps:
             - name: Run
               uses: foo-software/lighthouse-check-action@master
-              id: lighthouseCheck
+              id: lighthouse
               with:
                   locale: en
                   prCommentEnabled: false
@@ -33,4 +33,4 @@ jobs:
               run: npm install @actions/github --save-dev
 
             - name: Comment
-              run: node --trace-warnings --harmony lighthouse.js ${{ secrets.GITHUB_TOKEN }} "${{ fromJson(steps.lighthouseCheck.outputs.*).data }}"
+              run: node --trace-warnings --harmony lighthouse.js ${{ secrets.GITHUB_TOKEN }} ${{ fromJson(steps.lighthouse.outputs.*).data }}
