@@ -17,7 +17,7 @@ jobs:
                   locale: en
                   prCommentEnabled: false
                   urls: >-
-                      https://auth.onedot.cf,
+                      https://auth.onedot.cf
                   verbose: true
 
             - name: Setup Node.JS
