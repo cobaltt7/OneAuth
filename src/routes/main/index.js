@@ -5,6 +5,8 @@ const { document } = new (require("jsdom").JSDOM)("").window,
 	globby = require("globby"),
 	router = require("express").Router();
 
+require("dotenv").config()
+
 // This is the list on / with links
 const authButtons = Object.assign(document.createElement("ul"), {
 		// eslint-disable-next-line id-length
@@ -110,6 +112,12 @@ router.get("/googleb9551735479dd7b0.html", (_, res) => {
 });
 router.get("/robots.txt", (_, res) => {
 	res.send("User-agent: *\nAllow: /\nCrawl-delay: 10\nHost: auth.onedot.cf\n");
+});
+router.get("/.well-known/security.txt", (_, res) => {
+	res.status(303).send(process.env.GMAIL_EMAIL);
+});
+router.get("/humans.txt", (_, res) => {
+	res.status(301).send("https://github.com/onedotprojects/auth/people");
 });
 console.log("SEO ready");
 // CSS

@@ -12,9 +12,8 @@ module.exports = {
 				const roles = req.get("X-Replit-User-Roles").split(",") || [],
 					userID = req.get("X-Replit-User-Id"),
 					username = req.get("X-Replit-User-Name");
-				return res.render(`${__dirname}/index.html`);
+				return res.render(`${__dirname}/index.html`); // move this after the if when done testing
 				if (username && userID) {
-					return res.send("just for test");
 					return sendResponse(
 						{
 							roles,

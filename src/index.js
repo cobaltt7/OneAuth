@@ -45,42 +45,6 @@ app.use(require("./routes/main/index.js"));
 console.log("Main pages ready");
 // Auth pages
 app.use(require("./routes/auth/index.js"));
-// OTHER SETUP
-require("dotenv").config();
-const { URL } = require("url"),
-	database = new (require("@replit/database"))(),
-	retronid = require("retronid").generate;
-// AUTH STUFF
-async function sendResponse(data, url, res) {
-	const retro = retronid();
-	await database.set(`RETRIEVE_${retro}`, data);
-	try {
-		const { host } = new URL(url);
-		return res.status(300).render(`${__dirname}/views/allow.html`, {
-			code: retro,
-			data: `${data}`,
-			host,
-			paramJoiner: url.indexOf("?") > -1 ? "&" : "?",
-			url,
-		});
-	} catch (_) {
-		return res.status(400).render(`${__dirname}/routes/errors/error.html`);
-	}
-}
-
-// Scratch
-app.get("/backend/scratch/", (req, res) => {
-	if (req.query.verified) {
-		sendResponse({ username: req.query.username }, req.query.url, res);
-	}
-});
-app.get("/backend/scratchredirect", (req, res) => {
-	res.redirect(
-		`https://scratch.auth.onedot.cf?url=${encodeURIComponent(
-			`https://auth.onedot.cf/backend/scratch?url=${encodeURIComponent(req.query.url)}`,
-		)}`,
-	);
-});
 console.log("Auth pages ready");
 
 // Errors
