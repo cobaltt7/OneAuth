@@ -32,5 +32,8 @@ jobs:
             - name: Install
               run: npm install @actions/github --save-dev
 
+            - name: ls because i confused
+              run: ls
+
             - name: Comment
               run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }}

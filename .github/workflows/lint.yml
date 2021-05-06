@@ -1,5 +1,7 @@
-name: Lint and format
-on: [push, pull_request, workflow_dispatch]
+name: Format and lint
+on:
+    repository_dispatch:
+        types: [lint]
 
 jobs:
     run:
