@@ -33,4 +33,4 @@ jobs:
               run: npm install @actions/github --save-dev
 
             - name: Comment
-              run: node -trace-warnings --harmony lighthouse.js ${{ secrets.GITHUB_TOKEN }} "${{ fromJson(steps.lighthouseCheck.outputs.*).data }}"
+              run: node --trace-warnings --harmony lighthouse.js ${{ secrets.GITHUB_TOKEN }} "${{ fromJson(steps.lighthouseCheck.outputs.*).data }}"
