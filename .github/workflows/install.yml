@@ -11,10 +11,10 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@main
 
             - name: Setup Node.JS
-              uses: actions/setup-node@v1
+              uses: actions/setup-node@main
               with:
                   node-version: 12.2.1
 
@@ -22,7 +22,7 @@ jobs:
               run: npm install
 
             - name: Commit
-              uses: stefanzweifel/git-auto-commit-action@v4
+              uses: stefanzweifel/git-auto-commit-action@master
               with:
                   commit_message: "Install dependecies"
                   branch: main

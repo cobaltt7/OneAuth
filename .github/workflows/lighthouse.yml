@@ -10,9 +10,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-
             - name: Run
               uses: foo-software/lighthouse-check-action@master
               id: lighthouseCheck
@@ -28,3 +25,9 @@ jobs:
                       https://auth.onedot.cf/auth/email?url=https://google.com,
                       https://auth.onedot.cf/auth/replit?url=https://google.com
                   verbose: true
+
+            - name: Create comment
+              uses: peter-evans/create-or-update-comment@v1
+              with:
+                  issue-number: 27
+                  body: ${{join(steps.lighthouseCheck.outputs.*, '\n')}}
