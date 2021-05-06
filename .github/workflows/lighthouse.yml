@@ -1,0 +1,29 @@
+name: Lighthouse
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    lighthouse:
+        name: Lighthouse
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Run Lighthouse
+                uses: foo-software/lighthouse-check-action@master
+                id: lighthouseCheck
+                with:
+                    accessToken: ${{ secrets.GITHUB_TOKEN }}
+                    locale: en_US
+                    prCommentEnabled: false
+                    urls: >-
+                        https://auth.onedot.cf,
+                        https://auth.onedot.cf/about,
+                        https://auth.onedot.cf/?url=https://google.com,
+                        https://auth.onedot.cf/auth/email?url=https://google.com,
+                        https://auth.onedot.cf/auth/replit?url=https://google.com
+                    verbose: true

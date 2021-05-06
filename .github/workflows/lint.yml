@@ -3,28 +3,34 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
     run:
-        name: Run Prettier and ESLint
+        name: Run linters
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout Git repository
+            - name: Checkout
               uses: actions/checkout@v2
 
-            - name: Set up Node.js
+            - name: Setup Node.JS
               uses: actions/setup-node@v1
               with:
-                  node-version: 12.16.1
+                  node-version: 12.22.1
 
-            - name: Install Prettier and ESLint
-              run: npm i eslint eslint-plugin-html prettier --save-dev
+            - name: Install
+              run: npm install eslint eslint-plugin-html jslint prettier write-good --save-dev
 
-            - name: Format code
+            - name: Prettier
               run: npx prettier --write .
 
-            - name: Fix style issues
+            - name: ESLint
               run: npx eslint --fix .
 
-            - name: Commit changed files
+            - name: JSLint
+              run: npx jslint .
+
+            - name: write good
+              run: npx write-good --yes-eprime --parse .
+
+            - name: Commit
               uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: "Lint and format code using Prettier and ESLint"
@@ -32,4 +38,4 @@ jobs:
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
-                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com> # defaults to author of the commit that triggered the run
+                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
