@@ -29,4 +29,4 @@ jobs:
               run: npm install @actions/github --save-dev
 
             - name: Comment
-              run: node --trace-warnings --harmony .github/workflows/lighthouse.js
+              run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.GITHUB_TOKEN }}
