@@ -26,8 +26,5 @@ jobs:
                       https://auth.onedot.cf/auth/replit?url=https://google.com
                   verbose: true
 
-            - name: Create comment
-              uses: peter-evans/create-or-update-comment@v1
-              with:
-                  issue-number: 27
-                  body: ${{join(steps.lighthouseCheck.outputs.*, '\n')}}
+            - name: Comment
+              run: node  -trace-warnings --harmony lighthouse.js ${{ secrets.GITHUB_TOKEN }} "${{ fromJson(steps.lighthouseCheck.outputs.*).data }}"

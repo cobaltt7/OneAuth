@@ -46,6 +46,7 @@
 		"retronid": "^1.0.2"
 	},
 	"devDependencies": {
+		"@actions/github": "^4.0.0",
 		"@tailwindcss/forms": "^0.3.2",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/body-parser": "^1.19.0",
