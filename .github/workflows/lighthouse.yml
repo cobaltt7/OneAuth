@@ -18,10 +18,14 @@ jobs:
               uses: foo-software/lighthouse-check-action@master
               id: lighthouse
               with:
+                  emulatedFormFactor: all
                   locale: en
                   prCommentEnabled: false
                   urls: >-
-                      https://auth.onedot.cf
+                      https://auth.onedot.cf/about,
+                      https://auth.onedot.cf?url=https%3A%2F%2Fauth.onedot.cf%2F,
+                      https://auth.onedot.cf/auth/email?url=https%3A%2F%2Fauth.onedot.cf%2F,
+                      https://auth.onedot.cf/auth/replit?url=https%3A%2F%2Fauth.onedot.cf%2F
                   verbose: true
 
             - name: Setup Node.JS
