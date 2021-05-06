@@ -8,11 +8,12 @@ jobs:
     lighthouse:
         name: Run Lighthouse
         runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: /
 
         steps:
+            - name: Checkout
+              if: always()
+              uses: actions/checkout@main
+
             - name: Run
               uses: foo-software/lighthouse-check-action@master
               id: lighthouse
@@ -32,4 +33,4 @@ jobs:
               run: npm install @actions/github --save-dev
 
             - name: Comment
-              run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.GITHUB_TOKEN }}
+              run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }}

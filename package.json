@@ -66,7 +66,6 @@
 		"eslint": "^7.25.0",
 		"eslint-plugin-html": "^6.1.2",
 		"jshint": "^2.12.0",
-		"jslint": "^0.12.1",
 		"nodemon": "^2.0.7",
 		"postcss": "^8.2.14",
 		"postcss-advanced-variables": "^3.0.1",

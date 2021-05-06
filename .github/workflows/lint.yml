@@ -19,7 +19,7 @@ jobs:
 
             - name: Install
               if: always()
-              run: npm install eslint eslint-plugin-html jslint prettier write-good --save-dev
+              run: npm install eslint eslint-plugin-html jshint prettier write-good --save-dev
 
             - name: Prettier
               if: always()
@@ -29,9 +29,9 @@ jobs:
               if: always()
               run: npx eslint --fix .
 
-            - name: JSLint
+            - name: JSHint
               if: always()
-              run: npx jslint .
+              run: npx jshint .
 
             - name: write good
               if: always()
@@ -41,7 +41,7 @@ jobs:
               if: always()
               uses: stefanzweifel/git-auto-commit-action@master
               with:
-                  commit_message: "Lint and format code using Prettier and ESLint"
+                  commit_message: "Lint and format code using Prettier, ESLint, JSHint, and write good"
                   branch: main
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
