@@ -7,16 +7,16 @@ const { data } = JSON.parse(process.argv[3]);
 
 let OUTPUT =
 	`# This week's Lighthouse scores\n` +
-	`URL | Device | Accessibility | Best Practices | Performace | Progressive Web App | SEO | More Info\n` +
-	`- | - | - | - | - | - | -\n`;
+	`| URL | Device | Accessibility | Best Practices | Performace | Progressive Web App | SEO | More Info |\n` +
+	`| - | - | - | - | - | - | - |\n`;
 
 data.forEach(
 	(result) =>
-		(OUTPUT += `${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores).join(
+		(OUTPUT += `| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores).join(
 			" | ",
 		)} | https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
 			result.url,
-		)}&tab=${result.emulatedFormFactor}\n`),
+		)}&tab=${result.emulatedFormFactor} |\n`),
 );
 
 octokit.issues.createComment({
