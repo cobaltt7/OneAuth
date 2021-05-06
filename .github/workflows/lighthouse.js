@@ -12,15 +12,19 @@ let OUTPUT =
 
 data.forEach(
 	(result) =>
-		(OUTPUT += `| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores).join(
-			" | ",
-		)} | [More information](https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
+		(OUTPUT += `| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores)
+			.map((n) => (n < 50 ? "🔴" : n < 90 ? "🟡" : "🟢") + " " + n)
+			.join(
+				" | ",
+			)} | [More information](https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
 			result.url,
 		)}&tab=${result.emulatedFormFactor}) |\n`),
 );
 
 octokit.issues.createComment({
 	...github.context.repo,
+	// jshint camelcase:false
 	issue_number: "29",
+	// jshint camelcase:true
 	body: OUTPUT,
 });

@@ -28,7 +28,7 @@
 	"boss": false,
 	"debug": false,
 	"eqnull": false,
-	"esversion": 8,
+	"esversion": 9,
 	"moz": false,
 	"evil": false,
 	"expr": true,
