@@ -2,6 +2,8 @@ name: Format and lint
 on:
     workflow_dispatch:
     push:
+	pull_request:
+	pull_request_target:
 
 jobs:
     run:
@@ -12,6 +14,8 @@ jobs:
             - name: Checkout
               if: always()
               uses: actions/checkout@main
+              with:
+                  ref: ${{ github.head_ref }}
 
             - name: Setup Node.JS
               if: always()
@@ -39,12 +43,17 @@ jobs:
               if: always()
               run: npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md
 
+            - name: Remove
+              if: always()
+              run: rm package-lock.json
+
             - name: Commit
               if: always()
               uses: stefanzweifel/git-auto-commit-action@master
               with:
                   commit_message: "Lint and format code using Prettier, ESLint, Spellchecker CLI, and write good"
-                  branch: main
+                  branch: ${{ github.head_ref }}
+                  add_options: '-u'
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com

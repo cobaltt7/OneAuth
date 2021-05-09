@@ -1,8 +1,8 @@
 name: Install dependencies
 on:
     workflow_dispatch:
-	push:
-		- branches: main
+    push:
+        - branches: main
     schedule:
         - cron: "0 0 */6 * * "
 
@@ -15,6 +15,8 @@ jobs:
             - name: Checkout
               if: always()
               uses: actions/checkout@main
+              with:
+                  ref: ${{ github.head_ref }}
 
             - name: Setup Node.JS
               if: always()
