@@ -3,6 +3,7 @@
 const { document } = new (require("jsdom").JSDOM)("").window,
 	getURL = require("../../getUrl.js"),
 	globby = require("globby"),
+	// eslint-disable-next-line new-cap
 	router = require("express").Router();
 
 require("dotenv").config();

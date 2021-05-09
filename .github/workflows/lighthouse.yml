@@ -14,6 +14,7 @@ jobs:
               uses: actions/checkout@main
 
             - name: Run
+              if: always()
               uses: foo-software/lighthouse-check-action@master
               id: lighthouse
               with:
@@ -28,12 +29,15 @@ jobs:
                   verbose: true
 
             - name: Setup Node.JS
+              if: always()
               uses: actions/setup-node@main
               with:
                   node-version: 12.22.1
 
             - name: Install
+              if: always()
               run: npm install @actions/github --save-dev
 
             - name: Comment
+              if: always()
               run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }} '${{ join(steps.lighthouse.outputs.*, '\n') }}'

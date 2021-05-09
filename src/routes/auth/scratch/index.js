@@ -4,10 +4,11 @@ module.exports = {
 	icon: "https://scratch.mit.edu/favicon.ico",
 	iconProvider: "url",
 	link:
-		"https://scratch.auth.onedot.cf?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Furl={{url}}",
+		"https://scratch.auth.onedot.cf" +
+		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Furl={{url}}",
 	name: "Scratch",
 
-	// this will change once onedotprojects/scratchCommentAuth#12 is done
+	// This will change once onedotprojects/scratchCommentAuth#12 is done
 	pages: [
 		{
 			backendPage: "scratch",

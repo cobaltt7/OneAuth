@@ -1,5 +1,6 @@
 "use strict";
 
+// eslint-disable-next-line new-cap
 const router = require("express").Router();
 router.get("/error", (_, res) => {
 	res.status(500).render(`${__dirname}/error.html`);

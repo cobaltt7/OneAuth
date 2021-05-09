@@ -6,7 +6,7 @@
 		"es6": true
 	},
 	"parserOptions": {
-		"ecmaVersion": 2020,
+		"ecmaVersion": 11,
 		"sourceType": "script"
 	},
 	"extends": "eslint:all",
@@ -121,8 +121,23 @@
 		"no-console": 1,
 		"multiline-ternary": [1, "always-multiline"],
 		"no-ternary": 0,
-		"max-len": [1, { "code": 100, "tabWidth": 2, "ignoreRegExpLiterals": true }],
+		"max-len": [
+			1,
+			{
+				"code": 100,
+				"tabWidth": 2,
+				"ignoreRegExpLiterals": true
+			}
+		],
 		"linebreak-style": 0,
-		"no-extra-parens": 0
+		"no-extra-parens": 0,
+		"no-unused-vars": [
+			1,
+			{
+				"argsIgnorePattern": "_",
+				"args": "all",
+				"caughtErrors": "all"
+			}
+		]
 	}
 }

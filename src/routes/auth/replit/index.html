@@ -35,6 +35,13 @@
 		<script>
 			"use strict";
 			(function () {
+				let authWindow, interval;
+				// Get the <span> element that closes the modal
+				const close = document.getElementById("closeModal"),
+					html = document.documentElement,
+					// Get the modal
+					modal = document.getElementById("modalContainer");
+
 				function authComplete(event) {
 					if (event.data !== "auth_complete") {
 						return;
@@ -47,7 +54,7 @@
 					location.reload();
 				}
 
-				function openPopup(event) {
+				function openPopup(_) {
 					authWindow = open(
 						`https://repl.it/auth_with_repl_site?domain=${location.host}`,
 						"Sign in with Replit",
@@ -66,13 +73,6 @@
 						}
 					}, 100);
 				}
-
-				let authWindow, interval;
-				// Get the <span> element that closes the modal
-				const close = document.getElementById("closeModal"),
-					html = document.documentElement,
-					// Get the modal
-					modal = document.getElementById("modalContainer");
 
 				// When the user clicks on (x), close the modal
 				close.addEventListener("click", () => {

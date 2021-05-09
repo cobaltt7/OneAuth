@@ -3,10 +3,20 @@
 const fetch = require("node-fetch");
 
 module.exports = {
+	getData: (token) =>
+		fetch("https://api.github.com/user", {
+			headers: {
+				Authorization: `token ${token}`,
+				accept: "application/json",
+			},
+		}).then((res) => res.json()),
 	icon: "github",
 	iconProvider: "fa",
 	link:
-		"https://github.com/login/oauth/authorize?client_id=7b64414fe57e07d1e969&redirect_uri=https://auth.onedot.cf/auth/github&state={{url}}",
+		"https://github.com/login/oauth/authorize" +
+		"?client_id=7b64414fe57e07d1e969" +
+		"&redirect_uri=https://auth.onedot.cf/auth/github" +
+		"&state={{url}}",
 	name: "GitHub",
 
 	pages: [
@@ -20,8 +30,8 @@ module.exports = {
 						`&code=${req.query.code}` +
 						`&state=${req.query.state}`,
 					headers: {
-						accept: "application/json",
 						"Content-Type": "application/x-www-form-urlencoded",
+						accept: "application/json",
 					},
 					method: "POST",
 				})
@@ -34,12 +44,4 @@ module.exports = {
 			},
 		},
 	],
-	getData: async (token) => {
-		return await fetch("https://api.github.com/user", {
-			headers: {
-				accept: "application/json",
-				Authorization: `token ${token}`,
-			},
-		}).then((res) => res.json());
-	},
 };

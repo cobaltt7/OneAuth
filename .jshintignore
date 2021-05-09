@@ -1,5 +1,0 @@
-node_modules
-.upm
-src/routes/main/style.css
-_locales
-!_locales/en_US.json

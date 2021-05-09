@@ -5,6 +5,7 @@ const authClients = [],
 	getURL = require("../../getUrl.js"),
 	globby = require("globby"),
 	retronid = require("retronid"),
+	// eslint-disable-next-line new-cap
 	router = require("express").Router(),
 	{ URL } = require("url");
 
@@ -54,7 +55,7 @@ const getClient = (requestedClient) =>
 				token,
 				url,
 			});
-		} catch (_) {
+		} catch {
 			return res.status(400).render(getURL("routes/errors/error.html"));
 		}
 	};
@@ -90,7 +91,7 @@ router.get("/backend/send_data", async (req, res) => {
 	}
 	try {
 		redirect = new URL(url);
-	} catch (_) {
+	} catch {
 		return res.status(400);
 	}
 	redirect.searchParams.set("code", code);

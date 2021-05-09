@@ -22,12 +22,13 @@
 	},
 	"main": "src/index.js",
 	"scripts": {
-		"lint": "npx prettier --write . && npx eslint --fix . & npx jshint .",
+		"lint": "npx prettier --write .; npx eslint --fix .; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md; npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md",
 		"start": "TAILWIND_MODE=watch npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings --harmony src/index.js",
 		"test": "npx nodemon --harmony --trace-warnings src/index.js"
 	},
 	"dependencies": {
 		"@replit/database": "^2.0.1",
+		"accepts": "^1.3.7",
 		"atob": "^2.1.2",
 		"clean-css": "^5.1.2",
 		"compression": "^1.7.4",
@@ -61,7 +62,6 @@
 		"autoprefixer": "^10.2.5",
 		"eslint": "^7.25.0",
 		"eslint-plugin-html": "^6.1.2",
-		"jshint": "^2.12.0",
 		"nodemon": "^2.0.7",
 		"postcss": "^8.2.14",
 		"postcss-advanced-variables": "^3.0.1",
@@ -72,6 +72,7 @@
 		"postcss-scss": "^3.0.5",
 		"postcss-sort-media-queries": "^3.9.10",
 		"prettier": "^2.2.1",
+		"spellchecker-cli": "^4.4.0",
 		"tailwindcss": "^2.1.2",
 		"write-good": "^1.0.8"
 	},

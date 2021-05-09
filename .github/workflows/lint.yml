@@ -22,7 +22,7 @@ jobs:
 
             - name: Install
               if: always()
-              run: npm install eslint eslint-plugin-html jshint prettier write-good --save-dev
+              run: npm install eslint eslint-plugin-html prettier spellchecker-cli write-good --save-dev
 
             - name: Prettier
               if: always()
@@ -32,20 +32,19 @@ jobs:
               if: always()
               run: npx eslint --fix .
 
-            - name: JSHint
+            - name: Spellchecker CLI
               if: always()
-              run: npx jshint .
+              run: npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md
 
             - name: write good
               if: always()
-              run: npx write-good --yes-eprime --parse .
+              run: npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md
 
             - name: Commit
               if: always()
               uses: stefanzweifel/git-auto-commit-action@master
               with:
-                  commit_message: "Lint and format code using Prettier, ESLint, JSHint, and write good"
-
+                  commit_message: "Lint and format code using Prettier, ESLint, Spellchecker CLI, and write good"
                   branch: main
                   commit_options: "--signoff"
                   commit_user_name: wgytbot

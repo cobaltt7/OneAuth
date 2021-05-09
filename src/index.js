@@ -12,6 +12,8 @@ app.engine("html", require("mustache-express")(`${__dirname}/routes/partials`, "
 app.use(require("cookie-parser")());
 // Compress
 app.use(require("compression")());
+// L10N
+app.use(require("./l10n.js").setLangFromRequest);
 // Post request bodies
 app.use(
 	express.urlencoded({

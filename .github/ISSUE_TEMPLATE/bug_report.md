@@ -26,7 +26,7 @@ _Screenshots to help explain the problem._
 
 ## Device info
 
-_What device was the behavior reccorded on?_
+_What device was the behavior recorded on?_
 
 ## Additional context
 
