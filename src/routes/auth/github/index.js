@@ -44,4 +44,13 @@ module.exports = {
 			},
 		},
 	],
+<<<<<<< HEAD
+=======
+	getData: async (token) => await fetch("https://api.github.com/user", {
+		headers: {
+			accept: "application/json",
+			Authorization: `token ${token}`,
+		},
+	}).then((res) => res.json()),
+>>>>>>> 9cbe0eb004163c3ef3f2a2323452e5cd68f0c6c4
 };
