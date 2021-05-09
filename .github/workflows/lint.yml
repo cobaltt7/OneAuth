@@ -1,8 +1,7 @@
 name: Format and lint
 on:
     workflow_dispatch:
-    repository_dispatch:
-        types: [lint]
+    push:
 
 jobs:
     run:
