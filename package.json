@@ -71,7 +71,7 @@
 		"postcss-nested": "^5.0.5",
 		"postcss-scss": "^3.0.5",
 		"postcss-sort-media-queries": "^3.9.10",
-		"prettier": "^2.2.1",
+		"prettier": "^2.3.0",
 		"spellchecker-cli": "^4.4.0",
 		"tailwindcss": "^2.1.2",
 		"write-good": "^1.0.8"

@@ -16,10 +16,9 @@ const accepts = require("accepts"),
 		const [, code] = filename.split(".")[0].split("/"),
 			tempMsgs = JSON.parse(fileSystem.readFileSync(filename));
 		for (const item in tempMsgs) {
-			
-    if ({}.hasOwnProperty.call(tempMsgs, item)) {
-			tempMsgs[item] = tempMsgs[item].string;
-	}
+			if ({}.hasOwnProperty.call(tempMsgs, item)) {
+				tempMsgs[item] = tempMsgs[item].string;
+			}
 		}
 		MESSAGES[`${code}`] = tempMsgs;
 
@@ -43,7 +42,7 @@ function compileLangs(langs, cache = false) {
 					// Standardize character between language and country code
 					const standardLang = language.replaceAll("-", "_"),
 						// Add language without country code as fallback
-					 [noCountryLang] = standardLang.split("_");
+						[noCountryLang] = standardLang.split("_");
 					return [
 						standardLang,
 						noCountryLang,
@@ -105,7 +104,7 @@ module.exports = {
 		});
 		req.languages = langs;
 		// Grab reference of render
-		const render = res.render;
+		const { render } = res;
 		// Override logic
 		res.render = function (view, options, callback) {
 			if (typeof options === "object") {
