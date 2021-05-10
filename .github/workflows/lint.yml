@@ -25,7 +25,7 @@ jobs:
 
             - name: Install
               if: always()
-              run: npm install eslint eslint-plugin-html prettier spellchecker-cli write-good --save-dev
+              run: npm install -D
 
             - name: Prettier
               if: always()

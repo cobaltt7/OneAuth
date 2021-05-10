@@ -57,9 +57,11 @@
 			(function () {
 				let authWindow, interval;
 				// Get the <span> element that closes the modal
+
 				const close = document.getElementById("closeModal"),
 					html = document.documentElement,
 					// Get the modal
+
 					modal = document.getElementById("modalContainer");
 
 				function authComplete(event) {
@@ -95,6 +97,7 @@
 				}
 
 				// When the user clicks on (x), close the modal
+
 				close.addEventListener("click", () => {
 					modal.style.display = "none";
 					html.addEventListener("click", openPopup);

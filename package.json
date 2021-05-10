@@ -1,7 +1,8 @@
 {
 	"name": "@onedotprojects/auth",
+	"version": "1.0.0",
+	"private": true,
 	"description": "All-In-One Authorization",
-	"author": "OneDot",
 	"keywords": [
 		"auth",
 		"login",
@@ -10,21 +11,33 @@
 		"authorization"
 	],
 	"homepage": "https://auth.onedot.cf",
-	"private": true,
-	"license": "MIT",
-	"version": "1.0.0",
-	"engines": {
-		"node": "14.16.1"
-	},
 	"bugs": {
 		"url": "https://github.com/onedotprojects/auth/issues/new",
 		"email": "1auth.wgyt@gmail.com"
 	},
+	"license": "MIT",
+	"author": "OneDot",
 	"main": "src/index.js",
 	"scripts": {
 		"lint": "npx prettier --write .; npx eslint --fix .; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md; npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md",
 		"start": "TAILWIND_MODE=watch npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings --harmony src/index.js",
 		"test": "npx nodemon --harmony --trace-warnings src/index.js"
+	},
+	"nodemonConfig": {
+		"events": {
+			"restart": "npx prettier --write $FILENAME"
+		},
+		"ext": "*",
+		"verbose": false
+	},
+	"prettier": {
+		"embeddedLanguageFormatting": "auto",
+		"jsxBracketSameLine": true,
+		"printWidth": 100,
+		"tabWidth": 4,
+		"trailingComma": "all",
+		"useTabs": true,
+		"vueIndentScriptAndStyle": true
 	},
 	"dependencies": {
 		"@replit/database": "^2.0.1",
@@ -45,13 +58,14 @@
 	},
 	"devDependencies": {
 		"@actions/github": "^4.0.0",
+		"@html-eslint/eslint-plugin": "^0.10.1",
+		"@html-eslint/parser": "^0.10.1",
 		"@tailwindcss/forms": "^0.3.2",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/clean-css": "^4.2.4",
 		"@types/compression": "^1.7.0",
 		"@types/cookie-parser": "^1.4.2",
 		"@types/express": "^4.17.1",
-		"@types/globby": "^9.1.0",
 		"@types/jsdom": "^16.2.10",
 		"@types/mustache": "^4.1.1",
 		"@types/mustache-express": "^1.2.1",
@@ -61,7 +75,13 @@
 		"@types/postcss-import": "^12.0.0",
 		"autoprefixer": "^10.2.5",
 		"eslint": "^7.26.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-compat": "^3.9.0",
 		"eslint-plugin-html": "^6.1.2",
+		"eslint-plugin-markdown": "^2.1.0",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-optimize-regex": "^1.2.0",
+		"eslint-plugin-regexp": "^0.10.0",
 		"nodemon": "^2.0.7",
 		"postcss": "^8.2.14",
 		"postcss-advanced-variables": "^3.0.1",
@@ -76,23 +96,7 @@
 		"tailwindcss": "^2.1.2",
 		"write-good": "^1.0.8"
 	},
-	"prettier": {
-		"tabWidth": 4,
-		"useTabs": true,
-		"trailingComma": "all",
-		"jsxBracketSameLine": true,
-		"vueIndentScriptAndStyle": true,
-		"embeddedLanguageFormatting": "auto",
-		"printWidth": 100
-	},
-	"nodemonConfig": {
-		"verbose": false,
-		"ext": "*",
-		"events": {
-			"restart": "npx prettier --write $FILENAME"
-		}
-	},
-	"browserslist": [
-		"> 0%"
-	]
+	"engines": {
+		"node": "14.16.1"
+	}
 }

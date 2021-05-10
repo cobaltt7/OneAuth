@@ -1,0 +1,5 @@
+!*
+node_modules
+.upm
+src/routes/main/style.css
+package-lock.json

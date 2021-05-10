@@ -11,6 +11,7 @@ const authClients = [],
 
 (async () => {
 	// Idk why this is relative to the root dir but it is
+
 	const [base] = getURL("").split("src/"),
 		paths = await globby("src/routes/auth/*/index.js");
 
@@ -74,6 +75,7 @@ for (const http of ["post", "get"]) {
 
 router.get("/backend/get_data", async (req, res) => {
 	// When data is being retrieved
+
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.status(200).json(await database.get(`RETRIEVE_${req.query.code}`));

@@ -23,12 +23,12 @@ jobs:
             - name: Install
               if: always()
               run: |
-                  python -m pip install --upgrade pip 
+                  python -m pip install --upgrade pip
                   pip install transifex-client
 
             - name: Setup Transifex
-			  if: always()
-			  run: tx init --token=${{ secrets.TRANSIFEX }} --force-save --no-interactive --skipsetup
+              if: always()
+              run: tx init --token=${{ secrets.TRANSIFEX }} --force-save --no-interactive --skipsetup
 
             - name: Push
               run: tx push -ts

@@ -38,6 +38,7 @@
 					event.preventDefault();
 
 					// Show loading icon
+
 					const submit = document.querySelector('[type="submit"]');
 					submit.firstChild.remove();
 					submit.append(
@@ -47,9 +48,11 @@
 					);
 
 					// Save email for later
+
 					const email = document.querySelector("input").value;
 
 					// Send the email
+
 					await fetch("", {
 						body: `email=${email}`,
 						headers: {
@@ -59,8 +62,10 @@
 					});
 
 					// Create new form
+
 					const newForm = Object.assign(document.createElement("form"), {
 						// Create form element
+
 						action: "",
 						autocomplete: "off",
 						method: "POST",
@@ -68,6 +73,7 @@
 					newForm.append(
 						Object.assign(document.createElement("input"), {
 							// Code box
+
 							autocomplete: "off",
 							// eslint-disable-next-line id-length
 							id: "code",
@@ -78,6 +84,7 @@
 						}),
 						Object.assign(document.createElement("input"), {
 							// Hidden email box
+
 							name: "email",
 							type: "hidden",
 							value: email,

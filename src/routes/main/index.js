@@ -9,12 +9,15 @@ const { document } = new (require("jsdom").JSDOM)("").window,
 require("dotenv").config();
 
 // This is the list on / with links
+
 const authButtons = Object.assign(document.createElement("ul"), {
 		// eslint-disable-next-line id-length
 		id: "auth-list",
 	}),
 	authClients = [],
+
 	// This is the list on /about without links
+
 	authList = Object.assign(document.createElement("ul"), {
 		// eslint-disable-next-line id-length
 		id: "auth-list",
@@ -22,6 +25,7 @@ const authButtons = Object.assign(document.createElement("ul"), {
 
 (async () => {
 	// Idk why this is relative to the root dir but it is
+
 	const [base] = getURL("").split("src/"),
 		paths = await globby("src/routes/auth/*/index.js");
 
@@ -31,17 +35,20 @@ const authButtons = Object.assign(document.createElement("ul"), {
 
 	authClients.forEach((client) => {
 		// Add the link
+
 		const link = Object.assign(document.createElement("a"), {
 			href: client.link,
 		});
 		authButtons.append(link);
 
 		// Add the list item
+
 		const listItem = Object.assign(document.createElement("li"), {
 			className: "auth-button",
 		});
 
 		// Add the icon
+
 		let icon;
 		if (client.iconProvider.indexOf("fa") === 0) {
 			icon = Object.assign(document.createElement("i"), {
@@ -69,7 +76,9 @@ const authButtons = Object.assign(document.createElement("ul"), {
 		listItem.append(icon);
 		authList.append(listItem);
 		link.append(listItem.cloneNode(true));
+
 		// Add text
+
 		const span = document.createElement("span"),
 			span2 = span.cloneNode(true);
 		span.innerHTML = `Sign in with ${client.name}`;
@@ -79,7 +88,9 @@ const authButtons = Object.assign(document.createElement("ul"), {
 	});
 	console.log("Dynamic buttons ready");
 })();
+
 // Logo
+
 router.get("/logo.svg", (_, res) => {
 	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg");
 });
@@ -121,7 +132,9 @@ router.get("/humans.txt", (_, res) => {
 	res.status(301).send("https://github.com/onedotprojects/auth/people");
 });
 console.log("SEO ready");
+
 // CSS
+
 const CleanCSS = require("clean-css"),
 	fileSystem = require("fs"),
 	minify = new CleanCSS();

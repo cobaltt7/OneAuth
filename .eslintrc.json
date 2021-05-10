@@ -9,9 +9,45 @@
 		"ecmaVersion": 11,
 		"sourceType": "script"
 	},
-	"extends": "eslint:all",
+	"extends": [
+		"eslint:all",
+		"plugin:node/recommended",
+		"plugin:regexp/recommended",
+		"plugin:markdown/recommended",
+		"prettier"
+	],
 	"root": true,
+	"settings": {
+		"html": {
+			"xml-extensions": [".svg"]
+		}
+	},
 	"overrides": [
+		{
+			"files": ["**/*.md"],
+			"processor": "markdown/markdown",
+			"env": {
+				"browser": true,
+				"node": true,
+				"es6": true,
+				"es2020": true
+			},
+			"parserOptions": {
+				"ecmaVersion": 8,
+				"ecmaFeatures": {
+					"impliedStrict": true
+				}
+			},
+			"rules": {
+				"no-console": 0,
+				"no-undef": 0,
+				"no-unused-expressions": 0,
+				"no-unused-vars": 0,
+				"padded-blocks": 0,
+				"eol-last": 0,
+				"unicode-bom": 0
+			}
+		},
 		{
 			"files": ["*.html"],
 			"env": {
@@ -25,15 +61,16 @@
 			},
 			"rules": {
 				"no-console": 2
-			}
+			},
+			"extends": ["plugin:compat/recommended"]
 		}
 	],
 	"reportUnusedDisableDirectives": true,
 	"ignorePatterns": ["node_modules", ".upm", "src/routes/main/style.css"],
-	"plugins": ["html"],
+	"plugins": ["@html-eslint", "node", "regexp", "optimize-regex", "compat"],
 	"rules": {
 		"indent": [1, "tab"],
-		"no-tabs": 0,
+		"no-tabs": [1, { "allowIndentationTabs": true }],
 		"quote-props": [1, "as-needed"],
 		"comma-dangle": [
 			1,
@@ -101,6 +138,10 @@
 				"max": 5
 			}
 		],
+		"curly": [1, "all"],
+		"no-mixed-operators": 0,
+		"no-confusing-arrow": [1, { "allowParens": false }],
+		"lines-around-comment": 0,
 		"func-style": [
 			1,
 			"declaration",
@@ -117,7 +158,6 @@
 			}
 		],
 		"array-element-newline": 0,
-		"no-mixed-operators": 0,
 		"no-console": 1,
 		"multiline-ternary": [1, "always-multiline"],
 		"no-ternary": 0,
@@ -131,6 +171,13 @@
 		],
 		"linebreak-style": 0,
 		"no-extra-parens": 0,
+		"no-restricted-syntax": [
+			1,
+			{
+				"selector": "SequenceExpression",
+				"message": "The comma operator is confusing and a common mistake. Don’t use it!"
+			}
+		],
 		"no-unused-vars": [
 			1,
 			{
@@ -138,6 +185,72 @@
 				"args": "all",
 				"caughtErrors": "all"
 			}
-		]
+		],
+		"indent-legacy": 0,
+		"node/handle-callback-err": 2,
+		"node/no-callback-literal": 2,
+		"node/no-new-require": 2,
+		"node/no-path-concat": 2,
+		"node/no-process-exit": 2,
+		"node/callback-return": 2,
+		"node/exports-style": 2,
+		"node/file-extension-in-import": 2,
+		"node/no-restricted-import": 2,
+		"node/no-restricted-require": 2,
+		"node/no-unpublished-require": 0,
+		"node/prefer-promises/fs": 2,
+		"@html-eslint/require-meta-charset": 2,
+		"@html-eslint/require-button-type": 2,
+		"@html-eslint/require-meta-description": 2,
+		"@html-eslint/no-skip-heading-levels": 2,
+		"@html-eslint/require-frame-title": 2,
+		"@html-eslint/no-non-scalable-viewport": 2,
+		"@html-eslint/no-positive-tabindex": 2,
+		"@html-eslint/require-meta-viewport": 2,
+		"@html-eslint/no-abstract-roles": 2,
+		"@html-eslint/no-aria-hidden-body": 2,
+		"@html-eslint/id-naming-convention": 2,
+		"regexp/confusing-quantifier": 2,
+		"regexp/control-character-escape": 2,
+		"regexp/hexadecimal-escape": 2,
+		"regexp/letter-case": 2,
+		"regexp/negation": 2,
+		"regexp/no-dupe-disjunctions": 2,
+		"regexp/no-empty-alternative": 2,
+		"regexp/no-lazy-ends": 2,
+		"regexp/no-legacy-features": 2,
+		"regexp/no-non-standard-flag": 2,
+		"regexp/no-obscure-range": 2,
+		"regexp/no-optional-assertion": 2,
+		"regexp/no-potentially-useless-backreference": 2,
+		"regexp/no-standalone-backslash": 2,
+		"regexp/no-trivially-nested-assertion": 2,
+		"regexp/no-trivially-nested-quantifier": 2,
+		"regexp/no-unused-capturing-group": 2,
+		"regexp/no-useless-assertions": 2,
+		"regexp/no-useless-character-class": 2,
+		"regexp/no-useless-dollar-replacements": 2,
+		"regexp/no-useless-escape": 2,
+		"regexp/no-useless-flag": 2,
+		"regexp/no-useless-lazy": 2,
+		"regexp/no-useless-non-capturing-group": 2,
+		"regexp/no-useless-non-greedy": 2,
+		"regexp/no-useless-quantifier": 2,
+		"regexp/no-useless-range": 2,
+		"regexp/no-zero-quantifier": 2,
+		"regexp/optimal-lookaround-quantifier": 2,
+		"regexp/order-in-character-class": 2,
+		"regexp/prefer-character-class": 2,
+		"regexp/prefer-escape-replacement-dollar-char": 2,
+		"regexp/prefer-named-backreference": 2,
+		"regexp/prefer-predefined-assertion": 2,
+		"regexp/prefer-quantifier": 2,
+		"regexp/prefer-range": 2,
+		"regexp/prefer-regexp-exec": 2,
+		"regexp/prefer-regexp-test": 2,
+		"regexp/prefer-unicode-codepoint-escapes": 2,
+		"regexp/sort-flags": 2,
+		"regexp/unicode-escape": 2,
+		"optimize-regex/optimize-regex": 1
 	}
 }

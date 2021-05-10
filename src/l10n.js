@@ -36,25 +36,37 @@ function compileLangs(langs, cache = false) {
 	const prefLangs = [
 		...new Set(
 			langs
-				// Remove asterisks
+
+			// Remove asterisks
+
 				.filter((item) => item !== "*")
 				.flatMap((language) => {
 					// Standardize character between language and country code
+
 					const standardLang = language.replaceAll("-", "_"),
+
 						// Add language without country code as fallback
+
 						[noCountryLang] = standardLang.split("_");
 					return [
 						standardLang,
 						noCountryLang,
+
 						// Add other countries with the same languages' country codes as fallbacks
+
 						...LANG_CODES.filter((langCode) => langCode.indexOf(noCountryLang) === 0),
 					];
 				}),
+
 			// Add base language as fallback to the fallback
+
 		).add(BASE_LANG),
+
 		// Remove duplicates by converting it to a `Set` then back to an `Array`
 	];
+
 	// Slice it on the base language because the base langauge has everything that we'd need
+
 	prefLangs.splice(prefLangs.indexOf(BASE_LANG) + 1);
 	CACHE_CODES[`${langs}`] = prefLangs;
 	return prefLangs;
@@ -68,8 +80,7 @@ function getMsgs(langs, cache = true) {
 	}
 	let msgs = {};
 	langs.forEach((langCode) => {
-		msgs = { ...MESSAGES[langCode],
-			...msgs };
+		msgs = { ...MESSAGES[langCode], ...msgs };
 	});
 	CACHE_MSGS[`${langs}`] = msgs;
 	return msgs;
@@ -82,17 +93,24 @@ module.exports = {
 		if (req.query.lang) {
 			langs = compileLangs([
 				// `lang` query parameter overrides everything else
+
 				...(req.query.lang ?? "*").split("|"),
+
 				// Fallback to values in cookie
+
 				...(req.cookies.langs ?? "*").split("|"),
+
 				// Fallback to browser lang
+
 				...accepts(req).languages(),
 			]);
 		} else if (req.cookies.lang) {
 			// The cookie doesn't need to go through `compileLangs` since it already did
+
 			langs = (req.cookies.langs ?? "*").split("|");
 		} else {
 			// This is the default, the broswer langauge.
+
 			langs = compileLangs(accepts(req).languages(), true);
 		}
 		const expires = new Date();
@@ -103,14 +121,20 @@ module.exports = {
 			sameSite: false,
 		});
 		req.languages = langs;
+
 		// Grab reference of render
+
 		const { render } = res;
+
 		// Override logic
+
 		res.render = function (view, options, callback) {
 			if (typeof options === "object") {
 				options.msgs = getMsgs(langs);
 			}
+
 			// Continue with original render
+
 			render.call(this, view, options, callback);
 		};
 		next();

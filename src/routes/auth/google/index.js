@@ -7,22 +7,22 @@ require("dotenv").config();
 module.exports = {
 	getData: async (token) => {
 		const {
-			// jshint camelcase:false
-			id_token: idToken = ".eyJlcnJvciI6InRvbyBzbG93In0=.",
-			// jshint camelcase:true
-		} = await fetch("https://oauth2.googleapis.com/token", {
-			body:
-				`code=${token}` +
-				`&client_id=${process.env.googleAppUrl}` +
-				`&client_secret=${process.env.googleSecret}` +
-				"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
-				"&grant_type=authorization_code",
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
-			},
-			method: "POST",
-		}).then((res) => res.json());
-		const info = JSON.parse(atob(idToken.split(".")[1]));
+				// jshint camelcase:false
+				id_token: idToken = ".eyJlcnJvciI6InRvbyBzbG93In0=.",
+				// jshint camelcase:true
+			} = await fetch("https://oauth2.googleapis.com/token", {
+				body:
+					`code=${token}` +
+					`&client_id=${process.env.googleAppUrl}` +
+					`&client_secret=${process.env.googleSecret}` +
+					"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
+					"&grant_type=authorization_code",
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
+				},
+				method: "POST",
+			}).then((res) => res.json()),
+			info = JSON.parse(atob(idToken.split(".")[1]));
 		info.filter((item) =>
 			[
 				"sub",

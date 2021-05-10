@@ -9,6 +9,7 @@ module.exports = {
 	name: "Scratch",
 
 	// This will change once onedotprojects/scratchCommentAuth#12 is done
+
 	pages: [
 		{
 			backendPage: "scratch",
