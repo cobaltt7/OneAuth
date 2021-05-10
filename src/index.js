@@ -3,11 +3,12 @@
 // SET UP EXPRESS
 const express = require("express");
 const app = express();
-app.set("view engine", "html");
 app.disable("view cache");
 console.log("Express ready");
 // Mustache
 app.engine("html", require("mustache-express")(`${__dirname}/routes/partials`, ".html"));
+app.set("views", __dirname);
+app.set("view engine", "html");
 // Cookies
 app.use(require("cookie-parser")());
 // Compress

@@ -22,7 +22,7 @@ Implementing this in your own site is very easy. Simply direct your users to thi
 https://auth.onedot.cf/?url=<CALLBACK_URL>
 ```
 
-After the user clicks on the link and finishes authentication with us, we will redirect them to `<CALLBACK_URL>`. There will be a new query parameter: `code`. To retrive the user's information, send the following HTTP request:
+After the user clicks on the link and finishes authentication with us, we will redirect them to `<CALLBACK_URL>`. There will be a new query parameter: `code`. To retrieve the user's information, send the following HTTP request:
 
 ```http
 GET https://auth.onedot.cf/backend/get_data/?code=<CODE>
