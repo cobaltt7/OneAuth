@@ -43,6 +43,7 @@ function compileLangs(langs, cache = false) {
 				.flatMap((language) => {
 					// Standardize character between language and country code
 					const standardLang = language.replaceAll("-", "_"),
+
 						// Add language without country code as fallback
 						[noCountryLang] = standardLang.split("_");
 					return [
@@ -138,6 +139,7 @@ module.exports = {
 				options.msgs = function () {
 					return function (val, render) {
 						const [msgCode, ...placeholders] = render(val)
+
 							// Split on `|||`
 							.split(/(?<!\\)\|{3}/)
 
@@ -145,8 +147,10 @@ module.exports = {
 							.map((param) => param.replace(/\\\|{3}/g, "|||"));
 
 						return getFormatter(langs[0])(
+
 							// Get message, fallback to the code provided
 							msgs[msgCode] ?? msgCode,
+
 							// Render it with placeholders
 							placeholders,
 						);
