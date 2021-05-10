@@ -9,9 +9,9 @@
 ## Supported Clients
 
 -   Email
+-   GitHub
 -   Google
 -   Replit
--   GitHub
 -   Scratch
 
 ## For Developers

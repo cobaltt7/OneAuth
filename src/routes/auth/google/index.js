@@ -22,7 +22,6 @@ module.exports = {
 			},
 			method: "POST",
 		}).then((res) => res.json());
-		console.log("no combine");
 		const info = JSON.parse(atob(idToken.split(".")[1]));
 		info.filter((item) =>
 			[

@@ -45,7 +45,7 @@ jobs:
 
             - name: Remove
               if: always()
-              run: rm package-lock.json
+              run: rm package-lock.json package.json
 
             - name: Commit
               if: always()
@@ -53,7 +53,7 @@ jobs:
               with:
                   commit_message: "Lint and format code using Prettier, ESLint, Spellchecker CLI, and write good"
                   branch: ${{ github.head_ref }}
-                  add_options: "-u"
+                  add_options: "--ignore-removal"
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
