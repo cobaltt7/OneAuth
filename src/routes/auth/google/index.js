@@ -7,9 +7,8 @@ require("dotenv").config();
 module.exports = {
 	getData: async (token) => {
 		const {
-				// jshint camelcase:false
+				// eshint-disable-next-line camelcase
 				id_token: idToken = ".eyJlcnJvciI6InRvbyBzbG93In0=.",
-				// jshint camelcase:true
 			} = await fetch("https://oauth2.googleapis.com/token", {
 				body:
 					`code=${token}` +

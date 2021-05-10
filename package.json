@@ -19,7 +19,7 @@
 	"author": "OneDot",
 	"main": "src/index.js",
 	"scripts": {
-		"lint": "npx prettier --write .; npx eslint --fix .; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md; npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md",
+		"lint": "npx prettier --write . ; npx eslint --fix . ; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md ; npx write-good --yes-eprime --parse _locales/en_US.json ; npx write-good  --yes-eprime --parse *.md ; npx write-good  --yes-eprime --parse .github/**/*.md ; npx write-good  --yes-eprime --parse .github/*.md ;",
 		"start": "TAILWIND_MODE=watch npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings --harmony src/index.js",
 		"test": "npx nodemon --harmony --trace-warnings src/index.js"
 	},
@@ -41,6 +41,7 @@
 	},
 	"dependencies": {
 		"@replit/database": "^2.0.1",
+		"@ultraq/icu-message-formatter": "^0.11.1",
 		"accepts": "^1.3.7",
 		"atob": "^2.1.2",
 		"clean-css": "^5.1.2",
@@ -58,8 +59,6 @@
 	},
 	"devDependencies": {
 		"@actions/github": "^4.0.0",
-		"@html-eslint/eslint-plugin": "^0.10.1",
-		"@html-eslint/parser": "^0.10.1",
 		"@tailwindcss/forms": "^0.3.2",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/clean-css": "^4.2.4",

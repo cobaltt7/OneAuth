@@ -10,19 +10,18 @@ let OUTPUT =
 	"| - | - | - | - | - | - | - | - |\n";
 
 data.forEach((result) => {
-	OUTPUT += `| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores)
-		.map((num) => `${num < 50 ? "🔴" : num < 90 ? "🟡" : "🟢"} ${num}`)
-		.join(
-			" | ",
-		)} | [More information](https://developers.google.com/speed/pagespeed/insights/`+
-		`?url=${encodeURIComponent(
-		result.url,
-	)}&tab=${result.emulatedFormFactor}) |\n`;
+	OUTPUT +=
+		`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores)
+			.map((num) => `${num < 50 ? "🔴" : num < 90 ? "🟡" : "🟢"} ${num}`)
+			.join(
+				" | ",
+			)} | [More information](https://developers.google.com/speed/pagespeed/insights/` +
+		`?url=${encodeURIComponent(result.url)}&tab=${result.emulatedFormFactor}) |\n`;
 });
 
 octokit.issues.createComment({
 	...github.context.repo,
 	body: OUTPUT,
-	// eslint-disable-next-lint camelcase
+	// eslint-disable-next-line camelcase
 	issue_number: "29",
 });

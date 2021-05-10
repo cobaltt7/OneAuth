@@ -22,27 +22,6 @@
 	"cSpell.minWordLength": 2,
 	"checkpoints.locale": "en-US",
 	"codemetrics.basics.DiagnosticsEnabled": true,
-	"compile-hero.config": "",
-	"compile-hero.generate-minified-css": true,
-	"compile-hero.generate-minified-javascript": true,
-	"compile-hero.ignore": "",
-	"compile-hero.jade-output-directory": "",
-	"compile-hero.javascript-output-directory": "",
-	"compile-hero.language": {
-		"js": {
-			"type": ["javascript", "json", "jsonc"],
-			"filename": [".jshintrc", ".jsbeautifyrc"]
-		},
-		"css": ["css", "less", "scss"],
-		"html": ["htm", "html"]
-	},
-	"compile-hero.less-output-directory": "./",
-	"compile-hero.pug-output-directory": "",
-	"compile-hero.sass-output-directory": "",
-	"compile-hero.scss-output-directory": "",
-	"compile-hero.stylus-output-directory": "",
-	"compile-hero.typescript-output-directory": "",
-	"compile-hero.typescriptx-output-directory": "",
 	"css.fileExtensions": ["html", "css"],
 	"css.lint.compatibleVendorPrefixes": "warning",
 	"css.lint.duplicateProperties": "warning",
@@ -166,9 +145,6 @@
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"js/ts.implicitProjectConfig.checkJs": true,
 	"js/ts.implicitProjectConfig.experimentalDecorators": true,
-	"jshint.options": {
-		"esversion": 6
-	},
 	"multiclip.formatAfterPaste": true,
 	"todo-tree.filtering.includeHiddenFiles": true,
 	"todo-tree.general.tags": ["FIX", "IMPROVE", "ADD", "TEST", "REMOVE", "BOOKMARK", "ROP"],
@@ -195,5 +171,23 @@
 		"MD013": false,
 		"MD030": false
 	},
-	"prettier.requireConfig": true
+	"prettier.requireConfig": true,
+	"grammarly.overrides": [
+		{
+			"files": [
+				"**/README.md"
+			],
+			"config": {
+				"audience": "general",
+				"dialect": "american",
+				"domain": "academic",
+				"emotions": [
+					"neutral"
+				],
+				"goals": [
+					"inform"
+				]
+			}
+		}
+	]
 }

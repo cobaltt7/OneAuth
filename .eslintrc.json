@@ -67,7 +67,7 @@
 	],
 	"reportUnusedDisableDirectives": true,
 	"ignorePatterns": ["node_modules", ".upm", "src/routes/main/style.css"],
-	"plugins": ["@html-eslint", "node", "regexp", "optimize-regex", "compat"],
+	"plugins": ["html", "node", "regexp", "optimize-regex", "compat"],
 	"rules": {
 		"indent": [1, "tab"],
 		"no-tabs": [1, { "allowIndentationTabs": true }],
@@ -141,7 +141,23 @@
 		"curly": [1, "all"],
 		"no-mixed-operators": 0,
 		"no-confusing-arrow": [1, { "allowParens": false }],
-		"lines-around-comment": 0,
+		"lines-around-comment": [
+			1,
+			{
+				"beforeBlockComment": true,
+				"afterBlockComment": true,
+				"beforeLineComment": true,
+				"afterLineComment": false,
+				"allowBlockStart": true,
+				"allowBlockEnd": false,
+				"allowObjectStart": true,
+				"allowObjectEnd": false,
+				"allowArrayStart": true,
+				"allowArrayEnd": false,
+				"allowClassStart": true,
+				"allowClassEnd": false
+			}
+		],
 		"func-style": [
 			1,
 			"declaration",
@@ -199,17 +215,6 @@
 		"node/no-restricted-require": 2,
 		"node/no-unpublished-require": 0,
 		"node/prefer-promises/fs": 2,
-		"@html-eslint/require-meta-charset": 2,
-		"@html-eslint/require-button-type": 2,
-		"@html-eslint/require-meta-description": 2,
-		"@html-eslint/no-skip-heading-levels": 2,
-		"@html-eslint/require-frame-title": 2,
-		"@html-eslint/no-non-scalable-viewport": 2,
-		"@html-eslint/no-positive-tabindex": 2,
-		"@html-eslint/require-meta-viewport": 2,
-		"@html-eslint/no-abstract-roles": 2,
-		"@html-eslint/no-aria-hidden-body": 2,
-		"@html-eslint/id-naming-convention": 2,
 		"regexp/confusing-quantifier": 2,
 		"regexp/control-character-escape": 2,
 		"regexp/hexadecimal-escape": 2,
@@ -251,6 +256,7 @@
 		"regexp/prefer-unicode-codepoint-escapes": 2,
 		"regexp/sort-flags": 2,
 		"regexp/unicode-escape": 2,
-		"optimize-regex/optimize-regex": 1
+		"optimize-regex/optimize-regex": 1,
+		"no-nested-ternary": 0
 	}
 }

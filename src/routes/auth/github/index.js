@@ -38,9 +38,8 @@ module.exports = {
 					.then((result) => result.json())
 					.catch((err) => res.status(502).json(err));
 
-				// jshint camelcase:false
+				// eslint-disable-next-line camelcase
 				sendResponse(info.access_token, req.query.state, res);
-				// jshint camelcase:true
 			},
 		},
 	],

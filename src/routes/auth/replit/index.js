@@ -9,7 +9,7 @@ module.exports = {
 		{
 			backendPage: "replit",
 			get: (req, res, sendResponse) => {
-				const roles = req.get("X-Replit-User-Roles").split(",") || [],
+				const roles = req.get("X-Replit-User-Roles")?.split(",") || [],
 					userID = req.get("X-Replit-User-Id"),
 					username = req.get("X-Replit-User-Name");
 

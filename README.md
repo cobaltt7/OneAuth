@@ -1,12 +1,12 @@
-[![1Auth logo](https://auth.onedot.cf/logo.svg)](https://auth.onedot.cf/)
+# [![1Auth logo](https://auth.onedot.cf/logo.svg)](https://auth.onedot.cf/)
 
-# About 1Auth All-In-One Authentication
+## About 1Auth All-In-One Authentication
 
-## About
+### About
 
 1Auth is an all-in-one authentication client that we designed to work seamlessly with any website. It currently supports 5 clients with many more to come.
 
-## Supported Clients
+### Supported Clients
 
 -   Email
 -   GitHub
@@ -14,9 +14,9 @@
 -   Replit
 -   Scratch
 
-## For Developers
+### For Developers
 
-Implementing this in your own site is very easy. Simply direct your users to this URL:
+Implementing this on your site is very easy. Simply direct your users to this URL:
 
 ```http
 https://auth.onedot.cf/?url=<CALLBACK_URL>

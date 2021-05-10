@@ -15,7 +15,6 @@ const authButtons = Object.assign(document.createElement("ul"), {
 		id: "auth-list",
 	}),
 	authClients = [],
-
 	// This is the list on /about without links
 
 	authList = Object.assign(document.createElement("ul"), {
