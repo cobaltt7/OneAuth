@@ -47,7 +47,7 @@
 		"clean-css": "^5.1.2",
 		"compression": "^1.7.4",
 		"cookie-parser": "^1.4.5",
-		"dotenv": "^9.0.0",
+		"dotenv": "^9.0.2",
 		"express": "^4.17.1",
 		"globby": "^11.0.3",
 		"jsdom": "^16.5.3",
