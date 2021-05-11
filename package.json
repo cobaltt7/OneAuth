@@ -19,7 +19,7 @@
 	"author": "OneDot",
 	"main": "src/index.js",
 	"scripts": {
-		"lint": "npx prettier --write . ; npx eslint --fix . ; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md ; npx write-good --yes-eprime --parse _locales/en_US.json ; npx write-good  --yes-eprime --parse *.md ; npx write-good  --yes-eprime --parse .github/**/*.md ; npx write-good  --yes-eprime --parse .github/*.md ;",
+		"lint": "npx prettier --write .; npx eslint --fix .; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt; npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md;",
 		"start": "TAILWIND_MODE=watch npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings --harmony src/index.js",
 		"test": "npx nodemon --harmony --trace-warnings src/index.js"
 	},

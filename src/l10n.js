@@ -1,14 +1,15 @@
 "use strict";
 
-const accepts = require("accepts"),
+const
 	BASE_LANG = "en_US",
 	CACHE_CODES = {},
 	CACHE_FORMATTERS = {},
 	CACHE_MSGS = {},
-	fileSystem = require("fs"),
-	globby = require("globby"),
 	LANG_CODES = [],
 	MESSAGES = {},
+accepts = require("accepts"),
+	fileSystem = require("fs"),
+	globby = require("globby"),
 	{ MessageFormatter, pluralTypeHandler } = require("@ultraq/icu-message-formatter");
 
 (async function () {

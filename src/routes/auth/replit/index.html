@@ -56,12 +56,13 @@
 			"use strict";
 			(function () {
 				let authWindow, interval;
+
 				// Get the <span> element that closes the modal
-
 				const close = document.getElementById("closeModal"),
+				
 					html = document.documentElement,
-					// Get the modal
 
+					// Get the modal
 					modal = document.getElementById("modalContainer");
 
 				function authComplete(event) {

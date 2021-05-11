@@ -37,7 +37,7 @@ jobs:
 
             - name: Spellchecker CLI
               if: always()
-              run: npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md
+              run: npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt
 
             - name: write good
               if: always()
