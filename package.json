@@ -85,7 +85,7 @@
 		"postcss": "^8.2.15",
 		"postcss-advanced-variables": "^3.0.1",
 		"postcss-cli": "^8.3.1",
-		"postcss-import": "^14.0.1",
+		"postcss-import": "^14.0.2",
 		"postcss-map-get": "^0.3.0",
 		"postcss-nested": "^5.0.5",
 		"postcss-scss": "^3.0.5",
