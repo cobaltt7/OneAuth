@@ -1,3 +1,9 @@
 [main]
 host = https://www.transifex.com
 
+[1auth.en-json]
+file_filter = _locales/<lang>.json
+minimum_perc = 50
+source_file = _locales/en_US.json
+source_lang = en
+type = STRUCTURED_JSON
