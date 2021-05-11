@@ -30,13 +30,15 @@ jobs:
 
             - name: Configure Transifex
               if: always()
-              run: tx config mapping --resource=1Auth.en-json --source --language=en_US --type=STRUCTURED_JSON --minimum-perc=50 --source-language=en_US --source-file=_locales/en_US.json --execute --expression="_locales/<lang>.json"
+              run: tx config mapping --resource=1auth.mainStrings --source --language=en --type=STRUCTURED_JSON --minimum-perc=50 --source-language=en --source-file=_locales/en_US.json --execute --expression="_locales/<lang>.json"
 
             - name: Push
-              run: tx push -ts
+              if: always()
+              run: tx push --source --translations --no-interactive
 
             - name: Pull
-              run: tx pull --all
+              if: always()
+              run: tx pull --all --source --no-interactive
 
             - name: Commit
               if: always()
