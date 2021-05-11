@@ -22,19 +22,23 @@ jobs:
 
             - name: Install
               if: always()
-              run: |
-                  python -m pip install --upgrade pip
-                  pip install transifex-client
+              run: pip install transifex-client
 
             - name: Setup Transifex
               if: always()
-              run: tx init --token=${{ secrets.TRANSIFEX }} --force-save --no-interactive --skipsetup
+              run: tx init --host='https://www.transifex.com' --user=api --force-save --skipsetup --token=${{ secrets.TRANSIFEX }} --no-interactive
+
+            - name: Configure Transifex
+              if: always()
+              run: tx config mapping --resource=1auth.mainStrings --source --language=en --type=STRUCTURED_JSON --minimum-perc=50 --source-language=en --source-file=_locales/en_US.json --execute --expression="_locales/<lang>.json"
 
             - name: Push
-              run: tx push -ts
+              if: always()
+              run: tx push --source --translations --no-interactive
 
             - name: Pull
-              run: tx pull --all
+              if: always()
+              run: tx pull --all --source --no-interactive
 
             - name: Commit
               if: always()
