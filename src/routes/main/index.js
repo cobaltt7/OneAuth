@@ -115,7 +115,7 @@ router.get("/", (req, res) => {
 router.get("/about", (_, res) => {
 	res.render(`${__dirname}/about.html`, {
 		clients: authList.outerHTML,
-		hi: "hello"
+		hi: "hello",
 	});
 });
 console.log("Main pages ready");

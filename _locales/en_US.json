@@ -2,7 +2,7 @@
 	"hi": {
 		"string": "{0}, person"
 	},
-	"person":{
-		"string":"person"
+	"person": {
+		"string": "person"
 	}
 }
