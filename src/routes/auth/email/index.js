@@ -32,10 +32,14 @@ module.exports = {
 						(await database.get(`EMAIL_${req.body.code}`)) ?? {};
 					if (Date.now() - date > 900000) {
 						await database.delete(`EMAIL_${req.body.code}`);
-						return res.status(410).render(getURL("routes/errors/error.html"));
+						return res
+							.status(410)
+							.render(getURL("routes/errors/error.html"));
 					}
 					if (req.body.email !== email) {
-						return res.status(401).render(getURL("routes/errors/error.html"));
+						return res
+							.status(401)
+							.render(getURL("routes/errors/error.html"));
 					}
 					await database.delete(`EMAIL_${req.body.code}`);
 					return sendResponse(
@@ -83,7 +87,9 @@ module.exports = {
 						(error, info) => {
 							if (error) {
 								console.error(error);
-								return res.status(500).render(getURL("routes/errors/error.html"));
+								return res
+									.status(500)
+									.render(getURL("routes/errors/error.html"));
 							}
 							return res.status(200).json(info);
 						},

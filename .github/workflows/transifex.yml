@@ -26,11 +26,18 @@ jobs:
 
             - name: Setup Transifex
               if: always()
-              run: tx init --host='https://www.transifex.com' --user=api --force-save --skipsetup --token=${{ secrets.TRANSIFEX }} --no-interactive
+              run:
+                  tx init --host='https://www.transifex.com' --user=api
+                  --force-save --skipsetup --token=${{ secrets.TRANSIFEX }}
+                  --no-interactive
 
             - name: Configure Transifex
               if: always()
-              run: tx config mapping --resource=1auth.mainStrings --source --language=en --type=STRUCTURED_JSON --minimum-perc=50 --source-language=en --source-file=_locales/en_US.json --execute --expression="_locales/<lang>.json"
+              run:
+                  tx config mapping --resource=1auth.mainStrings --source
+                  --language=en --type=STRUCTURED_JSON --minimum-perc=50
+                  --source-language=en --source-file=_locales/en_US.json
+                  --execute --expression="_locales/<lang>.json"
 
             - name: Push
               if: always()
@@ -49,4 +56,5 @@ jobs:
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
-                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
+                  commit_author:
+                      wgytbot <83586655+wgytbot@users.noreply.github.com>

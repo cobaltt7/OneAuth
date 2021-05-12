@@ -5,12 +5,13 @@
 	(function () {
 		window.dataLayer = window.dataLayer || [];
 		window.dataLayer.push({
-			event: "gtm.js",
+			"event": "gtm.js",
 			"gtm.start": new Date().getTime(),
 		});
 		const newScript = document.createElement("script");
 		newScript.async = true;
-		newScript.src = "https://www.googletagmanager.com/gtm.js?id=GTM-5WN6THR";
+		newScript.src =
+			"https://www.googletagmanager.com/gtm.js?id=GTM-5WN6THR";
 		const firstScript = document.querySelector("script");
 		firstScript.parentNode.insertBefore(newScript, firstScript);
 	})();

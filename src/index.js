@@ -7,9 +7,16 @@ app.disable("view cache");
 console.log("Express ready");
 
 // Mustache
-app.engine("html", require("mustache-express")(`${__dirname}/routes/partials`, ".html"));
+app.engine(
+	"html",
+	require("mustache-express")(`${__dirname}/routes/partials`, ".html"),
+);
 app.set("views", __dirname);
 app.set("view engine", "html");
+
+// Docs
+app.use("/docs", require("./docs/index.js"));
+console.log("Docs ready");
 
 // Cookies
 app.use(require("cookie-parser")());

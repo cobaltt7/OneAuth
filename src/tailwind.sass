@@ -6,6 +6,9 @@
 /* Import Roboto per Google's guidlines */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
+/* Import PT Sans because it looks good */
+@import url(https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic);
+
 main {
 	@apply flex
 		flex-col
@@ -15,23 +18,33 @@ main {
 		shadow-xl
 		h-full
 		max-w-none;
-	
 
 	section h2 {
 		@apply mt-0;
 	}
 
 	h1 {
-		@apply m-2;
+		@apply m-0
+		px-0
+		pt-4
+		pr-2;
 	}
 
 	h1:only-of-type {
 		@apply text-3xl;
 	}
 
-	:first-child,h1:first-of-type,
+	:first-child,
+	h1:first-of-type,
 	p:only-of-type {
 		@apply self-center;
+	}
+	ul {
+		li {
+			p {
+				@apply m-0;
+			}
+		}
 	}
 }
 
@@ -42,6 +55,11 @@ h4,
 h5,
 h6 {
 	@apply font-medium;
+}
+
+code {
+	@apply block
+		p-2;
 }
 
 #auth-list {
@@ -186,8 +204,10 @@ iframe {
 		!important;
 
 	@apply border-0
+		font-sans
 		border-white
 		border-solid;
 
+	font-family: "PT Sans", "DejaVu Sans", Arial, sans;
 	scroll-behavior: smooth;
 }

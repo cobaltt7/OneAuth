@@ -11,12 +11,16 @@ let OUTPUT =
 
 data.forEach((result) => {
 	OUTPUT +=
-		`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores)
+		`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(
+			result.scores,
+		)
 			.map((num) => `${num < 50 ? "🔴" : num < 90 ? "🟡" : "🟢"} ${num}`)
 			.join(
 				" | ",
 			)} | [More information](https://developers.google.com/speed/pagespeed/insights/` +
-		`?url=${encodeURIComponent(result.url)}&tab=${result.emulatedFormFactor}) |\n`;
+		`?url=${encodeURIComponent(result.url)}&tab=${
+			result.emulatedFormFactor
+		}) |\n`;
 });
 
 octokit.issues.createComment({

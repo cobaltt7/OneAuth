@@ -7,15 +7,17 @@ const BASE_LANG = "en_US",
 	LANG_CODES = [],
 	MESSAGES = {},
 	accepts = require("accepts"),
-	fileSystem = require("fs"),
 	globby = require("globby"),
-	{ MessageFormatter, pluralTypeHandler } = require("@ultraq/icu-message-formatter");
+	{
+		MessageFormatter,
+		pluralTypeHandler,
+	} = require("@ultraq/icu-message-formatter");
 
 (async function () {
 	const codes = await globby("_locales/*.json");
 	codes.forEach((filename) => {
 		const [, code] = filename.split(".")[0].split("/"),
-			tempMsgs = JSON.parse(fileSystem.readFileSync(filename));
+			tempMsgs = require("../" + filename);
 		for (const item in tempMsgs) {
 			if ({}.hasOwnProperty.call(tempMsgs, item)) {
 				tempMsgs[item] = tempMsgs[item].string;
@@ -43,7 +45,6 @@ function compileLangs(langs, cache = false) {
 				.flatMap((language) => {
 					// Standardize character between language and country code
 					const standardLang = language.replaceAll("-", "_"),
-
 						// Add language without country code as fallback
 						[noCountryLang] = standardLang.split("_");
 					return [
@@ -51,7 +52,9 @@ function compileLangs(langs, cache = false) {
 						noCountryLang,
 
 						// Add other countries with the same languages' country codes as fallbacks
-						...LANG_CODES.filter((langCode) => langCode.indexOf(noCountryLang) === 0),
+						...LANG_CODES.filter(
+							(langCode) => langCode.indexOf(noCountryLang) === 0,
+						),
 					];
 				}),
 
@@ -139,7 +142,6 @@ module.exports = {
 				options.msgs = function () {
 					return function (val, render) {
 						const [msgCode, ...placeholders] = render(val)
-
 							// Split on `|||`
 							.split(/(?<!\\)\|{3}/)
 
@@ -147,7 +149,6 @@ module.exports = {
 							.map((param) => param.replace(/\\\|{3}/g, "|||"));
 
 						return getFormatter(langs[0])(
-
 							// Get message, fallback to the code provided
 							msgs[msgCode] ?? msgCode,
 

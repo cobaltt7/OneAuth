@@ -11,7 +11,6 @@ const authClients = [],
 
 (async () => {
 	const [base] = getURL("").split("src/"),
-
 		// Idk why this is relative to the root dir but it is
 		paths = await globby("src/routes/auth/*/index.js");
 
@@ -22,7 +21,9 @@ const authClients = [],
 
 const getClient = (requestedClient) =>
 		authClients.find((currentClient) =>
-			currentClient.pages.find(({ backendPage }) => backendPage === requestedClient),
+			currentClient.pages.find(
+				({ backendPage }) => backendPage === requestedClient,
+			),
 		),
 	getPageHandler = (requestedClient) => {
 		for (const currentClient of authClients) {
@@ -60,7 +61,32 @@ const getClient = (requestedClient) =>
 			return res.status(400).render(getURL("routes/errors/error.html"));
 		}
 	};
-for (const http of ["post", "get"]) {
+for (const http of [
+	"all",
+	"checkout",
+	"copy",
+	"delete",
+	"get",
+	"head",
+	"lock",
+	"merge",
+	"mkactivity",
+	"mkcol",
+	"move",
+	"m-search",
+	"notify",
+	"options",
+	"patch",
+	"post",
+	"purge",
+	"put",
+	"report",
+	"search",
+	"subscribe",
+	"trace",
+	"unlock",
+	"unsubscribe",
+]) {
 	router[http]("/auth/:client", (req, res) => {
 		const client = getPageHandler(req.params.client);
 		if (typeof client === "undefined" || client === null) {
@@ -69,7 +95,9 @@ for (const http of ["post", "get"]) {
 		if (typeof client.get !== "function") {
 			return res.status(405).render(getURL("routes/errors/405.html"));
 		}
-		return client[http](req, res, (...args) => sendResponse(req.params.client, ...args));
+		return client[http](req, res, (...args) =>
+			sendResponse(req.params.client, ...args),
+		);
 	});
 }
 
@@ -77,7 +105,10 @@ router.get("/backend/get_data", async (req, res) => {
 	// When data is being retrieved
 
 	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept",
+	);
 	res.status(200).json(await database.get(`RETRIEVE_${req.query.code}`));
 	await database.delete(`RETRIEVE_${req.query.code}`);
 });

@@ -147,7 +147,15 @@
 	"js/ts.implicitProjectConfig.experimentalDecorators": true,
 	"multiclip.formatAfterPaste": true,
 	"todo-tree.filtering.includeHiddenFiles": true,
-	"todo-tree.general.tags": ["FIX", "IMPROVE", "ADD", "TEST", "REMOVE", "BOOKMARK", "ROP"],
+	"todo-tree.general.tags": [
+		"FIX",
+		"IMPROVE",
+		"ADD",
+		"TEST",
+		"REMOVE",
+		"BOOKMARK",
+		"ROP"
+	],
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"typescript.format.insertSpaceAfterConstructor": true,
 	"typescript.format.insertSpaceAfterTypeAssertion": true,

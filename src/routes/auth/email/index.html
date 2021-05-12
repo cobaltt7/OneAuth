@@ -16,7 +16,9 @@
 		{{> nav}}
 		<main>
 			<h1>Sign in with Email</h1>
-			<label id="note" for="email-address">Enter your email to continue</label>
+			<label id="note" for="email-address"
+				>Enter your email to continue</label
+			>
 			<form action method="POST">
 				<input
 					id="email-address"
@@ -44,7 +46,7 @@
 					submit.append(
 						Object.assign(document.createElement("img"), {
 							src: "/svg/loading",
-						}),
+						})
 					);
 
 					// Save email for later
@@ -56,20 +58,24 @@
 					await fetch("", {
 						body: `email=${email}`,
 						headers: {
-							"content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+							"content-type":
+								"application/x-www-form-urlencoded; charset=UTF-8",
 						},
 						method: "POST",
 					});
 
 					// Create new form
 
-					const newForm = Object.assign(document.createElement("form"), {
-						// Create form element
+					const newForm = Object.assign(
+						document.createElement("form"),
+						{
+							// Create form element
 
-						action: "",
-						autocomplete: "off",
-						method: "POST",
-					});
+							action: "",
+							autocomplete: "off",
+							method: "POST",
+						}
+					);
 					newForm.append(
 						Object.assign(document.createElement("input"), {
 							// Code box
@@ -94,7 +100,7 @@
 							// eslint-disable-next-line id-length
 							id: "submit",
 							type: "submit",
-						}),
+						})
 					);
 					form.remove();
 					document.querySelector("#note").remove();
@@ -103,9 +109,10 @@
 							htmlFor: "code",
 							// eslint-disable-next-line id-length
 							id: "note",
-							innerText: "Enter the code we sent to you to continue",
+							innerText:
+								"Enter the code we sent to you to continue",
 						}),
-						newForm,
+						newForm
 					);
 				}
 				form.addEventListener("submit", eventListener);

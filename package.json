@@ -19,7 +19,7 @@
 	"author": "OneDot",
 	"main": "src/index.js",
 	"scripts": {
-		"lint": "npx prettier --write .; npx eslint --fix .; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt; npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md;",
+		"lint": "npx prettier --write . **.svg **.sass; npx eslint --fix .; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt; npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md;",
 		"start": "TAILWIND_MODE=watch npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings --harmony src/index.js",
 		"test": "npx nodemon --harmony --trace-warnings src/index.js"
 	},
@@ -31,13 +31,33 @@
 		"verbose": false
 	},
 	"prettier": {
-		"embeddedLanguageFormatting": "auto",
-		"jsxBracketSameLine": true,
-		"printWidth": 100,
+		"printWidth": 80,
+		"proseWrap": "always",
+		"quoteProps": "consistent",
 		"tabWidth": 4,
 		"trailingComma": "all",
 		"useTabs": true,
-		"vueIndentScriptAndStyle": true
+		"vueIndentScriptAndStyle": true,
+		"overrides": [
+			{
+				"files": [
+					"**.svg",
+					"**.html"
+				],
+				"options": {
+					"trailingComma": "es5",
+					"parser": "html"
+				}
+			},
+			{
+				"files": [
+					"**.sass"
+				],
+				"options": {
+					"parser": "scss"
+				}
+			}
+		]
 	},
 	"dependencies": {
 		"@replit/database": "^2.0.1",
@@ -49,13 +69,18 @@
 		"cookie-parser": "^1.4.5",
 		"dotenv": "^9.0.2",
 		"express": "^4.17.1",
+		"express-markdown-reloaded": "^0.2.4",
 		"globby": "^11.0.3",
+		"highlight.js": "^10.7.2",
 		"jsdom": "^16.5.3",
+		"marked": "^2.0.3",
 		"mustache": "^4.2.0",
 		"mustache-express": "^1.3.0",
 		"node-fetch": "^2.6.1",
 		"nodemailer": "^6.6.0",
-		"retronid": "^2.0.0"
+		"path": "^0.12.7",
+		"retronid": "^2.0.0",
+		"serve-index": "^1.9.1"
 	},
 	"devDependencies": {
 		"@actions/github": "^4.0.0",

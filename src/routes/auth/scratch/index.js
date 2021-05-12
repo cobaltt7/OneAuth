@@ -15,7 +15,11 @@ module.exports = {
 			backendPage: "scratch",
 			get: (req, res, sendResponse) => {
 				if (req.query.verified === "true") {
-					return sendResponse({ username: req.query.username }, req.query.url, res);
+					return sendResponse(
+						{ username: req.query.username },
+						req.query.url,
+						res,
+					);
 				}
 				return res.status(403);
 			},

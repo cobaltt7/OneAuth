@@ -40,4 +40,7 @@ jobs:
 
             - name: Comment
               if: always()
-              run: node --trace-warnings --harmony .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }} '${{ join(steps.lighthouse.outputs.*, '\n') }}'
+              run:
+                  node --trace-warnings --harmony
+                  .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }} '${{
+                  join(steps.lighthouse.outputs.*, '\n') }}'

@@ -15,7 +15,6 @@ const authButtons = Object.assign(document.createElement("ul"), {
 		id: "auth-list",
 	}),
 	authClients = [],
-
 	// This is the list on /about without links
 
 	authList = Object.assign(document.createElement("ul"), {
@@ -92,10 +91,14 @@ const authButtons = Object.assign(document.createElement("ul"), {
 // Logo
 
 router.get("/logo.svg", (_, res) => {
-	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg");
+	res.status(302).redirect(
+		"https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg",
+	);
 });
 router.get("/favicon.ico", (_, res) => {
-	res.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg");
+	res.status(302).redirect(
+		"https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg",
+	);
 });
 router.get("/svg/:img", (req, res) => {
 	res.sendFile(getURL(`routes/svg/${req.params.img}.svg`));
@@ -108,7 +111,10 @@ router.get("/", (req, res) => {
 		return res.status(303).redirect("https://auth.onedot.cf/about");
 	}
 	return res.render(`${__dirname}/index.html`, {
-		buttons: authButtons.outerHTML.replace(/{{url}}/g, encodeURIComponent(req.query.url)),
+		buttons: authButtons.outerHTML.replace(
+			/{{url}}/g,
+			encodeURIComponent(req.query.url),
+		),
 		url: encodeURIComponent(req.query.url),
 	});
 });
@@ -124,7 +130,9 @@ router.get("/googleb9551735479dd7b0.html", (_, res) => {
 	res.send("google-site-verification: googleb9551735479dd7b0.html");
 });
 router.get("/robots.txt", (_, res) => {
-	res.send("User-agent: *\nAllow: /\nCrawl-delay: 10\nHost: auth.onedot.cf\n");
+	res.send(
+		"User-agent: *\nAllow: /\nCrawl-delay: 10\nHost: auth.onedot.cf\n",
+	);
 });
 router.get("/.well-known/security.txt", (_, res) => {
 	res.status(303).send(process.env.GMAIL_EMAIL);

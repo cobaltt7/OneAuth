@@ -41,4 +41,5 @@ jobs:
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
-                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
+                  commit_author:
+                      wgytbot <83586655+wgytbot@users.noreply.github.com>
