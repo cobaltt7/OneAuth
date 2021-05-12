@@ -5,7 +5,7 @@
 	(function () {
 		window.dataLayer = window.dataLayer || [];
 		window.dataLayer.push({
-			"event": "gtm.js",
+			event: "gtm.js",
 			"gtm.start": new Date().getTime(),
 		});
 		const newScript = document.createElement("script");
@@ -17,3 +17,27 @@
 	})();
 </script>
 <!-- End Google Tag Manager -->
+<link rel="stylesheet" href="/style.css" />
+<script
+	src="https://kit.fontawesome.com/2a2d30d602.js"
+	defer
+	crossorigin="anonymous"
+></script>
+<script>
+	"use strict";
+
+	// eslint-disable-next-line no-unused-vars
+	function highlight() {
+		document.addEventListener("DOMContentLoaded", () =>
+			document
+				.querySelectorAll("pre.highlight")
+				// eslint-disable-next-line no-undef
+				.forEach(hljs.highlightElement),
+		);
+	}
+</script>
+<script
+	onload="highlight"
+	defer
+	src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.7.2/build/highlight.min.js"
+></script>

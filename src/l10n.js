@@ -17,7 +17,7 @@ const BASE_LANG = "en_US",
 	const codes = await globby("_locales/*.json");
 	codes.forEach((filename) => {
 		const [, code] = filename.split(".")[0].split("/"),
-			tempMsgs = require("../" + filename);
+			tempMsgs = require(`../${filename}`);
 		for (const item in tempMsgs) {
 			if ({}.hasOwnProperty.call(tempMsgs, item)) {
 				tempMsgs[item] = tempMsgs[item].string;
@@ -45,6 +45,7 @@ function compileLangs(langs, cache = false) {
 				.flatMap((language) => {
 					// Standardize character between language and country code
 					const standardLang = language.replaceAll("-", "_"),
+
 						// Add language without country code as fallback
 						[noCountryLang] = standardLang.split("_");
 					return [
@@ -98,6 +99,10 @@ function getFormatter(lang, cache = true) {
 	}).format);
 }
 
+function parsePlaceholders(placeholders){
+	
+}
+
 module.exports = {
 	compileLangs,
 	getFormatter,
@@ -142,13 +147,15 @@ module.exports = {
 				options.msgs = function () {
 					return function (val, render) {
 						const [msgCode, ...placeholders] = render(val)
+
 							// Split on `|||`
-							.split(/(?<!\\)\|{3}/)
+							.split(/(?<![^\\]{[^}]*)(?<!\\)\|{3}/)
 
 							// Handle escaping the `|||` (prefixing it with a `\`)
 							.map((param) => param.replace(/\\\|{3}/g, "|||"));
 
 						return getFormatter(langs[0])(
+
 							// Get message, fallback to the code provided
 							msgs[msgCode] ?? msgCode,
 

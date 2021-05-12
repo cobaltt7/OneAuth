@@ -9,6 +9,9 @@
 /* Import PT Sans because it looks good */
 @import url(https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic);
 
+/* For code syntax highlighting */
+@import url(https://highlightjs.org/static/demo/styles/github.css);
+
 main {
 	@apply flex
 		flex-col
@@ -39,6 +42,17 @@ main {
 	p:only-of-type {
 		@apply self-center;
 	}
+
+	pre {
+		@apply m-0
+		p-0
+		bg-transparent;
+
+		code {
+			@apply rounded-md;
+		}
+	}
+
 	ul {
 		li {
 			p {
@@ -57,9 +71,19 @@ h6 {
 	@apply font-medium;
 }
 
-code {
+pre {
 	@apply block
 		p-2;
+}
+
+.new::before {
+	content: "NEW!!";
+
+	@apply text-white
+		rounded-lg
+		p-1
+		bg-[#da17da]
+		mr-2;
 }
 
 #auth-list {
@@ -91,11 +115,10 @@ code {
 		p-[8px]
 		min-h-[30px]
 		min-w-[140px];
-
-	font-family: "Roboto";
-
 	@apply static
 		!important;
+
+	font-family: "Roboto";
 
 	&::before {
 		@apply hidden;
@@ -200,14 +223,14 @@ button {
 html,
 body,
 iframe {
-	@apply block
-		!important;
+	font-family: "PT Sans", "DejaVu Sans", Arial, sans;
+	scroll-behavior: smooth;
 
 	@apply border-0
 		font-sans
 		border-white
 		border-solid;
 
-	font-family: "PT Sans", "DejaVu Sans", Arial, sans;
-	scroll-behavior: smooth;
+	@apply block
+		!important;
 }

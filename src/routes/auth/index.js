@@ -11,6 +11,7 @@ const authClients = [],
 
 (async () => {
 	const [base] = getURL("").split("src/"),
+
 		// Idk why this is relative to the root dir but it is
 		paths = await globby("src/routes/auth/*/index.js");
 
@@ -62,7 +63,7 @@ const getClient = (requestedClient) =>
 		}
 	};
 for (const http of [
-	"all",
+	//	"all",
 	"checkout",
 	"copy",
 	"delete",
@@ -92,7 +93,7 @@ for (const http of [
 		if (typeof client === "undefined" || client === null) {
 			return res.status(404).render(getURL("routes/errors/404.html"));
 		}
-		if (typeof client.get !== "function") {
+		if (typeof client[http] !== "function") {
 			return res.status(405).render(getURL("routes/errors/405.html"));
 		}
 		return client[http](req, res, (...args) =>

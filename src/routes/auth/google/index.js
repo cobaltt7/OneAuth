@@ -21,22 +21,28 @@ module.exports = {
 				},
 				method: "POST",
 			}).then((res) => res.json()),
-			info = JSON.parse(atob(idToken.split(".")[1]));
-		info.filter((item) =>
-			[
-				"sub",
-				"email",
-				"email_verified",
-				"family_name",
-				"given_name",
-				"locale",
-				"name",
-				"picture",
-				"profile",
-				"error",
-			].includes(item),
-		);
-		return info;
+			info = JSON.parse(atob(idToken.split(".")[1])),
+			filteredInfo = {};
+		for (const item in info) {
+			if (
+				[
+					"sub",
+					"email",
+					"email_verified",
+					"family_name",
+					"given_name",
+					"locale",
+					"name",
+					"picture",
+					"profile",
+					"error",
+				].includes(item)
+			) {
+				filteredInfo[`${item}`] = info[item];
+			}
+		}
+
+		return filteredInfo;
 	},
 	icon: "google",
 	iconProvider: "svg",

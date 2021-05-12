@@ -20,7 +20,7 @@
 	"main": "src/index.js",
 	"scripts": {
 		"lint": "npx prettier --write . **.svg **.sass; npx eslint --fix .; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt; npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md;",
-		"start": "TAILWIND_MODE=watch npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings --harmony src/index.js",
+		"start": "TAILWIND_MODE=watch NODE_ENV=development npx postcss src/tailwind.sass -o src/routes/main/style.css & node --trace-warnings --harmony src/index.js",
 		"test": "npx nodemon --harmony --trace-warnings src/index.js"
 	},
 	"nodemonConfig": {
@@ -37,6 +37,7 @@
 		"tabWidth": 4,
 		"trailingComma": "all",
 		"useTabs": true,
+		"jsxBracketSameLine": true,
 		"vueIndentScriptAndStyle": true,
 		"overrides": [
 			{
@@ -56,6 +57,14 @@
 				"options": {
 					"parser": "scss"
 				}
+			},
+			{
+				"files": [
+					"**.md"
+				],
+				"options": {
+					"proseWrap": "never"
+				}
 			}
 		]
 	},
@@ -69,7 +78,6 @@
 		"cookie-parser": "^1.4.5",
 		"dotenv": "^9.0.2",
 		"express": "^4.17.1",
-		"express-markdown-reloaded": "^0.2.4",
 		"globby": "^11.0.3",
 		"highlight.js": "^10.7.2",
 		"jsdom": "^16.5.3",

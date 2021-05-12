@@ -231,7 +231,6 @@
 		"regexp/no-standalone-backslash": 2,
 		"regexp/no-trivially-nested-assertion": 2,
 		"regexp/no-trivially-nested-quantifier": 2,
-		"regexp/no-unused-capturing-group": 2,
 		"regexp/no-useless-assertions": 2,
 		"regexp/no-useless-character-class": 2,
 		"regexp/no-useless-dollar-replacements": 2,

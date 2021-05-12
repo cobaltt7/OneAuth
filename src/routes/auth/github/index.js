@@ -33,7 +33,7 @@ module.exports = {
 							`&state=${req.query.state}`,
 						headers: {
 							"Content-Type": "application/x-www-form-urlencoded",
-							"accept": "application/json",
+							accept: "application/json",
 						},
 						method: "POST",
 					},
