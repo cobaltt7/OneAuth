@@ -102,15 +102,17 @@ function getFormatter(lang, cache = true) {
 function parseMessage(inputInfo, langs, msgs) {
 	const [msgCode, ...placeholders] = inputInfo
 
-	.replace(/\s/g, " ")
-	.trim()
+		.replace(/\s/g, " ")
+		.trim()
 
 		// Split on `|||`
 		.split(/(?<![^\\]\[[^\]]*)(?<!\\)\|{3}/)
 
-		.map((param) => param.startsWith("[") && param.endsWith("]")
-			? parseMessage(param.slice(1, param.length - 1), langs, msgs)
-			: param)
+		.map((param) =>
+			param.startsWith("[") && param.endsWith("]")
+				? parseMessage(param.slice(1, param.length - 1), langs, msgs)
+				: param,
+		)
 
 		// Handle escaping the `|||` and `[` (prefixing them with a `\`)
 		.map((param) => param.replace(/\\\|{3}/g, "|||").replace(/\\\[/g, "["));

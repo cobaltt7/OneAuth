@@ -33,7 +33,9 @@
 					Implementing this in your own site is very easy. Simply
 					direct your users to this URL:
 				</p>
-				<pre class="highlight lang-http">https://auth.onedot.cf/?url=&lt;CALLBACK_URL&gt;</pre>
+				<pre class="highlight lang-http">
+https://auth.onedot.cf/?url=&lt;CALLBACK_URL&gt;</pre
+				>
 				<p>
 					After the user clicks on the link and finishes
 					authentication with us, we will redirect them to
@@ -41,7 +43,9 @@
 					parameter: <code>code</code>. To retrive the user&#39;s
 					information, send the following HTTP request:
 				</p>
-				<pre class="highlight lang-http">GET https://auth.onedot.cf/backend/get_data/?code=&lt;CODE&gt;</pre>
+				<pre class="highlight lang-http">
+GET https://auth.onedot.cf/backend/get_data/?code=&lt;CODE&gt;</pre
+				>
 				<p>
 					where <code>&lt;CODE&gt;</code> is the value of the new
 					search parameter.
