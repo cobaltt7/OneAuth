@@ -25,7 +25,7 @@ app.use(require("cookie-parser")());
 app.use(require("compression")());
 
 // Localization
-app.use(require("./l10n.js").setLangFromRequest);
+app.use(require("./l10n.js").middleware);
 
 // Post request bodies
 app.use(

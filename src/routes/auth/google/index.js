@@ -6,8 +6,9 @@ require("dotenv").config();
 
 module.exports = {
 	getData: async (token) => {
-		const {
-				// Eshint-disable-next-line camelcase
+		const filteredInfo = {},
+		{
+				// eslint-disable-next-line camelcase
 				id_token: idToken = ".eyJlcnJvciI6InRvbyBzbG93In0=.",
 			} = await fetch("https://oauth2.googleapis.com/token", {
 				body:
@@ -21,8 +22,7 @@ module.exports = {
 				},
 				method: "POST",
 			}).then((res) => res.json()),
-			info = JSON.parse(atob(idToken.split(".")[1])),
-			filteredInfo = {};
+			info = JSON.parse(atob(idToken.split(".")[1]));
 		for (const item in info) {
 			if (
 				[

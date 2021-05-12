@@ -23,21 +23,15 @@
 	defer
 	crossorigin="anonymous"
 ></script>
-<script>
-	"use strict";
-
-	// eslint-disable-next-line no-unused-vars
-	function highlight() {
-		document.addEventListener("DOMContentLoaded", () =>
-			document
-				.querySelectorAll("pre.highlight")
-				// eslint-disable-next-line no-undef
-				.forEach(hljs.highlightElement),
-		);
-	}
+<script type="module">
+	document.addEventListener("DOMContentLoaded", () =>
+		document
+			.querySelectorAll("pre.highlight")
+			// eslint-disable-next-line no-undef
+			.forEach(hljs.highlightElement),
+	);
 </script>
 <script
-	onload="highlight"
 	defer
 	src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.7.2/build/highlight.min.js"
 ></script>

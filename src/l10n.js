@@ -99,37 +99,59 @@ function getFormatter(lang, cache = true) {
 	}).format);
 }
 
-function parsePlaceholders(placeholders){
-	
+function parseMessage(inputInfo, langs, msgs) {
+	const [msgCode, ...placeholders] = inputInfo
+
+	.replace(/\s/g, " ")
+	.trim()
+
+		// Split on `|||`
+		.split(/(?<![^\\]\[[^\]]*)(?<!\\)\|{3}/)
+
+		.map((param) => param.startsWith("[") && param.endsWith("]")
+			? parseMessage(param.slice(1, param.length - 1), langs, msgs)
+			: param)
+
+		// Handle escaping the `|||` and `[` (prefixing them with a `\`)
+		.map((param) => param.replace(/\\\|{3}/g, "|||").replace(/\\\[/g, "["));
+
+	return getFormatter(langs[0])(
+
+		// Get message, fallback to the code provided
+		msgs[msgCode] ?? msgCode,
+
+		// Render it with placeholders
+		placeholders,
+	);
 }
 
 module.exports = {
 	compileLangs,
 	getFormatter,
 	getMsgs,
-	setLangFromRequest(req, res, next) {
+	middleware(req, res, next) {
 		let langs;
-		if (req.query.lang) {
+		if (req?.query?.lang) {
 			langs = compileLangs([
 				// `lang` query parameter overrides everything else
-				...(req.query.lang ?? "*").split("|"),
+				...(req?.query?.lang ?? "*").split("|"),
 
 				// Fallback to values in cookie
-				...(req.cookies.langs ?? "*").split("|"),
+				...(req?.cookies?.langs ?? "*").split("|"),
 
 				// Fallback to browser lang
-				...accepts(req).languages(),
+				...accepts(req)?.languages(),
 			]);
-		} else if (req.cookies.lang) {
+		} else if (req?.cookies?.langs) {
 			// The cookie doesn't need to go through `compileLangs` since it already did
-			langs = (req.cookies.langs ?? "*").split("|");
+			langs = (req?.cookies?.langs ?? "*").split("|");
 		} else {
 			// This is the default, the broswer langauge.
-			langs = compileLangs(accepts(req).languages(), true);
+			langs = compileLangs(accepts(req)?.languages(), true);
 		}
 		const expires = new Date();
 		expires.setFullYear(expires.getFullYear() + 1);
-		res.cookie("langs", langs.join("|"), {
+		res?.cookie("langs", langs.join("|"), {
 			expires,
 			maxAge: 31536000000,
 			sameSite: false,
@@ -146,22 +168,7 @@ module.exports = {
 			if (typeof options === "object") {
 				options.msgs = function () {
 					return function (val, render) {
-						const [msgCode, ...placeholders] = render(val)
-
-							// Split on `|||`
-							.split(/(?<![^\\]{[^}]*)(?<!\\)\|{3}/)
-
-							// Handle escaping the `|||` (prefixing it with a `\`)
-							.map((param) => param.replace(/\\\|{3}/g, "|||"));
-
-						return getFormatter(langs[0])(
-
-							// Get message, fallback to the code provided
-							msgs[msgCode] ?? msgCode,
-
-							// Render it with placeholders
-							placeholders,
-						);
+						return parseMessage(render(val), langs, msgs);
 					};
 				};
 			}

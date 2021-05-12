@@ -1,6 +1,6 @@
 {
 	"hi": {
-		"string": "{0}, persona"
+		"string": "hola, {0}"
 	},
 	"person": {
 		"string": "persona"

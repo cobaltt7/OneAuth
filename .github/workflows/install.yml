@@ -3,6 +3,9 @@ on:
     workflow_dispatch:
     push:
         branches: main
+        paths:
+            - package.json
+            - package-lock.json
     schedule:
         - cron: "0 0 */6 * * "
 
@@ -43,3 +46,9 @@ jobs:
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
                   commit_author:
                       wgytbot <83586655+wgytbot@users.noreply.github.com>
+
+            - name: Repository Dispatch
+              uses: peter-evans/repository-dispatch@v1
+              with:
+                  token: ${{ secrets.REPO_ACCESS_TOKEN }}
+                  event-type: lint

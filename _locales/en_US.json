@@ -1,8 +1,8 @@
 {
 	"hi": {
-		"string": "{0}, person"
+		"string": "hello, {0}"
 	},
 	"person": {
-		"string": "person"
+		"string": "perso"
 	}
 }
