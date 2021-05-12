@@ -2,7 +2,11 @@ name: Synchronize with Transifex
 on:
     workflow_dispatch:
     schedule:
-        - cron: "00 12 * * *"
+        - cron: "00 24 * * *"
+    push:
+        branches: main
+        paths:
+            - _locales/**.json
 
 jobs:
     sync:
