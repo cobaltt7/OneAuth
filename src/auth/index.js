@@ -11,6 +11,7 @@ const authClients = [],
 
 (async () => {
 	const [base] = getURL("").split("src/"),
+
 		// Idk why this is relative to the root dir but it is
 		paths = await globby("src/auth/*/index.js");
 
