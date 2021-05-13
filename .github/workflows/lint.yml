@@ -34,25 +34,25 @@ jobs:
 
             - name: Prettier
               if: always()
-              run: npx prettier --write . **.svg **sass;
+              run: npx prettier --write . **.svg **.sass
 
             - name: ESLint
               if: always()
-              run: npx eslint --fix .;
+              run: npx eslint --fix .
 
             - name: Spellchecker CLI
               if: always()
               run:
-                  npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md
-                  .github/*.md --dictionaries dictionary.txt;
+                  npx spellchecker-cli *.md .github/*.md .github/**/*.md
+                  _locales/en_US.json --dictionaries dictionary.txt
 
             - name: write good
               if: always()
               run:
-                  npx write-good --yes-eprime --parse _locales/en_US.json; npx
-                  write-good  --yes-eprime --parse *.md; npx
-                  write-good  --yes-eprime --parse .github/**/*.md; npx
-                  write-good  --yes-eprime --parse .github/*.md;
+                  npx write-good --yes-eprime --parse *.md;
+                  npx write-good --yes-eprime --parse .github/*.md;
+                  npx write-good --yes-eprime --parse .github/**/*.md;
+                  npx write-good --yes-eprime --parse _locales/en_US.json
 
             - name: Remove
               if: always()

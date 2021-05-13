@@ -142,7 +142,7 @@ module.exports = {
 				...(req?.cookies?.langs ?? "*").split("|"),
 
 				// Fallback to browser lang
-				...accepts(req)?.languages(),
+				...accepts(req).languages(),
 			]);
 		} else if (req?.cookies?.langs) {
 			// The cookie doesn't need to go through `compileLangs` since it already did

@@ -63,7 +63,7 @@ const getClient = (requestedClient) =>
 		}
 	};
 for (const http of [
-	//	"all",
+	// "all",
 	"checkout",
 	"copy",
 	"delete",

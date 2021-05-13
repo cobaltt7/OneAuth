@@ -6,7 +6,8 @@ const octokit = github.getOctokit(process.argv[2]),
 
 let OUTPUT =
 	"# This week's Lighthouse scores\n" +
-	"| URL | Device | Accessibility | Best Practices | Performace | Progressive Web App | SEO | PageSpeed Insights |\n" +
+	"| URL | Device | Accessibility | Best Practices | Performace " +
+	"| Progressive Web App | SEO | PageSpeed Insights |\n" +
 	"| - | - | - | - | - | - | - | - |\n";
 
 data.forEach((result) => {

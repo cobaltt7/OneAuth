@@ -49,14 +49,10 @@
 						}),
 					);
 
-					// Save email for later
-
-					const email = document.querySelector("input").value;
-
 					// Send the email
 
 					await fetch("", {
-						body: `email=${email}`,
+						body: new FormData(form),
 						headers: {
 							"content-type":
 								"application/x-www-form-urlencoded; charset=UTF-8",
@@ -93,10 +89,11 @@
 
 							name: "email",
 							type: "hidden",
-							value: email,
+							value: document.querySelector("input").value,
 						}),
 						Object.assign(document.createElement("input"), {
 							// Submit button
+
 							// eslint-disable-next-line id-length
 							id: "submit",
 							type: "submit",

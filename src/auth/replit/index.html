@@ -19,35 +19,15 @@
 		</main>
 		<div
 			id="modalContainer"
-			class="hidden fixed top-0 w-full h-full bg-white bg-opacity-50"
+			class="fixed top-0 hidden w-full h-full bg-white bg-opacity-50"
 		>
 			<div
 				id="modalContent"
-				class="
-					-translate-y-1/2
-					transform
-					border border-solid border-current
-					m-auto
-					p-5
-					relative
-					w-4/5
-					top-1/2
-					bg-gray-200
-				"
+				class="relative w-4/5 p-5 m-auto transform -translate-y-1/2 bg-gray-200 border border-current border-solid  top-1/2"
 			>
 				<button
 					id="closeModal"
-					class="
-						hover:text-gray-700
-						w-10
-						p-0
-						text-gray-600
-						float-right
-						text-3xl
-						font-bold
-						border-current
-						text-gray-400
-					"
+					class="float-right w-10 p-0 text-3xl font-bold text-gray-400 text-gray-600 border-current  hover:text-gray-700"
 				>
 					&times;
 				</button>
@@ -66,6 +46,7 @@
 				// Get the <span> element that closes the modal
 				const close = document.getElementById("closeModal"),
 					html = document.documentElement,
+					
 					// Get the modal
 					modal = document.getElementById("modalContainer");
 

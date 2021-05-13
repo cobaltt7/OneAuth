@@ -39,7 +39,7 @@ jobs:
               if: always()
               uses: stefanzweifel/git-auto-commit-action@master
               with:
-                  commit_message: "Install dependencies"
+                  commit_message: "Install dependencies to prevent deduplication"
                   branch: main
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
