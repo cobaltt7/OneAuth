@@ -15,7 +15,11 @@ const authClients = [],
 
 	paths.forEach((filepath) => {
 		authClients.push(
-			require(path.resolve(__dirname.split("/src/")[0], filepath)),
+			require(path.resolve(
+				__dirname,
+				__dirname.split("/src/")[0],
+				filepath,
+			)),
 		);
 	});
 })();
@@ -50,14 +54,16 @@ const getClient = (requestedClient) =>
 		}
 		try {
 			const { host } = new URL(url);
-			return res.status(300).render(path.resolve("allow.html"), {
-				client,
-				data: JSON.stringify(data),
-				encodedUrl: encodeURIComponent(url),
-				host,
-				token,
-				url,
-			});
+			return res
+				.status(300)
+				.render(path.resolve(__dirname, "allow.html"), {
+					client,
+					data: JSON.stringify(data),
+					encodedUrl: encodeURIComponent(url),
+					host,
+					token,
+					url,
+				});
 		} catch {
 			return res.status(400);
 		}

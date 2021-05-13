@@ -26,7 +26,7 @@ module.exports = {
 						res,
 					);
 				}
-				return res.render(path.resolve("index.html"));
+				return res.render(path.resolve(__dirname, "index.html"));
 			},
 		},
 	],

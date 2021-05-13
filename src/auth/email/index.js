@@ -24,7 +24,7 @@ module.exports = {
 		{
 			backendPage: "email",
 			get: (_, res) => {
-				res.render(path.resolve("index.html"));
+				res.render(path.resolve(__dirname, "index.html"));
 			},
 			post: async (req, res, sendResponse) => {
 				if (req.body.code && req.body.email) {
@@ -60,7 +60,7 @@ module.exports = {
 							from: process.env.GMAIL_EMAIL,
 							html: mustache.render(
 								fileSystem.readFileSync(
-									path.resolve("email.html"),
+									path.resolve(__dirname, "email.html"),
 									"utf8",
 								),
 								{
@@ -70,7 +70,7 @@ module.exports = {
 							subject: "1Auth Email Verification",
 							text: mustache.render(
 								fileSystem.readFileSync(
-									path.resolve("email.txt"),
+									path.resolve(__dirname, "email.txt"),
 									"utf8",
 								),
 								{

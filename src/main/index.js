@@ -15,7 +15,6 @@ const authButtons = Object.assign(document.createElement("ul"), {
 		id: "auth-list",
 	}),
 	authClients = [],
-
 	// This is the list on /about without links
 	authList = Object.assign(document.createElement("ul"), {
 		// eslint-disable-next-line id-length
@@ -28,7 +27,11 @@ const authButtons = Object.assign(document.createElement("ul"), {
 
 	paths.forEach((filepath) => {
 		authClients.push(
-			require(path.resolve(__dirname.split("/src/")[0], filepath)),
+			require(path.resolve(
+				__dirname,
+				__dirname.split("/src/")[0],
+				filepath,
+			)),
 		);
 	});
 
@@ -101,7 +104,7 @@ router.get("/favicon.ico", (_, res) => {
 	);
 });
 router.get("/svg/:img", (req, res) => {
-	res.sendFile(path.resolve(`../svg/${req.params.img}.svg`));
+	res.sendFile(path.resolve(__dirname, `../svg/${req.params.img}.svg`));
 });
 
 console.log("Logos ready");
@@ -110,7 +113,7 @@ router.get("/", (req, res) => {
 	if (!req.query.url) {
 		return res.status(303).redirect("https://auth.onedot.cf/about");
 	}
-	return res.render(path.resolve("index.html"), {
+	return res.render(path.resolve(__dirname, "index.html"), {
 		buttons: authButtons.outerHTML.replace(
 			/{{url}}/g,
 			encodeURIComponent(req.query.url),
@@ -119,7 +122,7 @@ router.get("/", (req, res) => {
 	});
 });
 router.get("/about", (_, res) => {
-	res.render(path.resolve("about.html"), {
+	res.render(path.resolve(__dirname, "about.html"), {
 		clients: authList.outerHTML,
 	});
 });
@@ -147,7 +150,10 @@ const CleanCSS = require("clean-css"),
 	fileSystem = require("fs"),
 	minify = new CleanCSS();
 router.get("/style.css", (_, res) => {
-	const text = fileSystem.readFileSync(path.resolve("styl.css"), "utf-8");
+	const text = fileSystem.readFileSync(
+		path.resolve(__dirname, "styl.css"),
+		"utf-8",
+	);
 	res.setHeader("content-type", "text/css");
 	res.send(minify.minify(text).styles);
 });
