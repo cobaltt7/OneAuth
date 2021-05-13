@@ -1,5 +1,7 @@
 "use strict";
 
+const path = require("path");
+
 module.exports = {
 	icon: "https://repl.it/public/images/logo.svg",
 	iconProvider: "url",
@@ -24,7 +26,7 @@ module.exports = {
 						res,
 					);
 				}
-				return res.render(`${__dirname}/index.html`);
+				return res.render(path.resolve("index.html"));
 			},
 		},
 	],

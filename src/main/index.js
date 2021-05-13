@@ -1,8 +1,8 @@
 "use strict";
 
 const { document } = new (require("jsdom").JSDOM)("").window,
-	getURL = require("../getUrl.js"),
 	globby = require("globby"),
+	 path = require("path"),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router();
 
@@ -24,12 +24,10 @@ const authButtons = Object.assign(document.createElement("ul"), {
 
 (async () => {
 	// Idk why this is relative to the root dir but it is
+	const paths = await globby("src/auth/*/index.js");
 
-	const [base] = getURL("").split("src/"),
-		paths = await globby("src/auth/*/index.js");
-
-	paths.forEach((path) => {
-		authClients.push(require(`${base}${path}`));
+	paths.forEach((filepath) => {
+		authClients.push(require(path.resolve(__dirname.split("/src/")[0],filepath)));
 	});
 
 	authClients.forEach((client) => {
@@ -101,7 +99,7 @@ router.get("/favicon.ico", (_, res) => {
 	);
 });
 router.get("/svg/:img", (req, res) => {
-	res.sendFile(getURL(`svg/${req.params.img}.svg`));
+	res.sendFile(path.resolve(`../svg/${req.params.img}.svg`));
 });
 
 console.log("Logos ready");
@@ -110,7 +108,7 @@ router.get("/", (req, res) => {
 	if (!req.query.url) {
 		return res.status(303).redirect("https://auth.onedot.cf/about");
 	}
-	return res.render(`${__dirname}/index.html`, {
+	return res.render(path.resolve("index.html"), {
 		buttons: authButtons.outerHTML.replace(
 			/{{url}}/g,
 			encodeURIComponent(req.query.url),
@@ -119,7 +117,7 @@ router.get("/", (req, res) => {
 	});
 });
 router.get("/about", (_, res) => {
-	res.render(`${__dirname}/about.html`, {
+	res.render(path.resolve("about.html"), {
 		clients: authList.outerHTML,
 	});
 });
@@ -147,7 +145,7 @@ const CleanCSS = require("clean-css"),
 	fileSystem = require("fs"),
 	minify = new CleanCSS();
 router.get("/style.css", (_, res) => {
-	const text = fileSystem.readFileSync(`${__dirname}/style.css`, "utf-8");
+	const text = fileSystem.readFileSync(path.resolve("styl.css"), "utf-8");
 	res.setHeader("content-type", "text/css");
 	res.send(minify.minify(text).styles);
 });

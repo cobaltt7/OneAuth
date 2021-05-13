@@ -1,7 +1,9 @@
 "use strict";
 
-// SET UP EXPRESS
-const express = require("express");
+const path = require("path"),
+
+	// SET UP EXPRESS
+	express = require("express");
 const app = express();
 app.disable("view cache");
 console.log("Express ready");
@@ -9,7 +11,7 @@ console.log("Express ready");
 // Mustache
 app.engine(
 	"html",
-	require("mustache-express")(`${__dirname}/partials`, ".html"),
+	require("mustache-express")(path.resolve("partials"), ".html"),
 );
 app.set("views", __dirname);
 app.set("view engine", "html");
@@ -50,7 +52,7 @@ app.use((req, res, next) => {
 		req.get("User-Agent").indexOf("Netscape") >= 0 ||
 		req.get("User-Agent").indexOf("Navigator") >= 0
 	) {
-		return res.status(400).render(`${__dirname}/errors/old.html`);
+		return res.status(400).render(path.resolve("errors/old.html"));
 	}
 	return next();
 });

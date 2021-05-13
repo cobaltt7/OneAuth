@@ -1,12 +1,14 @@
 "use strict";
 
+const path = require("path");
+
 // eslint-disable-next-line new-cap
 const router = require("express").Router();
 router.get("/error", (_, res) => {
-	res.status(500).render(`${__dirname}/error.html`);
+	res.status(500).render(path.resolve("error.html"));
 });
 router.get("/old", (_, res) => {
-	res.status(400).render(`${__dirname}/old.html`);
+	res.status(400).render(path.resolve("old.html"));
 });
 router.use((_, res) => {
 	res.on("finish", () => {

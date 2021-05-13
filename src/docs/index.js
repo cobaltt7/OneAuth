@@ -30,13 +30,13 @@ router.get(/^[^.]+\.md$/m, (req, res) => {
 });
 
 router.use((req, res, next) => {
-	const filename = path.resolve(__dirname, `${req.url.slice(1)}.md`);
+	const filename = path.resolve(`${req.url.slice(1)}.md`);
 	if (fileSystem.existsSync(filename)) {
 		const markdown = fileSystem.readFileSync(filename, "utf8");
-		return res.render(path.resolve(__dirname, "markdown.html"), {
+		return res.render(path.resolve("markdown.html"), {
 			content: marked(markdown).replace(
-				/<pre><code>/g,
-				'<pre class="hljs"><code>',
+				/<pre>/g,
+				'<pre class="hljs">',
 			),
 			title: /^#\s(?<heading>.+)$/m.exec(markdown).groups.heading,
 		});

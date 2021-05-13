@@ -4,7 +4,6 @@ require("dotenv").config();
 
 const database = new (require("@replit/database"))(),
 	fileSystem = require("fs"),
-	getURL = require("../../getUrl.js"),
 	mail = require("nodemailer").createTransport({
 		auth: {
 			pass: process.env.GMAIL_PASS,
@@ -13,6 +12,7 @@ const database = new (require("@replit/database"))(),
 		service: "gmail",
 	}),
 	mustache = require("mustache"),
+	path = require("path"),
 	retronid = require("retronid").generate;
 
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
 		{
 			backendPage: "email",
 			get: (_, res) => {
-				res.render(`${__dirname}/index.html`);
+				res.render(path.resolve("index.html"));
 			},
 			post: async (req, res, sendResponse) => {
 				if (req.body.code && req.body.email) {
@@ -33,13 +33,11 @@ module.exports = {
 					if (Date.now() - date > 900000) {
 						await database.delete(`EMAIL_${req.body.code}`);
 						return res
-							.status(410)
-							.render(getURL("errors/error.html"));
+							.status(410);
 					}
 					if (req.body.email !== email) {
 						return res
-							.status(401)
-							.render(getURL("errors/error.html"));
+							.status(401);
 					}
 					await database.delete(`EMAIL_${req.body.code}`);
 					return sendResponse(
@@ -64,7 +62,7 @@ module.exports = {
 							from: process.env.GMAIL_EMAIL,
 							html: mustache.render(
 								fileSystem.readFileSync(
-									getURL("auth/email/email.html"),
+									path.resolve("email.html"),
 									"utf8",
 								),
 								{
@@ -74,7 +72,7 @@ module.exports = {
 							subject: "1Auth Email Verification",
 							text: mustache.render(
 								fileSystem.readFileSync(
-									getURL("auth/email/email.txt"),
+									path.resolve("email.txt"),
 									"utf8",
 								),
 								{
@@ -88,8 +86,7 @@ module.exports = {
 							if (error) {
 								console.error(error);
 								return res
-									.status(500)
-									.render(getURL("errors/error.html"));
+									.status(500);
 							}
 							return res.status(200).json(info);
 						},

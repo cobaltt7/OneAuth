@@ -2,21 +2,19 @@
 
 const authClients = [],
 	database = new (require("@replit/database"))(),
-	getURL = require("../getUrl.js"),
 	globby = require("globby"),
+	path = require("path"),
 	retronid = require("retronid"),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router(),
 	{ URL } = require("url");
 
 (async () => {
-	const [base] = getURL("").split("src/"),
+	// Idk why this is relative to the root dir but it is
+	const paths = await globby("src/auth/*/index.js");
 
-		// Idk why this is relative to the root dir but it is
-		paths = await globby("src/auth/*/index.js");
-
-	paths.forEach((path) => {
-		authClients.push(require(`${base}${path}`));
+	paths.forEach((filepath) => {
+		authClients.push(require(path.resolve(__dirname.split("/src/")[0],filepath)));
 	});
 })();
 
@@ -50,7 +48,7 @@ const getClient = (requestedClient) =>
 		}
 		try {
 			const { host } = new URL(url);
-			return res.status(300).render(`${__dirname}/allow.html`, {
+			return res.status(300).render(path.resolve("allow.html"), {
 				client,
 				data: JSON.stringify(data),
 				encodedUrl: encodeURIComponent(url),
@@ -59,7 +57,7 @@ const getClient = (requestedClient) =>
 				url,
 			});
 		} catch {
-			return res.status(400).render(getURL("errors/error.html"));
+			return res.status(400);
 		}
 	};
 for (const http of [
@@ -91,10 +89,10 @@ for (const http of [
 	router[http]("/auth/:client", (req, res) => {
 		const client = getPageHandler(req.params.client);
 		if (typeof client === "undefined" || client === null) {
-			return res.status(404).render(getURL("errors/404.html"));
+			return res.status(404);
 		}
 		if (typeof client[http] !== "function") {
-			return res.status(405).render(getURL("errors/405.html"));
+			return res.status(405);
 		}
 		return client[http](req, res, (...args) =>
 			sendResponse(req.params.client, ...args),
