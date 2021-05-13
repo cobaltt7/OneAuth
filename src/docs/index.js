@@ -34,10 +34,7 @@ router.use((req, res, next) => {
 	if (fileSystem.existsSync(filename)) {
 		const markdown = fileSystem.readFileSync(filename, "utf8");
 		return res.render(path.resolve("markdown.html"), {
-			content: marked(markdown).replace(
-				/<pre>/g,
-				'<pre class="hljs">',
-			),
+			content: marked(markdown).replace(/<pre>/g, '<pre class="hljs">'),
 			title: /^#\s(?<heading>.+)$/m.exec(markdown).groups.heading,
 		});
 	}

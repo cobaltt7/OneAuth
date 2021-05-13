@@ -13,6 +13,9 @@ jobs:
             - name: Checkout
               if: always()
               uses: actions/checkout@main
+              with:
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.WGYTBOT }}
 
             - name: Run
               if: always()
@@ -43,5 +46,5 @@ jobs:
               if: always()
               run:
                   node --trace-warnings --harmony
-                  .github/workflows/lighthouse.js ${{ secrets.WGYTBOT }} '${{
+                  .github/workflows/lighthouse.js '${{ secrets.WGYTBOT }}' '${{
                   join(steps.lighthouse.outputs.*, '\n') }}'

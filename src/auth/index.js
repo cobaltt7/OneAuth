@@ -14,7 +14,9 @@ const authClients = [],
 	const paths = await globby("src/auth/*/index.js");
 
 	paths.forEach((filepath) => {
-		authClients.push(require(path.resolve(__dirname.split("/src/")[0],filepath)));
+		authClients.push(
+			require(path.resolve(__dirname.split("/src/")[0], filepath)),
+		);
 	});
 })();
 

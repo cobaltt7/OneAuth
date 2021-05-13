@@ -2,7 +2,7 @@
 
 const { document } = new (require("jsdom").JSDOM)("").window,
 	globby = require("globby"),
-	 path = require("path"),
+	path = require("path"),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router();
 
@@ -15,7 +15,6 @@ const authButtons = Object.assign(document.createElement("ul"), {
 		id: "auth-list",
 	}),
 	authClients = [],
-
 	// This is the list on /about without links
 	authList = Object.assign(document.createElement("ul"), {
 		// eslint-disable-next-line id-length
@@ -27,7 +26,9 @@ const authButtons = Object.assign(document.createElement("ul"), {
 	const paths = await globby("src/auth/*/index.js");
 
 	paths.forEach((filepath) => {
-		authClients.push(require(path.resolve(__dirname.split("/src/")[0],filepath)));
+		authClients.push(
+			require(path.resolve(__dirname.split("/src/")[0], filepath)),
+		);
 	});
 
 	authClients.forEach((client) => {
