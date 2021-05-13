@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const database = new (require("@replit/database"))(),
 	fileSystem = require("fs"),
-	getURL = require("../../../getUrl.js"),
+	getURL = require("../../getUrl.js"),
 	mail = require("nodemailer").createTransport({
 		auth: {
 			pass: process.env.GMAIL_PASS,
@@ -34,12 +34,12 @@ module.exports = {
 						await database.delete(`EMAIL_${req.body.code}`);
 						return res
 							.status(410)
-							.render(getURL("routes/errors/error.html"));
+							.render(getURL("errors/error.html"));
 					}
 					if (req.body.email !== email) {
 						return res
 							.status(401)
-							.render(getURL("routes/errors/error.html"));
+							.render(getURL("errors/error.html"));
 					}
 					await database.delete(`EMAIL_${req.body.code}`);
 					return sendResponse(
@@ -64,7 +64,7 @@ module.exports = {
 							from: process.env.GMAIL_EMAIL,
 							html: mustache.render(
 								fileSystem.readFileSync(
-									getURL("routes/auth/email/email.html"),
+									getURL("auth/email/email.html"),
 									"utf8",
 								),
 								{
@@ -74,7 +74,7 @@ module.exports = {
 							subject: "1Auth Email Verification",
 							text: mustache.render(
 								fileSystem.readFileSync(
-									getURL("routes/auth/email/email.txt"),
+									getURL("auth/email/email.txt"),
 									"utf8",
 								),
 								{
@@ -89,7 +89,7 @@ module.exports = {
 								console.error(error);
 								return res
 									.status(500)
-									.render(getURL("routes/errors/error.html"));
+									.render(getURL("errors/error.html"));
 							}
 							return res.status(200).json(info);
 						},

@@ -1,6 +1,6 @@
 # Adding an authenitcation client
 
-Make a folder in the `routes/auth` directory with the name of the client.
+Make a folder in the `auth` directory with the name of the client.
 
 Add a file in that folder called `index.js`.
 
@@ -11,7 +11,7 @@ Add a file in that folder called `index.js`.
 -   **`icon`**: Icon of the client. Should be one of
     -   a URL (absolute or relative)
     -   the name of a [free FontAwesome icon](https://fontawesome.com/icons?m=free) (without the `fa-` prefix)
-    -   the name of an SVG file in the `routes/svg` directory (without the `.svg` extention)
+    -   the name of an SVG file in the `svg` directory (without the `.svg` extention)
 -   **`iconProvider`**: Determines which of the above `icon` is. Should be one of
     -   `url` if `icon` is a URL
     -   `fa` if `icon` is the name of a FontAwesome icon
@@ -59,4 +59,4 @@ Add a file in that folder called `index.js`.
     1. **`token`**: Token that came from `pages[].METHOD.sendResponse` in the `tokenOrData` parameter.
 -   **`rawData`**: Determines if instead of passing a token to `pages[].METHOD.sendResponse` in the `tokenOrData` parameter, you will send the users' data directly. _**Only use this if all the data you are sending can be viewed at the client's website by anyone, at anytime!**_
 
-See the [typedef](#src/routes/auth/typedef.js) for more information about types, what is required, and etcetera.
+See the [typedef](#src/auth/typedef.js) for more information about types, what is required, and etcetera.

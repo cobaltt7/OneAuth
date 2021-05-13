@@ -1,6 +1,6 @@
 .DS_STORE
 # this is generated file
-src/routes/main/style.css
+src/main/style.css
 
 # Logs
 .bashrc

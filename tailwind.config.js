@@ -7,11 +7,7 @@ module.exports = {
 		require("@tailwindcss/forms"),
 		require("@tailwindcss/typography"),
 	],
-	purge: [
-		"./src/routes/**/**.html",
-		"./src/routes/**/**/**.html",
-		"./src/tailwind.sass",
-	],
+	purge: ["./src/**/**.html", "./src/**/**/**.html", "./src/tailwind.sass"],
 	theme: {
 		extend: {
 			colors: {

@@ -1,7 +1,7 @@
 "use strict";
 
 const { document } = new (require("jsdom").JSDOM)("").window,
-	getURL = require("../../getUrl.js"),
+	getURL = require("../getUrl.js"),
 	globby = require("globby"),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router();
@@ -17,7 +17,6 @@ const authButtons = Object.assign(document.createElement("ul"), {
 	authClients = [],
 
 	// This is the list on /about without links
-
 	authList = Object.assign(document.createElement("ul"), {
 		// eslint-disable-next-line id-length
 		id: "auth-list",
@@ -27,7 +26,7 @@ const authButtons = Object.assign(document.createElement("ul"), {
 	// Idk why this is relative to the root dir but it is
 
 	const [base] = getURL("").split("src/"),
-		paths = await globby("src/routes/auth/*/index.js");
+		paths = await globby("src/auth/*/index.js");
 
 	paths.forEach((path) => {
 		authClients.push(require(`${base}${path}`));
@@ -102,7 +101,7 @@ router.get("/favicon.ico", (_, res) => {
 	);
 });
 router.get("/svg/:img", (req, res) => {
-	res.sendFile(getURL(`routes/svg/${req.params.img}.svg`));
+	res.sendFile(getURL(`svg/${req.params.img}.svg`));
 });
 
 console.log("Logos ready");

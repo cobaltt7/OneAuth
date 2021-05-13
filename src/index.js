@@ -9,7 +9,7 @@ console.log("Express ready");
 // Mustache
 app.engine(
 	"html",
-	require("mustache-express")(`${__dirname}/routes/partials`, ".html"),
+	require("mustache-express")(`${__dirname}/partials`, ".html"),
 );
 app.set("views", __dirname);
 app.set("view engine", "html");
@@ -50,21 +50,21 @@ app.use((req, res, next) => {
 		req.get("User-Agent").indexOf("Netscape") >= 0 ||
 		req.get("User-Agent").indexOf("Navigator") >= 0
 	) {
-		return res.status(400).render(`${__dirname}/routes/errors/old.html`);
+		return res.status(400).render(`${__dirname}/errors/old.html`);
 	}
 	return next();
 });
 
 // Main pages
-app.use(require("./routes/main/index.js"));
+app.use(require("./main/index.js"));
 console.log("Main pages ready");
 
 // Auth pages
-app.use(require("./routes/auth/index.js"));
+app.use(require("./auth/index.js"));
 console.log("Auth pages ready");
 
 // Errors
-app.use(require("./routes/errors/index.js"));
+app.use(require("./errors/index.js"));
 console.log("Error pages ready");
 
 // LISTEN
