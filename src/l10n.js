@@ -45,6 +45,7 @@ function compileLangs(langs, cache = false) {
 				.flatMap((language) => {
 					// Standardize character between language and country code
 					const standardLang = language.replaceAll("-", "_"),
+
 						// Add language without country code as fallback
 						[noCountryLang] = standardLang.split("_");
 					return [
@@ -117,6 +118,7 @@ function parseMessage(inputInfo, langs, msgs) {
 		.map((param) => param.replace(/\\\|{3}/g, "|||").replace(/\\\[/g, "["));
 
 	return getFormatter(langs[0])(
+
 		// Get message, fallback to the code provided
 		msgs[msgCode] ?? msgCode,
 
