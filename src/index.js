@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path"),
+
 	// SET UP EXPRESS
 	express = require("express");
 const app = express();
