@@ -140,7 +140,7 @@
 		],
 		"curly": [1, "all"],
 		"no-mixed-operators": 0,
-		"no-confusing-arrow": [1, { "allowParens": false }],
+		"no-confusing-arrow": [1, { "allowParens": true }],
 		"lines-around-comment": [
 			1,
 			{

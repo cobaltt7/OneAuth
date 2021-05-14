@@ -1,12 +1,10 @@
 "use strict";
 
-const path = require("path"),
-
-	// SET UP EXPRESS
-	express = require("express");
+const express = require("express"),
+	path = require("path");
+// SET UP EXPRESS
 const app = express();
-app.disable("view cache");
-console.log("Express ready");
+app.enable("view cache");
 
 // Mustache
 app.engine(
@@ -16,34 +14,22 @@ app.engine(
 app.set("views", __dirname);
 app.set("view engine", "html");
 
-// Docs
-app.use("/docs", require("./docs/index.js"));
-console.log("Docs ready");
-
-// Cookies
-app.use(require("cookie-parser")());
-
 // Compress
 app.use(require("compression")());
 
-// Localization
-app.use(require("./l10n.js").middleware);
-
-// Post request bodies
-app.use(
-	express.urlencoded({
-		extended: true,
-	}),
-);
-app.use(
-	express.urlencoded({
-		extended: false,
-	}),
-);
+// Cache
+app.use((req, res, next) => {
+	if (req.path.includes(".css")) {
+		res.setHeader("Cache-Control", "public, max-age=86400");
+	} else if (req.path.includes(".")) {
+		res.setHeader("Cache-Control", "public, max-age=31536000");
+	}
+	next();
+});
 
 // Old browsers
 app.use((req, res, next) => {
-	if (req.url.indexOf(".css") >= 0 || req.url.indexOf(".js") >= 0) {
+	if (req.path.includes(".")) {
 		return next();
 	}
 	if (
@@ -59,17 +45,43 @@ app.use((req, res, next) => {
 	return next();
 });
 
+// Cookies
+app.use((req, res, next) => {
+	if (req.path.includes(".")) {
+		return next();
+	}
+	return require("cookie-parser")()(req, res, next);
+});
+
+// Post request bodies
+app.use((req, res, next) => {
+	if (req.path.includes(".")) {
+		return next();
+	}
+	return express.urlencoded({
+		extended: false,
+	})(req, res, next);
+});
+
+// Localization
+app.use((req, res, next) => {
+	if (req.path.includes(".")) {
+		return next();
+	}
+	return require("./l10n.js").middleware(req, res, next);
+});
+
+// Docs
+app.use("/docs", require("./docs/index.js"));
+
 // Main pages
 app.use(require("./main/index.js"));
-console.log("Main pages ready");
 
 // Auth pages
-app.use(require("./auth/index.js"));
-console.log("Auth pages ready");
+app.use("/auth", require("./auth/index.js"));
 
 // Errors
 app.use(require("./errors/index.js"));
-console.log("Error pages ready");
 
 // LISTEN
 app.listen(3000, () => console.log("App ready"));

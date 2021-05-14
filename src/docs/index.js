@@ -20,7 +20,13 @@ marked.setOptions({
 
 router.use(
 	serveIndex("./src/docs", {
-		filter: /^[^.]+(?:\.md)?$/m.test,
+		filter: (filename) => {
+			try {
+				return /^[^.]+(?:\.md)?$/m.test(filename);
+			} catch {
+				return true;
+			}
+		},
 		icons: true,
 	}),
 );

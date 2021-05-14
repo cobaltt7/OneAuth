@@ -1,6 +1,7 @@
 "use strict";
 
 const authClients = [],
+	authButtons = [],
 	database = new (require("@replit/database"))(),
 	globby = require("globby"),
 	path = require("path"),
@@ -15,21 +16,39 @@ const authClients = [],
 
 	paths.forEach((filepath) => {
 		authClients.push(
-			require(path.resolve(
-				__dirname,
-				__dirname.split("/src/")[0],
-				filepath,
-			)),
+			require(path.resolve(__dirname.split("/src/")[0], filepath)),
 		);
 	});
 })();
 
+(async () => {
+	// Idk why this is relative to the root dir but it is
+	const paths = await globby("src/auth/*/index.js");
+
+	paths.forEach((filepath) => {
+		const client = require(path.resolve(
+			__dirname.split("/src/")[0],
+			filepath,
+		));
+		authClients.push(
+			client
+		);
+		authButtons.push({
+			fontawesome: client.iconProvider.indexOf("fa") === 0,
+			icon:client.icon,
+			iconProvider:			client.iconProvider,
+			name:			client.name,
+			link:client.link,
+			svg: client.iconProvider === "svg",
+		});
+	});
+})();
 const getClient = (requestedClient) =>
-		authClients.find((currentClient) =>
-			currentClient.pages.find(
-				({ backendPage }) => backendPage === requestedClient,
-			),
+	authClients.find((currentClient) =>
+		currentClient.pages.find(
+			({ backendPage }) => backendPage === requestedClient,
 		),
+	),
 	getPageHandler = (requestedClient) => {
 		for (const currentClient of authClients) {
 			const result = currentClient.pages.find(
@@ -94,7 +113,7 @@ for (const http of [
 	"unlock",
 	"unsubscribe",
 ]) {
-	router[http]("/auth/:client", (req, res) => {
+	router[http]("/:client", (req, res) => {
 		const client = getPageHandler(req.params.client);
 		if (typeof client === "undefined" || client === null) {
 			return res.status(404);
@@ -107,6 +126,21 @@ for (const http of [
 		);
 	});
 }
+router.get("/", (req, res) => {
+	if (!req.query.url) {
+		return res.status(400);
+	}
+	const authButtonsReplaced = authButtons;
+	authButtons.forEach(({ link }, index) => {
+		authButtonsReplaced[index].link = link.replace(
+			/{{url}}/g,
+			encodeURIComponent(req.query.url),
+		);
+	});
+	return res.render(path.resolve(__dirname, "auth.html"), {
+		clients: authButtonsReplaced,
+	});
+})
 
 router.get("/backend/get_data", async (req, res) => {
 	// When data is being retrieved

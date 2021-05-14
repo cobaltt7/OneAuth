@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Sign in | 1Auth</title>
+		<meta name="robots" content="noindex, follow, archive, snippet" />
+		<noscript>
+			<meta http-equiv="refresh" content="0; url=/old/" />
+		</noscript>
+		{{> googletagmanager}}
+	</head>
+
+	<body style="display: none">
+		{{> nav}}
+		<main>
+			<h1>Sign in</h1>
+			<p>Choose an option to continue</p>
+			<!--{{{ buttons }}}-->
+			<ul id="auth-list">
+				{{#clients}}
+				<a href="{{ link }}">
+					<li class="auth-button">
+						{{#fontawesome}}
+						<i class="{{ iconProvider }} fa-{{ icon }}"></i
+						><span>Sign in with {{ name }}</span>
+						{{/fontawesome}} {{^fontawesome}}
+						<img
+							src="{{#svg}}/svg/{{/svg}}{{ icon }}"
+							alt="{{ name }}"
+							height="18"
+							width="18"
+							name="{{ name }}"
+						/>
+						<span>Sign in with {{ name }}</span>
+						{{/fontawesome}}
+					</li>
+				</a>
+				{{/clients}}
+			</ul>
+		</main>
+	</body>
+</html>

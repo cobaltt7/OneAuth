@@ -20,12 +20,31 @@
 				<p>
 					1Auth is an all-in-one authentication client that we
 					designed to work seamlessly with any website. It currently
-					supports 5 clients with many more to come.
+					supports {{ clients.length }} clients with many more to
+					come.
 				</p>
 			</section>
 			<section id="clients">
 				<h2>Supported Clients</h2>
-				{{{ clients }}}
+				<!--{{{ clients }}}-->
+				<ul id="auth-list">
+					{{#clients}}
+					<li class="auth-button">
+						{{#fontawesome}}
+						<i class="{{iconProvider}} fa-{{icon}}"></i
+						><span>{{ name }}</span>
+						{{/fontawesome}} {{^fontawesome}}
+						<img
+							src="{{#svg}}/svg/{{/svg}}{{icon}}"
+							alt="{{ name }}"
+							height="18"
+							width="18"
+							name="{{ name }}"
+						/><span>{{ name }}</span>
+						{{/fontawesome}}
+					</li>
+					{{/clients}}
+				</ul>
 			</section>
 			<section id="developers">
 				<h2>For Developers</h2>
@@ -34,7 +53,7 @@
 					direct your users to this URL:
 				</p>
 				<pre class="highlight lang-http">
-https://auth.onedot.cf/?url=&lt;CALLBACK_URL&gt;</pre
+https://auth.onedot.cf/auth?url=&lt;CALLBACK_URL&gt;</pre
 				>
 				<p>
 					After the user clicks on the link and finishes
@@ -44,7 +63,7 @@ https://auth.onedot.cf/?url=&lt;CALLBACK_URL&gt;</pre
 					information, send the following HTTP request:
 				</p>
 				<pre class="highlight lang-http">
-GET https://auth.onedot.cf/backend/get_data/?code=&lt;CODE&gt;</pre
+GET https://auth.onedot.cf/auth/backend/get_data/?code=&lt;CODE&gt;</pre
 				>
 				<p>
 					where <code>&lt;CODE&gt;</code> is the value of the new
