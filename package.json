@@ -19,9 +19,15 @@
 	"author": "OneDot",
 	"main": "src/index.js",
 	"scripts": {
-		"lint": "npx prettier --write . **.svg **.sass; npx eslint --fix .; npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt; npx write-good --yes-eprime --parse _locales/en_US.json; npx write-good  --yes-eprime --parse *.md; npx write-good  --yes-eprime --parse .github/**/*.md; npx write-good  --yes-eprime --parse .github/*.md;",
-		"start": "TAILWIND_MODE=watch NODE_ENV=production npx postcss src/tailwind.sass -o src/main/style.css & node --trace-warnings --harmony src/index.js",
-		"test": "npx nodemon --harmony --trace-warnings src/index.js"
+		"lint": "npm run lint:prettier; npm run lint:eslint; npm run lint:spellchecker-cli; npm run lint:write_good",
+		"lint:eslint": "npx eslint --fix .",
+		"lint:prettier": "npx prettier --write . **.svg **.sass",
+		"lint:spellchecker-cli": "npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt",
+		"lint:write_good": "find . -path ./node_modules -prune -false -o -name '*.md' | xargs -L1 npm run lint:write_good:config; npm run lint:write_good:config _locales/en_US.json",
+		"lint:write_good:config": "npx write-good --yes-eprime --parse",
+		"start": "node --trace-warnings --harmony src/index.js",
+		"start:dev": "npx nodemon --harmony --trace-warnings src/index.js",
+		"build:tailwind": "TAILWIND_MODE=build NODE_ENV=production npx postcss src/tailwind.sass -o src/main/style.css"
 	},
 	"nodemonConfig": {
 		"events": {

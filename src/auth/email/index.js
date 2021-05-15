@@ -27,6 +27,7 @@ module.exports = {
 				res.render(path.resolve(__dirname, "index.html"));
 			},
 			post: async (req, res, sendResponse) => {
+				console.log(req.body);
 				if (req.body.code && req.body.email) {
 					const { email = null, date = null } =
 						(await database.get(`EMAIL_${req.body.code}`)) ?? {};

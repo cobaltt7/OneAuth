@@ -30,25 +30,23 @@ const authClients = [],
 			__dirname.split("/src/")[0],
 			filepath,
 		));
-		authClients.push(
-			client
-		);
+		authClients.push(client);
 		authButtons.push({
 			fontawesome: client.iconProvider.indexOf("fa") === 0,
-			icon:client.icon,
-			iconProvider:			client.iconProvider,
-			name:			client.name,
-			link:client.link,
+			icon: client.icon,
+			iconProvider: client.iconProvider,
+			name: client.name,
+			link: client.link,
 			svg: client.iconProvider === "svg",
 		});
 	});
 })();
 const getClient = (requestedClient) =>
-	authClients.find((currentClient) =>
-		currentClient.pages.find(
-			({ backendPage }) => backendPage === requestedClient,
+		authClients.find((currentClient) =>
+			currentClient.pages.find(
+				({ backendPage }) => backendPage === requestedClient,
+			),
 		),
-	),
 	getPageHandler = (requestedClient) => {
 		for (const currentClient of authClients) {
 			const result = currentClient.pages.find(
@@ -140,7 +138,7 @@ router.get("/", (req, res) => {
 	return res.render(path.resolve(__dirname, "auth.html"), {
 		clients: authButtonsReplaced,
 	});
-})
+});
 
 router.get("/backend/get_data", async (req, res) => {
 	// When data is being retrieved
