@@ -77,14 +77,13 @@ router.get("/humans.txt", (_, res) => {
 });
 
 // CSS
-const CleanCSS=require("clean-css");
+const CleanCSS = require("clean-css");
 const cleanCSS = new CleanCSS(),
 	fileSystem = require("fs");
 
-const css=cleanCSS.minify(fileSystem.readFileSync(
-		path.resolve(__dirname, "style.css"),
-		"utf-8",
-	)).styles
+const css = cleanCSS.minify(
+	fileSystem.readFileSync(path.resolve(__dirname, "style.css"), "utf-8"),
+).styles;
 
 router.get("/style.css", (_, res) => {
 	res.setHeader("content-type", "text/css");

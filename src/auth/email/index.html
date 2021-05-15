@@ -46,7 +46,7 @@
 					submit.append(
 						Object.assign(document.createElement("img"), {
 							src: "/svg/loading",
-						})
+						}),
 					);
 
 					// Send the email
@@ -70,7 +70,7 @@
 							action: "",
 							autocomplete: "off",
 							method: "POST",
-						}
+						},
 					);
 					newForm.append(
 						Object.assign(document.createElement("input"), {
@@ -97,7 +97,7 @@
 							// eslint-disable-next-line id-length
 							id: "submit",
 							type: "submit",
-						})
+						}),
 					);
 					form.remove();
 					document.querySelector("#note").remove();
@@ -109,7 +109,7 @@
 							innerText:
 								"Enter the code we sent to you to continue",
 						}),
-						newForm
+						newForm,
 					);
 				}
 				form.addEventListener("submit", eventListener);
