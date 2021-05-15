@@ -60,7 +60,8 @@
 				"ecmaVersion": 8
 			},
 			"rules": {
-				"no-console": 2
+				"no-console": 2,
+				"comma-dangle": 0
 			},
 			"extends": ["plugin:compat/recommended"]
 		}
@@ -74,11 +75,7 @@
 		"quote-props": [1, "as-needed"],
 		"comma-dangle": [
 			1,
-			{
-				"arrays": "always-multiline",
-				"objects": "always-multiline",
-				"functions": "always-multiline"
-			}
+			"always-multiline"
 		],
 		"strict": [2, "global"],
 		"max-lines-per-function": [
@@ -141,23 +138,7 @@
 		"curly": [1, "all"],
 		"no-mixed-operators": 0,
 		"no-confusing-arrow": [1, { "allowParens": true }],
-		"lines-around-comment": [
-			1,
-			{
-				"beforeBlockComment": true,
-				"afterBlockComment": true,
-				"beforeLineComment": true,
-				"afterLineComment": false,
-				"allowBlockStart": true,
-				"allowBlockEnd": false,
-				"allowObjectStart": true,
-				"allowObjectEnd": false,
-				"allowArrayStart": true,
-				"allowArrayEnd": false,
-				"allowClassStart": true,
-				"allowClassEnd": false
-			}
-		],
+		"lines-around-comment": 0,
 		"func-style": [
 			1,
 			"declaration",
@@ -190,8 +171,7 @@
 		"no-restricted-syntax": [
 			1,
 			{
-				"selector": "SequenceExpression",
-				"message": "The comma operator is confusing and a common mistake. Don’t use it!"
+				"selector": "SequenceExpression"
 			}
 		],
 		"no-unused-vars": [
