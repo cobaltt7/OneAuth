@@ -108,9 +108,9 @@ function parseMessage(inputInfo, langs, msgs) {
 		.split(/(?<![^\\]\[[^\]]*)(?<!\\)\|{3}/)
 
 		.map((param) =>
-			param.startsWith("[") && param.endsWith("]")
+			(param.startsWith("[") && param.endsWith("]")
 				? parseMessage(param.slice(1, param.length - 1), langs, msgs)
-				: param,
+				: param),
 		)
 
 		// Handle escaping the `|||` and `[` (prefixing them with a `\`)

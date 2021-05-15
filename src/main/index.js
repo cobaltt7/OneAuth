@@ -44,15 +44,15 @@ router.get("/svg/:img", (req, res) => {
 	res.sendFile(path.resolve(__dirname, `../svg/${req.params.img}.svg`));
 });
 
-router.get("/", (req, res) => {
-	return res.render(path.resolve(__dirname, "about.html"), {
+router.get("/", (req, res) =>
+	res.render(path.resolve(__dirname, "about.html"), {
 		clients: authClients,
-	});
-});
+	}),
+);
 
-router.get("/about", (_, res) => {
-	return res.status(303).redirect("https://auth.onedot.cf/");
-});
+router.get("/about", (_, res) =>
+	res.status(303).redirect("https://auth.onedot.cf/"),
+);
 
 router.get("/googleb9551735479dd7b0.html", (_, res) => {
 	res.send("google-site-verification: googleb9551735479dd7b0.html");
