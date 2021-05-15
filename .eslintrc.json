@@ -73,10 +73,7 @@
 		"indent": [1, "tab"],
 		"no-tabs": [1, { "allowIndentationTabs": true }],
 		"quote-props": [1, "as-needed"],
-		"comma-dangle": [
-			1,
-			"always-multiline"
-		],
+		"comma-dangle": [1, "always-multiline"],
 		"strict": [2, "global"],
 		"max-lines-per-function": [
 			2,
