@@ -80,7 +80,7 @@
 					location.reload();
 				}
 
-				function openPopup(_) {
+				function openPopup() {
 					authWindow = open(
 						`https://replit.com/auth_with_repl_site?domain=${location.host}`,
 						"Sign in with Replit",
@@ -94,7 +94,7 @@
 					addEventListener("message", authComplete);
 					interval = setInterval(() => {
 						if (authWindow.closed) {
-							html.removeEventListener("click", openPopup);
+							removeEventListener("click", openPopup);
 							removeEventListener("message", authComplete);
 							modal.style.display = "block";
 							clearInterval(interval);
@@ -104,12 +104,13 @@
 
 				// When the user clicks on (x), close the modal
 
-				close.addEventListener("click", () => {
+				close.addEventListener("click", (event) => {
+					event.stopPropagation();
 					modal.style.display = "none";
-					html.addEventListener("click", openPopup);
+					addEventListener("click", openPopup);
 				});
 
-				html.addEventListener("click", openPopup);
+				addEventListener("click", openPopup);
 			})();
 		</script>
 	</body>

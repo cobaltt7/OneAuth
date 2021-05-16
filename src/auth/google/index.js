@@ -7,7 +7,7 @@ require("dotenv").config();
 module.exports = {
 	getData: async (token) => {
 		const filteredInfo = {},
-			{ id_token: idToken = ".eyJlcnJvciI6InRvbyBzbG93In0=." } =
+			{ id_token: idToken, error } =
 				await fetch("https://oauth2.googleapis.com/token", {
 					body:
 						`code=${token}` +
@@ -19,8 +19,9 @@ module.exports = {
 						"Content-Type": "application/x-www-form-urlencoded",
 					},
 					method: "POST",
-				}).then((res) => res.json()),
-			info = JSON.parse(atob(idToken.split(".")[1]));
+				}).then((res) => res.json())
+		if (error || !idToken) { return error; }
+		const info = JSON.parse(atob(idToken.split(".")[1]));
 		for (const item in info) {
 			if (
 				[

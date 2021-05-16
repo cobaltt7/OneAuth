@@ -19,7 +19,7 @@
 			<div class="buttons-container">
 				<a
 					id="allow"
-					href="/backend/send_data?client={{client}}&url={{encodedUrl}}&token={{token}}"
+					href="/auth/backend/send_data?client={{client}}&url={{encodedUrl}}&token={{token}}"
 					>Allow
 					<i class="far fa-check-circle"></i>
 				</a>
@@ -29,7 +29,7 @@
 				</a>
 			</div>
 			<p>Here is what would be sent:</p>
-			<pre>{{data}}</pre>
+			<pre class="hljs lang-json">{{data}}</pre>
 		</main>
 	</body>
 </html>

@@ -50,7 +50,10 @@ app.use((req, res, next) => {
 });
 
 // Info sent (cookies, bodies)
-const cookieParser = require("cookie-parser")();
+const bodyParser=express.urlencoded({
+		extended: true,
+	}),
+	cookieParser = require("cookie-parser")();
 app.use((req, res, next) => {
 	if (req.path.includes(".")) {
 		return next();
@@ -61,18 +64,7 @@ app.use((req, res, next) => {
 	if (req.path.includes(".")) {
 		return next();
 	}
-	return express.urlencoded({
-		extended: false,
-	})(req, res, next);
-});
-
-app.use((req, res, next) => {
-	if (req.path.includes(".")) {
-		return next();
-	}
-	return express.urlencoded({
-		extended: true,
-	})(req, res, next);
+	return bodyParser(req, res, next);
 });
 
 // Localization

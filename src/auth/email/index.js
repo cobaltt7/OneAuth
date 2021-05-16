@@ -27,16 +27,15 @@ module.exports = {
 				res.render(path.resolve(__dirname, "index.html"));
 			},
 			post: async (req, res, sendResponse) => {
-				console.log(req.body);
 				if (req.body.code && req.body.email) {
 					const { email = null, date = null } =
 						(await database.get(`EMAIL_${req.body.code}`)) ?? {};
 					if (Date.now() - date > 900000) {
 						await database.delete(`EMAIL_${req.body.code}`);
-						return res.status(410).send("410");
+						return res.status(410);
 					}
 					if (req.body.email !== email) {
-						return res.status(401).send("401");
+						return res.status(401);
 					}
 					await database.delete(`EMAIL_${req.body.code}`);
 					return sendResponse(
@@ -56,7 +55,7 @@ module.exports = {
 						email: req.body.email,
 					});
 
-					mail.sendMail(
+					return mail.sendMail(
 						{
 							from: process.env.GMAIL_EMAIL,
 							html: mustache.render(
@@ -83,13 +82,13 @@ module.exports = {
 						},
 						(error, info) => {
 							if (error) {
-								return res.status(500).send("500");
+								return res.status(500);
 							}
 							return res.status(200).json(info);
 						},
 					);
 				}
-				return res.status(400).send("400");
+				return res.status(400);
 			},
 		},
 	],

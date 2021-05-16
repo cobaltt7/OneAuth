@@ -1,2 +1,4 @@
-language = "bash" # this should be bash so new clones that has latest nodejs
-run = "npm start"
+# this should be bash so new clones that has latest nodejs
+language = "bash"
+
+run = "npm run build:tailwind & npm start"

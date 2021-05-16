@@ -51,4 +51,4 @@ Add a file in that folder called `index.js`.
 
 See the [typedef](#src/auth/typedef.js) for more information about types, what is required, and etcetera.
 
-**Protip: when debugging your client, start [here](https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fbackend%2Fget_data). That way it will automatically show you the retrieved data at the end!**
+**Protip: when debugging your client, start [here](https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fbackend%2Fget_data). That way it will automatically show you the retrieved data at the end!**

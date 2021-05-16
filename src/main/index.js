@@ -32,12 +32,12 @@ const authClients = [];
 
 router.get("/logo.svg", (_, res) => {
 	res.status(302).redirect(
-		"https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg",
+		"https://cdn.onedot.cf/SVG/NoPadding/1Auth%20NoPad.svg",
 	);
 });
 router.get("/favicon.ico", (_, res) => {
 	res.status(302).redirect(
-		"https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg",
+		"https://cdn.onedot.cf/SVG/Transparent/Auth.svg",
 	);
 });
 router.get("/svg/:img", (req, res) => {
@@ -73,7 +73,7 @@ router.get("/.well-known/security.txt", (_, res) => {
 });
 
 router.get("/humans.txt", (_, res) => {
-	res.status(301).send("https://github.com/onedotprojects/auth/people");
+	res.status(301).redirect("https://github.com/onedotprojects/auth/people");
 });
 
 // CSS
