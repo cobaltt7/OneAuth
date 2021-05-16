@@ -72,7 +72,7 @@
 	"rules": {
 		"indent": [1, "tab"],
 		"no-tabs": [1, { "allowIndentationTabs": true }],
-		"quote-props": [1, "as-needed"],
+		"quote-props": [1, "consistent-as-needed"],
 		"comma-dangle": [1, "always-multiline"],
 		"strict": [2, "global"],
 		"max-lines-per-function": [
@@ -134,7 +134,7 @@
 		],
 		"curly": [1, "all"],
 		"no-mixed-operators": 0,
-		"no-confusing-arrow": [1, { "allowParens": true }],
+		"no-confusing-arrow": 0,
 		"lines-around-comment": 0,
 		"func-style": [
 			1,
