@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 });
 
 // Info sent (cookies, bodies)
-const bodyParser=express.urlencoded({
+const bodyParser = express.urlencoded({
 		extended: true,
 	}),
 	cookieParser = require("cookie-parser")();

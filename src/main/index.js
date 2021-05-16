@@ -36,9 +36,7 @@ router.get("/logo.svg", (_, res) => {
 	);
 });
 router.get("/favicon.ico", (_, res) => {
-	res.status(302).redirect(
-		"https://cdn.onedot.cf/SVG/Transparent/Auth.svg",
-	);
+	res.status(302).redirect("https://cdn.onedot.cf/SVG/Transparent/Auth.svg");
 });
 router.get("/svg/:img", (req, res) => {
 	res.sendFile(path.resolve(__dirname, `../svg/${req.params.img}.svg`));
