@@ -40,15 +40,15 @@ Add a file in that folder called `index.js`.
     -   subscribe
     -   trace
     -   unlock
-    -   unsubscribe The funtion takes three arguments:
+    -   unsubscribe The function takes three arguments:
     1. _`req`_: Express request object
     2. _`res`_: Express response object
-    3. _`sendResponse`_: Function to be run once you are at a point where you can access the user's data without any further interaction. Takes three arguments: 1. _`tokenOrData`_: Token _returned by the **client**_ that can be passed to the `getData` function. Alternatively, this can be the user's data if the client doesn't return tokens (see `rawData`). 2. _`url`_: URL to redirect to after the user gives permission. Should be sourced from `{{url}}` (in `link`). 3. _`res`_: Express response object You can have multiple of these in the same object as long as the meathod is different.
+    3. _`sendResponse`_: Function to be run once you are at a point where you can access the user's data without any further interaction. Takes three arguments: 1. _`tokenOrData`_: Token _returned by the **client**_ that can be passed to the `getData` function. Alternatively, this can be the user's data if the client doesn't return tokens (see `rawData`). 2. _`url`_: URL to redirect to after the user gives permission. Should be sourced from `{{url}}` (in `link`). 3. _`res`_: Express response object You can have multiple of these in the same object as long as the method is different.
 -   **`pages[]backendPage`**: Page that handles the said HTTP requests. Relative to `/auth/`.
--   **`getData`**: Function that return a users' data based on a token. Takes one argument:
+-   **`getData`**: Function that returns a users' data based on a token. Takes one argument:
     1. **`token`**: Token that came from `pages[].METHOD.sendResponse` in the `tokenOrData` parameter.
--   **`rawData`**: Determines if instead of passing a token to `pages[].METHOD.sendResponse` in the `tokenOrData` parameter, you will send the users' data directly. _**Only use this if all the data you are sending can be viewed at the client's website by anyone, at anytime!**_
+-   **`rawData`**: Determines if instead of passing a token to `pages[].METHOD.sendResponse` in the `tokenOrData` parameter, you will send the users' data directly. _**Only use this if all the data you are sending can be viewed at the client's website by anyone, at any time!**_
 
 See the [typedef](#src/auth/typedef.js) for more information about types, what is required, and etcetera.
 
-**Protip: when debugging your client, start [here](https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fbackend%2Fget_data). That way it will automatiautomatically show you the retrieved data at the end!**
+**Protip: when debugging your client, start [here](https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fbackend%2Fget_data). That way it will automatically show you the retrieved data at the end!**

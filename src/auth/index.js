@@ -1,7 +1,7 @@
 "use strict";
 
-const authClients = [],
-	authButtons = [],
+const authButtons = [],
+	authClients = [],
 	database = new (require("@replit/database"))(),
 	globby = require("globby"),
 	path = require("path"),
@@ -35,8 +35,8 @@ const authClients = [],
 			fontawesome: client.iconProvider.indexOf("fa") === 0,
 			icon: client.icon,
 			iconProvider: client.iconProvider,
-			name: client.name,
 			link: client.link,
+			name: client.name,
 			svg: client.iconProvider === "svg",
 		});
 	});

@@ -14,7 +14,7 @@ const authClients = [];
 	const paths = await globby("src/auth/*/index.js");
 
 	paths.forEach((filepath) => {
-		const { link, iconProvider, icon, name } = require(path.resolve(
+		const { iconProvider, icon, name } = require(path.resolve(
 			__dirname.split("/src/")[0],
 			filepath,
 		));
@@ -44,7 +44,7 @@ router.get("/svg/:img", (req, res) => {
 	res.sendFile(path.resolve(__dirname, `../svg/${req.params.img}.svg`));
 });
 
-router.get("/", (req, res) =>
+router.get("/", (_, res) =>
 	res.render(path.resolve(__dirname, "about.html"), {
 		clients: authClients,
 	}),
