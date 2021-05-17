@@ -130,7 +130,7 @@ function mustacheFunc(langs, msgs = getMsgs(langs)) {
 		return function (val, render) {
 			return parseMessage(render(val), langs, msgs);
 		};
-	}
+	};
 }
 
 module.exports = {
@@ -174,7 +174,7 @@ module.exports = {
 		// Override logic
 		res.render = function (view, options, callback) {
 			if (typeof options === "object") {
-				options.msgs = mustacheFunc(langs,msgs);
+				options.msgs = mustacheFunc(langs, msgs);
 			}
 
 			// Continue with original render
