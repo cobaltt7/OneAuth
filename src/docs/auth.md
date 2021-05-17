@@ -17,7 +17,7 @@ Add a file in that folder called `index.js`.
     -   The FontAwesome style/prefix (`fa`, `fas`, `fab`, etc.) if `icon` is the name of a FontAwesome icon
     -   `svg` if `icon` is the name of a SVG file
 -   **`pages[]METHOD`**: Function that runs on a HTTP request to `pages[]backendPage`, where `METHOD` is the HTTP method. Supported methods:
-    -   all
+    <!-- -   all -->
     -   checkout
     -   copy
     -   delete

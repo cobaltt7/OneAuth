@@ -18,7 +18,7 @@
 		"string": "Enter the code we sent to you to continue"
 	},
 	"emailSubject": {
-		"string": "1Auth Email Verifcation"
+		"string": "1Auth Email Verification"
 	},
 	"emailCodeIs": {
 		"string": "Your code is {0}."
@@ -84,7 +84,7 @@
 		"string": "Deny"
 	},
 	"allowDataNote": {
-		"string": "If you press \"Allow\", then {1} will recieve the following information (taken from {0}):"
+		"string": "If you press \"Allow\", then {1} will receive the following information (taken from {0}):"
 	},
 	"signinPageTitle": {
 		"string": "Sign in | 1Auth"
@@ -200,7 +200,7 @@
 		"string": "Its value should be a 2-letter language code like {0} or {1}."
 	},
 	"aboutLangsCountry": {
-		"string": "It may be followed by a underscore and a 2-letter country code, IE {0} or {1} (optional)."
+		"string": "It may be followed by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
 	},
 	"aboutLangsFallback": {
 		"string": "If a language is not available, it will fall back to the non-country specific language, then to the users' browser language."

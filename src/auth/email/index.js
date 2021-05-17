@@ -24,7 +24,7 @@ module.exports = {
 	pages: [
 		{
 			backendPage: "email",
-			get: (req, res) => {
+			get: (_, res) => {
 				res.render(path.resolve(__dirname, "index.html"));
 			},
 			post: async (req, res, sendResponse) => {

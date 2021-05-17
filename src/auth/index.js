@@ -63,6 +63,7 @@ const getClient = (requestedClient) =>
 		let data, token;
 		if (rawData) {
 			data = tokenOrData;
+			data.client = name;
 			token = retronid.generate();
 			await database.set(`RETRIEVE_${token}`, data);
 		} else {
@@ -74,10 +75,11 @@ const getClient = (requestedClient) =>
 			return res
 				.status(300)
 				.render(path.resolve(__dirname, "allow.html"), {
-					client: name,
+					client,
 					data: JSON.stringify(data),
 					encodedUrl: encodeURIComponent(url),
 					host,
+					name,
 					token,
 					url,
 				});
@@ -153,13 +155,15 @@ router.get("/backend/get_data", async (req, res) => {
 });
 router.get("/backend/send_data", async (req, res) => {
 	const { client, url, token } = req.query,
-		{ getData, rawData } = getClient(client);
+		{ name, getData, rawData } = getClient(client);
 	let code, redirect;
 	if (rawData) {
 		code = token;
 	} else {
 		code = retronid.generate();
-		await database.set(`RETRIEVE_${code}`, await getData(token));
+		const data = await getData(token);
+		data.client = name;
+		await database.set(`RETRIEVE_${code}`, data);
 	}
 	try {
 		redirect = new URL(url);

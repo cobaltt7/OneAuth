@@ -24,7 +24,7 @@
 		"lint:prettier": "npx prettier --write . **.svg **.sass",
 		"lint:spellchecker-cli": "npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt",
 		"lint:write_good": "find . -path ./node_modules -prune -false -o -name '*.md' | xargs -L1 npm run lint:write_good:config; npm run lint:write_good:config _locales/en_US.json",
-		"lint:write_good:config": "npx write-good --yes-eprime --parse",
+		"lint:write_good:config": "npx write-good --parse",
 		"start": "node --trace-warnings --harmony src/index.js",
 		"start:dev": "npx nodemon --harmony --trace-warnings src/index.js",
 		"build:tailwind": "TAILWIND_MODE=build NODE_ENV=production npx postcss src/tailwind.sass -o src/main/style.css"
@@ -97,7 +97,7 @@
 		"serve-index": "^1.9.1"
 	},
 	"devDependencies": {
-		"@actions/github": "^4.0.0",
+		"@actions/github": "^5.0.0",
 		"@tailwindcss/forms": "^0.3.2",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/accepts": "^1.3.5",
