@@ -24,7 +24,7 @@ module.exports = {
 	pages: [
 		{
 			backendPage: "email",
-			get: (_, res) => {
+			get: (req, res) => {
 				res.render(path.resolve(__dirname, "index.html"));
 			},
 			post: async (req, res, sendResponse) => {
@@ -66,7 +66,7 @@ module.exports = {
 								),
 								{
 									code,
-									msgs: mustacheFunc(req.langs),
+									msgs: mustacheFunc(req.languages, req.msgs),
 								},
 							),
 							subject: req.msgs.emailSubject,
@@ -77,7 +77,7 @@ module.exports = {
 								),
 								{
 									code,
-									msgs: mustacheFunc(req.langs),
+									msgs: mustacheFunc(req.languages, req.msgs),
 								},
 							),
 							// eslint-disable-next-line id-length

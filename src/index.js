@@ -5,7 +5,6 @@ const express = require("express"),
 	path = require("path");
 
 const app = express();
-app.enable("view cache");
 
 // Mustache
 const mustacheExpress = require("mustache-express")(
@@ -13,8 +12,7 @@ const mustacheExpress = require("mustache-express")(
 	".html",
 );
 app.engine("html", mustacheExpress);
-app.set("views", __dirname);
-app.set("view engine", "html");
+app.engine("css", mustacheExpress);
 
 // Compress
 const compression = require("compression");
@@ -69,12 +67,7 @@ app.use((req, res, next) => {
 
 // Localization
 const l10n = require("./l10n.js").middleware;
-app.use((req, res, next) => {
-	if (req.path.includes(".")) {
-		return next();
-	}
-	return l10n(req, res, next);
-});
+app.use(l10n);
 
 // Docs
 const docs = require("./docs/index.js");

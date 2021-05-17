@@ -1,16 +1,40 @@
 {
-	"docsTitle": { "string": "{0} | 1Auth Development Docs" },
-	"emailPageTitle": { "string": "Sign in with email | 1Auth" },
-	"emailHeading": { "string": "Sign in with email" },
-	"emailEnterPrompt": { "string": "Enter your email to continue" },
-	"emailSubmit": { "string": "Submit" },
-	"emailEnterCode": { "string": "Enter the code we sent to you to continue" },
-	"emailSubject": { "string": "1Auth Email Verifcation" },
-	"emailCodeIs": { "string": "Your code is {0}." },
-	"emailNoShare": { "string": "Don't share it with anyone else." },
-	"emailNow": { "string": "What now?" },
-	"emailCopyCode": { "string": "Copy your code." },
-	"emailGoBack": { "string": "Go back to 1Auth." },
+	"docsTitle": {
+		"string": "{0} | 1Auth Development Docs"
+	},
+	"emailPageTitle": {
+		"string": "Sign in with email | 1Auth"
+	},
+	"emailHeading": {
+		"string": "Sign in with email"
+	},
+	"emailEnterPrompt": {
+		"string": "Enter your email to continue"
+	},
+	"emailSubmit": {
+		"string": "Submit"
+	},
+	"emailEnterCode": {
+		"string": "Enter the code we sent to you to continue"
+	},
+	"emailSubject": {
+		"string": "1Auth Email Verifcation"
+	},
+	"emailCodeIs": {
+		"string": "Your code is {0}."
+	},
+	"emailNoShare": {
+		"string": "Don't share it with anyone else."
+	},
+	"emailNow": {
+		"string": "What now?"
+	},
+	"emailCopyCode": {
+		"string": "Copy your code."
+	},
+	"emailGoBack": {
+		"string": "Go back to 1Auth."
+	},
 	"emailPasteCode": {
 		"string": "Paste your code in the box and press \"Submit\"."
 	},
@@ -23,10 +47,18 @@
 	"emailUnexpected": {
 		"string": "Not expecting this email? Just ignore it. Don't worry, nothing will happen."
 	},
-	"logoAlt": { "string": "1Auth logo" },
-	"replitPageTitle": { "string": "Sign in with Replit | 1Auth" },
-	"replitHeading": { "string": "Sign in with Replit" },
-	"replitClickAnywhere": { "string": "Click anywhere to get started" },
+	"logoAlt": {
+		"string": "1Auth logo"
+	},
+	"replitPageTitle": {
+		"string": "Sign in with Replit | 1Auth"
+	},
+	"replitHeading": {
+		"string": "Sign in with Replit"
+	},
+	"replitClickAnywhere": {
+		"string": "Click anywhere to get started"
+	},
 	"replitNoClose": {
 		"string": "If you close the popup, we can't authenticate you!"
 	},
@@ -36,34 +68,72 @@
 	"replitUnblockPopups": {
 		"string": "If nothing happens, please make sure pop-ups are not blocked, then reload the page."
 	},
-	"allowPageTitle": { "string": "Allow access? | 1Auth" },
-	"allowHeading": { "string": "Allow access?" },
+	"allowPageTitle": {
+		"string": "Allow access? | 1Auth"
+	},
+	"allowHeading": {
+		"string": "Allow access?"
+	},
 	"allowQuestion": {
 		"string": "Do you want {0} to access your information?"
 	},
-	"allowButtonA": { "string": "Allow" },
-	"allowButtonD": { "string": "Deny" },
-	"allowDataNote": {
-		"string": "If you press \"Allow\", then {0} will recieve the following information:"
+	"allowButtonA": {
+		"string": "Allow"
 	},
-	"signinPageTitle": { "string": "Sign in | 1Auth" },
-	"signinHeading": { "string": "Sign in" },
-	"signinChoose": { "string": "Choose an option to continue" },
-	"signinWith": { "string": "Sign in with {0}" },
+	"allowButtonD": {
+		"string": "Deny"
+	},
+	"allowDataNote": {
+		"string": "If you press \"Allow\", then {1} will recieve the following information (taken from {0}):"
+	},
+	"signinPageTitle": {
+		"string": "Sign in | 1Auth"
+	},
+	"signinHeading": {
+		"string": "Sign in"
+	},
+	"signinChoose": {
+		"string": "Choose an option to continue"
+	},
+	"signinWith": {
+		"string": "Sign in with {0}"
+	},
 	"allowDataHidden": {
 		"string": "Unfortunately, we can't show this data right now. Sorry about that!"
 	},
-	"error404PageTitle": { "string": "404 Not Found | 1Auth" },
-	"error404Heading": { "string": "404 Not Found" },
-	"error404Message": { "string": "We can't find that page." },
-	"error405PageTitle": { "string": "405 Method Not Allowed | 1Auth" },
-	"error405Heading": { "string": "405 Method Not Allowed" },
-	"error405Message": { "string": "That HTTP method isn't allowed." },
-	"errorPageTitle": { "string": "Error | 1Auth" },
-	"errorHeading": { "string": "Error" },
-	"errorMessage": { "string": "An error occurred." },
-	"errorOldPageTitle": { "string": "Outdated Browser | 1Auth" },
-	"errorOldHeading": { "string": "You are using an outdated browser!" },
+	"error404PageTitle": {
+		"string": "404 Not Found | 1Auth"
+	},
+	"error404Heading": {
+		"string": "404 Not Found"
+	},
+	"error404Message": {
+		"string": "We can't find that page."
+	},
+	"error405PageTitle": {
+		"string": "405 Method Not Allowed | 1Auth"
+	},
+	"error405Heading": {
+		"string": "405 Method Not Allowed"
+	},
+	"error405Message": {
+		"string": "That HTTP method isn't allowed."
+	},
+	"errorPageTitle": {
+		"string": "Error | 1Auth"
+	},
+	"errorHeading": {
+		"string": "Error"
+	},
+	"errorMessage": {
+		"string": "An error occurred."
+	},
+	"errorOldPageTitle": {
+		"string": "Outdated Browser | 1Auth"
+	},
+	"errorOldHeading": {
+		"string": "You are using an outdated browser!"
+	},
 	"errorOldWhy": {
 		"string": "For a better experience on {0} sites (not just ours), please keep your browser up to date.",
 		"developer_comment": "The placeholder is always the word \"all\". (It had to be pulled out into a separate string so that it can be underlined.)"
@@ -72,22 +142,36 @@
 		"string": "all",
 		"developer_comment": "For use in the \"errorOldWhy\" string."
 	},
-	"errorOldModern": { "string": "Modern browsers:" },
+	"errorOldModern": {
+		"string": "Modern browsers:"
+	},
 	"errorOldMistake": {
 		"string": "If you are using a modern browser, please make sure JavaScript is enabled and allowed on this site."
 	},
-	"errorOldMore": { "string": "Learn more" },
-	"aboutPageTitle": { "string": "1Auth | All-In-One Authentication" },
-	"aboutMainHeading": { "string": "1Auth All-In-One Authentication" },
-	"aboutSubHeading": { "string": "About" },
+	"errorOldMore": {
+		"string": "Learn more"
+	},
+	"aboutPageTitle": {
+		"string": "1Auth | All-In-One Authentication"
+	},
+	"aboutMainHeading": {
+		"string": "1Auth All-In-One Authentication"
+	},
+	"aboutSubHeading": {
+		"string": "About"
+	},
 	"aboutIntro": {
 		"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
 	},
 	"aboutClientCount": {
 		"string": "It currently supports {0} clients with many more to come."
 	},
-	"aboutClientsHeading": { "string": "Supported Clients" },
-	"aboutDevelopersHeading": { "string": "For Developers" },
+	"aboutClientsHeading": {
+		"string": "Supported Clients"
+	},
+	"aboutDevelopersHeading": {
+		"string": "For Developers"
+	},
 	"aboutImpementation": {
 		"string": "Implementing this in your site is very easy. Simply direct your users to this URL:"
 	},
@@ -106,7 +190,9 @@
 	"aboutMoreConfig": {
 		"string": "More configuration options are coming soon."
 	},
-	"aboutLangsHeader": { "string": "Language specification" },
+	"aboutLangsHeader": {
+		"string": "Language specification"
+	},
 	"aboutLangsHow": {
 		"string": "Specify the language to use on pages by adding another parameter to the URL: {0}"
 	},
@@ -119,11 +205,16 @@
 	"aboutLangsFallback": {
 		"string": "If a language is not available, it will fall back to the non-country specific language, then to the users' browser language."
 	},
-	"aboutNew": { "string": "NEW!!!" },
+	"aboutNew": {
+		"string": "NEW!!!"
+	},
 	"aboutTranslations": {
 		"string": "Please not that we currently do not have very many translations, if any. This will change as our translation team grows."
 	},
 	"aboutHelpTranslate": {
 		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click \"Join team\". Thanks for your eagerness to help!"
+	},
+	"emailPlaceholder": {
+		"string": "Email address"
 	}
 }

@@ -59,7 +59,7 @@ const getClient = (requestedClient) =>
 		return null;
 	},
 	sendResponse = async (client, tokenOrData, url, res, noDataMsg) => {
-		const { rawData } = getClient(client);
+		const { name, rawData } = getClient(client);
 		let data, token;
 		if (rawData) {
 			data = tokenOrData;
@@ -74,7 +74,7 @@ const getClient = (requestedClient) =>
 			return res
 				.status(300)
 				.render(path.resolve(__dirname, "allow.html"), {
-					client,
+					client: name,
 					data: JSON.stringify(data),
 					encodedUrl: encodeURIComponent(url),
 					host,
