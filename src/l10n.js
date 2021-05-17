@@ -176,7 +176,7 @@ module.exports = {
 			view,
 			options = {},
 			callback = function (err, str) {
-				if (err) return req.next(err);
+				if (err) {return req.next(err);}
 				self.send(str);
 			},
 		) {
