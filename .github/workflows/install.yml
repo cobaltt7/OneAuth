@@ -19,8 +19,8 @@ jobs:
               if: always()
               uses: actions/checkout@main
               with:
-                  ref: ${{ github.head_ref }}
-                  token: ${{ secrets.WGYTBOT }}
+                  ref: ${{github.head_ref}}
+                  token: ${{secrets.WGYTBOT}}
 
             - name: Setup Node.JS
               if: always()
@@ -52,5 +52,5 @@ jobs:
             - name: Repository Dispatch
               uses: peter-evans/repository-dispatch@v1
               with:
-                  token: ${{ secrets.WGYTBOT }}
+                  token: ${{secrets.WGYTBOT}}
                   event-type: lint

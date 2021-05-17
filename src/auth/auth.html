@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Sign in | 1Auth</title>
+		<title>{{#msgs}}signinPageTitle{{/msgs}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,26 +14,24 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>Sign in</h1>
-			<p>Choose an option to continue</p>
-			<!--{{{ buttons }}}-->
+			<h1>{{#msgs}}signinHeading{{/msgs}}</h1>
+			<p>{{#msgs}}signinChoose{{/msgs}}</p>
 			<ul id="auth-list">
 				{{#clients}}
-				<a href="{{ link }}">
+				<a href="{{link}}">
 					<li class="auth-button">
 						{{#fontawesome}}
-						<i class="{{ iconProvider }} fa-{{ icon }}"></i
-						><span>Sign in with {{ name }}</span>
+						<i class="{{iconProvider}} fa-{{icon}}"></i>
 						{{/fontawesome}} {{^fontawesome}}
 						<img
-							src="{{#svg}}/svg/{{/svg}}{{ icon }}"
-							alt="{{ name }}"
+							src="{{#svg}}/svg/{{/svg}}{{icon}}"
+							alt="{{name}}"
 							height="18"
 							width="18"
-							name="{{ name }}"
+							name="{{name}}"
 						/>
-						<span>Sign in with {{ name }}</span>
 						{{/fontawesome}}
+						<span>{{#msgs}}signinWith|||{{name}}{{/msgs}}</span>
 					</li>
 				</a>
 				{{/clients}}

@@ -125,6 +125,14 @@ function parseMessage(inputInfo, langs, msgs) {
 	);
 }
 
+function mustacheFunc(langs, msgs = getMsgs(langs)) {
+	return function () {
+		return function (val, render) {
+			return parseMessage(render(val), langs, msgs);
+		};
+	}
+}
+
 module.exports = {
 	compileLangs,
 	getFormatter,
@@ -166,11 +174,7 @@ module.exports = {
 		// Override logic
 		res.render = function (view, options, callback) {
 			if (typeof options === "object") {
-				options.msgs = function () {
-					return function (val, render) {
-						return parseMessage(render(val), langs, msgs);
-					};
-				};
+				options.msgs = mustacheFunc(langs,msgs);
 			}
 
 			// Continue with original render
@@ -178,4 +182,5 @@ module.exports = {
 		};
 		next();
 	},
+	mustacheFunc,
 };

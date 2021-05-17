@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>1Auth | All-In-One Authentication</title>
+		<title>{{#msgs}}aboutPageTitle{{/msgs}}</title>
 		<meta name="robots" content="index, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,64 +14,67 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>About 1Auth All-In-One Authentication</h1>
+			<h1>{{#msgs}}aboutMainHeading{{/msgs}}</h1>
 			<section id="about">
-				<h2>About</h2>
+				<h2>{{#msgs}}aboutSubHeading{{/msgs}}</h2>
 				<p>
-					1Auth is an all-in-one authentication client that we
-					designed to work seamlessly with any website. It currently
-					supports {{ clients.length }} clients with many more to
-					come.
+					{{#msgs}}aboutIntro{{/msgs}}
+					{{#msgs}}aboutClientCount|||{{clients.length}}{{/msgs}}
 				</p>
 			</section>
 			<section id="clients">
-				<h2>Supported Clients</h2>
-				<!--{{{ clients }}}-->
+				<h2>{{#msgs}}aboutClientsHeading{{/msgs}}</h2>
 				<ul id="auth-list">
 					{{#clients}}
 					<li class="auth-button">
 						{{#fontawesome}}
-						<i class="{{iconProvider}} fa-{{icon}}"></i
-						><span>{{ name }}</span>
+						<i class="{{iconProvider}} fa-{{icon}}"></i>
 						{{/fontawesome}} {{^fontawesome}}
 						<img
 							src="{{#svg}}/svg/{{/svg}}{{icon}}"
-							alt="{{ name }}"
+							alt="{{name}}"
 							height="18"
 							width="18"
-							name="{{ name }}"
-						/><span>{{ name }}</span>
+							name="{{name}}"
+						/>
 						{{/fontawesome}}
+						<span>{{name}}</span>
 					</li>
 					{{/clients}}
 				</ul>
 			</section>
 			<section id="developers">
-				<h2>For Developers</h2>
-				<p>
-					Implementing this in your own site is very easy. Simply
-					direct your users to this URL:
-				</p>
+				<h2>{{#msgs}}aboutDevelopersHeading{{/msgs}}</h2>
+				<p>{{#msgs}}aboutImpementation{{/msgs}}</p>
 				<pre class="hljs lang-http">
 https://auth.onedot.cf/auth?url=&lt;CALLBACK_URL&gt;</pre
 				>
 				<p>
-					After the user clicks on the link and finishes
-					authentication with us, we will redirect them to
-					<code>&lt;CALLBACK_URL&gt;</code>. There will be a new query
-					parameter: <code>code</code>. To retrive the user&#39;s
-					information, send the following HTTP request:
+					{{#msgs}}aboutAfterFinish|||<code>&lt;CALLBACK_URL&gt;</code>{{/msgs}}
+					{{#msgs}}aboutNewParam|||<code>code</code>{{/msgs}}
+					{{#msgs}}aboutGetInfo{{/msgs}}
 				</p>
 				<pre class="hljs lang-http">
 GET https://auth.onedot.cf/auth/backend/get_data/?code=&lt;CODE&gt;</pre
 				>
 				<p>
-					where <code>&lt;CODE&gt;</code> is the value of the new
-					search parameter.
+					{{#msgs}}aboutWhatCode|||<code>&lt;CODE&gt;</code>{{/msgs}}
 				</p>
-				<!--<p class="new"><strong>Language specification</strong> - Specify the language to use on pages by adding another parameter to the URL: <code>lang</code>. Its value should be a 2-letter lnguage code. It may be followed by a underscore and a 2-letter country code. If a language is not available, it will fallback to the non-country specific language, then to the users' preferred languge.</p>-->
+				<p class="new">
+					<strong>{{#msgs}}aboutLangsHeader{{/msgs}}</strong> -
+					{{#msgs}}aboutLangsHow|||<code>lang</code>{{/msgs}}
+					{{#msgs}}aboutLangsValue|||<code>en</code>|||<code>es</code>{{/msgs}}
+					{{#msgs}}aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>{{/msgs}}
+					{{#msgs}}aboutLangsFallback{{/msgs}}
+					<i>
+						{{#msgs}}aboutTranslations{{/msgs}}
+						<a href="https://www.transifex.com/1dot/1auth/">
+							{{#msgs}}aboutHelpTranslate{{/msgs}}
+						</a>
+					</i>
+				</p>
 				<br />
-				<p>More configuration options will come soon.</p>
+				<p>{{#msgs}}aboutMoreConfig{{/msgs}}</p>
 			</section>
 		</main>
 	</body>

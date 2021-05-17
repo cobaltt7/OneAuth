@@ -12,6 +12,7 @@ const database = new (require("@replit/database"))(),
 		service: "gmail",
 	}),
 	mustache = require("mustache"),
+	{ mustacheFunc } = require("../../l10n.js"),
 	path = require("path"),
 	retronid = require("retronid").generate;
 
@@ -65,9 +66,10 @@ module.exports = {
 								),
 								{
 									code,
+									msgs: mustacheFunc(req.langs),
 								},
 							),
-							subject: "1Auth Email Verification",
+							subject: req.msgs.emailSubject,
 							text: mustache.render(
 								fileSystem.readFileSync(
 									path.resolve(__dirname, "email.txt"),
@@ -75,6 +77,7 @@ module.exports = {
 								),
 								{
 									code,
+									msgs: mustacheFunc(req.langs),
 								},
 							),
 							// eslint-disable-next-line id-length

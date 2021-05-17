@@ -1,11 +1,14 @@
-1Auth Email Verification
-Your code is {{code}}. Don't share it with anyone else.
+--- 1AUTH ---
 
-What now?
-->	Copy your code
-->	Go back to 1Auth
-->	Paste it in the box
-->	You are now logged in!
-Doesn't work? Maybe it's been too long. Try starting over!
+{{#msgs}}emailSubject{{/msgs}}
+-------------
+{{#msgs}}emailCodeIs|||{{code}}{{/msgs}} {{#msgs}}emailNoShare{{/msgs}}
 
-Not expecting this email? Just ignore it. Don't worry, nothing will happen.
+{{#msgs}}emailNow{{/msgs}}
+->	{{#msgs}}emailCopyCode{{/msgs}}
+->	{{#msgs}}emailGoBack{{/msgs}}
+->	{{#msgs}}emailPasteCode{{/msgs}}
+->	{{#msgs}}emailReviewInfo{{/msgs}}
+{{#msgs}}emailTimeOut{{/msgs}}
+
+{{#msgs}}emailUnexpected{{/msgs}}

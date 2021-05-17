@@ -75,17 +75,10 @@ router.get("/humans.txt", (_, res) => {
 });
 
 // CSS
-const CleanCSS = require("clean-css");
-const cleanCSS = new CleanCSS(),
-	fileSystem = require("fs");
-
-const css = cleanCSS.minify(
-	fileSystem.readFileSync(path.resolve(__dirname, "style.css"), "utf-8"),
-).styles;
-
 router.get("/style.css", (_, res) => {
 	res.setHeader("content-type", "text/css");
-	res.send(css);
+	// TODO: minify the file. We were using CleanCSS (thanks @GrahamSH-LLK) but I couldn't do that if we wanted to translate `content` properties. There is probably a PostCSS plugin, I just need to find it.
+	res.render(path.resolve(__dirname, "style.css"));
 });
 
 module.exports = router;

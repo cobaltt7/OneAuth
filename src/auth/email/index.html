@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Sign in with email | 1Auth</title>
+		<title>{{#msgs}}emailPageTitle{{/msgs}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<link rel="preload" href="/svg/loading" as="image" />
 		<noscript>
@@ -15,9 +15,9 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>Sign in with Email</h1>
+			<h1>{{#msgs}}emailHeading{{/msgs}}</h1>
 			<label id="note" for="email-address"
-				>Enter your email to continue</label
+				>{{#msgs}}emailEnterPrompt{{/msgs}}</label
 			>
 			<form action method="POST">
 				<input
@@ -28,7 +28,9 @@
 					required="true"
 					placeholder="Email address"
 				/>
-				<button id="submit" type="submit">Submit</button>
+				<button id="submit" type="submit">
+					{{#msgs}}emailSubmit{{/msgs}}
+				</button>
 			</form>
 		</main>
 		<script>
@@ -90,11 +92,12 @@
 							type: "hidden",
 							value: email,
 						}),
-						Object.assign(document.createElement("input"), {
+						Object.assign(document.createElement("button"), {
 							// Submit button
 
 							// eslint-disable-next-line id-length
 							id: "submit",
+							innerText: "{{#msgs}}emailSubmit{{/msgs}}",
 							type: "submit",
 						})
 					);
@@ -105,8 +108,7 @@
 							htmlFor: "code",
 							// eslint-disable-next-line id-length
 							id: "note",
-							innerText:
-								"Enter the code we sent to you to continue",
+							innerText: "{{#msgs}}emailEnterCode{{/msgs}}",
 						}),
 						newForm
 					);

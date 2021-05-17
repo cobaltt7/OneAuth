@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Outdated browser | 1Auth</title>
+		<title>{{#msgs}}errorOldPageTitle{{/msgs}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		{{> googletagmanager}}
 	</head>
@@ -20,9 +20,9 @@
 		<!-- End Google Tag Manager -->
 		{{> nav}}
 		<main>
-			<h1>You are using an outdated browser!</h1>
-			<p>For a better experience, please keep your browser up to date.</p>
-			<h2>Modern browsers:</h2>
+			<h1>{{#msgs}}errorOldHeading{{/msgs}}</h1>
+			<p>{{#msgs}}errorOldWhy|||<u>{{all}}</u>{{/msgs}}</p>
+			<h2>{{#msgs}}errorOldModern{{/msgs}}</h2>
 			<ul>
 				<li>
 					<a href="https://www.google.com/chrome/">Google Chrome</a>
@@ -42,10 +42,9 @@
 				</li>
 			</ul>
 			<p>
-				If you are using a modern browser, make sure JavaScript and
-				cookies are enabled/allowed.
+				{{#msgs}}errorOldMistake{{/msgs}}
 			</p>
-			<p><a href="https://browsehappy.com/">Learn more</a></p>
+			<p><a href="https://browsehappy.com/">{{#msgs}}errorOldMore{{/msgs}}</a></p>
 		</main>
 	</body>
 </html>

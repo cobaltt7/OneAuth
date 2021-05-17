@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Allow access? | 1Auth</title>
+		<title>{{#msgs}}allowPageTitle{{/msgs}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,21 +14,21 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>Allow access?</h1>
-			<p>Do you want {{host}} to access your {{client}} data?</p>
+			<h1>{{#msgs}}allowHeading{{/msgs}}</h1>
+			<p>{{#msgs}}allowQuestion|||{{host}}{{/msgs}}</p>
 			<div class="buttons-container">
 				<a
 					id="allow"
 					href="/auth/backend/send_data?client={{client}}&url={{encodedUrl}}&token={{token}}"
-					>Allow
+					>{{#msgs}}allowButtonA{{/msgs}}
 					<i class="far fa-check-circle"></i>
 				</a>
 				<a id="deny" href="{{url}}"
-					>Deny
+					>{{#msgs}}allowButtonD{{/msgs}}
 					<i class="far fa-times-circle"></i>
 				</a>
 			</div>
-			<p>Here is what would be sent:</p>
+			<p>{{#msgs}}allowDataNote|||{{client}}{{/msgs}}</p>
 			<pre class="hljs lang-json">{{data}}</pre>
 		</main>
 	</body>

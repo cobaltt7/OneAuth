@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>404 Not Found | 1Auth</title>
+		<title>{{#msgs}}error404PageTitle{{/msgs}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,8 +14,8 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1 class="text-3xl">404 Not Found</h1>
-			<p>We can't find that page.</p>
+			<h1>{{#msgs}}error404Heading{{/msgs}}</h1>
+			<p>{{#msgs}}error404Message{{/msgs}}</p>
 		</main>
 	</body>
 </html>

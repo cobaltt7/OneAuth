@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Sign in with Replit | 1Auth</title>
+		<title>{{#msgs}}replitPageTitle{{/msgs}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,8 +14,9 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>Sign in with Replit</h1>
-			<h2>Click anywhere to get started</h2>
+			<h1>{{#msgs}}replitHeading{{/msgs}}</h1>
+			<h2>{{#msgs}}replitClickAnywhere{{/msgs}}</h2>
+			<p>{{#msgs}}replitUnblockPopups{{/msgs}}</p>
 		</main>
 		<div
 			id="modalContainer"
@@ -36,6 +37,7 @@
 				"
 			>
 				<button
+					type="button"
 					id="closeModal"
 					class="
 						float-right
@@ -50,10 +52,9 @@
 				>
 					&times;
 				</button>
-				<p>If you close the window, we can't authenticate you!</p>
+				<p>{{#msgs}}replitNoClose{{/msgs}}</p>
 				<p>
-					Please close this popup, then reopen the window by clicking
-					anywhere.
+					{{#msgs}}replitReopen{{/msgs}}
 				</p>
 			</div>
 		</div>
@@ -64,7 +65,6 @@
 
 				// Get the <span> element that closes the modal
 				const close = document.getElementById("closeModal"),
-					html = document.documentElement,
 					// Get the modal
 					modal = document.getElementById("modalContainer");
 

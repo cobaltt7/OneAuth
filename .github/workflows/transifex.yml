@@ -18,8 +18,8 @@ jobs:
               if: always()
               uses: actions/checkout@main
               with:
-                  ref: ${{ github.head_ref }}
-                  token: ${{ secrets.WGYTBOT }}
+                  ref: ${{github.head_ref}}
+                  token: ${{secrets.WGYTBOT}}
 
             - name: Setup Python
               if: always()
@@ -35,7 +35,7 @@ jobs:
               if: always()
               run:
                   tx init --host='https://www.transifex.com' --user=api
-                  --force-save --skipsetup --token=${{ secrets.TRANSIFEX }}
+                  --force-save --skipsetup --token=${{secrets.TRANSIFEX}}
                   --no-interactive
 
             - name: Configure Transifex

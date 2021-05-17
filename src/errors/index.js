@@ -8,8 +8,10 @@ router.get("/error", (_, res) => {
 	res.status(500).render(path.resolve(__dirname, "error.html"));
 });
 
-router.get("/old", (_, res) => {
-	res.status(400).render(path.resolve(__dirname, "old.html"));
+router.get("/old", (req, res) => {
+	res.status(400).render(path.resolve(__dirname, "old.html"), {
+		all: req.msgs.errorOldAll,
+	});
 });
 
 router.use((_, res) => {

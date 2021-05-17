@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>1Auth Email Verification</title>
+		<title>{{#msgs}}emailSubject{{/msgs}}</title>
 		<style>
 			body {
 				font-family: ui-sans-serif, system-ui, -apple-system,
@@ -10,33 +10,37 @@
 					Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
 					"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 			}
+			img {
+				max-width: 550px;
+			}
+			div {
+				font-size: 1.3em;
+			}
+			b {
+				font-size: 1.1em;
+			}
 		</style>
 	</head>
 	<body>
 		<img
 			src="https://cdn.onedot.cf/SVG/NoPadding/1Auth%20NoPad.svg"
-			alt="1Auth logo"
-			style="max-width: 550px"
+			alt="{{#msgs}}logoAlt{{/msgs}}"
 		/>
-		<div style="font-size: 1.3em">
-			<h1>1Auth Email Verification</h1>
+		<div>
+			<h1>{{#msgs}}emailSubject{{/msgs}}</h1>
 			<h2>
-				Your code is {{code}}. <u>Don't share it with anyone else.</u>
+				{{#msgs}}emailCodeIs|||{{code}}{{/msgs}}
+				<u>{{#msgs}}emailNoShare{{/msgs}}</u>
 			</h2>
-			<h3>What now?</h3>
+			<h3>{{#msgs}}emailNow{{/msgs}}</h3>
 			<ul>
-				<li>Copy your code</li>
-				<li>Go back to 1Auth</li>
-				<li>Paste it in the box</li>
-				<li>You are now logged in!</li>
+				<li>{{#msgs}}emailCopyCode{{/msgs}}</li>
+				<li>{{#msgs}}emailGoBack{{/msgs}}</li>
+				<li>{{#msgs}}emailPasteCode{{/msgs}}</li>
+				<li>{{#msgs}}emailReviewInfo{{/msgs}}</li>
 			</ul>
-			<p>Doesn't work? Maybe it's been too long. Try starting over!</p>
+			<p>{{#msgs}}emailTimeOut{{/msgs}}</p>
 		</div>
-		<b style="font-size: 1.1em">
-			<i
-				>Not expecting this email? Just ignore it. Don't worry, nothing
-				will happen.</i
-			>
-		</b>
+		<b><i>{{#msgs}}emailUnexpected{{/msgs}}</i></b>
 	</body>
 </html>

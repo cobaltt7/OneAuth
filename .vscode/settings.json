@@ -182,13 +182,37 @@
 	"prettier.requireConfig": true,
 	"grammarly.overrides": [
 		{
-			"files": ["**/README.md"],
+			"files": [
+				"**/README.md"
+			],
 			"config": {
 				"audience": "general",
 				"dialect": "american",
 				"domain": "academic",
-				"emotions": ["neutral"],
-				"goals": ["inform"]
+				"emotions": [
+					"neutral"
+				],
+				"goals": [
+					"inform"
+				]
+			}
+		},
+		{
+			"files": [
+				"**/_locales/en_US.json"
+			],
+			"config": {
+				"audience": "general",
+				"dialect": "american",
+				"domain": "general",
+				"emotions": [
+					"neutral",
+					"confident",
+					"joyful"
+				],
+				"goals": [
+					"inform"
+				]
 			}
 		}
 	]

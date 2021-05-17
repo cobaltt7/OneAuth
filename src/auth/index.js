@@ -58,7 +58,7 @@ const getClient = (requestedClient) =>
 		}
 		return null;
 	},
-	sendResponse = async (client, tokenOrData, url, res) => {
+	sendResponse = async (client, tokenOrData, url, res, noDataMsg) => {
 		const { rawData } = getClient(client);
 		let data, token;
 		if (rawData) {
@@ -66,7 +66,7 @@ const getClient = (requestedClient) =>
 			token = retronid.generate();
 			await database.set(`RETRIEVE_${token}`, data);
 		} else {
-			data = "we can't show this data right now, sorry about that.";
+			data = noDataMsg;
 			token = tokenOrData;
 		}
 		try {
@@ -120,7 +120,7 @@ for (const http of [
 			return res.status(405);
 		}
 		return client[http](req, res, (...args) =>
-			sendResponse(req.params.client, ...args),
+			sendResponse(req.params.client, ...args, req.msgs.allowDataHidden),
 		);
 	});
 }
