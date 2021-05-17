@@ -172,14 +172,7 @@ module.exports = {
 		const { render: realRender } = res;
 
 		// Override logic
-		res.render = function (
-			view,
-			options = {},
-			callback = function (err, str) {
-				if (err) return req.next(err);
-				self.send(str);
-			},
-		) {
+		res.render = function (view, options = {}, callback = undefined) {
 			options.msgs = mustacheFunc(langs, msgs);
 
 			// Continue with original render

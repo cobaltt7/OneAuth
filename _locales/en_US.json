@@ -136,7 +136,7 @@
 	},
 	"errorOldWhy": {
 		"string": "For a better experience on {0} sites (not just ours), please keep your browser up to date.",
-		"developer_comment": "The placeholder is always the word \"all\". (It had to be pulled out into a separate string so that it can be underlined.)"
+		"developer_comment": "The placeholder is always the word \"all\". (I had to move it out into a separate string so that I could underline it.)"
 	},
 	"errorOldAll": {
 		"string": "all",
@@ -146,7 +146,7 @@
 		"string": "Modern browsers:"
 	},
 	"errorOldMistake": {
-		"string": "If you are using a modern browser, please make sure JavaScript is enabled and allowed on this site."
+		"string": "If you are using a modern browser, please make sure that you have enabled and allowed JavaScript on this site."
 	},
 	"errorOldMore": {
 		"string": "Learn more"
@@ -164,7 +164,7 @@
 		"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
 	},
 	"aboutClientCount": {
-		"string": "It currently supports {0} clients with many more to come."
+		"string": "Right now, we support {0} clients with many more to come."
 	},
 	"aboutClientsHeading": {
 		"string": "Supported Clients"
@@ -173,7 +173,7 @@
 		"string": "For Developers"
 	},
 	"aboutImpementation": {
-		"string": "Implementing this in your site is very easy. Simply direct your users to this URL:"
+		"string": "Implementing this in your site is easy. When your users click \"Sign in\" on your site, direct them to this URL:"
 	},
 	"aboutAfterFinish": {
 		"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
@@ -200,7 +200,7 @@
 		"string": "Its value should be a 2-letter language code like {0} or {1}."
 	},
 	"aboutLangsCountry": {
-		"string": "It may be followed by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
+		"string": "You may follow it by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
 	},
 	"aboutLangsFallback": {
 		"string": "If a language is not available, it will fall back to the non-country specific language, then to the users' browser language."
@@ -209,7 +209,7 @@
 		"string": "NEW!!!"
 	},
 	"aboutTranslations": {
-		"string": "Please not that we currently do not have very many translations, if any. This will change as our translation team grows."
+		"string": "Please not that we do not have many translations, if any. This will change as our translation team grows."
 	},
 	"aboutHelpTranslate": {
 		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click \"Join team\". Thanks for your eagerness to help!"

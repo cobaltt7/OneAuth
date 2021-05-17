@@ -42,9 +42,9 @@ jobs:
               if: always()
               run:
                   tx config mapping --resource=1auth.mainStrings --source
-                  --language=en --type=STRUCTURED_JSON --minimum-perc=50
-                  --source-language=en --source-file=_locales/en_US.json
-                  --execute --expression="_locales/<lang>.json"
+                  --language=en --type=STRUCTURED_JSON --source-language=en
+                  --source-file=_locales/en_US.json --execute
+                  --expression="_locales/<lang>.json"
 
             - name: Push
               if: always()

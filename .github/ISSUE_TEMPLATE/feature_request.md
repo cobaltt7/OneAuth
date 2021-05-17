@@ -12,7 +12,7 @@ assignees: ""
 
 _A clear and concise description of the feature._
 
-## Reasons to implement this feature
+## Reasons to add this feature
 
 _This feature would be good because..._
 
@@ -20,6 +20,6 @@ _This feature would be good because..._
 
 _A clear and concise description of any alternative solutions or features._
 
-## Additional context
+## Additional information, if any
 
 _Any other context and/or screenshots about the feature request here._
