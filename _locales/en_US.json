@@ -66,7 +66,7 @@
 		"string": "Please close this popup, then reopen the window by clicking anywhere."
 	},
 	"replitUnblockPopups": {
-		"string": "If nothing happens, please make sure pop-ups are not blocked, then reload the page."
+		"string": "If nothing happens, please make sure popups are not blocked, then reload the page."
 	},
 	"allowPageTitle": {
 		"string": "Allow access? | 1Auth"

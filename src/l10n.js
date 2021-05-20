@@ -1,4 +1,4 @@
-/** @file Handles Localization of the site. */
+/** @file Localization of the site. */
 
 const BASE_LANG = "en_US";
 
@@ -204,12 +204,11 @@ module.exports = {
 	getFormatter,
 	getMsgs,
 	/**
-	 * Express middleware function that handles localization.
+	 * Express l10n middleware.
 	 *
-	 * @param {import("../types").ExpressRequest} req - Information about the HTTP request.
-	 * @param {import("../types").ExpressResponse} res - Functions to send a response to the browser.
-	 * @param {import("../types").ExpressNext} next - Function to continue processing the request
-	 *   using other functions.
+	 * @param {import("../types").ExpressRequest} req - Express request object.
+	 * @param {import("../types").ExpressResponse} res - Express response object.
+	 * @param {import("../types").ExpressNext} next - Express next function.
 	 */
 	middleware(req, res, next) {
 		/** @type {string[]} */

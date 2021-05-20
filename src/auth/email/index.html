@@ -38,10 +38,9 @@
 			(function () {
 				const form = document.querySelector("form");
 				/**
-				 * Code that handles submitting the form.
+				 * Code that submits the form in the background.
 				 *
 				 * @param {Event} event - The Submit event.
-				 * @returns {undefined}
 				 */
 				async function onSubmit(event) {
 					form.removeEventListener("submit", onSubmit);

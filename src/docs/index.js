@@ -1,4 +1,4 @@
-/** @file Handles Docs. */
+/** @file Documentation. */
 
 const fileSystem = require("fs"),
 	highlightjs = require("highlight.js"),

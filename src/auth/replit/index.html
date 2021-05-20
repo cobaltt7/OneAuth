@@ -67,10 +67,9 @@
 					modal = document.getElementById("modalContainer");
 
 				/**
-				 * Pop-up message handler, AKA authentication finished handler.
+				 * Popup message handler, AKA authentication finished handler.
 				 *
-				 * @param {MouseEvent} message - Event/message from the pop-up.
-				 * @returns {undefined}
+				 * @param {MouseEvent} message - Message from the popup.
 				 */
 				function authComplete(message) {
 					if (message.data !== "auth_complete") {
@@ -85,9 +84,7 @@
 				}
 
 				/**
-				 * Function that opens the pop-up.
-				 *
-				 * @returns {undefined}
+				 * Opens the popup.
 				 */
 				function openPopup() {
 					authWindow = open(
