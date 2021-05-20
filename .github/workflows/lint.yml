@@ -43,11 +43,11 @@ jobs:
 
             - name: Spellchecker CLI
               if: always()
-              run: npn run lint:spellchecker-cli
+              run: npm run lint:spellchecker-cli
 
             - name: Typescript
               if: always()
-              run: npn run lint:typescript
+              run: npm run lint:typescript
 
             - name: write good
               if: always()
