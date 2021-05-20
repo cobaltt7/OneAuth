@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#msgs}}emailPageTitle{{/msgs}}</title>
+		<title>{{#message}}emailPageTitle{{/message}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<link rel="preload" href="/svg/loading" as="image" />
 		<noscript>
@@ -15,9 +15,9 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>{{#msgs}}emailHeading{{/msgs}}</h1>
+			<h1>{{#message}}emailHeading{{/message}}</h1>
 			<label id="note" for="email-address"
-				>{{#msgs}}emailEnterPrompt{{/msgs}}</label
+				>{{#message}}emailEnterPrompt{{/message}}</label
 			>
 			<form action method="POST">
 				<input
@@ -26,10 +26,10 @@
 					type="email"
 					autocomplete="email"
 					required="true"
-					placeholder="{{#msgs}}emailPlaceholder{{/msgs}}"
+					placeholder="{{#message}}emailPlaceholder{{/message}}"
 				/>
 				<button id="submit" type="submit">
-					{{#msgs}}emailSubmit{{/msgs}}
+					{{#message}}emailSubmit{{/message}}
 				</button>
 			</form>
 		</main>
@@ -37,8 +37,14 @@
 			"use strict";
 			(function () {
 				const form = document.querySelector("form");
-				async function eventListener(event) {
-					form.removeEventListener("submit", eventListener);
+				/**
+				 * Code that handles submitting the form.
+				 *
+				 * @param {Event} event - The Submit event.
+				 * @returns {undefined}
+				 */
+				async function onSubmit(event) {
+					form.removeEventListener("submit", onSubmit);
 					event.preventDefault();
 
 					// Show loading icon
@@ -97,7 +103,7 @@
 
 							// eslint-disable-next-line id-length
 							id: "submit",
-							innerText: "{{#msgs}}emailSubmit{{/msgs}}",
+							innerText: "{{#message}}emailSubmit{{/message}}",
 							type: "submit",
 						})
 					);
@@ -108,12 +114,12 @@
 							htmlFor: "code",
 							// eslint-disable-next-line id-length
 							id: "note",
-							innerText: "{{#msgs}}emailEnterCode{{/msgs}}",
+							innerText: "{{#message}}emailEnterCode{{/message}}",
 						}),
 						newForm
 					);
 				}
-				form.addEventListener("submit", eventListener);
+				form.addEventListener("submit", onSubmit);
 			})();
 		</script>
 	</body>

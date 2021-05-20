@@ -1,5 +1,6 @@
-"use strict";
+/** @file Scratch Authentication handler. */
 
+/** @type {import("../../../types").Auth} Auth */
 module.exports = {
 	icon: "https://scratch.mit.edu/favicon.ico",
 	iconProvider: "url",
@@ -17,7 +18,7 @@ module.exports = {
 				if (req.query.verified === "true") {
 					return sendResponse(
 						{ username: req.query.username },
-						req.query.url,
+						`${req.query.url}`,
 						res,
 					);
 				}

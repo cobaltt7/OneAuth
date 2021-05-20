@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#msgs}}aboutPageTitle{{/msgs}}</title>
+		<title>{{#message}}aboutPageTitle{{/message}}</title>
 		<meta name="robots" content="index, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,16 +14,16 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>{{#msgs}}aboutMainHeading{{/msgs}}</h1>
+			<h1>{{#message}}aboutMainHeading{{/message}}</h1>
 			<section id="about">
-				<h2>{{#msgs}}aboutSubHeading{{/msgs}}</h2>
+				<h2>{{#message}}aboutSubHeading{{/message}}</h2>
 				<p>
-					{{#msgs}}aboutIntro{{/msgs}}
-					{{#msgs}}aboutClientCount|||{{clients.length}}{{/msgs}}
+					{{#message}}aboutIntro{{/message}}
+					{{#message}}aboutClientCount|||{{clients.length}}{{/message}}
 				</p>
 			</section>
 			<section id="clients">
-				<h2>{{#msgs}}aboutClientsHeading{{/msgs}}</h2>
+				<h2>{{#message}}aboutClientsHeading{{/message}}</h2>
 				<ul id="auth-list">
 					{{#clients}}
 					<li class="auth-button">
@@ -44,37 +44,37 @@
 				</ul>
 			</section>
 			<section id="developers">
-				<h2>{{#msgs}}aboutDevelopersHeading{{/msgs}}</h2>
-				<p>{{#msgs}}aboutImpementation{{/msgs}}</p>
+				<h2>{{#message}}aboutDevelopersHeading{{/message}}</h2>
+				<p>{{#message}}aboutImpementation{{/message}}</p>
 				<pre class="hljs lang-http">
 https://auth.onedot.cf/auth?url=&lt;CALLBACK_URL&gt;</pre
 				>
 				<p>
-					{{#msgs}}aboutAfterFinish|||<code>&lt;CALLBACK_URL&gt;</code>{{/msgs}}
-					{{#msgs}}aboutNewParam|||<code>code</code>{{/msgs}}
-					{{#msgs}}aboutGetInfo{{/msgs}}
+					{{#message}}aboutAfterFinish|||<code>&lt;CALLBACK_URL&gt;</code>{{/message}}
+					{{#message}}aboutNewParam|||<code>code</code>{{/message}}
+					{{#message}}aboutGetInfo{{/message}}
 				</p>
 				<pre class="hljs lang-http">
 GET https://auth.onedot.cf/auth/backend/get_data/?code=&lt;CODE&gt;</pre
 				>
 				<p>
-					{{#msgs}}aboutWhatCode|||<code>&lt;CODE&gt;</code>{{/msgs}}
+					{{#message}}aboutWhatCode|||<code>&lt;CODE&gt;</code>{{/message}}
 				</p>
 				<p class="new">
-					<strong>{{#msgs}}aboutLangsHeader{{/msgs}}</strong> -
-					{{#msgs}}aboutLangsHow|||<code>lang</code>{{/msgs}}
-					{{#msgs}}aboutLangsValue|||<code>en</code>|||<code>es</code>{{/msgs}}
-					{{#msgs}}aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>{{/msgs}}
-					{{#msgs}}aboutLangsFallback{{/msgs}}
+					<strong>{{#message}}aboutLangsHeader{{/message}}</strong> -
+					{{#message}}aboutLangsHow|||<code>lang</code>{{/message}}
+					{{#message}}aboutLangsValue|||<code>en</code>|||<code>es</code>{{/message}}
+					{{#message}}aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>{{/message}}
+					{{#message}}aboutLangsFallback{{/message}}
 					<i>
-						{{#msgs}}aboutTranslations{{/msgs}}
+						{{#message}}aboutTranslations{{/message}}
 						<a href="https://www.transifex.com/1dot/1auth/">
-							{{#msgs}}aboutHelpTranslate{{/msgs}}
+							{{#message}}aboutHelpTranslate{{/message}}
 						</a>
 					</i>
 				</p>
 				<br />
-				<p>{{#msgs}}aboutMoreConfig{{/msgs}}</p>
+				<p>{{#message}}aboutMoreConfig{{/message}}</p>
 			</section>
 		</main>
 	</body>

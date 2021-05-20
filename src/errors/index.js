@@ -1,4 +1,4 @@
-"use strict";
+/** @file Shows Error pages when errors occur. */
 
 const path = require("path"),
 	// eslint-disable-next-line new-cap
@@ -10,7 +10,7 @@ router.get("/error", (_, res) => {
 
 router.get("/old", (req, res) => {
 	res.status(400).render(path.resolve(__dirname, "old.html"), {
-		all: req.msgs.errorOldAll,
+		all: req.messages.errorOldAll,
 	});
 });
 

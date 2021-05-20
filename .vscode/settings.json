@@ -45,7 +45,7 @@
 	"es6-css-minify.minifyOnSave": "exists",
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,
-	"eslint.validate": ["javascript", "html"],
+	"eslint.validate": ["javascript", "html", "json"],
 	"files.eol": "\n",
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
@@ -180,26 +180,25 @@
 		"MD030": false
 	},
 	"prettier.requireConfig": true,
-	"grammarly.overrides": [
-		{
-			"files": ["**/README.md"],
-			"config": {
-				"audience": "general",
-				"dialect": "american",
-				"domain": "academic",
-				"emotions": ["neutral"],
-				"goals": ["inform"]
-			}
-		},
-		{
-			"files": ["**/_locales/en_US.json"],
-			"config": {
-				"audience": "general",
-				"dialect": "american",
-				"domain": "general",
-				"emotions": ["neutral", "confident", "joyful"],
-				"goals": ["inform"]
-			}
+	"grammarly.audience": "general",
+	"grammarly.diagnostics": {
+		"[markdown]": {
+			"ignore": ["code"]
 		}
-	]
+	},
+	"grammarly.domain": "technical",
+	"grammarly.emotions": ["neutral", "confident", "friendly"],
+	"grammarly.goals": ["inform"],
+	"grammarly.showExamples": true,
+	"grammarly.userWords": [
+		"svg",
+		"iconProvider",
+		"url",
+		"mkactivity",
+		"mkcol",
+		"req",
+		"sendResponse",
+		"rawData"
+	],
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#msgs}}replitPageTitle{{/msgs}}</title>
+		<title>{{#message}}replitPageTitle{{/message}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,9 +14,9 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>{{#msgs}}replitHeading{{/msgs}}</h1>
-			<h2>{{#msgs}}replitClickAnywhere{{/msgs}}</h2>
-			<p>{{#msgs}}replitUnblockPopups{{/msgs}}</p>
+			<h1>{{#message}}replitHeading{{/message}}</h1>
+			<h2>{{#message}}replitClickAnywhere{{/message}}</h2>
+			<p>{{#message}}replitUnblockPopups{{/message}}</p>
 		</main>
 		<div
 			id="modalContainer"
@@ -52,8 +52,8 @@
 				>
 					&times;
 				</button>
-				<p>{{#msgs}}replitNoClose{{/msgs}}</p>
-				<p>{{#msgs}}replitReopen{{/msgs}}</p>
+				<p>{{#message}}replitNoClose{{/message}}</p>
+				<p>{{#message}}replitReopen{{/message}}</p>
 			</div>
 		</div>
 		<script>
@@ -66,8 +66,14 @@
 					// Get the modal
 					modal = document.getElementById("modalContainer");
 
-				function authComplete(event) {
-					if (event.data !== "auth_complete") {
+				/**
+				 * Pop-up message handler, AKA authentication finished handler.
+				 *
+				 * @param {MouseEvent} message - Event/message from the pop-up.
+				 * @returns {undefined}
+				 */
+				function authComplete(message) {
+					if (message.data !== "auth_complete") {
 						return;
 					}
 
@@ -78,6 +84,11 @@
 					location.reload();
 				}
 
+				/**
+				 * Function that opens the pop-up.
+				 *
+				 * @returns {undefined}
+				 */
 				function openPopup() {
 					authWindow = open(
 						`https://replit.com/auth_with_repl_site?domain=${location.host}`,
@@ -101,7 +112,6 @@
 				}
 
 				// When the user clicks on (x), close the modal
-
 				close.addEventListener("click", (event) => {
 					event.stopPropagation();
 					modal.style.display = "none";

@@ -1,4 +1,4 @@
-"use strict";
+/** @file Tailwind Configuration file. */
 
 module.exports = {
 	darkMode: "class",

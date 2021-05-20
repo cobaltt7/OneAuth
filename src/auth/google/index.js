@@ -1,31 +1,40 @@
-"use strict";
+/** @file Google Authentication handler. */
 
 const atob = require("atob"),
-	fetch = require("node-fetch");
+	nodeFetch = require("node-fetch");
+const fetch = nodeFetch.default ?? nodeFetch;
 require("dotenv").config();
 
+/** @type {import("../../../types").Auth} Auth */
 module.exports = {
 	getData: async (token) => {
-		const filteredInfo = {},
-			{ id_token: idToken, error } = await fetch(
-				"https://oauth2.googleapis.com/token",
-				{
-					body:
-						`code=${token}` +
-						`&client_id=${process.env.googleAppUrl}` +
-						`&client_secret=${process.env.googleSecret}` +
-						"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
-						"&grant_type=authorization_code",
-					headers: {
-						"Content-Type": "application/x-www-form-urlencoded",
-					},
-					method: "POST",
+		const { id_token: idToken, error } = await fetch(
+			"https://oauth2.googleapis.com/token",
+			{
+				body:
+					`code=${token}` +
+					`&client_id=${process.env.googleAppUrl}` +
+					`&client_secret=${process.env.googleSecret}` +
+					"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
+					"&grant_type=authorization_code",
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
 				},
-			).then((res) => res.json());
+				method: "POST",
+			},
+		).then(
+			(
+				/** @type {any} */
+				res,
+			) => res.json(),
+		);
 		if (error || !idToken) {
 			return error;
 		}
-		const info = JSON.parse(atob(idToken.split(".")[1]));
+
+		/** @type {{ [key: string]: string }} */
+		const filteredInfo = {},
+			info = JSON.parse(atob(idToken.split(".")[1]));
 		for (const item in info) {
 			if (
 				[
@@ -62,7 +71,7 @@ module.exports = {
 		{
 			backendPage: "google",
 			get: (req, res, sendResponse) => {
-				sendResponse(req.query.code, req.query.state, res);
+				sendResponse(`${req.query.code}`, `${req.query.state}`, res);
 			},
 		},
 	],

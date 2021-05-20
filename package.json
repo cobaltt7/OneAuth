@@ -19,10 +19,11 @@
 	"author": "OneDot",
 	"main": "src/index.js",
 	"scripts": {
-		"lint": "npm run lint:prettier; npm run lint:eslint; npm run lint:spellchecker-cli; npm run lint:write_good",
-		"lint:eslint": "npx eslint --fix .",
-		"lint:prettier": "npx prettier --write . **.svg **.sass",
+		"lint": "npm run lint:prettier; npm run lint:eslint; npm run lint:spellchecker-cli; npm run lint typescript; npm run lint:write_good",
+		"lint:eslint": "npx eslint --ignore-pattern .gitignore --fix .",
+		"lint:prettier": "npx prettier --ignore-path .gitignore --write . **.svg **.sass",
 		"lint:spellchecker-cli": "npx spellchecker-cli *.md _locales/en_US.json .github/**/*.md .github/*.md --dictionaries dictionary.txt",
+		"lint:typescript": "npx typescript --project jsconfig.json",
 		"lint:write_good": "find . -path ./node_modules -prune -false -o -name '*.md' | xargs -L1 npm run lint:write_good:config; npm run lint:write_good:config _locales/en_US.json",
 		"lint:write_good:config": "npx write-good --parse",
 		"start": "node --trace-warnings --harmony src/index.js",
@@ -43,6 +44,8 @@
 		"tabWidth": 4,
 		"trailingComma": "all",
 		"useTabs": true,
+		"jsdocDescriptionWithDot": true,
+		"jsdocPrintWidth": 100,
 		"jsxBracketSameLine": false,
 		"vueIndentScriptAndStyle": true,
 		"overrides": [
@@ -73,6 +76,9 @@
 					"proseWrap": "never"
 				}
 			}
+		],
+		"plugins": [
+			"prettier-plugin-jsdoc"
 		]
 	},
 	"dependencies": {
@@ -109,16 +115,18 @@
 		"@types/marked": "^2.0.2",
 		"@types/mustache": "^4.1.1",
 		"@types/mustache-express": "^1.2.1",
-		"@types/node": "14.14.44",
+		"@types/node": "^14.14.44",
 		"@types/node-fetch": "^2.5.10",
 		"@types/nodemailer": "^6.4.1",
-		"@types/postcss-import": "^12.0.0",
 		"@types/serve-index": "^1.7.30",
 		"autoprefixer": "^10.2.5",
+		"css-mqpacker": "^7.0.0",
+		"cssnano": "^5.0.3",
 		"eslint": "^7.26.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-compat": "^3.9.0",
 		"eslint-plugin-html": "^6.1.2",
+		"eslint-plugin-jsdoc": "^34.7.0",
 		"eslint-plugin-markdown": "^2.1.0",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-optimize-regex": "^1.2.0",
@@ -134,8 +142,10 @@
 		"postcss-scss": "^3.0.5",
 		"postcss-sort-media-queries": "^3.9.10",
 		"prettier": "^2.3.0",
+		"prettier-plugin-jsdoc": "^0.3.22",
 		"spellchecker-cli": "^4.4.0",
 		"tailwindcss": "^2.1.2",
+		"typescript": "^4.2.4",
 		"write-good": "^1.0.8"
 	},
 	"engines": {
@@ -147,5 +157,26 @@
 		"> 0.1% in us",
 		"maintained node versions",
 		"unreleased versions"
-	]
+	],
+	"postcss": {
+		"map": false,
+		"parser": "postcss-scss",
+		"plugins": {
+			"postcss-map-get": {},
+			"postcss-import": {},
+			"tailwindcss": {},
+			"postcss-advanced-variables": {},
+			"postcss-nested": {},
+			"postcss-sort-media-queries": {},
+			"autoprefixer": {},
+			"css-mqpacker": {},
+			"cssnano": {
+				"autoprefixer": true,
+				"discardUnused": true,
+				"mergeIdents": true,
+				"reduceIdents": true,
+				"zindex": true
+			}
+		}
+	}
 }

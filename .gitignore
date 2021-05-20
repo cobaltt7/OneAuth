@@ -1,3 +1,5 @@
+# !! This file is the Ignore file not just for Git, but also for ESLint and Pretier !!
+
 .DS_STORE
 
 # this is generated file

@@ -31,7 +31,7 @@ jobs:
 
             - name: Install
               if: always()
-              run: npm install -D
+              run: npm install
 
             - name: Prettier
               if: always()
@@ -44,6 +44,10 @@ jobs:
             - name: Spellchecker CLI
               if: always()
               run: npn run lint:spellchecker-cli
+
+            - name: Typescript
+              if: always()
+              run: npn run lint:typescript
 
             - name: write good
               if: always()

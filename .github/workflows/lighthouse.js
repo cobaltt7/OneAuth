@@ -27,6 +27,5 @@ data.forEach((result) => {
 octokit.issues.createComment({
 	...github.context.repo,
 	body: OUTPUT,
-	// eslint-disable-next-line camelcase
 	issue_number: "29",
 });

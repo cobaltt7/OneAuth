@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#msgs}}signinPageTitle{{/msgs}}</title>
+		<title>{{#message}}signinPageTitle{{/message}}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,8 +14,8 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>{{#msgs}}signinHeading{{/msgs}}</h1>
-			<p>{{#msgs}}signinChoose{{/msgs}}</p>
+			<h1>{{#message}}signinHeading{{/message}}</h1>
+			<p>{{#message}}signinChoose{{/message}}</p>
 			<ul id="auth-list">
 				{{#clients}}
 				<a href="{{link}}">
@@ -31,7 +31,9 @@
 							name="{{name}}"
 						/>
 						{{/fontawesome}}
-						<span>{{#msgs}}signinWith|||{{name}}{{/msgs}}</span>
+						<span
+							>{{#message}}signinWith|||{{name}}{{/message}}</span
+						>
 					</li>
 				</a>
 				{{/clients}}

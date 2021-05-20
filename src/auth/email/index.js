@@ -1,9 +1,9 @@
-"use strict";
+/** @file Email Authentication handler. */
 
 require("dotenv").config();
 
-const database = new (require("@replit/database"))(),
-	fileSystem = require("fs"),
+const database = new (require("@replit/database").Client)();
+const fileSystem = require("fs"),
 	mail = require("nodemailer").createTransport({
 		auth: {
 			pass: process.env.GMAIL_PASS,
@@ -16,6 +16,7 @@ const database = new (require("@replit/database"))(),
 	path = require("path"),
 	retronid = require("retronid").generate;
 
+/** @type {import("../../../types").Auth} Auth */
 module.exports = {
 	icon: "envelope",
 	iconProvider: "fas",
@@ -29,21 +30,22 @@ module.exports = {
 			},
 			post: async (req, res, sendResponse) => {
 				if (req.body.code && req.body.email) {
-					const { email = null, date = null } =
+					const { email = "", date = Date.now() - 900001 } =
+						/** @type {any} */
 						(await database.get(`EMAIL_${req.body.code}`)) ?? {};
 					if (Date.now() - date > 900000) {
-						await database.delete(`EMAIL_${req.body.code}`);
+						database.delete(`EMAIL_${req.body.code}`);
 						return res.status(410);
 					}
 					if (req.body.email !== email) {
 						return res.status(401);
 					}
-					await database.delete(`EMAIL_${req.body.code}`);
+					database.delete(`EMAIL_${req.body.code}`);
 					return sendResponse(
 						{
 							email,
 						},
-						req.query.url,
+						`${req.query.url}`,
 						res,
 					);
 				}
@@ -51,7 +53,7 @@ module.exports = {
 					// Send email
 
 					const code = retronid();
-					await database.set(`EMAIL_${code}`, {
+					database.set(`EMAIL_${code}`, {
 						date: Date.now(),
 						email: req.body.email,
 					});
@@ -66,10 +68,13 @@ module.exports = {
 								),
 								{
 									code,
-									msgs: mustacheFunc(req.languages, req.msgs),
+									msgs: mustacheFunc(
+										req.languages,
+										req.messages,
+									),
 								},
 							),
-							subject: req.msgs.emailSubject,
+							subject: req.messages.emailSubject,
 							text: mustache.render(
 								fileSystem.readFileSync(
 									path.resolve(__dirname, "email.txt"),
@@ -77,17 +82,30 @@ module.exports = {
 								),
 								{
 									code,
-									msgs: mustacheFunc(req.languages, req.msgs),
+									msgs: mustacheFunc(
+										req.languages,
+										req.messages,
+									),
 								},
 							),
 							// eslint-disable-next-line id-length
 							to: req.body.email,
 						},
+						/**
+						 * Verify sent email.
+						 *
+						 * @param {Error} error - Error object if an error occured.
+						 * @param {{ [key: string]: any }} info - Information about the sent email
+						 *   if no error occured.
+						 * @returns {import("../../../types").ExpressResponse} - Express response object.
+						 */
 						(error, info) => {
+							console.log(info);
 							if (error) {
+								console.error(error);
 								return res.status(500);
 							}
-							return res.status(200).json(info);
+							return res.status(204);
 						},
 					);
 				}

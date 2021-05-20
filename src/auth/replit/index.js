@@ -1,7 +1,8 @@
-"use strict";
+/** @file Replit Authentication handler. */
 
 const path = require("path");
 
+/** @type {import("../../../types").Auth} Auth */
 module.exports = {
 	icon: "https://replit.com/public/images/logo.svg",
 	iconProvider: "url",
@@ -22,7 +23,7 @@ module.exports = {
 							userID,
 							username,
 						},
-						req.query.url,
+						`${req.query.url}`,
 						res,
 					);
 				}

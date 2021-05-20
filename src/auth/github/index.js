@@ -1,7 +1,9 @@
-"use strict";
+/** @file GitHub Authentication handler. */
 
-const fetch = require("node-fetch");
+const nodeFetch = require("node-fetch");
+const fetch = nodeFetch.default ?? nodeFetch;
 
+/** @type {import("../../../types").Auth} Auth */
 module.exports = {
 	getData: (token) =>
 		fetch("https://api.github.com/user", {
@@ -9,9 +11,14 @@ module.exports = {
 				Authorization: `token ${token}`,
 				accept: "application/json",
 			},
-		}).then((res) => res.json()),
+		}).then(
+			(
+				/** @type {any} */
+				res,
+			) => res.json(),
+		),
 	icon: "github",
-	iconProvider: "fa",
+	iconProvider: "fab",
 	link:
 		"https://github.com/login/oauth/authorize" +
 		"?client_id=7b64414fe57e07d1e969" +
@@ -38,10 +45,23 @@ module.exports = {
 						method: "POST",
 					},
 				)
-					.then((result) => result.json())
-					.catch((err) => res.status(502).json(err));
+					.then(
+						(
+							/** @type {any} */
+							result,
+						) => result.json(),
+					)
+					.catch(
+						(
+							/** @type {Error} */
+							err,
+						) => {
+							res.status(502);
+							console.error(err);
+						},
+					);
 
-				sendResponse(info.access_token, req.query.state, res);
+				sendResponse(info.access_token, `${req.query.state}`, res);
 			},
 		},
 	],

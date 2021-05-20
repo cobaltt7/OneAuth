@@ -1,14 +1,14 @@
 --- 1AUTH ---
 
-{{#msgs}}emailSubject{{/msgs}}
+{{#message}}emailSubject{{/message}}
 -------------
-{{#msgs}}emailCodeIs|||{{code}}{{/msgs}} {{#msgs}}emailNoShare{{/msgs}}
+{{#message}}emailCodeIs|||{{code}}{{/message}} {{#message}}emailNoShare{{/message}}
 
-{{#msgs}}emailNow{{/msgs}}
-->	{{#msgs}}emailCopyCode{{/msgs}}
-->	{{#msgs}}emailGoBack{{/msgs}}
-->	{{#msgs}}emailPasteCode{{/msgs}}
-->	{{#msgs}}emailReviewInfo{{/msgs}}
-{{#msgs}}emailTimeOut{{/msgs}}
+{{#message}}emailNow{{/message}}
+->	{{#message}}emailCopyCode{{/message}}
+->	{{#message}}emailGoBack{{/message}}
+->	{{#message}}emailPasteCode{{/message}}
+->	{{#message}}emailReviewInfo{{/message}}
+{{#message}}emailTimeOut{{/message}}
 
-{{#msgs}}emailUnexpected{{/msgs}}
+{{#message}}emailUnexpected{{/message}}

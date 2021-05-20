@@ -8,7 +8,7 @@
 	// Example:
 	"Insert message": {
 		"prefix": "message",
-		"body": ["{{#msgs}}${1}{{/msgs}}"],
+		"body": ["{{#message}}${1}{{/message}}"],
 		"description": "Insert message"
 	}
 }
