@@ -1,4 +1,4 @@
-/** @file Localization of the site. */
+/** @file Localization Of the site. */
 
 const BASE_LANG = "en_US";
 
