@@ -4,8 +4,12 @@ module.exports = (app) => {
 		realGet(url, (req, res, next) => {
 			res.bodySent = false;
 			callback(req, res, next);
-			if (!res.bodySent && (res.statusCode < 300 || res.statusCode > 399))
-			{next();}
+			if (
+				!res.bodySent &&
+				(res.statusCode < 300 || res.statusCode > 399)
+			) {
+				next();
+			}
 		});
 	};
 };
