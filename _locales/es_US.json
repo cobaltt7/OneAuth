@@ -63,49 +63,49 @@
 		"string": ""
 	},
 	"allowHeading": {
-		"string": ""
+		"string": "¿Permitir el acceso?"
 	},
 	"allowQuestion": {
 		"string": ""
 	},
 	"allowButtonA": {
-		"string": ""
+		"string": "Permitir"
 	},
 	"allowButtonD": {
-		"string": ""
+		"string": "Negar"
 	},
 	"allowDataNote": {
 		"string": ""
 	},
 	"signinHeading": {
-		"string": ""
+		"string": "Iniciar sesión"
 	},
 	"signinChoose": {
 		"string": ""
 	},
 	"signinWith": {
-		"string": ""
+		"string": "Iniciar sesión con {0}"
 	},
 	"allowDataHidden": {
 		"string": ""
 	},
 	"error404Heading": {
-		"string": ""
+		"string": "404 No Encontrado"
 	},
 	"error404Message": {
-		"string": ""
+		"string": "Nosotros no podemos encontrar esa pagina."
 	},
 	"error405Heading": {
-		"string": ""
+		"string": "405 Método no permitido"
 	},
 	"error405Message": {
-		"string": ""
+		"string": "Eso método HTTP no es permitido."
 	},
 	"errorHeading": {
-		"string": ""
+		"string": "Error"
 	},
 	"errorMessage": {
-		"string": ""
+		"string": "Ocurrió un error. "
 	},
 	"errorOldHeading": {
 		"string": ""
@@ -119,13 +119,13 @@
 		"developer_comment": "For use in the \"errorOldWhy\" string."
 	},
 	"errorOldModern": {
-		"string": ""
+		"string": "Navegadores modernos:"
 	},
 	"errorOldMistake": {
 		"string": ""
 	},
 	"errorOldMore": {
-		"string": ""
+		"string": "Aprende más"
 	},
 	"aboutPageTitle": {
 		"string": ""
@@ -134,7 +134,7 @@
 		"string": ""
 	},
 	"aboutSubHeading": {
-		"string": ""
+		"string": "Acerca de"
 	},
 	"aboutIntro": {
 		"string": ""
@@ -143,10 +143,10 @@
 		"string": ""
 	},
 	"aboutClientsHeading": {
-		"string": ""
+		"string": "Clientes soportados"
 	},
 	"aboutDevelopersHeading": {
-		"string": ""
+		"string": "Para Desarrolladores"
 	},
 	"aboutImpementation": {
 		"string": ""
@@ -170,7 +170,7 @@
 		"string": ""
 	},
 	"aboutLangsHeader": {
-		"string": ""
+		"string": "Especificación de idioma"
 	},
 	"aboutLangsHow": {
 		"string": ""
