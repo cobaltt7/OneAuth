@@ -2,6 +2,8 @@
 
 require("dotenv").config();
 
+/** @type {import("@replit/database").Client } */
+// @ts-expect-error
 const database = new (require("@replit/database"))(),
 	fileSystem = require("fs"),
 	mail = require("nodemailer").createTransport({

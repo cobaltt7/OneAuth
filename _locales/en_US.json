@@ -54,13 +54,13 @@
 		"string": "Click anywhere to get started"
 	},
 	"replitNoClose": {
-		"string": "If you close the popup, we can't authenticate you!"
+		"string": "If you close the pop-up, we can't authenticate you!"
 	},
 	"replitReopen": {
-		"string": "Please close this popup, then reopen the window by clicking anywhere."
+		"string": "Please close this modal, then reopen the window by clicking anywhere."
 	},
 	"replitUnblockPopups": {
-		"string": "If nothing happens, please make sure popups are not blocked, then reload the page."
+		"string": "If nothing happens, please make sure pop-ups are not blocked, then reload the page."
 	},
 	"allowHeading": {
 		"string": "Allow access?"
@@ -188,7 +188,7 @@
 		"string": "NEW!!!"
 	},
 	"aboutTranslations": {
-		"string": "Please not that we do not have many translations, if any. This will change as our translation team grows."
+		"string": "Please note that we do not have many translations, if any. This will change as our translation team grows."
 	},
 	"aboutHelpTranslate": {
 		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click \"Join team\". Thanks for your eagerness to help!"

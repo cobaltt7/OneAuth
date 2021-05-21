@@ -45,7 +45,7 @@
 	"es6-css-minify.minifyOnSave": "exists",
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,
-	"eslint.validate": ["javascript", "html", "json"],
+	"eslint.validate": ["javascript", "html"],
 	"files.eol": "\n",
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
