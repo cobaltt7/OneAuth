@@ -34,12 +34,11 @@ jobs:
             - name: Setup Transifex
               if: always()
               run:
-                  touch .transifexrc;
-                  echo "[https://www.transifex.com]" > .transifexrc;
-                  echo "api_hostname = https://api.transifex.com" >> .transifexrc;
-                  echo "hostname = https://www.transifex.com" >> .transifexrc;
-                  echo "password =" "${{secrets.TRANSIFEX}}" >> .transifexrc;
-                  echo "username = api" >> .transifexrc;
+                  touch .transifexrc; echo "[https://www.transifex.com]" >
+                  .transifexrc; echo "api_hostname = https://api.transifex.com"
+                  >> .transifexrc; echo "hostname = https://www.transifex.com"
+                  >> .transifexrc; echo "password =" "${{secrets.TRANSIFEX}}" >>
+                  .transifexrc; echo "username = api" >> .transifexrc;
 
             - name: Push
               if: always()
