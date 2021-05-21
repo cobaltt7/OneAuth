@@ -72,9 +72,7 @@
 				 * @param {MouseEvent} message - Message from the popup.
 				 */
 				function authComplete(message) {
-					if (message.data !== "auth_complete") {
-						return;
-					}
+					if (message.data !== "auth_complete") return;
 
 					removeEventListener("message", authComplete);
 					clearInterval(interval);

@@ -28,6 +28,6 @@ _Screenshots to help explain the problem._
 
 _What device was the behavior recorded on?_
 
-## Additional context
+## Additional information, if any
 
 _Any other context about the problem_

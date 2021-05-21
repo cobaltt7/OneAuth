@@ -40,9 +40,8 @@ const MESSAGES = {},
 		const tempMsgs = require(`../${filename}`);
 		for (const item in tempMsgs) {
 			if ({}.hasOwnProperty.call(tempMsgs, item)) {
-				if (!tempMsgs[item]?.string) {
-					continue;
-				}
+				if (!tempMsgs[item]?.string) continue;
+
 				// @ts-expect-error
 				MESSAGES[`${code}`][`${item}`] = `${tempMsgs[item].string}`;
 			}
@@ -62,9 +61,7 @@ const MESSAGES = {},
 function compileLangs(langs, cache = false) {
 	if (cache) {
 		const retrieved = CACHE_CODES[`${langs}`];
-		if (retrieved) {
-			return retrieved;
-		}
+		if (retrieved) return retrieved;
 	}
 
 	/** @type {string[]} */
@@ -118,9 +115,7 @@ function compileLangs(langs, cache = false) {
 function getMsgs(langs, cache = true) {
 	if (cache) {
 		const retrieved = CACHE_MSGS[`${langs}`];
-		if (retrieved) {
-			return retrieved;
-		}
+		if (retrieved) return retrieved;
 	}
 
 	/** @type {{ [key: string]: string }} */
@@ -143,9 +138,7 @@ function getFormatter(lang, cache = true) {
 	if (cache) {
 		/** @type {MessageFormatter} */
 		const retrieved = CACHE_FORMATTERS[`${lang}`];
-		if (retrieved) {
-			return retrieved;
-		}
+		if (retrieved) return retrieved;
 	}
 	return (CACHE_FORMATTERS[`${lang}`] = new MessageFormatter(lang, {
 		plural: pluralTypeHandler,
@@ -263,9 +256,8 @@ module.exports = {
 			view,
 			options = {},
 			callback = function (err, str) {
-				if (err) {
-					return req.next(err);
-				}
+				if (err) return req.next(err);
+
 				return res.send(str);
 			},
 		) {
@@ -274,11 +266,9 @@ module.exports = {
 			/** @type {any} */
 			// eslint-disable-next-line one-var
 			let opts = {};
-			if (typeof options === "object") {
-				opts = options;
-			} else if (typeof options === "function") {
-				afterRender = options;
-			}
+			if (typeof options === "object") opts = options;
+			else if (typeof options === "function") afterRender = options;
+
 			opts.message = mustacheFunc(langs, msgs);
 
 			// Continue with original render

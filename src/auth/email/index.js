@@ -39,9 +39,8 @@ module.exports = {
 						database.delete(`EMAIL_${req.body.code}`);
 						return res.status(410);
 					}
-					if (req.body.email !== email) {
-						return res.status(401);
-					}
+					if (req.body.email !== email) return res.status(401);
+
 					database.delete(`EMAIL_${req.body.code}`);
 					return sendResponse(
 						{
@@ -107,7 +106,7 @@ module.exports = {
 								console.error(error);
 								return res.status(500);
 							}
-							return res.sendStatus(200);
+							return res.status(204);
 						},
 					);
 				}

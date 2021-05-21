@@ -82,7 +82,7 @@ module.exports = {
 	rules: {
 		"array-element-newline": 0,
 		"comma-dangle": [1, "always-multiline"],
-		"curly": [1, "all"],
+		"curly": [1, "multi-or-nest", "consistent"],
 		"dot-location": [1, "property"],
 		"func-names": 0,
 		"func-style": [
@@ -203,7 +203,6 @@ module.exports = {
 				caughtErrors: "all",
 			},
 		],
-		"node/callback-return": 2,
 		"node/exports-style": 2,
 		"node/file-extension-in-import": 2,
 		"node/handle-callback-err": 2,

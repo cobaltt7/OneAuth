@@ -69,9 +69,7 @@ function getPageHandler(requestedClient) {
 		const result = currentClient?.pages?.find(
 			({ backendPage }) => backendPage === requestedClient,
 		);
-		if (result) {
-			return result;
-		}
+		if (result) return result;
 	}
 	return null;
 }
@@ -89,9 +87,8 @@ function getPageHandler(requestedClient) {
  */
 function sendResponse(client, tokenOrData, url, res, noDataMsg) {
 	const clientInfo = getClient(client);
-	if (!clientInfo) {
-		throw new ReferenceError(`Invalid client: ${client}`);
-	}
+	if (!clientInfo) throw new ReferenceError(`Invalid client: ${client}`);
+
 	let data, token;
 	if (clientInfo.rawData && typeof tokenOrData === "object") {
 		data = tokenOrData;
@@ -199,9 +196,8 @@ router.get(
 	 * @returns {import("../../types").ExpressResponse | import("express").IRouter} - Express response object.
 	 */
 	(req, res) => {
-		if (!req.query.url) {
-			return res.status(400);
-		}
+		if (!req.query.url) return res.status(400);
+
 		const authButtonsReplaced = authButtons;
 		authButtons.forEach(({ link }, index) => {
 			if (authButtonsReplaced[index]) {
@@ -246,17 +242,15 @@ router.get(
 	 *
 	 * @param {import("../../types").ExpressRequest} req - Express request object.
 	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @param next
 	 * @returns {Promise<import("../../types").ExpressResponse | import("express").IRouter>} -
 	 *   Express response object.
 	 * @throws {ReferenceError} - If client is not valid.
 	 */
-	async (req, res, next) => {
+	async (req, res) => {
 		const { client, url, token } = req.query,
 			clientInfo = getClient(`${client}`);
-		if (!clientInfo) {
-			throw new ReferenceError(`Invalid client: ${client}`);
-		}
+		if (!clientInfo) throw new ReferenceError(`Invalid client: ${client}`);
+
 		let code, redirect;
 		if (clientInfo.rawData) {
 			code = token;
@@ -270,9 +264,8 @@ router.get(
 			redirect = new URL(url);
 			redirect.searchParams.set("code", code);
 			return res.status(303).redirect(redirect);
-		} catch (err) {
-			res.status(400);
-			next(err);
+		} catch {
+			return res.status(400);
 		}
 	},
 );

@@ -41,13 +41,13 @@ jobs:
               if: always()
               run: npm run lint:eslint
 
-            - name: Spellchecker CLI
-              if: always()
-              run: npm run lint:spellchecker-cli
-
             - name: Typescript
               if: always()
               run: npm run lint:typescript
+
+            - name: Spellchecker CLI
+              if: always()
+              run: npm run lint:spellchecker-cli
 
             - name: write good
               if: always()

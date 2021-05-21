@@ -111,7 +111,7 @@
 		"string": "You are using an outdated browser!"
 	},
 	"errorOldWhy": {
-		"string": "For a better experience on {0} sites (not just ours), please keep your browser up to date.",
+		"string": "For a better experience on {0} sites (not only on ours), please keep your browser up to date.",
 		"developer_comment": "The placeholder is always the word \"all\". (I had to move it out into a separate string so that I could underline it.)"
 	},
 	"errorOldAll": {
@@ -140,7 +140,7 @@
 		"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
 	},
 	"aboutClientCount": {
-		"string": "Right now, we support {0} clients with many more to come."
+		"string": "Right now, we support {0} clients (more to come)."
 	},
 	"aboutClientsHeading": {
 		"string": "Supported Clients"

@@ -16,7 +16,8 @@ app.engine("html", mustacheExpress);
 app.engine("css", mustacheExpress);
 
 // Errors part 1
-require("./errors/middleware.js")(app);
+const errors = require("./errors/index.js");
+errors[0](app);
 
 // Compress
 const compression = require("compression");
@@ -31,11 +32,11 @@ app.use(
 	 * @param {import("../types").ExpressNext} next - Express continue function.
 	 */
 	(req, res, next) => {
-		if (req.path.includes(".css")) {
+		if (req.path.includes(".css"))
 			res.setHeader("Cache-Control", "public, max-age=86400");
-		} else if (req.path.includes(".")) {
+		else if (req.path.includes("."))
 			res.setHeader("Cache-Control", "public, max-age=31536000");
-		}
+
 		next();
 	},
 );
@@ -50,9 +51,8 @@ app.use(
 	 * @returns {import("express").IRouter | void} - Nothing of meaning.
 	 */
 	(req, res, next) => {
-		if (req.path.includes(".") || req.path === "/old") {
-			return next();
-		}
+		if (req.path.includes(".") || req.path === "/old") return next();
+
 		const userAgent = req.get("User-Agent");
 		if (
 			userAgent.indexOf("MSIE") >= 0 ||
@@ -83,9 +83,8 @@ app.use(
 	 * @returns {any} - Nothing important is returned.
 	 */
 	(req, res, next) => {
-		if (req.path.includes(".")) {
-			return next();
-		}
+		if (req.path.includes(".")) return next();
+
 		// @ts-expect-error
 		return cookieParser(req, res, next);
 	},
@@ -100,9 +99,8 @@ app.use(
 	 * @returns {void}
 	 */
 	(req, res, next) => {
-		if (req.path.includes(".")) {
-			return next();
-		}
+		if (req.path.includes(".")) return next();
+
 		return bodyParser(req, res, next);
 	},
 );
@@ -124,8 +122,7 @@ const auth = require("./auth/index.js");
 app.use("/auth", auth);
 
 // Errors part 2
-const errors = require("./errors/index.js");
-app.use(errors);
+app.use(errors[1]);
 
 // LISTEN
 // eslint-disable-next-line no-console

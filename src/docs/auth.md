@@ -12,7 +12,7 @@ Add a file in that folder called `index.js`.
     -   a URL (absolute or relative)
     -   the name of a [free FontAwesome icon](https://fontawesome.com/icons?m=free) (without the `fa-` prefix)
     -   the name of an SVG file in the `svg` directory (without the `.svg` extension)
--   **`iconProvider**`: Determines which of the above `icon` is. Should be one of
+-   **`iconProvider`**: Determines which of the above `icon` is. Should be one of
     -   `url` if `icon` is a URL
     -   The FontAwesome style/prefix (`fa`, `fas`, `fab`, etc.) if `icon` is the name of a FontAwesome icon
     -   `svg` if `icon` is the name of an SVG file

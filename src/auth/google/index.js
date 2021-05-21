@@ -28,9 +28,7 @@ module.exports = {
 				res,
 			) => res.json(),
 		);
-		if (error || !idToken) {
-			return error;
-		}
+		if (error || !idToken) return error;
 
 		/** @type {{ [key: string]: string }} */
 		const filteredInfo = {},
@@ -49,9 +47,8 @@ module.exports = {
 					"profile",
 					"error",
 				].includes(item)
-			) {
+			)
 				filteredInfo[`${item}`] = info[item];
-			}
 		}
 
 		return filteredInfo;
