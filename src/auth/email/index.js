@@ -2,8 +2,8 @@
 
 require("dotenv").config();
 
-const database = new (require("@replit/database").Client)();
-const fileSystem = require("fs"),
+const database = new (require("@replit/database"))(),
+	fileSystem = require("fs"),
 	mail = require("nodemailer").createTransport({
 		auth: {
 			pass: process.env.GMAIL_PASS,
@@ -68,7 +68,7 @@ module.exports = {
 								),
 								{
 									code,
-									msgs: mustacheFunc(
+									message: mustacheFunc(
 										req.languages,
 										req.messages,
 									),
@@ -82,7 +82,7 @@ module.exports = {
 								),
 								{
 									code,
-									msgs: mustacheFunc(
+									message: mustacheFunc(
 										req.languages,
 										req.messages,
 									),
@@ -105,7 +105,7 @@ module.exports = {
 								console.error(error);
 								return res.status(500);
 							}
-							return res.status(204);
+							return res.sendStatus(200);
 						},
 					);
 				}

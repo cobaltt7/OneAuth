@@ -13,7 +13,7 @@
 const authButtons = [];
 /** @type {import("../../types").Auth[]} */
 const authClients = [],
-	database = new (require("@replit/database").Client)(),
+	database = new (require("@replit/database"))(),
 	globby = require("globby"),
 	path = require("path");
 const retronid = require("retronid"),

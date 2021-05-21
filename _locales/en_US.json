@@ -2,9 +2,6 @@
 	"docsTitle": {
 		"string": "{0} | 1Auth Development Docs"
 	},
-	"emailPageTitle": {
-		"string": "Sign in with email | 1Auth"
-	},
 	"emailHeading": {
 		"string": "Sign in with email"
 	},
@@ -15,7 +12,7 @@
 		"string": "Submit"
 	},
 	"emailEnterCode": {
-		"string": "Enter the code we sent to you to continue"
+		"string": "Enter the code we sent you to continue"
 	},
 	"emailSubject": {
 		"string": "1Auth Email Verification"
@@ -50,9 +47,6 @@
 	"logoAlt": {
 		"string": "1Auth logo"
 	},
-	"replitPageTitle": {
-		"string": "Sign in with Replit | 1Auth"
-	},
 	"replitHeading": {
 		"string": "Sign in with Replit"
 	},
@@ -67,9 +61,6 @@
 	},
 	"replitUnblockPopups": {
 		"string": "If nothing happens, please make sure popups are not blocked, then reload the page."
-	},
-	"allowPageTitle": {
-		"string": "Allow access? | 1Auth"
 	},
 	"allowHeading": {
 		"string": "Allow access?"
@@ -86,9 +77,6 @@
 	"allowDataNote": {
 		"string": "If you press \"Allow\", then {1} will receive the following information (taken from {0}):"
 	},
-	"signinPageTitle": {
-		"string": "Sign in | 1Auth"
-	},
 	"signinHeading": {
 		"string": "Sign in"
 	},
@@ -101,17 +89,11 @@
 	"allowDataHidden": {
 		"string": "Unfortunately, we can't show this data right now. Sorry about that!"
 	},
-	"error404PageTitle": {
-		"string": "404 Not Found | 1Auth"
-	},
 	"error404Heading": {
 		"string": "404 Not Found"
 	},
 	"error404Message": {
 		"string": "We can't find that page."
-	},
-	"error405PageTitle": {
-		"string": "405 Method Not Allowed | 1Auth"
 	},
 	"error405Heading": {
 		"string": "405 Method Not Allowed"
@@ -119,17 +101,11 @@
 	"error405Message": {
 		"string": "That HTTP method isn't allowed."
 	},
-	"errorPageTitle": {
-		"string": "Error | 1Auth"
-	},
 	"errorHeading": {
 		"string": "Error"
 	},
 	"errorMessage": {
 		"string": "An error occurred."
-	},
-	"errorOldPageTitle": {
-		"string": "Outdated Browser | 1Auth"
 	},
 	"errorOldHeading": {
 		"string": "You are using an outdated browser!"
@@ -179,13 +155,16 @@
 		"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
 	},
 	"aboutNewParam": {
-		"string": "There will be a new query parameter on that URL:"
+		"string": "If they allowed sharing their data, then there will be a new query parameter on that URL:"
 	},
 	"aboutGetInfo": {
 		"string": "To retrieve the user's information, send the following HTTP request:"
 	},
 	"aboutWhatCode": {
 		"string": "where {0} is the value of the new search parameter."
+	},
+	"aboutNoParam": {
+		"string": "If they denied sharing their data, there will not be any appended query parameter."
 	},
 	"aboutMoreConfig": {
 		"string": "More configuration options are coming soon."

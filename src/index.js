@@ -39,7 +39,7 @@ app.use(
 
 app.use(
 	/**
-	 * Disalow old browsers from visition our site. TODO: make our site available to old browsers.
+	 * Disalow old browsers from visiting our site. TODO: make our site available to old browsers.
 	 *
 	 * @param {import("../types").ExpressRequest} req - Express request object.
 	 * @param {import("../types").ExpressResponse} res - Express response object.
