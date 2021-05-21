@@ -34,17 +34,12 @@ jobs:
             - name: Setup Transifex
               if: always()
               run:
-                  tx init --host='https://www.transifex.com' --user=api
-                  --force-save --skipsetup --token=${{secrets.TRANSIFEX}}
-                  --no-interactive
-
-            - name: Configure Transifex
-              if: always()
-              run:
-                  tx config mapping --resource=1auth.mainStrings --source
-                  --language=en --type=STRUCTURED_JSON --source-language=en
-                  --source-file=_locales/en_US.json --execute
-                  --expression="_locales/<lang>.json"
+			      touch .transifexrc;
+                  echo "[https://www.transifex.com]" > .transifexrc;
+				  echo "api_hostname = https://api.transifex.com" >> .transifexrc;
+				  echo "hostname = https://www.transifex.com" >> .transifexrc;
+				  echo "password =" "${{secrets.TRANSIFEX}}" >> .transifexrc;
+				  echo "username = api" >> .transifexrc;
 
             - name: Push
               if: always()
@@ -60,6 +55,7 @@ jobs:
 
             - name: Commit
               if: always()
+			  id: commit
               uses: stefanzweifel/git-auto-commit-action@master
               with:
                   commit_message: "Synchronize strings with Transifex"
@@ -69,3 +65,10 @@ jobs:
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
                   commit_author:
                       wgytbot <83586655+wgytbot@users.noreply.github.com>
+
+            - name: Repository Dispatch
+              if: steps.commit.outputs.changes_detected == 'false'
+              uses: peter-evans/repository-dispatch@v1
+              with:
+                  token: ${{secrets.WGYTBOT}}
+                  event-type: lint
