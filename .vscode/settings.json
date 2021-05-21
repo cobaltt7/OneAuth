@@ -177,7 +177,8 @@
 	"jshint.lintHTML": true,
 	"markdownlint.config": {
 		"MD013": false,
-		"MD030": false
+		"MD030": false,
+		"MD010": false
 	},
 	"prettier.requireConfig": true,
 	"grammarly.audience": "general",
