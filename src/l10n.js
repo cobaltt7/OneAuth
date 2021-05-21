@@ -36,12 +36,15 @@ const MESSAGES = {},
 			"en_US",
 		];
 		MESSAGES[`${code}`] = {};
-		/** @type {{ [key: string]: { [key: string]: string } }} */
+		/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
 		const tempMsgs = require(`../${filename}`);
 		for (const item in tempMsgs) {
 			if ({}.hasOwnProperty.call(tempMsgs, item)) {
+				if (!tempMsgs[item]?.string) {
+					continue;
+				}
 				// @ts-expect-error
-				MESSAGES[`${code}`][`${item}`] = `${tempMsgs[item]?.string}`;
+				MESSAGES[`${code}`][`${item}`] = `${tempMsgs[item].string}`;
 			}
 		}
 
@@ -93,7 +96,10 @@ function compileLangs(langs, cache = false) {
 		).add(BASE_LANG),
 
 		// Remove duplicates by converting it to a `Set` then back to an `Array`
-	].filter((lang) => typeof lang === "string");
+	]
+
+		// Remove undefined values
+		.filter((lang) => typeof lang === "string");
 
 	// Slice it on the base language because the base langauge has everything that we'd need
 	prefLangs.splice(prefLangs.indexOf(BASE_LANG) + 1);

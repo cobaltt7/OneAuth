@@ -182,6 +182,7 @@ module.exports = {
 		],
 		"no-confusing-arrow": 0,
 		"no-console": 1,
+		"no-continue": 0,
 		"no-extra-parens": 0,
 		"no-magic-numbers": 0,
 		"no-mixed-operators": 0,
