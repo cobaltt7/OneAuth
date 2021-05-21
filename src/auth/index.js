@@ -15,7 +15,7 @@ const authButtons = [];
 // eslint-disable-next-line one-var
 const authClients = [];
 
-/** @type {import("@replit/database").Client } */
+/** @type {import("@replit/database").Client} */
 // @ts-expect-error
 const database = new (require("@replit/database"))(),
 	globby = require("globby"),
