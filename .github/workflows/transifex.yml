@@ -48,11 +48,15 @@ jobs:
 
             - name: Push
               if: always()
-              run: tx push --source --translations --no-interactive --force --skip
+              run:
+                  tx push --source --translations --no-interactive --force
+                  --skip
 
             - name: Pull
               if: always()
-              run: tx pull --all --source --skip --no-interactive --force --mode=onlytranslated
+              run:
+                  tx pull --all --source --skip --no-interactive --force
+                  --mode=onlytranslated
 
             - name: Commit
               if: always()

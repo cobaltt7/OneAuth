@@ -36,7 +36,7 @@ const MESSAGES = {},
 			"en_US",
 		];
 		MESSAGES[`${code}`] = {};
-		/** @type {{ [key: string]: { [key: string]: string, string: string } }} */
+		/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
 		const tempMsgs = require(`../${filename}`);
 		for (const item in tempMsgs) {
 			if ({}.hasOwnProperty.call(tempMsgs, item)) {
