@@ -246,6 +246,7 @@ router.get(
 	 *
 	 * @param {import("../../types").ExpressRequest} req - Express request object.
 	 * @param {import("../../types").ExpressResponse} res - Express response object.
+	 * @param next
 	 * @returns {Promise<import("../../types").ExpressResponse | import("express").IRouter>} -
 	 *   Express response object.
 	 * @throws {ReferenceError} - If client is not valid.
