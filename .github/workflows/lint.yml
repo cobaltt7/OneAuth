@@ -1,7 +1,7 @@
 name: Format and lint
 on:
     repository_dispatch:
-        types: [lint]
+        types: lint
     workflow_dispatch:
     push:
         paths-ignore:
@@ -16,14 +16,11 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name:
+            - name: Find changed
               uses: marceloprado/has-changed-path@v1
               id: changed
               with:
-                    paths:
-                        - package.json
-                        - package-lock.json
-                        - _locales/**.json
+                    paths: package.json package-lock.json _locales/**.json
 
             - name: Checkout
               if: steps.changed.outputs.changed == 'false'
