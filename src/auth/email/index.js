@@ -2,8 +2,10 @@
 
 require("dotenv").config();
 
-const database = new (require("@replit/database"))(),
-	fileSystem = require("fs"),
+/** @type {import("@replit/database").Client} */
+// @ts-expect-error
+const database = new (require("@replit/database"))();
+const fileSystem = require("fs"),
 	mail = require("nodemailer").createTransport({
 		auth: {
 			pass: process.env.GMAIL_PASS,

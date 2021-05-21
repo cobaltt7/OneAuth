@@ -15,10 +15,8 @@ router.get("/old", (req, res) => {
 });
 
 router.use((_, res) => {
-	res.on("finish", () => {
-		const code = res.statusCode || 404;
-		console.log(code);
-	});
+	const code = res.statusCode === 200 ? 404 : res.statusCode;
+	console.log(code);
 });
 
 module.exports = router;

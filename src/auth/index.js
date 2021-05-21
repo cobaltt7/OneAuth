@@ -12,8 +12,12 @@
  */
 const authButtons = [];
 /** @type {import("../../types").Auth[]} */
-const authClients = [],
-	database = new (require("@replit/database"))(),
+// eslint-disable-next-line one-var
+const authClients = [];
+
+/** @type {import("@replit/database").Client} */
+// @ts-expect-error
+const database = new (require("@replit/database"))(),
 	globby = require("globby"),
 	path = require("path");
 const retronid = require("retronid"),
@@ -246,7 +250,7 @@ router.get(
 	 *   Express response object.
 	 * @throws {ReferenceError} - If client is not valid.
 	 */
-	async (req, res) => {
+	async (req, res, next) => {
 		const { client, url, token } = req.query,
 			clientInfo = getClient(`${client}`);
 		if (!clientInfo) {
@@ -265,8 +269,9 @@ router.get(
 			redirect = new URL(url);
 			redirect.searchParams.set("code", code);
 			return res.status(303).redirect(redirect);
-		} catch {
-			return res.status(400);
+		} catch (err) {
+			res.status(400);
+			next(err);
 		}
 	},
 );

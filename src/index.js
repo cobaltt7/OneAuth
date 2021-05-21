@@ -15,6 +15,9 @@ const app = express(),
 app.engine("html", mustacheExpress);
 app.engine("css", mustacheExpress);
 
+// Errors part 1
+require("./errors/middleware.js")(app);
+
 // Compress
 const compression = require("compression");
 app.use(compression());
@@ -120,7 +123,7 @@ app.use(main);
 const auth = require("./auth/index.js");
 app.use("/auth", auth);
 
-// Errors
+// Errors part 2
 const errors = require("./errors/index.js");
 app.use(errors);
 

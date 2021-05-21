@@ -4,7 +4,7 @@ interface nestedObjStr {
 	[key: string]: string | nestedObjStr;
 }
 interface JSON {
-	[key: string]: JSON | string | number | null | boolean | Array<json>;
+	[key: string]: JSON | string | number | null | boolean | Array<JSON>;
 }
 //#endregion
 
@@ -27,6 +27,7 @@ export interface ExpressResponse extends Response {
 	) => IRouter;
 	cookie: (name: string, value: string, options: { [key: string] }) => void;
 	send: (info: string) => IRouter;
+	sendStatus: (status: number) => IRouter;
 	json: (info: JSON) => IRouter;
 	redirect: (url: string) => IRouter;
 	sendFile: (url: string) => IRouter;
@@ -41,7 +42,7 @@ export interface ExpressRequest extends Request {
 	path: string;
 	get: (header: string) => string;
 	cookies: { [key: string]: string };
-	next: ([err]: Error | string) => void;
+	next: (err: Error | string) => void;
 	url: string;
 }
 //#endregion
@@ -95,7 +96,7 @@ export interface Page {
 export type sendResponseArgs = [
 	string | { [key: string]: string },
 	string,
-	import("../../types").ExpressResponse,
+	ExpressResponse,
 ];
 export type Auth = AuthObj;
 //#endregion
