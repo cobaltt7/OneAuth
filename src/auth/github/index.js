@@ -1,7 +1,8 @@
 /** @file GitHub Authentication handler. */
 
 const nodeFetch = require("node-fetch");
-const fetch = nodeFetch.default ?? nodeFetch;
+const fetch = nodeFetch.default ?? nodeFetch,
+	logError=require("../../errors/index.js").logError
 
 /** @type {import("../../../types").Auth} Auth */
 module.exports = {
@@ -57,7 +58,7 @@ module.exports = {
 							err,
 						) => {
 							res.status(502);
-							console.error(err);
+							logError(err);
 						},
 					);
 

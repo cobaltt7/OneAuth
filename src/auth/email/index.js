@@ -5,6 +5,7 @@ require("dotenv").config();
 /** @type {import("@replit/database").Client} */
 // @ts-expect-error
 const database = new (require("@replit/database"))(),
+logError=require("../../errors/index.js").logError,
 	fileSystem = require("fs"),
 	mail = require("nodemailer").createTransport({
 		auth: {
@@ -103,7 +104,7 @@ module.exports = {
 						(error, info) => {
 							console.log(info);
 							if (error) {
-								console.error(error);
+								logError(error);
 								return res.status(500);
 							}
 							return res.status(204);

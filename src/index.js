@@ -15,9 +15,9 @@ const app = express(),
 app.engine("html", mustacheExpress);
 app.engine("css", mustacheExpress);
 
-// Errors part 1
+// Errors
 const errors = require("./errors/index.js");
-errors[0](app);
+app.use(errors.middleware);
 
 // Compress
 const compression = require("compression");
@@ -120,9 +120,6 @@ app.use(main);
 // Auth pages
 const auth = require("./auth/index.js");
 app.use("/auth", auth);
-
-// Errors part 2
-app.use(errors[1]);
 
 // LISTEN
 // eslint-disable-next-line no-console

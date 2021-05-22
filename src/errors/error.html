@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#message}}errorHeading{{/message}} | 1Auth</title>
+		<title>{{error.status}} {{error.error}} | 1Auth</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,8 +14,8 @@
 	<body style="display: none">
 		{{> nav}}
 		<main>
-			<h1>{{#message}}errorHeading{{/message}}</h1>
-			<p>{{#message}}errorMessage{{/message}}</p>
+			<h1>{{error.status}} {{error.error}}</h1>
+			<p>{{error.message}}</p>
 		</main>
 	</body>
 </html>
