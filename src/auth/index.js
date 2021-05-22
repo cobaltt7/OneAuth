@@ -24,7 +24,7 @@ const database = new (require("@replit/database"))(),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router(),
 	{ URL } = require("url"),
-	{logError}=require("../errors/index.js");
+	{ logError } = require("../errors/index.js");
 
 (async () => {
 	// Idk why this is relative to the root dir but it is
@@ -99,9 +99,11 @@ function sendResponse(client, tokenOrData, url, res, noDataMsg) {
 		data = noDataMsg;
 		token = tokenOrData;
 	} else {
-		logError(new TypeError(
-			`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
-		));
+		logError(
+			new TypeError(
+				`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
+			),
+		);
 	}
 	try {
 		const { host } = new URL(url);
@@ -248,7 +250,8 @@ router.get(
 	async (req, res) => {
 		const { client, url, token } = req.query,
 			clientInfo = getClient(`${client}`);
-		if (!clientInfo) logError(new ReferenceError(`Invalid client: ${client}`));
+		if (!clientInfo)
+			logError(new ReferenceError(`Invalid client: ${client}`));
 
 		let code, redirect;
 		if (clientInfo.rawData) {

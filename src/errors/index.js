@@ -239,39 +239,53 @@ const ERRORS = [
 
 const path = require("path");
 
+/**
+ * @param req
+ * @param res
+ * @param next
+ */
 function middleware(req, res, next) {
-	if(req.path==="/old"){
-	return res.status(400).render(path.resolve(__dirname, "old.html"), {
-		all: req.messages.errorOldAll,
-	});
-}
-	res.statusCode = res.statusCode === 200 && !res.bodySent ? 404 : res.statusCode;
-	const code=res.statusCode
+	if (req.path === "/old") {
+		return res.status(400).render(path.resolve(__dirname, "old.html"), {
+			all: req.messages.errorOldAll,
+		});
+	}
+	res.statusCode =
+		res.statusCode === 200 && !res.bodySent ? 404 : res.statusCode;
+	const code = res.statusCode;
 	console.log(code);
 	if (
 		// If no content has already been sent
 		!res.bodySent &&
 		// And it's not a redirect
-		(code < 301 || code > 399
-		// (Allow the 300 codes that aren't actually redirects)
-		|| code === 304 || code === 305)
+		(code < 301 ||
+			code > 399 ||
+			// (Allow the 300 codes that aren't actually redirects)
+			code === 304 ||
+			code === 305)
 	) {
 		// Then it's an error code, send error page.
-		const error=ERRORS.find(error=>error.status===code)
-		if(error.changeTo){
-			res.statusCode=error.changeTo
-			return middleware(_,res,next)
+		const error = ERRORS.find((error) => error.status === code);
+		if (error.changeTo) {
+			res.statusCode = error.changeTo;
+			return middleware(_, res, next);
 		}
-		if(req.accepts('application/json')){return res.json(error)}else{
-		return res.render(path.resolve(__dirname, "error.html"),{error})}
+		if (req.accepts("application/json")) 
+			return res.json(error);
+		 return res.render(path.resolve(__dirname, "error.html"), { error });
 	}
 	return next();
 }
 
-function logError(err){return console.error(err)}
+/**
+ * @param err
+ */
+function logError(err) {
+	return console.error(err);
+}
 
 module.exports = {
-	middleware:(req, res, next) => {
+	middleware: (req, res, next) => {
 		res.bodySent = false;
 		const realSend = res.send,
 			realStatus = res.status;
@@ -282,11 +296,15 @@ module.exports = {
 			return realSend.call(this, ...args);
 		};
 		res.status = function (status, ...args) {
-			const returnVal = realStatus.call(this, status===200?204:status, ...args);
+			const returnVal = realStatus.call(
+				this,
+				status === 200 ? 204 : status,
+				...args,
+			);
 			middleware(req, res, next);
 			return returnVal;
 		};
 		return next();
 	},
-	logError
+	logError,
 };
