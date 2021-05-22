@@ -3,7 +3,7 @@
 const atob = require("atob"),
 	nodeFetch = require("node-fetch");
 const fetch = nodeFetch.default ?? nodeFetch,
-	logError=require("../../errors/index.js").logError
+	{ logError } = require("../../errors/index.js");
 require("dotenv").config();
 
 /** @type {import("../../../types").Auth} Auth */
@@ -29,7 +29,10 @@ module.exports = {
 				res,
 			) => res.json(),
 		);
-		if (error || !idToken){logError(error); return error;}
+		if (error || !idToken) {
+			logError(error);
+			return error;
+		}
 
 		/** @type {{ [key: string]: string }} */
 		const filteredInfo = {},

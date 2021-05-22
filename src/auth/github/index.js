@@ -2,7 +2,7 @@
 
 const nodeFetch = require("node-fetch");
 const fetch = nodeFetch.default ?? nodeFetch,
-	logError=require("../../errors/index.js").logError
+	{ logError } = require("../../errors/index.js");
 
 /** @type {import("../../../types").Auth} Auth */
 module.exports = {
