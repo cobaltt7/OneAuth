@@ -16,19 +16,19 @@ marked.setOptions({
 		if (!highlightjs.getLanguage(language)) {
 			let externalGrammar;
 			try {
-				await packageManager.install(`highlightjs-${  language}`);
+				await packageManager.install(`highlightjs-${language}`);
 				externalGrammar = packageManager.require(
-					`highlightjs-${  language}`,
+					`highlightjs-${language}`,
 				);
 			} catch {
 				try {
-					await packageManager.install(`${language  }-highlightjs`);
+					await packageManager.install(`${language}-highlightjs`);
 					externalGrammar = packageManager.require(
-						`${language  }-highlightjs`,
+						`${language}-highlightjs`,
 					);
 				} catch {}
 			}
-			if (externalGrammar) 
+			if (externalGrammar)
 				highlightjs.registerLanguage(language, externalGrammar);
 		}
 		return (
