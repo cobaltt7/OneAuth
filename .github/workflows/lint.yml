@@ -1,7 +1,6 @@
 name: Format and lint
 on:
-    repository_dispatch:
-        types: lint
+    pull_request:
     workflow_dispatch:
     push:
         paths-ignore:
