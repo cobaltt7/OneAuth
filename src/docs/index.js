@@ -10,26 +10,26 @@ const fileSystem = require("fs"),
 	serveIndex = require("serve-index");
 
 marked.setOptions({
-	highlight: async (code, lang) => {
+	highlight: async (code, language) => {
 		// prevent downloading langs already downloaded or included in core
-		if (!highlightjs.getLanguage(lang)) {
+		if (!highlightjs.getLanguage(language)) {
 			let externalGrammar;
 			try {
-				await package.install("highlightjs-" + lang);
-				externalGrammar = package.require("highlightjs-" + lang);
+				await package.install("highlightjs-" + language);
+				externalGrammar = package.require("highlightjs-" + language);
 			} catch {
 				try {
-					await package.install(lang + "-highlightjs");
-					externalGrammar = package.require(lang + "-highlightjs");
+					await package.install(language + "-highlightjs");
+					externalGrammar = package.require(language + "-highlightjs");
 				} catch {}
 			}
 			if (externalGrammar) {
-				highlights.registerLanguage("lang", externalGrammar);
+				highlights.registerLanguage(language, externalGrammar);
 			}
 		}
 		return (
-			highlightjs.getLanguage(lang)
-				? highlightjs.highlight(code, { language: lang })
+			highlightjs.getLanguage(language)
+				? highlightjs.highlight(code, { language })
 				: highlightjs.highlightAuto(code)
 		).value;
 	},
