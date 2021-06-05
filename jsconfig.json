@@ -16,7 +16,8 @@
 			"atob",
 			"highlight.js",
 			"marked",
-			"serve-index"
+			"serve-index",
+		        "live-package-manager"
 		],
 		"checkJs": true,
 		"noImplicitAny": true,
