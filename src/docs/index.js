@@ -20,7 +20,9 @@ marked.setOptions({
 			} catch {
 				try {
 					await package.install(language + "-highlightjs");
-					externalGrammar = package.require(language + "-highlightjs");
+					externalGrammar = package.require(
+						language + "-highlightjs",
+					);
 				} catch {}
 			}
 			if (externalGrammar) {
