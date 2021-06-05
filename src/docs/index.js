@@ -11,7 +11,7 @@ const fileSystem = require("fs"),
 
 marked.setOptions({
 	highlight: async (code, originalLanguage) => {
-                const language= originalLanguage.toLowerCase()
+		const language = originalLanguage.toLowerCase();
 		// prevent downloading langs already downloaded or included in core
 		if (!highlightjs.getLanguage(language)) {
 			let externalGrammar;
