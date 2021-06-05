@@ -11,7 +11,7 @@ const fileSystem = require("fs"),
 
 marked.setOptions({
 	highlight: async (code, originalLanguage) => {
-	if(!originalLanguage) return highlightjs.highlightAuto(code).value
+		if (!originalLanguage) return highlightjs.highlightAuto(code).value;
 		let language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
 		if (!highlightjs.getLanguage(language)) {
@@ -28,12 +28,11 @@ marked.setOptions({
 						`${language}-highlightjs`,
 					);
 				} catch {
-					language="plaintext"
+					language = "plaintext";
 				}
 			}
 			if (externalGrammar)
 				highlightjs.registerLanguage(language, externalGrammar);
-				
 		}
 		return highlightjs.highlight(code, { language }).value;
 	},
