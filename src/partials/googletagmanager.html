@@ -23,8 +23,13 @@
 	defer
 	crossorigin="anonymous"
 ></script>
-<script type="module">
-	/* eslint strict: 0 */
+<script
+async
+	defer
+	src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/highlight.min.js"
+></script>
+<script async defer>
+	"use strict";
 
 	document.addEventListener("DOMContentLoaded", () =>
 		document
@@ -33,7 +38,3 @@
 			.forEach(hljs.highlightElement)
 	);
 </script>
-<script
-	defer
-	src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.7.2/build/highlight.min.js"
-></script>
