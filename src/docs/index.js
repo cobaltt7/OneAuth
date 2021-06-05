@@ -12,23 +12,24 @@ const fileSystem = require("fs"),
 marked.setOptions({
 	highlight: async (code, originalLanguage) => {
 		const language = originalLanguage.toLowerCase();
-		// prevent downloading langs already downloaded or included in core
+		// Prevent downloading langs already downloaded or included in core
 		if (!highlightjs.getLanguage(language)) {
 			let externalGrammar;
 			try {
-				await packageManager.install("highlightjs-" + language);
-				externalGrammar = packageManager.require("highlightjs-" + language);
+				await packageManager.install(`highlightjs-${  language}`);
+				externalGrammar = packageManager.require(
+					`highlightjs-${  language}`,
+				);
 			} catch {
 				try {
-					await packageManager.install(language + "-highlightjs");
+					await packageManager.install(`${language  }-highlightjs`);
 					externalGrammar = packageManager.require(
-						language + "-highlightjs",
+						`${language  }-highlightjs`,
 					);
 				} catch {}
 			}
-			if (externalGrammar) {
+			if (externalGrammar) 
 				highlightjs.registerLanguage(language, externalGrammar);
-			}
 		}
 		return (
 			highlightjs.getLanguage(language)
