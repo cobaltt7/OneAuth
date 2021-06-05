@@ -4,7 +4,7 @@ const fileSystem = require("fs"),
 	highlightjs = require("highlight.js"),
 	marked = require("marked"),
 	path = require("path"),
-	package = new (require("live-plugin-manager"))(),
+	packageManager = new (require("live-plugin-manager"))(),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router(),
 	serveIndex = require("serve-index");
@@ -16,12 +16,12 @@ marked.setOptions({
 		if (!highlightjs.getLanguage(language)) {
 			let externalGrammar;
 			try {
-				await package.install("highlightjs-" + language);
-				externalGrammar = package.require("highlightjs-" + language);
+				await packageManager.install("highlightjs-" + language);
+				externalGrammar = packageManager.require("highlightjs-" + language);
 			} catch {
 				try {
-					await package.install(language + "-highlightjs");
-					externalGrammar = package.require(
+					await packageManager.install(language + "-highlightjs");
+					externalGrammar = packageManager.require(
 						language + "-highlightjs",
 					);
 				} catch {}
