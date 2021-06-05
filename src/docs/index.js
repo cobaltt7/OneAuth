@@ -3,15 +3,16 @@
 const fileSystem = require("fs"),
 	highlightjs = require("highlight.js"),
 	marked = require("marked"),
+	packageManager = require("live-plugin-manager"),
 	path = require("path"),
-	packageManager = new (require("live-plugin-manager"))(),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router(),
 	serveIndex = require("serve-index");
 
 marked.setOptions({
 	highlight: async (code, originalLanguage) => {
-		const language = originalLanguage.toLowerCase();
+	if(!originalLanguage) return highlightjs.highlightAuto(code).value
+		let language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
 		if (!highlightjs.getLanguage(language)) {
 			let externalGrammar;
@@ -26,16 +27,15 @@ marked.setOptions({
 					externalGrammar = packageManager.require(
 						`${language}-highlightjs`,
 					);
-				} catch {}
+				} catch {
+					language="plaintext"
+				}
 			}
 			if (externalGrammar)
 				highlightjs.registerLanguage(language, externalGrammar);
+				
 		}
-		return (
-			highlightjs.getLanguage(language)
-				? highlightjs.highlight(code, { language })
-				: highlightjs.highlightAuto(code)
-		).value;
+		return highlightjs.highlight(code, { language }).value;
 	},
 	mangle: false,
 	smartLists: true,
