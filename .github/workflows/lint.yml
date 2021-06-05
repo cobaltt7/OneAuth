@@ -7,8 +7,6 @@ on:
         paths-ignore:
             - package.json
             - package-lock.json
-    pull_request:
-    pull_request_target:
 
 jobs:
     run:
