@@ -10,7 +10,8 @@ const fileSystem = require("fs"),
 	serveIndex = require("serve-index");
 
 marked.setOptions({
-	highlight: async (code, language) => {
+	highlight: async (code, originalLanguage) => {
+                const language= originalLanguage.toLowerCase()
 		// prevent downloading langs already downloaded or included in core
 		if (!highlightjs.getLanguage(language)) {
 			let externalGrammar;
@@ -26,7 +27,7 @@ marked.setOptions({
 				} catch {}
 			}
 			if (externalGrammar) {
-				highlights.registerLanguage(language, externalGrammar);
+				highlightjs.registerLanguage(language, externalGrammar);
 			}
 		}
 		return (
