@@ -9,11 +9,11 @@ const fileSystem = require("fs"),
 	serveIndex = require("serve-index");
 
 marked.setOptions({
-	highlight: (code,language) => highlightjs.highlightAuto(code).value,
-	mangle: false ,
-smartLists: true,
-smartypants:true,
-xhtml:true,
+	highlight: (code, language) => highlightjs.highlightAuto(code).value,
+	mangle: false,
+	smartLists: true,
+	smartypants: true,
+	xhtml: true,
 });
 
 router.use(
