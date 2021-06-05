@@ -31,10 +31,5 @@
 <script async defer>
 	"use strict";
 
-	document.addEventListener("DOMContentLoaded", () =>
-		document
-			.querySelectorAll("pre.hljs")
-			// eslint-disable-next-line no-undef
-			.forEach(hljs.highlightElement)
-	);
+	hljs.highlightAll();
 </script>
