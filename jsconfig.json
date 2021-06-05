@@ -17,7 +17,7 @@
 			"highlight.js",
 			"marked",
 			"serve-index",
-		        "live-package-manager"
+		        "live-plugin-manager"
 		],
 		"checkJs": true,
 		"noImplicitAny": true,
