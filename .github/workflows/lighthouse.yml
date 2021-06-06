@@ -46,7 +46,8 @@ jobs:
               if: failure()
               run:
                   node --trace-warnings --harmony
-                  .github/workflows/lighthouse.js '${{secrets.WGYTBOT}}' '{}', '1'
+                  .github/workflows/lighthouse.js '${{secrets.WGYTBOT}}' '{}',
+                  '1'
 
             - name: Comment
               if: success()

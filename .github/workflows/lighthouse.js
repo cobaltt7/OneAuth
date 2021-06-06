@@ -13,7 +13,7 @@ if (process.argv[3]) {
 }
 
 try {
-	const {data} = JSON.parse(process.argv[3]);
+	const { data } = JSON.parse(process.argv[3]);
 
 	let OUTPUT =
 		"# This week's Lighthouse scores\n" +
@@ -26,11 +26,15 @@ try {
 			`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(
 				result.scores,
 			)
-				.map((num) => `${num < 50 ? "🔴" : num < 90 ? "🟡" : "🟢"} ${num}`)
+				.map(
+					(num) =>
+						`${num < 50 ? "🔴" : num < 90 ? "🟡" : "🟢"} ${num}`,
+				)
 				.join(
 					" | ",
 				)} | [More information](https://developers.google.com/speed/pagespeed/insights/` +
-			`?url=${encodeURIComponent(result.url)}&tab=${result.emulatedFormFactor
+			`?url=${encodeURIComponent(result.url)}&tab=${
+				result.emulatedFormFactor
 			}) |\n`;
 	});
 
@@ -40,14 +44,14 @@ try {
 		issue_number: "29",
 	});
 	process.exit();
-}
-catch (error) {
+} catch (error) {
 	octokit.issues.createComment({
 		...github.context.repo,
-		body: "An error occured while generating the comment.\n"+
+		body:
+			"An error occured while generating the comment.\n" +
 			"```js\n" +
-			JSON.stringify(error)+
-		"```",
+			JSON.stringify(error) +
+			"```",
 		issue_number: "29",
 	});
 	process.exit();
