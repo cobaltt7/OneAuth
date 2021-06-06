@@ -51,7 +51,7 @@ router.get(
 	(_, res) =>
 		res
 			.status(302)
-			.redirect("https://cdn.onedot.cf/SVG/NoPadding/1Auth%20NoPad.svg"),
+			.redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg"),
 );
 router.get(
 	"/favicon.ico",
@@ -65,7 +65,7 @@ router.get(
 	(_, res) =>
 		res
 			.status(302)
-			.redirect("https://cdn.onedot.cf/SVG/Transparent/Auth.svg"),
+			.redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg"),
 );
 router.get(
 	"/svg/:img",
