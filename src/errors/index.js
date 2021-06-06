@@ -270,16 +270,13 @@ function middleware(req, res, next) {
 			res.statusCode = error.changeTo;
 			return middleware(_, res, next);
 		}
-		if (req.accepts("application/json")) 
-			return res.json(error);
-		 return res.render(path.resolve(__dirname, "error.html"), { error });
+		if (req.accepts("application/json")) return res.json(error);
+		return res.render(path.resolve(__dirname, "error.html"), { error });
 	}
 	return next();
 }
 
-/**
- * @param err
- */
+/** @param err */
 function logError(err) {
 	return console.error(err);
 }
