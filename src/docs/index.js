@@ -10,32 +10,32 @@ const fileSystem = require("fs"),
 	serveIndex = require("serve-index");
 
 marked.setOptions({
-	highlight: async (code, originalLanguage) => {
-		if (!originalLanguage) return highlightjs.highlightAuto(code).value;
+	highlight: async (code, originalLanguage, callback) => {
+		console.log(code,originalLanguage,callback)
+		if (!originalLanguage) highlightjs.highlightAuto(code).value
 		let language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
 		if (!highlightjs.getLanguage(language)) {
-			let externalGrammar;
-			try {
-				await packageManager.install(`highlightjs-${language}`);
-				externalGrammar = packageManager.require(
+			
+			 packageManager.install(`highlightjs-${language}`).then(()=>{
+							highlightjs.registerLanguage(language, packageManager.require(
 					`highlightjs-${language}`,
-				);
-			} catch {
-				try {
-					await packageManager.install(`${language}-highlightjs`);
-					externalGrammar = packageManager.require(
+				))
+highlightjs.highlight(code, { language }).value
+}).catch(()=>{
+				
+					packageManager.install(`${language}-highlightjs`).then(()=>		{	highlightjs.registerLanguage(language,packageManager.require(
 						`${language}-highlightjs`,
-					);
-				} catch {
-					language = "plaintext";
-				}
-			}
-			if (externalGrammar)
-				highlightjs.registerLanguage(language, externalGrammar);
-		}
-		return highlightjs.highlight(code, { language }).value;
-	},
+					))
+highlightjs.highlight(code, { language }).value
+})
+
+				. catch (()=>
+					highlightjs.highlight(code,{language:"plaintext"})
+				)
+			})}
+		highlightjs.highlight(code,{language})
+		},
 	mangle: false,
 	smartLists: true,
 	smartypants: true,
