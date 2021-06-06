@@ -19,7 +19,7 @@
     - ./src/docs/**
 
 "scope: i18n":
-    - any: ["./src/l10n.js", "./_locales/**", ./tx/*']
+    - any: ["./src/l10n.js", "./_locales/**", ./tx/**']
       all: ["!./src/**.html"]
 
 "scope: meta":
