@@ -1,32 +1,32 @@
 "language: html":
-  - all: ['./**.html']
+    - all: ["./**.html"]
 
 "language: sass":
-  - all: ['./**.sass','./tailwind.config.js']
+    - all: ["./**.sass", "./tailwind.config.js"]
 
 "scope: auth clients":
-  - ./src/auth/*/**
+    - ./src/auth/*/**
 
 "scope: core":
-  - ./src/index.js
-  - ./src/auth/index.js
+    - ./src/index.js
+    - ./src/auth/index.js
 
 "scope: dependencies":
-  - any: ['./package.json', './package-lock.json']
-    all: ['!/.src/**']
+    - any: ["./package.json", "./package-lock.json"]
+      all: ["!/.src/**"]
 
 "scope: documentation":
-  - ./src/docs/**
+    - ./src/docs/**
 
 "scope: i18n":
-  - any: ['./src/l10n.js', './_locales/**',./tx/*']
-    all: ['!./src/**.html']
+    - any: ["./src/l10n.js", "./_locales/**", ./tx/*']
+      all: ["!./src/**.html"]
 
 "scope: meta":
-  - any: ['./*', './.github/**', './.vscode/**']
-    all: ['!./src/**']
+    - any: ["./*", "./.github/**", "./.vscode/**"]
+      all: ["!./src/**"]
 
 "scope: webpages":
-  - ./src/partials/**
-  - ./src/main/**
-  - ./src/errors/**
+    - ./src/partials/**
+    - ./src/main/**
+    - ./src/errors/**
