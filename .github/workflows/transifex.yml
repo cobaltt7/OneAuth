@@ -9,7 +9,7 @@ on:
             - _locales/**.json
 
 jobs:
-    sync:
+    run:
         name: Synchronize
         runs-on: ubuntu-latest
 
@@ -70,4 +70,5 @@ jobs:
               uses: peter-evans/repository-dispatch@v1
               with:
                   token: ${{secrets.WGYTBOT}}
+                  repository: ${{ github.repository }}
                   event-type: lint
