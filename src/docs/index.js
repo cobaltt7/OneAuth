@@ -2,17 +2,28 @@
 
 const fileSystem = require("fs"),
 	highlightjs = require("highlight.js"),
-	marked = require("marked"),
-	packageManager = require("live-plugin-manager"),
+	{ logError } = require("../errors/index.js"),
+	marked = require("marked");
+
+// @ts-expect-error
+/** @type {import("../../node_modules/live-plugin-manager/dist/src/PluginManager")} */
+const packageManager = require("live-plugin-manager"),
 	path = require("path"),
+	{ promisify } = require("util"),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router(),
 	serveIndex = require("serve-index");
 
+const markedPromise = promisify(marked);
+
 marked.setOptions({
-	highlight: async (code, originalLanguage, callback) => {
+	highlight: (code, originalLanguage, callback) => {
+		if (!callback)
+			return logError(new Error("`callback` is falsy"))
+
 		console.log(code, originalLanguage, callback);
-		if (!originalLanguage) highlightjs.highlightAuto(code).value;
+		if (!originalLanguage)
+			return callback(null, highlightjs.highlightAuto(code).value);
 		const language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
 		if (!highlightjs.getLanguage(language)) {
@@ -23,7 +34,10 @@ marked.setOptions({
 						language,
 						packageManager.require(`highlightjs-${language}`),
 					);
-					highlightjs.highlight(code, { language }).value;
+					return callback(
+						null,
+						highlightjs.highlight(code, { language }).value,
+					);
 				})
 				.catch(() => {
 					packageManager
@@ -35,17 +49,23 @@ marked.setOptions({
 									`${language}-highlightjs`,
 								),
 							);
-							highlightjs.highlight(code, { language }).value;
+							return callback(
+								null,
+								highlightjs.highlight(code, { language }).value,
+							);
 						})
 
 						.catch(() =>
-							highlightjs.highlight(code, {
-								language: "plaintext",
-							}),
+							callback(
+								null,
+								highlightjs.highlight(code, {
+									language: "plaintext",
+								}),
+							),
 						);
 				});
 		}
-		highlightjs.highlight(code, { language });
+		return callback(null, highlightjs.highlight(code, { language }));
 	},
 	mangle: false,
 	smartLists: true,
@@ -88,17 +108,18 @@ router.use(
 	 * @param {import("../../types").ExpressRequest} req - Express request object.
 	 * @param {import("../../types").ExpressResponse} res - Express response object.
 	 * @param {import("../../types").ExpressNext} next - Express next function.
-	 * @returns {import("express").IRouter | void} - Nothing of value.
+	 * @returns {Promise<import("express").IRouter | void>} - Nothing of value.
 	 */
-	(req, res, next) => {
+	async (req, res, next) => {
 		const filename = path.resolve(__dirname, `${req.path.slice(1)}.md`);
 		if (fileSystem.existsSync(filename)) {
 			const markdown = fileSystem.readFileSync(filename, "utf8");
 			return res.render(path.resolve(__dirname, "markdown.html"), {
-				content: marked(markdown).replace(
-					/<pre>/g,
-					'<pre class="hljs">',
-				),
+				content: (await markedPromise(markdown))
+
+					// TODO: change to a custom renderer instead of using `.replace()`
+					.replace(/<pre>/g, '<pre class="hljs">'),
+
 				title: /^#\s(?<heading>.+)$/m.exec(markdown)?.groups?.heading,
 			});
 		}
