@@ -26,7 +26,10 @@ marked.setOptions({
 		const language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
 		if (highlightjs.getLanguage(language))
-			return callback(null, highlightjs.highlight(code, { language }).value);
+		{return callback(
+			null,
+			highlightjs.highlight(code, { language }).value,
+		);}
 
 		return packageManager
 			.install(`highlightjs-${language}`)
@@ -46,9 +49,7 @@ marked.setOptions({
 					.then(() => {
 						highlightjs.registerLanguage(
 							language,
-							packageManager.require(
-								`${language}-highlightjs`,
-							),
+							packageManager.require(`${language}-highlightjs`),
 						);
 						return callback(
 							null,
