@@ -3,7 +3,7 @@
 const github = require("@actions/github");
 const octokit = github.getOctokit(process.argv[2]);
 
-if (process.argv[3]) {
+if (process.argv[4]) {
 	octokit.issues.createComment({
 		...github.context.repo,
 		body: "An error occured while retrieving the data from Lighthouse.",

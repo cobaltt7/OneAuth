@@ -201,5 +201,9 @@
 		"sendResponse",
 		"rawData"
 	],
-	"typescript.tsdk": "node_modules\\typescript\\lib"
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"github-actions.workflows.pinned.workflows": [".github/workflows/lint.yml"],
+"github-actions.workflows.pinned.refresh.enabled": true,
+"github-actions.workflows.pinned.refresh.interval": 100,
+"github-actions.org-features":true
 }
