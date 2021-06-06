@@ -25,46 +25,45 @@ marked.setOptions({
 			return callback(null, highlightjs.highlightAuto(code).value);
 		const language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
-		if (!highlightjs.getLanguage(language)) {
-			packageManager
-				.install(`highlightjs-${language}`)
-				.then(() => {
-					highlightjs.registerLanguage(
-						language,
-						packageManager.require(`highlightjs-${language}`),
-					);
-					return callback(
-						null,
-						highlightjs.highlight(code, { language }).value,
-					);
-				})
-				.catch(() => {
-					packageManager
-						.install(`${language}-highlightjs`)
-						.then(() => {
-							highlightjs.registerLanguage(
-								language,
-								packageManager.require(
-									`${language}-highlightjs`,
-								),
-							);
-							return callback(
-								null,
-								highlightjs.highlight(code, { language }).value,
-							);
-						})
+		if (highlightjs.getLanguage(language))
+			return callback(null, highlightjs.highlight(code, { language }).value);
 
-						.catch(() =>
-							callback(
-								null,
-								highlightjs.highlight(code, {
-									language: "plaintext",
-								}),
+		return packageManager
+			.install(`highlightjs-${language}`)
+			.then(() => {
+				highlightjs.registerLanguage(
+					language,
+					packageManager.require(`highlightjs-${language}`),
+				);
+				return callback(
+					null,
+					highlightjs.highlight(code, { language }).value,
+				);
+			})
+			.catch(() => {
+				packageManager
+					.install(`${language}-highlightjs`)
+					.then(() => {
+						highlightjs.registerLanguage(
+							language,
+							packageManager.require(
+								`${language}-highlightjs`,
 							),
 						);
-				});
-		}
-		return callback(null, highlightjs.highlight(code, { language }));
+						return callback(
+							null,
+							highlightjs.highlight(code, { language }).value,
+						);
+					})
+					.catch(() =>
+						callback(
+							null,
+							highlightjs.highlight(code, {
+								language: "plaintext",
+							}),
+						),
+					);
+			});
 	},
 	mangle: false,
 	smartLists: true,
