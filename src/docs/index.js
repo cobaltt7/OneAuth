@@ -18,8 +18,7 @@ const markedPromise = promisify(marked);
 
 marked.setOptions({
 	highlight: (code, originalLanguage, callback) => {
-		if (!callback)
-			return logError(new Error("`callback` is falsy"))
+		if (!callback) return logError(new Error("`callback` is falsy"));
 
 		console.log(code, originalLanguage, callback);
 		if (!originalLanguage)
