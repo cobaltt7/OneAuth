@@ -1,14 +1,11 @@
 name: Format and lint
 on:
-    repository_dispatch:
-        types: lint
+    pull_request:
     workflow_dispatch:
     push:
         paths-ignore:
             - package.json
             - package-lock.json
-    pull_request:
-    pull_request_target:
 
 jobs:
     run:
