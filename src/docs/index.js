@@ -25,11 +25,12 @@ marked.setOptions({
 			return callback(null, highlightjs.highlightAuto(code).value);
 		const language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
-		if (highlightjs.getLanguage(language))
-		{return callback(
-			null,
-			highlightjs.highlight(code, { language }).value,
-		);}
+		if (highlightjs.getLanguage(language)) {
+			return callback(
+				null,
+				highlightjs.highlight(code, { language }).value,
+			);
+		}
 
 		return packageManager
 			.install(`highlightjs-${language}`)
