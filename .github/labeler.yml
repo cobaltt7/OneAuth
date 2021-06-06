@@ -1,0 +1,32 @@
+"language: html":
+  - all: ['./**.html']
+
+"language: sass":
+  - all: ['./**.sass','./tailwind.config.js']
+
+"scope: auth clients":
+  - ./src/auth/*/**
+
+"scope: core":
+  - ./src/index.js
+  - ./src/auth/index.js
+
+"scope: dependencies":
+  - any: ['./package.json', './package-lock.json']
+    all: ['!/.src/**']
+
+"scope: documentation":
+  - ./src/docs/**
+
+"scope: i18n":
+  - any: ['./src/l10n.js', './_locales/**',./tx/*']
+    all: ['!./src/**.html']
+
+"scope: meta":
+  - any: ['./*', './.github/**', './.vscode/**']
+    all: ['!./src/**']
+
+"scope: webpages":
+  - ./src/partials/**
+  - ./src/main/**
+  - ./src/errors/**
