@@ -51,7 +51,9 @@ router.get(
 	(_, res) =>
 		res
 			.status(302)
-			.redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg"),
+			.redirect(
+				"https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg",
+			),
 );
 router.get(
 	"/favicon.ico",
