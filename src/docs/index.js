@@ -10,8 +10,9 @@ const fileSystem = require("fs"),
 	serveIndex = require("serve-index");
 
 marked.setOptions({
-	highlight: async (code, originalLanguage) => {
-		if (!originalLanguage) return highlightjs.highlightAuto(code).value;
+	highlight: async (code, originalLanguage, callback) => {
+		console.log(code,originalLanguage,callback)
+		if (!originalLanguage) return highlightjs.highlightAuto(code).value
 		let language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
 		if (!highlightjs.getLanguage(language)) {
@@ -34,13 +35,25 @@ marked.setOptions({
 			if (externalGrammar)
 				highlightjs.registerLanguage(language, externalGrammar);
 		}
-		return highlightjs.highlight(code, { language }).value;
-	},
+		return highlightjs.highlight(code, { language }).value
+		},
 	mangle: false,
 	smartLists: true,
 	smartypants: true,
 	xhtml: true,
 });
+
+const realCodeOutputer = (new marked.Renderer()).code
+
+marked.use({
+  renderer: {
+    code(codePromise, lang, escaped)  {
+    	console.log(codePromise)
+      const code = codePromise//.then(code=>code)
+      return realCodeOutputer(code, lang, escaped)
+    }
+  }
+})
 
 router.use(
 	serveIndex("./src/docs", {
