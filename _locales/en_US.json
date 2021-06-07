@@ -89,23 +89,161 @@
 	"allowDataHidden": {
 		"string": "Unfortunately, we can't show this data right now. Sorry about that!"
 	},
-	"error404Heading": {
-		"string": "404 Not Found"
+	"error201Heading": { "string": "Created" },
+	"error202Heading": { "string": "Accepted" },
+	"error204Heading": { "string": "No Content" },
+	"error205Heading": { "string": "Reset Content" },
+	"error300Heading": { "string": "Multiple Choice" },
+	"error304Heading": { "string": "Not Modified" },
+	"error305Heading": { "string": "Use Proxy" },
+	"error400Heading": { "string": "Bad Request" },
+	"error401Heading": { "string": "Unauthorized" },
+	"error402Heading": { "string": "Payment Required " },
+	"error403Heading": { "string": "Forbidden" },
+	"error404Heading": { "string": "Not Found" },
+	"error405Heading": { "string": "Method Not Allowed" },
+	"error406Heading": { "string": "Not Acceptable" },
+	"error407Heading": { "string": "Proxy Authentication Required" },
+	"error408Heading": { "string": "Request Timeout" },
+	"error409Heading": { "string": "Conflict" },
+	"error410Heading": { "string": "Gone" },
+	"error411Heading": { "string": "Length Required" },
+	"error412Heading": { "string": "Precondition Failed" },
+	"error413Heading": { "string": "Payload Too Large" },
+	"error414Heading": { "string": "URI Too Long" },
+	"error415Heading": { "string": "Unsupported Media Type" },
+	"error416Heading": { "string": "Range Not Satisfiable" },
+	"error417Heading": { "string": "Expectation Failed" },
+	"error418Heading": { "string": "I'm a teapot" },
+	"error421Heading": { "string": "Misdirected Request" },
+	"error425Heading": { "string": "Too Early " },
+	"error426Heading": { "string": "Upgrade Required" },
+	"error428Heading": { "string": "Precondition Required" },
+	"error429Heading": { "string": "Too Many Requests" },
+	"error431Heading": { "string": "Request Header Fields Too Large" },
+	"error451Heading": { "string": "Unavailable For Legal Reasons" },
+	"error500Heading": { "string": "Internal Server Error" },
+	"error501Heading": { "string": "Not Implemented" },
+	"error502Heading": { "string": "Bad Gateway" },
+	"error503Heading": { "string": "Service Unavailable" },
+	"error504Heading": { "string": "Gateway Timeout" },
+	"error505Heading": { "string": "HTTP Version Not Supported" },
+	"error506Heading": { "string": "Variant Also Negotiates" },
+	"error510Heading": { "string": "Not Extended" },
+	"error201Message": {
+		"string": "An item in our databases has successfully been created."
+	},
+	"error202Message": {
+		"string": "Your request has been accepted and understood. We forwarded it to another server."
+	},
+	"error204Message": {
+		"string": "Your request was successful. However, we don't have any response for you."
+	},
+	"error205Message": {
+		"string": "Your request was successful. Reset any pages that use our APIs as the content may have changed."
+	},
+	"error300Message": {
+		"string": "Please pick a redirection method or location to continue."
+	},
+	"error304Message": {
+		"string": "The requested page has not been modified since the last request."
+	},
+	"error305Message": { "string": "A proxy is needed to access this page." },
+	"error400Message": {
+		"string": "Oops! Your request was invalid. Please make sure all needed information is sent, no extra information is sent, and all sent information is valid. If this keeps happening, try contacting us on GitHub."
+	},
+	"error401Message": {
+		"string": "Please log in before accessing this resource."
+	},
+	"error402Message": { "string": "Please pay before accessing this page." },
+	"error403Message": {
+		"string": "Sorry, but you are forbidden to access this resource."
 	},
 	"error404Message": {
-		"string": "We can't find that page."
-	},
-	"error405Heading": {
-		"string": "405 Method Not Allowed"
+		"string": "Uh-oh! We're can't find that page! Go back? If a link on this site lead you here, you may want to contact us on GitHub and let us know we have a broken link."
 	},
 	"error405Message": {
-		"string": "That HTTP method isn't allowed."
+		"string": "That HTTP method isn't supported on this page! Try a different page and/or method."
 	},
-	"errorHeading": {
-		"string": "Error"
+	"error406Message": {
+		"string": "We can't match the data requested with the format requested."
 	},
-	"errorMessage": {
-		"string": "An error occurred."
+	"error407Message": {
+		"string": "Please log in through a proxy before accessing this resource."
+	},
+	"error408Message": {
+		"string": "Hmm...the page was loading for quite a while and timed out! Perhaps there was an internal error. Try reloading the page. If this keeps happening, you may want to contact us on GitHub so we can fix it."
+	},
+	"error409Message": {
+		"string": "Oops, there was a conflict between the information your browser sent and the information we have! Try reloading the page. If this keeps happening, try contacting us on GitHub so we can fix it."
+	},
+	"error410Message": {
+		"string": "This isn't here any anymore. Unfortunately, it's never coming back."
+	},
+	"error411Message": {
+		"string": "You didn't say how much information you wanted! Please repeat the request with a requested length."
+	},
+	"error412Message": {
+		"string": "Unfortunately, we can't meet your conditions. Too bad!"
+	},
+	"error413Message": {
+		"string": "You sent so much data, we can't process it!"
+	},
+	"error414Message": {
+		"string": "That URL is too long for us to understand!"
+	},
+	"error415Message": { "string": "You sent the wrong type of file!" },
+	"error416Message": {
+		"string": "We don't have any data in the requested range."
+	},
+	"error417Message": {
+		"string": "You didn't send information we expected to receive!"
+	},
+	"error418Message": {
+		"string": "We refuse to try and brew coffee with a teapot."
+	},
+	"error421Message": {
+		"string": "You sent this request to the wrong place!"
+	},
+	"error425Message": {
+		"string": "Please wait in sending this request so it won't be sent twice."
+	},
+	"error426Message": { "string": "Please use HTTPS, not HTTP." },
+	"error428Message": {
+		"string": "You can't do that yet. Please fulfill the requested conditions first."
+	},
+	"error429Message": {
+		"string": "You have sent too many requests in a short amount of time. Please wait before sending more."
+	},
+	"error431Message": {
+		"string": "The headers of your request are too long to be processed."
+	},
+	"error451Message": {
+		"string": "Unfortunately, we cannot legally provide this page to you. Sorry about that!"
+	},
+	"error500Message": {
+		"string": "Uh-oh, you found a bug! We ran into an unexpected error. Please report it on GitHub so we can stop this from happening again."
+	},
+	"error501Message": {
+		"string": "No part of our website supports that HTTP method. Try a different one!"
+	},
+	"error502Message": {
+		"string": "We got an invalid response from an external service."
+	},
+	"error503Message": {
+		"string": "Sorry! This page is currently down! It should be back up soon!"
+	},
+	"error504Message": {
+		"string": "An external server didn't send us a response fast enough."
+	},
+	"error505Message": {
+		"string": "That HTTP version isn't supported by any part of this website."
+	},
+	"error506Message": {
+		"string": "Error in our internal configuration! Please report this on GitHub so we can prevent it from happening again."
+	},
+	"error510Message": {
+		"string": "We can't show you this page with the information given. Please extend your request."
 	},
 	"errorOldHeading": {
 		"string": "You are using an outdated browser!"
