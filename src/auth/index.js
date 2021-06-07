@@ -178,7 +178,7 @@ for (const method of [
 				 *
 				 * @param {import("../../types").sendResponseArgs} args - Information from the
 				 *   authentication handler.
-				 * @returns { import("express").IRouter
+				 * @returns {	| import("express").IRouter
 				 * 	| void
 				 * 	| import("../../types").ExpressResponse}
 				 *   - Nothing of interest.
