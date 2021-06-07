@@ -232,7 +232,6 @@ router.get(
 			"Origin, X-Requested-With, Content-Type, Accept",
 		);
 
-		// @ts-expect-error
 		res.status(200).json(await database.get(`RETRIEVE_${req.query.code}`));
 		database.delete(`RETRIEVE_${req.query.code}`);
 	},
