@@ -73,17 +73,17 @@ marked.setOptions({
 	xhtml: true,
 });
 
-const realCodeOutputer = (new marked.Renderer()).code
+const realCodeOutputer = new marked.Renderer().code;
 
 marked.use({
-  renderer: {
-    code(codePromise, lang, escaped)  {
-    	console.log(codePromise)
-      const code = codePromise//.then(code=>code)
-      return realCodeOutputer(code, lang, escaped)
-    }
-  }
-})
+	renderer: {
+		code(codePromise, lang, escaped) {
+			console.log(codePromise);
+			const code = codePromise; // .then(code=>code)
+			return realCodeOutputer(code, lang, escaped);
+		},
+	},
+});
 
 router.use(
 	serveIndex("./src/docs", {
