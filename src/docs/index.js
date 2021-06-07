@@ -65,20 +65,8 @@ marked.setOptions({
 							}),
 						),
 					);
-<<<<<<< HEAD
-				} catch {
-					language = "plaintext";
-				}
-			}
-			if (externalGrammar)
-				highlightjs.registerLanguage(language, externalGrammar);
-		}
-		return highlightjs.highlight(code, { language }).value
-		},
-=======
 			});
 	},
->>>>>>> ee3a8a3c6ac8104dea448c6d9b4c3514424cc0f7
 	mangle: false,
 	smartLists: true,
 	smartypants: true,
