@@ -5,20 +5,20 @@ on:
         - cron: "00 00 * * SUN"
 
 jobs:
-    lighthouse:
+    run:
         name: Run Lighthouse
         runs-on: ubuntu-latest
 
         steps:
             - name: Checkout
-              if: always()
+              if: !cancelled()
               uses: actions/checkout@main
               with:
                   ref: ${{github.head_ref}}
                   token: ${{secrets.WGYTBOT}}
 
             - name: Run
-              if: always()
+              if: !cancelled()
               uses: foo-software/lighthouse-check-action@master
               id: lighthouse
               with:
@@ -33,18 +33,25 @@ jobs:
                       https://auth.onedot.cf/auth/replit?url=https%3A%2F%2Fauth.onedot.cf%2F
 
             - name: Setup Node.JS
-              if: always()
+              if: !cancelled()
               uses: actions/setup-node@main
               with:
                   node-version: 12.22.1
 
             - name: Install
-              if: always()
+              if: !cancelled()
               run: npm install @actions/github --save-dev
 
             - name: Comment
-              if: always()
+              if: failure()
+              run:
+                  node --trace-warnings --harmony
+                  .github/workflows/lighthouse.js '${{secrets.WGYTBOT}}' '{}',
+                  '1'
+
+            - name: Comment
+              if: success()
               run:
                   node --trace-warnings --harmony
                   .github/workflows/lighthouse.js '${{secrets.WGYTBOT}}' '${{
-                  join(steps.lighthouse.outputs.*, '\n')}}'
+                  join(steps.lighthouse.outputs.*, '\n')}}', ''

@@ -9,30 +9,30 @@ on:
             - _locales/**.json
 
 jobs:
-    sync:
+    run:
         name: Synchronize
         runs-on: ubuntu-latest
 
         steps:
             - name: Checkout
-              if: always()
+              if: !cancelled()
               uses: actions/checkout@main
               with:
                   ref: ${{github.head_ref}}
                   token: ${{secrets.WGYTBOT}}
 
             - name: Setup Python
-              if: always()
+              if: !cancelled()
               uses: actions/setup-python@main
               with:
                   python-version: 3.x
 
             - name: Install
-              if: always()
+              if: !cancelled()
               run: pip install transifex-client
 
             - name: Setup Transifex
-              if: always()
+              if: !cancelled()
               run:
                   touch .transifexrc; echo "[https://www.transifex.com]" >
                   .transifexrc; echo "api_hostname = https://api.transifex.com"
@@ -41,19 +41,19 @@ jobs:
                   .transifexrc; echo "username = api" >> .transifexrc;
 
             - name: Push
-              if: always()
+              if: !cancelled()
               run:
                   tx push --source --translations --no-interactive --force
                   --skip
 
             - name: Pull
-              if: always()
+              if: !cancelled()
               run:
                   tx pull --all --source --skip --no-interactive --force
                   --mode=onlytranslated
 
             - name: Commit
-              if: always()
+              if: !cancelled()
               id: commit
               uses: stefanzweifel/git-auto-commit-action@master
               with:
@@ -70,4 +70,5 @@ jobs:
               uses: peter-evans/repository-dispatch@v1
               with:
                   token: ${{secrets.WGYTBOT}}
+                  repository: ${{ github.repository }}
                   event-type: lint

@@ -3,9 +3,6 @@ import { Request, Response, IRouter } from "express";
 interface nestedObjStr {
 	[key: string]: string | nestedObjStr;
 }
-interface JSON {
-	[key: string]: JSON | string | number | null | boolean | Array<JSON>;
-}
 //#endregion
 
 //#region Mustache
@@ -28,9 +25,11 @@ export interface ExpressResponse extends Response {
 	cookie: (name: string, value: string, options: { [key: string] }) => void;
 	send: (info: string) => IRouter;
 	sendStatus: (status: number) => IRouter;
-	json: (info: JSON) => IRouter;
+	json: (info: any) => IRouter;
 	redirect: (url: string) => IRouter;
 	sendFile: (url: string) => IRouter;
+	statusCode: number;
+	bodySent: boolean;
 }
 export type ExpressNext = () => void;
 export interface ExpressRequest extends Request {
@@ -44,6 +43,7 @@ export interface ExpressRequest extends Request {
 	cookies: { [key: string]: string };
 	next: (err: Error | string) => void;
 	url: string;
+	accepts: (type: string) => boolean;
 }
 //#endregion
 

@@ -2,7 +2,7 @@ name: Labeler
 on: pull_request_target
 
 jobs:
-    label:
+    run:
         runs-on: ubuntu-latest
         permissions:
             contents: read
@@ -10,6 +10,7 @@ jobs:
 
         steps:
             - uses: actions/labeler@v2
+              if: always()
               with:
                   repo-token: "${{ secrets.WGYTBOT }}"
                   sync-labels: true
