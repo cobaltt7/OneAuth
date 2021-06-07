@@ -173,7 +173,7 @@ for (const method of [
 				req,
 				res,
 				/** .........
-				 * ......... ......... ......... ......... Passes information from the
+				 * ......... ......... ......... ......... ......... Passes information from the
 				 * authentication handler (and other sources) to sendResponse.
 				 *
 				 * @param {import("../../types").sendResponseArgs} args - Information from the
@@ -245,7 +245,7 @@ router.get(
 router.get(
 	"/backend/send_data",
 	/** .........
-	 * ......... ......... ......... ......... Save the user's data.
+	 * ......... ......... ......... ......... ......... Save the user's data.
 	 *
 	 * @param {import("../../types").ExpressRequest} req - Express request object.
 	 * @param {import("../../types").ExpressResponse} res - Express response object.
