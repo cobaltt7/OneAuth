@@ -172,16 +172,18 @@ for (const method of [
 			client[method](
 				req,
 				res,
+				/* eslint-disable */
 				/**
 				 * Passes information from the authentication handler (and other sources) to sendResponse.
 				 *
 				 * @param {import("../../types").sendResponseArgs} args - Information from the
 				 *   authentication handler.
-				 * @returns {	| import("express").IRouter
+				 * @returns { import("express").IRouter
 				 * 	| void
 				 * 	| import("../../types").ExpressResponse}
 				 *   - Nothing of interest.
 				 */
+				/* eslint-enable */
 				(...args) =>
 					sendResponse(
 						`${req.params.client}`,
@@ -243,6 +245,7 @@ router.get(
 );
 router.get(
 	"/backend/send_data",
+	/* eslint-disable */
 	/**
 	 * Save the user's data.
 	 *
@@ -253,6 +256,7 @@ router.get(
 	 * >}
 	 *   - Nothing of interest.
 	 */
+	/* eslint-enable */
 	async (req, res) => {
 		const { client, url, token } = req.query,
 			clientInfo = getClient(`${client}`);
