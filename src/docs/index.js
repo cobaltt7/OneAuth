@@ -65,37 +65,25 @@ marked.setOptions({
 							}),
 						),
 					);
-<<<<<<< HEAD
-				} catch {
-					language = "plaintext";
-				}
-			}
-			if (externalGrammar)
-				highlightjs.registerLanguage(language, externalGrammar);
-		}
-		return highlightjs.highlight(code, { language }).value
-		},
-=======
 			});
 	},
->>>>>>> ee3a8a3c6ac8104dea448c6d9b4c3514424cc0f7
 	mangle: false,
 	smartLists: true,
 	smartypants: true,
 	xhtml: true,
 });
 
-const realCodeOutputer = (new marked.Renderer()).code
+const realCodeOutputer = new marked.Renderer().code;
 
 marked.use({
-  renderer: {
-    code(codePromise, lang, escaped)  {
-    	console.log(codePromise)
-      const code = codePromise//.then(code=>code)
-      return realCodeOutputer(code, lang, escaped)
-    }
-  }
-})
+	renderer: {
+		code(codePromise, lang, escaped) {
+			console.log(codePromise);
+			const code = codePromise; // .then(code=>code)
+			return realCodeOutputer(code, lang, escaped);
+		},
+	},
+});
 
 router.use(
 	serveIndex("./src/docs", {
