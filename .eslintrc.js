@@ -116,6 +116,14 @@ module.exports = {
 			1,
 			{ max: 500, skipBlankLines: true, skipComments: true },
 		],
+		"max-lines": [
+			1,
+			{
+				max: 500,
+				skipBlankLines: true,
+				skipComments: true,
+			},
+		],
 		"max-lines-per-function": [
 			2,
 			{ IIFEs: true, max: 100, skipBlankLines: true, skipComments: true },

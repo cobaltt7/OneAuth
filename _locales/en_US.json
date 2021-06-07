@@ -97,7 +97,7 @@
 		"string": "Your request has been accepted and understood. We forwarded it to another server."
 	},
 	"error204Message": {
-		"string": "Your request was successful. However, we don't have any information to give you."
+		"string": "Your request was successful. However, we don't have any information to give you in response."
 	},
 	"error205Message": {
 		"string": "Your request was successful. Reset any pages that use our APIs as the content may have changed."
