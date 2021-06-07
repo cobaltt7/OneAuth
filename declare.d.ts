@@ -4,12 +4,29 @@ declare module "retronid" {
 declare module "@tailwindcss/forms";
 declare module "@tailwindcss/typography";
 declare module "@ultraq/icu-message-formatter";
+declare module "live-plugin-manager" {
+	export = {
+		install: (library: string) => new Promise<void>(),
+		require: (library: string) => any,
+	};
+}
 declare module "fs";
 declare module "url";
 declare module "path";
-declare module "util";
-declare module "highlight.js";
+declare module "dotenv";
+declare module "util" {
+	export = {
+		promisify:
+			(func: (...args: any[]) => any) =>
+			(...args: any[]) =>
+				new Promise<any>(),
+	};
+}
+declare module "highlight.js/lib/core";
+declare module "globby" {
+	export = (patterns: string | string[]) => new Promise<string[]>();
+}
 
-declare var __dirname: string;
-declare var process: { argv: string[]; env: { [key: string]: string } };
-declare var require: (library: string) => any;
+declare const __dirname: string;
+declare const process: { argv: string[]; env: { [key: string]: string } };
+declare const require: (library: string) => any;

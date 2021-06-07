@@ -2,8 +2,7 @@
 
 const path = require("path");
 
-/** @type {import("../../../types").Auth} Auth */
-module.exports = {
+/** @type {import("../../../types").Auth} Auth */ module.exports = {
 	icon: "https://replit.com/public/images/logo.svg",
 	iconProvider: "url",
 	link: "/auth/replit?url={{url}}",

@@ -1,12 +1,7 @@
 /** @file ESLint Configuration file. */
 
 module.exports = {
-	env: {
-		browser: false,
-		es2020: true,
-		es6: true,
-		node: true,
-	},
+	env: { browser: false, es2020: true, es6: true, node: true },
 	extends: [
 		"eslint:all",
 		"plugin:node/recommended",
@@ -17,17 +12,10 @@ module.exports = {
 	ignorePatterns: ["node_modules", ".upm", "src/main/style.css"],
 	overrides: [
 		{
-			env: {
-				browser: true,
-				es2020: false,
-				es6: true,
-				node: true,
-			},
+			env: { browser: true, es2020: false, es6: true, node: true },
 			files: ["**/*.md"],
 			parserOptions: {
-				ecmaFeatures: {
-					impliedStrict: true,
-				},
+				ecmaFeatures: { impliedStrict: true },
 				ecmaVersion: 8,
 			},
 			processor: "markdown/markdown",
@@ -43,17 +31,10 @@ module.exports = {
 			},
 		},
 		{
-			env: {
-				browser: true,
-				es2020: true,
-				es6: true,
-				node: false,
-			},
+			env: { browser: true, es2020: true, es6: true, node: false },
 			extends: ["plugin:compat/recommended"],
 			files: ["*.html"],
-			parserOptions: {
-				ecmaVersion: 8,
-			},
+			parserOptions: { ecmaVersion: 8 },
 			rules: {
 				"comma-dangle": 0,
 				"jsdoc/require-file-overview": 0,
@@ -71,10 +52,7 @@ module.exports = {
 			parserOptions: { sourceType: "module" },
 		},
 	],
-	parserOptions: {
-		ecmaVersion: 11,
-		sourceType: "script",
-	},
+	parserOptions: { ecmaVersion: 11, sourceType: "script" },
 	plugins: ["html", "node", "regexp", "optimize-regex", "compat", "jsdoc"],
 	// eslint-disable-next-line id-length
 	reportUnusedDisableDirectives: true,
@@ -85,23 +63,10 @@ module.exports = {
 		"curly": [1, "multi-or-nest", "consistent"],
 		"dot-location": [1, "property"],
 		"func-names": 0,
-		"func-style": [
-			1,
-			"declaration",
-			{
-				allowArrowFunctions: true,
-			},
-		],
+		"func-style": [1, "declaration", { allowArrowFunctions: true }],
 		"function-call-argument-newline": [1, "consistent"],
 		"function-paren-newline": 0,
-		"id-length": [
-			1,
-			{
-				exceptions: ["_"],
-				max: 20,
-				min: 3,
-			},
-		],
+		"id-length": [1, { exceptions: ["_"], max: 20, min: 3 }],
 		"implicit-arrow-linebreak": 0,
 		"indent": [1, "tab"],
 		"indent-legacy": 0,
@@ -146,48 +111,20 @@ module.exports = {
 		"jsdoc/require-yields-check": 1,
 		"linebreak-style": 0,
 		"lines-around-comment": 0,
-		"max-len": [
-			1,
-			{
-				code: 100,
-				ignoreRegExpLiterals: true,
-				tabWidth: 2,
-			},
-		],
+		"max-len": [1, { code: 100, ignoreRegExpLiterals: true, tabWidth: 2 }],
 		"max-lines": [
 			1,
-			{
-				max: 500,
-				skipBlankLines: true,
-				skipComments: true,
-			},
+			{ max: 500, skipBlankLines: true, skipComments: true },
 		],
 		"max-lines-per-function": [
 			2,
-			{
-				IIFEs: true,
-				max: 100,
-				skipBlankLines: true,
-				skipComments: true,
-			},
+			{ IIFEs: true, max: 100, skipBlankLines: true, skipComments: true },
 		],
-		"max-params": [
-			1,
-			{
-				max: 5,
-			},
-		],
+		"max-params": [1, { max: 5 }],
 		"max-statements": 0,
 		"multiline-comment-style": 0,
 		"multiline-ternary": [1, "always-multiline"],
-		"new-cap": [
-			1,
-			{
-				capIsNew: true,
-				newIsCap: true,
-				properties: true,
-			},
-		],
+		"new-cap": [1, { capIsNew: true, newIsCap: true, properties: true }],
 		"no-confusing-arrow": 0,
 		"no-console": 1,
 		"no-continue": 0,
@@ -195,21 +132,12 @@ module.exports = {
 		"no-magic-numbers": 0,
 		"no-mixed-operators": 0,
 		"no-nested-ternary": 0,
-		"no-restricted-syntax": [
-			1,
-			{
-				selector: "SequenceExpression",
-			},
-		],
+		"no-restricted-syntax": [1, { selector: "SequenceExpression" }],
 		"no-tabs": 0,
 		"no-ternary": 0,
 		"no-unused-vars": [
 			1,
-			{
-				args: "all",
-				argsIgnorePattern: "_",
-				caughtErrors: "all",
-			},
+			{ args: "all", argsIgnorePattern: "_", caughtErrors: "all" },
 		],
 		"node/exports-style": 2,
 		"node/file-extension-in-import": 2,
@@ -227,13 +155,7 @@ module.exports = {
 		"optimize-regex/optimize-regex": 1,
 		"padded-blocks": [1, "never"],
 		"quote-props": [1, "consistent-as-needed"],
-		"quotes": [
-			1,
-			"double",
-			{
-				avoidEscape: true,
-			},
-		],
+		"quotes": [1, "double", { avoidEscape: true }],
 		"regexp/confusing-quantifier": 2,
 		"regexp/control-character-escape": 2,
 		"regexp/hexadecimal-escape": 2,
@@ -277,18 +199,10 @@ module.exports = {
 		"require-unicode-regexp": 0,
 		"space-before-function-paren": [
 			1,
-			{
-				anonymous: "always",
-				asyncArrow: "always",
-				named: "never",
-			},
+			{ anonymous: "always", asyncArrow: "always", named: "never" },
 		],
 		"strict": [2, "global"],
 		"wrap-iife": [1, "inside"],
 	},
-	settings: {
-		html: {
-			"xml-extensions": [".svg"],
-		},
-	},
+	settings: { html: { "xml-extensions": [".svg"] } },
 };

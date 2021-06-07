@@ -83,11 +83,12 @@ function getPageHandler(requestedClient) {
  * @param {string} url - URL to redirect the user to afterwards.
  * @param {import("../../types").ExpressResponse} res - Express response object.
  * @param {string} noDataMsg - Message to display when the data can not be shown to the user.
- * @returns {import("express").IRouter} - Express router from `res.render`.
+ * @returns {import("express").IRouter | void | import("../../types").ExpressResponse} - Nothing of interest.
  */
 function sendResponse(client, tokenOrData, url, res, noDataMsg) {
 	const clientInfo = getClient(client);
-	if (!clientInfo) logError(new ReferenceError(`Invalid client: ${client}`));
+	if (!clientInfo)
+		return logError(new ReferenceError(`Invalid client: ${client}`));
 
 	let data, token;
 	if (clientInfo.rawData && typeof tokenOrData === "object") {
@@ -146,6 +147,7 @@ for (const method of [
 	"unlock",
 	"unsubscribe",
 ]) {
+	// @ts-expect-error
 	router[method](
 		"/:client",
 		/**
@@ -175,7 +177,10 @@ for (const method of [
 				 *
 				 * @param {import("../../types").sendResponseArgs} args - Information from the
 				 *   authentication handler.
-				 * @returns {import("express").IRouter} - Express router object.
+				 * @returns {	| import("express").IRouter
+				 * 	| void
+				 * 	| import("../../types").ExpressResponse}
+				 *   - Nothing of interest.
 				 */
 				(...args) =>
 					sendResponse(
@@ -243,14 +248,16 @@ router.get(
 	 *
 	 * @param {import("../../types").ExpressRequest} req - Express request object.
 	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {Promise<import("../../types").ExpressResponse | import("express").IRouter>} -
-	 *   Express response object.
+	 * @returns {Promise<
+	 * 	import("../../types").ExpressResponse | import("express").IRouter | void
+	 * >}
+	 *   - Nothing of interest.
 	 */
 	async (req, res) => {
 		const { client, url, token } = req.query,
 			clientInfo = getClient(`${client}`);
 		if (!clientInfo)
-			logError(new ReferenceError(`Invalid client: ${client}`));
+			return logError(new ReferenceError(`Invalid client: ${client}`));
 
 		let code, redirect;
 		if (clientInfo.rawData) {

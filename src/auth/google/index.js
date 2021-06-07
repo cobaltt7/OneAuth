@@ -6,8 +6,7 @@ const fetch = nodeFetch.default ?? nodeFetch,
 	{ logError } = require("../../errors/index.js");
 require("dotenv").config();
 
-/** @type {import("../../../types").Auth} Auth */
-module.exports = {
+/** @type {import("../../../types").Auth} Auth */ module.exports = {
 	getData: async (token) => {
 		const { id_token: idToken, error } = await fetch(
 			"https://oauth2.googleapis.com/token",
@@ -23,17 +22,11 @@ module.exports = {
 				},
 				method: "POST",
 			},
-		).then(
-			(
-				/** @type {any} */
-				res,
-			) => res.json(),
-		);
+		).then((res) => res.json());
 		if (error || !idToken) {
 			logError(error);
 			return error;
 		}
-
 		/** @type {{ [key: string]: string }} */
 		const filteredInfo = {},
 			info = JSON.parse(atob(idToken.split(".")[1]));

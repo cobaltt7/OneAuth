@@ -11,15 +11,15 @@ export type MustacheCallback = (err: Error, str: string) => void;
 
 //#region Express
 export interface ExpressResponse extends Response {
-	setHeader: (header: string, value: string) => any;
-	header: (header: string, value: string) => any;
-	header: (headers: { [key: string]: string }) => any;
-	set: (header: string, value: string) => any;
-	set: (headers: { [key: string]: string }) => any;
+	setHeader: (header: string, value: string) => void;
+	header: (header: string, value: string) => void;
+	header: (headers: { [key: string]: string }) => void;
+	set: (header: string, value: string) => void;
+	set: (headers: { [key: string]: string }) => void;
 	status: (status: number) => ExpressResponse;
 	render: (
 		view: string,
-		options?: any,
+		options?: { [key: string]: any },
 		callback?: MustacheCallback,
 	) => IRouter;
 	cookie: (name: string, value: string, options: { [key: string] }) => void;
@@ -31,7 +31,6 @@ export interface ExpressResponse extends Response {
 	statusCode: number;
 	bodySent: boolean;
 }
-export type ExpressNext = () => void;
 export interface ExpressRequest extends Request {
 	query: { [key: string]: string };
 	body: { [key: string]: nestedObjStr };

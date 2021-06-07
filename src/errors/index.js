@@ -67,7 +67,7 @@ module.exports = {
 	 *
 	 * @param {import("../../types").ExpressRequest} req - Express request object.
 	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @param {import("../../types").ExpressNext} next - Express next function.
+	 * @param {import("express").NextFunction} next - Express next function.
 	 * @returns {import("express").IRouter | void} - Nothing of interest.
 	 */
 	middleware: (req, res, next) => {

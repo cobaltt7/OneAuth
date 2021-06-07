@@ -1,7 +1,6 @@
 /** @file Scratch Authentication handler. */
 
-/** @type {import("../../../types").Auth} Auth */
-module.exports = {
+/** @type {import("../../../types").Auth} Auth */ module.exports = {
 	icon: "https://scratch.mit.edu/favicon.ico",
 	iconProvider: "url",
 	link:

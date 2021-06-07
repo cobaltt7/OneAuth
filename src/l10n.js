@@ -28,7 +28,6 @@ const MESSAGES = {},
 	} = require("@ultraq/icu-message-formatter");
 
 (async function () {
-	/** @type string[] */
 	const codes = await globby("_locales/*.json");
 	codes.forEach((filename) => {
 		const [, code] = filename.split(".")[0]?.split("/") ?? [
@@ -207,7 +206,7 @@ module.exports = {
 	 *
 	 * @param {import("../types").ExpressRequest} req - Express request object.
 	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express next function.
+	 * @param {import("express").NextFunction} next - Express next function.
 	 */
 	middleware(req, res, next) {
 		/** @type {string[]} */
@@ -248,7 +247,7 @@ module.exports = {
 		 * Override res.render to ensure `msg` is always available.
 		 *
 		 * @param {string} view - The file to render.
-		 * @param {any} [options] - Options to render it with.
+		 * @param {{ [key: string]: any }} [options] - Options to render it with.
 		 * @param {import("../types").MustacheCallback} [callback] - Callback to run after render.
 		 * @returns {import("express").IRouter} - Express router instance.
 		 */
@@ -263,7 +262,7 @@ module.exports = {
 		) {
 			let afterRender = callback;
 
-			/** @type {any} */
+			/** @type {{ [key: string]: any }} */
 			// eslint-disable-next-line one-var
 			let opts = {};
 			if (typeof options === "object") opts = options;

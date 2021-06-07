@@ -20,11 +20,11 @@
 	"main": "src/index.js",
 	"scripts": {
 		"lint": "echo 'CODE STYLE'; npm run lint:prettier; npm run lint:eslint; npm run lint:typescript; echo GRAMMAR; npm run lint:spellchecker-cli; npm run lint:write_good",
-		"lint:eslint": "echo ESLint; npx eslint --ignore-pattern .gitignore --fix .",
-		"lint:prettier": "echo Prettier; npx prettier --ignore-path .gitignore --write . **.svg **.sass",
-		"lint:typescript": "echo Typescript; npx typescript --project jsconfig.json",
-		"lint:spellchecker-cli": "echo 'Spellchecker CLI'; find . -path ./node_modules -prune -false -o -name '*.md' | xargs -I {} npx spellchecker-cli {} --dictionaries dictionary.txt; npx spellchecker-cli _locales/en_US.json --dictionaries dictionary.txt",
-		"lint:write_good": "echo 'write good'; find . -path ./node_modules -prune -false -o -name '*.md' | xargs -L1 npx write-good --parse; npx write-good --parse _locales/en_US.json",
+		"lint:eslint": "npx eslint --ignore-pattern .gitignore --fix .",
+		"lint:prettier": "npx prettier --ignore-path .gitignore --write ** !.gitignore !src/auth/email/email.txt",
+		"lint:typescript": "npx typescript --project jsconfig.json",
+		"lint:spellchecker-cli": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} npx spellchecker-cli {} --dictionaries dictionary.txt; npx spellchecker-cli _locales/en_US.json --dictionaries dictionary.txt",
+		"lint:write_good": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} npx write-good --parse {}; npx write-good --parse _locales/en_US.json",
 		"start": "node --trace-warnings --harmony src/index.js",
 		"start:dev": "npx nodemon --harmony --trace-warnings src/index.js",
 		"build:tailwind": "TAILWIND_MODE=build NODE_ENV=production npx postcss src/tailwind.sass -o src/main/style.css"
@@ -33,10 +33,11 @@
 		"events": {
 			"restart": "npx prettier --write $FILENAME"
 		},
-		"ext": "*",
+		"ext": "\\*",
 		"verbose": false
 	},
 	"prettier": {
+		"iniSpaceAroundEquals": true,
 		"printWidth": 80,
 		"proseWrap": "always",
 		"quoteProps": "consistent",
@@ -48,6 +49,18 @@
 		"jsxBracketSameLine": false,
 		"vueIndentScriptAndStyle": true,
 		"overrides": [
+			{
+				"files": [
+					"**.md",
+					"**.txt",
+					"**/LICENSE"
+				],
+				"options": {
+					"trailingComma": "es5",
+					"proseWrap": "never",
+					"parser": "markdown"
+				}
+			},
 			{
 				"files": [
 					"**.svg",
@@ -68,16 +81,26 @@
 			},
 			{
 				"files": [
-					"**.md"
+					"**.env",
+					"**.replit",
+					"**\\.tx\\config"
 				],
 				"options": {
-					"trailingComma": "es5",
-					"proseWrap": "never"
+					"parser": "ini"
+				}
+			},
+			{
+				"files": [
+					"**.code-snippets"
+				],
+				"options": {
+					"parser": "json"
 				}
 			}
 		],
 		"plugins": [
-			"prettier-plugin-jsdoc"
+			"prettier-plugin-jsdoc",
+			"prettier-plugin-ini"
 		]
 	},
 	"dependencies": {
@@ -141,7 +164,8 @@
 		"postcss-nested": "^5.0.5",
 		"postcss-scss": "^3.0.5",
 		"postcss-sort-media-queries": "^3.9.10",
-		"prettier": "^2.3.0",
+		"prettier": "^2.3.1",
+		"prettier-plugin-ini": "^0.3.1",
 		"prettier-plugin-jsdoc": "^0.3.22",
 		"spellchecker-cli": "^4.4.0",
 		"tailwindcss": "^2.1.4",

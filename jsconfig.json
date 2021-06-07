@@ -2,10 +2,7 @@
 	"compilerOptions": {
 		"types": [
 			"node",
-			"globby",
-			"@replit/database",
 			"express",
-			"dotenv",
 			"mustache",
 			"nodemailer",
 			"node-fetch",
@@ -15,8 +12,7 @@
 			"accepts",
 			"atob",
 			"marked",
-			"serve-index",
-			"live-plugin-manager"
+			"serve-index"
 		],
 		"checkJs": true,
 		"noImplicitAny": true,
@@ -40,7 +36,9 @@
 			"es2018",
 			"es2019",
 			"es2020",
-			"es5"
+			"es5",
+			"webworker",
+			"scripthost"
 		],
 		"alwaysStrict": true,
 		"disableReferencedProjectLoad": true,
