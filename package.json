@@ -140,7 +140,7 @@
 		"postcss-nested": "^5.0.5",
 		"postcss-scss": "^3.0.5",
 		"postcss-sort-media-queries": "^3.9.10",
-		"prettier": "^2.3.0",
+		"prettier": "^2.3.1",
 		"prettier-plugin-jsdoc": "^0.3.22",
 		"spellchecker-cli": "^4.5.0",
 		"tailwindcss": "^2.1.4",
