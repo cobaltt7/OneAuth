@@ -175,8 +175,8 @@ for (const method of [
 				/** .........
 				 * ......... ......... ......... ......... ......... ......... ......... .........
 				 * ......... ......... ......... ......... ......... ......... ......... .........
-				 * ......... ......... Passes information from the authentication handler (and other
-				 * sources) to sendResponse.
+				 * ......... ......... ......... Passes information from the authentication handler
+				 * (and other sources) to sendResponse.
 				 *
 				 * @param {import("../../types").sendResponseArgs} args - Information from the
 				 *   authentication handler.
@@ -249,7 +249,7 @@ router.get(
 	/** .........
 	 * ......... ......... ......... ......... ......... ......... ......... ......... .........
 	 * ......... ......... ......... ......... ......... ......... ......... ......... .........
-	 * Save the user's data.
+	 * ......... Save the user's data.
 	 *
 	 * @param {import("../../types").ExpressRequest} req - Express request object.
 	 * @param {import("../../types").ExpressResponse} res - Express response object.
