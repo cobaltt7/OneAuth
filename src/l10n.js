@@ -10,7 +10,7 @@ const CACHE_CODES = {};
 // eslint-disable-next-line one-var
 const CACHE_FORMATTERS = {};
 
-/** @type {{ [key: string]: { [key: string]: string } }} */
+/** @type {{ [key: string]: { [key: string]: string  }}} */
 // eslint-disable-next-line one-var
 const CACHE_MSGS = {};
 
@@ -18,7 +18,7 @@ const CACHE_MSGS = {};
 // eslint-disable-next-line one-var
 const LANG_CODES = [];
 
-/** @type {{ [key: string]: { [key: string]: string } }} */
+/** @type {{ [key: string]: { [key: string]: string  }}} */
 const MESSAGES = {},
 	accepts = require("accepts"),
 	globby = require("globby"),
@@ -36,7 +36,7 @@ const MESSAGES = {},
 			"en_US",
 		];
 		MESSAGES[`${code}`] = {};
-		/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
+		/** @type {{ [key: string]: { [key: string]: string; string: string  }}} */
 		const tempMsgs = require(`../${filename}`);
 		for (const item in tempMsgs) {
 			if ({}.hasOwnProperty.call(tempMsgs, item)) {

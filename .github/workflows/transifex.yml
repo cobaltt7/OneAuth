@@ -15,45 +15,39 @@ jobs:
 
         steps:
             - name: Checkout
-              if: !cancelled()
               uses: actions/checkout@main
               with:
-                  ref: ${{github.head_ref}}
-                  token: ${{secrets.WGYTBOT}}
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Python
-              if: !cancelled()
               uses: actions/setup-python@main
               with:
                   python-version: 3.x
 
             - name: Install
-              if: !cancelled()
               run: pip install transifex-client
 
             - name: Setup Transifex
-              if: !cancelled()
               run:
                   touch .transifexrc; echo "[https://www.transifex.com]" >
                   .transifexrc; echo "api_hostname = https://api.transifex.com"
                   >> .transifexrc; echo "hostname = https://www.transifex.com"
-                  >> .transifexrc; echo "password =" "${{secrets.TRANSIFEX}}" >>
+                  >> .transifexrc; echo "password =" "${{ secrets.TRANSIFEX }}" >>
                   .transifexrc; echo "username = api" >> .transifexrc;
 
             - name: Push
-              if: !cancelled()
               run:
                   tx push --source --translations --no-interactive --force
                   --skip
 
             - name: Pull
-              if: !cancelled()
               run:
                   tx pull --all --source --skip --no-interactive --force
                   --mode=onlytranslated
 
             - name: Commit
-              if: !cancelled()
+              if: always()
               id: commit
               uses: stefanzweifel/git-auto-commit-action@master
               with:
@@ -66,9 +60,9 @@ jobs:
                       wgytbot <83586655+wgytbot@users.noreply.github.com>
 
             - name: Repository Dispatch
-              if: steps.commit.outputs.changes_detected == 'false'
+              if: always()
               uses: peter-evans/repository-dispatch@v1
               with:
-                  token: ${{secrets.WGYTBOT}}
+                  token: ${{ secrets.WGYTBOT }}
                   repository: ${{ github.repository }}
                   event-type: lint

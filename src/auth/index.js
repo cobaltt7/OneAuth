@@ -205,7 +205,8 @@ router.get(
 			if (authButtonsReplaced[index]) {
 				// @ts-expect-error
 				authButtonsReplaced[index].link = link.replace(
-					/{{url}}/g,
+					// TODO: use mustache
+					/{{ ?url ?}}/g,
 					encodeURIComponent(`${req.query.url}`),
 				);
 			}

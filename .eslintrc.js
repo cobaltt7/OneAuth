@@ -154,14 +154,6 @@ module.exports = {
 				tabWidth: 2,
 			},
 		],
-		"max-lines": [
-			1,
-			{
-				max: 500,
-				skipBlankLines: true,
-				skipComments: true,
-			},
-		],
 		"max-lines-per-function": [
 			2,
 			{

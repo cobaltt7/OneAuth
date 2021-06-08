@@ -3,40 +3,40 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#message}}signinHeading{{/message}} | 1Auth</title>
+		<title>{{# message }}signinHeading{{/ message }} | 1Auth</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
-		{{> googletagmanager}}
+		{{> googletagmanager }}
 	</head>
 
 	<body style="display: none">
-		{{> nav}}
+		{{> nav }}
 		<main>
-			<h1>{{#message}}signinHeading{{/message}}</h1>
-			<p>{{#message}}signinChoose{{/message}}</p>
+			<h1>{{# message }}signinHeading{{/ message }}</h1>
+			<p>{{# message }}signinChoose{{/ message }}</p>
 			<ul id="auth-list">
-				{{#clients}}
-				<a href="{{link}}">
+				{{# clients }}
+				<a href="{{ link }}">
 					<li class="auth-button">
-						{{#fontawesome}}
-						<i class="{{iconProvider}} fa-{{icon}}"></i>
-						{{/fontawesome}} {{^fontawesome}}
+						{{# fontawesome }}
+						<i class="{{ iconProvider }} fa-{{ icon }}"></i>
+						{{/ fontawesome }} {{ ^fontawesome }}
 						<img
-							src="{{#svg}}/svg/{{/svg}}{{icon}}"
-							alt="{{name}}"
+							src="{{# svg }}/svg/{{/ svg }}{{ icon }}"
+							alt="{{ name }}"
 							height="18"
 							width="18"
-							name="{{name}}"
+							name="{{ name }}"
 						/>
-						{{/fontawesome}}
+						{{/ fontawesome }}
 						<span
-							>{{#message}}signinWith|||{{name}}{{/message}}</span
+							>{{# message }}signinWith|||{{ name }}{{/ message }}</span
 						>
 					</li>
 				</a>
-				{{/clients}}
+				{{/ clients }}
 			</ul>
 		</main>
 	</body>
