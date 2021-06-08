@@ -19,7 +19,6 @@
 -   Mark comments that answer your question as the answer.
 -   Only use Discussions for questions, comments, and other related topics. Do not request new features or report bugs in Discussions; they will be closed and ignored.
 -   Read [the docs](https://auth.onedot.cf/docs) before asking for help.
--   Use Discussions for questions, comments, and other related topics. Do not request new features or report bugs in Discussions; it will be closed and ignored.
 
 ## Code Guidelines
 
