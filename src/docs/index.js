@@ -39,12 +39,9 @@ marked.setOptions({
 		try {
 			highlightjs.registerLanguage(
 				language,
-				require(`highlight.js/lib/languages/${  language}`),
+				require(`highlight.js/lib/languages/${language}`),
 			);
-			callback(
-				null,
-				highlightjs.highlight(code, { language }).value,
-			)
+			callback(null, highlightjs.highlight(code, { language }).value);
 			return;
 		} catch {
 			packageManager

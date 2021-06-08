@@ -1,7 +1,1 @@
-1Auth
-Replit
-URI
-APIs
-HTTPS
-errorOldWhy
-Transifex
+1Auth Replit URI APIs HTTPS errorOldWhy Transifex
