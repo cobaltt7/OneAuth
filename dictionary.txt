@@ -1,12 +1,1 @@
-1Auth
-Replit
-Transifex
-errorOldWhy
-URI-encoded
-FontAwesome
-iconProvider
-SVG
-mkactivity
-mkcol
-Linebreaks
-whitespace
+1Auth Replit Transifex errorOldWhy URI-encoded FontAwesome iconProvider SVG mkactivity mkcol Linebreaks whitespace

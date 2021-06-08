@@ -33,7 +33,7 @@
 		"events": {
 			"restart": "npx prettier --write $FILENAME"
 		},
-		"ext": "*",
+		"ext": "\\*",
 		"verbose": false
 	},
 	"prettier": {

@@ -11,15 +11,6 @@ export type MustacheCallback = (err: Error, str: string) => void;
 
 //#region Express
 export interface ExpressResponse extends Response {
-	setHeader: (header: string, value: string) => any;
-	header: (header: string, value: string) => any;
-	header: (headers: { [key: string]: string }) => any;
-	set: (header: string, value: string) => any;
-	set: (headers: { [key: string]: string }) => any;
-	status: (status: number) => ExpressResponse;
-	render: (
-		view: string,
-		options?: any,
 	setHeader: (header: string, value: string) => void;
 	header: (header: string, value: string) => void;
 	header: (headers: { [key: string]: string }) => void;

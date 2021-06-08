@@ -36,4 +36,4 @@ You may report instances of abusive, harassing, or otherwise unacceptable behavi
 
 ## Attribution
 
-This Code of Conduct is taken from the [Contributor Covenant](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html), with slight modifications. For answers to common questions about this code of conduct, see [the Contributor Covenant FAQ](https://www.contributor-covenant.org/faq).
+This Code of Conduct is a modified version of the [Contributor Covenant, version 1.4, available here](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html). For answers to common questions about this code of conduct, see [the Contributor Covenant FAQ](https://www.contributor-covenant.org/faq).

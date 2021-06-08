@@ -4,7 +4,6 @@ declare module "retronid" {
 declare module "@tailwindcss/forms";
 declare module "@tailwindcss/typography";
 declare module "@ultraq/icu-message-formatter";
-
 declare module "live-plugin-manager" {
 	export = {
 		install: (library: string) => new Promise<void>(),
