@@ -16,7 +16,8 @@ const database = new (require("@replit/database"))(),
 	path = require("path"),
 	retronid = require("retronid").generate;
 
-/** @type {import("../../../types").Auth} Auth */ module.exports = {
+/** @type {import("../../../types").Auth} Auth */
+module.exports = {
 	icon: "envelope",
 	iconProvider: "fas",
 	link: "/auth/email?url={{url}}",
