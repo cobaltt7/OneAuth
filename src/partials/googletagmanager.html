@@ -23,14 +23,19 @@
 	defer
 	crossorigin="anonymous"
 ></script>
-<script
-	async
-	defer
-	src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/highlight.min.js"
-></script>
 <script async defer>
 	"use strict";
 
+	(function () {	
+	const newScript = document.createElement("script");
+	newScript.async = true;
+	newScript.defer = true;
+	newScript.addEventListener("load",()=>{document.querySelectorAll('pre.hljs').forEach(element => {
 	// eslint-disable-next-line no-undef
-	hljs.highlightAll();
+  hljs.highlightElement(element);
+});})
+	newScript.src =
+		"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/highlight.min.js";
+		document.head.append(newScript)	
+	})();
 </script>
