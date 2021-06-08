@@ -3,80 +3,81 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#message}}aboutPageTitle{{/message}}</title>
+		<title>{{# message }}aboutPageTitle{{/ message }}</title>
 		<meta name="robots" content="index, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
-		{{> googletagmanager}}
+		{{> googletagmanager }}
 	</head>
 
 	<body style="display: none">
-		{{> nav}}
+		{{> nav }}
 		<main>
-			<h1>{{#message}}aboutMainHeading{{/message}}</h1>
+			<h1>{{# message }}aboutMainHeading{{/ message }}</h1>
 			<section id="about">
-				<h2>{{#message}}aboutSubHeading{{/message}}</h2>
+				<h2>{{# message }}aboutSubHeading{{/ message }}</h2>
 				<p>
-					{{#message}}aboutIntro{{/message}}
-					{{#message}}aboutClientCount|||{{clients.length}}{{/message}}
+					{{# message }}aboutIntro{{/ message }}
+					{{# message }}aboutClientCount|||{{ clients.length }}{{/ message }}
 				</p>
 			</section>
 			<section id="clients">
-				<h2>{{#message}}aboutClientsHeading{{/message}}</h2>
+				<h2>{{# message }}aboutClientsHeading{{/ message }}</h2>
 				<ul id="auth-list">
-					{{#clients}}
+					{{# clients }}
 					<li class="auth-button">
-						{{#fontawesome}}
-						<i class="{{iconProvider}} fa-{{icon}}"></i>
-						{{/fontawesome}} {{^fontawesome}}
+						{{# fontawesome }}
+						<i class="{{ iconProvider }} fa-{{ icon }}"></i>
+						{{/ fontawesome }} {{ ^fontawesome }}
 						<img
-							src="{{#svg}}/svg/{{/svg}}{{icon}}"
-							alt="{{name}}"
+							src="{{# svg }}/svg/{{/ svg }}{{ icon }}"
+							alt="{{ name }}"
 							height="18"
 							width="18"
-							name="{{name}}"
+							name="{{ name }}"
 						/>
-						{{/fontawesome}}
-						<span>{{name}}</span>
+						{{/ fontawesome }}
+						<span>{{ name }}</span>
 					</li>
-					{{/clients}}
+					{{/ clients }}
 				</ul>
 			</section>
 			<section id="developers">
-				<h2>{{#message}}aboutDevelopersHeading{{/message}}</h2>
-				<p>{{#message}}aboutImpementation{{/message}}</p>
+				<h2>{{# message }}aboutDevelopersHeading{{/ message }}</h2>
+				<p>{{# message }}aboutImpementation{{/ message }}</p>
 				<pre class="hljs lang-http">
 https://auth.onedot.cf/auth?url=&lt;CALLBACK_URL&gt;</pre
 				>
 				<p>
-					{{#message}}aboutAfterFinish|||<code>&lt;CALLBACK_URL&gt;</code>{{/message}}
-					{{#message}}aboutNewParam|||<code>code</code>{{/message}}
-					{{#message}}aboutGetInfo{{/message}}
+					{{# message }}aboutAfterFinish|||<code>&lt;CALLBACK_URL&gt;</code>{{/ message }}
+					{{# message }}aboutNewParam|||<code>code</code>{{/ message }}
+					{{# message }}aboutGetInfo{{/ message }}
 				</p>
 				<pre class="hljs lang-http">
 GET https://auth.onedot.cf/auth/backend/get_data/?code=&lt;CODE&gt;</pre
 				>
 				<p>
-					{{#message}}aboutWhatCode|||<code>&lt;CODE&gt;</code>{{/message}}
-					{{#message}}aboutNoParam{{/message}}
+					{{# message }}aboutWhatCode|||<code>&lt;CODE&gt;</code>{{/ message }}
+					{{# message }}aboutNoParam{{/ message }}
 				</p>
 				<p class="new">
-					<strong>{{#message}}aboutLangsHeader{{/message}}</strong> -
-					{{#message}}aboutLangsHow|||<code>lang</code>{{/message}}
-					{{#message}}aboutLangsValue|||<code>en</code>|||<code>es</code>{{/message}}
-					{{#message}}aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>{{/message}}
-					{{#message}}aboutLangsFallback{{/message}}
+					<strong>{{# message }}aboutLangsHeader{{/ message }}</strong> -
+					{{# message }}aboutLangsHow|||<code>lang</code>{{/ message }}
+					{{# message }}aboutLangsValue|||<code>en</code>|||<code>es</code>{{/ message }}
+					{{# message }}aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>{{/ message }}
+					{{# message }}aboutLangsFallback{{/ message }}
 					<i>
-						{{#message}}aboutTranslations{{/message}}
+						{{# message }}aboutTranslations{{/ message }}
 						<a href="https://www.transifex.com/1dot/1auth/">
-							{{#message}}aboutHelpTranslate{{/message}}
+							{{# message }}aboutHelpTranslate{{/ message }}
 						</a>
 					</i>
 				</p>
 				<br />
-				<p>{{#message}}aboutMoreConfig{{/message}}</p>
+				<p>{{# message }}aboutMoreConfig{{/ message }}</p>
 			</section>
 		</main>
+		<a href="/docs/l10n">remove this link</a>
 	</body>
 </html>

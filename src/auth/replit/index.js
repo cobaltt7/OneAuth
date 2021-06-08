@@ -6,7 +6,7 @@ const path = require("path");
 module.exports = {
 	icon: "https://replit.com/public/images/logo.svg",
 	iconProvider: "url",
-	link: "/auth/replit?url={{url}}",
+	link: "/auth/replit?url={{ url }}",
 	name: "Replit",
 	pages: [
 		{

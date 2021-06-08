@@ -3,21 +3,21 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#message}}emailHeading{{/message}} | 1Auth</title>
+		<title>{{# message }}emailHeading{{/ message }} | 1Auth</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<link rel="preload" href="/svg/loading" as="image" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
-		{{> googletagmanager}}
+		{{> googletagmanager }}
 	</head>
 
 	<body style="display: none">
-		{{> nav}}
+		{{> nav }}
 		<main>
-			<h1>{{#message}}emailHeading{{/message}}</h1>
+			<h1>{{# message }}emailHeading{{/ message }}</h1>
 			<label id="note" for="email-address"
-				>{{#message}}emailEnterPrompt{{/message}}</label
+				>{{# message }}emailEnterPrompt{{/ message }}</label
 			>
 			<form action method="POST">
 				<input
@@ -26,10 +26,10 @@
 					type="email"
 					autocomplete="email"
 					required="true"
-					placeholder="{{#message}}emailPlaceholder{{/message}}"
+					placeholder="{{# message }}emailPlaceholder{{/ message }}"
 				/>
 				<button id="submit" type="submit">
-					{{#message}}emailSubmit{{/message}}
+					{{# message }}emailSubmit{{/ message }}
 				</button>
 			</form>
 		</main>
@@ -102,7 +102,7 @@
 
 							// eslint-disable-next-line id-length
 							id: "submit",
-							innerText: "{{#message}}emailSubmit{{/message}}",
+							innerText: "{{# message }}emailSubmit{{/ message }}",
 							type: "submit",
 						})
 					);
@@ -113,7 +113,7 @@
 							htmlFor: "code",
 							// eslint-disable-next-line id-length
 							id: "note",
-							innerText: "{{#message}}emailEnterCode{{/message}}",
+							innerText: "{{# message }}emailEnterCode{{/ message }}",
 						}),
 						newForm
 					);

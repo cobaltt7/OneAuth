@@ -14,9 +14,9 @@
 			"cookie-parser",
 			"accepts",
 			"atob",
-			"highlight.js",
 			"marked",
-			"serve-index"
+			"serve-index",
+			"live-plugin-manager"
 		],
 		"checkJs": true,
 		"noImplicitAny": true,

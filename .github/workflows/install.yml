@@ -16,28 +16,23 @@ jobs:
 
         steps:
             - name: Checkout
-              if: !cancelled()
               uses: actions/checkout@main
               with:
-                  ref: ${{github.head_ref}}
-                  token: ${{secrets.WGYTBOT}}
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Node.JS
-              if: !cancelled()
               uses: actions/setup-node@main
               with:
                   node-version: 12.22.1
 
             - name: Remove
-              if: !cancelled()
               run: rm package-lock.json
 
             - name: Install
-              if: !cancelled()
               run: npm install
 
             - name: Commit
-              if: !cancelled()
               id: commit
               uses: stefanzweifel/git-auto-commit-action@master
               with:
@@ -51,9 +46,9 @@ jobs:
                       wgytbot <83586655+wgytbot@users.noreply.github.com>
 
             - name: Repository Dispatch
-              if: !cancelled()
+              if: always()
               uses: peter-evans/repository-dispatch@v1
               with:
-                  token: ${{secrets.WGYTBOT}}
+                  token: ${{ secrets.WGYTBOT }}
                   repository: ${{ github.repository }}
                   event-type: lint

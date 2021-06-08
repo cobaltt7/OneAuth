@@ -65,8 +65,8 @@ module.exports = {
 		"&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com" +
 		"&scope=openid%20email%20profile" +
 		"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
-		"&state={{url}}" +
-		"&nonce={{nonce}}",
+		"&state={{ url }}" +
+		"&nonce={{ nonce }}",
 	name: "Google",
 	pages: [
 		{
