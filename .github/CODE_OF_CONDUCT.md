@@ -17,7 +17,7 @@ Examples of behavior that contributes to creating a positive environment include
 Examples of unacceptable behavior by participants include:
 
 -   Public or private harassment
--   Publishing others' private information, such as a physical or electronic address, without explicit permission
+-   Publishing other's private information, such as a physical or electronic address, without explicit permission
 -   The use of sexual language or imagery and unwelcome sexual attention or advances
 -   Trolling, insulting/derogatory comments, and personal or political attacks
 -   Other conduct which people could reasonably consider inappropriate in a professional setting
@@ -32,8 +32,8 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 
 ## Enforcement
 
-You may report instances of abusive, harassing, or otherwise unacceptable behavior by contacting the project team at 1auth.wgyt@gmail.com. They will review and investigate all complaints and will result in a response that they deem necessary and appropriate for the circumstances. The project team will maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately. Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
+You may report instances of abusive, harassing, or otherwise unacceptable behavior by contacting the project team at 1auth.wgyt@gmail.com. They will review and investigate all complaints and will result in a response that they deem necessary and appropriate for the circumstances. The project team will maintain confidentiality concerning the reporter of an incident. Further details of specific enforcement policies may be posted separately. Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
 ## Attribution
 
-We have adapted this Code of Conduct from the [Contributor Covenant, version 1.4, available here](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html). For answers to common questions about this code of conduct, see [the Contributor Covenant FAQ](https://www.contributor-covenant.org/faq).
+This Code of Conduct is taken from the [Contributor Covenant](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html), with slight modifications. For answers to common questions about this code of conduct, see [the Contributor Covenant FAQ](https://www.contributor-covenant.org/faq).

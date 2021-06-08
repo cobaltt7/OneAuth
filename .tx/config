@@ -6,4 +6,3 @@ file_filter = _locales/<lang>.json
 source_file = _locales/en_US.json
 source_lang = en
 type = STRUCTURED_JSON
-

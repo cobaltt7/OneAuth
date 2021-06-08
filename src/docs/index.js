@@ -1,13 +1,10 @@
 /** @file Documentation. */
 
 const fileSystem = require("fs"),
-	highlightjs = require("highlight.js"),
+	highlightjs = require("highlight.js/lib/core"),
 	{ logError } = require("../errors/index.js"),
-	marked = require("marked");
-
-// @ts-expect-error
-/** @type {import("../../node_modules/live-plugin-manager/dist/src/PluginManager")} */
-const packageManager = require("live-plugin-manager"),
+	marked = require("marked"),
+	packageManager = require("live-plugin-manager"),
 	path = require("path"),
 	{ promisify } = require("util"),
 	// eslint-disable-next-line new-cap
@@ -18,21 +15,24 @@ const markedPromise = promisify(marked);
 
 marked.setOptions({
 	highlight: (code, originalLanguage, callback) => {
-		if (!callback) return logError(new Error("`callback` is falsy"));
+		if (!callback) {
+			logError(new TypeError("`callback` is falsy"));
+			return;
+		}
 
 		console.log(code, originalLanguage, callback);
-		if (!originalLanguage)
-			return callback(null, highlightjs.highlightAuto(code).value);
+		if (!originalLanguage) {
+			callback(null, highlightjs.highlightAuto(code).value);
+			return;
+		}
 		const language = originalLanguage.toLowerCase();
 		// Prevent downloading langs already downloaded or included in core
 		if (highlightjs.getLanguage(language)) {
-			return callback(
-				null,
-				highlightjs.highlight(code, { language }).value,
-			);
+			callback(null, highlightjs.highlight(code, { language }).value);
+			return;
 		}
 
-		return packageManager
+		packageManager
 			.install(`highlightjs-${language}`)
 			.then(() => {
 				highlightjs.registerLanguage(
@@ -72,18 +72,6 @@ marked.setOptions({
 	smartypants: true,
 	xhtml: true,
 });
-
-const realCodeOutputer = (new marked.Renderer()).code
-
-marked.use({
-  renderer: {
-    code(codePromise, lang, escaped)  {
-    	console.log(codePromise)
-      const code = codePromise//.then(code=>code)
-      return realCodeOutputer(code, lang, escaped)
-    }
-  }
-})
 
 router.use(
 	serveIndex("./src/docs", {
@@ -137,6 +125,23 @@ router.use(
 		}
 		return next();
 	},
+);router.get(/^[^.]+\.md$/m, (req, res) =>
+	res.redirect(`/docs/${/^\/(?<file>.+).md$/m.exec(req.path)?.groups?.file}`),
 );
+
+router.use(async (req, res, next) => {
+	const filename = path.resolve(__dirname, `${req.path.slice(1)}.md`);
+	if (fileSystem.existsSync(filename)) {
+		const markdown = fileSystem.readFileSync(filename, "utf8");
+		return res.render(path.resolve(__dirname, "markdown.html"), {
+			content: (await markedPromise(markdown))
+				// TODO: change to a custom renderer instead of using `.replace()`
+				.replace(/<pre>/g, '<pre class="hljs">'),
+
+			title: /^#\s(?<heading>.+)$/m.exec(markdown)?.groups?.heading,
+		});
+	}
+	return next();
+});
 
 module.exports = router;

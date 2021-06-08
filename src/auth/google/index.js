@@ -23,17 +23,12 @@ module.exports = {
 				},
 				method: "POST",
 			},
-		).then(
-			(
-				/** @type {any} */
-				res,
-			) => res.json(),
-		);
+		).then((res) => res.json());
 		if (error || !idToken) {
 			logError(error);
 			return error;
 		}
-
+		
 		/** @type {{ [key: string]: string }} */
 		const filteredInfo = {},
 			info = JSON.parse(atob(idToken.split(".")[1]));

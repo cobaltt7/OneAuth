@@ -8,10 +8,7 @@ const database = new (require("@replit/database"))(),
 	{ logError } = require("../../errors/index.js"),
 	fileSystem = require("fs"),
 	mail = require("nodemailer").createTransport({
-		auth: {
-			pass: process.env.GMAIL_PASS,
-			user: process.env.GMAIL_EMAIL,
-		},
+		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
 		service: "gmail",
 	}),
 	mustache = require("mustache"),
@@ -34,7 +31,6 @@ module.exports = {
 			post: async (req, res, sendResponse) => {
 				if (req.body.code && req.body.email) {
 					const { email = "", date = Date.now() - 900001 } =
-						/** @type {any} */
 						(await database.get(`EMAIL_${req.body.code}`)) ?? {};
 					if (Date.now() - date > 900000) {
 						database.delete(`EMAIL_${req.body.code}`);

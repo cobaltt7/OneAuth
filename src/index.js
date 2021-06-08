@@ -29,7 +29,7 @@ app.use(
 	 *
 	 * @param {import("../types").ExpressRequest} req - Express request object.
 	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express continue function.
+	 * @param {import("express").NextFunction} next - Express continue function.
 	 */
 	(req, res, next) => {
 		if (req.path.includes(".css"))
@@ -47,7 +47,7 @@ app.use(
 	 *
 	 * @param {import("../types").ExpressRequest} req - Express request object.
 	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express continue function.
+	 * @param {import("express").NextFunction} next - Express continue function.
 	 * @returns {import("express").IRouter | void} - Nothing of meaning.
 	 */
 	(req, res, next) => {
@@ -79,8 +79,8 @@ app.use(
 	 *
 	 * @param {import("../types").ExpressRequest} req - Express request object.
 	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express continue function.
-	 * @returns {any} - Nothing important is returned.
+	 * @param {import("express").NextFunction} next - Express continue function.
+	 * @returns {void}
 	 */
 	(req, res, next) => {
 		if (req.path.includes(".")) return next();
@@ -95,7 +95,7 @@ app.use(
 	 *
 	 * @param {import("../types").ExpressRequest} req - Express request object.
 	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express continue function.
+	 * @param {import("express").NextFunction} next - Express continue function.
 	 * @returns {void}
 	 */
 	(req, res, next) => {

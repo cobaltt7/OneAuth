@@ -12,12 +12,7 @@ module.exports = {
 				Authorization: `token ${token}`,
 				accept: "application/json",
 			},
-		}).then(
-			(
-				/** @type {any} */
-				res,
-			) => res.json(),
-		),
+		}).then((res) => res.json()),
 	icon: "github",
 	iconProvider: "fab",
 	link:
@@ -46,12 +41,7 @@ module.exports = {
 						method: "POST",
 					},
 				)
-					.then(
-						(
-							/** @type {any} */
-							result,
-						) => result.json(),
-					)
+					.then((result) => result.json())
 					.catch(
 						(
 							/** @type {Error} */
