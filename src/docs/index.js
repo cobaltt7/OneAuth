@@ -12,11 +12,11 @@ const fileSystem = require("fs"),
 	router = require("express").Router(),
 	serveIndex = require("serve-index");
 
+
 highlightjs.registerLanguage(
 	"plaintext",
 	require("highlight.js/lib/languages/plaintext"),
 );
-
 
 /**
  * Highlights code using highlight.js.
@@ -32,7 +32,6 @@ function highlight(code, originalLanguage, callback) {
 		return;
 	}
 
-	console.log(code, originalLanguage, callback);
 	if (!originalLanguage) {
 		callback(null, highlightjs.highlightAuto(code).value);
 		return;
@@ -48,7 +47,11 @@ function highlight(code, originalLanguage, callback) {
 			language,
 			require(`highlight.js/lib/languages/${language}`),
 		);
-		callback(null, highlightjs.highlight(code, { language }).value);
+		console.log()
+		console.log("highlighting " +code+ " with "+language)
+		const res=highlightjs.highlight(code, { language })
+		console.log("res: " + res.value + ". Highlighed with " + res.language )
+		callback(null, res.value);
 		return;
 	} catch {
 		packageManager
@@ -76,13 +79,12 @@ function highlight(code, originalLanguage, callback) {
 							highlightjs.highlight(code, { language }).value,
 						);
 					})
-					.catch(() =>
-						callback(
+					.catch(() => callback(
 							null,
 							highlightjs.highlight(code, {
 								language: "plaintext",
-							}),
-						),
+							}).value,
+						)
 					);
 			});
 	}
@@ -126,22 +128,6 @@ router.get(
 			`/docs/${/^\/(?<file>.+).md$/m.exec(req.path)?.groups?.file}`,
 		),
 );
-<<<<<<< HEAD
-router.use(async (req, res, next) => {
-	const filename = path.resolve(__dirname, `${req.path.slice(1)}.md`);
-	if (fileSystem.existsSync(filename)) {
-		const markdown = fileSystem.readFileSync(filename, "utf8");
-		return res.render(path.resolve(__dirname, "markdown.html"), {
-			content: (await markedPromise(markdown))
-				// TODO: change to a custom renderer instead of using `.replace()`
-				.replace(/<pre>/g, '<pre class="hljs">'),
-
-			title: /^#\s(?<heading>.+)$/m.exec(markdown)?.groups?.heading,
-		});
-	}
-	return next();
-});
-=======
 router.use(
 	/**
 	 * Handle docs.
@@ -166,6 +152,5 @@ router.use(
 		return next();
 	},
 );
->>>>>>> d258f2a6b88fd07acde0fb6a8293d1e15033f6e4
 
 module.exports = router;

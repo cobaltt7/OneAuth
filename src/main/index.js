@@ -1,6 +1,7 @@
 /** @file Handle Main pages. */
 
-const globby = require("globby"),
+const cheerio = require('cheerio'),
+	globby = require("globby"),
 	path = require("path"),
 	// eslint-disable-next-line new-cap
 	router = require("express").Router();
@@ -37,8 +38,27 @@ const authClients = [];
 	});
 })();
 
-// Logo
+// Highlighting
+rouer.use(
+	(req, res, next) => {
+		const { send } = res
+		res.send = (text, ...args) => {
+			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
+const $ = cheerio.load(text);
+let div = $("span:not(:has(*))")
+console.log(div.html(highlight(cheerio.text(div))))
+			highlightedText
 
+			const returnVal =  send.call(
+				this,
+				highlightedText,
+				...args
+			)
+		}
+	}
+)
+
+// Logos
 router.get(
 	"/logo.svg",
 	/**
