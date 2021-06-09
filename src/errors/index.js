@@ -78,7 +78,7 @@ module.exports = {
 				all: req.messages.errorOldAll,
 			});
 		}
-		const {send, status} = res;
+		const { send, status } = res;
 		res.send = function (...args) {
 			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 
