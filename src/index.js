@@ -43,12 +43,13 @@ app.use(
 
 app.use(
 	/**
-	 * Disalow old browsers from visiting our site. TODO: make our site available to old browsers.
+	 * Disalow old browsers from visiting our site.
 	 *
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 * @returns {void}
+	 * @todo Make our site available to old browsers.
 	 */
 	(req, res, next) => {
 		if (req.path.includes(".") || req.path === "/old") return next();

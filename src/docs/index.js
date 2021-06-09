@@ -12,7 +12,6 @@ const fileSystem = require("fs"),
 	router = require("express").Router(),
 	serveIndex = require("serve-index");
 
-
 highlightjs.registerLanguage(
 	"plaintext",
 	require("highlight.js/lib/languages/plaintext"),
@@ -47,10 +46,7 @@ function highlight(code, originalLanguage, callback) {
 			language,
 			require(`highlight.js/lib/languages/${language}`),
 		);
-		console.log()
-		console.log("highlighting " +code+ " with "+language)
-		const res=highlightjs.highlight(code, { language })
-		console.log("res: " + res.value + ". Highlighed with " + res.language )
+		const res = highlightjs.highlight(code, { language });
 		callback(null, res.value);
 		return;
 	} catch {
@@ -79,12 +75,13 @@ function highlight(code, originalLanguage, callback) {
 							highlightjs.highlight(code, { language }).value,
 						);
 					})
-					.catch(() => callback(
+					.catch(() =>
+						callback(
 							null,
 							highlightjs.highlight(code, {
 								language: "plaintext",
 							}).value,
-						)
+						),
 					);
 			});
 	}
@@ -136,15 +133,17 @@ router.use(
 	 * @param {e.Response} res - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 * @returns {Promise<void>}
+	 * @todo Change to a custom renderer instead of using `.replace()`
 	 */
 	async (req, res, next) => {
 		const filename = path.resolve(__dirname, `${req.path.slice(1)}.md`);
 		if (fileSystem.existsSync(filename)) {
 			const markdown = fileSystem.readFileSync(filename, "utf8");
 			return res.render(path.resolve(__dirname, "markdown.html"), {
-				content: (await markedPromise(markdown))
-					// TODO: change to a custom renderer instead of using `.replace()`
-					.replace(/<pre>/g, '<pre class="hljs">'),
+				content: (await markedPromise(markdown)).replace(
+					/<pre>/g,
+					'<pre class="hljs">',
+				),
 
 				title: /^#\s(?<heading>.+)$/m.exec(markdown)?.groups?.heading,
 			});
@@ -153,4 +152,4 @@ router.use(
 	},
 );
 
-module.exports = {router,highlight};
+module.exports = { highlight, router };

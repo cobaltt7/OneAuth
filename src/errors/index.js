@@ -10,9 +10,9 @@ const path = require("path");
  *
  * @param {any} err - The error to log.
  * @returns {void}
+ * @todo Log it to an admin dashboard instead.
  */
 function logError(err) {
-	// TODO: Log it to an admin dashboard instead.
 	return console.error(err);
 }
 

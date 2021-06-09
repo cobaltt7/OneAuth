@@ -148,6 +148,7 @@ module.exports = {
 			1,
 			{ args: "all", argsIgnorePattern: "_", caughtErrors: "all" },
 		],
+		"no-warning-comments": [1, { location: "anywhere" }],
 		"node/exports-style": 2,
 		"node/file-extension-in-import": 2,
 		"node/handle-callback-err": 2,

@@ -1,11 +1,14 @@
 /** @file Handle Main pages. */
 
-const cheerio = require('cheerio'),
-	{highlight} = require("../docs/index.js"),
+const cheerio = require("cheerio"),
 	globby = require("globby"),
 	path = require("path"),
+	// eslint-disable-next-line prefer-destructuring
+	promisify = require("util").promisify,
 	// eslint-disable-next-line new-cap
 	router = require("express").Router();
+
+const highlight = promisify(require("../docs/index.js").highlight);
 
 require("dotenv").config();
 
@@ -41,24 +44,27 @@ const authClients = [];
 
 // Highlighting
 router.use(
-	(req, res, next) => {
-		const { send } = res
+	/**
+	 * Express middleware to handle arror handling.
+	 *
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @param {(error?: any) => void} next - Express continue function.
+	 * @returns {void}
+	 */
+	(_, res, next) => {
+		const { send } = res;
 		res.send = (text, ...args) => {
 			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
-const $ = cheerio.load(text);
-let div = $("span:not(:has(*))")
-console.log(div.html(highlight(div.text())))
-			
+			const jQuery = cheerio.load(text);
+			let div = jQuery("pre.hljs:not(:has(*))");
+			console.log(div); //.html(highlight(div.text(), "plaintext")));
 
-			return send.call(
-				this,
-				text,
-				...args
-			)
-		}
-		return next()
-	}
-)
+			return send.call(this, text, ...args);
+		};
+		return next();
+	},
+);
 
 // Logos
 router.get(
