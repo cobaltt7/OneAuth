@@ -6,16 +6,26 @@ const changeTo = { 203: 204, 206: 204 };
 const path = require("path");
 
 /**
+ * Logs an error to the console.
+ *
+ * @param {any} err - The error to log.
+ * @returns {void}
+ */
+function logError(err) {
+	// TODO: Log it to an admin dashboard instead.
+	return console.error(err);
+}
+
+/**
  * Function to run once status is sent.
  *
- * @param {import("../../types").ExpressRequest} req - Express request object.
- * @param {import("../../types").ExpressResponse} res - Express response object.
- * @returns {import("express").IRouter | null} - Nothing of interest.
+ * @param {e.Request} req - Express request object.
+ * @param {e.Response} res - Express response object.
+ * @param {number} [_status] - Status override value.
+ * @returns {void | e.Response | null} - Nothing of interest.
  */
-function middleware(req, res) {
-	res.statusCode =
-		res.statusCode === 200 && !res.bodySent ? 404 : res.statusCode;
-	const status = res.statusCode;
+function middleware(req, res, _status) {
+	const status = _status || res.statusCode;
 	if (
 		// If no content has already been sent
 		!res.bodySent &&
@@ -28,19 +38,21 @@ function middleware(req, res) {
 	) {
 		// Then it's an error code, send error page.
 		if (changeTo[status]) {
-			// @ts-expect-error
-			res.statusCode = changeTo[status];
-			return middleware(req, res);
+			logError(
+				new RangeError(
+					`Do not use the HTTP status code ${status}. Instead, use ${changeTo[status]}.`,
+				),
+			);
+			return middleware(req, res, changeTo[status]);
 		}
+
 		const error = {
 			heading: req.messages[`error${status}Heading`],
 			message: req.messages[`error${status}Message`],
 			status,
 		};
-		if (Object.values(error).filter((key) => !key)) {
-			res.statusCode = 500;
-			return middleware(req, res);
-		}
+		if (Object.values(error).filter((key) => !key))
+			return middleware(req, res, 500);
 
 		if (req.accepts("application/json") || req.accepts("text/json"))
 			return res.json(error);
@@ -49,26 +61,15 @@ function middleware(req, res) {
 	return null;
 }
 
-/**
- * Logs an error to the console.
- *
- * @param {any} err - The error to log.
- * @returns {void}
- */
-function logError(err) {
-	// TODO: Log it to an admin dashboard instead.
-	return console.error(err);
-}
-
 module.exports = {
 	logError,
 	/**
 	 * Express middleware to handle arror handling.
 	 *
-	 * @param {import("../../types").ExpressRequest} req - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @param {import("express").NextFunction} next - Express next function.
-	 * @returns {import("express").IRouter | void} - Nothing of interest.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @param {(error?: any) => void} next - Express continue function.
+	 * @returns {void}
 	 */
 	middleware: (req, res, next) => {
 		res.bodySent = false;
@@ -80,17 +81,16 @@ module.exports = {
 		const realSend = res.send,
 			realStatus = res.status;
 		res.send = function (...args) {
-			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use `send` internally.
+			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 
 			res.bodySent = true;
 			return realSend.call(this, ...args);
 		};
 		res.status = function (status, ...args) {
 			// Also applys to `res.sendStatus` which uses `status` internally.
-
 			const returnVal = realStatus.call(
 				this,
-				status === 200 ? 204 : status,
+				status === 200 && !res.bodySent ? 404 : status,
 				...args,
 			);
 			middleware(req, res);

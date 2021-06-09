@@ -15,8 +15,6 @@ const authButtons = [];
 // eslint-disable-next-line one-var
 const authClients = [];
 
-/** @type {import("@replit/database").Client} */
-// @ts-expect-error
 const database = new (require("@replit/database"))(),
 	globby = require("globby"),
 	path = require("path"),
@@ -81,9 +79,9 @@ function getPageHandler(requestedClient) {
  * @param {string | { [key: string]: string }} tokenOrData - Token to retrieve the data with or the
  *   raw data itself.
  * @param {string} url - URL to redirect the user to afterwards.
- * @param {import("../../types").ExpressResponse} res - Express response object.
+ * @param {e.Response} res - Express response object.
  * @param {string} noDataMsg - Message to display when the data can not be shown to the user.
- * @returns {import("express").IRouter | void | import("../../types").ExpressResponse} - Nothing of interest.
+ * @returns {void | e.Response} - Nothing of interest.
  */
 function sendResponse(client, tokenOrData, url, res, noDataMsg) {
 	const clientInfo = getClient(client);
@@ -122,7 +120,7 @@ function sendResponse(client, tokenOrData, url, res, noDataMsg) {
 	}
 }
 for (const method of [
-	// "all",
+	// TODO: support "all",
 	"checkout",
 	"copy",
 	"delete",
@@ -152,40 +150,37 @@ for (const method of [
 		/**
 		 * Run the appropriate HTTP request handler on a HTTP request, or return a HTTP error code.
 		 *
-		 * @param {import("../../types").ExpressRequest} req - Express request object.
-		 * @param {import("../../types").ExpressResponse} res - Express response object.
+		 * @param {e.Request} req - Express request object.
+		 * @param {e.Response} res - Express response object.
 		 */
 		(req, res) => {
-			const client = getPageHandler(`${req.params.client}`);
+			const client = getPageHandler(`${req.params?.client}`);
 			if (typeof client !== "object" || client === null) {
 				res.status(404);
 				return;
 			}
-			// @ts-expect-error
-			if (typeof client[method] !== "function") {
+
+			/** @type {import("../../types").RequestFunction | undefined} */
+			// @ts-expect-error - TS can't tell that there is a limited set of values for `method`.
+			const requestFunction = client[method];
+			if (typeof requestFunction !== "function") {
 				res.status(405);
 				return;
 			}
 
-			// @ts-expect-error
-			client[method](
+			requestFunction(
 				req,
 				res,
-				/* eslint-disable */
 				/**
 				 * Passes information from the authentication handler (and other sources) to sendResponse.
 				 *
 				 * @param {import("../../types").sendResponseArgs} args - Information from the
 				 *   authentication handler.
-				 * @returns {	| import("express").IRouter
-				 * 	| void
-				 * 	| import("../../types").ExpressResponse}
-				 *   - Nothing of interest.
+				 * @returns {void | e.Response} - Nothing of interest.
 				 */
-				/* eslint-enable */
 				(...args) =>
 					sendResponse(
-						`${req.params.client}`,
+						`${req.params?.client}`,
 						...args,
 						`${req.messages.allowDataHidden}`,
 					),
@@ -199,20 +194,21 @@ router.get(
 	/**
 	 * Send the authentication entry page.
 	 *
-	 * @param {import("../../types").ExpressRequest} req - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("../../types").ExpressResponse | import("express").IRouter} - Express response object.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {e.Response | void} - Express response object.
 	 */
 	(req, res) => {
-		if (!req.query.url) return res.status(400);
+		if (!req.query?.url) return res.status(400);
 
 		const authButtonsReplaced = authButtons;
 		authButtons.forEach(({ link }, index) => {
 			if (authButtonsReplaced[index]) {
-				// @ts-expect-error
+				// @ts-expect-error - TS thinks `authButtonsReplaced[index]` might be `undefined`.
+				// That's impossible. See L208
 				authButtonsReplaced[index].link = link.replace(
 					/{{url}}/g,
-					encodeURIComponent(`${req.query.url}`),
+					encodeURIComponent(`${req.query?.url}`),
 				);
 			}
 		});
@@ -227,9 +223,9 @@ router.get(
 	/**
 	 * Retrieve the user's data.
 	 *
-	 * @param {import("../../types").ExpressRequest} req - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {Promise<void>} - Express response object.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {Promise<void>}
 	 */
 	async (req, res) => {
 		res.setHeader("Access-Control-Allow-Origin", "*");
@@ -238,25 +234,21 @@ router.get(
 			"Origin, X-Requested-With, Content-Type, Accept",
 		);
 
-		res.status(200).json(await database.get(`RETRIEVE_${req.query.code}`));
-		database.delete(`RETRIEVE_${req.query.code}`);
+		res.status(200).json(await database.get(`RETRIEVE_${req.query?.code}`));
+		database.delete(`RETRIEVE_${req.query?.code}`);
 	},
 );
 router.get(
 	"/backend/send_data",
-	/* eslint-disable */
 	/**
 	 * Save the user's data.
 	 *
-	 * @param {import("../../types").ExpressRequest} req - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {Promise<
-	 * 	import("../../types").ExpressResponse | import("express").IRouter | void
-	 * >}
-	 *   - Nothing of interest.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {Promise<e.Response | void>} - Nothing of interest.
 	 */
-	/* eslint-enable */
 	async (req, res) => {
+		if (!req.query) return logError("`req.query` is falsy!");
 		const { client, url, token } = req.query,
 			clientInfo = getClient(`${client}`);
 		if (!clientInfo)

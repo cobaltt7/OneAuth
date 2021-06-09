@@ -128,8 +128,6 @@
 	"javascript.referencesCodeLens.enabled": true,
 	"javascript.referencesCodeLens.showOnAllFunctions": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
-	"js/ts.implicitProjectConfig.checkJs": true,
-	"js/ts.implicitProjectConfig.experimentalDecorators": true,
 	"multiclip.formatAfterPaste": true,
 	"todo-tree.filtering.includeHiddenFiles": true,
 	"todo-tree.general.tags": [
@@ -144,7 +142,7 @@
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"typescript.format.insertSpaceAfterConstructor": true,
 	"typescript.format.insertSpaceAfterTypeAssertion": true,
-	"typescript.format.semicolons": "remove",
+	"typescript.format.semicolons": "insert",
 	"typescript.implementationsCodeLens.enabled": true,
 	"typescript.preferences.importModuleSpecifierEnding": "minimal",
 	"typescript.preferences.includePackageJsonAutoImports": "on",

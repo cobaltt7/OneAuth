@@ -12,28 +12,29 @@ module.exports = {
 	ignorePatterns: ["node_modules", ".upm", "src/main/style.css"],
 	overrides: [
 		{
+			files: ["**.md"],
+			processor: "markdown/markdown",
+		},
+		{
 			env: { browser: true, es2020: false, es6: true, node: true },
-			files: ["**/*.md"],
+			files: ["**.md/*.js"],
 			parserOptions: {
 				ecmaFeatures: { impliedStrict: true },
 				ecmaVersion: 8,
 			},
-			processor: "markdown/markdown",
 			rules: {
-				"eol-last": 0,
+				"eol-last": [2, "never"],
 				"jsdoc/require-file-overview": 0,
 				"no-console": 0,
 				"no-undef": 0,
 				"no-unused-expressions": 0,
 				"no-unused-vars": 0,
-				"padded-blocks": 0,
-				"unicode-bom": 0,
 			},
 		},
 		{
 			env: { browser: true, es2020: true, es6: true, node: false },
 			extends: ["plugin:compat/recommended"],
-			files: ["*.html"],
+			files: ["**.html"],
 			parserOptions: { ecmaVersion: 8 },
 			rules: {
 				"comma-dangle": 0,
@@ -53,7 +54,15 @@ module.exports = {
 		},
 	],
 	parserOptions: { ecmaVersion: 11, sourceType: "script" },
-	plugins: ["html", "node", "regexp", "optimize-regex", "compat", "jsdoc"],
+	plugins: [
+		"compat",
+		"html",
+		"jsdoc",
+		"markdown",
+		"node",
+		"optimize-regex",
+		"regexp",
+	],
 	// eslint-disable-next-line id-length
 	reportUnusedDisableDirectives: true,
 	root: true,
@@ -87,7 +96,7 @@ module.exports = {
 		"jsdoc/newline-after-description": 1,
 		"jsdoc/no-bad-blocks": 1,
 		"jsdoc/no-defaults": 1,
-		"jsdoc/no-undefined-types": 1,
+		"jsdoc/no-undefined-types": 0,
 		"jsdoc/require-asterisk-prefix": 1,
 		"jsdoc/require-description": 1,
 		"jsdoc/require-description-complete-sentence": 1,
@@ -132,7 +141,7 @@ module.exports = {
 		"no-magic-numbers": 0,
 		"no-mixed-operators": 0,
 		"no-nested-ternary": 0,
-		"no-restricted-syntax": [1, { selector: "SequenceExpression" }],
+		"no-restricted-syntax": 2,
 		"no-tabs": 0,
 		"no-ternary": 0,
 		"no-unused-vars": [

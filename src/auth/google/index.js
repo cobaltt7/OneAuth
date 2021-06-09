@@ -1,9 +1,9 @@
 /** @file Google Authentication handler. */
 
 const atob = require("atob"),
-	nodeFetch = require("node-fetch");
-const fetch = nodeFetch.default ?? nodeFetch,
+	fetch = require("node-fetch"),
 	{ logError } = require("../../errors/index.js");
+
 require("dotenv").config();
 
 /** @type {import("../../../types").Auth} Auth */
@@ -66,7 +66,7 @@ module.exports = {
 		{
 			backendPage: "google",
 			get: (req, res, sendResponse) => {
-				sendResponse(`${req.query.code}`, `${req.query.state}`, res);
+				sendResponse(`${req.query?.code}`, `${req.query?.state}`, res);
 			},
 		},
 	],

@@ -44,9 +44,9 @@ router.get(
 	/**
 	 * Redirect to the 1Auth logo.
 	 *
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {void}
 	 */
 	(_, res) =>
 		res
@@ -60,9 +60,9 @@ router.get(
 	/**
 	 * Redirect to the 1Auth "1" mini-logo.
 	 *
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {void}
 	 */
 	(_, res) =>
 		res
@@ -74,12 +74,12 @@ router.get(
 	/**
 	 * Send SVG file from the `../svg` folder.
 	 *
-	 * @param {import("../../types").ExpressRequest} req - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {void}
 	 */
 	(req, res) =>
-		res.sendFile(path.resolve(__dirname, `../svg/${req.params.img}.svg`)),
+		res.sendFile(path.resolve(__dirname, `../svg/${req.params?.img}.svg`)),
 );
 
 router.get(
@@ -87,9 +87,9 @@ router.get(
 	/**
 	 * Send the about page.
 	 *
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {void}
 	 */
 	(_, res) =>
 		res.render(path.resolve(__dirname, "about.html"), {
@@ -103,9 +103,9 @@ router.get(
 	 * For backwards compatibility. Redirect to the home page.
 	 *
 	 * @deprecated
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {void}
 	 */
 	(_, res) => res.status(303).redirect("https://auth.onedot.cf/"),
 );
@@ -115,9 +115,9 @@ router.get(
 	/**
 	 * Verify ownership of the domain with Google.
 	 *
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {e.Response} - Express response object.
 	 */
 	(_, res) =>
 		res.send("google-site-verification: googleb9551735479dd7b0.html"),
@@ -128,9 +128,9 @@ router.get(
 	/**
 	 * Send information to web crawlers.
 	 *
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {e.Response} - Express response object.
 	 */
 	(_, res) =>
 		res.send(
@@ -147,9 +147,9 @@ router.get(
 	/**
 	 * Send information on how to contact us to report a security bug.
 	 *
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {e.Response} - Express response object.
 	 */
 	(_, res) => res.status(303).send(`${process.env.GMAIL_EMAIL}`),
 );
@@ -159,9 +159,9 @@ router.get(
 	/**
 	 * Redirect to the onedotprojects/auth contributors page on GitHub.
 	 *
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
-	 * @returns {import("express").IRouter} - Express router instance.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @returns {void}
 	 */
 	(_, res) =>
 		res
@@ -175,8 +175,8 @@ router.get(
 	/**
 	 * Send styles.
 	 *
-	 * @param {import("../../types").ExpressRequest} _ - Express request object.
-	 * @param {import("../../types").ExpressResponse} res - Express response object.
+	 * @param {e.Request} _ - Express request object.
+	 * @param {e.Response} res - Express response object.
 	 */
 	(_, res) => {
 		res.setHeader("content-type", "text/css");

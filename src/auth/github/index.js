@@ -1,7 +1,6 @@
 /** @file GitHub Authentication handler. */
 
-const nodeFetch = require("node-fetch");
-const fetch = nodeFetch.default ?? nodeFetch,
+const fetch = require("node-fetch"),
 	{ logError } = require("../../errors/index.js");
 
 /** @type {import("../../../types").Auth} Auth */
@@ -32,8 +31,8 @@ module.exports = {
 						body:
 							"client_id=7b64414fe57e07d1e969" +
 							`&client_secret=${process.env.githubSECRET}` +
-							`&code=${req.query.code}` +
-							`&state=${req.query.state}`,
+							`&code=${req.query?.code}` +
+							`&state=${req.query?.state}`,
 						headers: {
 							"Content-Type": "application/x-www-form-urlencoded",
 							"accept": "application/json",
@@ -42,17 +41,12 @@ module.exports = {
 					},
 				)
 					.then((result) => result.json())
-					.catch(
-						(
-							/** @type {Error} */
-							err,
-						) => {
-							res.status(502);
-							logError(err);
-						},
-					);
+					.catch((err) => {
+						res.status(502);
+						logError(err);
+					});
 
-				sendResponse(info.access_token, `${req.query.state}`, res);
+				sendResponse(info.access_token, `${req.query?.state}`, res);
 			},
 		},
 	],
