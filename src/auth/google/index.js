@@ -6,7 +6,8 @@ const fetch = nodeFetch.default ?? nodeFetch,
 	{ logError } = require("../../errors/index.js");
 require("dotenv").config();
 
-/** @type {import("../../../types").Auth} Auth */ module.exports = {
+/** @type {import("../../../types").Auth} Auth */
+module.exports = {
 	getData: async (token) => {
 		const { id_token: idToken, error } = await fetch(
 			"https://oauth2.googleapis.com/token",

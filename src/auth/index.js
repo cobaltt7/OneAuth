@@ -147,7 +147,6 @@ for (const method of [
 	"unlock",
 	"unsubscribe",
 ]) {
-	// @ts-expect-error
 	router[method](
 		"/:client",
 		/**
