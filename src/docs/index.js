@@ -133,7 +133,7 @@ router.use(
 	 * @param {e.Response} res - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 * @returns {Promise<void>}
-	 * @todo Change to a custom renderer instead of using `.replace()`
+	 * @todo Change to a custom renderer instead of using `.replace()`.
 	 */
 	async (req, res, next) => {
 		const filename = path.resolve(__dirname, `${req.path.slice(1)}.md`);
