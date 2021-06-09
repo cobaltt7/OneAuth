@@ -153,4 +153,4 @@ router.use(
 	},
 );
 
-module.exports = router;
+module.exports = {router,highlight};

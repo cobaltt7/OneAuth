@@ -1,6 +1,7 @@
 /** @file Handle Main pages. */
 
 const cheerio = require('cheerio'),
+	{highlight} = require("../docs/index.js"),
 	globby = require("globby"),
 	path = require("path"),
 	// eslint-disable-next-line new-cap
@@ -39,22 +40,23 @@ const authClients = [];
 })();
 
 // Highlighting
-rouer.use(
+router.use(
 	(req, res, next) => {
 		const { send } = res
 		res.send = (text, ...args) => {
 			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 const $ = cheerio.load(text);
 let div = $("span:not(:has(*))")
-console.log(div.html(highlight(cheerio.text(div))))
-			highlightedText
+console.log(div.html(highlight(div.text())))
+			
 
-			const returnVal =  send.call(
+			return send.call(
 				this,
-				highlightedText,
+				text,
 				...args
 			)
 		}
+		return next()
 	}
 )
 

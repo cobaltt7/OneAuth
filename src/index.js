@@ -108,7 +108,7 @@ const l10n = require("./l10n.js").middleware;
 app.use(l10n);
 
 // Docs
-const docs = require("./docs/index.js");
+const docs = require("./docs/index.js").router;
 app.use("/docs", docs);
 
 // Main pages
