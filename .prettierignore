@@ -1,0 +1,4 @@
+.gitignore
+src/auth/email/email.txt
+dictionary.txt
+.prettierignore

@@ -1,9 +1,6 @@
 /** @file Localization Of the site. */
 
-const BASE_LANG = "en_US";
-
 /** @type {{ [key: string]: string[] }} */
-// eslint-disable-next-line one-var
 const CACHE_CODES = {};
 
 /** @type {{ [key: string]: MessageFormatter }} */
@@ -19,9 +16,13 @@ const CACHE_MSGS = {};
 const LANG_CODES = [];
 
 /** @type {{ [key: string]: { [key: string]: string } }} */
-const MESSAGES = {},
+// eslint-disable-next-line one-var
+const MESSAGES = {};
+
+const BASE_LANG = "en_US",
 	accepts = require("accepts"),
 	globby = require("globby"),
+	{ logError } = require("./errors"),
 	{
 		MessageFormatter,
 		pluralTypeHandler,
@@ -41,7 +42,8 @@ const MESSAGES = {},
 			if ({}.hasOwnProperty.call(tempMsgs, item)) {
 				if (!tempMsgs[item]?.string) continue;
 
-				// @ts-expect-error
+				// @ts-expect-error - TS thinks `MESSAGES[code]` and `tempMsgs[item]` might be `undefined`.
+				// That's imposssible. See L38 and L43.
 				MESSAGES[`${code}`][`${item}`] = `${tempMsgs[item].string}`;
 			}
 		}
@@ -64,7 +66,8 @@ function compileLangs(langs, cache = false) {
 	}
 
 	/** @type {string[]} */
-	// @ts-expect-error
+	// @ts-expect-error - TS thinks there might be `undefinded` values in the array.
+	// That's inpossible, see L100.
 	const prefLangs = [
 		...new Set(
 			langs
@@ -145,7 +148,7 @@ function getFormatter(lang, cache = true) {
 }
 
 /**
- * Parses a string into a language code and optional placeholder data and renders a translation with them.
+ * Parses a string into a language code and optional placeholder data. Renders a translation with them.
  *
  * @param {string} inputInfo - String to parse, including a message code and optional placeholders.
  * @param {string} lang - Language code to be used when retreiving a plural formatter.
@@ -187,7 +190,8 @@ function parseMessage(inputInfo, lang, msgs) {
  *
  * @param {string[]} langs - Language to be used when formating plurals.
  * @param {{ [key: string]: string }} [msgs] - Messages to be used.
- * @returns {() => (val: string, render: (val: string) => string) => string} Function to pass to Mustache.JS.
+ * @returns {() => (val: string, render: (val: string) => string) => string} - Function to pass to
+ *   Mustache.JS.
  */
 function mustacheFunc(langs, msgs = getMsgs(langs)) {
 	return function () {
@@ -204,34 +208,34 @@ module.exports = {
 	/**
 	 * Express l10n middleware.
 	 *
-	 * @param {import("../types").ExpressRequest} req - Express request object.
-	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("express").NextFunction} next - Express next function.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @param {(error?: any) => void} next - Express continue function.
 	 */
 	middleware(req, res, next) {
 		/** @type {string[]} */
 		let langs;
-		if (req?.query?.lang) {
+		if (req.query?.lang) {
 			langs = compileLangs([
 				// `lang` query parameter overrides everything else
-				...(`${req?.query?.lang}` ?? "*").split("|"),
+				...(`${req.query?.lang}` ?? "*").split("|"),
 
 				// Fallback to values in cookie
-				...(req?.cookies?.langs ?? "*").split("|"),
+				...(req.cookies?.langs ?? "*").split("|"),
 
 				// Fallback to browser lang
 				...accepts(req).languages(),
 			]);
-		} else if (req?.cookies?.langs) {
+		} else if (req.cookies?.langs) {
 			// The cookie doesn't need to go through `compileLangs` since it already did
-			langs = (req?.cookies?.langs ?? "*").split("|");
+			langs = (req.cookies?.langs ?? "*").split("|");
 		} else {
 			// This is the default, the broswer langauge.
 			langs = compileLangs(accepts(req)?.languages(), true);
 		}
 		const expires = new Date();
 		expires.setFullYear(expires.getFullYear() + 1);
-		res?.cookie("langs", langs.join("|"), {
+		res.cookie("langs", langs.join("|"), {
 			expires,
 			maxAge: 31536000000,
 			sameSite: false,
@@ -247,31 +251,37 @@ module.exports = {
 		 * Override res.render to ensure `msg` is always available.
 		 *
 		 * @param {string} view - The file to render.
-		 * @param {{ [key: string]: any }} [options] - Options to render it with.
-		 * @param {import("../types").MustacheCallback} [callback] - Callback to run after render.
-		 * @returns {import("express").IRouter} - Express router instance.
+		 * @param {{ [key: string]: any } | ((err: Error, str: string) => void)} [placeholderCallback]
+		 *   - Data to render it with or callback to run after render.
+		 *
+		 * @param {(err: Error, str: string) => void} [callback] - Callback to run after render.
+		 * @returns {void}
 		 */
 		res.render = function (
 			view,
-			options = {},
+			placeholderCallback = {},
 			callback = function (err, str) {
-				if (err) return req.next(err);
+				if (err) return logError(err);
 
 				return res.send(str);
 			},
 		) {
-			let afterRender = callback;
-
-			/** @type {{ [key: string]: any }} */
-			// eslint-disable-next-line one-var
-			let opts = {};
-			if (typeof options === "object") opts = options;
-			else if (typeof options === "function") afterRender = options;
-
+			const opts =
+				typeof placeholderCallback === "object"
+					? placeholderCallback
+					: {};
 			opts.message = mustacheFunc(langs, msgs);
 
 			// Continue with original render
-			return render.call(this, view, opts, afterRender);
+			return render.call(
+				this,
+				view,
+				opts,
+				// @ts-expect-error - TS doesn't like the first param, but it is needed.
+				typeof placeholderCallback === "function"
+					? placeholderCallback
+					: callback,
+			);
 		};
 		next();
 	},

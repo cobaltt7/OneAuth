@@ -23,7 +23,7 @@ module.exports = {
 							userID,
 							username,
 						},
-						`${req.query.url}`,
+						`${req.query?.url}`,
 						res,
 					);
 				}

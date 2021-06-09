@@ -1,6 +1,7 @@
 /** @file Scratch Authentication handler. */
 
-/** @type {import("../../../types").Auth} Auth */ module.exports = {
+/** @type {import("../../../types").Auth} Auth */
+module.exports = {
 	icon: "https://scratch.mit.edu/favicon.ico",
 	iconProvider: "url",
 	link:
@@ -14,10 +15,10 @@
 		{
 			backendPage: "scratch",
 			get: (req, res, sendResponse) => {
-				if (req.query.verified === "true") {
+				if (req.query?.verified === "true") {
 					return sendResponse(
-						{ username: req.query.username },
-						`${req.query.url}`,
+						{ username: req.query?.username },
+						`${req.query?.url}`,
 						res,
 					);
 				}
