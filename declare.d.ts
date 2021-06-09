@@ -59,7 +59,6 @@ declare module "cookie-parser" {
 }
 declare module "highlight.js/lib/core";
 
-
 declare module "@tailwindcss/forms";
 declare module "@tailwindcss/typography";
 declare module "@ultraq/icu-message-formatter";

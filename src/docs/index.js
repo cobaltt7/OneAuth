@@ -17,7 +17,6 @@ highlightjs.registerLanguage(
 	require("highlight.js/lib/languages/plaintext"),
 );
 
-
 /**
  * Highlights code using highlight.js.
  *
