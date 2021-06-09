@@ -78,19 +78,18 @@ module.exports = {
 				all: req.messages.errorOldAll,
 			});
 		}
-		const realSend = res.send,
-			realStatus = res.status;
+		const {send, status} = res;
 		res.send = function (...args) {
 			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 
 			res.bodySent = true;
-			return realSend.call(this, ...args);
+			return send.call(this, ...args);
 		};
-		res.status = function (status, ...args) {
+		res.status = function (statusCode, ...args) {
 			// Also applys to `res.sendStatus` which uses `status` internally.
-			const returnVal = realStatus.call(
+			const returnVal = status.call(
 				this,
-				status === 200 && !res.bodySent ? 404 : status,
+				statusCode === 200 && !res.bodySent ? 404 : statusCode,
 				...args,
 			);
 			middleware(req, res);
