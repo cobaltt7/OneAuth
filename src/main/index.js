@@ -65,21 +65,21 @@ router.use(
 
 			codeblocks.map((index) => {
 				const code = codeblocks.eq(index),
-				 [langClass, language = "plaintext"] =
-				 // eslint-disable-next-line prefer-named-capturing-group
-					/lang(?:uage)?-(\w+)/u.exec(code.attr("class"));
+					[langClass, language = "plaintext"] =
+						// eslint-disable-next-line prefer-named-capturing-group
+						/lang(?:uage)?-(\w+)/u.exec(code.attr("class"));
 				code.removeClass(langClass);
 				highlight(code.text(), language).then((highlighted) => {
 					code.html(highlighted);
 					code.wrapInner(
 						jQuery(`<code class="language-${language}"></code>`),
 					);
-					if (index + 1 === codeblocks.length) 
+					if (index + 1 === codeblocks.length)
 						return send.call(this, jQuery.html());
 
-						return res
+					return res;
 				});
-				return index
+				return index;
 			});
 		};
 		return next();
