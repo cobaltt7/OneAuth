@@ -41,8 +41,7 @@ jobs:
 
             - name: Mustaches
               if: failure() || steps.changed.outputs.changed == 'false'
-              run:
-                  npm run lint:mustaches
+              run: npm run lint:mustaches
 
             - name: Prettier
               if: failure() || steps.changed.outputs.changed == 'false'
