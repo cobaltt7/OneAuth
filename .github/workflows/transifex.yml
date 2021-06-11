@@ -60,9 +60,13 @@ jobs:
                       wgytbot <83586655+wgytbot@users.noreply.github.com>
 
             - name: Repository Dispatch
-              if: always()
+              if: ${{ !success() }}
               uses: peter-evans/repository-dispatch@v1
               with:
                   token: ${{ secrets.WGYTBOT }}
                   repository: ${{ github.repository }}
                   event-type: lint
+
+            - name: Lint
+              if: success()
+              run: npm run lint
