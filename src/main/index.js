@@ -55,12 +55,10 @@ router.use(
 	 */
 	(_, res, next) => {
 		const { send } = res;
-		res.send = (text, ...args) => {
+		res.send = (text) => {
 			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
-			const jQuery = cheerio.load(text),
-				div = jQuery("pre.hljs:not(:has(*))");
-			console.log(div); // .html(highlight(div.text(), "plaintext")));
-
+			const jQuery = cheerio.load(text);
+			
 			const codeblocks = jQuery("pre.hljs:not(:has(*))");
 
 			codeblocks.map((index) => {
