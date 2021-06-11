@@ -210,9 +210,10 @@ router.get(
 		authButtons.forEach(({ link }, index) => {
 			if (authButtonsReplaced[index]) {
 				// @ts-expect-error - TS thinks `authButtonsReplaced[index]` might be `undefined`.
-				// That's impossible. See L208
+				// That's impossible. See L211
 				authButtonsReplaced[index].link = link.replace(
-					/{{url}}/g,
+					// TODO: Use mustache instead.
+					/{{ \s*url\s* }}/g,
 					encodeURIComponent(`${req.query?.url}`),
 				);
 			}

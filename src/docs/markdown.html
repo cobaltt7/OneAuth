@@ -3,16 +3,16 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{#message}}docsTitle|||{{title}}{{/message}}</title>
+		<title>{{ #message }}docsTitle|||{{ title }}{{ /message }}</title>
 		<meta name="robots" content="index, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
-		{{> googletagmanager}}
+		{{> googletagmanager }}
 	</head>
 
 	<body style="display: none">
-		{{> nav}}
-		<main>{{&content}}</main>
+		{{> nav }}
+		<main>{{& content }}</main>
 	</body>
 </html>

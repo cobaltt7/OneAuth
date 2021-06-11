@@ -68,7 +68,7 @@ function compileLangs(langs, cache = false) {
 
 	/** @type {string[]} */
 	// @ts-expect-error - TS thinks there might be `undefinded` values in the array.
-	// That's inpossible, see L100.
+	// That's inpossible, see L102.
 	const prefLangs = [
 		...new Set(
 			langs

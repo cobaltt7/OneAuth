@@ -57,9 +57,8 @@ router.use(
 		const { send } = res;
 		res.send = (text) => {
 			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
-			const jQuery = cheerio.load(text);
-			
-			const codeblocks = jQuery("pre.hljs:not(:has(*))");
+			const jQuery = cheerio.load(text),
+				codeblocks = jQuery("pre.hljs:not(:has(*))");
 
 			codeblocks.map((index) => {
 				const code = codeblocks.eq(index),

@@ -26,8 +26,8 @@ jobs:
               if: failure() || steps.changed.outputs.changed == 'false'
               uses: actions/checkout@main
               with:
-                  ref: ${{github.head_ref}}
-                  token: ${{secrets.WGYTBOT}}
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Node.JS
               if: failure() || steps.changed.outputs.changed == 'false'
@@ -38,6 +38,10 @@ jobs:
             - name: Install
               if: failure() || steps.changed.outputs.changed == 'false'
               run: npm install
+
+            - name: Mustaches
+              if: failure() || steps.changed.outputs.changed == 'false'
+              run: node --trace-warnings --harmony .github/workflows/mustaches,js
 
             - name: Prettier
               if: failure() || steps.changed.outputs.changed == 'false'
@@ -68,7 +72,7 @@ jobs:
               uses: stefanzweifel/git-auto-commit-action@master
               with:
                   commit_message: "Lint and format code"
-                  branch: ${{github.head_ref}}
+                  branch: ${{ github.head_ref }}
                   add_options: "--ignore-removal"
                   commit_options: "--signoff"
                   commit_user_name: wgytbot

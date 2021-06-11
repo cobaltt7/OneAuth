@@ -6,7 +6,7 @@ module.exports = {
 	iconProvider: "url",
 	link:
 		"https://scratch.auth.onedot.cf" +
-		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Furl={{url}}",
+		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Furl={{ url }}",
 	name: "Scratch",
 
 	// This will change once onedotprojects/scratchCommentAuth#12 is done

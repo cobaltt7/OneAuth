@@ -17,8 +17,8 @@ jobs:
             - name: Checkout
               uses: actions/checkout@main
               with:
-                  ref: ${{github.head_ref}}
-                  token: ${{secrets.WGYTBOT}}
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Python
               uses: actions/setup-python@main
@@ -33,8 +33,8 @@ jobs:
                   touch .transifexrc; echo "[https://www.transifex.com]" >
                   .transifexrc; echo "api_hostname = https://api.transifex.com"
                   >> .transifexrc; echo "hostname = https://www.transifex.com"
-                  >> .transifexrc; echo "password =" "${{secrets.TRANSIFEX}}" >>
-                  .transifexrc; echo "username = api" >> .transifexrc;
+                  >> .transifexrc; echo "password =" "${{ secrets.TRANSIFEX }}"
+                  >> .transifexrc; echo "username = api" >> .transifexrc;
 
             - name: Push
               run:
@@ -63,6 +63,6 @@ jobs:
               if: always()
               uses: peter-evans/repository-dispatch@v1
               with:
-                  token: ${{secrets.WGYTBOT}}
+                  token: ${{ secrets.WGYTBOT }}
                   repository: ${{ github.repository }}
                   event-type: lint

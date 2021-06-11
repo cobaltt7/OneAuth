@@ -18,7 +18,7 @@ const database = new (require("@replit/database"))(),
 module.exports = {
 	icon: "envelope",
 	iconProvider: "fas",
-	link: "/auth/email?url={{url}}",
+	link: "/auth/email?url={{ url }}",
 	name: "Email",
 	pages: [
 		{
