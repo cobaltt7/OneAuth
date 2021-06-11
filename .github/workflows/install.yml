@@ -51,7 +51,7 @@ jobs:
                       wgytbot <83586655+wgytbot@users.noreply.github.com>
 
             - name: Repository Dispatch
-              if: ${{ !cancelled() }}
+              if: always()
               uses: peter-evans/repository-dispatch@v1
               with:
                   token: ${{ secrets.WGYTBOT }}

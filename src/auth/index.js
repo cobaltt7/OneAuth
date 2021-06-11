@@ -212,8 +212,8 @@ router.get(
 				// @ts-expect-error - TS thinks `authButtonsReplaced[index]` might be `undefined`.
 				// That's impossible. See L211
 				authButtonsReplaced[index].link = link.replace(
-					// TODO: Use mustache instead.
-					/{{ \s*url\s* }}/g,
+					// TODO: Use mustache instead. mustache-format-ignore
+					/{{\s*url\s*}}/g,
 					encodeURIComponent(`${req.query?.url}`),
 				);
 			}
