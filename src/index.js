@@ -27,9 +27,9 @@ app.use(
 	/**
 	 * Set caching headers.
 	 *
-	 * @param {import("../types").ExpressRequest} req - Express request object.
-	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express continue function.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @param {(error?: any) => void} next - Express continue function.
 	 */
 	(req, res, next) => {
 		if (req.path.includes(".css"))
@@ -43,17 +43,19 @@ app.use(
 
 app.use(
 	/**
-	 * Disalow old browsers from visiting our site. TODO: make our site available to old browsers.
+	 * Disalow old browsers from visiting our site.
 	 *
-	 * @param {import("../types").ExpressRequest} req - Express request object.
-	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express continue function.
-	 * @returns {import("express").IRouter | void} - Nothing of meaning.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @param {(error?: any) => void} next - Express continue function.
+	 *
+	 * @returns {void}
+	 * @todo Make our site available to old browsers.
 	 */
 	(req, res, next) => {
 		if (req.path.includes(".") || req.path === "/old") return next();
 
-		const userAgent = req.get("User-Agent");
+		const userAgent = `${req.get("User-Agent")}`;
 		if (
 			userAgent.indexOf("MSIE") >= 0 ||
 			userAgent.indexOf("Trident") >= 0 ||
@@ -77,15 +79,14 @@ app.use(
 	/**
 	 * Parse cookies for use in request handlers.
 	 *
-	 * @param {import("../types").ExpressRequest} req - Express request object.
-	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express continue function.
-	 * @returns {any} - Nothing important is returned.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @param {(error?: any) => void} next - Express continue function.
+	 *
+	 * @returns {void}
 	 */
 	(req, res, next) => {
 		if (req.path.includes(".")) return next();
-
-		// @ts-expect-error
 		return cookieParser(req, res, next);
 	},
 );
@@ -93,9 +94,10 @@ app.use(
 	/**
 	 * Parse POST request bodies for use in request handlers.
 	 *
-	 * @param {import("../types").ExpressRequest} req - Express request object.
-	 * @param {import("../types").ExpressResponse} res - Express response object.
-	 * @param {import("../types").ExpressNext} next - Express continue function.
+	 * @param {e.Request} req - Express request object.
+	 * @param {e.Response} res - Express response object.
+	 * @param {(error?: any) => void} next - Express continue function.
+	 *
 	 * @returns {void}
 	 */
 	(req, res, next) => {
@@ -110,7 +112,7 @@ const l10n = require("./l10n.js").middleware;
 app.use(l10n);
 
 // Docs
-const docs = require("./docs/index.js");
+const docs = require("./docs/index.js").router;
 app.use("/docs", docs);
 
 // Main pages

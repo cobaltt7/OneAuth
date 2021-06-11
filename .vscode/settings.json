@@ -50,10 +50,7 @@
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"gremlins.characters": {
-		"2013": {
-			"description": "en dash",
-			"level": "warning"
-		},
+		"2013": { "description": "en dash", "level": "warning" },
 		"2018": {
 			"description": "left single quotation mark",
 			"level": "warning"
@@ -67,22 +64,10 @@
 			"description": "paragraph separator",
 			"level": "error"
 		},
-		"0003": {
-			"description": "end of text",
-			"level": "warning"
-		},
-		"000b": {
-			"description": "line tabulation",
-			"level": "warning"
-		},
-		"00a0": {
-			"description": "non breaking space",
-			"level": "info"
-		},
-		"00ad": {
-			"description": "soft hyphen",
-			"level": "info"
-		},
+		"0003": { "description": "end of text", "level": "warning" },
+		"000b": { "description": "line tabulation", "level": "warning" },
+		"00a0": { "description": "non breaking space", "level": "info" },
+		"00ad": { "description": "soft hyphen", "level": "info" },
 		"200b": {
 			"zeroWidth": true,
 			"description": "zero width space",
@@ -143,8 +128,6 @@
 	"javascript.referencesCodeLens.enabled": true,
 	"javascript.referencesCodeLens.showOnAllFunctions": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
-	"js/ts.implicitProjectConfig.checkJs": true,
-	"js/ts.implicitProjectConfig.experimentalDecorators": true,
 	"multiclip.formatAfterPaste": true,
 	"todo-tree.filtering.includeHiddenFiles": true,
 	"todo-tree.general.tags": [
@@ -159,7 +142,7 @@
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"typescript.format.insertSpaceAfterConstructor": true,
 	"typescript.format.insertSpaceAfterTypeAssertion": true,
-	"typescript.format.semicolons": "remove",
+	"typescript.format.semicolons": "insert",
 	"typescript.implementationsCodeLens.enabled": true,
 	"typescript.preferences.importModuleSpecifierEnding": "minimal",
 	"typescript.preferences.includePackageJsonAutoImports": "on",
@@ -172,21 +155,13 @@
 	"xmlTools.removeCommentsOnMinify": true,
 	"xmlTools.splitAttributesOnFormat": true,
 	"workbench.editor.wrapTabs": true,
-	"todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^)\\s*($TAGS))",
+	"todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^| \\* @)\\s*($TAGS))",
 	"intelephense.environment.phpVersion": "7.4.15",
 	"jshint.lintHTML": true,
-	"markdownlint.config": {
-		"MD013": false,
-		"MD030": false,
-		"MD010": false
-	},
+	"markdownlint.config": { "MD013": false, "MD030": false, "MD010": false },
 	"prettier.requireConfig": true,
 	"grammarly.audience": "general",
-	"grammarly.diagnostics": {
-		"[markdown]": {
-			"ignore": ["code"]
-		}
-	},
+	"grammarly.diagnostics": { "[markdown]": { "ignore": ["code"] } },
 	"grammarly.domain": "technical",
 	"grammarly.emotions": ["neutral", "confident", "friendly"],
 	"grammarly.goals": ["inform"],

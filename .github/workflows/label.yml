@@ -10,7 +10,6 @@ jobs:
 
         steps:
             - uses: actions/labeler@v2
-              if: always()
               with:
                   repo-token: "${{ secrets.WGYTBOT }}"
                   sync-labels: true

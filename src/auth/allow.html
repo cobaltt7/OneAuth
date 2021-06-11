@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{# message }}allowHeading{{/ message }} | 1Auth</title>
+		<title>{{ #message }}allowHeading{{ /message }} | 1Auth</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,22 +14,22 @@
 	<body style="display: none">
 		{{> nav }}
 		<main>
-			<h1>{{# message }}allowHeading{{/ message }}</h1>
-			<p>{{# message }}allowQuestion|||{{ host }}{{/ message }}</p>
+			<h1>{{ #message }}allowHeading{{ /message }}</h1>
+			<p>{{ #message }}allowQuestion|||{{ host }}{{ /message }}</p>
 			<div class="buttons-container">
 				<a
 					id="allow"
 					href="/auth/backend/send_data?client={{ client }}&url={{ encodedUrl }}&token={{ token }}"
-					>{{# message }}allowButtonA{{/ message }}
+					>{{ #message }}allowButtonA{{ /message }}
 					<i class="far fa-check-circle"></i>
 				</a>
 				<a id="deny" href="{{ url }}"
-					>{{# message }}allowButtonD{{/ message }}
+					>{{ #message }}allowButtonD{{ /message }}
 					<i class="far fa-times-circle"></i>
 				</a>
 			</div>
 			<p>
-				{{# message }}allowDataNote|||{{ name }}|||{{ host }}{{/ message
+				{{ #message }}allowDataNote|||{{ name }}|||{{ host }}{{ /message
 				}}
 			</p>
 			<pre class="hljs lang-json">{{ data }}</pre>

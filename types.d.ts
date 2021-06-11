@@ -1,49 +1,6 @@
 //#region Meta
-import { Request, Response, IRouter } from "express";
-interface nestedObjStr {
+export interface nestedObjStr {
 	[key: string]: string | nestedObjStr;
-}
-//#endregion
-
-//#region Mustache
-export type MustacheCallback = (err: Error, str: string) => void;
-//#endregion
-
-//#region Express
-export interface ExpressResponse extends Response {
-	setHeader: (header: string, value: string) => any;
-	header: (header: string, value: string) => any;
-	header: (headers: { [key: string]: string }) => any;
-	set: (header: string, value: string) => any;
-	set: (headers: { [key: string]: string }) => any;
-	status: (status: number) => ExpressResponse;
-	render: (
-		view: string,
-		options?: any,
-		callback?: MustacheCallback,
-	) => IRouter;
-	cookie: (name: string, value: string, options: { [key: string] }) => void;
-	send: (info: string) => IRouter;
-	sendStatus: (status: number) => IRouter;
-	json: (info: any) => IRouter;
-	redirect: (url: string) => IRouter;
-	sendFile: (url: string) => IRouter;
-	statusCode: number;
-	bodySent: boolean;
-}
-export type ExpressNext = () => void;
-export interface ExpressRequest extends Request {
-	query: { [key: string]: string };
-	body: { [key: string]: nestedObjStr };
-	languages: string[];
-	messages: { [key: string]: string };
-	params: { [key: string]: string };
-	path: string;
-	get: (header: string) => string;
-	cookies: { [key: string]: string };
-	next: (err: Error | string) => void;
-	url: string;
-	accepts: (type: string) => boolean;
 }
 //#endregion
 
@@ -57,14 +14,14 @@ interface AuthObj {
 	getData: (token: string) => Promise<{ [key: string]: string }>;
 	rawData: boolean;
 }
-type RequestFunction = (
-	req: ExpressRequest,
-	res: ExpressResponse,
+export type RequestFunction = (
+	req: e.Request,
+	res: e.Response,
 	sendResponse: (
-		tokenOrData: string | Object,
+		tokenOrData: any,
 		url: string,
-		res: ExpressResponse,
-	) => IRouter,
+		res: e.Response,
+	) => void | e.Response,
 ) => Promise<void>;
 export interface Page {
 	"backendPage": string;
@@ -96,7 +53,7 @@ export interface Page {
 export type sendResponseArgs = [
 	string | { [key: string]: string },
 	string,
-	ExpressResponse,
+	e.Response,
 ];
 export type Auth = AuthObj;
 //#endregion

@@ -3,15 +3,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* Import Roboto per Google's guidlines */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
-
-/* Import PT Sans because it looks good */
-@import url("https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italicdisplay=swap");
-
-/* For code syntax highlighting */
-@import url("https://highlightjs.org/static/demo/styles/github.css");
-
 main {
 	@apply flex
 		flex-col
@@ -78,7 +69,7 @@ pre {
 }
 
 .new::before {
-	content: "{{# message }}aboutNew{{/ message }}";
+	content: "{{ #message }}aboutNew{{ /message }}";
 
 	@apply text-white
 		rounded-lg

@@ -2,16 +2,11 @@
 
 require("dotenv").config();
 
-/** @type {import("@replit/database").Client} */
-// @ts-expect-error
 const database = new (require("@replit/database"))(),
 	{ logError } = require("../../errors/index.js"),
 	fileSystem = require("fs"),
 	mail = require("nodemailer").createTransport({
-		auth: {
-			pass: process.env.GMAIL_PASS,
-			user: process.env.GMAIL_EMAIL,
-		},
+		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
 		service: "gmail",
 	}),
 	mustache = require("mustache"),
@@ -32,9 +27,8 @@ module.exports = {
 				res.render(path.resolve(__dirname, "index.html"));
 			},
 			post: async (req, res, sendResponse) => {
-				if (req.body.code && req.body.email) {
+				if (req.body?.code && req.body?.email) {
 					const { email = "", date = Date.now() - 900001 } =
-						/** @type {any} */
 						(await database.get(`EMAIL_${req.body.code}`)) ?? {};
 					if (Date.now() - date > 900000) {
 						database.delete(`EMAIL_${req.body.code}`);
@@ -47,11 +41,11 @@ module.exports = {
 						{
 							email,
 						},
-						`${req.query.url}`,
+						`${req.query?.url}`,
 						res,
 					);
 				}
-				if (req.body.email) {
+				if (req.body?.email) {
 					// Send email
 
 					const code = retronid();
@@ -99,10 +93,11 @@ module.exports = {
 						 * @param {Error} error - Error object if an error occured.
 						 * @param {{ [key: string]: any }} info - Information about the sent email
 						 *   if no error occured.
-						 * @returns {import("../../../types").ExpressResponse} - Express response object.
+						 *
+						 * @returns {e.Response} - Express response object.
 						 */
 						(error, info) => {
-							console.log(info);
+							logError(info);
 							if (error) {
 								logError(error);
 								return res.status(500);

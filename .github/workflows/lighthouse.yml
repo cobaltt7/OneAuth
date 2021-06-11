@@ -35,7 +35,19 @@ jobs:
               with:
                   node-version: 12.22.1
 
-            - name:
-                  Install node --trace-warnings --harmony
+            - name: Install
+              run: npm install @actions/github --save-dev
+
+            - name: Comment
+              if: failure()
+              run:
+                  node --trace-warnings --harmony
+                  .github/workflows/lighthouse.js '${{ secrets.WGYTBOT }}' '{}',
+                  '1'
+
+            - name: Comment
+              if: success()
+              run:
+                  node --trace-warnings --harmony
                   .github/workflows/lighthouse.js '${{ secrets.WGYTBOT }}' '${{
                   join(steps.lighthouse.outputs.*, '\n') }}', ''

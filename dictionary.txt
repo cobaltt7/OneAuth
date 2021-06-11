@@ -1,12 +1,7 @@
 1Auth
 Replit
-Transifex
+URI
+APIs
+HTTPS
 errorOldWhy
-URI-encoded
-FontAwesome
-iconProvider
-SVG
-mkactivity
-mkcol
-Linebreaks
-whitespace
+Transifex

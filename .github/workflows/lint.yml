@@ -39,6 +39,11 @@ jobs:
               if: failure() || steps.changed.outputs.changed == 'false'
               run: npm install
 
+            - name: Mustaches
+              if: failure() || steps.changed.outputs.changed == 'false'
+              run:
+                  node --trace-warnings --harmony .github/workflows/mustaches,js
+
             - name: Prettier
               if: failure() || steps.changed.outputs.changed == 'false'
               run: npm run lint:prettier

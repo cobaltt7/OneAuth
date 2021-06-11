@@ -15,10 +15,10 @@ module.exports = {
 		{
 			backendPage: "scratch",
 			get: (req, res, sendResponse) => {
-				if (req.query.verified === "true") {
+				if (req.query?.verified === "true") {
 					return sendResponse(
-						{ username: req.query.username },
-						`${req.query.url}`,
+						{ username: req.query?.username },
+						`${req.query?.url}`,
 						res,
 					);
 				}

@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{# message }}emailSubject{{/ message }}</title>
+		<title>{{ #message }}emailSubject{{ /message }}</title>
 		<style>
 			body {
 				font-family: ui-sans-serif, system-ui, -apple-system,
@@ -24,23 +24,23 @@
 	<body>
 		<img
 			src="https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg"
-			alt="{{# message }}logoAlt{{/ message }}"
+			alt="{{ #message }}logoAlt{{ /message }}"
 		/>
 		<div>
-			<h1>{{# message }}emailSubject{{/ message }}</h1>
+			<h1>{{ #message }}emailSubject{{ /message }}</h1>
 			<h2>
-				{{# message }}emailCodeIs|||{{ code }}{{/ message }}
-				<u>{{# message }}emailNoShare{{/ message }}</u>
+				{{ #message }}emailCodeIs|||{{ code }}{{ /message }}
+				<u>{{ #message }}emailNoShare{{ /message }}</u>
 			</h2>
-			<h3>{{# message }}emailNow{{/ message }}</h3>
+			<h3>{{ #message }}emailNow{{ /message }}</h3>
 			<ul>
-				<li>{{# message }}emailCopyCode{{/ message }}</li>
-				<li>{{# message }}emailGoBack{{/ message }}</li>
-				<li>{{# message }}emailPasteCode{{/ message }}</li>
-				<li>{{# message }}emailReviewInfo{{/ message }}</li>
+				<li>{{ #message }}emailCopyCode{{ /message }}</li>
+				<li>{{ #message }}emailGoBack{{ /message }}</li>
+				<li>{{ #message }}emailPasteCode{{ /message }}</li>
+				<li>{{ #message }}emailReviewInfo{{ /message }}</li>
 			</ul>
-			<p>{{# message }}emailTimeOut{{/ message }}</p>
+			<p>{{ #message }}emailTimeOut{{ /message }}</p>
 		</div>
-		<b><i>{{# message }}emailUnexpected{{/ message }}</i></b>
+		<b><i>{{ #message }}emailUnexpected{{ /message }}</i></b>
 	</body>
 </html>
