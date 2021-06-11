@@ -19,9 +19,10 @@
 	"author": "OneDot",
 	"main": "src/index.js",
 	"scripts": {
-		"lint": "echo 'CODE STYLE'; npm run lint:prettier; npm run lint:eslint; npm run lint:typescript; echo GRAMMAR; npm run lint:spellchecker-cli; npm run lint:write_good",
+		"lint": "echo 'CODE STYLE'; npm run lint:mustaches; npm run lint:prettier; npm run lint:eslint; npm run lint:typescript; echo GRAMMAR; npm run lint:spellchecker-cli; npm run lint:write_good",
 		"lint:eslint": "npx eslint --ignore-pattern .gitignore --fix .",
-		"lint:prettier": "npx prettier --ignore-path .gitignore --write .",
+		"lint:prettier": "npx prettier --ignore-path .gitignore --ignore _locales --write .",
+		"lint:mustache": "node --trace-warnings --harmony .github/workflows/mustaches.js",
 		"lint:typescript": "npx typescript --project jsconfig.json",
 		"lint:spellchecker-cli": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} npx spellchecker-cli {} --dictionaries dictionary.txt; npx spellchecker-cli _locales/en_US.json --dictionaries dictionary.txt",
 		"lint:write_good": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} npx write-good --parse {}; npx write-good --parse _locales/en_US.json",
