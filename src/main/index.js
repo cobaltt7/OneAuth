@@ -50,17 +50,34 @@ router.use(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
+	 *
 	 * @returns {void}
 	 */
 	(_, res, next) => {
 		const { send } = res;
-		res.send = (text, ...args) => {
-			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
+		res.send = function (text) {
 			const jQuery = cheerio.load(text);
-			let div = jQuery("pre.hljs:not(:has(*))");
-			console.log(div); //.html(highlight(div.text(), "plaintext")));
 
-			return send.call(this, text, ...args);
+			const codeblocks = jQuery("pre.hljs:not(:has(*))");
+
+			codeblocks.map((index) => {
+				const code = codeblocks.eq(index),
+				 [langClass, language = "plaintext"] =
+				 // eslint-disable-next-line prefer-named-capturing-group
+					/lang(?:uage)?-(\w+)/u.exec(code.attr("class"));
+				code.removeClass(langClass);
+				highlight(code.text(), language).then((highlighted) => {
+					code.html(highlighted);
+					code.wrapInner(
+						jQuery(`<code class="language-${language}"></code>`),
+					);
+					if (index + 1 === codeblocks.length) 
+						return send.call(this, jQuery.html());
+
+						return res
+				});
+				return index
+			});
 		};
 		return next();
 	},
@@ -74,6 +91,7 @@ router.get(
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {void}
 	 */
 	(_, res) =>
@@ -90,6 +108,7 @@ router.get(
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {void}
 	 */
 	(_, res) =>
@@ -104,6 +123,7 @@ router.get(
 	 *
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {void}
 	 */
 	(req, res) =>
@@ -117,6 +137,7 @@ router.get(
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {void}
 	 */
 	(_, res) =>
@@ -128,11 +149,12 @@ router.get(
 router.get(
 	"/about",
 	/**
-	 * For backwards compatibility. Redirect to the home page.
+	 * Redirect to the home page.
 	 *
-	 * @deprecated
+	 * @deprecated - For backwards compatibility only.
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {void}
 	 */
 	(_, res) => res.status(303).redirect("https://auth.onedot.cf/"),
@@ -145,6 +167,7 @@ router.get(
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {e.Response} - Express response object.
 	 */
 	(_, res) =>
@@ -158,6 +181,7 @@ router.get(
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {e.Response} - Express response object.
 	 */
 	(_, res) =>
@@ -177,9 +201,15 @@ router.get(
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {e.Response} - Express response object.
 	 */
-	(_, res) => res.status(303).send(`${process.env.GMAIL_EMAIL}`),
+	(_, res) =>
+		res.status(303).send(`Contact: mailto:${process.env.GMAIL_EMAIL}
+Expires: 2107-10-07T05:13:00.000Z
+Acknowledgments: https://auth.onedot.cf/docs/contributors
+Preferred-Languages: en_US
+Canonical: https://auth.onedot.cf/.well-known/security.txt`),
 );
 
 router.get(
@@ -189,6 +219,7 @@ router.get(
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {void}
 	 */
 	(_, res) =>

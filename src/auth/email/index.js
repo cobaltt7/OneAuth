@@ -93,6 +93,7 @@ module.exports = {
 						 * @param {Error} error - Error object if an error occured.
 						 * @param {{ [key: string]: any }} info - Information about the sent email
 						 *   if no error occured.
+						 *
 						 * @returns {e.Response} - Express response object.
 						 */
 						(error, info) => {

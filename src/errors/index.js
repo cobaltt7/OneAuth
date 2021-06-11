@@ -9,6 +9,7 @@ const path = require("path");
  * Logs an error to the console.
  *
  * @param {any} err - The error to log.
+ *
  * @returns {void}
  * @todo Log it to an admin dashboard instead.
  */
@@ -22,6 +23,7 @@ function logError(err) {
  * @param {e.Request} req - Express request object.
  * @param {e.Response} res - Express response object.
  * @param {number} [_status] - Status override value.
+ *
  * @returns {void | e.Response | null} - Nothing of interest.
  */
 function middleware(req, res, _status) {
@@ -69,6 +71,7 @@ module.exports = {
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
+	 *
 	 * @returns {void}
 	 */
 	middleware: (req, res, next) => {

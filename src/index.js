@@ -48,6 +48,7 @@ app.use(
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
+	 *
 	 * @returns {void}
 	 * @todo Make our site available to old browsers.
 	 */
@@ -81,6 +82,7 @@ app.use(
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
+	 *
 	 * @returns {void}
 	 */
 	(req, res, next) => {
@@ -95,6 +97,7 @@ app.use(
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
+	 *
 	 * @returns {void}
 	 */
 	(req, res, next) => {

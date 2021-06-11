@@ -57,6 +57,7 @@ const BASE_LANG = "en_US",
  *
  * @param {string[]} langs - Input languages.
  * @param {boolean} [cache] - Whether languages should be loaded from the cache if possible.
+ *
  * @returns {string[]} - Resulting array.
  */
 function compileLangs(langs, cache = false) {
@@ -112,6 +113,7 @@ function compileLangs(langs, cache = false) {
  *
  * @param {string[]} langs - Languages to use when searching for messages.
  * @param {boolean} [cache] - Whether to load messages from the cache when possible.
+ *
  * @returns {{ [key: string]: string }} - Retrieved messages.
  */
 function getMsgs(langs, cache = true) {
@@ -134,6 +136,7 @@ function getMsgs(langs, cache = true) {
  *
  * @param {string} lang - Language to generate the formatter for.
  * @param {boolean} [cache] - Whether formatters should be loaded from the cache if possible.
+ *
  * @returns {MessageFormatter} - The message formater.
  */
 function getFormatter(lang, cache = true) {
@@ -153,6 +156,7 @@ function getFormatter(lang, cache = true) {
  * @param {string} inputInfo - String to parse, including a message code and optional placeholders.
  * @param {string} lang - Language code to be used when retreiving a plural formatter.
  * @param {{ [key: string]: string }} msgs - Messages to be used.
+ *
  * @returns {string} - Rendered message.
  */
 function parseMessage(inputInfo, lang, msgs) {
@@ -190,6 +194,7 @@ function parseMessage(inputInfo, lang, msgs) {
  *
  * @param {string[]} langs - Language to be used when formating plurals.
  * @param {{ [key: string]: string }} [msgs] - Messages to be used.
+ *
  * @returns {() => (val: string, render: (val: string) => string) => string} - Function to pass to
  *   Mustache.JS.
  */
@@ -255,6 +260,7 @@ module.exports = {
 		 *   - Data to render it with or callback to run after render.
 		 *
 		 * @param {(err: Error, str: string) => void} [callback] - Callback to run after render.
+		 *
 		 * @returns {void}
 		 */
 		res.render = function (

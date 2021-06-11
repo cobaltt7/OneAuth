@@ -48,6 +48,7 @@ const database = new (require("@replit/database"))(),
  * Returns information about a authentication client.
  *
  * @param {string} requestedClient - Client to retrieve information about.
+ *
  * @returns {import("../../types").Auth | undefined} - Information about the client.
  */
 function getClient(requestedClient) {
@@ -61,6 +62,7 @@ function getClient(requestedClient) {
  * Get HTTP request handlers from a page name.
  *
  * @param {string} requestedClient - The page name.
+ *
  * @returns {import("../../types").Page | null} - The HTTP handlers.
  */
 function getPageHandler(requestedClient) {
@@ -81,6 +83,7 @@ function getPageHandler(requestedClient) {
  * @param {string} url - URL to redirect the user to afterwards.
  * @param {e.Response} res - Express response object.
  * @param {string} noDataMsg - Message to display when the data can not be shown to the user.
+ *
  * @returns {void | e.Response} - Nothing of interest.
  */
 function sendResponse(client, tokenOrData, url, res, noDataMsg) {
@@ -176,6 +179,7 @@ for (const method of [
 				 *
 				 * @param {import("../../types").sendResponseArgs} args - Information from the
 				 *   authentication handler.
+				 *
 				 * @returns {void | e.Response} - Nothing of interest.
 				 */
 				(...args) =>
@@ -196,6 +200,7 @@ router.get(
 	 *
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {e.Response | void} - Express response object.
 	 */
 	(req, res) => {
@@ -225,6 +230,7 @@ router.get(
 	 *
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {Promise<void>}
 	 */
 	async (req, res) => {
@@ -245,6 +251,7 @@ router.get(
 	 *
 	 * @param {e.Request} req - Express request object.
 	 * @param {e.Response} res - Express response object.
+	 *
 	 * @returns {Promise<e.Response | void>} - Nothing of interest.
 	 */
 	async (req, res) => {

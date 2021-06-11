@@ -33,7 +33,8 @@ declare global {
 			readonly statusCode: number;
 			json: (info: any) => void;
 			bodySent: boolean;
-			send: (info: string) => Response;
+			// Technically returns `Response` in basic Express but because of syntax highlighting problems (async) it can't anymore. I could probably find a way but I'm too lazy :P
+			send: (info: string) => void;
 			redirect: (url: string) => void;
 			sendFile: (url: string) => void;
 		} & express.Response;
