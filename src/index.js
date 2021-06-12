@@ -116,7 +116,7 @@ const docs = require("./docs/index.js").router;
 app.use("/docs", docs);
 
 // Main pages
-const main = require("./main/index.js");
+const main = require("./main/index.js").default;
 app.use(main);
 
 // Auth pages

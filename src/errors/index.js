@@ -63,41 +63,38 @@ function middleware(req, res, _status) {
 	return null;
 }
 
-module.exports = {
-	logError,
-	/**
-	 * Express middleware to handle arror handling.
-	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
-	 * @param {(error?: any) => void} next - Express continue function.
-	 *
-	 * @returns {void}
-	 */
-	middleware: (req, res, next) => {
-		res.bodySent = false;
-		if (req.path === "/old") {
-			return res.status(400).render(path.resolve(__dirname, "old.html"), {
-				all: req.messages.errorOldAll,
-			});
-		}
-		const { send, status } = res;
-		res.send = function (...args) {
-			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
-
-			res.bodySent = true;
-			return send.call(this, ...args);
-		};
-		res.status = function (statusCode, ...args) {
-			// Also applys to `res.sendStatus` which uses `status` internally.
-			const returnVal = status.call(
-				this,
-				statusCode === 200 && !res.bodySent ? 404 : statusCode,
-				...args,
-			);
-			middleware(req, res);
-			return returnVal;
-		};
-		return next();
-	},
-};
+module.exports.logError=logError;
+/**
+ * Express middleware to handle arror handling.
+ *
+ * @param {e.Request} req - Express request object.
+ * @param {e.Response} res - Express response object.
+ * @param {(error?: any) => void} next - Express continue function.
+ *
+ * @returns {void}
+ */
+module.exports.middleware=(req, res, next) =>{
+	res.bodySent = false;
+	if (req.path === "/old") {
+		return res.status(400).render(path.resolve(__dirname, "old.html"), {
+			all: req.messages.errorOldAll,
+		});
+	}
+	const { send, status } = res;
+	res.send = function (...args) {
+		// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
+		res.bodySent = true;
+		return send.call(this, ...args);
+	};
+	res.status = function (statusCode, ...args) {
+		// Also applys to `res.sendStatus` which uses `status` internally.
+		const returnVal = status.call(
+			this,
+			statusCode === 200 && !res.bodySent ? 404 : statusCode,
+			...args,
+		);
+		middleware(req, res);
+		return returnVal;
+	};
+	return next();
+}

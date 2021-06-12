@@ -55,29 +55,39 @@ router.use(
 	 */
 	(_, res, next) => {
 		const { send } = res;
+
+		// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 		res.send = (text) => {
-			// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
-			const jQuery = cheerio.load(text),
-				codeblocks = jQuery("pre.hljs:not(:has(*))");
+			const jQuery = cheerio.load(text);
 
-			codeblocks.map((index) => {
-				const code = codeblocks.eq(index),
-					[langClass, language = "plaintext"] =
-						// eslint-disable-next-line prefer-named-capturing-group
-						/lang(?:uage)?-(\w+)/u.exec(code.attr("class"));
-				code.removeClass(langClass);
-				highlight(code.text(), language).then((highlighted) => {
-					code.html(highlighted);
-					code.wrapInner(
-						jQuery(`<code class="language-${language}"></code>`),
-					);
-					if (index + 1 === codeblocks.length)
-						return send.call(this, jQuery.html());
+			// eslint-disable-next-line one-var
+			const codeblocks = jQuery("pre.hljs:not(:has(*))");
 
-					return res;
+			codeblocks.map(
+				/**
+				 * Highlight a code block using highlight.js.
+				 *
+				 * @param {number} index - Iteration of the loop.
+				 *
+				 * @returns {number} - The index of the loop.
+				 */
+				(index) => {
+					const code = codeblocks.eq(index),
+						[langClass, language = "plaintext"] =
+							/lang(?:uage)?-(?<language>\w+)/u.exec(code.attr("class")) ?? [];
+					code.removeClass(langClass);
+					highlight(code.text(), language).then((highlighted) => {
+						code.html(highlighted);
+						code.wrapInner(
+							jQuery(`<code class="language-${language}"></code>`),
+						);
+						if (index + 1 === codeblocks.length)
+							return send.call(this, jQuery.html());
+
+						return res;
+					});
+					return index
 				});
-				return index;
-			});
 		};
 		return next();
 	},
@@ -168,7 +178,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 *
-	 * @returns {e.Response} - Express response object.
+	 * @returns {void}
 	 */
 	(_, res) =>
 		res.send("google-site-verification: googleb9551735479dd7b0.html"),
@@ -182,7 +192,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 *
-	 * @returns {e.Response} - Express response object.
+	 * @returns {void}
 	 */
 	(_, res) =>
 		res.send(
@@ -202,7 +212,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
 	 *
-	 * @returns {e.Response} - Express response object.
+	 * @returns {void}
 	 */
 	(_, res) =>
 		res.status(303).send(`Contact: mailto:${process.env.GMAIL_EMAIL}

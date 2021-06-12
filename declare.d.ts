@@ -57,8 +57,10 @@ declare module "cookie-parser" {
 		(req: e.Request, res: e.Response, next: (err?: any) => void) =>
 			undefined;
 }
-declare module "highlight.js/lib/core";
 
+
+declare module "highlight.js/lib/core";
+declare module "cheerio"
 declare module "@tailwindcss/forms";
 declare module "@tailwindcss/typography";
 declare module "@ultraq/icu-message-formatter";

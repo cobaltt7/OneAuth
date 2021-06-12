@@ -138,6 +138,7 @@ module.exports = {
 		"no-console": 1,
 		"no-continue": 0,
 		"no-extra-parens": 0,
+		"no-invalid-this": 0,
 		"no-magic-numbers": 0,
 		"no-mixed-operators": 0,
 		"no-nested-ternary": 0,
