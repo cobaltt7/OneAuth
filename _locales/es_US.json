@@ -1,9 +1,13 @@
 {
 	"docsTitle": { "string": "" },
 	"emailHeading": { "string": "Iniciar sesión con correo electrónico" },
-	"emailEnterPrompt": { "string": "Introduce tu correo electrónico para continuar" },
+	"emailEnterPrompt": {
+		"string": "Introduce tu correo electrónico para continuar"
+	},
 	"emailSubmit": { "string": "Enviar" },
-	"emailEnterCode": { "string": "Introduce el código que te enviamos para continuar" },
+	"emailEnterCode": {
+		"string": "Introduce el código que te enviamos para continuar"
+	},
 	"emailSubject": { "string": "Verificación 1Auth de Correo Electrónico" },
 	"emailCodeIs": { "string": "Tu código es {0}." },
 	"emailNoShare": { "string": "" },
@@ -24,7 +28,9 @@
 	},
 	"logoAlt": { "string": "Logotipo de 1Auth" },
 	"replitHeading": { "string": "Iniciar sesión con Replit" },
-	"replitClickAnywhere": { "string": "Haz clic en cualquier lugar para empezar" },
+	"replitClickAnywhere": {
+		"string": "Haz clic en cualquier lugar para empezar"
+	},
 	"replitNoClose": {
 		"string": ""
 	},
