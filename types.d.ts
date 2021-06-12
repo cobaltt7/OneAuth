@@ -1,10 +1,22 @@
-//#region Meta
 export interface nestedObjStr {
 	[key: string]: string | nestedObjStr;
 }
-//#endregion
 
-//#region Auth
+export interface lighthouseResult {
+	code: string;
+	data: {
+		url: string;
+		emulatedFormFactor: string;
+		scores: {
+			accessibility: number;
+			bestPractices: number;
+			performance: number;
+			progressiveWebApp: number;
+			seo: number;
+		};
+	}[];
+}
+
 interface AuthObj {
 	icon: string;
 	iconProvider?: "svg" | "url" | "far" | "fab" | "fas";
@@ -56,4 +68,3 @@ export type sendResponseArgs = [
 	e.Response,
 ];
 export type Auth = AuthObj;
-//#endregion

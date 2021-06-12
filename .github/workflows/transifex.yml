@@ -6,7 +6,7 @@ on:
     push:
         branches: main
         paths:
-            - _locales/**.json
+            - _locales/en_US.json
 
 jobs:
     run:
@@ -42,12 +42,13 @@ jobs:
                   --skip
 
             - name: Pull
+              if: ${{ !cancelled() }}
               run:
                   tx pull --all --source --skip --no-interactive --force
                   --mode=onlytranslated
 
             - name: Commit
-              if: always()
+              if: ${{ !cancelled() }}
               id: commit
               uses: stefanzweifel/git-auto-commit-action@master
               with:
@@ -60,13 +61,9 @@ jobs:
                       wgytbot <83586655+wgytbot@users.noreply.github.com>
 
             - name: Repository Dispatch
-              if: ${{ !success() }}
+              if: always()
               uses: peter-evans/repository-dispatch@v1
               with:
                   token: ${{ secrets.WGYTBOT }}
                   repository: ${{ github.repository }}
                   event-type: lint
-
-            - name: Lint
-              if: success()
-              run: npm run lint

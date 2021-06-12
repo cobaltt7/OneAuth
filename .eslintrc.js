@@ -9,7 +9,6 @@ module.exports = {
 		"plugin:markdown/recommended",
 		"prettier",
 	],
-	ignorePatterns: ["node_modules", ".upm", "src/main/style.css"],
 	overrides: [
 		{
 			files: ["**.md"],
@@ -51,6 +50,12 @@ module.exports = {
 				"**rc.js",
 			],
 			parserOptions: { sourceType: "module" },
+		},
+		{
+			files: [".github/**.js"],
+			rules: {
+				"no-console": 0,
+			},
 		},
 	],
 	parserOptions: { ecmaVersion: 11, sourceType: "script" },

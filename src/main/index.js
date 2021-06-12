@@ -45,7 +45,7 @@ const authClients = [];
 // Highlighting
 router.use(
 	/**
-	 * Express middleware to handle arror handling.
+	 * Express middleware to handle code block highlighting.
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} res - Express response object.
@@ -204,7 +204,6 @@ router.get(
 			"User-agent: *\n" +
 				"Allow: /\n" +
 				"Disalow: /auth\n" +
-				"Crawl-delay: 10\n" +
 				"Host: https://auth.onedot.cf",
 		),
 );
@@ -222,7 +221,7 @@ router.get(
 	(_, res) =>
 		res.status(303).send(`Contact: mailto:${process.env.GMAIL_EMAIL}
 Expires: 2107-10-07T05:13:00.000Z
-Acknowledgments: https://auth.onedot.cf/docs/contributors
+Acknowledgments: https://auth.onedot.cf/docs/credits
 Preferred-Languages: en_US
 Canonical: https://auth.onedot.cf/.well-known/security.txt`),
 );

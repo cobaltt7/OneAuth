@@ -1,7 +1,10 @@
 # !! This file is the Ignore file not just for Git, but also for ESLint and Pretier !!
 
+!**
+
 .transifexrc
 .DS_STORE
+.git/
 
 # this is generated file
 src/main/style.css

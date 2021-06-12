@@ -13,7 +13,6 @@ jobs:
 
         steps:
             - name: Mark
-              if: always()
               uses: actions/stale@v3
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}

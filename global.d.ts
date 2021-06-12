@@ -2,7 +2,11 @@ import express = require("express");
 
 declare global {
 	declare const __dirname: string;
-	declare const process: { argv: string[]; env: { [key: string]: string } };
+	declare const process: {
+		argv: string[];
+		env: { [key: string]: string };
+		exit: (code?: number) => void;
+	};
 	declare const require: (library: string) => any;
 	declare namespace e {
 		export type Request = {

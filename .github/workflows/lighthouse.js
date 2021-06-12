@@ -1,3 +1,5 @@
+/** @file Format And post data retrieved from Lighthouse. */
+
 "use strict";
 
 const github = require("@actions/github");
@@ -7,13 +9,19 @@ if (process.argv[4]) {
 	octokit.issues.createComment({
 		...github.context.repo,
 		body: "An error occured while retrieving the data from Lighthouse.",
+		// eslint-disable-next-line camelcase
 		issue_number: "29",
 	});
-	process.exit();
+	throw new Error(
+		"An error occured while retrieving the data from Lighthouse.",
+	);
 }
 
 try {
-	const { data } = JSON.parse(process.argv[3]);
+	/** @type {import("../../types").lighthouseResult} */
+	const { code, data } = JSON.parse(`${process.argv[3]}`);
+
+	if (code !== "SUCCESS") throw new Error(code);
 
 	let OUTPUT =
 		"# This week's Lighthouse scores\n" +
@@ -41,18 +49,16 @@ try {
 	octokit.issues.createComment({
 		...github.context.repo,
 		body: OUTPUT,
+		// eslint-disable-next-line camelcase
 		issue_number: "29",
 	});
-	process.exit();
 } catch (error) {
 	octokit.issues.createComment({
 		...github.context.repo,
 		body:
 			"An error occured while generating the comment.\n" +
-			"```js\n" +
-			JSON.stringify(error) +
-			"```",
+			`\`\`\`js\n${JSON.stringify(error)}\n\`\`\``,
+		// eslint-disable-next-line camelcase
 		issue_number: "29",
 	});
-	process.exit();
 }
