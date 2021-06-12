@@ -36,14 +36,14 @@ function processResult(discussions) {
 fetch("https://api.github.com/graphql", {
 	body: JSON.stringify(request1),
 	headers: {
-		"authorization": "Bearer 51b83fe12024147aada1ca95b9fd686aba2764d4",
-		"graphql-features": "discussions_api",
+		"Authorization": `Bearer ${accessToken}`,
+		"GraphQL-Features": "discussions_api",
 	},
 	method: "POST",
 })
 	.then((response) => response.json())
 	.then(
-		async ({
+		async (/*{
 			data: {
 				repository: {
 					discussions: {
@@ -54,7 +54,8 @@ fetch("https://api.github.com/graphql", {
 					},
 				},
 			},
-		}) => {
+		}*/data) => {
+			return console.log(data)
 			const nextRequest = {
 				query: `{
 					repository(name: "${REPO_NAME}", owner: "${REPO_OWNER}") {
@@ -86,8 +87,7 @@ fetch("https://api.github.com/graphql", {
 			} = await fetch("https://api.github.com/graphql", {
 				body: JSON.stringify(nextRequest),
 				headers: {
-					"authorization":
-						"Bearer 51b83fe12024147aada1ca95b9fd686aba2764d4",
+					"Authorization": `Bearer ${accessToken}`,
 					"graphql-features": "discussions_api",
 				},
 				method: "POST",
