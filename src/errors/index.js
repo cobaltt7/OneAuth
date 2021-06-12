@@ -63,7 +63,7 @@ function middleware(req, res, _status) {
 	return null;
 }
 
-module.exports.logError=logError;
+module.exports.logError = logError;
 /**
  * Express middleware to handle arror handling.
  *
@@ -73,7 +73,7 @@ module.exports.logError=logError;
  *
  * @returns {void}
  */
-module.exports.middleware=(req, res, next) =>{
+module.exports.middleware = (req, res, next) => {
 	res.bodySent = false;
 	if (req.path === "/old") {
 		return res.status(400).render(path.resolve(__dirname, "old.html"), {
@@ -97,4 +97,4 @@ module.exports.middleware=(req, res, next) =>{
 		return returnVal;
 	};
 	return next();
-}
+};

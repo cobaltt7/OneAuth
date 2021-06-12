@@ -58,9 +58,8 @@ declare module "cookie-parser" {
 			undefined;
 }
 
-
 declare module "highlight.js/lib/core";
-declare module "cheerio"
+declare module "cheerio";
 declare module "@tailwindcss/forms";
 declare module "@tailwindcss/typography";
 declare module "@ultraq/icu-message-formatter";
