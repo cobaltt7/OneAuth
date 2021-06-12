@@ -43,7 +43,8 @@ fetch("https://api.github.com/graphql", {
 })
 	.then((response) => response.json())
 	.then(
-		async (/*{
+		async (
+			/*{
 			data: {
 				repository: {
 					discussions: {
@@ -54,8 +55,9 @@ fetch("https://api.github.com/graphql", {
 					},
 				},
 			},
-		}*/data) => {
-			return console.log(data)
+		}*/ data,
+		) => {
+			return console.log(data);
 			const nextRequest = {
 				query: `{
 					repository(name: "${REPO_NAME}", owner: "${REPO_OWNER}") {
