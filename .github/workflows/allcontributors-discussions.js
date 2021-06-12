@@ -92,6 +92,6 @@ fetch("https://api.github.com/graphql", {
 				},
 				method: "POST",
 			}).then((response) => response.json());
-			console.log(processResult(discussions2))
+			console.log(processResult(discussions2));
 		},
 	);
