@@ -36,7 +36,7 @@ jobs:
                   node-version: 12.22.1
 
             - name: Install
-              run: npm install @actions/github --save-dev
+              run: npm install
 
             - name: Comment
               if: success()
