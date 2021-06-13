@@ -8,12 +8,13 @@ const fetch = require("node-fetch");
  * Comment on the Lighthouse issue.
  *
  * @param {string} body - Body of the comment.
+ *
  * @returns {Promise<any>} - Result from GitHub's GraphQL API.
  */
 function commentOnDiscussion(body) {
 	return fetch("https://api.github.com/graphql", {
-			body: JSON.stringify({
-				query: `mutation {
+		body: JSON.stringify({
+			query: `mutation {
 					addDiscussionComment(
 						input: {discussionId: "MDEwOkRpc2N1c3Npb24zNDEwNDA2", body: "${body}"}
 					) {
@@ -22,18 +23,20 @@ function commentOnDiscussion(body) {
 					  }
 					}
 				  }`,
-				variables: null
-			}),
-			headers: {
-				"Authorization": `Bearer ${process.argv[2]}`,
-				"GraphQL-Features": "discussions_api",
-			},
-			method: "POST",
-		}).then((response) => response.json())
+			variables: null,
+		}),
+		headers: {
+			"Authorization": `Bearer ${process.argv[2]}`,
+			"GraphQL-Features": "discussions_api",
+		},
+		method: "POST",
+	}).then((response) => response.json());
 }
 
 if (process.argv[4]) {
-	commentOnDiscussion( "An error occured while retrieving the data from Lighthouse.");
+	commentOnDiscussion(
+		"An error occured while retrieving the data from Lighthouse.",
+	);
 	throw new Error(
 		"An error occured while retrieving the data from Lighthouse.",
 	);
@@ -68,10 +71,11 @@ try {
 			}) |\n`;
 	});
 
-	commentOnDiscussion( OUTPUT);
+	commentOnDiscussion(OUTPUT);
 } catch (error) {
 	commentOnDiscussion(
-			"An error occured while generating the comment.\n" +
-		`\`\`\`js\n${JSON.stringify(error)}\n\`\`\``);
-	throw error
+		"An error occured while generating the comment.\n" +
+			`\`\`\`js\n${JSON.stringify(error)}\n\`\`\``,
+	);
+	throw error;
 }

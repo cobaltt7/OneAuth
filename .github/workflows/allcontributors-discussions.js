@@ -9,7 +9,6 @@ const REPO_NAME = "onedotprojects",
 	/** @type {string[][]} */
 	result = [];
 
-
 /**
  * Get a page of discussions based on a previous discussion's hash.
  *
