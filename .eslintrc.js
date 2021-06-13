@@ -147,6 +147,7 @@ module.exports = {
 		"no-magic-numbers": 0,
 		"no-mixed-operators": 0,
 		"no-nested-ternary": 0,
+		"no-plusplus": 0,
 		"no-restricted-syntax": 2,
 		"no-tabs": 0,
 		"no-ternary": 0,

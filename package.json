@@ -16,7 +16,7 @@
 		"email": "1auth.wgyt@gmail.com"
 	},
 	"license": "MIT",
-	"author": "OneDot",
+	"author": "OneDot Projects",
 	"main": "src/index.js",
 	"scripts": {
 		"lint": "echo 'CODE STYLE'; npm run lint:mustaches; npm run lint:prettier; npm run lint:eslint; npm run lint:typescript; echo GRAMMAR; npm run lint:spellchecker-cli; npm run lint:write_good",
@@ -119,7 +119,6 @@
 		"serve-index": "^1.9.1"
 	},
 	"devDependencies": {
-		"@actions/github": "^5.0.0",
 		"@tailwindcss/forms": "^0.3.3",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/accepts": "^1.3.5",

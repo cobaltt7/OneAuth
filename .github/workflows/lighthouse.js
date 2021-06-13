@@ -2,16 +2,38 @@
 
 "use strict";
 
-const github = require("@actions/github");
-const octokit = github.getOctokit(process.argv[2]);
+const fetch = require("node-fetch");
+
+/**
+ * Comment on the Lighthouse issue.
+ *
+ * @param {string} body - Body of the comment.
+ * @returns {Promise<any>} - Result from GitHub's GraphQL API.
+ */
+function commentOnDiscussion(body) {
+	return fetch("https://api.github.com/graphql", {
+			body: JSON.stringify({
+				query: `mutation {
+					addDiscussionComment(
+						input: {discussionId: "MDEwOkRpc2N1c3Npb24zNDEwNDA2", body: "${body}"}
+					) {
+					  comment {
+						id
+					  }
+					}
+				  }`,
+				variables: null
+			}),
+			headers: {
+				"Authorization": `Bearer ${process.argv[2]}`,
+				"GraphQL-Features": "discussions_api",
+			},
+			method: "POST",
+		}).then((response) => response.json())
+}
 
 if (process.argv[4]) {
-	octokit.issues.createComment({
-		...github.context.repo,
-		body: "An error occured while retrieving the data from Lighthouse.",
-		// eslint-disable-next-line camelcase
-		issue_number: "29",
-	});
+	commentOnDiscussion( "An error occured while retrieving the data from Lighthouse.");
 	throw new Error(
 		"An error occured while retrieving the data from Lighthouse.",
 	);
@@ -46,19 +68,10 @@ try {
 			}) |\n`;
 	});
 
-	octokit.issues.createComment({
-		...github.context.repo,
-		body: OUTPUT,
-		// eslint-disable-next-line camelcase
-		issue_number: "29",
-	});
+	commentOnDiscussion( OUTPUT);
 } catch (error) {
-	octokit.issues.createComment({
-		...github.context.repo,
-		body:
+	commentOnDiscussion(
 			"An error occured while generating the comment.\n" +
-			`\`\`\`js\n${JSON.stringify(error)}\n\`\`\``,
-		// eslint-disable-next-line camelcase
-		issue_number: "29",
-	});
+		`\`\`\`js\n${JSON.stringify(error)}\n\`\`\``);
+	throw error
 }

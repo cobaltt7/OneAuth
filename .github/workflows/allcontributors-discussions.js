@@ -4,96 +4,106 @@
 
 const fetch = require("node-fetch");
 
-const REPO_NAME = "ScratchAddons",
-	REPO_OWNER = "ScratchAddons",
-	request1 = {
-		query: `{
-		repository(name: "${REPO_NAME}", owner: "${REPO_OWNER}") {
-			discussions(first: 100, orderBy: {direction: DESC, field: CREATED_AT}) {
-				edges {
-					node { answer { author { login } } }
-				}
-				totalCount
-			}
-		}
-	}`,
-		variables: null,
-	};
+const REPO_NAME = "onedotprojects",
+	REPO_OWNER = "auth",
+	/** @type {string[][]} */
+	result = [];
+
 
 /**
- * Processes the result given by GraphQL.
+ * Get a page of discussions based on a previous discussion's hash.
  *
- * @param {{ answer: { author: { login: string } } | null }[]} discussions - The result from GraphQL.
+ * @param {string} [hash] - Retrieve all issues after this hash. If no hash is provided or the hash
+ *   is blank, the first page will be returned.
+ * @param {boolean} [total] - Whether or not to return the total number of discussions in the repository.
+ *
+ * @returns {Promise<{ discussions: { username: string; cursor: string }[]; total?: number }>} - The
+ *   retrieved discussion information.
  */
-function processResult(discussions) {
-	return discussions
-		.map((discussion) => {
-			discussion.answer?.author.login;
-		})
-		.filter((username) => username);
-}
-
-fetch("https://api.github.com/graphql", {
-	body: JSON.stringify(request1),
-	headers: {
-		"Authorization": `Bearer ${accessToken}`,
-		"GraphQL-Features": "discussions_api",
-	},
-	method: "POST",
-})
-	.then((response) => response.json())
-	.then(
-		async (
-			/*{
+async function getPage(hash = "", total = false) {
+	const nextRequest = {
+			query: `{
+			repository(name: "${REPO_NAME}", owner: "${REPO_OWNER}") {
+				discussions(
+					${hash ? `after: "${hash}",` : ""}
+					first: 100,
+					orderBy: {direction: DESC, field: CREATED_AT}
+				) {
+					edges {
+						cursor
+						node { answer { author { login } } }
+					}
+					${total ? "totalCount" : ""}
+				}
+			}
+		}`,
+			variables: null,
+		},
+		/**
+		 * @type {{
+		 * 	data: {
+		 * 		repository: {
+		 * 			discussions: {
+		 * 				edges: {
+		 * 					cursor: string;
+		 * 					node: { answer: { author: { login: string } } | null };
+		 * 				}[];
+		 * 				totalCount: number;
+		 * 			};
+		 * 		};
+		 * 	};
+		 * }}
+		 */
+		{
 			data: {
 				repository: {
-					discussions: {
-						edges: {
-							node: { discussions },
-						},
-						totalCount,
-					},
+					discussions: { edges: discussions, totalCount },
 				},
 			},
-		}*/ data,
-		) => {
-			return console.log(data);
-			const nextRequest = {
-				query: `{
-					repository(name: "${REPO_NAME}", owner: "${REPO_OWNER}") {
-						discussions(
-							after: ${discussions.at(-1).cursor},
-							first: 100,
-							orderBy: {direction: DESC, field: CREATED_AT}
-						) {
-							edges {
-								node { answer { author { login } } }
-							}
-						}
-					}
-				}`,
-				variables: null,
-			};
-			console.log(discussions, totalCount);
+		} = await fetch("https://api.github.com/graphql", {
+			body: JSON.stringify(nextRequest),
+			headers: {
+				"Authorization": `Bearer ${process.argv[2]}`,
+				"GraphQL-Features": "discussions_api",
+			},
+			method: "POST",
+		}).then((response) => response.json()),
+		/** @type {{ cursor: string; username: string }[]} */
+		// @ts-expect-error - TS thinks `username` may contain `undefined` values.
+		// That's impossible. See L83.
+		processedDiscussions = discussions
+			.map((discussion) => ({
+				cursor: discussion.cursor,
+				username: discussion.node.answer?.author?.login,
+			}))
+			.filter((discussion) => discussion.username);
+	if (total) return { discussions: processedDiscussions, total: totalCount };
+	return { discussions: processedDiscussions };
+}
 
-			const {
-				data: {
-					repository: {
-						discussions: {
-							edges: {
-								node: { discussions2 },
-							},
-						},
-					},
-				},
-			} = await fetch("https://api.github.com/graphql", {
-				body: JSON.stringify(nextRequest),
-				headers: {
-					"Authorization": `Bearer ${accessToken}`,
-					"graphql-features": "discussions_api",
-				},
-				method: "POST",
-			}).then((response) => response.json());
-			console.log(processResult(discussions2));
-		},
-	);
+getPage("", true).then(async ({ discussions, total }) => {
+	let discussionIndex = discussions.length,
+		hash = discussions[discussions.length - 1]?.cursor;
+	if (!total || !hash) {
+		throw new Error(
+			`\`total\` or \`hash\` is falsy! \`hash\`: ${hash}. \`total\`: ${total}.`,
+		);
+	}
+	result.push(discussions.map((discussion) => discussion.username));
+	while (discussionIndex < total) {
+		/** @type {{ username: string; cursor: string }[]} */
+		// eslint-disable-next-line no-await-in-loop
+		const nextDiscussions = (await getPage(hash)).discussions;
+		hash = nextDiscussions[nextDiscussions.length - 1]?.cursor;
+		discussionIndex += nextDiscussions.length;
+		result.push(nextDiscussions.map((discussion) => discussion.username));
+	}
+
+	/** @type {{ [key: string]: number }} */
+	const top = {};
+	result.flat().forEach((name) => {
+		if (!top[name]) top[name] = 0;
+		top[name]++;
+	});
+	console.log(top);
+});

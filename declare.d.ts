@@ -61,7 +61,6 @@ declare module "cookie-parser" {
 declare module "highlight.js/lib/core";
 declare module "cheerio";
 declare module "@tailwindcss/forms";
-declare module "@actions/github";
 declare module "replace-in-file" {
 	export = {
 		sync: (options: any) =>
