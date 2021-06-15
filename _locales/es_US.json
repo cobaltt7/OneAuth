@@ -1,5 +1,5 @@
 {
-	"docsTitle": { "string": "" },
+	"docsTitle": { "string": "{0} | 1Auth Documentos de Desarrollo" },
 	"emailHeading": { "string": "Iniciar sesión con correo electrónico" },
 	"emailEnterPrompt": { "string": "Introduce tu correo electrónico para continuar" },
 	"emailSubmit": { "string": "Enviar" },
@@ -26,7 +26,7 @@
 	"replitHeading": { "string": "Iniciar sesión con Replit" },
 	"replitClickAnywhere": { "string": "Haz clic en cualquier lugar para empezar" },
 	"replitNoClose": {
-		"string": ""
+		"string": "Si cierras la ventana emergente, ¡nosotros no podemos autenticarte!"
 	},
 	"replitReopen": {
 		"string": ""
@@ -44,15 +44,15 @@
 		"string": ""
 	},
 	"signinHeading": { "string": "Iniciar sesión" },
-	"signinChoose": { "string": "" },
+	"signinChoose": { "string": "Elija una opción para continuar" },
 	"signinWith": { "string": "Iniciar sesión con {0}" },
 	"allowDataHidden": {
-		"string": ""
+		"string": "Desafortunadamente, no podemos mostrar esto datos ahora. ¡Lo siento por eso!"
 	},
-	"error201Heading": { "string": "" },
-	"error202Heading": { "string": "" },
-	"error204Heading": { "string": "" },
-	"error205Heading": { "string": "" },
+	"error201Heading": { "string": "Creado" },
+	"error202Heading": { "string": "Aceptado" },
+	"error204Heading": { "string": "Sin Contenido" },
+	"error205Heading": { "string": "Reajustar Contenido" },
 	"error300Heading": { "string": "" },
 	"error304Heading": { "string": "" },
 	"error305Heading": { "string": "" },
@@ -62,7 +62,7 @@
 	"error403Heading": { "string": "" },
 	"error404Heading": { "string": "404 No Encontrado" },
 	"error405Heading": { "string": "405 Método no permitido" },
-	"error406Heading": { "string": "" },
+	"error406Heading": { "string": "No Aceptable" },
 	"error407Heading": { "string": "" },
 	"error408Heading": { "string": "" },
 	"error409Heading": { "string": "" },
@@ -74,7 +74,7 @@
 	"error415Heading": { "string": "" },
 	"error416Heading": { "string": "" },
 	"error417Heading": { "string": "" },
-	"error418Heading": { "string": "" },
+	"error418Heading": { "string": "Soy una tetera" },
 	"error421Heading": { "string": "" },
 	"error425Heading": { "string": "" },
 	"error426Heading": { "string": "" },
@@ -120,7 +120,7 @@
 		"string": ""
 	},
 	"error404Message": {
-		"string": ""
+		"string": "¡Uh-oh! ¡No podemos encontrar esa página! ¿Regresa? Si un enlace en este sitio te trajo aquí, es posible que desee ponerse en contacta con nosotros en GitHub y dejar que nosotros sabemos que tenemos un enlance roto."
 	},
 	"error405Message": {
 		"string": "Eso método HTTP no es permitido."
@@ -144,7 +144,7 @@
 		"string": ""
 	},
 	"error412Message": {
-		"string": ""
+		"string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!"
 	},
 	"error413Message": {
 		"string": ""
@@ -168,7 +168,7 @@
 	"error425Message": {
 		"string": ""
 	},
-	"error426Message": { "string": "" },
+	"error426Message": { "string": "Por favor use HTTPS, no HTTP." },
 	"error428Message": {
 		"string": ""
 	},
@@ -179,7 +179,7 @@
 		"string": ""
 	},
 	"error451Message": {
-		"string": ""
+		"string": "Desafortunadamente, no podemos proporcionar legalmente esto pagina para ti. ¡Lo siento por eso!"
 	},
 	"error500Message": {
 		"string": ""
@@ -191,7 +191,7 @@
 		"string": ""
 	},
 	"error503Message": {
-		"string": ""
+		"string": "¡Lo siento! ¡Esta página es actualmente fuera de línea! ¡Debería ser retrocede pronto!"
 	},
 	"error504Message": {
 		"string": ""
@@ -219,8 +219,8 @@
 		"string": ""
 	},
 	"errorOldMore": { "string": "Aprende más" },
-	"aboutPageTitle": { "string": "" },
-	"aboutMainHeading": { "string": "" },
+	"aboutPageTitle": { "string": "1Auth | Todos-In-Uno Autenticación" },
+	"aboutMainHeading": { "string": "1Auth Todos-In-Uno Autenticación" },
 	"aboutSubHeading": { "string": "Acerca de" },
 	"aboutIntro": {
 		"string": ""
