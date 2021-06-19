@@ -6,27 +6,27 @@
 	"emailEnterCode": { "string": "Enter the code we sent you to continue" },
 	"emailSubject": { "string": "1Auth Email Verification" },
 	"emailCodeIs": { "string": "Your code is {0}." },
-	"emailNoShare": { "string": "Don't share it with anyone else." },
+	"emailNoShare": { "string": "Don’t share it with anyone else." },
 	"emailNow": { "string": "What now?" },
 	"emailCopyCode": { "string": "Copy your code." },
 	"emailGoBack": { "string": "Go back to 1Auth." },
 	"emailPasteCode": {
-		"string": "Paste your code in the box and press \"Submit\"."
+		"string": "Paste your code in the box and press {“{0}”}."
 	},
 	"emailReviewInfo": {
-		"string": "Review the information we will send and the site we will send it to, and if all looks good, press \"Allow\"."
+		"string": "Review the information we will send and the site we will send it to, and if all looks good, press “{0}”."
 	},
 	"emailTimeOut": {
-		"string": "Doesn't work? Maybe it's been too long. Try pressing the back button and requesting another code!"
+		"string": "Doesn’t work? Maybe it’s been too long. Try pressing the back button and requesting another code!"
 	},
 	"emailUnexpected": {
-		"string": "Not expecting this email? Just ignore it. Don't worry, nothing will happen."
+		"string": "Not expecting this email? Just ignore it. Don’t worry, nothing will happen."
 	},
 	"logoAlt": { "string": "1Auth logo" },
 	"replitHeading": { "string": "Sign in with Replit" },
 	"replitClickAnywhere": { "string": "Click anywhere to get started" },
 	"replitNoClose": {
-		"string": "If you close the pop-up, we can't authenticate you!"
+		"string": "If you close the pop-up, we can’t authenticate you!"
 	},
 	"replitReopen": {
 		"string": "Please close this modal, then reopen the window by clicking anywhere."
@@ -41,13 +41,13 @@
 	"allowButtonA": { "string": "Allow" },
 	"allowButtonD": { "string": "Deny" },
 	"allowDataNote": {
-		"string": "If you press \"Allow\", then {1} will receive the following information (taken from {0}):"
+		"string": "If you press “{2}”, then {1} will receive the following information (taken from your {0} account):"
 	},
 	"signinHeading": { "string": "Sign in" },
 	"signinChoose": { "string": "Choose an option to continue" },
 	"signinWith": { "string": "Sign in with {0}" },
 	"allowDataHidden": {
-		"string": "Unfortunately, we can't show this data right now. Sorry about that!"
+		"string": "Unfortunately, we can’t show this data right now. Sorry about that!"
 	},
 	"error201Heading": { "string": "Created" },
 	"error202Heading": { "string": "Accepted" },
@@ -74,7 +74,7 @@
 	"error415Heading": { "string": "Unsupported Media Type" },
 	"error416Heading": { "string": "Range Not Satisfiable" },
 	"error417Heading": { "string": "Expectation Failed" },
-	"error418Heading": { "string": "I'm a teapot" },
+	"error418Heading": { "string": "I’m a teapot" },
 	"error421Heading": { "string": "Misdirected Request" },
 	"error425Heading": { "string": "Too Early " },
 	"error426Heading": { "string": "Upgrade Required" },
@@ -97,7 +97,7 @@
 		"string": "Your request has been accepted and understood. We forwarded it to another server."
 	},
 	"error204Message": {
-		"string": "Your request was successful. However, we don't have any information to give you in response."
+		"string": "Your request was successful. However, we don’t have any information to give you in response."
 	},
 	"error205Message": {
 		"string": "Your request was successful. Reset any pages that use our APIs as the content may have changed."
@@ -120,44 +120,44 @@
 		"string": "Sorry, but you are forbidden to access this resource."
 	},
 	"error404Message": {
-		"string": "Uh-oh! We're can't find that page! Go back? If a link on this site brought you here, you may want to contact us on GitHub and let us know we have a broken link."
+		"string": "Uh-oh! We’re can’t find that page! Go back? If a link on this site brought you here, you may want to contact us on GitHub and let us know we have a broken link."
 	},
 	"error405Message": {
-		"string": "That HTTP method isn't supported on this page! Try a different page and/or method."
+		"string": "That HTTP method isn’t supported on this page! Try a different page and/or method."
 	},
 	"error406Message": {
-		"string": "We can't match the data requested with the format requested."
+		"string": "We can’t match the data requested with the format requested."
 	},
 	"error407Message": {
 		"string": "Please use a proxy to access this resource."
 	},
 	"error408Message": {
-		"string": "Hmm...the page was loading for quite a while and timed out! Perhaps there was an internal error. Try reloading the page. If this keeps happening, you may want to contact us on GitHub so we can fix it."
+		"string": "Hmm… the page was loading for quite a while and timed out! Perhaps there was an internal error. Try reloading the page. If this keeps happening, you may want to contact us on GitHub so we can fix it."
 	},
 	"error409Message": {
 		"string": "Oops, there was a conflict between the information your browser sent and the information we have! Try reloading the page. If this keeps happening, try contacting us on GitHub so we can fix it."
 	},
 	"error410Message": {
-		"string": "This isn't here any anymore. Unfortunately, it's never coming back."
+		"string": "This isn’t here any anymore. Unfortunately, it’s never coming back."
 	},
 	"error411Message": {
-		"string": "You didn't say how much information you wanted! Please repeat the request with a requested length."
+		"string": "You didn’t say how much information you wanted! Please repeat the request with a requested length."
 	},
 	"error412Message": {
-		"string": "Unfortunately, we can't meet your conditions. Too bad!"
+		"string": "Unfortunately, we can’t meet your conditions. Too bad!"
 	},
 	"error413Message": {
-		"string": "You sent so much data, we can't process it!"
+		"string": "You sent so much data, we can’t process it!"
 	},
 	"error414Message": {
 		"string": "That URL is too long for us to understand!"
 	},
 	"error415Message": { "string": "You sent the wrong type of file!" },
 	"error416Message": {
-		"string": "We don't have any data in the requested range."
+		"string": "We don’t have any data in the requested range."
 	},
 	"error417Message": {
-		"string": "You didn't send information we expected to receive!"
+		"string": "You didn’t send information we expected to receive!"
 	},
 	"error418Message": {
 		"string": "We refuse to try and brew coffee with a teapot."
@@ -166,11 +166,11 @@
 		"string": "You sent this request to the wrong place!"
 	},
 	"error425Message": {
-		"string": "Please wait in sending this request so it won't be sent twice."
+		"string": "Please wait in sending this request so it won’t be sent twice."
 	},
 	"error426Message": { "string": "Please use HTTPS, not HTTP." },
 	"error428Message": {
-		"string": "You can't do that yet. Please fulfill the requested conditions first."
+		"string": "You can’t do that yet. Please fulfill the requested conditions first."
 	},
 	"error429Message": {
 		"string": "You have sent too many requests in a short amount of time. Please wait before sending more."
@@ -194,25 +194,25 @@
 		"string": "Sorry! This page is currently down! It should be back up soon!"
 	},
 	"error504Message": {
-		"string": "An external server didn't send us a response fast enough."
+		"string": "An external server didn’t send us a response fast enough."
 	},
 	"error505Message": {
-		"string": "That HTTP version isn't supported by any part of this website."
+		"string": "That HTTP version isn’t supported by any part of this website."
 	},
 	"error506Message": {
 		"string": "Error in our internal configuration! Please report this on GitHub so we can prevent it from happening again."
 	},
 	"error510Message": {
-		"string": "We can't show you this page with the information given. Please extend your request."
+		"string": "We can’t show you this page with the information given. Please extend your request."
 	},
 	"errorOldHeading": { "string": "You are using an outdated browser!" },
 	"errorOldWhy": {
 		"string": "For a better experience on {0} sites (not only on ours), please keep your browser up to date.",
-		"developer_comment": "The placeholder is always the word \"all\". (I had to move it out into a separate string so that I could underline it.)"
+		"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 	},
 	"errorOldAll": {
 		"string": "all",
-		"developer_comment": "For use in the \"errorOldWhy\" string."
+		"developer_comment": "For use in the “errorOldWhy” string."
 	},
 	"errorOldModern": { "string": "Modern browsers:" },
 	"errorOldMistake": {
@@ -231,7 +231,7 @@
 	"aboutClientsHeading": { "string": "Supported Clients" },
 	"aboutDevelopersHeading": { "string": "For Developers" },
 	"aboutImpementation": {
-		"string": "Implementing this in your site is easy. When your users click \"Sign in\" on your site, direct them to this URL:"
+		"string": "Implementing this in your site is easy. When your users click “Sign in” on your site, direct them to this URL:"
 	},
 	"aboutAfterFinish": {
 		"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
@@ -240,7 +240,7 @@
 		"string": "If they allowed sharing their data, then there will be a new query parameter on that URL:"
 	},
 	"aboutGetInfo": {
-		"string": "To retrieve the user's information, send the following HTTP request:"
+		"string": "To retrieve the user’s information, send the following HTTP request:"
 	},
 	"aboutWhatCode": {
 		"string": "where {0} is the value of the new search parameter."
@@ -262,14 +262,15 @@
 		"string": "You may follow it by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
 	},
 	"aboutLangsFallback": {
-		"string": "If a language is not available, it will fall back to the non-country specific language, then to the users' browser language."
+		"string": "If a language is not available, it will fall back to the non-country specific language, then to the users’ browser language."
 	},
 	"aboutNew": { "string": "NEW!!!" },
 	"aboutTranslations": {
 		"string": "Please note that we do not have many translations, if any. This will change as our translation team grows."
 	},
 	"aboutHelpTranslate": {
-		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click \"Join team\". Thanks for your eagerness to help!"
+		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click “Join team”. Thanks for your eagerness to help!",
+		"developer_comment": "Please make sure that you translate “Join team” exactly how it is translated on Transifex."
 	},
 	"emailPlaceholder": { "string": "Email address" }
 }

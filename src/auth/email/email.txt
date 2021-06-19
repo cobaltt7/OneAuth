@@ -2,13 +2,15 @@
 
 {{ #message }}emailSubject{{ /message }}
 -------------
-{{ #message }}emailCodeIs|||{{ code }}{{ /message }} {{ #message }}emailNoShare{{ /message }}
+
+{{ #message }}emailCodeIs|||{{ code }}{{ /message }} **{{ #message }}emailNoShare{{ /message }}**
 
 {{ #message }}emailNow{{ /message }}
 ->	{{ #message }}emailCopyCode{{ /message }}
 ->	{{ #message }}emailGoBack{{ /message }}
-->	{{ #message }}emailPasteCode{{ /message }}
-->	{{ #message }}emailReviewInfo{{ /message }}
+->	{{ #message }}emailPasteCode|||[emailSubmit]{{ /message }}
+->	{{ #message }}emailReviewInfo|||[allowButtonA]{{ /message }}
 {{ #message }}emailTimeOut{{ /message }}
 
-{{ #message }}emailUnexpected{{ /message }}
+------------
+{ #message }}emailUnexpected{{ /message }}
