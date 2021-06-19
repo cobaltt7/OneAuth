@@ -28,15 +28,13 @@ function graphql(query, ...placeholderValues) {
  */
 async function getPage(hash = "") {
 	const nextRequest = {
-		// hmmst… query strings break prettier formatting...mustache? maybe
+			// hmmst… query strings break prettier formatting...mustache? maybe
 			query: graphql`{
 
 
 			repository(name: "${REPO_NAME}", owner: "${REPO_OWNER}") {
 				discussions(
-					${
-						hash ? `after: "${hash}",` : ""
-					}
+					${hash ? `after: "${hash}",` : ""}
 										first: 100,
 					orderBy: {direction: DESC, field: CREATED_AT}
 					) {
