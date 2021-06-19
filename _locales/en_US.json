@@ -11,7 +11,7 @@
 	"emailCopyCode": { "string": "Copy your code." },
 	"emailGoBack": { "string": "Go back to 1Auth." },
 	"emailPasteCode": {
-		"string": "Paste your code in the box and press {“{0}”}."
+		"string": "Paste your code in the box and press “{0}”."
 	},
 	"emailReviewInfo": {
 		"string": "Review the information we will send and the site we will send it to, and if all looks good, press “{0}”."

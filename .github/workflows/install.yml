@@ -44,6 +44,9 @@ jobs:
             - name: Health
               run: npm dedupe
 
+            - name: Pull
+              run: git pull
+
             - name: Commit
               id: commit
               uses: stefanzweifel/git-auto-commit-action@master
