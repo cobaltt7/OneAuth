@@ -208,11 +208,11 @@
 	"errorOldHeading": { "string": "" },
 	"errorOldWhy": {
 		"string": "",
-		"developer_comment": "The placeholder is always the word \"all\". (I had to move it out into a separate string so that I could underline it.)"
+		"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 	},
 	"errorOldAll": {
 		"string": "todos",
-		"developer_comment": "For use in the \"errorOldWhy\" string."
+		"developer_comment": "For use in the “errorOldWhy” string."
 	},
 	"errorOldModern": { "string": "Navegadores modernos:" },
 	"errorOldMistake": {
@@ -269,7 +269,8 @@
 		"string": ""
 	},
 	"aboutHelpTranslate": {
-		"string": ""
+		"string": "",
+		"developer_comment": "Please make sure that you translate “Join team” exactly how it is translated on Transifex."
 	},
 	"emailPlaceholder": { "string": "Correo electrónico" }
 }
