@@ -1,0 +1,14 @@
+{
+  "projectName": "auth",
+  "projectOwner": "onedotprojects",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "src/docs/credits.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "gitmoji",
+  "contributors": [],
+  "contributorsPerLine": 7
+}
