@@ -1,4 +1,4 @@
-import express = require("express");
+import express from "express";
 
 declare global {
 	declare const __dirname: string;
@@ -19,14 +19,14 @@ declare global {
 			languages: string[];
 			accepts: (type: string) => boolean;
 			messages: { [key: string]: string };
-		} & express.Response;
+		} & express.Request;
 		export type Response = {
 			sendStatus: (status: number) => void;
 			status: (status: number) => Response;
 			render: (
 				view: string,
 				options?: { [key: string]: any },
-				callback?: (err: Error, str: string) => void,
+				callback?: (error: Error, str: string) => void,
 			) => void;
 			cookie: (
 				name: string,
