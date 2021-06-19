@@ -14,7 +14,7 @@ _A clear and concise description of the feature._
 
 ## Reasons to add this feature
 
-_This feature would be good because..._
+_This feature would be good because…_
 
 ## Alternatives to this feature
 

@@ -2,37 +2,53 @@
 
 "use strict";
 
-const fetch = require("node-fetch");
-
-const REPO_NAME = "onedotprojects",
-	REPO_OWNER = "auth",
-	/** @type {string[][]} */
+const REPO_NAME = "ScratchAddons",
+	REPO_OWNER = "ScratchAddons",
+	fetch = require("node-fetch"),
+	/** @type {(string | undefined)[][]} */
 	result = [];
+
+function graphql(query, ...placeholderValues) {
+	return placeholderValues.reduce((last, placeholder, index) => {
+		return `${last}${placeholder}${query[index + 1]}`;
+	}, query[0]);
+}
 
 /**
  * Get a page of discussions based on a previous discussion's hash.
  *
  * @param {string} [hash] - Retrieve all issues after this hash. If no hash is provided or the hash
  *   is blank, the first page will be returned.
- * @param {boolean} [total] - Whether or not to return the total number of discussions in the repository.
  *
- * @returns {Promise<{ discussions: { username: string; cursor: string }[]; total?: number }>} - The
- *   retrieved discussion information.
+ * @returns {Promise<{
+ * 	discussions: { username?: string; cursor: string }[];
+ * 	total?: number;
+ * }>}
+ *   - The retrieved discussion information.
  */
-async function getPage(hash = "", total = false) {
+async function getPage(hash = "") {
 	const nextRequest = {
-			query: `{
+		// hmmst… query strings break prettier formatting...mustache? maybe
+			query: graphql`{
+
+
 			repository(name: "${REPO_NAME}", owner: "${REPO_OWNER}") {
 				discussions(
-					${hash ? `after: "${hash}",` : ""}
-					first: 100,
-					orderBy: {direction: DESC, field: CREATED_AT}
-				) {
-					edges {
-						cursor
-						node { answer { author { login } } }
+					${
+						hash ? `after: "${hash}",` : ""
 					}
-					${total ? "totalCount" : ""}
+										first: 100,
+					orderBy: {direction: DESC, field: CREATED_AT}
+					) {
+
+
+
+						edges {
+							cursor
+						node { answer { author { login } } }
+
+			}
+					totalCount
 				}
 			}
 		}`,
@@ -45,7 +61,7 @@ async function getPage(hash = "", total = false) {
 		 * 			discussions: {
 		 * 				edges: {
 		 * 					cursor: string;
-		 * 					node: { answer: { author: { login: string } } | null };
+		 * 					node: { answer?: { author: { login: string } } };
 		 * 				}[];
 		 * 				totalCount: number;
 		 * 			};
@@ -66,21 +82,17 @@ async function getPage(hash = "", total = false) {
 				"GraphQL-Features": "discussions_api",
 			},
 			method: "POST",
-		}).then((response) => response.json()),
-		/** @type {{ cursor: string; username: string }[]} */
-		// @ts-expect-error - TS thinks `username` may contain `undefined` values.
-		// That's impossible. See L83.
-		processedDiscussions = discussions
-			.map((discussion) => ({
-				cursor: discussion.cursor,
-				username: discussion.node.answer?.author?.login,
-			}))
-			.filter((discussion) => discussion.username);
-	if (total) return { discussions: processedDiscussions, total: totalCount };
-	return { discussions: processedDiscussions };
+		}).then((response) => response.json());
+
+	/** @type {{ cursor: string; username?: string }[]} */
+	const processedDiscussions = discussions.map((discussion) => ({
+		cursor: discussion.cursor,
+		username: discussion.node.answer?.author?.login,
+	}));
+	return { discussions: processedDiscussions, total: totalCount };
 }
 
-getPage("", true).then(async ({ discussions, total }) => {
+getPage("").then(async ({ discussions, total }) => {
 	let discussionIndex = discussions.length,
 		hash = discussions[discussions.length - 1]?.cursor;
 	if (!total || !hash) {
@@ -90,19 +102,15 @@ getPage("", true).then(async ({ discussions, total }) => {
 	}
 	result.push(discussions.map((discussion) => discussion.username));
 	while (discussionIndex < total) {
-		/** @type {{ username: string; cursor: string }[]} */
-		// eslint-disable-next-line no-await-in-loop
+		/** @type {{ username?: string; cursor: string }[]} */
+		// eslint-disable-next-line no-await-in-loop -- We can't use `Promise.all` here.
 		const nextDiscussions = (await getPage(hash)).discussions;
 		hash = nextDiscussions[nextDiscussions.length - 1]?.cursor;
 		discussionIndex += nextDiscussions.length;
 		result.push(nextDiscussions.map((discussion) => discussion.username));
 	}
 
-	/** @type {{ [key: string]: number }} */
-	const top = {};
-	result.flat().forEach((name) => {
-		if (!top[name]) top[name] = 0;
-		top[name]++;
-	});
-	console.log(top);
+	console.log(
+		[...new Set(result.flat().filter((username) => username))].join("\n"),
+	);
 });

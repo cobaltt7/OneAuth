@@ -27,10 +27,22 @@ jobs:
                   node-version: 12.22.1
 
             - name: Remove
-              run: rm package-lock.json
+              run: rm package-lock.json --force
 
             - name: Install
               run: npm install
+
+            - name: Vulnerabilities
+              run: npm audit fix
+
+            - name: Unneeded
+              run: npm prune
+
+            - name: Duplicates
+              run: npm dedupe
+
+            - name: Health
+              run: npm dedupe
 
             - name: Commit
               id: commit

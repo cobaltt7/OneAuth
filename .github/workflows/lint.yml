@@ -23,24 +23,24 @@ jobs:
                   paths: package.json package-lock.json _locales/**.json
 
             - name: Checkout
-              if: failure() || steps.changed.outputs.changed == 'false'
+              if: steps.changed.outputs.changed == 'false'
               uses: actions/checkout@main
               with:
                   ref: ${{ github.head_ref }}
                   token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Node.JS
-              if: failure() || steps.changed.outputs.changed == 'false'
+              if: steps.changed.outputs.changed == 'false'
               uses: actions/setup-node@main
               with:
                   node-version: 12.22.1
 
             - name: Install
-              if: failure() || steps.changed.outputs.changed == 'false'
-              run: npm install
+              if: steps.changed.outputs.changed == 'false'
+              run: npm ci
 
             - name: Mustaches
-              if: failure() || steps.changed.outputs.changed == 'false'
+              if: steps.changed.outputs.changed == 'false'
               run: npm run lint:mustaches
 
             - name: Prettier

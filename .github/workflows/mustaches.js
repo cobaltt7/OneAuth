@@ -35,7 +35,8 @@ function processResult(results, log = true) {
 }
 
 const commentRegex =
-		/(?<!(?:\/\/|\/\*|#|<!--)(?:.+\s+)?\s*?mustache-format-ignore\s*?(?:\s+.+)?(?:\*\/|-->)?.+\n+)/,
+		/(?<!(?:\/\/|\/\*|#|<!--||{[^\S\n]{[^\S\n]!)(?:.+[^\S\n]+)?[^\S\n]*?mustache-format-ignore[^\S\n]*?(?:[^\S\n]+.+)?(?:\*\/|-->|}[^\S\n]})?.+\n+)/
+			.source,
 	options = {
 		cwd: `${path.resolve(__dirname, "../../")}/`,
 		files: "**",
@@ -63,11 +64,13 @@ console.log("Replacing triple mustaches with double and a ampersand");
 processResult(
 	replace.sync({
 		from: new RegExp(
-			commentRegex.source + /{{{\s*(?<tagName>[^!#&/>^]+?)\s*}}}/.source,
+			commentRegex +
+				/{[^\S\n]{[^\S\n]{[^\S\n]*(?<tag>[^!#&/>^]+?)[^\S\n]*}[^\S\n]}[^\S\n]}/
+					.source,
 			"g",
 		),
-		// eslint-disable-next-line id-length
-		to: "{{ & $<tagName> }}",
+		// eslint-disable-next-line id-length -- We didn't name this.
+		to: "{{ & $<tag> }}",
 		...options,
 	}),
 );
@@ -75,11 +78,12 @@ processResult(
 const result1 = processResult(
 	replace.sync({
 		from: new RegExp(
-			commentRegex.source +
-				/(?<tag>{{{\s*.+?\s*}}}|{{\s*&\s*.+?\s*}})/.source,
+			commentRegex +
+				/(?<tag>{[^\S\n]{[^\S\n]{[^\S\n]*.+?[^\S\n]*}[^\S\n]}[^\S\n]}|{[^\S\n]{[^\S\n]*&[^\S\n]*.+?[^\S\n]*}[^\S\n]})/
+					.source,
 			"g",
 		),
-		// eslint-disable-next-line id-length
+		// eslint-disable-next-line id-length -- We didn't name this.
 		to: "$<tag> ",
 		...options,
 	}),
@@ -101,13 +105,13 @@ console.log(
 processResult(
 	replace.sync({
 		from: new RegExp(
-			commentRegex.source +
-				/{{\s*(?<typeIdentifier>[!#/^])?\s*(?<tagName>[^&>]+?)\s*}}/
+			commentRegex +
+				/{[^\S\n]{[^\S\n]*(?<type>[!#/^])?[^\S\n]*(?<tag>[^&>]+?)[^\S\n]*}[^\S\n]}/
 					.source,
 			"g",
 		),
-		// eslint-disable-next-line id-length
-		to: "{{ $<typeIdentifier>$<tagName> }}",
+		// eslint-disable-next-line id-length -- We didn't name this.
+		to: "{{ $<type>$<tag> }}",
 		...options,
 	}),
 );
@@ -116,13 +120,13 @@ console.log("\nFormatting partial and unescaped mustaches");
 processResult(
 	replace.sync({
 		from: new RegExp(
-			commentRegex.source +
-				/{{\s*(?<typeIdentifier>[&>])\s*(?<tagName>[^!#/^]+?)\s*}}/
+			commentRegex +
+				/{[^\S\n]{[^\S\n]*(?<type>[&>])[^\S\n]*(?<tag>[^!#/^]+?)[^\S\n]*}[^\S\n]}/
 					.source,
 			"g",
 		),
-		// eslint-disable-next-line id-length
-		to: "{{$<typeIdentifier> $<tagName> }}",
+		// eslint-disable-next-line id-length -- We didn't name this.
+		to: "{{$<type> $<tag> }}",
 		...options,
 	}),
 );
