@@ -158,7 +158,7 @@
 		"prettier-plugin-ini": "^0.3.1",
 		"prettier-plugin-jsdoc": "^0.3.23",
 		"spellchecker-cli": "^4.5.0",
-		"tailwindcss": "^2.1.4",
+		"tailwindcss": "^2.2.4",
 		"typescript": "^4.2.4",
 		"write-good": "^1.0.8"
 	},
