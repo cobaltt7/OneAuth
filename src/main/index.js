@@ -288,7 +288,7 @@ router.get(
 		response.setHeader("content-type", "text/css");
 
 		return response.render(path.resolve(__dirname, "style.css"));
-	}
+	},
 );
 
 module.exports = router;
