@@ -83,8 +83,8 @@ module.exports.middleware = (request, result, next) => {
 		});
 	}
 	const { bodySent } = result,
-	 realSend = result.send,
-	 realStatus = result.status;
+		realSend = result.send,
+		realStatus = result.status;
 	result.send = function (...arguments_) {
 		// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 		result.bodySent = true;
