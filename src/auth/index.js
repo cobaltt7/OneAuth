@@ -1,38 +1,40 @@
+"use strict";
+
 /** @file Authentication APIs. */
 
-/**
- * @type {{
- * 	fontawesome: boolean;
- * 	icon: string;
- * 	iconProvider: string;
- * 	link: string;
- * 	name: string;
- * 	svg: boolean;
- * }[]}
- */
-const authButtons = [];
-/** @type {import("../../types").Auth[]} */
-// eslint-disable-next-line one-var
-const authClients = [];
-
-const database = new (require("@replit/database"))(),
+const ReplitDB = require("@replit/database"),
+	/**
+	 * @type {{
+	 * 	fontawesome: boolean;
+	 * 	icon: string;
+	 * 	iconProvider: string;
+	 * 	link: string;
+	 * 	name: string;
+	 * 	svg: boolean;
+	 * }[]}
+	 */
+	authButtons = [],
+	/** @type {import("../../types").Auth[]} */
+	authClients = [],
+	database = new ReplitDB(),
 	globby = require("globby"),
 	path = require("path"),
 	retronid = require("retronid"),
-	// eslint-disable-next-line new-cap
+	// eslint-disable-next-line new-cap -- We didn't name this.
 	router = require("express").Router(),
-	{ URL } = require("url"),
-	{ logError } = require("../errors/index.js");
+	{ logError } = require("../errors");
 
 (async () => {
 	// Idk why this is relative to the root dir but it is
 	const paths = await globby("src/auth/*/index.js");
 
-	paths.forEach((filepath) => {
+	for (const filepath of paths) {
+		// eslint-disable-next-line node/global-require -- We can't move this to a higher scope.
 		const client = require(path.resolve(
 			__dirname.split("/src/")[0],
 			filepath,
 		));
+
 		authClients.push(client);
 		authButtons.push({
 			fontawesome: client.iconProvider.indexOf("fa") === 0,
@@ -42,14 +44,15 @@ const database = new (require("@replit/database"))(),
 			name: client.name,
 			svg: client.iconProvider === "svg",
 		});
-	});
+	}
 })();
+
 /**
  * Returns information about a authentication client.
  *
  * @param {string} requestedClient - Client to retrieve information about.
  *
- * @returns {import("../../types").Auth | undefined} - Information about the client.
+ * @returns {import("../../types").Auth | void} - Information about the client.
  */
 function getClient(requestedClient) {
 	return authClients.find((currentClient) =>
@@ -58,70 +61,26 @@ function getClient(requestedClient) {
 		),
 	);
 }
+
 /**
  * Get HTTP request handlers from a page name.
  *
  * @param {string} requestedClient - The page name.
  *
- * @returns {import("../../types").Page | null} - The HTTP handlers.
+ * @returns {import("../../types").Page} - The HTTP handlers.
  */
 function getPageHandler(requestedClient) {
 	for (const currentClient of authClients) {
-		const result = currentClient?.pages?.find(
+		const response = currentClient?.pages?.find(
 			({ backendPage }) => backendPage === requestedClient,
 		);
-		if (result) return result;
-	}
-	return null;
-}
-/**
- * Ask the user for permission to share their data, then redirect them to the specified URL.
- *
- * @param {string} client - Client that the user authenticated with.
- * @param {string | { [key: string]: string }} tokenOrData - Token to retrieve the data with or the
- *   raw data itself.
- * @param {string} url - URL to redirect the user to afterwards.
- * @param {e.Response} res - Express response object.
- * @param {string} noDataMsg - Message to display when the data can not be shown to the user.
- *
- * @returns {void | e.Response} - Nothing of interest.
- */
-function sendResponse(client, tokenOrData, url, res, noDataMsg) {
-	const clientInfo = getClient(client);
-	if (!clientInfo)
-		return logError(new ReferenceError(`Invalid client: ${client}`));
 
-	let data, token;
-	if (clientInfo.rawData && typeof tokenOrData === "object") {
-		data = tokenOrData;
-		data.client = clientInfo.name;
-		token = retronid.generate();
-		database.set(`RETRIEVE_${token}`, data);
-	} else if (typeof tokenOrData === "string") {
-		data = noDataMsg;
-		token = tokenOrData;
-	} else {
-		logError(
-			new TypeError(
-				`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
-			),
-		);
+		if (response) return response;
 	}
-	try {
-		const { host } = new URL(url);
-		return res.status(300).render(path.resolve(__dirname, "allow.html"), {
-			client,
-			data: JSON.stringify(data),
-			encodedUrl: encodeURIComponent(url),
-			host,
-			name: clientInfo.name,
-			token,
-			url,
-		});
-	} catch {
-		return res.status(400);
-	}
+
+	return { backendPage: requestedClient };
 }
+
 for (const method of [
 	// TODO: support "all",
 	"checkout",
@@ -148,46 +107,94 @@ for (const method of [
 	"unlock",
 	"unsubscribe",
 ]) {
-	router[method](
+	router[`${method}`](
 		"/:client",
+
 		/**
 		 * Run the appropriate HTTP request handler on a HTTP request, or return a HTTP error code.
 		 *
-		 * @param {e.Request} req - Express request object.
-		 * @param {e.Response} res - Express response object.
+		 * @param {e.Request} request - Express request object.
+		 * @param {e.Response} response - Express response object.
 		 */
-		(req, res) => {
-			const client = getPageHandler(`${req.params?.client}`);
-			if (typeof client !== "object" || client === null) {
-				res.status(404);
+		(request, response) => {
+			const client = getPageHandler(`${request.params?.client}`);
+
+			if (Object.keys(client).length === 1) {
+				response.status(404);
+
 				return;
 			}
 
-			/** @type {import("../../types").RequestFunction | undefined} */
-			// @ts-expect-error - TS can't tell that there is a limited set of values for `method`.
-			const requestFunction = client[method];
+			/** @type {import("../../types").RequestFunction | void} */
+			// @ts-expect-error -- TS can't tell that there is a limited set of values for `method`.
+			const requestFunction = client[`${method}`];
+
 			if (typeof requestFunction !== "function") {
-				res.status(405);
+				response.status(405);
+
 				return;
 			}
 
 			requestFunction(
-				req,
-				res,
+				request,
+				response,
+
 				/**
-				 * Passes information from the authentication handler (and other sources) to sendResponse.
+				 * Ask the user for permission to share their data, then redirect them to the specified URL.
 				 *
-				 * @param {import("../../types").sendResponseArgs} args - Information from the
-				 *   authentication handler.
+				 * @param {string | { [key: string]: string }} tokenOrData - Token to retrieve the
+				 *   data with or the raw data itself.
+				 * @param {string} url - URL to redirect the user to afterwards.
 				 *
 				 * @returns {void | e.Response} - Nothing of interest.
 				 */
-				(...args) =>
-					sendResponse(
-						`${req.params?.client}`,
-						...args,
-						`${req.messages.allowDataHidden}`,
-					),
+				(tokenOrData, url) => {
+					const clientInfo = getClient(request.params?.client || "");
+
+					if (!clientInfo) {
+						return logError(
+							new ReferenceError(
+								`Invalid client: ${request.params?.client}`,
+							),
+						);
+					}
+
+					let data, token;
+
+					if (clientInfo.rawData && typeof tokenOrData === "object") {
+						data = tokenOrData;
+						data.client = clientInfo.name;
+						token = retronid.generate();
+						database.set(`RETRIEVE_${token}`, data);
+					} else if (typeof tokenOrData === "string") {
+						data = request.messages.allowDataHidden;
+						token = tokenOrData;
+					} else {
+						logError(
+							new TypeError(
+								`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
+							),
+						);
+					}
+
+					try {
+						const { host } = new URL(url);
+
+						return response
+							.status(300)
+							.render(path.resolve(__dirname, "allow.html"), {
+								client: request.params?.client,
+								data: JSON.stringify(data),
+								encodedUrl: encodeURIComponent(url),
+								host,
+								name: clientInfo.name,
+								token,
+								url,
+							});
+					} catch {
+						return response.status(400);
+					}
+				},
 			);
 		},
 	);
@@ -195,30 +202,32 @@ for (const method of [
 
 router.get(
 	"/",
+
 	/**
 	 * Send the authentication entry page.
 	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Request} request - Express request object.
+	 * @param {e.Response} response - Express response object.
 	 *
 	 * @returns {e.Response | void} - Express response object.
 	 */
-	(req, res) => {
-		if (!req.query?.url) return res.status(400);
+	(request, response) => {
+		if (!request.query?.url) return response.status(400);
 
 		const authButtonsReplaced = authButtons;
-		authButtons.forEach(({ link }, index) => {
-			if (authButtonsReplaced[index]) {
-				// @ts-expect-error - TS thinks `authButtonsReplaced[index]` might be `undefined`.
-				// That's impossible. See L211
-				authButtonsReplaced[index].link = link.replace(
+
+		for (const [index, { link }] of authButtons.entries()) {
+			if (authButtonsReplaced[+index]) {
+				// @ts-expect-error -- TS thinks `authButtonsReplaced[index]` might be `undefined`. That's impossible. See L211
+				authButtonsReplaced[+index].link = link.replace(
 					// TODO: Use mustache instead. mustache-format-ignore
-					/{{ \s*url\s* }}/g,
-					encodeURIComponent(`${req.query?.url}`),
+					/{{\s*url\s*}}/g,
+					encodeURIComponent(`${request.query?.url}`),
 				);
 			}
-		});
-		return res.render(path.resolve(__dirname, "auth.html"), {
+		}
+
+		return response.render(path.resolve(__dirname, "auth.html"), {
 			clients: authButtonsReplaced,
 		});
 	},
@@ -226,57 +235,68 @@ router.get(
 
 router.get(
 	"/backend/get_data",
+
 	/**
 	 * Retrieve the user's data.
 	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Request} request - Express request object.
+	 * @param {e.Response} response - Express response object.
 	 *
 	 * @returns {Promise<void>}
 	 */
-	async (req, res) => {
-		res.setHeader("Access-Control-Allow-Origin", "*");
-		res.setHeader(
+	async (request, response) => {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader(
 			"Access-Control-Allow-Headers",
 			"Origin, X-Requested-With, Content-Type, Accept",
 		);
 
-		res.status(200).json(await database.get(`RETRIEVE_${req.query?.code}`));
-		database.delete(`RETRIEVE_${req.query?.code}`);
+		response
+			.status(200)
+			.json(await database.get(`RETRIEVE_${request.query?.code}`));
+		database.delete(`RETRIEVE_${request.query?.code}`);
 	},
 );
 router.get(
 	"/backend/send_data",
+
 	/**
 	 * Save the user's data.
 	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Request} request - Express request object.
+	 * @param {e.Response} response - Express response object.
 	 *
 	 * @returns {Promise<e.Response | void>} - Nothing of interest.
 	 */
-	async (req, res) => {
-		if (!req.query) return logError("`req.query` is falsy!");
-		const { client, url, token } = req.query,
+	async (request, response) => {
+		if (!request.query) return logError("`request.query` is falsy!");
+
+		const { client, url = "", token } = request.query,
 			clientInfo = getClient(`${client}`);
+
 		if (!clientInfo)
 			return logError(new ReferenceError(`Invalid client: ${client}`));
 
 		let code, redirect;
+
 		if (clientInfo.rawData) {
 			code = token;
 		} else {
 			code = retronid.generate();
+
 			const data = await clientInfo.getData(`${token}`);
+
 			data.client = clientInfo.name;
 			database.set(`RETRIEVE_${code}`, data);
 		}
+
 		try {
 			redirect = new URL(url);
 			redirect.searchParams.set("code", code);
-			return res.status(303).redirect(redirect);
+
+			return response.status(303).redirect(url);
 		} catch {
-			return res.status(400);
+			return response.status(400);
 		}
 	},
 );

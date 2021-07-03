@@ -1,3 +1,5 @@
+"use strict";
+
 /** @file Replit Authentication handler. */
 
 const path = require("path");
@@ -8,28 +10,32 @@ module.exports = {
 	iconProvider: "url",
 	link: "/auth/replit?url={{ url }}",
 	name: "Replit",
+
 	pages: [
 		{
 			backendPage: "replit",
-			get: (req, res, sendResponse) => {
-				const roles = req.get("X-Replit-User-Roles")?.split(",") || [],
-					userID = req.get("X-Replit-User-Id"),
-					username = req.get("X-Replit-User-Name");
 
-				if (username && userID) {
+			get: (request, response, sendResponse) => {
+				const roles =
+						request.get("X-Replit-User-Roles")?.split(",") || [],
+					userID = request.get("X-Replit-User-Id"),
+					username = request.get("X-Replit-User-Name");
+
+				if (username) {
 					return sendResponse(
 						{
 							roles,
 							userID,
 							username,
 						},
-						`${req.query?.url}`,
-						res,
+						`${request.query?.url}`,
 					);
 				}
-				return res.render(path.resolve(__dirname, "index.html"));
+
+				return response.render(path.resolve(__dirname, "index.html"));
 			},
 		},
 	],
+
 	rawData: true,
 };

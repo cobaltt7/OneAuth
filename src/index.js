@@ -12,30 +12,33 @@ const app = express(),
 		path.resolve(__dirname, "partials"),
 		".html",
 	);
+
 app.engine("html", mustacheExpress);
 app.engine("css", mustacheExpress);
 
 // Errors
-const errors = require("./errors/index.js");
+const errors = require("./errors");
+
 app.use(errors.middleware);
 
 // Compress
 const compression = require("compression");
+
 app.use(compression());
 
 app.use(
 	/**
 	 * Set caching headers.
 	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Request} request - Express request object.
+	 * @param {e.Response} response - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 */
-	(req, res, next) => {
-		if (req.path.includes(".css"))
-			res.setHeader("Cache-Control", "public, max-age=86400");
-		else if (req.path.includes("."))
-			res.setHeader("Cache-Control", "public, max-age=31536000");
+	(request, response, next) => {
+		if (request.path.includes(".css"))
+			response.setHeader("Cache-Control", "public, max-age=86400");
+		else if (request.path.includes("."))
+			response.setHeader("Cache-Control", "public, max-age=31536000");
 
 		next();
 	},
@@ -45,27 +48,30 @@ app.use(
 	/**
 	 * Disalow old browsers from visiting our site.
 	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Request} request - Express request object.
+	 * @param {e.Response} response - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 *
 	 * @returns {void}
 	 * @todo Make our site available to old browsers.
 	 */
-	(req, res, next) => {
-		if (req.path.includes(".") || req.path === "/old") return next();
+	(request, response, next) => {
+		if (request.path.includes(".") || request.path === "/old")
+			return next();
 
-		const userAgent = `${req.get("User-Agent")}`;
+		const userAgent = `${request.get("User-Agent")}`;
+
 		if (
-			userAgent.indexOf("MSIE") >= 0 ||
-			userAgent.indexOf("Trident") >= 0 ||
-			userAgent.indexOf("Netscape") >= 0 ||
-			userAgent.indexOf("Navigator") >= 0
+			userAgent.includes("MSIE") ||
+			userAgent.includes("Trident") ||
+			userAgent.includes("Netscape") ||
+			userAgent.includes("Navigator")
 		) {
-			return res
+			return response
 				.status(400)
 				.render(path.resolve(__dirname, "errors/old.html"));
 		}
+
 		return next();
 	},
 );
@@ -75,54 +81,60 @@ const bodyParser = express.urlencoded({
 		extended: true,
 	}),
 	cookieParser = require("cookie-parser")();
+
 app.use(
 	/**
 	 * Parse cookies for use in request handlers.
 	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Request} request - Express request object.
+	 * @param {e.Response} response - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 *
 	 * @returns {void}
 	 */
-	(req, res, next) => {
-		if (req.path.includes(".")) return next();
-		return cookieParser(req, res, next);
+	(request, response, next) => {
+		if (request.path.includes(".")) return next();
+
+		return cookieParser(request, response, next);
 	},
 );
 app.use(
 	/**
 	 * Parse POST request bodies for use in request handlers.
 	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Request} request - Express request object.
+	 * @param {e.Response} response - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 *
 	 * @returns {void}
 	 */
-	(req, res, next) => {
-		if (req.path.includes(".")) return next();
+	(request, response, next) => {
+		if (request.path.includes(".")) return next();
 
-		return bodyParser(req, res, next);
+		return bodyParser(request, response, next);
 	},
 );
 
 // Localization
-const l10n = require("./l10n.js").middleware;
-app.use(l10n);
+const localization = require("./l10n").middleware;
+
+app.use(localization);
 
 // Docs
-const docs = require("./docs/index.js").router;
-app.use("/docs", docs);
+const documentation = require("./docs").router;
+
+app.use("/docs", documentation);
 
 // Main pages
-const main = require("./main/index.js").default;
+const main = require("./main").default;
+
 app.use(main);
 
 // Auth pages
-const auth = require("./auth/index.js");
+const auth = require("./auth");
+
 app.use("/auth", auth);
 
 // LISTEN
-// eslint-disable-next-line no-console
+// eslint-disable-next-line no-console -- We need to know when it's ready.
 app.listen(3000, () => console.log("App ready"));

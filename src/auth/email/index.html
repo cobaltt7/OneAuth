@@ -35,7 +35,7 @@
 		</main>
 		<script>
 			"use strict";
-			(function () {
+			(function forumHandler() {
 				const form = document.querySelector("form");
 				/**
 				 * Code that submits the form in the background.
@@ -69,7 +69,7 @@
 					});
 
 					// Create new form
-					const newForm = Object.assign(
+					const codeForm = Object.assign(
 						document.createElement("form"),
 						{
 							// Create form element
@@ -78,12 +78,12 @@
 							method: "POST",
 						}
 					);
-					newForm.append(
+					codeForm.append(
 						Object.assign(document.createElement("input"), {
 							// Code box
 
 							autocomplete: "off",
-							// eslint-disable-next-line id-length
+							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "code",
 							name: "code",
 							placeholder: "abcde12345",
@@ -100,7 +100,7 @@
 						Object.assign(document.createElement("button"), {
 							// Submit button
 
-							// eslint-disable-next-line id-length
+							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "submit",
 							innerText:
 								"{{ #message }}emailSubmit{{ /message }}",
@@ -112,12 +112,12 @@
 					document.querySelector("main").append(
 						Object.assign(document.createElement("label"), {
 							htmlFor: "code",
-							// eslint-disable-next-line id-length
+							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "note",
 							innerText:
 								"{{ #message }}emailEnterCode{{ /message }}",
 						}),
-						newForm
+						codeForm
 					);
 				}
 				form.addEventListener("submit", onSubmit);

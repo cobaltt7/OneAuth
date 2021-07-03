@@ -18,6 +18,7 @@ Add a file in that folder called `index.js`.
     -   `svg` if `icon` is the name of an SVG file
 -   **`pages[]METHOD`**: Function that runs on a HTTP request to `pages[]backendPage`, where `METHOD` is the HTTP method. Supported methods:
     <!-- -   all -->
+
     -   checkout
     -   copy
     -   delete
@@ -40,13 +41,18 @@ Add a file in that folder called `index.js`.
     -   subscribe
     -   trace
     -   unlock
-    -   unsubscribe The function takes three arguments:
-    1. _`req`_: Express request object
-    2. _`res`_: Express response object
+    -   unsubscribe
+
+    The function takes three arguments:
+
+    1. _`request`_: Express request object
+    2. _`response`_: Express response object
     3. _`sendResponse`_: Function to be run once you are at a point where you can access the user's data without any further interaction. Takes three arguments:
         1. _`tokenOrData`_: Token _returned by the **client**_ that can be passed to the `getData` function. Alternatively, this can be the user's data if the client doesn't return tokens (see `rawData`).
         2. _`url`_: URL to redirect to after the user gives permission. Should be sourced from `{{ url }}` (in `link`).
-        3. _`res`_: Express response object You can have multiple of these in the same object as long as the method is different.
+
+You can have multiple of these in the same object as long as the method is different.
+
 -   **`pages[]backendPage`**: Page that handles the said HTTP requests. Relative to `/auth/`.
 -   **`getData`**: Function that returns a users' data based on a token. Takes one argument:
     1. **`token`**: Token that came from `pages[].METHOD.sendResponse` in the `tokenOrData` parameter.

@@ -15,7 +15,7 @@ declare global {
 			query?: { [key: string]: string };
 			params?: { [key: string]: string };
 			cookies?: { [key: string]: string };
-			get: (header: string) => string | undefined;
+			get: (header: string) => string | void;
 			languages: string[];
 			accepts: (type: string) => boolean;
 			messages: { [key: string]: string };
@@ -37,7 +37,7 @@ declare global {
 			readonly statusCode: number;
 			json: (info: any) => void;
 			bodySent: boolean;
-			// Technically returns `Response` in basic Express but because of syntax highlighting problems (async) it can't anymore. I could probably find a way but I'm too lazy :P
+			// Technically returns `Response` in basic Express but because of syntax highlighting problems (async) it can't anymore.
 			send: (info: string) => void;
 			redirect: (url: string) => void;
 			sendFile: (url: string) => void;

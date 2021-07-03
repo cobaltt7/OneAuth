@@ -58,13 +58,13 @@
 		</div>
 		<script>
 			"use strict";
-			(function () {
+			(function popupHandler() {
 				let authWindow, interval;
 
 				// Get the <span> element that closes the modal
-				const close = document.getElementById("closeModal"),
+				const close = document.querySelector("#closeModal"),
 					// Get the modal
-					modal = document.getElementById("modalContainer");
+					modal = document.querySelector("#modalContainer");
 
 				/**
 				 * Popup message handler, AKA authentication finished handler.

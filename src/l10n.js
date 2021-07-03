@@ -1,55 +1,54 @@
+"use strict";
+
 /** @file Localization Of the site. */
 
-/** @type {{ [key: string]: string[] }} */
-const CACHE_CODES = {};
-
-/** @type {{ [key: string]: MessageFormatter }} */
-// eslint-disable-next-line one-var
-const CACHE_FORMATTERS = {};
-
-/** @type {{ [key: string]: { [key: string]: string } }} */
-// eslint-disable-next-line one-var
-const CACHE_MSGS = {};
-
-/** @type {string[]} */
-// eslint-disable-next-line one-var
-const LANG_CODES = [];
-
-/** @type {{ [key: string]: { [key: string]: string } }} */
-// eslint-disable-next-line one-var
-const MESSAGES = {};
-
 const BASE_LANG = "en_US",
+	/** @type {{ [key: string]: string[] }} */
+	CACHE_CODES = {},
+	/** @type {{ [key: string]: MessageFormatter }} */
+	CACHE_FORMATTERS = {},
+	/** @type {{ [key: string]: { [key: string]: string } }} */
+	CACHE_MSGS = {},
+	/** @type {string[]} */
+	LANG_CODES = [],
+	/** @type {{ [key: string]: { [key: string]: string } }} */
+	MESSAGES = {},
 	accepts = require("accepts"),
-	globby = require("globby"),
-	{ logError } = require("./errors"),
 	{
 		MessageFormatter,
 		pluralTypeHandler,
-	} = require("@ultraq/icu-message-formatter");
+	} = require("@ultraq/icu-message-formatter"),
+	globby = require("globby"),
+	{ logError } = require("./errors");
 
-(async function () {
+(async function generateMessages() {
 	const codes = await globby("_locales/*.json");
-	codes.forEach((filename) => {
+
+	for (const filename of codes) {
 		const [, code] = filename.split(".")[0]?.split("/") ?? [
 			"_locales",
 			"en_US",
 		];
-		MESSAGES[`${code}`] = {};
-		/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
-		const tempMsgs = require(`../${filename}`);
-		for (const item in tempMsgs) {
-			if ({}.hasOwnProperty.call(tempMsgs, item)) {
-				if (!tempMsgs[item]?.string) continue;
 
-				// @ts-expect-error - TS thinks `MESSAGES[code]` and `tempMsgs[item]` might be `undefined`.
-				// That's imposssible. See L38 and L43.
-				MESSAGES[`${code}`][`${item}`] = `${tempMsgs[item].string}`;
+		MESSAGES[`${code}`] = {};
+
+		/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
+		// eslint-disable-next-line node/global-require -- We can't move this to a higher scope.
+		const rawMessages = require(`../${filename}`);
+
+		for (const item in rawMessages) {
+			if (Object.prototype.hasOwnProperty.call(rawMessages, item)) {
+				if (!rawMessages[`${item}`]?.string) continue;
+
+				// @ts-expect-error -- It's impossible for `MESSAGES[code]` or `temporaryMessages[item]` to be `undefined`.
+				MESSAGES[`${code}`][`${item}`] = `${
+					rawMessages[`${item}`]?.string
+				}`;
 			}
 		}
 
 		LANG_CODES.push(`${code}`);
-	});
+	}
 })();
 
 /**
@@ -63,49 +62,49 @@ const BASE_LANG = "en_US",
 function compileLangs(langs, cache = false) {
 	if (cache) {
 		const retrieved = CACHE_CODES[`${langs}`];
+
 		if (retrieved) return retrieved;
 	}
 
-	/** @type {string[]} */
-	// @ts-expect-error - TS thinks there might be `undefinded` values in the array.
-	// That's inpossible, see L102.
-	const prefLangs = [
-		...new Set(
-			langs
+	// @ts-expect-error -- It's impossible for `undefined` to be in the array.
+	CACHE_CODES[`${langs}`] = langs
 
-				// Remove asterisks
-				.filter((item) => item !== "*")
-				.flatMap((language) => {
-					// Standardize character between language and country code
-					const standardLang = language.replace(/-/g, "_"),
-						// Add language without country code as fallback
-						[noCountryLang] = standardLang.split("_");
-					return [
-						standardLang,
-						noCountryLang,
+		// Remove asterisks
+		.filter((item) => item !== "*")
+		.flatMap((language) => {
+			// Standardize character between language and country code
+			const standardLang = language.replace(/-/g, "_"),
+				// Add language without country code as fallback
+				[noCountryLang] = standardLang.split("_");
 
-						// Add other countries with the same languages' country codes as fallbacks
-						...LANG_CODES.filter(
-							(langCode) =>
-								langCode.indexOf(`${noCountryLang}`) === 0,
-						),
-					];
-				}),
+			return [
+				standardLang,
+				noCountryLang,
 
-			// Add base language as fallback to the fallback
-		).add(BASE_LANG),
+				// Add other countries with the same languages' country codes as fallbacks
+				...LANG_CODES.filter(
+					(langCode) => langCode.indexOf(`${noCountryLang}`) === 0,
+				),
+			];
+		})
 
-		// Remove duplicates by converting it to a `Set` then back to an `Array`
-	]
+		// Remove duplicates
+		.filter(
+			(item, index) =>
+				CACHE_CODES[`${langs}`]?.indexOf(item || "") === index,
+		)
 
 		// Remove undefined values
 		.filter((lang) => typeof lang === "string");
 
-	// Slice it on the base language because the base langauge has everything that we'd need
-	prefLangs.splice(prefLangs.indexOf(BASE_LANG) + 1);
+	// Add base language as fallback to the fallback
+	CACHE_CODES[`${langs}`]?.push(BASE_LANG);
+	// Slice it on the base language because the base has all the strings.
+	CACHE_CODES[`${langs}`]?.splice(
+		(CACHE_CODES[`${langs}`]?.indexOf(BASE_LANG) || 0) + 1,
+	);
 
-	CACHE_CODES[`${langs}`] = prefLangs;
-	return prefLangs;
+	return CACHE_CODES[`${langs}`] || [BASE_LANG];
 }
 
 /**
@@ -116,18 +115,21 @@ function compileLangs(langs, cache = false) {
  *
  * @returns {{ [key: string]: string }} - Retrieved messages.
  */
-function getMsgs(langs, cache = true) {
+function getMessages(langs, cache = true) {
 	if (cache) {
 		const retrieved = CACHE_MSGS[`${langs}`];
+
 		if (retrieved) return retrieved;
 	}
 
 	/** @type {{ [key: string]: string }} */
 	let msgs = {};
-	langs.forEach((langCode) => {
+
+	for (const langCode of langs)
 		msgs = { ...MESSAGES[`${langCode}`], ...msgs };
-	});
+
 	CACHE_MSGS[`${langs}`] = msgs;
+
 	return msgs;
 }
 
@@ -143,11 +145,15 @@ function getFormatter(lang, cache = true) {
 	if (cache) {
 		/** @type {MessageFormatter} */
 		const retrieved = CACHE_FORMATTERS[`${lang}`];
+
 		if (retrieved) return retrieved;
 	}
-	return (CACHE_FORMATTERS[`${lang}`] = new MessageFormatter(lang, {
+
+	CACHE_FORMATTERS[`${lang}`] = new MessageFormatter(lang, {
 		plural: pluralTypeHandler,
-	}).format);
+	}).format;
+
+	return CACHE_FORMATTERS[`${lang}`];
 }
 
 /**
@@ -158,31 +164,34 @@ function getFormatter(lang, cache = true) {
  * @param {{ [key: string]: string }} msgs - Messages to be used.
  *
  * @returns {string} - Rendered message.
+ * @todo Move rendering out of this function.
  */
 function parseMessage(inputInfo, lang, msgs) {
-	const [msgCode, ...placeholders] = inputInfo
+	const [messageCode, ...placeholders] = inputInfo
 
 		// Trim excess whitespace
 		.trim()
 
 		// Condense remaining whitespce
-		.replace(/\s/g, " ")
+		.replace(/\s/gu, " ")
 
 		// Split on `|||`
-		.split(/(?<![^\\]\[[^\]]*)(?<!\\)\|{3}/)
+		.split(/(?<![^\\]\[[^\]]*)(?<!\\)\|{3}/u)
 
-		.map((param) =>
-			param.startsWith("[") && param.endsWith("]")
-				? parseMessage(param.slice(1, param.length - 1), lang, msgs)
-				: param,
+		.map((parameter) =>
+			parameter.startsWith("[") && parameter.endsWith("]")
+				? parseMessage(parameter.slice(1, -1), lang, msgs)
+				: parameter,
 		)
 
 		// Handle escaping the `|||` and `[` (prefixing them with a `\`)
-		.map((param) => param.replace(/\\\|{3}/g, "|||").replace(/\\\[/g, "["));
+		.map((parameter) =>
+			parameter.replace(/\\\|{3}/g, "|||").replace(/\\\[/gu, "["),
+		);
 
 	return getFormatter(lang)(
 		// Get message, fallback to the code provided
-		msgs[`${msgCode}`] ?? msgCode,
+		msgs[`${messageCode}`] ?? messageCode,
 
 		// Render it with placeholders
 		placeholders,
@@ -198,92 +207,100 @@ function parseMessage(inputInfo, lang, msgs) {
  * @returns {() => (val: string, render: (val: string) => string) => string} - Function to pass to
  *   Mustache.JS.
  */
-function mustacheFunc(langs, msgs = getMsgs(langs)) {
-	return function () {
-		return function (val, render) {
-			return parseMessage(render(val), `${langs[0]}`, msgs);
-		};
-	};
+function mustacheFunction(langs, msgs = getMessages(langs)) {
+	return () => (value, render) =>
+		parseMessage(render(value), `${langs[0]}`, msgs);
 }
 
 module.exports = {
 	compileLangs,
 	getFormatter,
-	getMsgs,
+	getMessages,
+
 	/**
 	 * Express l10n middleware.
 	 *
-	 * @param {e.Request} req - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Request} request - Express request object.
+	 * @param {e.Response} response - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 */
-	middleware(req, res, next) {
+	middleware(request, response, next) {
 		/** @type {string[]} */
 		let langs;
-		if (req.query?.lang) {
+
+		if (request.query?.lang) {
 			langs = compileLangs([
 				// `lang` query parameter overrides everything else
-				...(`${req.query?.lang}` ?? "*").split("|"),
+				...(`${request.query?.lang}` ?? "*").split("|"),
 
 				// Fallback to values in cookie
-				...(req.cookies?.langs ?? "*").split("|"),
+				...(request.cookies?.langs ?? "*").split("|"),
 
 				// Fallback to browser lang
-				...accepts(req).languages(),
+				...accepts(request).languages(),
 			]);
-		} else if (req.cookies?.langs) {
+		} else if (request.cookies?.langs) {
 			// The cookie doesn't need to go through `compileLangs` since it already did
-			langs = (req.cookies?.langs ?? "*").split("|");
+			langs = (request.cookies?.langs ?? "*").split("|");
 		} else {
 			// This is the default, the broswer langauge.
-			langs = compileLangs(accepts(req)?.languages(), true);
+			langs = compileLangs(accepts(request)?.languages(), true);
 		}
+
 		const expires = new Date();
+
 		expires.setFullYear(expires.getFullYear() + 1);
-		res.cookie("langs", langs.join("|"), {
+		response.cookie("langs", langs.join("|"), {
 			expires,
 			maxAge: 31536000000,
 			sameSite: false,
 		});
-		req.languages = langs;
-		const msgs = getMsgs(langs);
-		req.messages = msgs;
+		// eslint-disable-next-line no-param-reassign -- We need to override the original.
+		request.languages = langs;
+
+		const msgs = getMessages(langs);
+
+		// eslint-disable-next-line no-param-reassign -- We need to override the original.
+		request.messages = msgs;
 
 		// Grab reference of render
-		const { render } = res;
+		const realRender = response.render;
 
 		/**
-		 * Override res.render to ensure `msg` is always available.
+		 * Override response.render to ensure `msg` is always available.
 		 *
 		 * @param {string} view - The file to render.
-		 * @param {{ [key: string]: any } | ((err: Error, str: string) => void)} [placeholderCallback]
+		 * @param {{ [key: string]: any } | ((error: Error, str: string) => void)} [placeholderCallback]
 		 *   - Data to render it with or callback to run after render.
 		 *
-		 * @param {(err: Error, str: string) => void} [callback] - Callback to run after render.
+		 * @param {(error: Error, str: string) => void} [callback] - Callback to run after render.
 		 *
 		 * @returns {void}
 		 */
-		res.render = function (
+		// eslint-disable-next-line no-param-reassign -- We need to override the original.
+		response.render = function render(
 			view,
 			placeholderCallback = {},
-			callback = function (err, str) {
-				if (err) return logError(err);
+			callback = function (error, string) {
+				if (error) return logError(error);
 
-				return res.send(str);
+				return response.send(string);
 			},
 		) {
-			const opts =
+			const options =
 				typeof placeholderCallback === "object"
 					? placeholderCallback
 					: {};
-			opts.message = mustacheFunc(langs, msgs);
+
+			options.message = mustacheFunction(langs, msgs);
 
 			// Continue with original render
-			return render.call(
+			return realRender.call(
 				this,
 				view,
-				opts,
-				// @ts-expect-error - TS doesn't like the first param, but it is needed.
+				options,
+
+				// @ts-expect-error -- TS doesn't like the first param, but it is needed.
 				typeof placeholderCallback === "function"
 					? placeholderCallback
 					: callback,
@@ -291,5 +308,6 @@ module.exports = {
 		};
 		next();
 	},
-	mustacheFunc,
+
+	mustacheFunction,
 };

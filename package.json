@@ -3,13 +3,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"description": "All-In-One Authorization",
-	"keywords": [
-		"auth",
-		"login",
-		"signup",
-		"signin",
-		"authorization"
-	],
+	"keywords": ["auth", "login", "signup", "signin", "authorization"],
 	"homepage": "https://auth.onedot.cf",
 	"bugs": {
 		"url": "https://github.com/onedotprojects/auth/issues/new",
@@ -20,14 +14,14 @@
 	"main": "src/index.js",
 	"scripts": {
 		"lint": "echo 'CODE STYLE'; npm run lint:mustaches; npm run lint:prettier; npm run lint:eslint; npm run lint:typescript; echo GRAMMAR; npm run lint:spellchecker-cli; npm run lint:write_good",
-		"lint:eslint": "npx eslint --ignore-pattern .gitignore --fix .",
-		"lint:prettier": "npx prettier --ignore-path .gitignore --ignore-path .prettierignore --write .",
-		"lint:mustache": "node --trace-warnings --harmony .github/workflows/mustaches.js",
-		"lint:typescript": "npx typescript --project jsconfig.json",
-		"lint:spellchecker-cli": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} npx spellchecker-cli {} --dictionaries dictionary.txt; npx spellchecker-cli _locales/en_US.json --dictionaries dictionary.txt",
-		"lint:write_good": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} npx write-good --parse {}; npx write-good --parse _locales/en_US.json",
+		"lint:eslint": "eslint --ignore-pattern .gitignore --fix .",
+		"lint:prettier": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write .",
+		"lint:mustaches": "node --trace-warnings --harmony .github/workflows/mustaches.js",
+		"lint:typescript": "tsc --project jsconfig.json",
+		"lint:spellchecker": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} spellchecker {} --dictionaries dictionary.txt; spellchecker-cli _locales/en_US.json --dictionaries dictionary.txt",
+		"lint:writegood": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} writegood --parse {}; write-good --parse _locales/en_US.json",
 		"start": "node --trace-warnings --harmony src/index.js",
-		"build:tailwind": "TAILWIND_MODE=build NODE_ENV=production npx postcss src/tailwind.sass -o src/main/style.css"
+		"build:tailwind": "TAILWIND_MODE=build NODE_ENV=production postcss src/tailwind.sass -o src/main/style.css"
 	},
 	"prettier": {
 		"iniSpaceAroundEquals": true,
@@ -44,10 +38,7 @@
 		"vueIndentScriptAndStyle": true,
 		"overrides": [
 			{
-				"files": [
-					"**.md",
-					"**/LICENSE"
-				],
+				"files": ["**.md", "**/LICENSE"],
 				"options": {
 					"trailingComma": "es5",
 					"proseWrap": "never",
@@ -55,46 +46,54 @@
 				}
 			},
 			{
-				"files": [
-					"**.svg",
-					"**.html"
-				],
+				"files": ["**.svg", "**.html", "**.xml"],
 				"options": {
 					"trailingComma": "es5",
-					"parser": "html"
+					"parser": "html",
+					"jsxBracketSameLine": true
 				}
 			},
 			{
-				"files": [
-					"**.sass"
-				],
+				"files": ["**.sass", "**.scss", "**.css"],
 				"options": {
 					"parser": "scss"
 				}
 			},
 			{
-				"files": [
-					"**.env",
-					"**.replit",
-					"**/.tx/config"
-				],
+				"files": ["**.env", "**.replit", "**/.tx/config"],
 				"options": {
 					"parser": "ini"
 				}
 			},
 			{
 				"files": [
-					"**.code-snippets"
+					"**.code-workspace",
+					".code-snippets",
+					"**/settings.json",
+					"**/launch.json",
+					"**/extensions.json",
+					"**.jsonc",
+					"**.eslintrc",
+					"**.eslintrc.json",
+					"jsconfig.json"
+				],
+				"options": {
+					"parser": "json5"
+				}
+			},
+			{
+				"files": [
+					"**.json",
+					"**.map",
+					"**.jslintrc",
+					"**.all-contributorsrc"
 				],
 				"options": {
 					"parser": "json"
 				}
 			}
 		],
-		"plugins": [
-			"prettier-plugin-jsdoc",
-			"prettier-plugin-ini"
-		]
+		"plugins": ["prettier-plugin-jsdoc", "prettier-plugin-ini"]
 	},
 	"dependencies": {
 		"@replit/database": "^2.0.1",
@@ -114,11 +113,11 @@
 		"mustache-express": "^1.3.0",
 		"node-fetch": "^2.6.1",
 		"nodemailer": "^6.6.1",
-		"replace-in-file": "^6.2.0",
 		"retronid": "^2.0.0",
 		"serve-index": "^1.9.1"
 	},
 	"devDependencies": {
+		"@onedotprojects/eslint-plugin": "github:onedotprojects/eslint-plugin#main",
 		"@tailwindcss/forms": "^0.3.3",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/accepts": "^1.3.5",
@@ -134,18 +133,12 @@
 		"@types/node-fetch": "^2.5.10",
 		"@types/nodemailer": "^6.4.2",
 		"@types/serve-index": "^1.7.30",
+		"all-contributors-cli": "^6.20.0",
 		"autoprefixer": "^10.2.6",
 		"css-mqpacker": "^7.0.0",
 		"cssnano": "^5.0.6",
 		"eslint": "^7.28.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-compat": "^3.9.0",
-		"eslint-plugin-html": "^6.1.2",
-		"eslint-plugin-jsdoc": "^35.1.3",
-		"eslint-plugin-markdown": "^2.2.0",
-		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-optimize-regex": "^1.2.0",
-		"eslint-plugin-regexp": "^0.12.1",
+		"eslint-plugin-diff": "^1.0.11",
 		"postcss": "^8.3.0",
 		"postcss-advanced-variables": "^3.0.1",
 		"postcss-cli": "^8.3.1",
@@ -157,13 +150,14 @@
 		"prettier": "^2.3.1",
 		"prettier-plugin-ini": "^0.3.1",
 		"prettier-plugin-jsdoc": "^0.3.23",
+		"replace-in-file": "^6.2.0",
 		"spellchecker-cli": "^4.5.0",
 		"tailwindcss": "^2.1.4",
 		"typescript": "^4.2.4",
 		"write-good": "^1.0.8"
 	},
 	"engines": {
-		"node": "14.16.1"
+		"node": ">=14.16.1"
 	},
 	"browserslist": [
 		"last 2 versions",
