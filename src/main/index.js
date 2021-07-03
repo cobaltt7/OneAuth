@@ -86,7 +86,7 @@ router.use(
 							),
 						);
 						if (index + 1 === codeblocks.length)
-							return send.call(this, jQuery.html());
+							return send.call(router, jQuery.html());
 
 						return res;
 					});
