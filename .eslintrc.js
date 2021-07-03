@@ -12,7 +12,7 @@ module.exports = {
 			parserOptions: { ecmaVersion: 11 },
 		},
 		{
-			extends: ["plugin:@onedotprojects/workflow"],
+			extends: ["plugin:@onedotprojects/cli"],
 			files: [".github/**"],
 		},
 		{

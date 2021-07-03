@@ -14,7 +14,7 @@
 	"main": "src/index.js",
 	"scripts": {
 		"lint": "echo 'CODE STYLE'; npm run lint:mustaches; npm run lint:prettier; npm run lint:eslint; npm run lint:typescript; echo GRAMMAR; npm run lint:spellchecker-cli; npm run lint:write_good",
-		"lint:eslint": "eslint --ignore-pattern .gitignore --fix .",
+		"lint:eslint": "eslint --fix .",
 		"lint:prettier": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write .",
 		"lint:mustaches": "node --trace-warnings --harmony .github/workflows/mustaches.js",
 		"lint:typescript": "tsc --project jsconfig.json",
