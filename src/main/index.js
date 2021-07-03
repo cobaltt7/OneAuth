@@ -48,19 +48,19 @@ router.use(
 	 * Express middleware to handle code block highlighting.
 	 *
 	 * @param {e.Request} _ - Express request object.
-	 * @param {e.Response} res - Express response object.
+	 * @param {e.Response} result - Express response object.
 	 * @param {(error?: any) => void} next - Express continue function.
 	 *
 	 * @returns {void}
 	 */
-	(_, res, next) => {
-		const { send } = res;
+	(_, result, next) => {
+		const realSend = result.send;
 
 		// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
-		res.send = (text) => {
+		result.send = (text) => {
 			const jQuery = cheerio.load(text);
 
-			// eslint-disable-next-line one-var
+			// eslint-disable-next-line one-var -- `codeblocks` depends on `jQuery`
 			const codeblocks = jQuery("pre.hljs:not(:has(*))");
 
 			codeblocks.map(
@@ -86,9 +86,9 @@ router.use(
 							),
 						);
 						if (index + 1 === codeblocks.length)
-							return send.call(router, jQuery.html());
+							return realSend.call(result, jQuery.html());
 
-						return res;
+						return result;
 					});
 					return index;
 				},
