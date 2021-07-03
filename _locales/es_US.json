@@ -1,12 +1,13 @@
 {
 	"docsTitle": { "string": "{0} | 1Auth Documentos de Desarrollo" },
-	"emailHeading": { "string": "Iniciar sesión con correo electrónico" },
-	"emailEnterPrompt": { "string": "Introduce tu correo electrónico para continuar" },
+	"emailHeading": { "string": "" },
+	"emailEnterPrompt": { "string": "" },
 	"emailSubmit": { "string": "Enviar" },
-	"emailEnterCode": { "string": "Introduce el código que te enviamos para continuar" },
+	"emailEnterCode": { "string": "" },
 	"emailSubject": { "string": "Verificación 1Auth de Correo Electrónico" },
 	"emailCodeIs": { "string": "Tu código es {0}." },
 	"emailNoShare": { "string": "" },
+	"emailNoShareWhy":{"string": ""},
 	"emailNow": { "string": "¿Qué ahora?" },
 	"emailCopyCode": { "string": "Copie su código." },
 	"emailGoBack": { "string": "Volver a 1Auth." },
@@ -120,7 +121,7 @@
 		"string": ""
 	},
 	"error404Message": {
-		"string": "¡Uh-oh! ¡No podemos encontrar esa página! ¿Regresa? Si un enlace en este sitio te trajo aquí, es posible que desee ponerse en contacta con nosotros en GitHub y dejar que nosotros sabemos que tenemos un enlance roto."
+		"string": ""
 	},
 	"error405Message": {
 		"string": "Eso método HTTP no es permitido."
@@ -270,7 +271,7 @@
 	},
 	"aboutHelpTranslate": {
 		"string": "",
-		"developer_comment": "Please make sure that you translate “Join team” exactly how it is translated on Transifex."
+		"developer_comment": "Please make sure that you translate “Join team” and “Request language” exactly how Transifex does."
 	},
 	"emailPlaceholder": { "string": "Correo electrónico" }
 }
