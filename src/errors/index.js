@@ -82,15 +82,17 @@ module.exports.middleware = (request, result, next) => {
 			all: request.messages.errorOldAll,
 		});
 	}
-	const { bodySent, send, status } = result;
+	const { bodySent } = result;
+	const realSend = result.send;
+	const realStatus = result.status;
 	result.send = function (...arguments_) {
 		// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 		result.bodySent = true;
-		return send.call(this, ...arguments_);
+		return realSend.call(this, ...arguments_);
 	};
 	result.status = function (statusCode, ...arguments_) {
 		// Also applys to `result.sendStatus` which uses `status` internally.
-		const returnValue = status.call(
+		const returnValue = realStatus.call(
 			this,
 			statusCode === 200 && !bodySent ? 404 : statusCode,
 			...arguments_,

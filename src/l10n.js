@@ -250,10 +250,10 @@ module.exports = {
 		req.messages = msgs;
 
 		// Grab reference of render
-		const { render } = res;
+		const realRender = res.render;
 
 		/**
-		 * Override res.render to ensure `msg` is always available.
+		 * Override res.render to ensure `message` is always available.
 		 *
 		 * @param {string} view - The file to render.
 		 * @param {{ [key: string]: any } | ((err: Error, str: string) => void)} [placeholderCallback]
@@ -279,8 +279,8 @@ module.exports = {
 			opts.message = mustacheFunc(langs, msgs);
 
 			// Continue with original render
-			return render.call(
-				this,
+			return realRender.call(
+				res,
 				view,
 				opts,
 				// @ts-expect-error - TS doesn't like the first param, but it is needed.

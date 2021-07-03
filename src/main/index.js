@@ -59,10 +59,11 @@ router.use(
 		// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 		result.send = (text) => {
 			const jQuery = cheerio.load(text);
-
 			// eslint-disable-next-line one-var -- `codeblocks` depends on `jQuery`
 			const codeblocks = jQuery("pre.hljs:not(:has(*))");
-
+			if(!codeblocks?.length) {
+							 realSend.call(result, jQuery.html()); 
+							 next();}
 			codeblocks.map(
 				/**
 				 * Highlight a code block using highlight.js.
@@ -142,7 +143,7 @@ router.get(
 	 * @returns {void}
 	 */
 	(req, res) =>
-		res.sendFile(path.resolve(__dirname, `../svg/${req.params?.img}.svg`)),
+		res.sendFile(path.resolve(__dirname, `../svg/${req.params ?.img}.svg`)),
 );
 
 router.get(
@@ -202,9 +203,9 @@ router.get(
 	(_, res) =>
 		res.send(
 			"User-agent: *\n" +
-				"Allow: /\n" +
-				"Disalow: /auth\n" +
-				"Host: https://auth.onedot.cf",
+			"Allow: /\n" +
+			"Disalow: /auth\n" +
+			"Host: https://auth.onedot.cf",
 		),
 );
 
@@ -253,7 +254,7 @@ router.get(
 	 */
 	(_, res) => {
 		res.setHeader("content-type", "text/css");
-		res.render(path.resolve(__dirname, "style.css"));
+		return res.render(path.resolve(__dirname, "style.css"));
 	},
 );
 
