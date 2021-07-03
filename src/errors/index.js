@@ -82,9 +82,9 @@ module.exports.middleware = (request, result, next) => {
 			all: request.messages.errorOldAll,
 		});
 	}
-	const { bodySent } = result;
-	const realSend = result.send;
-	const realStatus = result.status;
+	const { bodySent } = result,
+	 realSend = result.send,
+	 realStatus = result.status;
 	result.send = function (...arguments_) {
 		// Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 		result.bodySent = true;
