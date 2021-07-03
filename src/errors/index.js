@@ -54,7 +54,7 @@ function middleware(request, result, _status) {
 			status,
 		};
 		if (Object.values(error).filter((key) => !key))
-			return middleware(request, result, 500); // this is the error
+			return middleware(request, result, 500); // This is the error
 
 		if (request.accepts("application/json") || request.accepts("text/json"))
 			return result.json(error);
