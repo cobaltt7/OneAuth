@@ -34,7 +34,7 @@ function middleware(request, result, _status) {
 		// And it's not a redirect
 		(status < 301 ||
 			status > 399 ||
-			// (Allow the 300 codes that aren't actually redirects)
+			// (Allow the 300 codes that aren't actually redirects. Also, 300 is excluded above)
 			status === 304 ||
 			status === 305)
 	) {
@@ -54,7 +54,7 @@ function middleware(request, result, _status) {
 			status,
 		};
 		if (Object.values(error).filter((key) => !key))
-			return middleware(request, result, 500);
+			return middleware(request, result, 500); // this is the error
 
 		if (request.accepts("application/json") || request.accepts("text/json"))
 			return result.json(error);
