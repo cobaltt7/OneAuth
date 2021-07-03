@@ -58,7 +58,7 @@ router.use(
 	 * @returns {void}
 	 */
 	(_, response, next) => {
-		const { send } = response;
+		const realSend = response.send;
 
 		/**
 		 * Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
@@ -69,11 +69,13 @@ router.use(
 		 */
 		// eslint-disable-next-line no-param-reassign -- We need to override the original functions.
 		response.send = (text) => {
-			const indexQuery = cheerio.load(text);
-
+			const jQuery = cheerio.load(text);
 			// eslint-disable-next-line one-var -- `codeblocks` depends on `jQuery`
-			const codeblocks = indexQuery("pre.hljs:not(:has(*))");
-
+			const codeblocks = jQuery("pre.hljs:not(:has(*))");
+			if (!codeblocks?.length) {
+				realSend.call(response, jQuery.html());
+				next();
+			}
 			codeblocks.map(
 				/**
 				 * Highlight a code block using highlight.js.
@@ -94,13 +96,13 @@ router.use(
 						.then((highlighted) => {
 							code.html(highlighted);
 							code.wrapInner(
-								indexQuery(
+								jQuery(
 									`<code class="language-${language}"></code>`,
 								),
 							);
 
 							if (index + 1 === codeblocks.length)
-								return send.call(this, indexQuery.html());
+								return realSend.call(this, jQuery.html());
 
 							return response;
 						})
@@ -286,7 +288,7 @@ router.get(
 		response.setHeader("content-type", "text/css");
 
 		return response.render(path.resolve(__dirname, "style.css"));
-	},
+	}
 );
 
 module.exports = router;

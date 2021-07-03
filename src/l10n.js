@@ -267,7 +267,7 @@ module.exports = {
 		const realRender = response.render;
 
 		/**
-		 * Override response.render to ensure `msg` is always available.
+		 * Override res.render to ensure `message` is always available.
 		 *
 		 * @param {string} view - The file to render.
 		 * @param {{ [key: string]: any } | ((error: Error, str: string) => void)} [placeholderCallback]
@@ -296,7 +296,7 @@ module.exports = {
 
 			// Continue with original render
 			return realRender.call(
-				this,
+				response,
 				view,
 				options,
 
