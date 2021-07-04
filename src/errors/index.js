@@ -34,7 +34,7 @@ function middleware(request, result, _status) {
 		// And it's not a redirect
 		(status < 301 ||
 			status > 399 ||
-			// (Allow the 300 codes that aren't actually redirects. Also, 300 is excluded above)
+			// Allow the 300 codes that aren't actually redirects. Also, 300 is excluded above.
 			status === 304 ||
 			status === 305)
 	) {

@@ -3,7 +3,7 @@
 {{ #message }}emailSubject{{ /message }}
 -------------
 
-{{ #message }}emailCodeIs|||{{ code }}{{ /message }} **{{ #message }}emailNoShare{{ /message }}**
+{{ #message }}emailCodeIs|||{{ code }}{{ /message }} **{{ #message }}emailNoShare{{ /message }}** {{ #message }}emailNoShareWhy{{ /message }}
 
 {{ #message }}emailNow{{ /message }}
 ->	{{ #message }}emailCopyCode{{ /message }}
@@ -13,4 +13,4 @@
 {{ #message }}emailTimeOut{{ /message }}
 
 ------------
-{ #message }}emailUnexpected{{ /message }}
+{{ #message }}emailUnexpected{{ /message }}
