@@ -1,12 +1,13 @@
 {
 	"docsTitle": { "string": "{0} | 1Auth Development Docs" },
-	"emailHeading": { "string": "Sign in with email" },
-	"emailEnterPrompt": { "string": "Enter your email to continue" },
+	"emailHeading": { "string": "Sign in with your email address" },
+	"emailEnterPrompt": { "string": "To continue, please enter your email." },
 	"emailSubmit": { "string": "Submit" },
-	"emailEnterCode": { "string": "Enter the code we sent you to continue" },
+	"emailEnterCode": { "string": "To continue, please enter the code we sent you." },
 	"emailSubject": { "string": "1Auth Email Verification" },
 	"emailCodeIs": { "string": "Your code is {0}." },
 	"emailNoShare": { "string": "Don’t share it with anyone else." },
+	"emailNoShareWhy":{"string": "Otherwise, they could be able to act on your behalf."},
 	"emailNow": { "string": "What now?" },
 	"emailCopyCode": { "string": "Copy your code." },
 	"emailGoBack": { "string": "Go back to 1Auth." },
@@ -17,7 +18,7 @@
 		"string": "Review the information we will send and the site we will send it to, and if all looks good, press “{0}”."
 	},
 	"emailTimeOut": {
-		"string": "Doesn’t work? Maybe it’s been too long. Try pressing the back button and requesting another code!"
+		"string": "If it doesn't work, maybe you waited too long. Try pressing the back button and requesting another code!"
 	},
 	"emailUnexpected": {
 		"string": "Not expecting this email? Just ignore it. Don’t worry, nothing will happen."
@@ -113,14 +114,14 @@
 		"string": "Oops! Your request was invalid. Please make sure all needed information is sent, no extra information is sent, and all sent information is valid. If this keeps happening, try contacting us on GitHub."
 	},
 	"error401Message": {
-		"string": "Please log in before accessing this resource."
+		"string": "Please login before accessing this resource."
 	},
 	"error402Message": { "string": "Please pay before accessing this page." },
 	"error403Message": {
 		"string": "Sorry, but you are forbidden to access this resource."
 	},
 	"error404Message": {
-		"string": "Uh-oh! We’re can’t find that page! Go back? If a link on this site brought you here, you may want to contact us on GitHub and let us know we have a broken link."
+		"string": "Uh-oh! We can’t find that page! Go back? If a link on this site brought you here, you may want to contact us on GitHub and let us know we have a broken link."
 	},
 	"error405Message": {
 		"string": "That HTTP method isn’t supported on this page! Try a different page and/or method."
@@ -138,7 +139,7 @@
 		"string": "Oops, there was a conflict between the information your browser sent and the information we have! Try reloading the page. If this keeps happening, try contacting us on GitHub so we can fix it."
 	},
 	"error410Message": {
-		"string": "This isn’t here any anymore. Unfortunately, it’s never coming back."
+		"string": "This isn’t here anymore. Unfortunately, it’s never coming back."
 	},
 	"error411Message": {
 		"string": "You didn’t say how much information you wanted! Please repeat the request with a requested length."
@@ -147,7 +148,7 @@
 		"string": "Unfortunately, we can’t meet your conditions. Too bad!"
 	},
 	"error413Message": {
-		"string": "You sent so much data, we can’t process it!"
+		"string": "You sent so much data that we can’t process it!"
 	},
 	"error414Message": {
 		"string": "That URL is too long for us to understand!"
@@ -157,7 +158,7 @@
 		"string": "We don’t have any data in the requested range."
 	},
 	"error417Message": {
-		"string": "You didn’t send information we expected to receive!"
+		"string": "We expected to receive more information than you sent!"
 	},
 	"error418Message": {
 		"string": "We refuse to try and brew coffee with a teapot."
@@ -166,7 +167,7 @@
 		"string": "You sent this request to the wrong place!"
 	},
 	"error425Message": {
-		"string": "Please wait in sending this request so it won’t be sent twice."
+		"string": "Please wait before sending this request."
 	},
 	"error426Message": { "string": "Please use HTTPS, not HTTP." },
 	"error428Message": {
@@ -197,7 +198,7 @@
 		"string": "An external server didn’t send us a response fast enough."
 	},
 	"error505Message": {
-		"string": "That HTTP version isn’t supported by any part of this website."
+		"string": "No part of our website supports that HTTP version. Try a different one!"
 	},
 	"error506Message": {
 		"string": "Error in our internal configuration! Please report this on GitHub so we can prevent it from happening again."
@@ -226,12 +227,12 @@
 		"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
 	},
 	"aboutClientCount": {
-		"string": "Right now, we support {0} clients (more to come)."
+		"string": "Right now, we support {0} clients with many more to come."
 	},
 	"aboutClientsHeading": { "string": "Supported Clients" },
 	"aboutDevelopersHeading": { "string": "For Developers" },
 	"aboutImpementation": {
-		"string": "Implementing this in your site is easy. When your users click “Sign in” on your site, direct them to this URL:"
+		"string": "We designed 1Auth so that adding it to your site is as streamlined as possible. When your users click “Sign in” on your site, direct them to this URL:"
 	},
 	"aboutAfterFinish": {
 		"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
@@ -243,10 +244,10 @@
 		"string": "To retrieve the user’s information, send the following HTTP request:"
 	},
 	"aboutWhatCode": {
-		"string": "where {0} is the value of the new search parameter."
+		"string": "where {0} is the value of the said parameter."
 	},
 	"aboutNoParam": {
-		"string": "If they denied sharing their data, there will not be any appended query parameter."
+		"string": "If they denied sharing their data, then there will not be any new query parameter."
 	},
 	"aboutMoreConfig": {
 		"string": "More configuration options are coming soon."
@@ -262,15 +263,15 @@
 		"string": "You may follow it by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
 	},
 	"aboutLangsFallback": {
-		"string": "If a language is not available, it will fall back to the non-country specific language, then to the users’ browser language."
+		"string": "If a language is not available, it will fall back to the non-country-specific language, then to the users’ browser language."
 	},
 	"aboutNew": { "string": "NEW!!!" },
 	"aboutTranslations": {
-		"string": "Please note that we do not have many translations, if any. This will change as our translation team grows."
+		"string": "Please note that we do not have many translations, if any. Thiat will change as our translation team grows."
 	},
 	"aboutHelpTranslate": {
-		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click “Join team”. Thanks for your eagerness to help!",
-		"developer_comment": "Please make sure that you translate “Join team” exactly how it is translated on Transifex."
+		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click “Join team”. Thanks for your eagerness to help! (Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
+		"developer_comment": "Please make sure that you translate “Join team” and “Request language” exactly how Transifex does."
 	},
 	"emailPlaceholder": { "string": "Email address" }
 }

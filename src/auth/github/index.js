@@ -1,7 +1,9 @@
+"use strict";
+
 /** @file GitHub Authentication handler. */
 
 const fetch = require("node-fetch"),
-	{ logError } = require("../../errors/index.js");
+	{ logError } = require("../../errors");
 
 /** @type {import("../../../types").Auth} Auth */
 module.exports = {
@@ -11,42 +13,48 @@ module.exports = {
 				Authorization: `token ${token}`,
 				accept: "application/json",
 			},
-		}).then((res) => res.json()),
+		}).then((result) => result.json()),
+
 	icon: "github",
 	iconProvider: "fab",
+
 	link:
 		"https://github.com/login/oauth/authorize" +
 		"?client_id=7b64414fe57e07d1e969" +
 		"&redirect_uri=https://auth.onedot.cf/auth/github" +
 		"&state={{ url }}",
+
 	name: "GitHub",
 
 	pages: [
 		{
 			backendPage: "github",
-			get: async (req, res, sendResponse) => {
+
+			get: async (request, response, sendResponse) => {
 				const info = await fetch(
 					"https://github.com/login/oauth/access_token",
 					{
 						body:
 							"client_id=7b64414fe57e07d1e969" +
 							`&client_secret=${process.env.githubSECRET}` +
-							`&code=${req.query?.code}` +
-							`&state=${req.query?.state}`,
+							`&code=${request.query?.code}` +
+							`&state=${request.query?.state}`,
+
 						headers: {
 							"Content-Type": "application/x-www-form-urlencoded",
 							"accept": "application/json",
 						},
+
 						method: "POST",
 					},
 				)
-					.then((result) => result.json())
-					.catch((err) => {
-						res.status(502);
-						logError(err);
+					.then((fetchResult) => fetchResult.json())
+					.catch((error) => {
+						response.status(502);
+						logError(error);
 					});
 
-				sendResponse(info.access_token, `${req.query?.state}`, res);
+				sendResponse(info.access_token, `${request.query?.state}`);
 			},
 		},
 	],

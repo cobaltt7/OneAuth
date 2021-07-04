@@ -6,14 +6,14 @@
 		window.dataLayer = window.dataLayer || [];
 		window.dataLayer.push({
 			"event": "gtm.js",
-			"gtm.start": new Date().getTime(),
+			"gtm.start": Date.now(),
 		});
-		const newScript = document.createElement("script");
-		newScript.async = true;
-		newScript.src =
+		const gtmScriptTag = document.createElement("script");
+		gtmScriptTag.async = true;
+		gtmScriptTag.src =
 			"https://www.googletagmanager.com/gtm.js?id=GTM-5WN6THR";
 		const firstScript = document.querySelector("script");
-		firstScript.parentNode.insertBefore(newScript, firstScript);
+		firstScript.parentNode.insertBefore(gtmScriptTag, firstScript);
 	})();
 </script>
 <!-- End Google Tag Manager -->

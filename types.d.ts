@@ -27,13 +27,9 @@ interface AuthObj {
 	rawData: boolean;
 }
 export type RequestFunction = (
-	req: e.Request,
-	res: e.Response,
-	sendResponse: (
-		tokenOrData: any,
-		url: string,
-		res: e.Response,
-	) => void | e.Response,
+	request: e.Request,
+	response: e.Response,
+	sendResponse: (tokenOrData: any, url: string) => void | e.Response,
 ) => Promise<void>;
 export interface Page {
 	"backendPage": string;
@@ -62,9 +58,5 @@ export interface Page {
 	"unlock"?: RequestFunction;
 	"unsubscribe"?: RequestFunction;
 }
-export type sendResponseArgs = [
-	string | { [key: string]: string },
-	string,
-	e.Response,
-];
+export type sendResponseArgs = [string | { [key: string]: string }, string];
 export type Auth = AuthObj;

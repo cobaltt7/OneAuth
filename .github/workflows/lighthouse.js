@@ -1,8 +1,27 @@
-/** @file Format And post data retrieved from Lighthouse. */
-
 "use strict";
 
+/** @file Format And post data retrieved from Lighthouse. */
+
 const fetch = require("node-fetch");
+
+/**
+ * Join two arrays. (Just so syntax highlighting & prettier formatting work).
+ *
+ * @param {TemplateStringsArray} query - Array of default joiner values.
+ * @param {...string} placeholderValues - Array of placeholder values.
+ *
+ * @returns {string} - The joined arrays.
+ */
+function graphql(query, ...placeholderValues) {
+	return (
+		// eslint-disable-next-line unicorn/no-array-reduce -- reduce is the best way to do this.
+		placeholderValues.reduce(
+			(last, placeholder, index) =>
+				`${last}${placeholder}${query[index + 1]}`,
+			query[0],
+		) || ""
+	);
+}
 
 /**
  * Comment on the Lighthouse issue.
@@ -14,7 +33,8 @@ const fetch = require("node-fetch");
 function commentOnDiscussion(body) {
 	return fetch("https://api.github.com/graphql", {
 		body: JSON.stringify({
-			query: `mutation {
+			// Hmmst… query strings break prettier formatting...mustache? maybe
+			query: graphql`mutation {
 					addDiscussionComment(
 						input: {discussionId: "MDEwOkRpc2N1c3Npb24zNDEwNDA2", body: "${body}"}
 					) {
@@ -23,12 +43,13 @@ function commentOnDiscussion(body) {
 					  }
 					}
 				  }`,
-			variables: null,
 		}),
+
 		headers: {
 			"Authorization": `Bearer ${process.argv[2]}`,
 			"GraphQL-Features": "discussions_api",
 		},
+
 		method: "POST",
 	}).then((response) => response.json());
 }
@@ -37,6 +58,7 @@ if (process.argv[4]) {
 	commentOnDiscussion(
 		"An error occured while retrieving the data from Lighthouse.",
 	);
+
 	throw new Error(
 		"An error occured while retrieving the data from Lighthouse.",
 	);
@@ -48,20 +70,22 @@ try {
 
 	if (code !== "SUCCESS") throw new Error(code);
 
-	let OUTPUT =
-		"# This week's Lighthouse scores\n" +
+	let output =
+		"# This week’s Lighthouse scores\n" +
 		"| URL | Device | Accessibility | Best Practices | Performace " +
 		"| Progressive Web App | SEO | PageSpeed Insights |\n" +
 		"| - | - | - | - | - | - | - | - |\n";
 
-	data.forEach((result) => {
-		OUTPUT +=
+	for (const result of data) {
+		output +=
 			`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(
 				result.scores,
 			)
 				.map(
-					(num) =>
-						`${num < 50 ? "🔴" : num < 90 ? "🟡" : "🟢"} ${num}`,
+					(number) =>
+						`${
+							number < 50 ? "🔴" : number < 90 ? "🟡" : "🟢"
+						} ${number}`,
 				)
 				.join(
 					" | ",
@@ -69,13 +93,14 @@ try {
 			`?url=${encodeURIComponent(result.url)}&tab=${
 				result.emulatedFormFactor
 			}) |\n`;
-	});
+	}
 
-	commentOnDiscussion(OUTPUT);
+	commentOnDiscussion(output);
 } catch (error) {
 	commentOnDiscussion(
 		"An error occured while generating the comment.\n" +
 			`\`\`\`js\n${JSON.stringify(error)}\n\`\`\``,
 	);
+
 	throw error;
 }

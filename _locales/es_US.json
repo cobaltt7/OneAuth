@@ -1,17 +1,18 @@
 {
 	"docsTitle": { "string": "{0} | 1Auth Documentos de Desarrollo" },
-	"emailHeading": { "string": "Iniciar sesión con correo electrónico" },
-	"emailEnterPrompt": { "string": "Introduce tu correo electrónico para continuar" },
+	"emailHeading": { "string": "Inicie sesión con su dirección de correo electrónico" },
+	"emailEnterPrompt": { "string": "Para continuar, por favor introduce tu correo electrónico." },
 	"emailSubmit": { "string": "Enviar" },
-	"emailEnterCode": { "string": "Introduce el código que te enviamos para continuar" },
+	"emailEnterCode": { "string": "Para continuar, por favor introduce el código que te enviamos." },
 	"emailSubject": { "string": "Verificación 1Auth de Correo Electrónico" },
 	"emailCodeIs": { "string": "Tu código es {0}." },
 	"emailNoShare": { "string": "" },
+	"emailNoShareWhy":{"string": ""},
 	"emailNow": { "string": "¿Qué ahora?" },
 	"emailCopyCode": { "string": "Copie su código." },
 	"emailGoBack": { "string": "Volver a 1Auth." },
 	"emailPasteCode": {
-		"string": "Pegue su código en el caja y haz clic en \"Enviar\"."
+		"string": "Pegue su código en el caja y haz clic en “{0}”."
 	},
 	"emailReviewInfo": {
 		"string": ""
@@ -55,13 +56,13 @@
 	"error205Heading": { "string": "Reajustar Contenido" },
 	"error300Heading": { "string": "" },
 	"error304Heading": { "string": "" },
-	"error305Heading": { "string": "" },
+	"error305Heading": { "string": "Usa Proxy" },
 	"error400Heading": { "string": "" },
 	"error401Heading": { "string": "" },
 	"error402Heading": { "string": "" },
 	"error403Heading": { "string": "" },
-	"error404Heading": { "string": "404 No Encontrado" },
-	"error405Heading": { "string": "405 Método no permitido" },
+	"error404Heading": { "string": "No Encontrado" },
+	"error405Heading": { "string": "Método No Permitido" },
 	"error406Heading": { "string": "No Aceptable" },
 	"error407Heading": { "string": "" },
 	"error408Heading": { "string": "" },
@@ -123,7 +124,7 @@
 		"string": "¡Uh-oh! ¡No podemos encontrar esa página! ¿Regresa? Si un enlace en este sitio te trajo aquí, es posible que desee ponerse en contacta con nosotros en GitHub y dejar que nosotros sabemos que tenemos un enlance roto."
 	},
 	"error405Message": {
-		"string": "Eso método HTTP no es permitido."
+		"string": ""
 	},
 	"error406Message": {
 		"string": ""
@@ -228,7 +229,7 @@
 	"aboutClientCount": {
 		"string": ""
 	},
-	"aboutClientsHeading": { "string": "Clientes soportados" },
+	"aboutClientsHeading": { "string": "Clientes Soportados" },
 	"aboutDevelopersHeading": { "string": "Para Desarrolladores" },
 	"aboutImpementation": {
 		"string": ""
@@ -270,7 +271,7 @@
 	},
 	"aboutHelpTranslate": {
 		"string": "",
-		"developer_comment": "Please make sure that you translate “Join team” exactly how it is translated on Transifex."
+		"developer_comment": "Please make sure that you translate “Join team” and “Request language” exactly how Transifex does."
 	},
 	"emailPlaceholder": { "string": "Correo electrónico" }
 }
