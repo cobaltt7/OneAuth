@@ -14,10 +14,7 @@ const BASE_LANG = "en_US",
 	/** @type {{ [key: string]: { [key: string]: string } }} */
 	MESSAGES = {},
 	accepts = require("accepts"),
-	{
-		MessageFormatter,
-		pluralTypeHandler,
-	} = require("@ultraq/icu-message-formatter"),
+	{ MessageFormatter, pluralTypeHandler } = require("@ultraq/icu-message-formatter"),
 	globby = require("globby"),
 	{ logError } = require("./errors");
 
@@ -25,10 +22,7 @@ const BASE_LANG = "en_US",
 	const codes = await globby("_locales/*.json");
 
 	for (const filename of codes) {
-		const [, code] = filename.split(".")[0]?.split("/") ?? [
-			"_locales",
-			"en_US",
-		];
+		const [, code] = filename.split(".")[0]?.split("/") ?? ["_locales", "en_US"];
 
 		MESSAGES[`${code}`] = {};
 
@@ -41,9 +35,7 @@ const BASE_LANG = "en_US",
 				if (!rawMessages[`${item}`]?.string) continue;
 
 				// @ts-expect-error -- It's impossible for `MESSAGES[code]` or `temporaryMessages[item]` to be `undefined`.
-				MESSAGES[`${code}`][`${item}`] = `${
-					rawMessages[`${item}`]?.string
-				}`;
+				MESSAGES[`${code}`][`${item}`] = `${rawMessages[`${item}`]?.string}`;
 			}
 		}
 
@@ -82,17 +74,12 @@ function compileLangs(langs, cache = false) {
 				noCountryLang,
 
 				// Add other countries with the same languages' country codes as fallbacks
-				...LANG_CODES.filter(
-					(langCode) => langCode.indexOf(`${noCountryLang}`) === 0,
-				),
+				...LANG_CODES.filter((langCode) => langCode.indexOf(`${noCountryLang}`) === 0),
 			];
 		})
 
 		// Remove duplicates
-		.filter(
-			(item, index) =>
-				CACHE_CODES[`${langs}`]?.indexOf(item || "") === index,
-		)
+		.filter((item, index) => CACHE_CODES[`${langs}`]?.indexOf(item || "") === index)
 
 		// Remove undefined values
 		.filter((lang) => typeof lang === "string");
@@ -100,9 +87,7 @@ function compileLangs(langs, cache = false) {
 	// Add base language as fallback to the fallback
 	CACHE_CODES[`${langs}`]?.push(BASE_LANG);
 	// Slice it on the base language because the base has all the strings.
-	CACHE_CODES[`${langs}`]?.splice(
-		(CACHE_CODES[`${langs}`]?.indexOf(BASE_LANG) || 0) + 1,
-	);
+	CACHE_CODES[`${langs}`]?.splice((CACHE_CODES[`${langs}`]?.indexOf(BASE_LANG) || 0) + 1);
 
 	return CACHE_CODES[`${langs}`] || [BASE_LANG];
 }
@@ -125,8 +110,7 @@ function getMessages(langs, cache = true) {
 	/** @type {{ [key: string]: string }} */
 	let msgs = {};
 
-	for (const langCode of langs)
-		msgs = { ...MESSAGES[`${langCode}`], ...msgs };
+	for (const langCode of langs) msgs = { ...MESSAGES[`${langCode}`], ...msgs };
 
 	CACHE_MSGS[`${langs}`] = msgs;
 
@@ -185,9 +169,7 @@ function parseMessage(inputInfo, lang, msgs) {
 		)
 
 		// Handle escaping the `|||` and `[` (prefixing them with a `\`)
-		.map((parameter) =>
-			parameter.replace(/\\\|{3}/g, "|||").replace(/\\\[/gu, "["),
-		);
+		.map((parameter) => parameter.replace(/\\\|{3}/g, "|||").replace(/\\\[/gu, "["));
 
 	return getFormatter(lang)(
 		// Get message, fallback to the code provided
@@ -208,8 +190,7 @@ function parseMessage(inputInfo, lang, msgs) {
  *   Mustache.JS.
  */
 function mustacheFunction(langs, msgs = getMessages(langs)) {
-	return () => (value, render) =>
-		parseMessage(render(value), `${langs[0]}`, msgs);
+	return () => (value, render) => parseMessage(render(value), `${langs[0]}`, msgs);
 }
 
 module.exports = {
@@ -287,10 +268,7 @@ module.exports = {
 				return response.send(string);
 			},
 		) {
-			const options =
-				typeof placeholderCallback === "object"
-					? placeholderCallback
-					: {};
+			const options = typeof placeholderCallback === "object" ? placeholderCallback : {};
 
 			options.message = mustacheFunction(langs, msgs);
 
@@ -301,9 +279,7 @@ module.exports = {
 				options,
 
 				// @ts-expect-error -- TS doesn't like the first param, but it is needed.
-				typeof placeholderCallback === "function"
-					? placeholderCallback
-					: callback,
+				typeof placeholderCallback === "function" ? placeholderCallback : callback,
 			);
 		};
 		next();

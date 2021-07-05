@@ -30,10 +30,7 @@ const ReplitDB = require("@replit/database"),
 
 	for (const filepath of paths) {
 		// eslint-disable-next-line node/global-require -- We can't move this to a higher scope.
-		const client = require(path.resolve(
-			__dirname.split("/src/")[0],
-			filepath,
-		));
+		const client = require(path.resolve(__dirname.split("/src/")[0], filepath));
 
 		authClients.push(client);
 		authButtons.push({
@@ -56,9 +53,7 @@ const ReplitDB = require("@replit/database"),
  */
 function getClient(requestedClient) {
 	return authClients.find((currentClient) =>
-		currentClient?.pages?.find(
-			({ backendPage }) => backendPage === requestedClient,
-		),
+		currentClient?.pages?.find(({ backendPage }) => backendPage === requestedClient),
 	);
 }
 
@@ -153,9 +148,7 @@ for (const method of [
 
 					if (!clientInfo) {
 						return logError(
-							new ReferenceError(
-								`Invalid client: ${request.params?.client}`,
-							),
+							new ReferenceError(`Invalid client: ${request.params?.client}`),
 						);
 					}
 
@@ -180,17 +173,15 @@ for (const method of [
 					try {
 						const { host } = new URL(url);
 
-						return response
-							.status(300)
-							.render(path.resolve(__dirname, "allow.html"), {
-								client: request.params?.client,
-								data: JSON.stringify(data),
-								encodedUrl: encodeURIComponent(url),
-								host,
-								name: clientInfo.name,
-								token,
-								url,
-							});
+						return response.status(300).render(path.resolve(__dirname, "allow.html"), {
+							client: request.params?.client,
+							data: JSON.stringify(data),
+							encodedUrl: encodeURIComponent(url),
+							host,
+							name: clientInfo.name,
+							token,
+							url,
+						});
 					} catch {
 						return response.status(400);
 					}
@@ -251,9 +242,7 @@ router.get(
 			"Origin, X-Requested-With, Content-Type, Accept",
 		);
 
-		response
-			.status(200)
-			.json(await database.get(`RETRIEVE_${request.query?.code}`));
+		response.status(200).json(await database.get(`RETRIEVE_${request.query?.code}`));
 		database.delete(`RETRIEVE_${request.query?.code}`);
 	},
 );
@@ -274,8 +263,7 @@ router.get(
 		const { client, url = "", token } = request.query,
 			clientInfo = getClient(`${client}`);
 
-		if (!clientInfo)
-			return logError(new ReferenceError(`Invalid client: ${client}`));
+		if (!clientInfo) return logError(new ReferenceError(`Invalid client: ${client}`));
 
 		let code, redirect;
 

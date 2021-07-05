@@ -18,8 +18,7 @@ function processResult(results) {
 		.filter((result) => result.hasChanged)
 		.map((result) => result.file);
 
-	if (filteredResults.length === 1)
-		filteredResults = filteredResults[0] ?? [];
+	if (filteredResults.length === 1) filteredResults = filteredResults[0] ?? [];
 
 	return filteredResults;
 }
@@ -36,22 +35,14 @@ const commentRegex =
 			dot: true,
 			follow: true,
 
-			ignore: [
-				"node_modules/**",
-				".git/**",
-				".github/workflows/mustaches.js",
-			],
+			ignore: ["node_modules/**", ".git/**", ".github/workflows/mustaches.js"],
 
 			nocase: true,
 			nodir: true,
 			strict: true,
 		},
 
-		ignore: [
-			"node_modules/**",
-			".git/**",
-			".github/workflows/mustaches.js",
-		],
+		ignore: ["node_modules/**", ".git/**", ".github/workflows/mustaches.js"],
 	};
 
 console.log("Replacing triple mustaches with double and an ampersand...");
@@ -59,8 +50,7 @@ processResult(
 	replace.sync({
 		from: new RegExp(
 			commentRegex +
-				/(?:{[^\S\n]){2}{[^\S\n]*(?<tag>[^!#&/>^]*)[^\S\n]*(?:}[^\S\n]){2}}/
-					.source,
+				/(?:{[^\S\n]){2}{[^\S\n]*(?<tag>[^!#&/>^]*)[^\S\n]*(?:}[^\S\n]){2}}/.source,
 			"g",
 		),
 
@@ -74,9 +64,7 @@ processResult(
 const tripple = processResult(
 	replace.sync({
 		from: new RegExp(
-			commentRegex +
-				/{[^\S\n]{[^\S\n]*(?:[!#/^][^\S\n]*)?[^&>]*p}[^\S\n]}/
-					.source,
+			commentRegex + /{[^\S\n]{[^\S\n]*(?:[!#/^][^\S\n]*)?[^&>]*p}[^\S\n]}/.source,
 			"g",
 		),
 
@@ -96,9 +84,7 @@ if (tripple.length > 0) {
 	);
 }
 
-console.log(
-	"\nFormatting list mustaches, comment mustaches, and normal mustaches",
-);
+console.log("\nFormatting list mustaches, comment mustaches, and normal mustaches");
 processResult(
 	replace.sync({
 		from: new RegExp(
@@ -120,8 +106,7 @@ processResult(
 	replace.sync({
 		from: new RegExp(
 			commentRegex +
-				/{[^\S\n]{[^\S\n]*(?<type>[&>])[^\S\n]*(?<tag>[^!#/^]*)[^\S\n]*}[^\S\n]}/
-					.source,
+				/{[^\S\n]{[^\S\n]*(?<type>[&>])[^\S\n]*(?<tag>[^!#/^]*)[^\S\n]*}[^\S\n]}/.source,
 			"g",
 		),
 
@@ -131,4 +116,3 @@ processResult(
 		...options,
 	}),
 );
-

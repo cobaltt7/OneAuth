@@ -30,20 +30,17 @@ jobs:
 
             - name: Setup Transifex
               run:
-                  touch .transifexrc; echo "[https://www.transifex.com]" >
-                  .transifexrc; echo "api_hostname = https://api.transifex.com"
-                  >> .transifexrc; echo "hostname = https://www.transifex.com"
-                  >> .transifexrc; echo "password =" "${{ secrets.TRANSIFEX }}"
-                  >> .transifexrc; echo "username = api" >> .transifexrc;
+                  touch .transifexrc; echo "[https://www.transifex.com]" > .transifexrc; echo
+                  "api_hostname = https://api.transifex.com" >> .transifexrc; echo "hostname =
+                  https://www.transifex.com" >> .transifexrc; echo "password =" "${{
+                  secrets.TRANSIFEX }}" >> .transifexrc; echo "username = api" >> .transifexrc;
 
             - name: Push
               run: tx push --source --no-interactive --force --skip
 
             - name: Pull
               if: ${{ !cancelled() }}
-              run:
-                  tx pull --all --skip --no-interactive --force
-                  --mode=onlytranslated
+              run: tx pull --all --skip --no-interactive --force --mode=onlytranslated
 
             - name: Commit
               if: ${{ !cancelled() }}
@@ -55,8 +52,7 @@ jobs:
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
-                  commit_author:
-                      wgytbot <83586655+wgytbot@users.noreply.github.com>
+                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
 
             - name: Repository Dispatch
               if: always()

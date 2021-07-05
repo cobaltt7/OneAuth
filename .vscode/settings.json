@@ -45,15 +45,7 @@
 	"es6-css-minify.minifyOnSave": "exists",
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,
-	"eslint.validate": [
-		"javascript",
-		"html",
-		"json",
-		"jsonc",
-		"json5",
-		"markdown",
-		"handlebars"
-	],
+	"eslint.validate": ["javascript", "html", "json", "jsonc", "json5", "markdown", "handlebars"],
 	"files.associations": {
 		".autoprefixerrc": "ini",
 		"*.settings": "json",
@@ -153,15 +145,7 @@
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"multiclip.formatAfterPaste": true,
 	"todo-tree.filtering.includeHiddenFiles": true,
-	"todo-tree.general.tags": [
-		"FIX",
-		"IMPROVE",
-		"ADD",
-		"TEST",
-		"REMOVE",
-		"BOOKMARK",
-		"ROP"
-	],
+	"todo-tree.general.tags": ["FIX", "IMPROVE", "ADD", "TEST", "REMOVE", "BOOKMARK", "ROP"],
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"typescript.format.insertSpaceAfterConstructor": true,
 	"typescript.format.insertSpaceAfterTypeAssertion": true,
