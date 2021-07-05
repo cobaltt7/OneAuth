@@ -26,11 +26,15 @@ function logError(error) {
  * @param {e.Request} request - Express request object.
  * @param {e.Response} response - Express response object.
  * @param {number} status - HTTP status code.
- * 
- * @returns {e.Response} response - Express response object.
+ *
+ * @returns {e.Response} Response - Express response object.
  */
-function middleware(realStatus, request, response, status=response.statusCode) {
-
+function middleware(
+	realStatus,
+	request,
+	response,
+	status = response.statusCode,
+) {
 	if (
 		// If no content has already been sent
 		!response.headersSent &&
@@ -45,7 +49,7 @@ function middleware(realStatus, request, response, status=response.statusCode) {
 			logError(
 				new RangeError(
 					`Do not use the HTTP status code ${status}. Instead, use ${
-					changeTo[`${status}`]
+						changeTo[`${status}`]
 					}.`,
 				),
 			);
@@ -69,8 +73,9 @@ function middleware(realStatus, request, response, status=response.statusCode) {
 						path.resolve(__dirname, "error.html"),
 						error,
 					);
+				} else {
+					response.json(error);
 				}
-				else { response.json(error); }
 			}, 3000);
 
 			return realStatus.call(response, status);
@@ -78,12 +83,13 @@ function middleware(realStatus, request, response, status=response.statusCode) {
 	}
 
 	setTimeout(() => {
-		if (!response.headersSent) middleware(
-			realStatus,
-			request,
-			response,
-			Math.floor(status / 100) === 2 ? 408 : status,
-		);
+		if (!response.headersSent)
+			middleware(
+				realStatus,
+				request,
+				response,
+				Math.floor(status / 100) === 2 ? 408 : status,
+			);
 	}, 3000);
 }
 
@@ -123,4 +129,3 @@ module.exports.middleware = (request, response, next) => {
 
 	return next();
 };
-

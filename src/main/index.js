@@ -103,7 +103,10 @@ router.use(
 							);
 
 							if (index + 1 === codeblocks.length)
-								return realSend.call(response, indexQuery.html());
+								return realSend.call(
+									response,
+									indexQuery.html(),
+								);
 
 							return response;
 						})
