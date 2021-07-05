@@ -143,7 +143,7 @@
 		"serve-index": "^1.9.1"
 	},
 	"devDependencies": {
-		"@onedotprojects/eslint-plugin": "^1.0.2",
+		"@onedotprojects/eslint-plugin": "^1.1.0",
 		"@tailwindcss/forms": "^0.3.3",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/accepts": "^1.3.5",
