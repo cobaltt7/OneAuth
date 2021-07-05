@@ -56,7 +56,6 @@
 	"error205Heading": { "string": "Reajustar Contenido" },
 	"error300Heading": { "string": "" },
 	"error304Heading": { "string": "" },
-	"error305Heading": { "string": "Usa Proxy" },
 	"error400Heading": { "string": "" },
 	"error401Heading": { "string": "" },
 	"error402Heading": { "string": "" },
@@ -109,7 +108,6 @@
 	"error304Message": {
 		"string": ""
 	},
-	"error305Message": { "string": "" },
 	"error400Message": {
 		"string": ""
 	},
@@ -204,6 +202,53 @@
 		"string": ""
 	},
 	"error510Message": {
+		"string": ""
+	},	"error100Heading": { "string": "" },
+	"error100Message": {
+		"string": ""
+	},
+	"error101Heading": { "string": ""},
+	"error101Message": {
+		"string": ""
+	},
+	"error102Heading": { "string": ""},
+	"error102Message": {
+		"string": ""
+	},
+	"error103Heading": { "string": ""},
+	"error103Message": {
+		"string": ""
+	},
+	"error203Heading": { "string": ""},
+	"error203Message": {
+		"string": ""
+	},
+	"error208Heading": { "string": ""},
+	"error208Message": {
+		"string": ""
+	},
+	"error226Heading": { "string": ""},
+	"error226Message": {
+		"string": ""
+	},
+	"error422Heading": { "string":""},
+	"error422Message": {
+		"string": ""
+	},
+	"error423Heading": { "string":""},
+	"error423Message": {
+		"string": ""
+	},
+	"error507Heading": { "string":""},
+	"error507Message": {
+		"string": ""
+	},
+	"error508Heading": { "string":""},
+	"error508Message": {
+		"string": ""
+	},
+	"error511Heading": { "string":""},
+	"error511Message": {
 		"string": ""
 	},
 	"errorOldHeading": { "string": "" },
