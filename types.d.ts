@@ -29,8 +29,8 @@ interface AuthObj {
 export type RequestFunction = (
 	request: e.Request,
 	response: e.Response,
-	sendResponse: (tokenOrData: any, url: string) => void | e.Response,
-) => Promise<void>;
+	sendResponse: (tokenOrData: any, url: string) => undefined | e.Response,
+) => Promise<undefined>;
 export interface Page {
 	"backendPage": string;
 	// "all"?: RequestFunction;

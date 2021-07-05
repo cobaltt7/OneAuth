@@ -5,7 +5,7 @@ declare module "retronid" {
 declare module "live-plugin-manager" {
 	export = {
 		PluginManager = class {
-			install(library: string): Promise<void>;
+			install(library: string): Promise<undefined>;
 			require(library: string): any;
 		},
 	};
@@ -57,7 +57,7 @@ declare module "cookie-parser" {
 		(
 			request: e.Request,
 			response: e.Response,
-			next: (error?: any) => void,
+			next: (error?: any) => undefined,
 		) =>
 			undefined;
 }

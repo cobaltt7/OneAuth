@@ -52,7 +52,7 @@ const ReplitDB = require("@replit/database"),
  *
  * @param {string} requestedClient - Client to retrieve information about.
  *
- * @returns {import("../../types").Auth | void} - Information about the client.
+ * @returns {import("../../types").Auth | undefined} - Information about the client.
  */
 function getClient(requestedClient) {
 	return authClients.find((currentClient) =>
@@ -125,7 +125,7 @@ for (const method of [
 				return;
 			}
 
-			/** @type {import("../../types").RequestFunction | void} */
+			/** @type {import("../../types").RequestFunction | undefined} */
 			// @ts-expect-error -- TS can't tell that there is a limited set of values for `method`.
 			const requestFunction = client[`${method}`];
 
@@ -146,7 +146,7 @@ for (const method of [
 				 *   data with or the raw data itself.
 				 * @param {string} url - URL to redirect the user to afterwards.
 				 *
-				 * @returns {void | e.Response} - Nothing of interest.
+				 * @returns {undefined | e.Response} - Nothing of interest.
 				 */
 				(tokenOrData, url) => {
 					const clientInfo = getClient(request.params?.client || "");
@@ -209,7 +209,7 @@ router.get(
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {e.Response | void} - Express response object.
+	 * @returns {e.Response | undefined} - Express response object.
 	 */
 	(request, response) => {
 		if (!request.query?.url) return response.status(400);
@@ -266,7 +266,7 @@ router.get(
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {Promise<e.Response | void>} - Nothing of interest.
+	 * @returns {Promise<e.Response | undefined>} - Nothing of interest.
 	 */
 	async (request, response) => {
 		if (!request.query) return logError("`request.query` is falsy!");
@@ -293,8 +293,6 @@ router.get(
 		try {
 			redirect = new URL(url);
 			redirect.searchParams.set("code", code);
-
-			console.log(redirect, url);
 
 			return response.status(303).redirect(redirect);
 		} catch {

@@ -5,7 +5,7 @@ declare global {
 	declare const process: {
 		argv: string[];
 		env: { [key: string]: string };
-		exit: (code?: number) => void;
+		exit: (code?: number) => undefined;
 	};
 	declare const require: (library: string) => any;
 	declare namespace e {
@@ -15,32 +15,34 @@ declare global {
 			query?: { [key: string]: string };
 			params?: { [key: string]: string };
 			cookies?: { [key: string]: string };
-			get: (header: string) => string | void;
+			get: (header: string) => string | undefined;
 			languages: string[];
 			accepts: (type: string) => boolean;
 			messages: { [key: string]: string };
 		} & express.Request;
 		export type Response = {
-			sendStatus: (status: number) => void;
+			sendStatus: (status: number) => undefined;
 			status: (status: number) => Response;
 			render: (
 				view: string,
 				options?: { [key: string]: any },
-				callback?: (error: Error, str: string) => void,
-			) => void;
+				callback?: (error: Error, str: string) => undefined,
+			) => undefined;
 			cookie: (
 				name: string,
 				value: string,
 				options: { [key: string] },
-			) => void;
-			setHeader: (header: string, value: string) => void;
+			) => undefined;
+			setHeader: (header: string, value: string) => undefined;
 			readonly statusCode: number;
-			json: (info: any) => void;
+			json: (info: any) => undefined;
 			headersSent: boolean;
+
 			// Technically returns `Response` in basic Express but because of syntax highlighting problems (async) it can't anymore.
-			send: (info: string) => void;
-			redirect: (url: string) => void;
-			sendFile: (url: string) => void;
+			send: (info: string) => undefined;
+
+			redirect: (url: string | URL) => undefined;
+			sendFile: (path: string) => undefined;
 		} & express.Response;
 	}
 }

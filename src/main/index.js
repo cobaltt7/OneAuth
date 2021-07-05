@@ -53,9 +53,9 @@ router.use(
 	 *
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => void} next - Express continue function.
+	 * @param {(error?: any) => undefined} next - Express continue function.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response, next) => {
 		const realSend = response.send;
@@ -65,7 +65,7 @@ router.use(
 		 *
 		 * @param {string} text - The text to send.
 		 *
-		 * @returns {void}
+		 * @returns {undefined}
 		 */
 		// eslint-disable-next-line no-param-reassign -- We need to override the original functions.
 		response.send = (text) => {
@@ -73,11 +73,9 @@ router.use(
 			// eslint-disable-next-line one-var -- `codeblocks` depends on `jQuery`
 			const codeblocks = indexQuery("pre.hljs:not(:has(*))");
 
-			if (!codeblocks?.length) {
-				return realSend.call(response, text);
-			}
+			if (!codeblocks?.length) return realSend.call(response, text);
 
-			codeblocks.map(
+			return codeblocks.map(
 				/**
 				 * Highlight a code block using highlight.js.
 				 *
@@ -102,11 +100,12 @@ router.use(
 								),
 							);
 
-							if (index + 1 === codeblocks.length)
+							if (index + 1 === codeblocks.length) {
 								return realSend.call(
 									response,
 									indexQuery.html(),
 								);
+							}
 
 							return response;
 						})
@@ -131,7 +130,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) =>
 		response
@@ -149,7 +148,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) =>
 		response
@@ -165,7 +164,7 @@ router.get(
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(request, response) =>
 		response.sendFile(
@@ -182,7 +181,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) =>
 		response.render(path.resolve(__dirname, "about.html"), {
@@ -200,7 +199,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) => response.status(303).redirect("https://auth.onedot.cf/"),
 );
@@ -214,7 +213,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) =>
 		response.send("google-site-verification: googleb9551735479dd7b0.html"),
@@ -229,7 +228,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) =>
 		response.send(
@@ -249,7 +248,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) =>
 		response.status(303).send(`Contact: mailto:${process.env.GMAIL_EMAIL}
@@ -268,7 +267,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) =>
 		response
@@ -286,7 +285,7 @@ router.get(
 	 * @param {e.Request} _ - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(_, response) => {
 		response.setHeader("content-type", "text/css");
