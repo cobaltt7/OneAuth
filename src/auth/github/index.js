@@ -31,23 +31,20 @@ module.exports = {
 			backendPage: "github",
 
 			get: async (request, response, sendResponse) => {
-				const info = await fetch(
-					"https://github.com/login/oauth/access_token",
-					{
-						body:
-							"client_id=7b64414fe57e07d1e969" +
-							`&client_secret=${process.env.githubSECRET}` +
-							`&code=${request.query?.code}` +
-							`&state=${request.query?.state}`,
+				const info = await fetch("https://github.com/login/oauth/access_token", {
+					body:
+						"client_id=7b64414fe57e07d1e969" +
+						`&client_secret=${process.env.githubSECRET}` +
+						`&code=${request.query?.code}` +
+						`&state=${request.query?.state}`,
 
-						headers: {
-							"Content-Type": "application/x-www-form-urlencoded",
-							"accept": "application/json",
-						},
-
-						method: "POST",
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded",
+						"accept": "application/json",
 					},
-				)
+
+					method: "POST",
+				})
 					.then((fetchResult) => fetchResult.json())
 					.catch((error) => {
 						response.status(502);

@@ -28,11 +28,7 @@ declare global {
 				options?: { [key: string]: any },
 				callback?: (error: Error, str: string) => undefined,
 			) => undefined;
-			cookie: (
-				name: string,
-				value: string,
-				options: { [key: string] },
-			) => undefined;
+			cookie: (name: string, value: string, options: { [key: string] }) => undefined;
 			setHeader: (header: string, value: string) => undefined;
 			readonly statusCode: number;
 			json: (info: any) => undefined;

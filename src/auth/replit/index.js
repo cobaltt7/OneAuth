@@ -16,8 +16,7 @@ module.exports = {
 			backendPage: "replit",
 
 			get: (request, response, sendResponse) => {
-				const roles =
-						request.get("X-Replit-User-Roles")?.split(",") || [],
+				const roles = request.get("X-Replit-User-Roles")?.split(",") || [],
 					userID = request.get("X-Replit-User-Id"),
 					username = request.get("X-Replit-User-Name");
 

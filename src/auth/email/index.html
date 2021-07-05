@@ -28,9 +28,7 @@
 					required="true"
 					placeholder="{{ #message }}emailPlaceholder{{ /message }}"
 				/>
-				<button id="submit" type="submit">
-					{{ #message }}emailSubmit{{ /message }}
-				</button>
+				<button id="submit" type="submit">{{ #message }}emailSubmit{{ /message }}</button>
 			</form>
 		</main>
 		<script>
@@ -62,22 +60,18 @@
 					await fetch("", {
 						body: `email=${email}`,
 						headers: {
-							"content-type":
-								"application/x-www-form-urlencoded; charset=UTF-8",
+							"content-type": "application/x-www-form-urlencoded; charset=UTF-8",
 						},
 						method: "POST",
 					});
 
 					// Create new form
-					const codeForm = Object.assign(
-						document.createElement("form"),
-						{
-							// Create form element
-							action: "",
-							autocomplete: "off",
-							method: "POST",
-						}
-					);
+					const codeForm = Object.assign(document.createElement("form"), {
+						// Create form element
+						action: "",
+						autocomplete: "off",
+						method: "POST",
+					});
 					codeForm.append(
 						Object.assign(document.createElement("input"), {
 							// Code box
@@ -102,8 +96,7 @@
 
 							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "submit",
-							innerText:
-								"{{ #message }}emailSubmit{{ /message }}",
+							innerText: "{{ #message }}emailSubmit{{ /message }}",
 							type: "submit",
 						})
 					);
@@ -114,8 +107,7 @@
 							htmlFor: "code",
 							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "note",
-							innerText:
-								"{{ #message }}emailEnterCode{{ /message }}",
+							innerText: "{{ #message }}emailEnterCode{{ /message }}",
 						}),
 						codeForm
 					);

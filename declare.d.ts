@@ -54,11 +54,7 @@ declare module "node-fetch" {
 
 declare module "cookie-parser" {
 	export = (secret?: string | string[], options?: any) =>
-		(
-			request: e.Request,
-			response: e.Response,
-			next: (error?: any) => undefined,
-		) =>
+		(request: e.Request, response: e.Response, next: (error?: any) => undefined) =>
 			undefined;
 }
 

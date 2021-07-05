@@ -15,10 +15,7 @@ const fileSystem = require("fs"),
 	router = require("express").Router(),
 	serveIndex = require("serve-index");
 
-highlightjs.registerLanguage(
-	"plaintext",
-	require("highlight.js/lib/languages/plaintext"),
-);
+highlightjs.registerLanguage("plaintext", require("highlight.js/lib/languages/plaintext"));
 
 /**
  * Highlights code using highlight.js.
@@ -71,10 +68,7 @@ function highlight(code, originalLanguage, callback) {
 					packageManager.require(`highlightjs-${language}`),
 				);
 
-				return callback(
-					undefined,
-					highlightjs.highlight(code, { language }).value,
-				);
+				return callback(undefined, highlightjs.highlight(code, { language }).value);
 			})
 			.catch(() => {
 				packageManager
@@ -85,10 +79,7 @@ function highlight(code, originalLanguage, callback) {
 							packageManager.require(`${language}-highlightjs`),
 						);
 
-						return callback(
-							undefined,
-							highlightjs.highlight(code, { language }).value,
-						);
+						return callback(undefined, highlightjs.highlight(code, { language }).value);
 					})
 					.catch(() =>
 						callback(
@@ -139,9 +130,7 @@ router.get(
 	 * @returns {undefined}
 	 */
 	(request, response) =>
-		response.redirect(
-			`/docs/${/^\/(?<file>.+).md$/m.exec(request.path)?.groups?.file}`,
-		),
+		response.redirect(`/docs/${/^\/(?<file>.+).md$/m.exec(request.path)?.groups?.file}`),
 );
 router.use(
 	/**
@@ -161,10 +150,7 @@ router.use(
 			const markdown = fileSystem.readFileSync(filename, "utf8");
 
 			return response.render(path.resolve(__dirname, "markdown.html"), {
-				content: (await markedPromise(markdown)).replace(
-					/<pre>/g,
-					'<pre class="hljs">',
-				),
+				content: (await markedPromise(markdown)).replace(/<pre>/g, '<pre class="hljs">'),
 
 				title: /^#\s(?<heading>.+)$/m.exec(markdown)?.groups?.heading,
 			});

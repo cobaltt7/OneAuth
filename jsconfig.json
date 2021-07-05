@@ -28,17 +28,7 @@
 		"strictPropertyInitialization": true,
 		"pretty": true,
 		"noResolve": true,
-		"lib": [
-			"es2015",
-			"dom",
-			"es2016",
-			"es2017",
-			"es2018",
-			"es2019",
-			"es2020",
-			"es5",
-			"es6"
-		],
+		"lib": ["es2015", "dom", "es2016", "es2017", "es2018", "es2019", "es2020", "es5", "es6"],
 		"alwaysStrict": true,
 		"disableReferencedProjectLoad": true,
 		"disableSizeLimit": true,
@@ -55,12 +45,7 @@
 		"stripInternal": true,
 		"target": "es2020",
 		"useDefineForClassFields": true,
-		"typeRoots": [
-			"node_modules",
-			"node_modules/@types",
-			"node_modules/@types/node",
-			"/"
-		]
+		"typeRoots": ["node_modules", "node_modules/@types", "node_modules/@types/node", "/"]
 	},
 	"exclude": ["node_modules"],
 	"typeAcquisition": { "enable": true },

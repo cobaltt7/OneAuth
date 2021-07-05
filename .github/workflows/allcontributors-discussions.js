@@ -20,8 +20,7 @@ function graphql(query, ...placeholderValues) {
 	return (
 		// eslint-disable-next-line unicorn/no-array-reduce -- reduce is the best way to do this.
 		placeholderValues.reduce(
-			(last, placeholder, index) =>
-				`${last}${placeholder}${query[index + 1]}`,
+			(last, placeholder, index) => `${last}${placeholder}${query[index + 1]}`,
 			query[0],
 		) || ""
 	);
@@ -86,12 +85,10 @@ async function getPage(hash = "") {
 			method: "POST",
 		}).then((response) => response.json()),
 		/** @type {{ cursor: string; username?: string }[]} */
-		processedDiscussions = data.repository.discussions.edges.map(
-			(discussion) => ({
-				cursor: discussion.cursor,
-				username: discussion.node.answer?.author?.login,
-			}),
-		);
+		processedDiscussions = data.repository.discussions.edges.map((discussion) => ({
+			cursor: discussion.cursor,
+			username: discussion.node.answer?.author?.login,
+		}));
 
 	return {
 		discussions: processedDiscussions,
@@ -119,14 +116,10 @@ getPage("")
 
 			hash = nextDiscussions[nextDiscussions.length - 1]?.cursor;
 			discussionIndex += nextDiscussions.length;
-			result.push(
-				nextDiscussions.map((discussion) => discussion.username),
-			);
+			result.push(nextDiscussions.map((discussion) => discussion.username));
 		}
 
-		return Array.from(
-			new Set(result.flat().filter((username) => username)),
-		).join("\n");
+		return Array.from(new Set(result.flat().filter((username) => username))).join("\n");
 	})
 	.then(console.log)
 	.catch((error) => {

@@ -51,14 +51,12 @@ jobs:
               id: commit
               uses: stefanzweifel/git-auto-commit-action@master
               with:
-                  commit_message:
-                      "Install dependencies to prevent deduplication"
+                  commit_message: "Install dependencies to prevent deduplication"
                   branch: main
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
-                  commit_author:
-                      wgytbot <83586655+wgytbot@users.noreply.github.com>
+                  commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
 
             - name: Repository Dispatch
               if: always()

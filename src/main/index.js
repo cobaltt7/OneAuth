@@ -86,25 +86,18 @@ router.use(
 				(index) => {
 					const code = codeblocks.eq(index),
 						[langClass, language = "plaintext"] =
-							/lang(?:uage)?-(?<language>\w+)/u.exec(
-								code.attr("class"),
-							) ?? [];
+							/lang(?:uage)?-(?<language>\w+)/u.exec(code.attr("class")) ?? [];
 
 					code.removeClass(langClass);
 					highlight(code.text(), language)
 						.then((highlighted) => {
 							code.html(highlighted);
 							code.wrapInner(
-								indexQuery(
-									`<code class="language-${language}"></code>`,
-								),
+								indexQuery(`<code class="language-${language}"></code>`),
 							);
 
 							if (index + 1 === codeblocks.length) {
-								return realSend.call(
-									response,
-									indexQuery.html(),
-								);
+								return realSend.call(response, indexQuery.html());
 							}
 
 							return response;
@@ -135,9 +128,7 @@ router.get(
 	(_, response) =>
 		response
 			.status(302)
-			.redirect(
-				"https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg",
-			),
+			.redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg"),
 );
 router.get(
 	"/favicon.ico",
@@ -151,9 +142,7 @@ router.get(
 	 * @returns {undefined}
 	 */
 	(_, response) =>
-		response
-			.status(302)
-			.redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg"),
+		response.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg"),
 );
 router.get(
 	"/svg/:img",
@@ -167,9 +156,7 @@ router.get(
 	 * @returns {undefined}
 	 */
 	(request, response) =>
-		response.sendFile(
-			path.resolve(__dirname, `../svg/${request.params?.img}.svg`),
-		),
+		response.sendFile(path.resolve(__dirname, `../svg/${request.params?.img}.svg`)),
 );
 
 router.get(
@@ -215,8 +202,7 @@ router.get(
 	 *
 	 * @returns {undefined}
 	 */
-	(_, response) =>
-		response.send("google-site-verification: googleb9551735479dd7b0.html"),
+	(_, response) => response.send("google-site-verification: googleb9551735479dd7b0.html"),
 );
 
 router.get(
@@ -232,10 +218,7 @@ router.get(
 	 */
 	(_, response) =>
 		response.send(
-			"User-agent: *\n" +
-				"Allow: /\n" +
-				"Disalow: /auth\n" +
-				"Host: https://auth.onedot.cf",
+			"User-agent: *\n" + "Allow: /\n" + "Disalow: /auth\n" + "Host: https://auth.onedot.cf",
 		),
 );
 
@@ -269,10 +252,7 @@ router.get(
 	 *
 	 * @returns {undefined}
 	 */
-	(_, response) =>
-		response
-			.status(301)
-			.redirect("https://github.com/onedotprojects/auth/people"),
+	(_, response) => response.status(301).redirect("https://github.com/onedotprojects/auth/people"),
 );
 
 // CSS

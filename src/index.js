@@ -8,10 +8,7 @@ const express = require("express"),
 
 const app = express(),
 	// Mustache
-	mustacheExpress = require("mustache-express")(
-		path.resolve(__dirname, "partials"),
-		".html",
-	);
+	mustacheExpress = require("mustache-express")(path.resolve(__dirname, "partials"), ".html");
 
 app.engine("html", mustacheExpress);
 app.engine("css", mustacheExpress);

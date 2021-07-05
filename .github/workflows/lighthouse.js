@@ -16,8 +16,7 @@ function graphql(query, ...placeholderValues) {
 	return (
 		// eslint-disable-next-line unicorn/no-array-reduce -- reduce is the best way to do this.
 		placeholderValues.reduce(
-			(last, placeholder, index) =>
-				`${last}${placeholder}${query[index + 1]}`,
+			(last, placeholder, index) => `${last}${placeholder}${query[index + 1]}`,
 			query[0],
 		) || ""
 	);
@@ -55,13 +54,9 @@ function commentOnDiscussion(body) {
 }
 
 if (process.argv[4]) {
-	commentOnDiscussion(
-		"An error occured while retrieving the data from Lighthouse.",
-	);
+	commentOnDiscussion("An error occured while retrieving the data from Lighthouse.");
 
-	throw new Error(
-		"An error occured while retrieving the data from Lighthouse.",
-	);
+	throw new Error("An error occured while retrieving the data from Lighthouse.");
 }
 
 try {
@@ -78,21 +73,12 @@ try {
 
 	for (const result of data) {
 		output +=
-			`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(
-				result.scores,
-			)
-				.map(
-					(number) =>
-						`${
-							number < 50 ? "🔴" : number < 90 ? "🟡" : "🟢"
-						} ${number}`,
-				)
+			`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores)
+				.map((number) => `${number < 50 ? "🔴" : number < 90 ? "🟡" : "🟢"} ${number}`)
 				.join(
 					" | ",
 				)} | [More information](https://developers.google.com/speed/pagespeed/insights/` +
-			`?url=${encodeURIComponent(result.url)}&tab=${
-				result.emulatedFormFactor
-			}) |\n`;
+			`?url=${encodeURIComponent(result.url)}&tab=${result.emulatedFormFactor}) |\n`;
 	}
 
 	commentOnDiscussion(output);
