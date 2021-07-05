@@ -21,7 +21,7 @@
 	"scripts": {
 		"lint": "echo 'CODE STYLE'; npm run lint:mustaches; npm run lint:prettier; npm run lint:eslint; npm run lint:typescript; echo GRAMMAR; npm run lint:spellchecker-cli; npm run lint:write_good",
 		"lint:eslint": "eslint --fix .",
-		"lint:prettier": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write .",
+		"lint:prettier": "prettier --write .",
 		"lint:mustaches": "node --trace-warnings --harmony .github/workflows/mustaches.js",
 		"lint:typescript": "tsc --project jsconfig.json",
 		"lint:spellchecker": "find . -path ./node_modules -prune -false -o -name '_.md' | xargs -I {} spellchecker {} --dictionaries dictionary.txt; spellchecker-cli _locales/en_US.json --dictionaries dictionary.txt",
@@ -143,7 +143,7 @@
 		"serve-index": "^1.9.1"
 	},
 	"devDependencies": {
-		"@onedotprojects/eslint-plugin": "*",
+		"@onedotprojects/eslint-plugin": "^1.0.2",
 		"@tailwindcss/forms": "^0.3.3",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/accepts": "^1.3.5",

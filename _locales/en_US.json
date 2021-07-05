@@ -56,7 +56,6 @@
 	"error205Heading": { "string": "Reset Content" },
 	"error300Heading": { "string": "Multiple Choice" },
 	"error304Heading": { "string": "Not Modified" },
-	"error305Heading": { "string": "Use Proxy" },
 	"error400Heading": { "string": "Bad Request" },
 	"error401Heading": { "string": "Unauthorized" },
 	"error402Heading": { "string": "Payment Required " },
@@ -77,7 +76,7 @@
 	"error417Heading": { "string": "Expectation Failed" },
 	"error418Heading": { "string": "I’m a teapot" },
 	"error421Heading": { "string": "Misdirected Request" },
-	"error425Heading": { "string": "Too Early " },
+	"error425Heading": { "string": "Too Early" },
 	"error426Heading": { "string": "Upgrade Required" },
 	"error428Heading": { "string": "Precondition Required" },
 	"error429Heading": { "string": "Too Many Requests" },
@@ -109,7 +108,6 @@
 	"error304Message": {
 		"string": "The requested page has not been modified since the last request."
 	},
-	"error305Message": { "string": "A proxy is needed to access this page." },
 	"error400Message": {
 		"string": "Oops! Your request was invalid. Please make sure all needed information is sent, no extra information is sent, and all sent information is valid. If this keeps happening, try contacting us on GitHub."
 	},
@@ -205,6 +203,53 @@
 	},
 	"error510Message": {
 		"string": "We can’t show you this page with the information given. Please extend your request."
+	},	"error100Heading": { "string": "Continue" },
+	"error100Message": {
+		"string": "Please continue with your request."
+	},
+	"error101Heading": { "string": "Switching Protocol"},
+	"error101Message": {
+		"string": "Switching from HTTP to HTTPS."
+	},
+	"error102Heading": { "string": "Processing"},
+	"error102Message": {
+		"string": "We have received your request. Please wait."
+	},
+	"error103Heading": { "string": "Early Hints"},
+	"error103Message": {
+		"string": "Here are some resources that you will need. While you wait for the rest of the response, please start loading them."
+	},
+	"error203Heading": { "string": "Non-Authoritative Information"},
+	"error203Message": {
+		"string": "This information is from a backup copy and may not be up-to-date. Please do not rely on it being correct."
+	},
+	"error208Heading": { "string": "Already Reported"},
+	"error208Message": {
+		"string": "We have already reported this information to you."
+	},
+	"error226Heading": { "string": "IM Used"},
+	"error226Message": {
+		"string": "We used some instance-manipulations on the current instance. Here is the result."
+	},
+	"error422Heading": { "string":"Unprocessable Entity"},
+	"error422Message": {
+		"string": "There are semantic errors in your request."
+	},
+	"error423Heading": { "string":"Locked"},
+	"error423Message": {
+		"string": "The requested resource is locked."
+	},
+	"error507Heading": { "string":"Insufficient Storage"},
+	"error507Message": {
+		"string": "Our servers do not have enough storage to store the data needed to complete your request."
+	},
+	"error508Heading": { "string":"Loop Detected"},
+	"error508Message": {
+		"string": "Ummm...there's an infinite loop somewhere in the code! As such, we can't complete your request! You may want to contact us on GitHub and let us know about this."
+	},
+	"error511Heading": { "string":"Network Authentication Required"},
+	"error511Message": {
+		"string": "Please sign in to the network before accessing the Internet."
 	},
 	"errorOldHeading": { "string": "You are using an outdated browser!" },
 	"errorOldWhy": {

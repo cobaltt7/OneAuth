@@ -36,7 +36,7 @@ declare global {
 			setHeader: (header: string, value: string) => void;
 			readonly statusCode: number;
 			json: (info: any) => void;
-			bodySent: boolean;
+			headersSent: boolean;
 			// Technically returns `Response` in basic Express but because of syntax highlighting problems (async) it can't anymore.
 			send: (info: string) => void;
 			redirect: (url: string) => void;

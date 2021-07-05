@@ -294,7 +294,9 @@ router.get(
 			redirect = new URL(url);
 			redirect.searchParams.set("code", code);
 
-			return response.status(303).redirect(url);
+			console.log(redirect, url);
+
+			return response.status(303).redirect(redirect);
 		} catch {
 			return response.status(400);
 		}

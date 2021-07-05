@@ -3,7 +3,7 @@
 /** @file Shows Error pages when errors occur. */
 
 /** @type {{ [key: string]: number }} */
-const changeTo = { 203: 204, 206: 204 };
+const changeTo = { 206: 204 };
 
 const path = require("path");
 
@@ -22,34 +22,35 @@ function logError(error) {
 /**
  * Function to run once status is sent.
  *
+ * @param {(status: number) => e.Response} realStatus
  * @param {e.Request} request - Express request object.
  * @param {e.Response} response - Express response object.
- * @param {number} [_status] - Status override value.
+ * @param {number} status - HTTP status code.
+ * 
+ * @returns {e.Response} response - Express response object.
  */
-function middleware(request, response, _status) {
-	const status = _status || response.statusCode;
+function middleware(realStatus, request, response, status=response.statusCode) {
 
 	if (
 		// If no content has already been sent
-		!response.bodySent &&
+		!response.headersSent &&
 		// And it's not a redirect
 		(status < 301 ||
 			status > 399 ||
-			// Allow the 300 codes that aren't actually redirects. Also, 300 is excluded above.
-			status === 304 ||
-			status === 305)
+			// Allow 300 (above) and 304 (below) since they aren't actually redirects.
+			status === 304)
 	) {
 		// Then it's an error code, send error page.
 		if (changeTo[`${status}`]) {
 			logError(
 				new RangeError(
 					`Do not use the HTTP status code ${status}. Instead, use ${
-						changeTo[`${status}`]
+					changeTo[`${status}`]
 					}.`,
 				),
 			);
 
-			middleware(request, response, changeTo[`${status}`]);
+			return middleware(request, response, changeTo[`${status}`]);
 		} else {
 			const error = {
 				heading: request.messages[`error${status}Heading`],
@@ -57,14 +58,33 @@ function middleware(request, response, _status) {
 				status,
 			};
 
-			if (
-				request.accepts("application/json") ||
-				request.accepts("text/json")
-			)
-				response.json(error);
-			else response.render(path.resolve(__dirname, "error.html"), error);
+			if (Object.keys(error).includes())
+				return middleware(realStatus, request, response, 500);
+
+			setTimeout(() => {
+				if (response.headersSent) return "";
+
+				if (request.accepts("text/html")) {
+					response.render(
+						path.resolve(__dirname, "error.html"),
+						error,
+					);
+				}
+				else { response.json(error); }
+			}, 3000);
+
+			return realStatus.call(response, status);
 		}
 	}
+
+	setTimeout(() => {
+		if (!response.headersSent) middleware(
+			realStatus,
+			request,
+			response,
+			Math.floor(status / 100) === 2 ? 408 : status,
+		);
+	}, 3000);
 }
 
 module.exports.logError = logError;
@@ -79,9 +99,6 @@ module.exports.logError = logError;
  * @returns {void}
  */
 module.exports.middleware = (request, response, next) => {
-	// eslint-disable-next-line no-param-reassign -- We need to override the original.
-	response.bodySent = false;
-
 	if (request.path === "/old") {
 		return response
 			.status(400)
@@ -90,23 +107,7 @@ module.exports.middleware = (request, response, next) => {
 			});
 	}
 
-	const realSend = response.send,
-		realStatus = response.status;
-
-	/**
-	 * Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use `send` internally.
-	 *
-	 * @param {string} body - The content to send.
-	 *
-	 * @returns {void}
-	 */
-	// eslint-disable-next-line no-param-reassign -- We need to override the original.
-	response.send = function send(body) {
-		// eslint-disable-next-line no-param-reassign -- We need to override the original.
-		response.bodySent = true;
-
-		return realSend.call(this, body);
-	};
+	const realStatus = response.status;
 
 	/**
 	 * Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use `send` internally.
@@ -117,15 +118,9 @@ module.exports.middleware = (request, response, next) => {
 	 */
 	// eslint-disable-next-line no-param-reassign -- We need to override the original.
 	response.status = function status(statusCode) {
-		const returnValue = realStatus.call(
-			this,
-			statusCode === 200 && !response.bodySent ? 404 : statusCode,
-		);
-
-		middleware(request, response);
-
-		return returnValue;
+		return middleware(realStatus, request, response, statusCode);
 	};
 
 	return next();
 };
+

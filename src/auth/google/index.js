@@ -29,15 +29,14 @@ module.exports = {
 			},
 		).then((result) => result.json());
 
-		if (error || !idToken) {
-			logError(error);
-
-			return error;
-		}
+		if (error || !idToken) return logError(new Error(error));
+		// Handle `error === "invalid_grant"`, meaning you took too long.
 
 		/** @type {{ [key: string]: string }} */
 		const filteredInfo = {},
 			info = JSON.parse(atob(idToken.split(".")[1]));
+
+		if (info.error) return logError(new Error(info.error));
 
 		for (const item in info) {
 			if (
@@ -51,7 +50,6 @@ module.exports = {
 					"name",
 					"picture",
 					"profile",
-					"error",
 				].includes(item)
 			)
 				filteredInfo[`${item}`] = info[`${item}`];

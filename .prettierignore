@@ -1,2 +1,13 @@
+logs
+!**
+.git/
+src/main/style.css
+node_modules/
+plugin_packages/
+.npm
+.upm
+.nvm
+.eslintcache
+.node_repl_history
 _locales
 !locales/en_US.json

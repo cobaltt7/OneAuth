@@ -1,6 +1,6 @@
-/** @file Main Script that sets up Express and Express middleware. */
-
 "use strict";
+
+/** @file Main Script that sets up Express and Express middleware. */
 
 // SET UP EXPRESS
 const express = require("express"),
@@ -17,9 +17,8 @@ app.engine("html", mustacheExpress);
 app.engine("css", mustacheExpress);
 
 // Errors
-const errors = require("./errors");
-
-app.use(errors.middleware);
+const errors = require("./errors").middleware;
+app.use(errors);
 
 // Compress
 const compression = require("compression");
@@ -126,7 +125,8 @@ const documentation = require("./docs").router;
 app.use("/docs", documentation);
 
 // Main pages
-const main = require("./main/index.js");
+const main = require("./main");
+
 app.use(main);
 
 // Auth pages
@@ -137,3 +137,4 @@ app.use("/auth", auth);
 // LISTEN
 // eslint-disable-next-line no-console -- We need to know when it's ready.
 app.listen(3000, () => console.log("App ready"));
+

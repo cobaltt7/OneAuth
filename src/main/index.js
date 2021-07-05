@@ -69,13 +69,14 @@ router.use(
 		 */
 		// eslint-disable-next-line no-param-reassign -- We need to override the original functions.
 		response.send = (text) => {
-			const jQuery = cheerio.load(text);
+			const indexQuery = cheerio.load(text);
 			// eslint-disable-next-line one-var -- `codeblocks` depends on `jQuery`
-			const codeblocks = jQuery("pre.hljs:not(:has(*))");
+			const codeblocks = indexQuery("pre.hljs:not(:has(*))");
+
 			if (!codeblocks?.length) {
-				realSend.call(response, jQuery.html());
-				next();
+				return realSend.call(response, text);
 			}
+
 			codeblocks.map(
 				/**
 				 * Highlight a code block using highlight.js.
@@ -96,13 +97,13 @@ router.use(
 						.then((highlighted) => {
 							code.html(highlighted);
 							code.wrapInner(
-								jQuery(
+								indexQuery(
 									`<code class="language-${language}"></code>`,
 								),
 							);
 
 							if (index + 1 === codeblocks.length)
-								return realSend.call(this, jQuery.html());
+								return realSend.call(response, indexQuery.html());
 
 							return response;
 						})
