@@ -17,8 +17,9 @@ app.engine("html", mustacheExpress);
 app.engine("css", mustacheExpress);
 
 // Errors
-const errors = require("./errors").middleware;
-app.use(errors);
+const errors = require("./errors");
+
+app.use(errors.errorPages);
 
 // Compress
 const compression = require("compression");
@@ -31,7 +32,7 @@ app.use(
 	 *
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => void} next - Express continue function.
+	 * @param {(error?: any) => undefined} next - Express continue function.
 	 */
 	(request, response, next) => {
 		if (request.path.includes(".css"))
@@ -43,37 +44,7 @@ app.use(
 	},
 );
 
-app.use(
-	/**
-	 * Disalow old browsers from visiting our site.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => void} next - Express continue function.
-	 *
-	 * @returns {void}
-	 * @todo Make our site available to old browsers.
-	 */
-	(request, response, next) => {
-		if (request.path.includes(".") || request.path === "/old")
-			return next();
-
-		const userAgent = `${request.get("User-Agent")}`;
-
-		if (
-			userAgent.includes("MSIE") ||
-			userAgent.includes("Trident") ||
-			userAgent.includes("Netscape") ||
-			userAgent.includes("Navigator")
-		) {
-			return response
-				.status(400)
-				.render(path.resolve(__dirname, "errors/old.html"));
-		}
-
-		return next();
-	},
-);
+app.use(errors.old);
 
 // Info sent (cookies, bodies)
 const bodyParser = express.urlencoded({
@@ -87,9 +58,9 @@ app.use(
 	 *
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => void} next - Express continue function.
+	 * @param {(error?: any) => undefined} next - Express continue function.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(request, response, next) => {
 		if (request.path.includes(".")) return next();
@@ -103,9 +74,9 @@ app.use(
 	 *
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => void} next - Express continue function.
+	 * @param {(error?: any) => undefined} next - Express continue function.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(request, response, next) => {
 		if (request.path.includes(".")) return next();
@@ -133,6 +104,8 @@ app.use(main);
 const auth = require("./auth");
 
 app.use("/auth", auth);
+
+app.use(errors.notFound);
 
 // LISTEN
 // eslint-disable-next-line no-console -- We need to know when it's ready.

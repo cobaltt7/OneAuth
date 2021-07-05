@@ -222,7 +222,7 @@ module.exports = {
 	 *
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => void} next - Express continue function.
+	 * @param {(error?: any) => undefined} next - Express continue function.
 	 */
 	middleware(request, response, next) {
 		/** @type {string[]} */
@@ -270,12 +270,12 @@ module.exports = {
 		 * Override res.render to ensure `message` is always available.
 		 *
 		 * @param {string} view - The file to render.
-		 * @param {{ [key: string]: any } | ((error: Error, str: string) => void)} [placeholderCallback]
+		 * @param {{ [key: string]: any } | ((error: Error, str: string) => undefined)} [placeholderCallback]
 		 *   - Data to render it with or callback to run after render.
 		 *
-		 * @param {(error: Error, str: string) => void} [callback] - Callback to run after render.
+		 * @param {(error: Error, str: string) => undefined} [callback] - Callback to run after render.
 		 *
-		 * @returns {void}
+		 * @returns {undefined}
 		 */
 		// eslint-disable-next-line no-param-reassign -- We need to override the original.
 		response.render = function render(

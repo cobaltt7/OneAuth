@@ -25,7 +25,7 @@ function processResult(results) {
 }
 
 const commentRegex =
-		/(?<!(?:\/\/|\/\*|#|<!--|{[^\S\n]{[^\S\n]!)?(?:.+[^\S\n]+)?[^\S\n]*?mustache-format-ignore[^\S\n]*?(?:(?:[^\S\n]*[\r\u2028\u2029]|[\t\v\f \xa0\u1680\u2000-\u200a\u202F\u205f\u3000\ufeff]).+)?(?:\*\/|-->|}[^\S\n]})?.+\n+)/
+		/(?<!(?:\/\/|\/\*|#|<!--|{[^\S\n]{[^\S\n]!)?(?:.+[^\S\n]+)?[^\S\n]*mustache-format-ignore[^\S\n]*(?:(?:[^\S\n]*[\r\u2028\u2029]|[\t\v\f \xa0\u1680\u2000-\u200a\u202f\u205f\u3000\ufeff]).+)?(?:\*\/|-->|}[^\S\n]})?.+\n+)/
 			.source,
 	options = {
 		cwd: `${path.resolve(__dirname, "../../")}/`,
@@ -59,7 +59,7 @@ processResult(
 	replace.sync({
 		from: new RegExp(
 			commentRegex +
-				/(?:{[^\S\n]){2}{[^\S\n]*(?<tag>[^!#&/>^]+?)[^\S\n]*(?:}[^\S\n]){2}}/
+				/(?:{[^\S\n]){2}{[^\S\n]*(?<tag>[^!#&/>^]*)[^\S\n]*(?:}[^\S\n]){2}}/
 					.source,
 			"g",
 		),
@@ -75,13 +75,13 @@ const tripple = processResult(
 	replace.sync({
 		from: new RegExp(
 			commentRegex +
-				/{[^\S\n]{[^\S\n]*(?:(?<type>[!#/^])[^\S\n]*)?(?<tag>[^&>]+?)[^\S\n]*p}[^\S\n]}/
+				/{[^\S\n]{[^\S\n]*(?:[!#/^][^\S\n]*)?[^&>]*p}[^\S\n]}/
 					.source,
 			"g",
 		),
 
 		// eslint-disable-next-line id-length -- We didn't name this.
-		to: "$<tag> ",
+		to: "<full> ",
 
 		...options,
 	}),
@@ -103,7 +103,7 @@ processResult(
 	replace.sync({
 		from: new RegExp(
 			commentRegex +
-				/{[^\S\n]{[^\S\n]*(?:(?<type>[!#/^])[^\S\n]*)?(?<tag>[^&>]+?)[^\S\n]*}[^\S\n]}/
+				/{[^\S\n]{[^\S\n]*(?:(?<type>[!#/^])[^\S\n]*)?(?<tag>[^&>]*)[^\S\n]*}[^\S\n]}/
 					.source,
 			"g",
 		),
@@ -120,7 +120,7 @@ processResult(
 	replace.sync({
 		from: new RegExp(
 			commentRegex +
-				/{[^\S\n]{[^\S\n]*(?<type>[&>])[^\S\n]*(?<tag>[^!#/^]+?)[^\S\n]*}[^\S\n]}/
+				/{[^\S\n]{[^\S\n]*(?<type>[&>])[^\S\n]*(?<tag>[^!#/^]*)[^\S\n]*}[^\S\n]}/
 					.source,
 			"g",
 		),
@@ -131,3 +131,4 @@ processResult(
 		...options,
 	}),
 );
+

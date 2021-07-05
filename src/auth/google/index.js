@@ -76,11 +76,10 @@ module.exports = {
 		{
 			backendPage: "google",
 
-			get: (request, response, sendResponse) => {
+			get: (request, _, sendResponse) => {
 				sendResponse(
 					`${request.query?.code}`,
 					`${request.query?.state}`,
-					response,
 				);
 			},
 		},

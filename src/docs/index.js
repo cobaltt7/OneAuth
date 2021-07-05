@@ -6,8 +6,8 @@ const fileSystem = require("fs"),
 	highlightjs = require("highlight.js/lib/core"),
 	{ logError } = require("../errors"),
 	marked = require("marked"),
-	{ PluginManager } = require("live-plugin-manager"),
-	packageManager = new PluginManager(),
+	// eslint-disable-next-line node/global-require -- I don't want to move it higher up to use the variable once. Plus there's a type error...?
+	packageManager = new (require("live-plugin-manager").PluginManager)(),
 	path = require("path"),
 	// eslint-disable-next-line prefer-destructuring -- Apparently there's a type error if I use it?
 	promisify = require("util").promisify,
@@ -25,7 +25,7 @@ highlightjs.registerLanguage(
  *
  * @param {string} code - Code to highlight.
  * @param {string} originalLanguage - Language to highlight it with.
- * @param {(error: Error | void, code: string) => void} [callback] - Callback to run after
+ * @param {(error: Error | undefined, code: string) => undefined} [callback] - Callback to run after
  *   highlighing is over.
  */
 function highlight(code, originalLanguage, callback) {
@@ -136,7 +136,7 @@ router.get(
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {void}
+	 * @returns {undefined}
 	 */
 	(request, response) =>
 		response.redirect(
@@ -149,9 +149,9 @@ router.use(
 	 *
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => void} next - Express continue function.
+	 * @param {(error?: any) => undefined} next - Express continue function.
 	 *
-	 * @returns {Promise<void>}
+	 * @returns {Promise<undefined>}
 	 * @todo Change to a custom renderer instead of using `.replace()`.
 	 */
 	async (request, response, next) => {

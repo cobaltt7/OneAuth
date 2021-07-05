@@ -5,7 +5,7 @@
 const REPO_NAME = "ScratchAddons",
 	REPO_OWNER = "ScratchAddons",
 	fetch = require("node-fetch"),
-	/** @type {(string | void)[][]} */
+	/** @type {(string | undefined)[][]} */
 	result = [];
 
 /**
