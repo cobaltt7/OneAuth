@@ -2,7 +2,7 @@
 
 // SET UP EXPRESS
 import express, { urlencoded } from "express";
-import { resolve, dirname } from "node:path";
+import { dirname, resolve } from "node:path";
 import mustacheExpress from "mustache-express";
 import { errorPages, old } from "./errors/index.js";
 import compression from "compression";
@@ -13,9 +13,9 @@ import main from "./main/index.js";
 import auth from "./auth/index.js";
 import { fileURLToPath } from "node:url";
 
-const directory = dirname(fileURLToPath(import.meta.url));
+const directory = dirname(fileURLToPath(import.meta.url)),
 
-const app = express(),
+	app = express(),
 	// Mustache
 	mustacheExpressEngine = mustacheExpress(resolve(directory, "partials"), ".html");
 
@@ -50,6 +50,7 @@ app.use(old);
 const bodyParser = urlencoded({
 	extended: true,
 });
+
 app.use(
 	/**
 	 * Parse cookies for use in request handlers.
@@ -98,9 +99,7 @@ app.use(
 	 *
 	 * @returns {e.Response} - Express response object.
 	 */
-	function notFound(_, response) {
-		return response.status(404);
-	},
+	(_, response) => response.status(404),
 );
 
 // LISTEN

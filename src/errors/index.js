@@ -1,12 +1,12 @@
 /** @file Shows Error pages when errors occur. */
 
 /** @type {{ [key: string]: number }} */
-const changeTo = { 206: 204 };
-
-import { resolve, dirname } from "node:path";
+import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const directory = dirname(fileURLToPath(import.meta.url));
+const changeTo = { 206: 204 },
+
+	directory = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Logs an error to the console.
@@ -54,8 +54,8 @@ function middleware(realStatus, request, response, status = response.statusCode)
 		}
 
 		const error = {
-			heading: request.messages[`error${status}Heading`],
 			errorMessage: request.messages[`error${status}Message`],
+			heading: request.messages[`error${status}Heading`],
 			status,
 		};
 

@@ -1,8 +1,8 @@
 /** @file Documentation. */
 
 import fileSystem from "node:fs";
-import highlightjs from "highlight.js/lib/core";
-import hljsPlaintext from "highlight.js/lib/languages/plaintext";
+import highlightjs from "highlight.js/lib/core.js";
+import hljsPlaintext from "highlight.js/lib/languages/plaintext.js";
 import { logError } from "../errors/index.js";
 import marked from "marked";
 import PluginManager from "live-plugin-manager";
@@ -12,10 +12,10 @@ import { Router } from "express";
 import serveIndex from "serve-index";
 import { fileURLToPath } from "node:url";
 
-const directory = path.dirname(fileURLToPath(import.meta.url));
+const directory = path.dirname(fileURLToPath(import.meta.url)),
 
-const packageManager = new PluginManager.PluginManager();
-const router = Router();
+	packageManager = new PluginManager.PluginManager(),
+	router = Router();
 
 highlightjs.registerLanguage("plaintext", hljsPlaintext);
 
@@ -52,6 +52,7 @@ export function highlight(code, originalLanguage, callback) {
 	import(`highlight.js/lib/languages/${language}`)
 		.then((module) => {
 			highlightjs.registerLanguage(language, module.default);
+
 			return callback(undefined, highlightjs.highlight(code, { language }).value);
 		})
 		.catch(() => {
@@ -157,4 +158,5 @@ router.use(
 		return next();
 	},
 );
+
 export default router;

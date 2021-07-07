@@ -9,14 +9,16 @@ import mustache from "mustache";
 import { mustacheFunction } from "../../l10n.js";
 import path from "node:path";
 import retronid from "retronid";
-const database = new ReplitDB();
-const mail = nodemailer.createTransport({
-	auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
-	service: "gmail",
-});
 import { fileURLToPath } from "node:url";
 
-const directory = path.dirname(fileURLToPath(import.meta.url));
+const database = new ReplitDB(),
+	mail = nodemailer.createTransport({
+		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
+		service: "gmail",
+	}),
+
+	directory = path.dirname(fileURLToPath(import.meta.url));
+
 dotenv.config();
 
 /** @type {import("../../../types").Auth} Auth */

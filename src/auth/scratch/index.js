@@ -10,6 +10,7 @@ const client = {
 		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Furl={{ url }}",
 
 	name: "Scratch",
+
 	pages: [
 		{
 			backendPage: "scratch",
