@@ -1,12 +1,10 @@
-"use strict";
-
 /** @file GitHub Authentication handler. */
 
-const fetch = require("node-fetch"),
-	{ logError } = require("../../errors");
+import fetch from "node-fetch";
+import { logError } from "../../errors/index.js";
 
 /** @type {import("../../../types").Auth} Auth */
-module.exports = {
+const client = {
 	getData: (token) =>
 		fetch("https://api.github.com/user", {
 			headers: {
@@ -56,3 +54,5 @@ module.exports = {
 		},
 	],
 };
+
+export default client;

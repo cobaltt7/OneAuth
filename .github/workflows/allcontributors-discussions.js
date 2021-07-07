@@ -1,10 +1,9 @@
 /** @file Determine Which GitHub users have answered discussions before. */
 
-"use strict";
+import fetch from "node-fetch";
 
 const REPO_NAME = "ScratchAddons",
 	REPO_OWNER = "ScratchAddons",
-	fetch = require("node-fetch"),
 	/** @type {(string | undefined)[][]} */
 	result = [];
 

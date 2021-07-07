@@ -18,6 +18,7 @@
 	"license": "MIT",
 	"author": "OneDot Projects",
 	"main": "src/index.js",
+	"type":"module",
 	"scripts": {
 		"lint": "echo 'CODE STYLE'; npm run lint:mustaches; npm run lint:prettier; npm run lint:eslint; npm run lint:typescript; echo GRAMMAR; npm run lint:spellchecker-cli; npm run lint:write_good",
 		"lint:eslint": "eslint --fix .",

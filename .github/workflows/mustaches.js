@@ -1,9 +1,10 @@
-"use strict";
-
 /** @file Formats {{mustache}} tags. */
 
-const path = require("path"),
-	replace = require("replace-in-file");
+import path from "node:path";
+import replace from "replace-in-file";
+import { fileURLToPath } from "node:url";
+
+const directory = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * Processes the output of `replace-in-file`.
@@ -27,11 +28,11 @@ const commentRegex =
 		/(?<!(?:\/\/|\/\*|#|<!--|{[^\S\n]{[^\S\n]!)?(?:.+[^\S\n]+)?[^\S\n]*mustache-format-ignore[^\S\n]*(?:(?:[^\S\n]*[\r\u2028\u2029]|[\t\v\f \xa0\u1680\u2000-\u200a\u202f\u205f\u3000\ufeff]).+)?(?:\*\/|-->|}[^\S\n]})?.+\n+)/
 			.source,
 	options = {
-		cwd: `${path.resolve(__dirname, "../../")}/`,
+		cwd: `${path.resolve(directory, "../../")}/`,
 		files: "**",
 
 		glob: {
-			cwd: `${path.resolve(__dirname, "../../")}/`,
+			cwd: `${path.resolve(directory, "../../")}/`,
 			dot: true,
 			follow: true,
 

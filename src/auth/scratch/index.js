@@ -1,9 +1,7 @@
-"use strict";
-
 /** @file Scratch Authentication handler. */
 
 /** @type {import("../../../types").Auth} Auth */
-module.exports = {
+const client = {
 	icon: "https://scratch.mit.edu/favicon.ico",
 	iconProvider: "url",
 
@@ -12,8 +10,6 @@ module.exports = {
 		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Furl={{ url }}",
 
 	name: "Scratch",
-
-	// This will change once onedotprojects/scratchCommentAuth#12 is done
 
 	pages: [
 		{
@@ -34,3 +30,5 @@ module.exports = {
 
 	rawData: true,
 };
+
+export default client;

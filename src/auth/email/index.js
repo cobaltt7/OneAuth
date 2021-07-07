@@ -1,24 +1,27 @@
-"use strict";
-
 /** @file Email Authentication handler. */
 
-require("dotenv").config();
+import dotenv from "dotenv";
+import ReplitDB from "@replit/database";
+import { logError } from "../../errors/index.js";
+import fileSystem from "node:fs";
+import nodemailer from "nodemailer";
+import mustache from "mustache";
+import { mustacheFunction } from "../../l10n.js";
+import path from "node:path";
+import retronid from "retronid";
+import { fileURLToPath } from "node:url";
 
-const ReplitDB = require("@replit/database"),
-	database = new ReplitDB(),
-	{ logError } = require("../../errors"),
-	fileSystem = require("fs"),
-	mail = require("nodemailer").createTransport({
+const database = new ReplitDB(),
+	mail = nodemailer.createTransport({
 		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
 		service: "gmail",
 	}),
-	mustache = require("mustache"),
-	{ mustacheFunction } = require("../../l10n"),
-	path = require("path"),
-	retronid = require("retronid").generate;
+	directory = path.dirname(fileURLToPath(import.meta.url));
+
+dotenv.config();
 
 /** @type {import("../../../types").Auth} Auth */
-module.exports = {
+const client = {
 	icon: "envelope",
 	iconProvider: "fas",
 	link: "/auth/email?url={{ url }}",
@@ -29,7 +32,7 @@ module.exports = {
 			backendPage: "email",
 
 			get: (_, response) => {
-				response.render(path.resolve(__dirname, "index.html"));
+				response.render(path.resolve(directory, "index.html"));
 			},
 
 			post: async (request, response, sendResponse) => {
@@ -58,7 +61,7 @@ module.exports = {
 				if (request.body?.email) {
 					// Send email
 
-					const code = retronid();
+					const code = retronid.generate();
 
 					database.set(`EMAIL_${code}`, {
 						date: Date.now(),
@@ -71,7 +74,7 @@ module.exports = {
 
 							html: mustache.render(
 								fileSystem.readFileSync(
-									path.resolve(__dirname, "email.html"),
+									path.resolve(directory, "email.html"),
 									"utf8",
 								),
 								{
@@ -85,7 +88,7 @@ module.exports = {
 
 							text: mustache.render(
 								fileSystem.readFileSync(
-									path.resolve(__dirname, "email.txt"),
+									path.resolve(directory, "email.txt"),
 									"utf8",
 								),
 								{
@@ -129,3 +132,5 @@ module.exports = {
 
 	rawData: true,
 };
+
+export default client;
