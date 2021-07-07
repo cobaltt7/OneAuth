@@ -13,7 +13,6 @@ import serveIndex from "serve-index";
 import { fileURLToPath } from "node:url";
 
 const directory = path.dirname(fileURLToPath(import.meta.url)),
-
 	packageManager = new PluginManager.PluginManager(),
 	router = Router();
 

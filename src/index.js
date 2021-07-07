@@ -14,7 +14,6 @@ import auth from "./auth/index.js";
 import { fileURLToPath } from "node:url";
 
 const directory = dirname(fileURLToPath(import.meta.url)),
-
 	app = express(),
 	// Mustache
 	mustacheExpressEngine = mustacheExpress(resolve(directory, "partials"), ".html");

@@ -16,7 +16,6 @@ const database = new ReplitDB(),
 		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
 		service: "gmail",
 	}),
-
 	directory = path.dirname(fileURLToPath(import.meta.url));
 
 dotenv.config();

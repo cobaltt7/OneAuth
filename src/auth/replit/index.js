@@ -4,7 +4,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const directory = path.dirname(fileURLToPath(import.meta.url)),
-
 	/** @type {import("../../../types").Auth} Auth */
 	client = {
 		icon: "https://replit.com/public/images/logo.svg",

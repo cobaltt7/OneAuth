@@ -5,7 +5,6 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const changeTo = { 206: 204 },
-
 	directory = dirname(fileURLToPath(import.meta.url));
 
 /**
