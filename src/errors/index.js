@@ -55,8 +55,8 @@ function middleware(realStatus, request, response, status = response.statusCode)
 		}
 
 		const error = {
-			heading: request.messages[`error${status}Heading`],
 			errorMessage: request.messages[`error${status}Message`],
+			heading: request.messages[`error${status}Heading`],
 			status,
 		};
 
