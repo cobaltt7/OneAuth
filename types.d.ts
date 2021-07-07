@@ -23,14 +23,14 @@ interface AuthObj {
 	link: string;
 	name: string;
 	pages?: Page[];
-	getData: (token: string) => Promise<{ [key: string]: string }>;
-	rawData: boolean;
+	getData?: (token: string) => Promise<{ [key: string]: string } | undefined | null | void>;
+	rawData?: boolean;
 }
 export type RequestFunction = (
 	request: e.Request,
 	response: e.Response,
-	sendResponse: (tokenOrData: any, url: string) => undefined | e.Response,
-) => Promise<undefined>;
+	sendResponse: (tokenOrData: string | { [key: string]: any }, url: string) => void | e.Response,
+) => any;
 export interface Page {
 	"backendPage": string;
 	// "all"?: RequestFunction;
@@ -58,5 +58,4 @@ export interface Page {
 	"unlock"?: RequestFunction;
 	"unsubscribe"?: RequestFunction;
 }
-export type sendResponseArgs = [string | { [key: string]: string }, string];
 export type Auth = AuthObj;
