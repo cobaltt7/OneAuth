@@ -1,7 +1,7 @@
 /** @file GitHub Authentication handler. */
 
 import fetch from "node-fetch";
-import {logError} from "../../errors/index.js";
+import { logError } from "../../errors/index.js";
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {

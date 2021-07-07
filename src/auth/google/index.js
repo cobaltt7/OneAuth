@@ -2,8 +2,8 @@
 
 import atob from "atob";
 import fetch from "node-fetch";
-import {logError} from "../../errors/index.js";
-import dotenv  from "dotenv";
+import { logError } from "../../errors/index.js";
+import dotenv from "dotenv";
 
 dotenv.config();
 

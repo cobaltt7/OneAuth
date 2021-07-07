@@ -29,8 +29,9 @@ for (const filename of codes) {
 
 	/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
 	const rawMessages =
-		JSON.parse(await fileSystem.readFileSync(url.pathToFileURL(path.resolve(filename)), "utf8")) ||
-		{};
+		JSON.parse(
+			await fileSystem.readFileSync(url.pathToFileURL(path.resolve(filename)), "utf8"),
+		) || {};
 
 	for (const item in rawMessages) {
 		if (Object.prototype.hasOwnProperty.call(rawMessages, item)) {

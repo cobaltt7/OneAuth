@@ -36,7 +36,7 @@ const paths = await globby("src/auth/*/index.js");
 
 for (const filepath of paths) {
 	const { iconProvider, icon, name } = (await import("../../" + filepath)).default;
-	console.log( { iconProvider, icon, name });
+	console.log({ iconProvider, icon, name });
 
 	authClients.push({
 		fontawesome: iconProvider.indexOf("fa") === 0,

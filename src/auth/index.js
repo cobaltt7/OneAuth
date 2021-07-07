@@ -3,7 +3,7 @@
 import ReplitDB from "@replit/database";
 const database = new ReplitDB();
 import globby from "globby";
-import { resolve,dirname } from "node:path";
+import { resolve, dirname } from "node:path";
 import retronid from "retronid";
 import { logError } from "../errors/index.js";
 import { Router } from "express";
