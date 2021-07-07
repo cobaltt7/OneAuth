@@ -312,7 +312,7 @@
 	},
 	"aboutNew": { "string": "NEW!!!" },
 	"aboutTranslations": {
-		"string": "Please note that we do not have many translations, if any. Thiat will change as our translation team grows."
+		"string": "Please note that we do not have many translations, if any. That will change as our translation team grows."
 	},
 	"aboutHelpTranslate": {
 		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click “Join team”. Thanks for your eagerness to help! (Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
