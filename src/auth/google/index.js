@@ -1,15 +1,14 @@
-"use strict";
-
 /** @file Google Authentication handler. */
 
-const atob = require("atob"),
-	fetch = require("node-fetch"),
-	{ logError } = require("../../errors");
+import atob from "atob";
+import fetch from "node-fetch";
+import {logError} from "../../errors/index.js";
+import dotenv  from "dotenv";
 
-require("dotenv").config();
+dotenv.config();
 
 /** @type {import("../../../types").Auth} Auth */
-module.exports = {
+const client = {
 	getData: async (token) => {
 		const { id_token: idToken, error } = await fetch("https://oauth2.googleapis.com/token", {
 			body:
@@ -27,7 +26,7 @@ module.exports = {
 		}).then((result) => result.json());
 
 		if (error || !idToken) return logError(new Error(error));
-		// Handle `error === "invalid_grant"`, meaning you took too long.
+		// TODO: Handle `error === "invalid_grant"`, meaning you took too long. this might be fixed with jwt tho
 
 		/** @type {{ [key: string]: string }} */
 		const filteredInfo = {},
@@ -79,3 +78,5 @@ module.exports = {
 		},
 	],
 };
+
+export default client;

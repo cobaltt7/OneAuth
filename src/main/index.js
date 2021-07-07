@@ -1,18 +1,24 @@
-"use strict";
-
 /** @file Handle Main pages. */
 
-const cheerio = require("cheerio"),
-	globby = require("globby"),
-	{ logError } = require("../errors"),
-	path = require("path"),
-	{ promisify } = require("util"),
-	// eslint-disable-next-line new-cap -- We didn't name this.
-	router = require("express").Router();
+import { load } from "cheerio";
+import globby from "globby";
 
-const highlight = promisify(require("../docs").highlight);
+import { logError } from "../errors/index.js";
+import { resolve } from "node:path";
+import { highlight as callbackHighlight } from "../docs/index.js";
+import utils from "node:util";
+import dotenv from "dotenv";
+import { Router } from "express";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
 
-require("dotenv").config();
+const directory = path.dirname(fileURLToPath(import.meta.url));
+
+const router = Router();
+
+const highlight = utils.promisify(callbackHighlight);
+
+dotenv.config();
 
 /**
  * @type {{
@@ -25,26 +31,21 @@ require("dotenv").config();
  */
 const authClients = [];
 
-(async () => {
-	// Idk why this is relative to the root dir but it is
-	const paths = await globby("src/auth/*/index.js");
+// Idk why this is relative to the root dir but it is
+const paths = await globby("src/auth/*/index.js");
 
-	for (const filepath of paths) {
-		// eslint-disable-next-line node/global-require -- We can't move this to a higher scope.
-		const { iconProvider, icon, name } = require(path.resolve(
-			__dirname.split("/src/")[0],
-			filepath,
-		));
+for (const filepath of paths) {
+	const { iconProvider, icon, name } = (await import("../../" + filepath)).default;
+	console.log( { iconProvider, icon, name });
 
-		authClients.push({
-			fontawesome: iconProvider.indexOf("fa") === 0,
-			icon,
-			iconProvider,
-			name,
-			svg: iconProvider === "svg",
-		});
-	}
-})();
+	authClients.push({
+		fontawesome: iconProvider.indexOf("fa") === 0,
+		icon,
+		iconProvider,
+		name,
+		svg: iconProvider === "svg",
+	});
+}
 
 // Highlighting
 router.use(
@@ -69,7 +70,7 @@ router.use(
 		 */
 		// eslint-disable-next-line no-param-reassign -- We need to override the original functions.
 		response.send = (text) => {
-			const indexQuery = cheerio.load(text);
+			const indexQuery = load(text);
 			// eslint-disable-next-line one-var -- `codeblocks` depends on `jQuery`
 			const codeblocks = indexQuery("pre.hljs:not(:has(*))");
 
@@ -156,7 +157,7 @@ router.get(
 	 * @returns {undefined}
 	 */
 	(request, response) =>
-		response.sendFile(path.resolve(__dirname, `../svg/${request.params?.img}.svg`)),
+		response.sendFile(resolve(directory, `../svg/${request.params?.img}.svg`)),
 );
 
 router.get(
@@ -170,10 +171,11 @@ router.get(
 	 *
 	 * @returns {undefined}
 	 */
-	(_, response) =>
-		response.render(path.resolve(__dirname, "about.html"), {
+	(_, response) => {
+		return response.render(resolve(directory, "about.html"), {
 			clients: authClients,
-		}),
+		});
+	},
 );
 
 router.get(
@@ -270,8 +272,8 @@ router.get(
 	(_, response) => {
 		response.setHeader("content-type", "text/css");
 
-		return response.render(path.resolve(__dirname, "style.css"));
+		return response.render(resolve(directory, "style.css"));
 	},
 );
 
-module.exports = router;
+export default router;

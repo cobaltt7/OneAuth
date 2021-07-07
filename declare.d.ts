@@ -31,7 +31,7 @@ declare module "dotenv" {
 	export = { config: () => undefined };
 }
 
-declare module "util" {
+declare module "node:util" {
 	export = {
 		promisify:
 			(func1: (...args: any[]) => any) =>
@@ -72,6 +72,6 @@ declare module "replace-in-file" {
 }
 declare module "@tailwindcss/typography";
 declare module "@ultraq/icu-message-formatter";
-declare module "fs";
-declare module "path";
-declare module "url";
+declare module "node:fs";
+declare module "node:path";
+declare module "node:url";

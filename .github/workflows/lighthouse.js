@@ -1,8 +1,6 @@
-"use strict";
-
 /** @file Format And post data retrieved from Lighthouse. */
 
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
 /**
  * Join two arrays. (Just so syntax highlighting & prettier formatting work).

@@ -1,11 +1,12 @@
-"use strict";
-
 /** @file Shows Error pages when errors occur. */
 
 /** @type {{ [key: string]: number }} */
 const changeTo = { 206: 204 };
 
-const path = require("path");
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const directory = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Logs an error to the console.
@@ -15,7 +16,7 @@ const path = require("path");
  * @returns {void}
  * @todo Log it to an admin dashboard instead.
  */
-function logError(error) {
+export function logError(error) {
 	return console.error(error);
 }
 
@@ -26,8 +27,6 @@ function logError(error) {
  * @param {e.Request} request - Express request object.
  * @param {e.Response} response - Express response object.
  * @param {number} status - HTTP status code.
- *
- * @returns {undefined}
  */
 function middleware(realStatus, request, response, status = response.statusCode) {
 	if (
@@ -71,7 +70,7 @@ function middleware(realStatus, request, response, status = response.statusCode)
 			if (response.headersSent) return;
 
 			if (request.accepts("text/html"))
-				response.render(path.resolve(__dirname, "error.html"), error);
+				response.render(resolve(directory, "error.html"), error);
 			else response.json(error);
 		}, 3000);
 
@@ -90,8 +89,6 @@ function middleware(realStatus, request, response, status = response.statusCode)
 	}, 3000);
 }
 
-module.exports.logError = logError;
-
 /**
  * Express middleware to handle arror handling.
  *
@@ -101,9 +98,9 @@ module.exports.logError = logError;
  *
  * @returns {undefined}
  */
-module.exports.errorPages = (request, response, next) => {
+export function errorPages(request, response, next) {
 	if (request.path === "/old") {
-		return response.status(400).render(path.resolve(__dirname, "old.html"), {
+		return response.status(400).render(resolve(directory, "old.html"), {
 			all: request.messages.errorOldAll,
 		});
 	}
@@ -125,7 +122,7 @@ module.exports.errorPages = (request, response, next) => {
 	};
 
 	return next();
-};
+}
 
 /**
  * Disalow old browsers from visiting our site.
@@ -137,7 +134,7 @@ module.exports.errorPages = (request, response, next) => {
  * @returns {undefined}
  * @todo Make our site available to old browsers.
  */
-module.exports.old = (request, response, next) => {
+export function old(request, response, next) {
 	if (request.path.includes(".") || request.path === "/old") return next();
 
 	const userAgent = `${request.get("User-Agent")}`;
@@ -148,17 +145,7 @@ module.exports.old = (request, response, next) => {
 		userAgent.includes("Netscape") ||
 		userAgent.includes("Navigator")
 	)
-		return response.status(400).render(path.resolve(__dirname, "old.html"));
+		return response.status(400).render(resolve(directory, "old.html"));
 
 	return next();
-};
-
-/**
- * Send a 404 response.
- *
- * @param {e.Request} _ - Express request object.
- * @param {e.Response} response - Express response object.
- *
- * @returns {e.Response} - Express response object.
- */
-module.exports.notFound = (_, response) => response.status(404);
+}

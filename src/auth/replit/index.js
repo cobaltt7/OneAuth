@@ -1,11 +1,12 @@
-"use strict";
-
 /** @file Replit Authentication handler. */
 
-const path = require("path");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const directory = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import("../../../types").Auth} Auth */
-module.exports = {
+const client = {
 	icon: "https://replit.com/public/images/logo.svg",
 	iconProvider: "url",
 	link: "/auth/replit?url={{ url }}",
@@ -31,10 +32,12 @@ module.exports = {
 					);
 				}
 
-				return response.render(path.resolve(__dirname, "index.html"));
+				return response.render(path.resolve(directory, "index.html"));
 			},
 		},
 	],
 
 	rawData: true,
 };
+
+export default client;

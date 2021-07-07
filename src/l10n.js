@@ -1,4 +1,10 @@
-"use strict";
+import accepts from "accepts";
+import { MessageFormatter, pluralTypeHandler } from "@ultraq/icu-message-formatter";
+import globby from "globby";
+import { logError } from "./errors/index.js";
+import fileSystem from "node:fs";
+import path from "node:path";
+import url from "node:url";
 
 /** @file Localization Of the site. */
 
@@ -12,36 +18,31 @@ const BASE_LANG = "en_US",
 	/** @type {string[]} */
 	LANG_CODES = [],
 	/** @type {{ [key: string]: { [key: string]: string } }} */
-	MESSAGES = {},
-	accepts = require("accepts"),
-	{ MessageFormatter, pluralTypeHandler } = require("@ultraq/icu-message-formatter"),
-	globby = require("globby"),
-	{ logError } = require("./errors");
+	MESSAGES = {};
 
-(async function generateMessages() {
-	const codes = await globby("_locales/*.json");
+const codes = await globby("_locales/*.json");
 
-	for (const filename of codes) {
-		const [, code] = filename.split(".")[0]?.split("/") ?? ["_locales", "en_US"];
+for (const filename of codes) {
+	const [, code] = filename.split(".")[0]?.split("/") ?? ["_locales", "en_US"];
 
-		MESSAGES[`${code}`] = {};
+	MESSAGES[`${code}`] = {};
 
-		/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
-		// eslint-disable-next-line node/global-require -- We can't move this to a higher scope.
-		const rawMessages = require(`../${filename}`);
+	/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
+	const rawMessages =
+		JSON.parse(await fileSystem.readFileSync(url.pathToFileURL(path.resolve(filename)), "utf8")) ||
+		{};
 
-		for (const item in rawMessages) {
-			if (Object.prototype.hasOwnProperty.call(rawMessages, item)) {
-				if (!rawMessages[`${item}`]?.string) continue;
+	for (const item in rawMessages) {
+		if (Object.prototype.hasOwnProperty.call(rawMessages, item)) {
+			if (!rawMessages[`${item}`]?.string) continue;
 
-				// @ts-expect-error -- It's impossible for `MESSAGES[code]` or `temporaryMessages[item]` to be `undefined`.
-				MESSAGES[`${code}`][`${item}`] = `${rawMessages[`${item}`]?.string}`;
-			}
+			// @ts-expect-error -- It's impossible for `MESSAGES[code]` or `temporaryMessages[item]` to be `undefined`.
+			MESSAGES[`${code}`][`${item}`] = `${rawMessages[`${item}`]?.string}`;
 		}
-
-		LANG_CODES.push(`${code}`);
 	}
-})();
+
+	LANG_CODES.push(`${code}`);
+}
 
 /**
  * Expands array of languages to be broader.
@@ -51,7 +52,7 @@ const BASE_LANG = "en_US",
  *
  * @returns {string[]} - Resulting array.
  */
-function compileLangs(langs, cache = false) {
+export function compileLangs(langs, cache = false) {
 	if (cache) {
 		const retrieved = CACHE_CODES[`${langs}`];
 
@@ -100,7 +101,7 @@ function compileLangs(langs, cache = false) {
  *
  * @returns {{ [key: string]: string }} - Retrieved messages.
  */
-function getMessages(langs, cache = true) {
+export function getMessages(langs, cache = true) {
 	if (cache) {
 		const retrieved = CACHE_MSGS[`${langs}`];
 
@@ -125,7 +126,7 @@ function getMessages(langs, cache = true) {
  *
  * @returns {MessageFormatter} - The message formater.
  */
-function getFormatter(lang, cache = true) {
+export function getFormatter(lang, cache = true) {
 	if (cache) {
 		/** @type {MessageFormatter} */
 		const retrieved = CACHE_FORMATTERS[`${lang}`];
@@ -189,101 +190,92 @@ function parseMessage(inputInfo, lang, msgs) {
  * @returns {() => (val: string, render: (val: string) => string) => string} - Function to pass to
  *   Mustache.JS.
  */
-function mustacheFunction(langs, msgs = getMessages(langs)) {
+export function mustacheFunction(langs, msgs = getMessages(langs)) {
 	return () => (value, render) => parseMessage(render(value), `${langs[0]}`, msgs);
 }
+/**
+ * Express l10n middleware.
+ *
+ * @param {e.Request} request - Express request object.
+ * @param {e.Response} response - Express response object.
+ * @param {(error?: any) => undefined} next - Express continue function.
+ */
+export default function localization(request, response, next) {
+	/** @type {string[]} */
+	let langs;
 
-module.exports = {
-	compileLangs,
-	getFormatter,
-	getMessages,
+	if (request.query?.lang) {
+		langs = compileLangs([
+			// `lang` query parameter overrides everything else
+			...(`${request.query?.lang}` ?? "*").split("|"),
+
+			// Fallback to values in cookie
+			...(request.cookies?.langs ?? "*").split("|"),
+
+			// Fallback to browser lang
+			...accepts(request).languages(),
+		]);
+	} else if (request.cookies?.langs) {
+		// The cookie doesn't need to go through `compileLangs` since it already did
+		langs = (request.cookies?.langs ?? "*").split("|");
+	} else {
+		// This is the default, the broswer langauge.
+		langs = compileLangs(accepts(request)?.languages(), true);
+	}
+
+	const expires = new Date();
+
+	expires.setFullYear(expires.getFullYear() + 1);
+	response.cookie("langs", langs.join("|"), {
+		expires,
+		maxAge: 31536000000,
+		sameSite: false,
+	});
+	// eslint-disable-next-line no-param-reassign -- We need to override the original.
+	request.languages = langs;
+
+	const msgs = getMessages(langs);
+
+	// eslint-disable-next-line no-param-reassign -- We need to override the original.
+	request.messages = msgs;
+
+	// Grab reference of render
+	const realRender = response.render;
 
 	/**
-	 * Express l10n middleware.
+	 * Override res.render to ensure `message` is always available.
 	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => undefined} next - Express continue function.
+	 * @param {string} view - The file to render.
+	 * @param {{ [key: string]: any } | ((error: Error, str: string) => undefined)} [placeholderCallback]
+	 *   - Data to render it with or callback to run after render.
+	 *
+	 * @param {(error: Error, str: string) => void} [callback] - Callback to run after render.
+	 *
+	 * @returns {undefined}
 	 */
-	middleware(request, response, next) {
-		/** @type {string[]} */
-		let langs;
+	// eslint-disable-next-line no-param-reassign -- We need to override the original.
+	response.render = function render(
+		view,
+		placeholderCallback = {},
+		callback = function (error, string) {
+			if (error) return logError(error);
 
-		if (request.query?.lang) {
-			langs = compileLangs([
-				// `lang` query parameter overrides everything else
-				...(`${request.query?.lang}` ?? "*").split("|"),
+			return response.send(string);
+		},
+	) {
+		const placeholders = typeof placeholderCallback === "object" ? placeholderCallback : {};
 
-				// Fallback to values in cookie
-				...(request.cookies?.langs ?? "*").split("|"),
+		placeholders.message = mustacheFunction(langs, msgs);
 
-				// Fallback to browser lang
-				...accepts(request).languages(),
-			]);
-		} else if (request.cookies?.langs) {
-			// The cookie doesn't need to go through `compileLangs` since it already did
-			langs = (request.cookies?.langs ?? "*").split("|");
-		} else {
-			// This is the default, the broswer langauge.
-			langs = compileLangs(accepts(request)?.languages(), true);
-		}
-
-		const expires = new Date();
-
-		expires.setFullYear(expires.getFullYear() + 1);
-		response.cookie("langs", langs.join("|"), {
-			expires,
-			maxAge: 31536000000,
-			sameSite: false,
-		});
-		// eslint-disable-next-line no-param-reassign -- We need to override the original.
-		request.languages = langs;
-
-		const msgs = getMessages(langs);
-
-		// eslint-disable-next-line no-param-reassign -- We need to override the original.
-		request.messages = msgs;
-
-		// Grab reference of render
-		const realRender = response.render;
-
-		/**
-		 * Override res.render to ensure `message` is always available.
-		 *
-		 * @param {string} view - The file to render.
-		 * @param {{ [key: string]: any } | ((error: Error, str: string) => undefined)} [placeholderCallback]
-		 *   - Data to render it with or callback to run after render.
-		 *
-		 * @param {(error: Error, str: string) => undefined} [callback] - Callback to run after render.
-		 *
-		 * @returns {undefined}
-		 */
-		// eslint-disable-next-line no-param-reassign -- We need to override the original.
-		response.render = function render(
+		// Continue with original render
+		return realRender.call(
+			response,
 			view,
-			placeholderCallback = {},
-			callback = function (error, string) {
-				if (error) return logError(error);
+			placeholders,
 
-				return response.send(string);
-			},
-		) {
-			const options = typeof placeholderCallback === "object" ? placeholderCallback : {};
-
-			options.message = mustacheFunction(langs, msgs);
-
-			// Continue with original render
-			return realRender.call(
-				response,
-				view,
-				options,
-
-				// @ts-expect-error -- TS doesn't like the first param, but it is needed.
-				typeof placeholderCallback === "function" ? placeholderCallback : callback,
-			);
-		};
-		next();
-	},
-
-	mustacheFunction,
-};
+			// @ts-expect-error -- TS doesn't like the first param, but it is needed.
+			typeof placeholderCallback === "function" ? placeholderCallback : callback,
+		);
+	};
+	next();
+}

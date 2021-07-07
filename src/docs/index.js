@@ -1,21 +1,23 @@
-"use strict";
-
 /** @file Documentation. */
 
-const fileSystem = require("fs"),
-	highlightjs = require("highlight.js/lib/core"),
-	{ logError } = require("../errors"),
-	marked = require("marked"),
-	// eslint-disable-next-line node/global-require -- I don't want to move it higher up to use the variable once. Plus there's a type error...?
-	packageManager = new (require("live-plugin-manager").PluginManager)(),
-	path = require("path"),
-	// eslint-disable-next-line prefer-destructuring -- Apparently there's a type error if I use it?
-	promisify = require("util").promisify,
-	// eslint-disable-next-line new-cap -- We didn't name this.
-	router = require("express").Router(),
-	serveIndex = require("serve-index");
+import fileSystem from "node:fs";
+import highlightjs from "highlight.js/lib/core";
+import hljsPlaintext from "highlight.js/lib/languages/plaintext";
+import { logError } from "../errors/index.js";
+import marked from "marked";
+import PluginManager from "live-plugin-manager";
+import path from "node:path";
+import utils from "node:util";
+import { Router } from "express";
+import serveIndex from "serve-index";
+import { fileURLToPath } from "node:url";
 
-highlightjs.registerLanguage("plaintext", require("highlight.js/lib/languages/plaintext"));
+const directory = path.dirname(fileURLToPath(import.meta.url));
+
+const packageManager = new PluginManager.PluginManager();
+const router = Router();
+
+highlightjs.registerLanguage("plaintext", hljsPlaintext);
 
 /**
  * Highlights code using highlight.js.
@@ -25,7 +27,7 @@ highlightjs.registerLanguage("plaintext", require("highlight.js/lib/languages/pl
  * @param {(error: Error | undefined, code: string) => undefined} [callback] - Callback to run after
  *   highlighing is over.
  */
-function highlight(code, originalLanguage, callback) {
+export function highlight(code, originalLanguage, callback) {
 	if (!callback) {
 		logError(new TypeError("`callback` is falsy"));
 
@@ -47,53 +49,49 @@ function highlight(code, originalLanguage, callback) {
 		return;
 	}
 
-	try {
-		highlightjs.registerLanguage(
-			language,
-			// eslint-disable-next-line node/global-require -- We can't move this to a higher scope.
-			require(`highlight.js/lib/languages/${language}`),
-		);
-
-		const response = highlightjs.highlight(code, { language });
-
-		callback(undefined, response.value);
-
-		return;
-	} catch {
-		packageManager
-			.install(`highlightjs-${language}`)
-			.then(() => {
-				highlightjs.registerLanguage(
-					language,
-					packageManager.require(`highlightjs-${language}`),
-				);
-
-				return callback(undefined, highlightjs.highlight(code, { language }).value);
-			})
-			.catch(() => {
-				packageManager
-					.install(`${language}-highlightjs`)
-					.then(() => {
-						highlightjs.registerLanguage(
-							language,
-							packageManager.require(`${language}-highlightjs`),
-						);
-
-						return callback(undefined, highlightjs.highlight(code, { language }).value);
-					})
-					.catch(() =>
-						callback(
-							undefined,
-							highlightjs.highlight(code, {
-								language: "plaintext",
-							}).value,
-						),
+	import(`highlight.js/lib/languages/${language}`)
+		.then((module) => {
+			highlightjs.registerLanguage(language, module.default);
+			return callback(undefined, highlightjs.highlight(code, { language }).value);
+		})
+		.catch(() => {
+			packageManager
+				.install(`highlightjs-${language}`)
+				.then(() => {
+					highlightjs.registerLanguage(
+						language,
+						packageManager.require(`highlightjs-${language}`),
 					);
-			});
-	}
+
+					return callback(undefined, highlightjs.highlight(code, { language }).value);
+				})
+				.catch(() => {
+					packageManager
+						.install(`${language}-highlightjs`)
+						.then(() => {
+							highlightjs.registerLanguage(
+								language,
+								packageManager.require(`${language}-highlightjs`),
+							);
+
+							return callback(
+								undefined,
+								highlightjs.highlight(code, { language }).value,
+							);
+						})
+						.catch(() =>
+							callback(
+								undefined,
+								highlightjs.highlight(code, {
+									language: "plaintext",
+								}).value,
+							),
+						);
+				});
+		});
 }
 
-const markedPromise = promisify(marked);
+const markedPromise = utils.promisify(marked);
 
 marked.setOptions({
 	highlight,
@@ -144,12 +142,12 @@ router.use(
 	 * @todo Change to a custom renderer instead of using `.replace()`.
 	 */
 	async (request, response, next) => {
-		const filename = path.resolve(__dirname, `${request.path.slice(1)}.md`);
+		const filename = path.resolve(directory, `${request.path.slice(1)}.md`);
 
 		if (fileSystem.existsSync(filename)) {
 			const markdown = fileSystem.readFileSync(filename, "utf8");
 
-			return response.render(path.resolve(__dirname, "markdown.html"), {
+			return response.render(path.resolve(directory, "markdown.html"), {
 				content: (await markedPromise(markdown)).replace(/<pre>/g, '<pre class="hljs">'),
 
 				title: /^#\s(?<heading>.+)$/m.exec(markdown)?.groups?.heading,
@@ -159,5 +157,4 @@ router.use(
 		return next();
 	},
 );
-
-module.exports = { highlight, router };
+export default router;

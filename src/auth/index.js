@@ -1,48 +1,46 @@
-"use strict";
-
 /** @file Authentication APIs. */
 
-const ReplitDB = require("@replit/database"),
-	/**
-	 * @type {{
-	 * 	fontawesome: boolean;
-	 * 	icon: string;
-	 * 	iconProvider: string;
-	 * 	link: string;
-	 * 	name: string;
-	 * 	svg: boolean;
-	 * }[]}
-	 */
-	authButtons = [],
+import ReplitDB from "@replit/database";
+const database = new ReplitDB();
+import globby from "globby";
+import { resolve,dirname } from "node:path";
+import retronid from "retronid";
+import { logError } from "../errors/index.js";
+import { Router } from "express";
+import url from "node:url";
+
+const directory = dirname(url.fileURLToPath(import.meta.url));
+/**
+ * @type {{
+ * 	fontawesome: boolean;
+ * 	icon: string;
+ * 	iconProvider: string;
+ * 	link: string;
+ * 	name: string;
+ * 	svg: boolean;
+ * }[]}
+ */
+const authButtons = [],
 	/** @type {import("../../types").Auth[]} */
 	authClients = [],
-	database = new ReplitDB(),
-	globby = require("globby"),
-	path = require("path"),
-	retronid = require("retronid"),
-	// eslint-disable-next-line new-cap -- We didn't name this.
-	router = require("express").Router(),
-	{ logError } = require("../errors");
+	router = Router();
 
-(async () => {
-	// Idk why this is relative to the root dir but it is
-	const paths = await globby("src/auth/*/index.js");
+// Idk why this is relative to the root dir but it is
+const paths = await globby("src/auth/*/index.js");
 
-	for (const filepath of paths) {
-		// eslint-disable-next-line node/global-require -- We can't move this to a higher scope.
-		const client = require(path.resolve(__dirname.split("/src/")[0], filepath));
+for (const filepath of paths) {
+	const client = (await import("../../" + filepath)).default;
 
-		authClients.push(client);
-		authButtons.push({
-			fontawesome: client.iconProvider.indexOf("fa") === 0,
-			icon: client.icon,
-			iconProvider: client.iconProvider,
-			link: client.link,
-			name: client.name,
-			svg: client.iconProvider === "svg",
-		});
-	}
-})();
+	authClients.push(client);
+	authButtons.push({
+		fontawesome: client.iconProvider.indexOf("fa") === 0,
+		icon: client.icon,
+		iconProvider: client.iconProvider,
+		link: client.link,
+		name: client.name,
+		svg: client.iconProvider === "svg",
+	});
+}
 
 /**
  * Returns information about a authentication client.
@@ -134,15 +132,6 @@ for (const method of [
 				request,
 				response,
 
-				/**
-				 * Ask the user for permission to share their data, then redirect them to the specified URL.
-				 *
-				 * @param {string | { [key: string]: string }} tokenOrData - Token to retrieve the
-				 *   data with or the raw data itself.
-				 * @param {string} url - URL to redirect the user to afterwards.
-				 *
-				 * @returns {undefined | e.Response} - Nothing of interest.
-				 */
 				(tokenOrData, url) => {
 					const clientInfo = getClient(request.params?.client || "");
 
@@ -173,7 +162,7 @@ for (const method of [
 					try {
 						const { host } = new URL(url);
 
-						return response.status(300).render(path.resolve(__dirname, "allow.html"), {
+						return response.status(300).render(resolve(directory, "allow.html"), {
 							client: request.params?.client,
 							data: JSON.stringify(data),
 							encodedUrl: encodeURIComponent(url),
@@ -218,7 +207,7 @@ router.get(
 			}
 		}
 
-		return response.render(path.resolve(__dirname, "auth.html"), {
+		return response.render(resolve(directory, "auth.html"), {
 			clients: authButtonsReplaced,
 		});
 	},
@@ -255,7 +244,7 @@ router.get(
 	 * @param {e.Request} request - Express request object.
 	 * @param {e.Response} response - Express response object.
 	 *
-	 * @returns {Promise<e.Response | undefined>} - Nothing of interest.
+	 * @returns {Promise<e.Response | void>} - Nothing of interest.
 	 */
 	async (request, response) => {
 		if (!request.query) return logError("`request.query` is falsy!");
@@ -263,7 +252,7 @@ router.get(
 		const { client, url = "", token } = request.query,
 			clientInfo = getClient(`${client}`);
 
-		if (!clientInfo) return logError(new ReferenceError(`Invalid client: ${client}`));
+		if (!clientInfo?.getData) return logError(new ReferenceError(`Invalid client: ${client}`));
 
 		let code, redirect;
 
@@ -273,6 +262,8 @@ router.get(
 			code = retronid.generate();
 
 			const data = await clientInfo.getData(`${token}`);
+
+			if (!data) return logError("No data available");
 
 			data.client = clientInfo.name;
 			database.set(`RETRIEVE_${code}`, data);
@@ -289,4 +280,4 @@ router.get(
 	},
 );
 
-module.exports = router;
+export default router;

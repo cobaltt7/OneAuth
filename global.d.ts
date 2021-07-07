@@ -1,13 +1,14 @@
 import express from "express";
 
 declare global {
-	declare const __dirname: string;
+	declare const __dirname: string | undefined;
+	declare const __filename: string | undefined;
 	declare const process: {
 		argv: string[];
 		env: { [key: string]: string };
 		exit: (code?: number) => undefined;
 	};
-	declare const require: (library: string) => any;
+	declare const require: undefined | ((library: string) => any);
 	declare namespace e {
 		export type Request = {
 			path: string;
