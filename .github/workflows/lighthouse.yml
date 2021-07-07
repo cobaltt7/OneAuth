@@ -33,7 +33,8 @@ jobs:
             - name: Setup Node.JS
               uses: actions/setup-node@main
               with:
-                  node-version: 12.22.1
+                  node-version: 14
+                  cache: "npm"
 
             - name: Install
               run: npm ci

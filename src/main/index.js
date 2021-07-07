@@ -96,9 +96,9 @@ router.use(
 								indexQuery(`<code class="language-${language}"></code>`),
 							);
 
-							if (index + 1 === codeblocks.length) {
+							if (index + 1 === codeblocks.length) 
 								return realSend.call(response, indexQuery.html());
-							}
+							
 
 							return response;
 						})

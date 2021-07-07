@@ -33,7 +33,8 @@ jobs:
               if: steps.changed.outputs.changed == 'false'
               uses: actions/setup-node@main
               with:
-                  node-version: 12.22.1
+                  node-version: 14
+                  cache: "npm"
 
             - name: Install
               if: steps.changed.outputs.changed == 'false'
