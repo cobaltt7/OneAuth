@@ -35,15 +35,13 @@ jobs:
                   https://www.transifex.com" >> .transifexrc; echo "password =" "${{
                   secrets.TRANSIFEX }}" >> .transifexrc; echo "username = api" >> .transifexrc;
 
+            - name: Pull
+              run: tx pull --all --skip --no-interactive --force --mode=onlytranslated
+
             - name: Push
               run: tx push --source --no-interactive --force --skip
 
-            - name: Pull
-              if: ${{ !cancelled() }}
-              run: tx pull --all --skip --no-interactive --force --mode=onlytranslated
-
             - name: Commit
-              if: ${{ !cancelled() }}
               id: commit
               uses: stefanzweifel/git-auto-commit-action@master
               with:
@@ -53,11 +51,3 @@ jobs:
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
                   commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
-
-            - name: Repository Dispatch
-              if: always()
-              uses: peter-evans/repository-dispatch@v1
-              with:
-                  token: ${{ secrets.WGYTBOT }}
-                  repository: ${{ github.repository }}
-                  event-type: lint

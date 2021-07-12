@@ -11,3 +11,5 @@ plugin_packages/
 .node_repl_history
 _locales
 !locales/en_US.json
+package-lock.json
+package.json
