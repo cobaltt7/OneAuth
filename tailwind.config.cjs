@@ -2,11 +2,14 @@
 
 /** @file Tailwind Configuration file. */
 
+const forms = require("@tailwindcss/forms"),
+	typography = require("@tailwindcss/typography");
+
 module.exports = {
 	darkMode: "class",
 	mode: "jit",
 
-	plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
+	plugins: [forms, typography],
 
 	purge: ["./src/**/**.html", "./src/**/**/**.html", "./src/tailwind.sass"],
 

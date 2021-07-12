@@ -9,7 +9,7 @@
 ## Issue Guidelines
 
 -   Choose a relevant category.
--   Fill out the template. Replace all text in _italics_ (surrounded by underscores `_`). Do remove the underscores.
+-   Fill out the template. Replace all comments (text flanked by `<!--` and `-->`).
 -   Search for duplicates before opening an issue.
 -   Use Issues for announcements, bugs, and feature requests only.
 
@@ -22,8 +22,8 @@
 
 ## Code Guidelines
 
--   Enable actions on your fork by going to the Actions tab (on your fork) and pushing the button.
--   Fill out the template. Replace all text in _italics_ (surrounded by underscores `_`). Do remove the underscores.
+-   Enable actions on your fork by going to the Actions tab (on your fork) and pushing the button. That will add automatic linting and formatting to your code.
+-   Fill out the template. Replace all comments (text flanked by `<!--` and `-->`).
 -   Minimize lint errors.
 -   Open an issue before you start working on something.
 -   Only work on issues that have a `priority` label and do not have an assignee.

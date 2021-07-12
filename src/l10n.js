@@ -1,12 +1,15 @@
-import accepts from "accepts";
-import { MessageFormatter, pluralTypeHandler } from "@ultraq/icu-message-formatter";
-import globby from "globby";
-import { logError } from "./errors/index.js";
-import fileSystem from "node:fs";
-import path from "node:path";
-import url from "node:url";
-
 /** @file Localization Of the site. */
+
+import fileSystem from "fs";
+import path from "path";
+import url from "url";
+
+import { MessageFormatter, pluralTypeHandler } from "@ultraq/icu-message-formatter";
+import accepts from "accepts";
+import globby from "globby";
+
+
+import { logError } from "./errors/index.js";
 
 const BASE_LANG = "en_US",
 	/** @type {{ [key: string]: string[] }} */
@@ -18,31 +21,32 @@ const BASE_LANG = "en_US",
 	/** @type {string[]} */
 	LANG_CODES = [],
 	/** @type {{ [key: string]: { [key: string]: string } }} */
-	MESSAGES = {};
+	MESSAGES = {},
+	messagePromises = [];
 
-const codes = await globby("_locales/*.json");
+for (const filename of await globby("_locales/*.json")) {
+	const [, code = BASE_LANG] = filename.split(".")[0]?.split("/") ?? [];
 
-for (const filename of codes) {
-	const [, code] = filename.split(".")[0]?.split("/") ?? ["_locales", "en_US"];
+	LANG_CODES.push(`${code}`);
 
 	MESSAGES[`${code}`] = {};
 
+	messagePromises.push(
+		fileSystem.readFileSync(url.pathToFileURL(path.resolve(filename)), "utf8"),
+	);
+}
+
+for (const [index, messages] of (await Promise.all(messagePromises)).entries()) {
 	/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
-	const rawMessages =
-		JSON.parse(
-			await fileSystem.readFileSync(url.pathToFileURL(path.resolve(filename)), "utf8"),
-		) || {};
+	const rawMessages = JSON.parse(messages) || {};
 
 	for (const item in rawMessages) {
 		if (Object.prototype.hasOwnProperty.call(rawMessages, item)) {
 			if (!rawMessages[`${item}`]?.string) continue;
 
-			// @ts-expect-error -- It's impossible for `MESSAGES[code]` or `temporaryMessages[item]` to be `undefined`.
-			MESSAGES[`${code}`][`${item}`] = `${rawMessages[`${item}`]?.string}`;
+			MESSAGES[`${LANG_CODES[+index]}`][`${item}`] = `${rawMessages[`${item}`]?.string}`;
 		}
 	}
-
-	LANG_CODES.push(`${code}`);
 }
 
 /**
@@ -60,7 +64,6 @@ export function compileLangs(langs, cache = false) {
 		if (retrieved) return retrieved;
 	}
 
-	// @ts-expect-error -- It's impossible for `undefined` to be in the array.
 	CACHE_CODES[`${langs}`] = langs
 
 		// Remove asterisks
@@ -197,9 +200,9 @@ export function mustacheFunction(langs, msgs = getMessages(langs)) {
 /**
  * Express l10n middleware.
  *
- * @param {e.Request} request - Express request object.
- * @param {e.Response} response - Express response object.
- * @param {(error?: any) => undefined} next - Express continue function.
+ * @param {import("express").Request} request - Express request object.
+ * @param {import("express").Response} response - Express response object.
+ * @param {import("express").NextFunction} next - Express continue function.
  */
 export default function localization(request, response, next) {
 	/** @type {string[]} */
@@ -252,7 +255,7 @@ export default function localization(request, response, next) {
 	 *
 	 * @param {(error: Error, str: string) => void} [callback] - Callback to run after render.
 	 *
-	 * @returns {undefined}
+	 * @returns {void}
 	 */
 	// eslint-disable-next-line no-param-reassign -- We need to override the original.
 	response.render = function render(

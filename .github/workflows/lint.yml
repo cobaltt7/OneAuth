@@ -56,18 +56,6 @@ jobs:
               if: failure() || steps.changed.outputs.changed == 'false'
               run: npm run lint:typescript
 
-            - name: Spellchecker CLI
-              if: failure() || steps.changed.outputs.changed == 'false'
-              run: npm run lint:spellchecker-cli
-
-            - name: write good
-              if: failure() || steps.changed.outputs.changed == 'false'
-              run: npm run lint:write_good
-
-            - name: Remove
-              if: failure() || steps.changed.outputs.changed == 'false'
-              run: rm package-lock.json package.json
-
             - name: Commit
               if: failure() || steps.changed.outputs.changed == 'false'
               uses: stefanzweifel/git-auto-commit-action@master

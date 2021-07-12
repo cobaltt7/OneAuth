@@ -6,28 +6,28 @@ labels: bug
 assignees: ""
 ---
 
-# _One line summary_
+# <!--One line summary-->
 
 ## Describe the bug
 
-_A clear and concise description of what the bug is._
+<!--A clear and concise description of what the bug is.-->
 
 ## To Reproduce
 
-_Steps to reproduce the behavior_
+<!--Steps to reproduce the behavior.-->
 
 ## Expected behavior
 
-_A clear and concise description of what should have happened._
+<!--A clear and concise description of what should have happened.-->
 
 ## Screenshots
 
-_Screenshots to help explain the problem._
+<!--Screenshots to help explain the problem.-->
 
 ## Device info
 
-_What device was the behavior recorded on?_
+<!--What device was the behavior recorded on?-->
 
 ## Additional information, if any
 
-_Any other context about the problem_
+<!--Put any other context and/or screenshots about the problem here.-->

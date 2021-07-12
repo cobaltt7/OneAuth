@@ -1,30 +1,40 @@
 /** @file Documentation. */
 
-import fileSystem from "node:fs";
-import highlightjs from "highlight.js/lib/core.js";
-import hljsPlaintext from "highlight.js/lib/languages/plaintext.js";
-import { logError } from "../errors/index.js";
-import marked from "marked";
+
+
+import fileSystem from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { promisify } from "util";
+
+import { Router as express } from "express";
+// eslint-disable-next-line import/extensions -- This module breaks with the extention
+import highlightjs from "highlight.js/lib/core";
+// eslint-disable-next-line import/extensions -- This module breaks with the extention
+import hljsPlaintext from "highlight.js/lib/languages/plaintext";
 import PluginManager from "live-plugin-manager";
-import path from "node:path";
-import utils from "node:util";
-import { Router } from "express";
+import marked from "marked";
 import serveIndex from "serve-index";
-import { fileURLToPath } from "node:url";
 
-const directory = path.dirname(fileURLToPath(import.meta.url)),
-	packageManager = new PluginManager.PluginManager(),
-	router = Router();
+import { logError } from "../errors/index.js";
 
-highlightjs.registerLanguage("plaintext", hljsPlaintext);
+const app = express(),
+	directory = path.dirname(fileURLToPath(import.meta.url)),
+	packageManager = new PluginManager.PluginManager();
+
+highlightjs.registerLanguage("plaintext", (hljs) => ({
+	...hljsPlaintext(hljs),
+	contains: [],
+}));
 
 /**
  * Highlights code using highlight.js.
  *
  * @param {string} code - Code to highlight.
  * @param {string} originalLanguage - Language to highlight it with.
- * @param {(error: Error | undefined, code: string) => undefined} [callback] - Callback to run after
+ * @param {(error: Error | undefined, code: string) => void} [callback] - Callback to run after
  *   highlighing is over.
+ * @todo Move highlighting elsewhere?
  */
 export function highlight(code, originalLanguage, callback) {
 	if (!callback) {
@@ -49,8 +59,8 @@ export function highlight(code, originalLanguage, callback) {
 	}
 
 	import(`highlight.js/lib/languages/${language}`)
-		.then((module) => {
-			highlightjs.registerLanguage(language, module.default);
+		.then(({ default: highlighter }) => {
+			highlightjs.registerLanguage(language, highlighter);
 
 			return callback(undefined, highlightjs.highlight(code, { language }).value);
 		})
@@ -91,7 +101,7 @@ export function highlight(code, originalLanguage, callback) {
 		});
 }
 
-const markedPromise = utils.promisify(marked);
+const markedPromise = promisify(marked);
 
 marked.setOptions({
 	highlight,
@@ -101,7 +111,7 @@ marked.setOptions({
 	xhtml: true,
 });
 
-router.use(
+app.use(
 	// TODO: Use our own system instead of `serve-index`.
 	serveIndex("./src/docs", {
 		filter: (filename) => {
@@ -116,46 +126,24 @@ router.use(
 	}),
 );
 
-router.get(
-	/^[^.]+\.md$/m,
-
-	/**
-	 * Strip `.md` from the ends of URLs.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 *
-	 * @returns {undefined}
-	 */
-	(request, response) =>
-		response.redirect(`/docs/${/^\/(?<file>.+).md$/m.exec(request.path)?.groups?.file}`),
+app.get(/^[^.]+\.md$/m, (request, response) =>
+	response.redirect(`/docs/${/^\/(?<file>.+).md$/m.exec(request.path)?.groups?.file}`),
 );
-router.use(
-	/**
-	 * Handle docs.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => undefined} next - Express continue function.
-	 *
-	 * @returns {Promise<undefined>}
-	 * @todo Change to a custom renderer instead of using `.replace()`.
-	 */
-	async (request, response, next) => {
-		const filename = path.resolve(directory, `${request.path.slice(1)}.md`);
+app.use(async (request, response, next) => {
+	const filename = path.resolve(directory, `${request.path.slice(1)}.md`);
 
-		if (fileSystem.existsSync(filename)) {
-			const markdown = fileSystem.readFileSync(filename, "utf8");
+	if (fileSystem.existsSync(filename)) {
+		const markdown = fileSystem.readFileSync(filename, "utf8");
 
-			return response.render(path.resolve(directory, "markdown.html"), {
-				content: (await markedPromise(markdown)).replace(/<pre>/g, '<pre class="hljs">'),
+		return response.render(path.resolve(directory, "markdown.html"), {
+			// TODO: Change to a custom renderer instead of using `.replace()`.
+			content: (await markedPromise(markdown)).replace(/<pre>/g, '<pre class="hljs">'),
 
-				title: /^#\s(?<heading>.+)$/m.exec(markdown)?.groups?.heading,
-			});
-		}
+			title: /^#\s(?<heading>.+)$/m.exec(markdown)?.groups?.heading,
+		});
+	}
 
-		return next();
-	},
-);
+	return next();
+});
 
-export default router;
+export default app;

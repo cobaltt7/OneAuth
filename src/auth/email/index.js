@@ -1,22 +1,24 @@
 /** @file Email Authentication handler. */
 
-import dotenv from "dotenv";
+import fileSystem from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
 import ReplitDB from "@replit/database";
-import { logError } from "../../errors/index.js";
-import fileSystem from "node:fs";
-import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 import mustache from "mustache";
-import { mustacheFunction } from "../../l10n.js";
-import path from "node:path";
+import nodemailer from "nodemailer";
 import retronid from "retronid";
-import { fileURLToPath } from "node:url";
+
+import { logError } from "../../errors/index.js";
+import { mustacheFunction } from "../../l10n.js";
 
 const database = new ReplitDB(),
+	directory = path.dirname(fileURLToPath(import.meta.url)),
 	mail = nodemailer.createTransport({
 		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
 		service: "gmail",
-	}),
-	directory = path.dirname(fileURLToPath(import.meta.url));
+	});
 
 dotenv.config();
 
@@ -101,16 +103,6 @@ const client = {
 							// eslint-disable-next-line id-length -- We didn't name this.
 							to: request.body.email,
 						},
-
-						/**
-						 * Verify sent email.
-						 *
-						 * @param {Error} error - Error object if an error occured.
-						 * @param {{ [key: string]: any }} info - Information about the sent email
-						 *   if no error occured.
-						 *
-						 * @returns {e.Response} - Express response object.
-						 */
 						(error, info) => {
 							logError(info);
 
