@@ -39,7 +39,7 @@ jobs:
 
             - name: Install
               if: always()
-              run: npm ci
+              run: npm install
 
             - name: Comment
               if: success()

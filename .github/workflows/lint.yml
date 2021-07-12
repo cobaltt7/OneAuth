@@ -38,7 +38,7 @@ jobs:
 
             - name: Install
               if: steps.changed.outputs.changed == 'false'
-              run: npm ci
+              run: npm install
 
             - name: Mustaches
               if: steps.changed.outputs.changed == 'false'
