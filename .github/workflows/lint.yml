@@ -41,6 +41,10 @@ jobs:
               if: ${{ !cancelled() }}
               run: npm run lint:typescript
 
+            - name: Remove
+              if: ${{ !cancelled() }}
+              run: rm package-lock.json package.json
+
             - name: Commit
               if: ${{ !cancelled() }}
               uses: stefanzweifel/git-auto-commit-action@master
