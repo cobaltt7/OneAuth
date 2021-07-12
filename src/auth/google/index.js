@@ -1,9 +1,10 @@
 /** @file Google Authentication handler. */
 
 import atob from "atob";
-import fetch from "node-fetch";
-import { logError } from "../../errors/index.js";
 import dotenv from "dotenv";
+import fetch from "node-fetch";
+
+import { logError } from "../../errors/index.js";
 
 dotenv.config();
 

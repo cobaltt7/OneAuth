@@ -6,20 +6,20 @@ labels: enhancement
 assignees: ""
 ---
 
-# _One line summary_
+# <!--One line summary-->
 
 ## Describe the feature
 
-_A clear and concise description of the feature._
+<!--A clear and concise description of the feature.-->
 
 ## Reasons to add this feature
 
-_This feature would be good because…_
+<!--This feature would be good because…-->
 
 ## Alternatives to this feature
 
-_A clear and concise description of any alternative solutions or features._
+<!--A clear and concise description of any alternative solutions or features.-->
 
 ## Additional information, if any
 
-_Any other context and/or screenshots about the feature request here._
+<!--Put any other context and/or screenshots about the feature request here.-->

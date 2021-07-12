@@ -1,8 +1,4 @@
-export interface nestedObjStr {
-	[key: string]: string | nestedObjStr;
-}
-
-export interface lighthouseResult {
+export type lighthouseResult = {
 	code: string;
 	data: {
 		url: string;
@@ -15,7 +11,7 @@ export interface lighthouseResult {
 			seo: number;
 		};
 	}[];
-}
+};
 
 interface AuthObj {
 	icon: string;

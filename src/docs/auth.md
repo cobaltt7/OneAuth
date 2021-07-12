@@ -18,7 +18,6 @@ Add a file in that folder called `index.js`.
     -   `svg` if `icon` is the name of an SVG file
 -   **`pages[]METHOD`**: Function that runs on a HTTP request to `pages[]backendPage`, where `METHOD` is the HTTP method. Supported methods:
     <!-- -   all -->
-
     -   checkout
     -   copy
     -   delete
