@@ -1,6 +1,5 @@
 /** @file Handle Main pages. */
 
-
 import path from "path";
 import { fileURLToPath } from "url";
 import { promisify } from "util";

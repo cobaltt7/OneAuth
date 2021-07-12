@@ -8,7 +8,6 @@ import { MessageFormatter, pluralTypeHandler } from "@ultraq/icu-message-formatt
 import accepts from "accepts";
 import globby from "globby";
 
-
 import { logError } from "./errors/index.js";
 
 const BASE_LANG = "en_US",

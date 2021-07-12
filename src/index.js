@@ -1,7 +1,5 @@
 /** @file Main Script that sets up Express and Express middleware. */
 
-
-
 import path from "path";
 import { fileURLToPath } from "url";
 
