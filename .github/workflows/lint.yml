@@ -56,10 +56,6 @@ jobs:
               if: failure() || steps.changed.outputs.changed == 'false'
               run: npm run lint:typescript
 
-            - name: Remove
-              if: failure() || steps.changed.outputs.changed == 'false'
-              run: rm package-lock.json package.json
-
             - name: Commit
               if: failure() || steps.changed.outputs.changed == 'false'
               uses: stefanzweifel/git-auto-commit-action@master
