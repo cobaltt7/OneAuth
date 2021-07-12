@@ -3,7 +3,13 @@
 	"version": "1.0.0",
 	"private": true,
 	"description": "All-In-One Authorization",
-	"keywords": ["auth", "login", "signup", "signin", "authorization"],
+	"keywords": [
+		"auth",
+		"login",
+		"signup",
+		"signin",
+		"authorization"
+	],
 	"homepage": "https://auth.onedot.cf",
 	"bugs": {
 		"url": "https://github.com/onedotprojects/auth/issues/new",
@@ -37,7 +43,10 @@
 		"vueIndentScriptAndStyle": true,
 		"overrides": [
 			{
-				"files": ["**.md", "**/LICENSE"],
+				"files": [
+					"**.md",
+					"**/LICENSE"
+				],
 				"options": {
 					"trailingComma": "es5",
 					"proseWrap": "never",
@@ -45,7 +54,11 @@
 				}
 			},
 			{
-				"files": ["**.svg", "**.html", "**.xml"],
+				"files": [
+					"**.svg",
+					"**.html",
+					"**.xml"
+				],
 				"options": {
 					"trailingComma": "es5",
 					"parser": "html",
@@ -53,13 +66,21 @@
 				}
 			},
 			{
-				"files": ["**.sass", "**.scss", "**.css"],
+				"files": [
+					"**.sass",
+					"**.scss",
+					"**.css"
+				],
 				"options": {
 					"parser": "scss"
 				}
 			},
 			{
-				"files": ["**.env", "**.replit", "**/.tx/config"],
+				"files": [
+					"**.env",
+					"**.replit",
+					"**/.tx/config"
+				],
 				"options": {
 					"parser": "ini"
 				}
@@ -81,13 +102,21 @@
 				}
 			},
 			{
-				"files": ["**.json", "**.map", "**.jslintrc", "**.all-contributorsrc"],
+				"files": [
+					"**.json",
+					"**.map",
+					"**.jslintrc",
+					"**.all-contributorsrc"
+				],
 				"options": {
 					"parser": "json"
 				}
 			}
 		],
-		"plugins": ["prettier-plugin-jsdoc", "prettier-plugin-ini"]
+		"plugins": [
+			"prettier-plugin-jsdoc",
+			"prettier-plugin-ini"
+		]
 	},
 	"dependencies": {
 		"@replit/database": "^2.0.1",
