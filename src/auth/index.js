@@ -1,6 +1,5 @@
 /** @file Authentication APIs. */
 
-
 import path from "path";
 import url from "url";
 
