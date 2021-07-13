@@ -108,7 +108,9 @@
 					"jsconfig.json"
 				],
 				"options": {
-					"parser": "json5"
+					"parser": "json5",
+					"quoteProps":"preserve",
+					"trailingComma":"none"
 				}
 			}
 		],
