@@ -29,7 +29,8 @@ app.use((request, response, next) => {
 	if (request.path.includes(".css")) response.setHeader("Cache-Control", "public, max-age=86400");
 	else if (request.path.includes("."))
 		response.setHeader("Cache-Control", "public, max-age=31536000");
-	else next();
+
+	return next();
 });
 
 app.use(old);

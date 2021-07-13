@@ -151,7 +151,7 @@ for (const method of [
 						data.client = clientInfo.name;
 						token = retronid.generate();
 						database.set(`RETRIEVE_${token}`, data);
-					} else if (typeof tokenOrData === "string") {
+					} else if (!clientInfo.rawData && typeof tokenOrData === "string") {
 						data = request.messages.allowDataHidden;
 						token = tokenOrData;
 					} else {
@@ -219,13 +219,11 @@ app.get("/backend/send_data", async (request, response) => {
 	const { client, url: redirectUrl = "", token } = request.query,
 		clientInfo = getClient(`${client}`);
 
-	if (!clientInfo?.getData) return logError(new ReferenceError(`Invalid client: ${client}`));
-
 	let code, redirect;
 
-	if (clientInfo.rawData) {
+	if (clientInfo?.rawData) {
 		code = token;
-	} else {
+	} else if (clientInfo?.getData) {
 		code = retronid.generate();
 
 		const data = await clientInfo.getData(`${token}`);
@@ -234,8 +232,9 @@ app.get("/backend/send_data", async (request, response) => {
 
 		data.client = clientInfo.name;
 		database.set(`RETRIEVE_${code}`, data);
+	} else {
+		return logError(new ReferenceError(`Invalid client: ${client}`));
 	}
-
 	try {
 		redirect = new URL(`${redirectUrl}`);
 		redirect.searchParams.set("code", code);
