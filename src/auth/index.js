@@ -235,6 +235,7 @@ app.get("/backend/send_data", async (request, response) => {
 	} else {
 		return logError(new ReferenceError(`Invalid client: ${client}`));
 	}
+
 	try {
 		redirect = new URL(`${redirectUrl}`);
 		redirect.searchParams.set("code", code);
