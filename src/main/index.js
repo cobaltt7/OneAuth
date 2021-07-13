@@ -64,9 +64,9 @@ app.use((_, response, next) => {
 			return;
 		}
 
-		const indexQuery = load(text);
+		const jQuery = load(text);
 		// eslint-disable-next-line one-var -- `codeblocks` depends on `jQuery`
-		const codeblocks = indexQuery("pre.hljs:not(:has(*))");
+		const codeblocks = jQuery("pre.hljs:not(:has(*))");
 
 		if (!codeblocks?.length) {
 			realSend.call(response, text);
@@ -91,11 +91,11 @@ app.use((_, response, next) => {
 				highlight(code.text(), language)
 					.then((highlighted) => {
 						code.html(highlighted).wrapInner(
-							indexQuery(`<code class="language-${language}"></code>`),
+							jQuery(`<code class="language-${language}"></code>`),
 						);
 
 						if (index + 1 === codeblocks.length)
-							return realSend.call(response, indexQuery.html());
+							return realSend.call(response, jQuery.html());
 
 						return response;
 					})
