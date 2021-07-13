@@ -109,8 +109,8 @@
 				],
 				"options": {
 					"parser": "json5",
-					"quoteProps":"preserve",
-					"trailingComma":"none"
+					"quoteProps": "preserve",
+					"trailingComma": "none"
 				}
 			}
 		],
