@@ -1,36 +1,38 @@
 /** @file Authentication APIs. */
 
-import ReplitDB from "@replit/database";
-const database = new ReplitDB();
-import globby from "globby";
-import { resolve, dirname } from "node:path";
-import retronid from "retronid";
-import { logError } from "../errors/index.js";
-import { Router } from "express";
-import url from "node:url";
+import path from "path";
+import url from "url";
 
-const directory = dirname(url.fileURLToPath(import.meta.url));
-/**
- * @type {{
- * 	fontawesome: boolean;
- * 	icon: string;
- * 	iconProvider: string;
- * 	link: string;
- * 	name: string;
- * 	svg: boolean;
- * }[]}
- */
-const authButtons = [],
+import ReplitDB from "@replit/database";
+import { Router as express } from "express";
+import globby from "globby";
+import retronid from "retronid";
+
+import { logError } from "../errors/index.js";
+
+const app = express(),
+	/**
+	 * @type {{
+	 * 	fontawesome: boolean;
+	 * 	icon: string;
+	 * 	iconProvider: string;
+	 * 	link: string;
+	 * 	name: string;
+	 * 	svg: boolean;
+	 * }[]}
+	 */
+	authButtons = [],
 	/** @type {import("../../types").Auth[]} */
 	authClients = [],
-	router = Router();
+	clientPromises = [],
+	database = new ReplitDB(),
+	directory = path.dirname(url.fileURLToPath(import.meta.url)),
+	// Idk why this is relative to the root dir but it is
+	paths = await globby("src/auth/*/index.js");
 
-// Idk why this is relative to the root dir but it is
-const paths = await globby("src/auth/*/index.js");
+for (const filepath of paths) clientPromises.push(import(`../../${filepath}`));
 
-for (const filepath of paths) {
-	const client = (await import("../../" + filepath)).default;
-
+for (const { default: client } of await Promise.all(clientPromises)) {
 	authClients.push(client);
 	authButtons.push({
 		fontawesome: client.iconProvider.indexOf("fa") === 0,
@@ -100,14 +102,15 @@ for (const method of [
 	"unlock",
 	"unsubscribe",
 ]) {
-	router[`${method}`](
+	// @ts-expect-error -- TS can't tell that there is a limited set of values for `method`.
+	app[`${method}`](
 		"/:client",
 
 		/**
 		 * Run the appropriate HTTP request handler on a HTTP request, or return a HTTP error code.
 		 *
-		 * @param {e.Request} request - Express request object.
-		 * @param {e.Response} response - Express response object.
+		 * @param {import("express").Request} request - Express request object.
+		 * @param {import("express").Response} response - Express response object.
 		 */
 		(request, response) => {
 			const client = getPageHandler(`${request.params?.client}`);
@@ -132,7 +135,7 @@ for (const method of [
 				request,
 				response,
 
-				(tokenOrData, url) => {
+				(tokenOrData, redirect) => {
 					const clientInfo = getClient(request.params?.client || "");
 
 					if (!clientInfo) {
@@ -160,16 +163,16 @@ for (const method of [
 					}
 
 					try {
-						const { host } = new URL(url);
+						const { host } = new URL(redirect);
 
-						return response.status(300).render(resolve(directory, "allow.html"), {
+						return response.status(300).render(path.resolve(directory, "allow.html"), {
 							client: request.params?.client,
 							data: JSON.stringify(data),
-							encodedUrl: encodeURIComponent(url),
+							encodedUrl: encodeURIComponent(redirect),
 							host,
 							name: clientInfo.name,
 							token,
-							url,
+							url: redirect,
 						});
 					} catch {
 						return response.status(400);
@@ -180,104 +183,67 @@ for (const method of [
 	);
 }
 
-router.get(
-	"/",
+app.get("/", (request, response) => {
+	if (!request.query?.url) return response.status(400);
 
-	/**
-	 * Send the authentication entry page.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 *
-	 * @returns {e.Response | undefined} - Express response object.
-	 */
-	(request, response) => {
-		if (!request.query?.url) return response.status(400);
+	const authButtonsReplaced = authButtons;
 
-		const authButtonsReplaced = authButtons;
-
-		for (const [index, { link }] of authButtons.entries()) {
-			if (authButtonsReplaced[+index]) {
-				// @ts-expect-error -- TS thinks `authButtonsReplaced[index]` might be `undefined`. That's impossible. See L211
-				authButtonsReplaced[+index].link = link.replace(
-					// TODO: Use mustache instead. mustache-format-ignore
-					/{{\s*url\s*}}/g,
-					encodeURIComponent(`${request.query?.url}`),
-				);
-			}
+	for (const [index, { link }] of authButtons.entries()) {
+		if (authButtonsReplaced[+index]) {
+			authButtonsReplaced[+index].link = link.replace(
+				// TODO: Use mustache instead. mustache-format-ignore
+				/{{\s*url\s*}}/g,
+				encodeURIComponent(`${request.query?.url}`),
+			);
 		}
+	}
 
-		return response.render(resolve(directory, "auth.html"), {
-			clients: authButtonsReplaced,
-		});
-	},
-);
+	return response.render(path.resolve(directory, "auth.html"), {
+		clients: authButtonsReplaced,
+	});
+});
 
-router.get(
-	"/backend/get_data",
+app.get("/backend/get_data", async (request, response) => {
+	response.setHeader("Access-Control-Allow-Origin", "*");
+	response.setHeader(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept",
+	);
 
-	/**
-	 * Retrieve the user's data.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 *
-	 * @returns {Promise<void>}
-	 */
-	async (request, response) => {
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		response.setHeader(
-			"Access-Control-Allow-Headers",
-			"Origin, X-Requested-With, Content-Type, Accept",
-		);
+	response.status(200).json(await database.get(`RETRIEVE_${request.query?.code}`));
+	database.delete(`RETRIEVE_${request.query?.code}`);
+});
+app.get("/backend/send_data", async (request, response) => {
+	if (!request.query) return logError("`request.query` is falsy!");
 
-		response.status(200).json(await database.get(`RETRIEVE_${request.query?.code}`));
-		database.delete(`RETRIEVE_${request.query?.code}`);
-	},
-);
-router.get(
-	"/backend/send_data",
+	const { client, url: redirectUrl = "", token } = request.query,
+		clientInfo = getClient(`${client}`);
 
-	/**
-	 * Save the user's data.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 *
-	 * @returns {Promise<e.Response | void>} - Nothing of interest.
-	 */
-	async (request, response) => {
-		if (!request.query) return logError("`request.query` is falsy!");
+	if (!clientInfo?.getData) return logError(new ReferenceError(`Invalid client: ${client}`));
 
-		const { client, url = "", token } = request.query,
-			clientInfo = getClient(`${client}`);
+	let code, redirect;
 
-		if (!clientInfo?.getData) return logError(new ReferenceError(`Invalid client: ${client}`));
+	if (clientInfo.rawData) {
+		code = token;
+	} else {
+		code = retronid.generate();
 
-		let code, redirect;
+		const data = await clientInfo.getData(`${token}`);
 
-		if (clientInfo.rawData) {
-			code = token;
-		} else {
-			code = retronid.generate();
+		if (!data) return logError("No data available");
 
-			const data = await clientInfo.getData(`${token}`);
+		data.client = clientInfo.name;
+		database.set(`RETRIEVE_${code}`, data);
+	}
 
-			if (!data) return logError("No data available");
+	try {
+		redirect = new URL(`${redirectUrl}`);
+		redirect.searchParams.set("code", code);
 
-			data.client = clientInfo.name;
-			database.set(`RETRIEVE_${code}`, data);
-		}
+		return response.status(303).redirect(redirect.href);
+	} catch {
+		return response.status(400);
+	}
+});
 
-		try {
-			redirect = new URL(url);
-			redirect.searchParams.set("code", code);
-
-			return response.status(303).redirect(redirect);
-		} catch {
-			return response.status(400);
-		}
-	},
-);
-
-export default router;
+export default app;

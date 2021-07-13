@@ -4,11 +4,6 @@ on:
         types: [opened]
     workflow_dispatch:
     push:
-        paths-ignore:
-            - package.json
-            - package-lock.json
-    repository_dispatch:
-        types: [lint]
 
 jobs:
     run:
@@ -16,60 +11,42 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Find changed
-              uses: marceloprado/has-changed-path@v1
-              id: changed
-              with:
-                  paths: package.json package-lock.json _locales/**.json
-
             - name: Checkout
-              if: steps.changed.outputs.changed == 'false'
               uses: actions/checkout@main
               with:
                   ref: ${{ github.head_ref }}
                   token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Node.JS
-              if: steps.changed.outputs.changed == 'false'
               uses: actions/setup-node@main
               with:
                   node-version: 14
                   cache: "npm"
 
             - name: Install
-              if: steps.changed.outputs.changed == 'false'
-              run: npm ci
+              run: npm install
 
             - name: Mustaches
-              if: steps.changed.outputs.changed == 'false'
               run: npm run lint:mustaches
 
             - name: Prettier
-              if: failure() || steps.changed.outputs.changed == 'false'
+              if: ${{ !cancelled() }}
               run: npm run lint:prettier
 
             - name: ESLint
-              if: failure() || steps.changed.outputs.changed == 'false'
+              if: ${{ !cancelled() }}
               run: npm run lint:eslint
 
             - name: Typescript
-              if: failure() || steps.changed.outputs.changed == 'false'
+              if: ${{ !cancelled() }}
               run: npm run lint:typescript
 
-            - name: Spellchecker CLI
-              if: failure() || steps.changed.outputs.changed == 'false'
-              run: npm run lint:spellchecker-cli
-
-            - name: write good
-              if: failure() || steps.changed.outputs.changed == 'false'
-              run: npm run lint:write_good
-
-            - name: Remove
-              if: failure() || steps.changed.outputs.changed == 'false'
-              run: rm package-lock.json package.json
+            - name: Revert
+              if: ${{ !cancelled() }}
+              run: git checkout HEAD -- package-lock.json package.json
 
             - name: Commit
-              if: failure() || steps.changed.outputs.changed == 'false'
+              if: ${{ !cancelled() }}
               uses: stefanzweifel/git-auto-commit-action@master
               with:
                   commit_message: "Lint and format code"
@@ -79,9 +56,3 @@ jobs:
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
                   commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
-
-            - name: Exit
-              if: steps.changed.outputs.changed == 'true'
-              run:
-                  "echo 'Workflow not run. Waiting for other workflow to finish first, then it will
-                  trigger this one again.'"

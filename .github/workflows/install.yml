@@ -58,11 +58,3 @@ jobs:
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
                   commit_author: wgytbot <83586655+wgytbot@users.noreply.github.com>
-
-            - name: Repository Dispatch
-              if: always()
-              uses: peter-evans/repository-dispatch@v1
-              with:
-                  token: ${{ secrets.WGYTBOT }}
-                  repository: ${{ github.repository }}
-                  event-type: lint

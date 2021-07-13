@@ -1,7 +1,0 @@
-1Auth
-Replit
-URI
-APIs
-HTTPS
-errorOldWhy
-Transifex

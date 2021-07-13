@@ -31,15 +31,15 @@ jobs:
                       https://auth.onedot.cf/auth/replit?url=https%3A%2F%2Fauth.onedot.cf%2F
 
             - name: Setup Node.JS
-              if: always()
+              if: ${{ !cancelled() }}
               uses: actions/setup-node@main
               with:
                   node-version: 14
                   cache: "npm"
 
             - name: Install
-              if: always()
-              run: npm ci
+              if: ${{ !cancelled() }}
+              run: npm install
 
             - name: Comment
               if: success()

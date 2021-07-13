@@ -1,17 +1,17 @@
-# _One line summary_
+# <!--One line summary-->
 
 ## Resolves
 
-_Which issue(s) does this pull request fix or resolve?_
+<!--Which issue(s) does this pull request fix or resolve?-->
 
 ## Changes
 
-_Please describe the changes._
+<!--Please describe the changes made.-->
 
 ## Reason for changes
 
-_Why did you make them?_
+<!--Why did you make them?-->
 
 ## Tests
 
-_Have you tested this PR? If so, how? If not, please do so before submitting the PR._
+<!--Have you tested this PR? If so, how? If not, please do so before submitting the PR.-->

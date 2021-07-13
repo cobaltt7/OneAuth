@@ -1,47 +1,36 @@
 /** @file Main Script that sets up Express and Express middleware. */
 
-// SET UP EXPRESS
-import express, { urlencoded } from "express";
-import { dirname, resolve } from "node:path";
-import mustacheExpress from "mustache-express";
-import { errorPages, old } from "./errors/index.js";
+import path from "path";
+import { fileURLToPath } from "url";
+
 import compression from "compression";
 import cookieParser from "cookie-parser";
-import localization from "./l10n.js";
-import documentation from "./docs/index.js";
-import main from "./main/index.js";
+import express, { urlencoded } from "express";
+import mustacheExpress from "mustache-express";
+
 import auth from "./auth/index.js";
-import { fileURLToPath } from "node:url";
+import documentation from "./docs/index.js";
+import { errorPages, old } from "./errors/index.js";
+import localization from "./l10n.js";
+import main from "./main/index.js";
 
-const directory = dirname(fileURLToPath(import.meta.url)),
-	app = express(),
-	// Mustache
-	mustacheExpressEngine = mustacheExpress(resolve(directory, "partials"), ".html");
+const app = express(),
+	directory = path.dirname(fileURLToPath(import.meta.url)),
+	mustacheEngine = mustacheExpress(path.resolve(directory, "partials"), ".html");
 
-app.engine("html", mustacheExpressEngine);
-app.engine("css", mustacheExpressEngine);
+app.engine("html", mustacheEngine);
+app.engine("css", mustacheEngine);
 
 app.use(compression());
 
 app.use(errorPages);
 
-app.use(
-	/**
-	 * Set caching headers.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => undefined} next - Express continue function.
-	 */
-	(request, response, next) => {
-		if (request.path.includes(".css"))
-			response.setHeader("Cache-Control", "public, max-age=86400");
-		else if (request.path.includes("."))
-			response.setHeader("Cache-Control", "public, max-age=31536000");
-
-		next();
-	},
-);
+app.use((request, response, next) => {
+	if (request.path.includes(".css")) response.setHeader("Cache-Control", "public, max-age=86400");
+	else if (request.path.includes("."))
+		response.setHeader("Cache-Control", "public, max-age=31536000");
+	else next();
+});
 
 app.use(old);
 
@@ -50,38 +39,16 @@ const bodyParser = urlencoded({
 	extended: true,
 });
 
-app.use(
-	/**
-	 * Parse cookies for use in request handlers.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => undefined} next - Express continue function.
-	 *
-	 * @returns {undefined}
-	 */
-	(request, response, next) => {
-		if (request.path.includes(".")) return next();
+app.use((request, response, next) => {
+	if (request.path.includes(".")) return next();
 
-		return cookieParser()(request, response, next);
-	},
-);
-app.use(
-	/**
-	 * Parse POST request bodies for use in request handlers.
-	 *
-	 * @param {e.Request} request - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 * @param {(error?: any) => undefined} next - Express continue function.
-	 *
-	 * @returns {undefined}
-	 */
-	(request, response, next) => {
-		if (request.path.includes(".")) return next();
+	return cookieParser()(request, response, next);
+});
+app.use((request, response, next) => {
+	if (request.path.includes(".")) return next();
 
-		return bodyParser(request, response, next);
-	},
-);
+	return bodyParser(request, response, next);
+});
 
 // Pages
 app.use(localization);
@@ -89,17 +56,7 @@ app.use("/docs", documentation);
 app.use(main);
 app.use("/auth", auth);
 
-app.use(
-	/**
-	 * Send a 404 response.
-	 *
-	 * @param {e.Request} _ - Express request object.
-	 * @param {e.Response} response - Express response object.
-	 *
-	 * @returns {e.Response} - Express response object.
-	 */
-	(_, response) => response.status(404),
-);
+app.use((_, response) => response.status(404));
 
 // LISTEN
 // eslint-disable-next-line no-console -- We need to know when it's ready.

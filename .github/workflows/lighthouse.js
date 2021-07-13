@@ -51,25 +51,31 @@ function commentOnDiscussion(body) {
 	}).then((response) => response.json());
 }
 
-if (process.argv[4]) {
-	commentOnDiscussion("An error occured while retrieving the data from Lighthouse.");
+/** @type {import("../../types").lighthouseResult} */
+let data;
 
-	throw new Error("An error occured while retrieving the data from Lighthouse.");
+try {
+	if (process.argv[4]) throw new Error(process.argv[4]);
+
+	data = JSON.parse(`${process.argv[3]}`);
+
+	if (data.code !== "SUCCESS") throw new Error(`code: ${data.code}`);
+} catch (error) {
+	commentOnDiscussion(
+		`An error occured while retrieving the data from Lighthouse.\n\`\`\`js\n${error}\n\`\`\``,
+	);
+
+	throw new Error(error);
 }
 
 try {
-	/** @type {import("../../types").lighthouseResult} */
-	const { code, data } = JSON.parse(`${process.argv[3]}`);
-
-	if (code !== "SUCCESS") throw new Error(code);
-
 	let output =
 		"# This week’s Lighthouse scores\n" +
 		"| URL | Device | Accessibility | Best Practices | Performace " +
 		"| Progressive Web App | SEO | PageSpeed Insights |\n" +
 		"| - | - | - | - | - | - | - | - |\n";
 
-	for (const result of data) {
+	for (const result of data.data) {
 		output +=
 			`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores)
 				.map((number) => `${number < 50 ? "🔴" : number < 90 ? "🟡" : "🟢"} ${number}`)
