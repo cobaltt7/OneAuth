@@ -1,8 +1,8 @@
 /** @file Documentation. */
 
 import fileSystem from "node:fs";
-import highlightjs from "highlight.js/lib/core.js";
-import hljsPlaintext from "highlight.js/lib/languages/plaintext.js";
+import highlightjs from "highlight.js/lib/core";
+import hljsPlaintext from "highlight.js/lib/languages/plaintext";
 import { logError } from "../errors/index.js";
 import marked from "marked";
 import PluginManager from "live-plugin-manager";
