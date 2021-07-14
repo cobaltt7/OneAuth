@@ -21,19 +21,20 @@ const app = express(),
 app.engine("html", mustacheEngine);
 app.engine("css", mustacheEngine);
 
-app.use(express.static(path.resolve(directory, 'static'), {
-	"maxAge":31536000,
-	"dotfiles": "allow",
-	immutable:true
-}));
+app.use(
+	express.static(path.resolve(directory, "static"), {
+		maxAge: 31536000,
+		dotfiles: "allow",
+		immutable: true,
+	}),
+);
 
 app.use(compression());
 
 app.use(errorPages);
 
 app.use((request, response, next) => {
-	if (request.path.includes(".css"))
-		response.setHeader("Cache-Control", "public, max-age=86400");
+	if (request.path.includes(".css")) response.setHeader("Cache-Control", "public, max-age=86400");
 	else if (request.path.includes("."))
 		response.setHeader("Cache-Control", "public, max-age=31536000, immutable");
 	else if (request.path.includes("/auth"))

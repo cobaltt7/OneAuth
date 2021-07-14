@@ -49,7 +49,7 @@
 					submit.firstChild.remove();
 					submit.append(
 						Object.assign(document.createElement("img"), {
-							src: "/image/loading.svg",
+							src: "/image/loading.svg"
 						})
 					);
 
@@ -60,9 +60,9 @@
 					await fetch("", {
 						body: `email=${email}`,
 						headers: {
-							"content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+							"content-type": "application/x-www-form-urlencoded; charset=UTF-8"
 						},
-						method: "POST",
+						method: "POST"
 					});
 
 					// Create new form
@@ -70,7 +70,7 @@
 						// Create form element
 						action: "",
 						autocomplete: "off",
-						method: "POST",
+						method: "POST"
 					});
 					codeForm.append(
 						Object.assign(document.createElement("input"), {
@@ -82,14 +82,14 @@
 							name: "code",
 							placeholder: "abcde12345",
 							required: "true",
-							type: "password",
+							type: "password"
 						}),
 						Object.assign(document.createElement("input"), {
 							// Hidden email box
 
 							name: "email",
 							type: "hidden",
-							value: email,
+							value: email
 						}),
 						Object.assign(document.createElement("button"), {
 							// Submit button
@@ -97,7 +97,7 @@
 							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "submit",
 							innerText: "{{ #message }}emailSubmit{{ /message }}",
-							type: "submit",
+							type: "submit"
 						})
 					);
 					form.remove();
@@ -107,7 +107,7 @@
 							htmlFor: "code",
 							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "note",
-							innerText: "{{ #message }}emailEnterCode{{ /message }}",
+							innerText: "{{ #message }}emailEnterCode{{ /message }}"
 						}),
 						codeForm
 					);
