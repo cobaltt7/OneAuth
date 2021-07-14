@@ -3,8 +3,11 @@
 import path from "path";
 import { fileURLToPath } from "url";
 
-/** @type {{ [key: string]: number }} */
-const changeTo = { 206: 204 },
+import { Router as express } from "express";
+
+const app = express(),
+	/** @type {{ [key: number]: number }} */
+	changeTo = { 206: 204 },
 	directory = path.dirname(fileURLToPath(import.meta.url));
 
 /**
@@ -27,7 +30,7 @@ export function logError(error) {
  * @param {import("express").Response} response - Express response object.
  * @param {number} status - HTTP status code.
  */
-function middleware(realStatus, request, response, status = response.statusCode) {
+function statusMiddleware(realStatus, request, response, status = response.statusCode) {
 	if (
 		// If no content has already been sent
 		!response.headersSent &&
@@ -38,16 +41,14 @@ function middleware(realStatus, request, response, status = response.statusCode)
 			status === 304)
 	) {
 		// Then it's an error code, send error page.
-		if (changeTo[`${status}`]) {
+		if (changeTo[+status]) {
 			logError(
 				new RangeError(
-					`Do not use the HTTP status code ${status}. Instead, use ${
-						changeTo[`${status}`]
-					}.`,
+					`Do not use the HTTP status code ${status}. Instead, use ${changeTo[+status]}.`,
 				),
 			);
 
-			middleware(realStatus, request, response, changeTo[`${status}`]);
+			statusMiddleware(realStatus, request, response, changeTo[+status]);
 
 			return;
 		}
@@ -60,7 +61,7 @@ function middleware(realStatus, request, response, status = response.statusCode)
 
 		// @ts-expect-error -- We *want* to check `.includes(undefined)`.
 		if (Object.keys(error).includes()) {
-			middleware(realStatus, request, response, 500);
+			statusMiddleware(realStatus, request, response, 500);
 
 			return;
 		}
@@ -78,7 +79,7 @@ function middleware(realStatus, request, response, status = response.statusCode)
 
 	setTimeout(() => {
 		if (!response.headersSent) {
-			middleware(
+			statusMiddleware(
 				realStatus,
 				request,
 				response,
@@ -88,22 +89,13 @@ function middleware(realStatus, request, response, status = response.statusCode)
 	}, 3000);
 }
 
-/**
- * Express middleware to handle arror handling.
- *
- * @param {import("express").Request} request - Express request object.
- * @param {import("express").Response} response - Express response object.
- * @param {import("express").NextFunction} next - Express continue function.
- *
- * @returns {void}
- */
-export function errorPages(request, response, next) {
-	if (request.path === "/old") {
-		return response.status(400).render(path.resolve(directory, "old.html"), {
-			all: request.messages.errorOldAll,
-		});
-	}
+app.get("/old", (request, response) =>
+	response.status(400).render(path.resolve(directory, "old.html"), {
+		all: request.messages.errorOldAll,
+	}),
+);
 
+app.use((request, response, next) => {
 	const realStatus = response.status;
 
 	/**
@@ -115,36 +107,41 @@ export function errorPages(request, response, next) {
 	 */
 	// eslint-disable-next-line no-param-reassign -- We need to override the original.
 	response.status = function status(statusCode) {
-		middleware(realStatus, request, response, statusCode);
+		statusMiddleware(realStatus, request, response, statusCode);
 
 		return response;
 	};
 
 	return next();
-}
+});
+app.use(
+	/**
+	 * Disalow old browsers from visiting our site.
+	 *
+	 * @param {import("express").Request} request - Express request object.
+	 * @param {import("express").Response} response - Express response object.
+	 * @param {import("express").NextFunction} next - Express continue function.
+	 *
+	 * @returns {void}
+	 * @todo Make our site available to old browsers.
+	 */
+	(request, response, next) => {
+		if (request.path.includes(".") || request.path === "/old") return next();
 
-/**
- * Disalow old browsers from visiting our site.
- *
- * @param {import("express").Request} request - Express request object.
- * @param {import("express").Response} response - Express response object.
- * @param {import("express").NextFunction} next - Express continue function.
- *
- * @returns {void}
- * @todo Make our site available to old browsers.
- */
-export function old(request, response, next) {
-	if (request.path.includes(".") || request.path === "/old") return next();
+		const userAgent = `${request.get("User-Agent")}`;
 
-	const userAgent = `${request.get("User-Agent")}`;
+		if (
+			userAgent.includes("MSIE") ||
+			userAgent.includes("Trident") ||
+			userAgent.includes("Netscape") ||
+			userAgent.includes("Navigator")
+		)
+			return response.status(400).render(path.resolve(directory, "old.html"));
 
-	if (
-		userAgent.includes("MSIE") ||
-		userAgent.includes("Trident") ||
-		userAgent.includes("Netscape") ||
-		userAgent.includes("Navigator")
-	)
-		return response.status(400).render(path.resolve(directory, "old.html"));
+		return next();
+	},
+);
 
-	return next();
-}
+app.get("/428", (_, response) => response.status(428));
+
+export default app;

@@ -19,13 +19,13 @@ const app = express(),
 dotenv.config();
 
 /**
-	 * @type {{
-	 * 	fontawesome: boolean;
-	 * 	icon: string;
-	 * 	iconProvider: string;
-	 * 	name: string;
-	 * 	url: boolean;
-	 * }[]}
+ * @type {{
+ * 	fontawesome: boolean;
+ * 	icon: string;
+ * 	iconProvider: string;
+ * 	name: string;
+ * 	url: boolean;
+ * }[]}
  */
 const authClients = [],
 	clientPromises = [],
@@ -34,13 +34,13 @@ const authClients = [],
 
 for (const filepath of paths) clientPromises.push(import(`../../${filepath}`));
 
-for (const {default: client} of await Promise.all(clientPromises)) {
+for (const { default: client } of await Promise.all(clientPromises)) {
 	authClients.push({
 		fontawesome: client.iconProvider.indexOf("fa") === 0,
 		icon: client.icon,
 		iconProvider: client.iconProvider,
-		url: client.iconProvider === "url",
 		name: client.name,
+		url: client.iconProvider === "url",
 	});
 }
 

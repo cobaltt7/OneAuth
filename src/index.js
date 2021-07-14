@@ -10,7 +10,7 @@ import mustacheExpress from "mustache-express";
 
 import auth from "./auth/index.js";
 import documentation from "./docs/index.js";
-import { errorPages, old } from "./errors/index.js";
+import errorPages from "./errors/index.js";
 import localization from "./l10n.js";
 import main from "./main/index.js";
 
@@ -21,28 +21,30 @@ const app = express(),
 app.engine("html", mustacheEngine);
 app.engine("css", mustacheEngine);
 
-app.use(express.static(path.resolve(directory, 'static'), {
-	"maxAge":31536000,
-	"dotfiles": "allow",
-	immutable:true
-}));
-
 app.use(compression());
 
-app.use(errorPages);
-
 app.use((request, response, next) => {
-	if (request.path.includes(".css"))
-		response.setHeader("Cache-Control", "public, max-age=86400");
-	else if (request.path.includes("."))
-		response.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-	else if (request.path.includes("/auth"))
-		response.setHeader("Cache-Control", "no-store, max-age=0");
+	let directive;
+
+	if (request.path.includes(".css")) directive = "public, max-age=86400";
+	else if (request.path.includes(".")) directive = "public, max-age=31536000, immutable";
+	else if (request.path.includes("/auth")) directive = "no-store, max-age=0";
+	else directive = "";
+
+	if (directive) response.setHeader("Cache-Control", directive);
 
 	return next();
 });
 
-app.use(old);
+app.use(errorPages);
+
+app.use(
+	express.static(path.resolve(directory, "static"), {
+		dotfiles: "allow",
+		immutable: true,
+		maxAge: 31536000,
+	}),
+);
 
 // Information parsing
 const bodyParser = urlencoded({

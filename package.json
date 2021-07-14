@@ -22,7 +22,7 @@
 	"scripts": {
 		"lint": "npm run lint:mustaches ; npm run lint:prettier ; npm run lint:eslint ; npm run lint:typescript",
 		"lint:eslint": "eslint --fix --cache --color --resolve-plugins-relative-to=\"./node_modules/@onedotprojects/eslint-plugin/\" .",
-		"lint:prettier": "prettier --write . **.svg **.xml **.sass **.scss **.env **.replit **/.tx/config **.all-contributorsrc **.code-workspace .code-snippets",
+		"lint:prettier": "prettier --write . **.svg **.sass **.env **.replit **/.tx/config **.all-contributorsrc",
 		"lint:mustaches": "node --trace-warnings --harmony .github/workflows/mustaches.js",
 		"lint:typescript": "tsc --project jsconfig.json",
 		"start": "node --trace-warnings --harmony src/index.js",
