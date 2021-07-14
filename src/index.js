@@ -21,6 +21,13 @@ const app = express(),
 app.engine("html", mustacheEngine);
 app.engine("css", mustacheEngine);
 
+app.use(
+	express.static(path.resolve(directory, "static"), {
+		maxAge: 31536000,
+		dotfiles: "allow",
+		immutable: true,
+	}),
+);
 app.use(compression());
 
 app.use((request, response, next) => {
