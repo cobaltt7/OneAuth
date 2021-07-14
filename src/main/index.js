@@ -19,13 +19,13 @@ const app = express(),
 dotenv.config();
 
 /**
- * @type {{
- * 	fontawesome: boolean;
- * 	icon: string;
- * 	iconProvider: string;
- * 	name: string;
- * 	svg: boolean;
- * }[]}
+	 * @type {{
+	 * 	fontawesome: boolean;
+	 * 	icon: string;
+	 * 	iconProvider: string;
+	 * 	name: string;
+	 * 	url: boolean;
+	 * }[]}
  */
 const authClients = [],
 	clientPromises = [],
@@ -34,15 +34,13 @@ const authClients = [],
 
 for (const filepath of paths) clientPromises.push(import(`../../${filepath}`));
 
-for (const {
-	default: { iconProvider, icon, name },
-} of await Promise.all(clientPromises)) {
+for (const {default: client} of await Promise.all(clientPromises)) {
 	authClients.push({
-		fontawesome: iconProvider.indexOf("fa") === 0,
-		icon,
-		iconProvider,
-		name,
-		svg: iconProvider === "svg",
+		fontawesome: client.iconProvider.indexOf("fa") === 0,
+		icon: client.icon,
+		iconProvider: client.iconProvider,
+		url: client.iconProvider === "url",
+		name: client.name,
 	});
 }
 
@@ -116,24 +114,10 @@ app.get("/logo.svg", (_, response) =>
 app.get("/favicon.ico", (_, response) =>
 	response.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg"),
 );
-app.get("/svg/:img", (request, response) =>
-	response.sendFile(path.resolve(directory, `../svg/${request.params?.img}.svg`)),
-);
-
 app.get("/", (_, response) =>
 	response.render(path.resolve(directory, "about.html"), {
 		clients: authClients,
 	}),
-);
-
-app.get("/about", (_, response) => response.status(303).redirect("https://auth.onedot.cf/"));
-
-app.get("/googleb9551735479dd7b0.html", (_, response) =>
-	response.send("google-site-verification: googleb9551735479dd7b0.html"),
-);
-
-app.get("/robots.txt", (_, response) =>
-	response.send("User-agent: *\nAllow: /\nDisalow: /auth\nHost: https://auth.onedot.cf"),
 );
 
 app.get("/.well-known/security.txt", (_, response) =>

@@ -18,7 +18,7 @@ const app = express(),
 	 * 	iconProvider: string;
 	 * 	link: string;
 	 * 	name: string;
-	 * 	svg: boolean;
+	 * 	url: boolean;
 	 * }[]}
 	 */
 	authButtons = [],
@@ -38,9 +38,9 @@ for (const { default: client } of await Promise.all(clientPromises)) {
 		fontawesome: client.iconProvider.indexOf("fa") === 0,
 		icon: client.icon,
 		iconProvider: client.iconProvider,
+		url: client.iconProvider === "url",
 		link: client.link,
 		name: client.name,
-		svg: client.iconProvider === "svg",
 	});
 }
 

@@ -29,15 +29,15 @@
 					<li class="auth-button">
 						{{ #fontawesome }}
 						<i class="{{ iconProvider }} fa-{{ icon }}"></i>
-						{{ /fontawesome }} {{ ^fontawesome }}
+						{{ /fontawesome }} {{ #url }}
 						<img
-							src="{{ #svg }}/svg/{{ /svg }}{{ icon }}"
+							src="{{ icon }}"
 							alt="{{ name }}"
 							height="18"
 							width="18"
 							name="{{ name }}"
 						/>
-						{{ /fontawesome }}
+						{{ /url }}
 						<span>{{ name }}</span>
 					</li>
 					{{ /clients }}

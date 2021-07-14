@@ -15,7 +15,7 @@ export type lighthouseResult = {
 
 interface AuthObj {
 	icon: string;
-	iconProvider?: "svg" | "url" | "far" | "fab" | "fas";
+	iconProvider?: "url" | "far" | "fab" | "fas";
 	link: string;
 	name: string;
 	pages?: Page[];

@@ -55,8 +55,8 @@ const client = {
 		return filteredInfo;
 	},
 
-	icon: "google",
-	iconProvider: "svg",
+	icon: "/image/google.svg",
+	iconProvider: "url",
 
 	link:
 		"https://accounts.google.com/o/oauth2/v2/auth" +

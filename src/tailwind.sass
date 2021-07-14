@@ -37,19 +37,6 @@ main {
 		@apply self-center;
 	}
 
-	pre.hljs {
-		@apply m-0
-			p-0
-			bg-transparent;
-
-		code {
-			@apply rounded-md
-				py-3.5
-				px-5
-				overflow-x-auto;
-		}
-	}
-
 	ul {
 		li {
 			p {
@@ -71,6 +58,19 @@ h6 {
 pre {
 	@apply block
 		p-2;
+
+	&.hljs {
+		@apply m-0
+			p-0
+			bg-transparent
+			overflow-x-auto;
+
+		code {
+			@apply rounded-md
+				py-3.5
+				px-5;
+		}
+	}
 }
 
 .new::before {
@@ -112,6 +112,7 @@ pre {
 		p-[8px]
 		min-h-[30px]
 		min-w-[140px];
+
 	@apply static
 		!important;
 

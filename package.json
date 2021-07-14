@@ -22,11 +22,11 @@
 	"scripts": {
 		"lint": "npm run lint:mustaches ; npm run lint:prettier ; npm run lint:eslint ; npm run lint:typescript",
 		"lint:eslint": "eslint --fix --cache --color --resolve-plugins-relative-to=\"./node_modules/@onedotprojects/eslint-plugin/\" .",
-		"lint:prettier": "prettier --write . **.svg **.xml **.sass **.scss",
+		"lint:prettier": "prettier --write . **.svg **.xml **.sass **.scss **.env **.replit **/.tx/config **.all-contributorsrc **.code-workspace .code-snippets",
 		"lint:mustaches": "node --trace-warnings --harmony .github/workflows/mustaches.js",
 		"lint:typescript": "tsc --project jsconfig.json",
 		"start": "node --trace-warnings --harmony src/index.js",
-		"build:tailwind": "TAILWIND_MODE=build ; NODE_ENV=production ; postcss src/tailwind.sass -o src/main/style.css"
+		"build:tailwind": "postcss src/tailwind.sass -o src/main/style.css"
 	},
 	"prettier": {
 		"iniSpaceAroundEquals": true,
@@ -59,7 +59,7 @@
 					"**.xml"
 				],
 				"options": {
-					"trailingComma": "never",
+					"trailingComma": "none",
 					"parser": "html",
 					"jsxBracketSameLine": true
 				}
@@ -88,7 +88,6 @@
 				"files": [
 					"**.json",
 					"**.map",
-					"**.jslintrc",
 					"**.all-contributorsrc"
 				],
 				"options": {

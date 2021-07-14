@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disalow: /auth
+Host: https://auth.onedot.cf
