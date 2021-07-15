@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import replace from "replace-in-file";
 
 const commentRegex =
-		/(?<!(?:\/\/|\/\*|#|<!--|{[^\S\n]{[^\S\n]!)?(?:.+[^\S\n]+)?[^\S\n]*mustache-format-ignore[^\S\n]*(?:(?:[^\S\n]*[\r\u2028\u2029]|[\t\v\f \xa0\u1680\u2000-\u200a\u202f\u205f\u3000\ufeff]).+)?(?:\*\/|-->|}[^\S\n]})?.+\n+)/
+		/(?<!(?:\/\/|\/\*|#|<!--|{[^\S\n]{[^\S\n]!)?(?:.+[^\S\n]+)?[^\S\n]*?mustache-format-ignore[^\S\n]*?(?:[^\S\n]*.+)?(?:\*\/|-->|}[^\S\n]})?.*\n+)/
 			.source,
 	ignore = ["node_modules/**", ".git/**", ".github/workflows/mustaches.js"],
 	repoRoot = `${path.resolve(fileURLToPath(import.meta.url), "../../../")}\\`;
@@ -36,7 +36,7 @@ console.log("Replacing triple mustaches with double and an ampersand...");
 
 replace.sync({
 	from: new RegExp(
-		commentRegex + /(?:{[^\S\n]){2}{[^\S\n]*(?<tag>[^!#&/>^]*)[^\S\n]*(?:}[^\S\n]){2}}/.source,
+		commentRegex + /(?:{[^\S\n]*){3}(?<tag>[^!#&/>^].+?)(?:[^\S\n]*}){3}/.source,
 		"g",
 	),
 
@@ -48,13 +48,15 @@ replace.sync({
 
 const tripple = replace
 	.sync({
+		dry: true,
+
 		from: new RegExp(
-			commentRegex + /{[^\S\n]{[^\S\n]*(?:[!#/^][^\S\n]*)?[^&>]*p}[^\S\n]}/.source,
+			commentRegex + /(?:{[^\S\n]*){2}(?:&.+?|{[^\S\n]*.+?[^\S\n]*})(?:[^\S\n]*}){2}/.source,
 			"g",
 		),
 
 		// eslint-disable-next-line id-length -- We didn't name this.
-		to: "$0 hi",
+		to: "$0 ",
 
 		...options,
 	})
@@ -75,7 +77,7 @@ console.log("\nFormatting list mustaches, comment mustaches, and normal mustache
 replace.sync({
 	from: new RegExp(
 		commentRegex +
-			/{[^\S\n]{[^\S\n]*(?:(?<type>[!#/^])[^\S\n]*)?(?<tag>[^&>]*)[^\S\n]*}[^\S\n]}/.source,
+			/(?:{[^\S\n]*){2}(?<type>[!#/^]?)[^\S\n]*(?<tag>[^&>]+?)(?:[^\S\n]*}){2}/.source,
 		"g",
 	),
 
@@ -90,7 +92,7 @@ console.log("\nFormatting partial and unescaped mustaches");
 replace.sync({
 	from: new RegExp(
 		commentRegex +
-			/{[^\S\n]{[^\S\n]*(?<type>[&>])[^\S\n]*(?<tag>[^!#/^]*)[^\S\n]*}[^\S\n]}/.source,
+			/(?:{[^\S\n]*){2}(?<type>[&>])[^\S\n]*(?<tag>[^!#/^]+?)(?:[^\S\n]*}){2}/.source,
 		"g",
 	),
 
