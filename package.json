@@ -160,6 +160,7 @@
 		"css-mqpacker": "^7.0.0",
 		"cssnano": "^5.0.6",
 		"eslint": "^7.30.0",
+		"openode": "^2.1.2",
 		"postcss": "^8.3.0",
 		"postcss-advanced-variables": "^3.0.1",
 		"postcss-cli": "^8.3.1",
