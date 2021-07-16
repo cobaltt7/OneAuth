@@ -20,6 +20,7 @@ const app = express(),
 
 app.engine("html", mustacheEngine);
 app.engine("css", mustacheEngine);
+app.set('views', directory);
 
 app.use(
 	express.static(path.resolve(directory, "static"), {
