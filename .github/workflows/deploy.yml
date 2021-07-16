@@ -1,0 +1,32 @@
+name: Deploy wesite
+on:
+    workflow_dispatch:
+    push:
+        branches: release
+
+jobs:
+    run:
+        name: Install dependencies
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@main
+              with:
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.WGYTBOT }}
+
+            - name: Setup Node.JS
+              uses: actions/setup-node@main
+              with:
+                  node-version: 14
+                  cache: "npm"
+
+            - name: Install
+              run: npm install
+
+            - name: Build Tailwind
+              run: npm run build:tailwind
+
+            - name: Deploy
+              run: npx openode deploy -t 696176d07c73c2036b2d5e71a85b1d63 -s oneauth
