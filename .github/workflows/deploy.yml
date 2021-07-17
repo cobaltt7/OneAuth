@@ -29,4 +29,4 @@ jobs:
               run: npm run build:tailwind
 
             - name: Deploy
-              run: npx openode deploy -t 696176d07c73c2036b2d5e71a85b1d63 -s oneauth
+              run: npx openode deploy -t ${{ secrets.OPENODE }} -s oneauth
