@@ -11,10 +11,6 @@ RUN echo 'crond' > /boot.sh
 COPY package*.json ./
 RUN npm install
 
-# Build CSS
-COPY src/tailwind.sass ./src/tailwind.sass
-RUN npm run build:tailwind
-
 # Bundle app source
 COPY . .
 
