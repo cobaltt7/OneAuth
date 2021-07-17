@@ -1,4 +1,4 @@
-name: Deploy wesite
+name: Deploy website
 on:
     workflow_dispatch:
     push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
     run:
-        name: Install dependencies
+        name: Deploy website
         runs-on: ubuntu-latest
 
         steps:
