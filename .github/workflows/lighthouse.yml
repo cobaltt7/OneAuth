@@ -39,7 +39,7 @@ jobs:
 
             - name: Install
               if: ${{ !cancelled() }}
-              run: npm install
+              run: npm install --force
 
             - name: Comment
               if: success()
