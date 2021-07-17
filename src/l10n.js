@@ -6,7 +6,7 @@ import url from "url";
 
 import { MessageFormatter, pluralTypeHandler } from "@ultraq/icu-message-formatter";
 import accepts from "accepts";
-import matchBrackets from "balanced-match"
+import matchBrackets from "balanced-match";
 import globby from "globby";
 
 import { logError } from "./errors/index.js";
@@ -28,7 +28,7 @@ const BASE_LANGUAGE = "en_US",
 // Initialize
 for (const filename of await globby("_locales/*.json")) {
 	// Get all supported languages
-	const [,code] = /^_locales\/(.*)\.json$/.exec(filename) || [];
+	const [, code] = /^_locales\/(.*)\.json$/.exec(filename) || [];
 
 	// Add it to the list
 	LANGUAGE_CODES.push(`${code}`);
@@ -86,7 +86,9 @@ function compileLanguages(languages) {
 				noCountryLanguage,
 
 				// Add other countries with the same languages' country codes as fallbacks
-				...LANGUAGE_CODES.filter((languageCode) => languageCode.indexOf(`${noCountryLanguage}`) === 0),
+				...LANGUAGE_CODES.filter(
+					(languageCode) => languageCode.indexOf(`${noCountryLanguage}`) === 0,
+				),
 			];
 		})
 
@@ -110,7 +112,9 @@ function compileLanguages(languages) {
 	LANGUAGE_CODE_CACHE[`${languages}`].push(BASE_LANGUAGE);
 
 	// Slice it on the base language because the base has all the strings.
-	LANGUAGE_CODE_CACHE[`${languages}`].splice(LANGUAGE_CODE_CACHE[`${languages}`].indexOf(BASE_LANGUAGE) + 1);
+	LANGUAGE_CODE_CACHE[`${languages}`].splice(
+		LANGUAGE_CODE_CACHE[`${languages}`].indexOf(BASE_LANGUAGE) + 1,
+	);
 
 	return LANGUAGE_CODE_CACHE[`${languages}`];
 }
@@ -128,7 +132,8 @@ function getMessages(languages) {
 	/** @type {{ [key: string]: string }} */
 	let messages = {};
 
-	for (const languageCode of languages) messages = { ...MESSAGES[`${languageCode}`], ...messages };
+	for (const languageCode of languages)
+		messages = { ...MESSAGES[`${languageCode}`], ...messages };
 
 	return (MESSAGE_CACHE[`${languages}`] = messages);
 }
@@ -136,15 +141,19 @@ function getMessages(languages) {
 /**
  * @param {string} variable - Variable to parse.
  * @param {string} language - Language to format plurals with.
- * @param {{[key:string]: string }} messages - Messages to translate to.
+ * @param {{ [key: string]: string }} messages - Messages to translate to.
  *
  * @returns {string}
-*/
-function parseNestedVariables (variable,language,messages)  {
-		const matched = matchBrackets("[", "]", variable)
-		if (!matched) return variable;
+ */
+function parseNestedVariables(variable, language, messages) {
+	const matched = matchBrackets("[", "]", variable);
+	if (!matched) return variable;
 
-	return matched.pre + renderMessage((matched.body),language,messages) + parseNestedVariables(matched.post,language,messages)
+	return (
+		matched.pre +
+		renderMessage(matched.body, language, messages) +
+		parseNestedVariables(matched.post, language, messages)
+	);
 }
 
 /**
@@ -155,13 +164,12 @@ function parseNestedVariables (variable,language,messages)  {
  * @returns {MessageFormatter} - The message formater.
  */
 export function getFormatter(language) {
-	 // Use a cached formatter if available.
-		if (FORMATTERS_CACHE[`${language}`]) return FORMATTERS_CACHE[`${language}`];
+	// Use a cached formatter if available.
+	if (FORMATTERS_CACHE[`${language}`]) return FORMATTERS_CACHE[`${language}`];
 
-	return FORMATTERS_CACHE[`${language}`] = new MessageFormatter(language, {
+	return (FORMATTERS_CACHE[`${language}`] = new MessageFormatter(language, {
 		plural: pluralTypeHandler,
-	}).format;
-
+	}).format);
 }
 
 /**
@@ -169,35 +177,34 @@ export function getFormatter(language) {
  *
  * @param {string} toParse - String to parse.
  * @param {string} language - Language to format plurals with.
- * @param {{[key:string]: string }} messages - Messages to translate to.
+ * @param {{ [key: string]: string }} messages - Messages to translate to.
  *
  * @returns {string} - Rendered message.
  */
-function renderMessage(toParse,language,messages) {
+function renderMessage(toParse, language, messages) {
 	const [messageCode, ...placeholders] = toParse
-			// Trim excess whitespace
-			.trim()
+		// Trim excess whitespace
+		.trim()
 
-			// Condense remaining whitespce
-			.replace(/\s/gu, " ")
+		// Condense remaining whitespce
+		.replace(/\s/gu, " ")
 
-			//Split the string into the message code and variables
-			.split(/(?<![^\\]\[[^\]]+)(?<!\\)\|{3}/iu)
+		//Split the string into the message code and variables
+		.split(/(?<![^\\]\[[^\]]+)(?<!\\)\|{3}/iu)
 
-			// Handle embedded messages
-			.map((variable)=>parseNestedVariables(variable,language,messages))
+		// Handle embedded messages
+		.map((variable) => parseNestedVariables(variable, language, messages))
 
-			// Unescape escaped characters
-		.map((parameter) => parameter.replace(/\\\|{3}/gu, "|||").replace(/\\\[/gu, "["))
+		// Unescape escaped characters
+		.map((parameter) => parameter.replace(/\\\|{3}/gu, "|||").replace(/\\\[/gu, "["));
 
 	return getFormatter(language)(
+		// Get message, fallback to the code provided
+		messages[`${messageCode}`] || messageCode,
 
-				// Get message, fallback to the code provided
-				messages[`${messageCode}`] || messageCode,
-
-				// Render it with placeholders
-				placeholders,
-			);
+		// Render it with placeholders
+		placeholders,
+	);
 }
 
 /**

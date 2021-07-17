@@ -83,7 +83,7 @@ app.use((_, response, next) => {
 			(index) => {
 				const code = codeblocks.eq(index),
 					[fullClass, language = "plaintext"] =
-						/lang(?:uage)?-(?<language>\w+)/u.exec(code.attr("class") || "")|| [];
+						/lang(?:uage)?-(?<language>\w+)/u.exec(code.attr("class") || "") || [];
 
 				code.removeClass(fullClass);
 				highlight(code.text(), language)

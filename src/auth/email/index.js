@@ -39,8 +39,9 @@ const client = {
 
 			post: async (request, response, sendResponse) => {
 				if (request.body?.code && request.body?.email) {
-					const { email = "", date = Date.now() - 900001 } =
-						(await database.get(`EMAIL_${request.body.code}`))
+					const { email = "", date = Date.now() - 900001 } = await database.get(
+						`EMAIL_${request.body.code}`,
+					);
 
 					if (Date.now() - date > 900000) {
 						database.delete(`EMAIL_${request.body.code}`);
