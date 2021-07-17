@@ -59,11 +59,8 @@ const bodyParser = urlencoded({
 	extended: true,
 });
 
-app.use((request, response, next) => {
-	if (request.path.includes(".")) return next();
-
-	return cookieParser()(request, response, next);
-});
+// Not exculded on assets because of l10n.
+app.use(cookieParser());
 app.use((request, response, next) => {
 	if (request.path.includes(".")) return next();
 
