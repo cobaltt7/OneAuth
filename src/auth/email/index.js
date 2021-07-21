@@ -4,7 +4,7 @@ import fileSystem from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import ReplitDB from "@replit/database";
+import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import mustache from "mustache";
 import nodemailer from "nodemailer";
@@ -13,14 +13,21 @@ import retronid from "retronid";
 import { logError } from "../../errors/index.js";
 import { mustacheFunction } from "../../l10n.js";
 
-const database = new ReplitDB(),
+dotenv.config();
+
+const database = new MongoClient(process.env.MONGO_URL || "", {
+		appName: "auth",
+		//"logger":logError,
+		//"useNewUrlParser": true,
+		//"useUnifiedTopology": true,
+	})
+		.db("auth")
+		.collection("auth"),
 	directory = path.dirname(fileURLToPath(import.meta.url)),
 	mail = nodemailer.createTransport({
 		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
 		service: "gmail",
 	});
-
-dotenv.config();
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {
@@ -40,17 +47,17 @@ const client = {
 			post: async (request, response, sendResponse) => {
 				if (request.body?.code && request.body?.email) {
 					const { email = "", date = Date.now() - 900001 } =
-						(await database.get(`EMAIL_${request.body.code}`)) ?? {};
+						(await database.findOne({ code: request.body.code })) ?? {};
 
 					if (Date.now() - date > 900000) {
-						database.delete(`EMAIL_${request.body.code}`);
+						await database.deleteOne({ code: request.body.code });
 
 						return response.status(410);
 					}
 
 					if (request.body.email !== email) return response.status(401);
 
-					database.delete(`EMAIL_${request.body.code}`);
+					await database.deleteOne({ code: request.body.code });
 
 					return sendResponse(
 						{
@@ -65,10 +72,7 @@ const client = {
 
 					const code = retronid.generate();
 
-					database.set(`EMAIL_${code}`, {
-						date: Date.now(),
-						email: request.body.email,
-					});
+					await database.insertOne({ code, date: Date.now(), email: request.body.email });
 
 					return mail.sendMail(
 						{
