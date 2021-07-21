@@ -158,7 +158,7 @@
 		"all-contributors-cli": "^6.20.0",
 		"autoprefixer": "^10.3.0",
 		"css-mqpacker": "^7.0.0",
-		"cssnano": "^5.0.6",
+		"cssnano": "^5.0.7",
 		"eslint": "^7.30.0",
 		"openode": "^2.1.2",
 		"postcss": "^8.3.0",
