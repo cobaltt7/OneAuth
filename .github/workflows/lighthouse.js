@@ -11,13 +11,15 @@ import fetch from "node-fetch";
  * @returns {string} - The joined arrays.
  */
 function graphql(query, ...placeholderValues) {
-	return (
+	const d= (
 		// eslint-disable-next-line unicorn/no-array-reduce -- reduce is the best way to do this.
 		placeholderValues.reduce(
 			(last, placeholder, index) => `${last}${placeholder}${query[index + 1]}`,
 			query[0],
 		) || ""
 	);
+	console.log(d);
+	return d
 }
 
 /**
@@ -25,7 +27,7 @@ function graphql(query, ...placeholderValues) {
  *
  * @param {string} body - Body of the comment.
  *
- * @returns {Promise<any>} - Result from GitHub's GraphQL API.
+ * @returns {Promise<unknown>} - Result from GitHub's GraphQL API.
  */
 function commentOnDiscussion(body) {
 	return fetch("https://api.github.com/graphql", {
@@ -33,7 +35,7 @@ function commentOnDiscussion(body) {
 			// Hmmst… query strings break prettier formatting...mustache? maybe
 			query: graphql`mutation {
 					addDiscussionComment(
-						input: {discussionId: "MDEwOkRpc2N1c3Npb24zNDEwNDA2", body: "${body}"}
+						input: {discussionId: "MDEwOkRpc2N1c3Npb24zNDEwNDA2", body: ${JSON.stringify(body)}}
 					) {
 					  comment {
 						id
@@ -48,7 +50,25 @@ function commentOnDiscussion(body) {
 		},
 
 		method: "POST",
-	}).then((response) => response.json());
+	}).then((response) => response.text()).then((response)=>{console.log({response});return JSON.stringify(response)});
+}
+
+/**
+ * Transpose array.
+ *
+ * @param {unknown[][]} matrix
+ */
+function transpose(matrix) {
+	return matrix[0].map((_, i) => matrix.map((row) => row[i]));
+}
+
+/**
+ * Add emoji colored based on a number.
+ *
+ * @param {number} number
+ */
+function addEmoji(number) {
+	return `${number < 50 ? "🔴" : number < 90 ? "🟡" : "🟢"} ${number}`;
 }
 
 /** @type {import("../../types").lighthouseResult} */
@@ -62,33 +82,51 @@ try {
 	if (data.code !== "SUCCESS") throw new Error(`code: ${data.code}`);
 } catch (error) {
 	commentOnDiscussion(
-		`An error occured while retrieving the data from Lighthouse.\n\`\`\`js\n${error}\n\`\`\``,
+		`An error occurred while retrieving the data from Lighthouse.\n\`\`\`js\n${error}\n\`\`\``,
 	);
 
 	throw new Error(error);
 }
 
 try {
-	let output =
-		"# This week’s Lighthouse scores\n" +
-		"| URL | Device | Accessibility | Best Practices | Performace " +
-		"| Progressive Web App | SEO | PageSpeed Insights |\n" +
-		"| - | - | - | - | - | - | - | - |\n";
-
-	for (const result of data.data) {
-		output +=
-			`| ${result.url} | ${result.emulatedFormFactor} | ${Object.values(result.scores)
-				.map((number) => `${number < 50 ? "🔴" : number < 90 ? "🟡" : "🟢"} ${number}`)
-				.join(
-					" | ",
-				)} | [More information](https://developers.google.com/speed/pagespeed/insights/` +
-			`?url=${encodeURIComponent(result.url)}&tab=${result.emulatedFormFactor}) |\n`;
-	}
-
-	commentOnDiscussion(output);
+	const allScores = transpose(data.data.map(({scores: s}) => Object.values(s))).map(
+		(s) => s.reduce((a, b) => a + b, 0) / s.length,
+	);
+	commentOnDiscussion(
+		"<h2>Today’s Lighthouse scores</h2><br /> <br />" +
+		"<table><thead><tr><th>URL</th>" +
+		"<th>Device</th>" +
+		"<th>Accessibility</th>" +
+		"<th>Best Practices</th>" +
+		"<th>Performace</th>" +
+		"<th>Progressive Web App</th>" +
+		"<th>SEO</th>" +
+		"<th>Overall</th>" +
+		"<th>PageSpeed Insights</th></tr></thead><tbody>" +
+		data.data.reduce((accumulated, result) => {
+			const scores = Object.values(result.scores);
+			return (
+				accumulated +
+				`<tr><td><a href="//${result.url.trim()}">${(result.url[result.url.length - 1] === "/" ? result.url : result.url + "/")
+					.trim()
+					.split(/^(?:https?:\/\/)?.+\..+?(?=\/)/iu)[1]
+				}</a></td>` +
+				`<td>${result.emulatedFormFactor}</td>` +
+				`<td>${scores.map(addEmoji).join("</td><td>")}</td>` +
+				`<td>${addEmoji(scores.reduce((a, b) => a + b, 0) / scores.length)}</td><td>` +
+				`<a href="//developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent("//"+result.url.trim())}&tab=${result.emulatedFormFactor
+				}">More information</a></td></tr>`
+			);
+		}, "") +
+		`</tbody><tfoot><tr><td colspan="2"><b>Overall</b></td>` +
+		`<td><b>${allScores.map(addEmoji).join("</b></td><td><b>")}</b></td>` +
+		`<td colspan="2"><b><i>${addEmoji(
+			allScores.reduce((a, b) => a + b, 0) / allScores.length,
+		)}</i></b></td></tr></tbody></table>`
+	);
 } catch (error) {
 	commentOnDiscussion(
-		"An error occured while generating the comment.\n" +
+		"An error occurred while generating the comment.\n" +
 			`\`\`\`js\n${JSON.stringify(error)}\n\`\`\``,
 	);
 
