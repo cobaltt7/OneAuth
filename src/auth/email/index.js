@@ -28,7 +28,6 @@ const database = new MongoClient(process.env.MONGO_URL || "", {
 		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
 		service: "gmail",
 	}),
-
 	/** @type {import("../../../types").Auth} Auth */
 	client = {
 		icon: "envelope",
@@ -47,7 +46,7 @@ const database = new MongoClient(process.env.MONGO_URL || "", {
 				post: async (request, response, sendResponse) => {
 					if (request.body?.code && request.body?.email) {
 						const { email = "", date = Date.now() - 900001 } =
-						(await database.findOne({ code: request.body.code })) ?? {};
+							(await database.findOne({ code: request.body.code })) ?? {};
 
 						if (Date.now() - date > 900000) {
 							await database.deleteOne({ code: request.body.code });
@@ -68,11 +67,15 @@ const database = new MongoClient(process.env.MONGO_URL || "", {
 					}
 
 					if (request.body?.email) {
-					// Send email
+						// Send email
 
 						const code = retronid.generate();
 
-						await database.insertOne({ code, date: Date.now(), email: request.body.email });
+						await database.insertOne({
+							code,
+							date: Date.now(),
+							email: request.body.email,
+						});
 
 						return mail.sendMail(
 							{
@@ -86,7 +89,10 @@ const database = new MongoClient(process.env.MONGO_URL || "", {
 									{
 										code,
 
-										message: mustacheFunction(request.languages, request.messages),
+										message: mustacheFunction(
+											request.languages,
+											request.messages,
+										),
 									},
 								),
 
@@ -100,7 +106,10 @@ const database = new MongoClient(process.env.MONGO_URL || "", {
 									{
 										code,
 
-										message: mustacheFunction(request.languages, request.messages),
+										message: mustacheFunction(
+											request.languages,
+											request.messages,
+										),
 									},
 								),
 
