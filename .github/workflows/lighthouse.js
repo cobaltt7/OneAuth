@@ -18,7 +18,9 @@ function graphql(query, ...placeholderValues) {
 			query[0],
 		) || ""
 	);
+
 	console.log(d);
+
 	return d
 }
 
@@ -50,7 +52,9 @@ function commentOnDiscussion(body) {
 		},
 
 		method: "POST",
-	}).then((response) => response.text()).then((response)=>{console.log({response});return JSON.stringify(response)});
+	}).then((response) => response.text()).then((response)=>{console.log({ response });
+
+		return JSON.stringify(response)});
 }
 
 /**
@@ -59,7 +63,7 @@ function commentOnDiscussion(body) {
  * @param {unknown[][]} matrix
  */
 function transpose(matrix) {
-	return matrix[0].map((_, i) => matrix.map((row) => row[i]));
+	return matrix[0].map((_, index) => matrix.map((row) => row[index]));
 }
 
 /**
@@ -89,11 +93,12 @@ try {
 }
 
 try {
-	const allScores = transpose(data.data.map(({scores: s}) => Object.values(s))).map(
+	const allScores = transpose(data.data.map(({ scores: s }) => Object.values(s))).map(
 		(s) => s.reduce((a, b) => a + b, 0) / s.length,
 	);
+
 	commentOnDiscussion(
-		"<h2>Today’s Lighthouse scores</h2><br /> <br />" +
+		`${"<h2>Today’s Lighthouse scores</h2><br /> <br />" +
 		"<table><thead><tr><th>URL</th>" +
 		"<th>Device</th>" +
 		"<th>Accessibility</th>" +
@@ -102,27 +107,28 @@ try {
 		"<th>Progressive Web App</th>" +
 		"<th>SEO</th>" +
 		"<th>Overall</th>" +
-		"<th>PageSpeed Insights</th></tr></thead><tbody>" +
-		data.data.reduce((accumulated, result) => {
-			const scores = Object.values(result.scores);
-			return (
-				accumulated +
-				`<tr><td><a href="//${result.url.trim()}">${(result.url[result.url.length - 1] === "/" ? result.url : result.url + "/")
-					.trim()
-					.split(/^(?:https?:\/\/)?.+\..+?(?=\/)/iu)[1]
-				}</a></td>` +
+		"<th>PageSpeed Insights</th></tr></thead><tbody>"}${ 
+			data.data.reduce((accumulated, result) => {
+				const scores = Object.values(result.scores);
+
+				return (
+					`${accumulated 
+					}<tr><td><a href="//${result.url.trim()}">${(result.url[result.url.length - 1] === "/" ? result.url : `${result.url  }/`)
+						.trim()
+						.split(/^(?:https?:\/\/)?.+\..+?(?=\/)/iu)[1]
+					}</a></td>` +
 				`<td>${result.emulatedFormFactor}</td>` +
 				`<td>${scores.map(addEmoji).join("</td><td>")}</td>` +
 				`<td>${addEmoji(scores.reduce((a, b) => a + b, 0) / scores.length)}</td><td>` +
-				`<a href="//developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent("//"+result.url.trim())}&tab=${result.emulatedFormFactor
+				`<a href="//developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(`//${result.url.trim()}`)}&tab=${result.emulatedFormFactor
 				}">More information</a></td></tr>`
-			);
-		}, "") +
-		`</tbody><tfoot><tr><td colspan="2"><b>Overall</b></td>` +
+				);
+			}, "") 
+		}</tbody><tfoot><tr><td colspan="2"><b>Overall</b></td>` +
 		`<td><b>${allScores.map(addEmoji).join("</b></td><td><b>")}</b></td>` +
 		`<td colspan="2"><b><i>${addEmoji(
 			allScores.reduce((a, b) => a + b, 0) / allScores.length,
-		)}</i></b></td></tr></tbody></table>`
+		)}</i></b></td></tr></tbody></table>`,
 	);
 } catch (error) {
 	commentOnDiscussion(
