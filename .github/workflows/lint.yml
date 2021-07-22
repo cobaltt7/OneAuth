@@ -51,7 +51,6 @@ jobs:
               with:
                   commit_message: "Lint and format code"
                   branch: ${{ github.head_ref }}
-                  add_options: "--ignore-removal"
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com
