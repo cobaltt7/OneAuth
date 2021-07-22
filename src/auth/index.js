@@ -3,15 +3,12 @@
 import path from "path";
 import url from "url";
 
-import { MongoClient } from "mongodb";
-import dotenv from "dotenv";
+import ReplitDB from "@replit/database";
 import { Router as express } from "express";
 import globby from "globby";
 import retronid from "retronid";
 
 import { logError } from "../errors/index.js";
-
-dotenv.config();
 
 const app = express(),
 	/**
@@ -28,14 +25,7 @@ const app = express(),
 	/** @type {import("../../types").Auth[]} */
 	authClients = [],
 	clientPromises = [],
-	database = new MongoClient(process.env.MONGO_URL || "", {
-		appName: "auth",
-		//"logger":logError,
-		//"useNewUrlParser": true,
-		//"useUnifiedTopology": true,
-	})
-		.db("auth")
-		.collection("auth"),
+	database = new ReplitDB(),
 	directory = path.dirname(url.fileURLToPath(import.meta.url)),
 	// Idk why this is relative to the root dir but it is
 	paths = await globby("src/auth/*/index.js");
@@ -145,7 +135,7 @@ for (const method of [
 				request,
 				response,
 
-				async (tokenOrData, redirect) => {
+				(tokenOrData, redirect) => {
 					const clientInfo = getClient(request.params?.client || "");
 
 					if (!clientInfo) {
@@ -160,12 +150,12 @@ for (const method of [
 						data = tokenOrData;
 						data.client = clientInfo.name;
 						token = retronid.generate();
-						await database.insertOne({ token, data });
+						database.set(`RETRIEVE_${token}`, data);
 					} else if (!clientInfo.rawData && typeof tokenOrData === "string") {
 						data = request.messages.allowDataHidden;
 						token = tokenOrData;
 					} else {
-						return logError(
+						logError(
 							new TypeError(
 								`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
 							),
@@ -175,7 +165,7 @@ for (const method of [
 					try {
 						const { host } = new URL(redirect);
 
-						response.status(300).render(path.resolve(directory, "allow.html"), {
+						return response.status(300).render(path.resolve(directory, "allow.html"), {
 							client: request.params?.client,
 							data: JSON.stringify(data),
 							encodedUrl: encodeURIComponent(redirect),
@@ -185,7 +175,7 @@ for (const method of [
 							url: redirect,
 						});
 					} catch {
-						response.status(400);
+						return response.status(400);
 					}
 				},
 			);
@@ -220,7 +210,8 @@ app.get("/backend/get_data", async (request, response) => {
 		"Origin, X-Requested-With, Content-Type, Accept",
 	);
 
-	response.status(200).json(await database.findOneAndDelete({ token: request.query?.code }));
+	response.status(200).json(await database.get(`RETRIEVE_${request.query?.code}`));
+	database.delete(`RETRIEVE_${request.query?.code}`);
 });
 app.get("/backend/send_data", async (request, response) => {
 	if (!request.query) return logError("`request.query` is falsy!");
@@ -240,7 +231,7 @@ app.get("/backend/send_data", async (request, response) => {
 		if (!data) return logError("No data available");
 
 		data.client = clientInfo.name;
-		database.insertOne({ token: code, data });
+		database.set(`RETRIEVE_${code}`, data);
 	} else {
 		return logError(new ReferenceError(`Invalid client: ${client}`));
 	}
