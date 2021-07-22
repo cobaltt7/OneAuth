@@ -2,6 +2,8 @@
 
 ## About 1Auth All-In-One Authentication
 
+<a href="https://www.openode.io/">Cloud hosted on opeNode.io</a>
+
 ### About
 
 1Auth is an all-in-one authentication client that we designed to work seamlessly with any website. It currently supports 5 clients with many more to come.
