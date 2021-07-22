@@ -79,7 +79,9 @@ export function compileLangs(languages, cache = false) {
 				noCountryLanguage,
 
 				// Add other countries with the same languages' country codes as fallbacks
-				...LANG_CODES.filter((languageCode) => languageCode.indexOf(`${noCountryLanguage}`) === 0),
+				...LANG_CODES.filter(
+					(languageCode) => languageCode.indexOf(`${noCountryLanguage}`) === 0,
+				),
 			];
 		})
 
@@ -116,7 +118,8 @@ export function getMessages(languages, cache = true) {
 	/** @type {{ [key: string]: string }} */
 	let messages = {};
 
-	for (const languageCode of languages) messages = { ...MESSAGES[`${languageCode}`], ...messages };
+	for (const languageCode of languages)
+		messages = { ...MESSAGES[`${languageCode}`], ...messages };
 
 	CACHE_MSGS[`${languages}`] = messages;
 
@@ -154,8 +157,8 @@ export function getFormatter(language, cache = true) {
  * @param {string} lang - Language code to be used when retreiving a plural formatter.
  * @param language
  * @param {{ [key: string]: string }} msgs - Messages to be used.
- *
  * @param messages
+ *
  * @returns {string} - Rendered message.
  * @todo Move rendering out of this function.
  */
@@ -195,8 +198,8 @@ function parseMessage(inputInfo, language, messages) {
  * @param {string[]} langs - Language to be used when formating plurals.
  * @param languages
  * @param {{ [key: string]: string }} [msgs] - Messages to be used.
- *
  * @param messages
+ *
  * @returns {() => (val: string, render: (val: string) => string) => string} - Function to pass to
  *   Mustache.JS.
  */
