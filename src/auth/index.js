@@ -3,10 +3,10 @@
 import path from "path";
 import url from "url";
 
+import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import { Router as express } from "express";
 import globby from "globby";
-import { MongoClient } from "mongodb";
 import retronid from "retronid";
 
 import { logError } from "../errors/index.js";
@@ -30,9 +30,9 @@ const app = express(),
 	clientPromises = [],
 	database = new MongoClient(process.env.MONGO_URL || "", {
 		appName: "auth",
-		// "logger":logError,
-		// "useNewUrlParser": true,
-		// "useUnifiedTopology": true,
+		//"logger":logError,
+		//"useNewUrlParser": true,
+		//"useUnifiedTopology": true,
 	})
 		.db("auth")
 		.collection("auth"),
