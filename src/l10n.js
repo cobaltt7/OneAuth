@@ -52,96 +52,99 @@ for (const [index, messages] of (await Promise.all(messagePromises)).entries()) 
  * Expands array of languages to be broader.
  *
  * @param {string[]} langs - Input languages.
+ * @param languages
  * @param {boolean} [cache] - Whether languages should be loaded from the cache if possible.
  *
  * @returns {string[]} - Resulting array.
  */
-export function compileLangs(langs, cache = false) {
+export function compileLangs(languages, cache = false) {
 	if (cache) {
-		const retrieved = CACHE_CODES[`${langs}`];
+		const retrieved = CACHE_CODES[`${languages}`];
 
 		if (retrieved) return retrieved;
 	}
 
-	CACHE_CODES[`${langs}`] = langs
+	CACHE_CODES[`${languages}`] = languages
 
 		// Remove asterisks
 		.filter((item) => item !== "*")
 		.flatMap((language) => {
 			// Standardize character between language and country code
-			const standardLang = language.replace(/-/g, "_"),
+			const standardLanguage = language.replace(/-/g, "_"),
 				// Add language without country code as fallback
-				[noCountryLang] = standardLang.split("_");
+				[noCountryLanguage] = standardLanguage.split("_");
 
 			return [
-				standardLang,
-				noCountryLang,
+				standardLanguage,
+				noCountryLanguage,
 
 				// Add other countries with the same languages' country codes as fallbacks
-				...LANG_CODES.filter((langCode) => langCode.indexOf(`${noCountryLang}`) === 0),
+				...LANG_CODES.filter((languageCode) => languageCode.indexOf(`${noCountryLanguage}`) === 0),
 			];
 		})
 
 		// Remove duplicates
-		.filter((item, index) => CACHE_CODES[`${langs}`]?.indexOf(item || "") === index)
+		.filter((item, index) => CACHE_CODES[`${languages}`]?.indexOf(item || "") === index)
 
 		// Remove undefined values
-		.filter((lang) => typeof lang === "string");
+		.filter((language) => typeof language === "string");
 
 	// Add base language as fallback to the fallback
-	CACHE_CODES[`${langs}`]?.push(BASE_LANG);
+	CACHE_CODES[`${languages}`]?.push(BASE_LANG);
 	// Slice it on the base language because the base has all the strings.
-	CACHE_CODES[`${langs}`]?.splice((CACHE_CODES[`${langs}`]?.indexOf(BASE_LANG) || 0) + 1);
+	CACHE_CODES[`${languages}`]?.splice((CACHE_CODES[`${languages}`]?.indexOf(BASE_LANG) || 0) + 1);
 
-	return CACHE_CODES[`${langs}`] || [BASE_LANG];
+	return CACHE_CODES[`${languages}`] || [BASE_LANG];
 }
 
 /**
  * Get messages in the first avilable language.
  *
  * @param {string[]} langs - Languages to use when searching for messages.
+ * @param languages
  * @param {boolean} [cache] - Whether to load messages from the cache when possible.
  *
  * @returns {{ [key: string]: string }} - Retrieved messages.
  */
-export function getMessages(langs, cache = true) {
+export function getMessages(languages, cache = true) {
 	if (cache) {
-		const retrieved = CACHE_MSGS[`${langs}`];
+		const retrieved = CACHE_MSGS[`${languages}`];
 
 		if (retrieved) return retrieved;
 	}
 
 	/** @type {{ [key: string]: string }} */
-	let msgs = {};
+	let messages = {};
 
-	for (const langCode of langs) msgs = { ...MESSAGES[`${langCode}`], ...msgs };
+	for (const languageCode of languages) messages = { ...MESSAGES[`${languageCode}`], ...messages };
 
-	CACHE_MSGS[`${langs}`] = msgs;
+	CACHE_MSGS[`${languages}`] = messages;
 
-	return msgs;
+	return messages;
 }
 
 /**
  * Generates a plural formatter for a specific language.
  *
  * @param {string} lang - Language to generate the formatter for.
+ * @param language
  * @param {boolean} [cache] - Whether formatters should be loaded from the cache if possible.
  *
  * @returns {MessageFormatter} - The message formater.
  */
-export function getFormatter(lang, cache = true) {
+export function getFormatter(language, cache = true) {
 	if (cache) {
 		/** @type {MessageFormatter} */
-		const retrieved = CACHE_FORMATTERS[`${lang}`];
+		const retrieved = CACHE_FORMATTERS[`${language}`];
 
 		if (retrieved) return retrieved;
 	}
 
-	CACHE_FORMATTERS[`${lang}`] = new MessageFormatter(lang, {
+	CACHE_FORMATTERS[`${language}`] = new MessageFormatter(language, {
 		plural: pluralTypeHandler,
 	}).format;
 
-	return CACHE_FORMATTERS[`${lang}`];
+	return CACHE_FORMATTERS[`${language}`];
 }
 
 /**
@@ -149,12 +152,14 @@ export function getFormatter(lang, cache = true) {
  *
  * @param {string} inputInfo - String to parse, including a message code and optional placeholders.
  * @param {string} lang - Language code to be used when retreiving a plural formatter.
+ * @param language
  * @param {{ [key: string]: string }} msgs - Messages to be used.
  *
+ * @param messages
  * @returns {string} - Rendered message.
  * @todo Move rendering out of this function.
  */
-function parseMessage(inputInfo, lang, msgs) {
+function parseMessage(inputInfo, language, messages) {
 	const [messageCode, ...placeholders] = inputInfo
 
 		// Trim excess whitespace
@@ -168,16 +173,16 @@ function parseMessage(inputInfo, lang, msgs) {
 
 		.map((parameter) =>
 			parameter.startsWith("[") && parameter.endsWith("]")
-				? parseMessage(parameter.slice(1, -1), lang, msgs)
+				? parseMessage(parameter.slice(1, -1), language, messages)
 				: parameter,
 		)
 
 		// Handle escaping the `|||` and `[` (prefixing them with a `\`)
 		.map((parameter) => parameter.replace(/\\\|{3}/g, "|||").replace(/\\\[/gu, "["));
 
-	return getFormatter(lang)(
+	return getFormatter(language)(
 		// Get message, fallback to the code provided
-		msgs[`${messageCode}`] ?? messageCode,
+		messages[`${messageCode}`] ?? messageCode,
 
 		// Render it with placeholders
 		placeholders,
@@ -188,13 +193,15 @@ function parseMessage(inputInfo, lang, msgs) {
  * Function to be used with Mustache.JS to render messages in templates.
  *
  * @param {string[]} langs - Language to be used when formating plurals.
+ * @param languages
  * @param {{ [key: string]: string }} [msgs] - Messages to be used.
  *
+ * @param messages
  * @returns {() => (val: string, render: (val: string) => string) => string} - Function to pass to
  *   Mustache.JS.
  */
-export function mustacheFunction(langs, msgs = getMessages(langs)) {
-	return () => (value, render) => parseMessage(render(value), `${langs[0]}`, msgs);
+export function mustacheFunction(languages, messages = getMessages(languages)) {
+	return () => (value, render) => parseMessage(render(value), `${languages[0]}`, messages);
 }
 /**
  * Express l10n middleware.
@@ -205,10 +212,10 @@ export function mustacheFunction(langs, msgs = getMessages(langs)) {
  */
 export default function localization(request, response, next) {
 	/** @type {string[]} */
-	let langs;
+	let languages;
 
 	if (request.query?.lang) {
-		langs = compileLangs([
+		languages = compileLangs([
 			// `lang` query parameter overrides everything else
 			...(`${request.query?.lang}` ?? "*").split("|"),
 
@@ -220,27 +227,27 @@ export default function localization(request, response, next) {
 		]);
 	} else if (request.cookies?.langs) {
 		// The cookie doesn't need to go through `compileLangs` since it already did
-		langs = (request.cookies?.langs ?? "*").split("|");
+		languages = (request.cookies?.langs ?? "*").split("|");
 	} else {
 		// This is the default, the broswer langauge.
-		langs = compileLangs(accepts(request)?.languages(), true);
+		languages = compileLangs(accepts(request)?.languages(), true);
 	}
 
 	const expires = new Date();
 
 	expires.setFullYear(expires.getFullYear() + 1);
-	response.cookie("langs", langs.join("|"), {
+	response.cookie("langs", languages.join("|"), {
 		expires,
 		maxAge: 31536000000,
 		sameSite: false,
 	});
 	// eslint-disable-next-line no-param-reassign -- We need to override the original.
-	request.languages = langs;
+	request.languages = languages;
 
-	const msgs = getMessages(langs);
+	const messages = getMessages(languages);
 
 	// eslint-disable-next-line no-param-reassign -- We need to override the original.
-	request.messages = msgs;
+	request.messages = messages;
 
 	// Grab reference of render
 	const realRender = response.render;
@@ -268,7 +275,7 @@ export default function localization(request, response, next) {
 	) {
 		const placeholders = typeof placeholderCallback === "object" ? placeholderCallback : {};
 
-		placeholders.message = mustacheFunction(langs, msgs);
+		placeholders.message = mustacheFunction(languages, messages);
 
 		// Continue with original render
 		return realRender.call(

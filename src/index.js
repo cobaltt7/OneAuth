@@ -24,9 +24,9 @@ app.set("views", "/");
 
 app.use(
 	express.static(path.resolve(directory, "static"), {
-		maxAge: 31536000,
 		dotfiles: "allow",
 		immutable: true,
+		maxAge: 31536000,
 	}),
 );
 app.use(compression());
