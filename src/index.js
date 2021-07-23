@@ -78,5 +78,3 @@ app.use((_, response) => response.status(404));
 // LISTEN
 // eslint-disable-next-line no-console -- We need to know when it's ready.
 app.listen(process.env.PORT || 3000, () => console.log("App ready"));
-
-
