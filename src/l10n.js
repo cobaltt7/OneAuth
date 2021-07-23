@@ -33,34 +33,61 @@ for (const filename of await globby("_locales/*.json")) {
 	// Add it to the list
 	LANGUAGE_CODES.push(`${code}`);
 
-	// Initialize the messages object
-	MESSAGES[`${code}`] = {};
-
 	// Queue the locales file
 	messagePromises.push(fileSystem.readFile(url.pathToFileURL(path.resolve(filename)), "utf8"));
 }
 
-// Get the translations
-for (const [index, rawMessages] of (await Promise.all(messagePromises)).entries()) {
-	/**
-	 * @type {{
-	 * 	[key: string]: {
-	 * 		character_limit?: number;
-	 * 		context?: string;
-	 * 		developer_comment?: string;
-	 * 		string: string;
-	 * 	};
-	 * }}
-	 * @todo Support nested properties.
-	 */
-	const messages = JSON.parse(rawMessages);
+/**
+ * @param {import("../types").StructuredJSON} messages
+ *
+ * @returns {{ [key: string]: string }}
+ * @todo Support nested properties.
+ */
+function loadTranslations(messages) {
+	/** @type {{ [key: string]: string }} */
+	const returnValue = {};
 
 	for (const key in messages) {
 		if (Object.prototype.hasOwnProperty.call(messages, key)) {
-			MESSAGES[`${LANGUAGE_CODES[+index]}`][`${key}`] = messages[`${key}`].string;
+			// If it's not nested, just add it to the return value.
+			const message = messages[`${key}`];
+			if (typeof message?.string !== "undefined") returnValue[`${key}`] = message.string;
+			else {
+				// If it's nested, recursively add it to the return value.
+				for (const subMessageKey in message) {
+					if (Object.hasOwnProperty.call(message, subMessageKey)) {
+						// Load nested messages.
+						const subMessages =
+							typeof message[`${subMessageKey}`]?.string === "string"
+								? message[`${subMessageKey}`]?.string
+								: //@ts-expect-error -- It's impossible for `message[`${subMessageKey}`]` to be undefined.
+								  loadTranslations(message[`${subMessageKey}`]);
+						if (typeof subMessages === "string") {
+							// Add them to the return value.
+							returnValue[`${key}.${subMessageKey}`] = subMessages;
+						} else {
+							// Iterate over all sub-messages and add them to the return value.
+							for (const subMessageKey2 in subMessages) {
+								if (Object.hasOwnProperty.call(subMessages, subMessageKey2)) {
+									// Add them to the return value.
+									//@ts-expect-error -- It's only possible for `subMessages[`${subMessageKey2}`]` to be a string.
+									returnValue[`${key}.${subMessageKey}.${subMessageKey2}`] =
+										subMessages[`${subMessageKey2}`];
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
+	return returnValue;
 }
+
+// Get the translations
+for (const [index, rawMessages] of (await Promise.all(messagePromises)).entries())
+	MESSAGES[`${LANGUAGE_CODES[+index]}`] = loadTranslations(JSON.parse(rawMessages));
+
 /**
  * Expands array of languages to be broader.
  *

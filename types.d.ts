@@ -54,4 +54,26 @@ export interface Page {
 	"unlock"?: RequestFunction;
 	"unsubscribe"?: RequestFunction;
 }
+
+export type StructuredMessage = {
+	character_limit?: number;
+	context?: string;
+	developer_comment?: string;
+	string: string;
+	[key: string]: undefined;
+};
+
+export type StructuredJSON = {
+	[key: string]:
+		| {
+				[key: string]: StructuredJSON | StructuredMessage;
+
+				string: undefined;
+				character_limit: undefined;
+				context: undefined;
+				developer_comment: undefined;
+		  }
+		| StructuredMessage;
+};
+
 export type Auth = AuthObj;
