@@ -7,7 +7,7 @@
 	"emailSubject": { "string": "1Auth Email Verification" },
 	"emailCodeIs": { "string": "Your code is {0}." },
 	"emailNoShare": { "string": "Don’t share it with anyone else." },
-	"emailNoShareWhy":{"string": "Otherwise, they could be able to act on your behalf."},
+	"emailNoShareWhy": { "string": "Otherwise, they could be able to act on your behalf." },
 	"emailNow": { "string": "What now?" },
 	"emailCopyCode": { "string": "Copy your code." },
 	"emailGoBack": { "string": "Go back to 1Auth." },
@@ -203,51 +203,52 @@
 	},
 	"error510Message": {
 		"string": "We can’t show you this page with the information given. Please extend your request."
-	},	"error100Heading": { "string": "Continue" },
+	},
+	"error100Heading": { "string": "Continue" },
 	"error100Message": {
 		"string": "Please continue with your request."
 	},
-	"error101Heading": { "string": "Switching Protocol"},
+	"error101Heading": { "string": "Switching Protocol" },
 	"error101Message": {
 		"string": "Switching from HTTP to HTTPS."
 	},
-	"error102Heading": { "string": "Processing"},
+	"error102Heading": { "string": "Processing" },
 	"error102Message": {
 		"string": "We have received your request. Please wait."
 	},
-	"error103Heading": { "string": "Early Hints"},
+	"error103Heading": { "string": "Early Hints" },
 	"error103Message": {
 		"string": "Here are some resources that you will need. While you wait for the rest of the response, please start loading them."
 	},
-	"error203Heading": { "string": "Non-Authoritative Information"},
+	"error203Heading": { "string": "Non-Authoritative Information" },
 	"error203Message": {
 		"string": "This information is from a backup copy and may not be up-to-date. Please do not rely on it being correct."
 	},
-	"error208Heading": { "string": "Already Reported"},
+	"error208Heading": { "string": "Already Reported" },
 	"error208Message": {
 		"string": "We have already reported this information to you."
 	},
-	"error226Heading": { "string": "IM Used"},
+	"error226Heading": { "string": "IM Used" },
 	"error226Message": {
 		"string": "We used some instance-manipulations on the current instance. Here is the result."
 	},
-	"error422Heading": { "string":"Unprocessable Entity"},
+	"error422Heading": { "string": "Unprocessable Entity" },
 	"error422Message": {
 		"string": "There are semantic errors in your request."
 	},
-	"error423Heading": { "string":"Locked"},
+	"error423Heading": { "string": "Locked" },
 	"error423Message": {
 		"string": "The requested resource is locked."
 	},
-	"error507Heading": { "string":"Insufficient Storage"},
+	"error507Heading": { "string": "Insufficient Storage" },
 	"error507Message": {
 		"string": "Our servers do not have enough storage to store the data needed to complete your request."
 	},
-	"error508Heading": { "string":"Loop Detected"},
+	"error508Heading": { "string": "Loop Detected" },
 	"error508Message": {
 		"string": "Ummm...there's an infinite loop somewhere in the code! As such, we can't complete your request! You may want to contact us on GitHub and let us know about this."
 	},
-	"error511Heading": { "string":"Network Authentication Required"},
+	"error511Heading": { "string": "Network Authentication Required" },
 	"error511Message": {
 		"string": "Please sign in to the network before accessing the Internet."
 	},
