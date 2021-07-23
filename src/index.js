@@ -24,9 +24,9 @@ app.set("views", "/");
 
 app.use(
 	express.static(path.resolve(directory, "static"), {
-		maxAge: 31536000,
 		dotfiles: "allow",
 		immutable: true,
+		maxAge: 31536000,
 	}),
 );
 app.use(compression());
@@ -78,3 +78,5 @@ app.use((_, response) => response.status(404));
 // LISTEN
 // eslint-disable-next-line no-console -- We need to know when it's ready.
 app.listen(process.env.PORT || 3000, () => console.log("App ready"));
+
+
