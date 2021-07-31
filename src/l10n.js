@@ -61,7 +61,7 @@ function loadTranslations(messages) {
 							typeof message[`${subMessageKey}`]?.string === "string"
 								? message[`${subMessageKey}`]?.string
 								: //@ts-expect-error -- It's impossible for `message[`${subMessageKey}`]` to be undefined.
-								loadTranslations(message[`${subMessageKey}`]);
+								  loadTranslations(message[`${subMessageKey}`]);
 
 						if (typeof subMessages === "string") {
 							// Add them to the return value.
@@ -77,9 +77,7 @@ function loadTranslations(messages) {
 								}
 							}
 						}
-
-				}
-
+					}
 		}
 
 	return returnValue;
@@ -211,28 +209,32 @@ export function getFormatter(language) {
  * @param {string} notEnd - Character that marks the end of a "do not split" section.
  *
  * @returns {string[]} - The split string.
- *
- * @todo handle escaped characters
+ * @todo Handle escaped characters.
  */
- function splitOnNotBetween(string,splitOn,notStart,notEnd) {
-	let unbalancedParens = 0, currentValue = '';
+function splitOnNotBetween(string, splitOn, notStart, notEnd) {
+	let unbalancedParens = 0,
+		currentValue = "";
 
 	return [...string]
-		.reduce((accum, val,index) => {
-			if (currentValue[index - 1] === "\\"){
-				currentValue += val;}
-			else {
-			if (val === notStart) unbalancedParens++;
-			else if (val === notEnd) unbalancedParens--;
+		.reduce(
+			(accum, val, index) => {
+				if (currentValue[index - 1] === "\\") {
+					currentValue += val;
+				} else {
+					if (val === notStart) unbalancedParens++;
+					else if (val === notEnd) unbalancedParens--;
 
-			if (val !== splitOn || unbalancedParens) currentValue += val;
-			else if (val === splitOn && !unbalancedParens) {
-				const tmp = currentValue;
-				currentValue = '';
-				return accum.concat(tmp);
-			}}
-			return accum;
-		}, [""])
+					if (val !== splitOn || unbalancedParens) currentValue += val;
+					else if (val === splitOn && !unbalancedParens) {
+						const tmp = currentValue;
+						currentValue = "";
+						return accum.concat(tmp);
+					}
+				}
+				return accum;
+			},
+			[""],
+		)
 		.concat(currentValue);
 }
 
@@ -246,32 +248,35 @@ export function getFormatter(language) {
  * @returns {string} - Rendered message.
  */
 function renderMessage(original, language, messages) {
-	const formatter = getFormatter(language)
-	return splitOnNotBetween(original, ";", "[", "]").map((splitmessage) => {
-		const [messageCode, ...placeholders] = splitmessage
-			// Trim excess whitespace
-			.trim()
+	const formatter = getFormatter(language);
+	return splitOnNotBetween(original, ";", "[", "]")
+		.map((splitmessage) => {
+			const [messageCode, ...placeholders] = splitmessage
+				// Trim excess whitespace
+				.trim()
 
-			// Condense remaining whitespce
-			.replace(/\s/gu, " ")
+				// Condense remaining whitespce
+				.replace(/\s/gu, " ")
 
-			//Split the string into the message code and variables
-			.split(/(?<![^\\]\[[^\]]+)(?<!\\)\|{3}/iu)
+				//Split the string into the message code and variables
+				.split(/(?<![^\\]\[[^\]]+)(?<!\\)\|{3}/iu)
 
-			// Handle embedded messages
-			.map((variable) => parseNestedVariables(variable, language, messages))
+				// Handle embedded messages
+				.map((variable) => parseNestedVariables(variable, language, messages))
 
-			// Unescape escaped characters
-			.map((parameter) => parameter.replace(/\\\|{3}/gu, "|||").replace(/\\\[/gu, "["));
+				// Unescape escaped characters
+				.map((parameter) => parameter.replace(/\\\|{3}/gu, "|||").replace(/\\\[/gu, "["));
 
-		return formatter(
-			// Get message, fallback to the code provided
-			messages[`${messageCode}`] || messageCode,
+			return formatter(
+				// Get message, fallback to the code provided
+				messages[`${messageCode}`] || messageCode,
 
-			// Render it with placeholders
-			placeholders,
-		);
-	}).join(" ").trim();
+				// Render it with placeholders
+				placeholders,
+			);
+		})
+		.join(" ")
+		.trim();
 }
 
 /**
@@ -373,10 +378,9 @@ export default function localization(request, response, next) {
 		return realRender.call(
 			response,
 			view,
-				variables,
-		// @ts-expect-error -- For some reason TS doesn't like the first parameter?
-			typeof variablesOrCallback === "object" ? callback:variablesOrCallback,
-
+			variables,
+			// @ts-expect-error -- For some reason TS doesn't like the first parameter?
+			typeof variablesOrCallback === "object" ? callback : variablesOrCallback,
 		);
 	};
 	next();

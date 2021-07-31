@@ -79,19 +79,12 @@ function statusMiddleware(realStatus, request, response, status = response.statu
 
 	setTimeout(() => {
 		if (!response.headersSent) {
-			statusMiddleware(
-				realStatus,
-				request,
-				response,
-				`${status}`[0] === "2" ? 408 : status,
-			);
+			statusMiddleware(realStatus, request, response, `${status}`[0] === "2" ? 408 : status);
 		}
 	}, 3000);
 }
 
-app.get("/old", (request, response) =>
-	response.render(path.resolve(directory, "old.html")),
-);
+app.get("/old", (request, response) => response.render(path.resolve(directory, "old.html")));
 
 app.use((request, response, next) => {
 	const realStatus = response.status;

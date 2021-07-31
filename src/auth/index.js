@@ -152,7 +152,9 @@ for (const method of [
 						token = retronid.generate();
 						database.set(`RETRIEVE_${token}`, data);
 					} else if (!clientInfo.rawData && typeof tokenOrData === "string") {
-						data = request.localization.messages.allowDataHidden+request.localization.messages.allowDataHiddenSorry;
+						data =
+							request.localization.messages.allowDataHidden +
+							request.localization.messages.allowDataHiddenSorry;
 						token = tokenOrData;
 					} else {
 						logError(
