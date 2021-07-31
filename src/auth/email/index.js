@@ -83,11 +83,11 @@ const client = {
 								{
 									code,
 
-									message: mustacheFunction(request.languages, request.messages),
+									message: mustacheFunction(request.localization.languages, request.localization.messages),
 								},
 							),
 
-							subject: request.messages.emailSubject,
+							subject: request.localization.messages.emailSubject,
 
 							text: mustache.render(
 								fileSystem.readFileSync(
@@ -97,7 +97,7 @@ const client = {
 								{
 									code,
 
-									message: mustacheFunction(request.languages, request.messages),
+									message: mustacheFunction(request.localization.languages, request.localization.messages),
 								},
 							),
 

@@ -5,7 +5,7 @@ declare global {
 			 * Please note that this is a custom field processed and set manually and will probably
 			 * not be present in other Express applications.
 			 */
-			l10n: {
+			localization: {
 				/** The client's prefered languages in order of preferation. */
 				languages: string[];
 				/** The messages translated to the first language in the client's prefered languages. */

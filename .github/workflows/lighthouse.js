@@ -11,10 +11,12 @@ import fetch from "node-fetch";
  * @returns {string} - The joined arrays.
  */
 function graphql(query, ...placeholderValues) {
-	return placeholderValues.reduce(
-		(last, placeholder, index) => `${last}${placeholder}${query[index + 1]}`,
-		query[0],
-	) || "";
+	return (
+		placeholderValues.reduce(
+			(last, placeholder, index) => `${last}${placeholder}${query[index + 1]}`,
+			query[0],
+		) || ""
+	);
 }
 
 /**
@@ -47,11 +49,7 @@ function commentOnDiscussion(body) {
 		method: "POST",
 	})
 		.then((response) => response.text())
-		.then((response) => {
-			console.log({ response });
-
-			return JSON.stringify(response);
-		});
+		.then(JSON.stringify);
 }
 
 /**

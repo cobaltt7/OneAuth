@@ -37,18 +37,23 @@ jobs:
               run: npm audit fix
 
             - name: Unneeded
+              if: ${{ !cancelled() }}
               run: npm prune
 
             - name: Duplicates
+              if: ${{ !cancelled() }}
               run: npm dedupe
 
             - name: Health
-              run: npm dedupe
+              if: ${{ !cancelled() }}
+              run: npm doctor
 
             - name: Pull
+              if: ${{ !cancelled() }}
               run: git pull
 
             - name: Commit
+              if: ${{ !cancelled() }}
               id: commit
               uses: stefanzweifel/git-auto-commit-action@master
               with:

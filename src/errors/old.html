@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{ #message }}errorOldHeading{{ /message }} | 1Auth</title>
+		<title>{{ #message }}title|||[errorOldHeading]{{ /message }}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		{{> head }}
 	</head>
@@ -21,20 +21,20 @@
 		{{> nav }}
 		<main>
 			<h1>{{ #message }}errorOldHeading{{ /message }}</h1>
-			<p>{{ #message }}errorOldWhy|||<u>{{ all }}</u>{{ /message }}</p>
+			<p>{{ #message }}errorOldWhy|||<u>[errorOldAll]</u>{{ /message }}</p>
 			<h2>{{ #message }}errorOldModern{{ /message }}</h2>
 			<ul>
 				<li>
-					<a href="https://www.google.com/chrome/">Google Chrome</a>
+					<a href="https://www.google.com/chrome/">{{ #message }}errorOldChrome{{ /message }}</a>
 				</li>
 				<li>
-					<a href="https://www.microsoft.com/en-us/edge?r=1">Microsoft Edge</a>
+					<a href="https://www.microsoft.com/en-us/edge?r=1">{{ #message }}errorOldEdge{{ /message }}</a>
 				</li>
 				<li>
-					<a href="https://www.mozilla.org/en-US/firefox/">Mozila Firefox</a>
+					<a href="https://www.mozilla.org/en-US/firefox/">{{ #message }}errorOldFirefox{{ /message }}</a>
 				</li>
 				<li>
-					<a href="https://www.apple.com/safari/">Apple Safari</a>
+					<a href="https://www.apple.com/safari/">{{ #message }}errorOldSafari{{ /message }}</a>
 				</li>
 			</ul>
 			<p>{{ #message }}errorOldMistake{{ /message }}</p>

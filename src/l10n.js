@@ -47,21 +47,22 @@ function loadTranslations(messages) {
 	/** @type {{ [key: string]: string }} */
 	const returnValue = {};
 
-	for (const key in messages) {
+	for (const key in messages)
 		if (Object.prototype.hasOwnProperty.call(messages, key)) {
 			// If it's not nested, just add it to the return value.
 			const message = messages[`${key}`];
 			if (typeof message?.string !== "undefined") returnValue[`${key}`] = message.string;
-			else {
-				// If it's nested, recursively add it to the return value.
-				for (const subMessageKey in message) {
+			// If it's nested, recursively add it to the return value.
+			else
+				for (const subMessageKey in message)
 					if (Object.hasOwnProperty.call(message, subMessageKey)) {
 						// Load nested messages.
 						const subMessages =
 							typeof message[`${subMessageKey}`]?.string === "string"
 								? message[`${subMessageKey}`]?.string
 								: //@ts-expect-error -- It's impossible for `message[`${subMessageKey}`]` to be undefined.
-								  loadTranslations(message[`${subMessageKey}`]);
+								loadTranslations(message[`${subMessageKey}`]);
+
 						if (typeof subMessages === "string") {
 							// Add them to the return value.
 							returnValue[`${key}.${subMessageKey}`] = subMessages;
@@ -76,11 +77,11 @@ function loadTranslations(messages) {
 								}
 							}
 						}
-					}
+
 				}
-			}
+
 		}
-	}
+
 	return returnValue;
 }
 
@@ -200,38 +201,77 @@ export function getFormatter(language) {
 }
 
 /**
+ * Split on a character not between other characters.
+ *
+ * Thanks to @CubeyTheCube for code!
+ *
+ * @param {string} string - String to spltit.
+ * @param {string} splitOn - Character to split on.
+ * @param {string} notStart - Character that marks the start of a "do not split" section.
+ * @param {string} notEnd - Character that marks the end of a "do not split" section.
+ *
+ * @returns {string[]} - The split string.
+ *
+ * @todo handle escaped characters
+ */
+ function splitOnNotBetween(string,splitOn,notStart,notEnd) {
+	let unbalancedParens = 0, currentValue = '';
+
+	return [...string]
+		.reduce((accum, val,index) => {
+			if (currentValue[index - 1] === "\\"){
+				currentValue += val;}
+			else {
+			if (val === notStart) unbalancedParens++;
+			else if (val === notEnd) unbalancedParens--;
+
+			if (val !== splitOn || unbalancedParens) currentValue += val;
+			else if (val === splitOn && !unbalancedParens) {
+				const tmp = currentValue;
+				currentValue = '';
+				return accum.concat(tmp);
+			}}
+			return accum;
+		}, [""])
+		.concat(currentValue);
+}
+
+/**
  * Renders a string with a language code and optional variables into a trnaslated message.
  *
- * @param {string} toParse - String to parse.
+ * @param {string} original - String to parse.
  * @param {string} language - Language to format plurals with.
  * @param {{ [key: string]: string }} messages - Messages to translate to.
  *
  * @returns {string} - Rendered message.
  */
-function renderMessage(toParse, language, messages) {
-	const [messageCode, ...placeholders] = toParse
-		// Trim excess whitespace
-		.trim()
+function renderMessage(original, language, messages) {
+	const formatter = getFormatter(language)
+	return splitOnNotBetween(original, ";", "[", "]").map((splitmessage) => {
+		const [messageCode, ...placeholders] = splitmessage
+			// Trim excess whitespace
+			.trim()
 
-		// Condense remaining whitespce
-		.replace(/\s/gu, " ")
+			// Condense remaining whitespce
+			.replace(/\s/gu, " ")
 
-		//Split the string into the message code and variables
-		.split(/(?<![^\\]\[[^\]]+)(?<!\\)\|{3}/iu)
+			//Split the string into the message code and variables
+			.split(/(?<![^\\]\[[^\]]+)(?<!\\)\|{3}/iu)
 
-		// Handle embedded messages
-		.map((variable) => parseNestedVariables(variable, language, messages))
+			// Handle embedded messages
+			.map((variable) => parseNestedVariables(variable, language, messages))
 
-		// Unescape escaped characters
-		.map((parameter) => parameter.replace(/\\\|{3}/gu, "|||").replace(/\\\[/gu, "["));
+			// Unescape escaped characters
+			.map((parameter) => parameter.replace(/\\\|{3}/gu, "|||").replace(/\\\[/gu, "["));
 
-	return getFormatter(language)(
-		// Get message, fallback to the code provided
-		messages[`${messageCode}`] || messageCode,
+		return formatter(
+			// Get message, fallback to the code provided
+			messages[`${messageCode}`] || messageCode,
 
-		// Render it with placeholders
-		placeholders,
-	);
+			// Render it with placeholders
+			placeholders,
+		);
+	}).join(" ").trim();
 }
 
 /**
@@ -240,12 +280,12 @@ function renderMessage(toParse, language, messages) {
  * @example
  * 	mustache.render("<p>{{ #message }}aboutClientCount|||{{ clients.length }}</p>", {
  * 		clients,
- * 		message: mustacheFunction(request.languages, request.messages),
+ * 		message: mustacheFunction(request.localization.languages, request.localization.messages),
  * 	});
  *
  * @example
  * 	response.render(path.resolve(directory, "./index.html"), {
- * 		message: mustacheFunction(request.languages, request.messages),
+ * 		message: mustacheFunction(request.localization.languages, request.localization.messages),
  * 	});
  *
  * @param {string[]} languages - Language to be used when formating plurals.
@@ -259,7 +299,7 @@ export function mustacheFunction(languages, messages = getMessages(languages)) {
 }
 
 /**
- * Express l10n middleware.
+ * Express localization middleware.
  *
  * @param {import("express").Request} request - Express request object.
  * @param {import("express").Response} response - Express response object.
@@ -297,7 +337,7 @@ export default function localization(request, response, next) {
 
 	// Save the language and message data in `request` so request handlers can access them.
 	// eslint-disable-next-line no-param-reassign -- We need to override the original.
-	request.l10n = { languages, messages };
+	request.localization = { languages, messages };
 
 	// Grab reference of render
 	const realRender = response.render;
@@ -333,10 +373,10 @@ export default function localization(request, response, next) {
 		return realRender.call(
 			response,
 			view,
-			variables,
+				variables,
+		// @ts-expect-error -- For some reason TS doesn't like the first parameter?
+			typeof variablesOrCallback === "object" ? callback:variablesOrCallback,
 
-			// @ts-expect-error -- For some reason TS doesn't like the first parameter?
-			typeof variablesOrCallback === "function" ? variablesOrCallback : callback,
 		);
 	};
 	next();
