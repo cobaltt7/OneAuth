@@ -24,7 +24,7 @@ const BASE_LANGUAGE = "en_US",
 	messagePromises = [];
 
 /** @type {string[]} */
-export const LANGUAGE_CODES = []
+export const LANGUAGE_CODES = [];
 
 // Initialize
 for (const filename of await globby("_locales/*.json")) {
