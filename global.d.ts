@@ -1,12 +1,4 @@
 declare global {
-	declare const __dirname: string | undefined;
-	declare const __filename: string | undefined;
-	declare const process: {
-		argv: string[];
-		env: { [key: string]: string };
-		exit: (code?: number) => undefined;
-	};
-	declare const require: undefined | ((library: string) => any);
 	namespace Express {
 		interface Request {
 			/**
