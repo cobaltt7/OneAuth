@@ -371,7 +371,7 @@
 		"string": "Apple Safari",
 		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
 	},
-	"title":{
+	"title": {
 		"string": "{0} | 1Auth"
 	}
 }
