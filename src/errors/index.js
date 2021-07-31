@@ -84,7 +84,7 @@ function statusMiddleware(realStatus, request, response, status = response.statu
 	}, 3000);
 }
 
-app.get("/old", (request, response) => response.render(path.resolve(directory, "old.html")));
+app.get("/old", (_, response) => response.render(path.resolve(directory, "old.html")));
 
 app.use((request, response, next) => {
 	const realStatus = response.status;
