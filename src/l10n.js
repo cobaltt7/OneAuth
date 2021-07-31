@@ -18,12 +18,13 @@ const BASE_LANGUAGE = "en_US",
 	FORMATTERS_CACHE = {},
 	/** @type {{ [key: string]: { [key: string]: string } }} */
 	MESSAGE_CACHE = {},
-	/** @type {string[]} */
-	LANGUAGE_CODES = [],
 	/** @type {{ [key: string]: { [key: string]: string } }} */
 	MESSAGES = {},
 	/** @type {Promise<string>[]} */
 	messagePromises = [];
+
+/** @type {string[]} */
+export const LANGUAGE_CODES = []
 
 // Initialize
 for (const filename of await globby("_locales/*.json")) {
