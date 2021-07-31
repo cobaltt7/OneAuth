@@ -83,7 +83,10 @@ const client = {
 								{
 									code,
 
-									message: mustacheFunction(request.localization.languages, request.localization.messages),
+									message: mustacheFunction(
+										request.localization.languages,
+										request.localization.messages,
+									),
 								},
 							),
 
@@ -97,7 +100,10 @@ const client = {
 								{
 									code,
 
-									message: mustacheFunction(request.localization.languages, request.localization.messages),
+									message: mustacheFunction(
+										request.localization.languages,
+										request.localization.messages,
+									),
 								},
 							),
 

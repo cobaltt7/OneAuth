@@ -18,10 +18,10 @@
 		"string": "Review the information we will send and the site we will send it to, and if all looks good, press “{0}”."
 	},
 	"emailDoesntWork": {
-		"string": "Your code will expire after 15 minutes, so if it doesn't work, it might have been too long."}
-		,
-		"emailPressBack":{
-			"string":"Try pressing the back button and requesting another code!"
+		"string": "Your code will expire after 15 minutes, so if it doesn't work, it might have been too long."
+	},
+	"emailPressBack": {
+		"string": "Try pressing the back button and requesting another code!"
 	},
 	"emailUnexpected": {
 		"string": "Not expecting this email?"
@@ -345,14 +345,30 @@
 		"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
 	},
 	"emailPlaceholder": { "string": "Email address" },
-	"aboutCode": { "string": "CODE",
-		"character_limit":10,
-		"developer_comment": "AKA a token. Please replace spaces with underscores." },
-		"aboutCallbackUrl": { "string": "CALLBACK_URI",
-			"character_limit":20,
-			"developer_comment": "Please replace spaces with underscores." },
-			"errorOldChrome":{"string":"Google Chrome","developer_comment"   :"Please make sure that you translate this exactly how it appears on the browser's website."},
-			"errorOldEdge":{"string":"Microsoft Edge","developer_comment":    "Please make sure that you translate this exactly how it appears on the browser's website."},
-			"errorOldFirefox":{"string":"Mozilla Firefox","developer_comment":"Please make sure that you translate this exactly how it appears on the browser's website."},
-			"errorOldSafari":{"string":"Apple Safari","developer_comment":    "Please make sure that you translate this exactly how it appears on the browser's website."}
-		}
+	"aboutCode": {
+		"string": "CODE",
+		"character_limit": 10,
+		"developer_comment": "AKA a token. Please replace spaces with underscores."
+	},
+	"aboutCallbackUrl": {
+		"string": "CALLBACK_URI",
+		"character_limit": 20,
+		"developer_comment": "Please replace spaces with underscores."
+	},
+	"errorOldChrome": {
+		"string": "Google Chrome",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldEdge": {
+		"string": "Microsoft Edge",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldFirefox": {
+		"string": "Mozilla Firefox",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldSafari": {
+		"string": "Apple Safari",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	}
+}

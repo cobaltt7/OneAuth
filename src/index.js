@@ -44,7 +44,6 @@ app.use((request, response, next) => {
 	return next();
 });
 
-
 // Information parsing
 const bodyParser = urlencoded({
 	extended: true,
