@@ -130,7 +130,6 @@ for (const method of [
 				return;
 			}
 
-
 			requestFunction(
 				request,
 				response,
