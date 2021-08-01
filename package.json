@@ -119,7 +119,6 @@
 		]
 	},
 	"dependencies": {
-		"@replit/database": "^2.0.1",
 		"@ultraq/icu-message-formatter": "^0.11.1",
 		"accepts": "^1.3.7",
 		"atob": "^2.1.2",
@@ -133,6 +132,7 @@
 		"highlight.js": "^11.0.1",
 		"live-plugin-manager": "^0.15.1",
 		"marked": "^2.1.3",
+		"mongoose": "^5.13.5",
 		"mustache": "^4.2.0",
 		"mustache-express": "^1.3.0",
 		"node-fetch": "^2.6.1",

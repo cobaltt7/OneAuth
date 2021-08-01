@@ -21,13 +21,20 @@ interface AuthObj {
 	link: string;
 	name: string;
 	pages?: Page[];
-	getData?: (token: string) => Promise<{ [key: string]: string } | undefined | null | void>;
+	getData?: (
+		token: string,
+	) =>
+		| Promise<{ [key: string]: string } | undefined | null | void>
+		| { [key: string]: string }
+		| undefined
+		| null
+		| void;
 	rawData?: boolean;
 }
 export type RequestFunction = (
 	request: Request,
 	response: Response,
-	sendResponse: (tokenOrData: string | { [key: string]: any }, url: string) => void | Response,
+	sendResponse: (tokenOrData: string | { [key: string]: any }, url: string) => Promise<void>,
 ) => any;
 export interface Page {
 	"backendPage": string;

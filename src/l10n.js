@@ -217,7 +217,7 @@ function splitOnNotBetween(string, splitOn, notStart, notEnd) {
 		currentValue = "";
 
 	return [...string]
-		.reduce((accum, val, index) => {
+		.reduce((/** @type {string[]} */ accum, val, index) => {
 			if (currentValue[index - 1] === "\\") {
 				currentValue += val;
 			} else {
