@@ -217,27 +217,24 @@ function splitOnNotBetween(string, splitOn, notStart, notEnd) {
 		currentValue = "";
 
 	return [...string]
-		.reduce(
-			(accum, val, index) => {
-				if (currentValue[index - 1] === "\\") {
-					currentValue += val;
-				} else {
-					if (val === notStart) unbalancedParens++;
-					else if (val === notEnd) unbalancedParens--;
+		.reduce((accum, val, index) => {
+			if (currentValue[index - 1] === "\\") {
+				currentValue += val;
+			} else {
+				if (val === notStart) unbalancedParens++;
+				else if (val === notEnd) unbalancedParens--;
 
-					if (val !== splitOn || unbalancedParens) currentValue += val;
-					else if (val === splitOn && !unbalancedParens) {
-						const tmp = currentValue;
-						currentValue = "";
-						return accum.concat(tmp);
-					}
+				if (val !== splitOn || unbalancedParens) currentValue += val;
+				else if (val === splitOn && !unbalancedParens) {
+					const tmp = currentValue;
+					currentValue = "";
+					return accum.concat(tmp);
 				}
-				return accum;
-			},
-			[]
-		)
+			}
+			return accum;
+		}, [])
 		.concat(currentValue)
-		.map((string) =>  string.replace(/\\;/g, ";"));
+		.map((string) => string.replace(/\\;/g, ";"));
 }
 
 /**
