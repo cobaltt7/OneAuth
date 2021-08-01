@@ -7,7 +7,7 @@
 	"emailSubject": { "string": "Verificación 1Auth de Correo Electrónico" },
 	"emailCodeIs": { "string": "Tu código es {0}." },
 	"emailNoShare": { "string": "" },
-	"emailNoShareWhy": { "string": "" },
+	"emailNoShareWhy":{"string": ""},
 	"emailNow": { "string": "¿Qué ahora?" },
 	"emailCopyCode": { "string": "Copie su código." },
 	"emailGoBack": { "string": "Volver a 1Auth." },
@@ -17,19 +17,10 @@
 	"emailReviewInfo": {
 		"string": ""
 	},
-	"emailDoesntWork": {
-		"string": ""
-	},
-	"emailPressBack": {
+	"emailTimeOut": {
 		"string": ""
 	},
 	"emailUnexpected": {
-		"string": ""
-	},
-	"emailIgnoreIt": {
-		"string": ""
-	},
-	"emailDontWorry": {
 		"string": ""
 	},
 	"logoAlt": { "string": "Logotipo de 1Auth" },
@@ -57,10 +48,7 @@
 	"signinChoose": { "string": "Elija una opción para continuar" },
 	"signinWith": { "string": "Iniciar sesión con {0}" },
 	"allowDataHidden": {
-		"string": ""
-	},
-	"allowDataHiddenSorry": {
-		"string": ""
+		"string": "Desafortunadamente, no podemos mostrar esto datos ahora. ¡Lo siento por eso!"
 	},
 	"error201Heading": { "string": "Creado" },
 	"error202Heading": { "string": "Aceptado" },
@@ -215,52 +203,51 @@
 	},
 	"error510Message": {
 		"string": ""
-	},
-	"error100Heading": { "string": "" },
+	},	"error100Heading": { "string": "" },
 	"error100Message": {
 		"string": ""
 	},
-	"error101Heading": { "string": "" },
+	"error101Heading": { "string": ""},
 	"error101Message": {
 		"string": ""
 	},
-	"error102Heading": { "string": "" },
+	"error102Heading": { "string": ""},
 	"error102Message": {
 		"string": ""
 	},
-	"error103Heading": { "string": "" },
+	"error103Heading": { "string": ""},
 	"error103Message": {
 		"string": ""
 	},
-	"error203Heading": { "string": "" },
+	"error203Heading": { "string": ""},
 	"error203Message": {
 		"string": ""
 	},
-	"error208Heading": { "string": "" },
+	"error208Heading": { "string": ""},
 	"error208Message": {
 		"string": ""
 	},
-	"error226Heading": { "string": "" },
+	"error226Heading": { "string": ""},
 	"error226Message": {
 		"string": ""
 	},
-	"error422Heading": { "string": "" },
+	"error422Heading": { "string":""},
 	"error422Message": {
 		"string": ""
 	},
-	"error423Heading": { "string": "" },
+	"error423Heading": { "string":""},
 	"error423Message": {
 		"string": ""
 	},
-	"error507Heading": { "string": "" },
+	"error507Heading": { "string":""},
 	"error507Message": {
 		"string": ""
 	},
-	"error508Heading": { "string": "" },
+	"error508Heading": { "string":""},
 	"error508Message": {
 		"string": ""
 	},
-	"error511Heading": { "string": "" },
+	"error511Heading": { "string":""},
 	"error511Message": {
 		"string": ""
 	},
@@ -289,10 +276,7 @@
 	},
 	"aboutClientsHeading": { "string": "Clientes Soportados" },
 	"aboutDevelopersHeading": { "string": "Para Desarrolladores" },
-	"aboutSuperEasy": {
-		"string": ""
-	},
-	"aboutDirectTo": {
+	"aboutImpementation": {
 		"string": ""
 	},
 	"aboutAfterFinish": {
@@ -331,44 +315,8 @@
 		"string": ""
 	},
 	"aboutHelpTranslate": {
-		"string": ""
-	},
-	"aboutCreateTXAcc": {
 		"string": "",
-		"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
+		"developer_comment": "Please make sure that you translate “Join team” and “Request language” exactly how Transifex does."
 	},
-	"aboutTranslateThanks": {
-		"string": ""
-	},
-	"aboutTranslateRequestLanguage": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
-	},
-	"emailPlaceholder": { "string": "Correo electrónico" },
-	"aboutCode": {
-		"string": "",
-		"character_limit": 10,
-		"developer_comment": "AKA a token. Please replace spaces with underscores."
-	},
-	"aboutCallbackUrl": {
-		"string": "",
-		"character_limit": 20,
-		"developer_comment": "Please replace spaces with underscores."
-	},
-	"errorOldChrome": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldEdge": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldFirefox": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldSafari": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	}
+	"emailPlaceholder": { "string": "Correo electrónico" }
 }
