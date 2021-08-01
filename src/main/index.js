@@ -82,10 +82,10 @@ app.use((_, response, next) => {
 			 */
 			(index) => {
 				const code = codeblocks.eq(index),
-					[languageClass, language = "plaintext"] =
-						/lang(?:uage)?-(?<language>\w+)/u.exec(code.attr("class") || "") ?? [];
+					[fullClass, language = "plaintext"] =
+						/lang(?:uage)?-(?<language>\w+)/u.exec(code.attr("class") || "") || [];
 
-				code.removeClass(languageClass);
+				code.removeClass(fullClass);
 				highlight(code.text(), language)
 					.then((highlighted) => {
 						code.html(highlighted).wrapInner(

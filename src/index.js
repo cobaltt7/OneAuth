@@ -44,26 +44,13 @@ app.use((request, response, next) => {
 	return next();
 });
 
-app.use(errorPages);
-
-app.use(
-	express.static(path.resolve(directory, "static"), {
-		dotfiles: "allow",
-		immutable: true,
-		maxAge: 31536000,
-	}),
-);
-
 // Information parsing
 const bodyParser = urlencoded({
 	extended: true,
 });
 
-app.use((request, response, next) => {
-	if (request.path.includes(".")) return next();
-
-	return cookieParser()(request, response, next);
-});
+// Not exculded on assets because of localization.
+app.use(cookieParser());
 app.use((request, response, next) => {
 	if (request.path.includes(".")) return next();
 
@@ -72,6 +59,7 @@ app.use((request, response, next) => {
 
 // Pages
 app.use(localization);
+app.use(errorPages);
 app.use("/docs", documentation);
 app.use(main);
 app.use("/auth", auth);

@@ -49,7 +49,7 @@ export function highlight(code, originalLanguage, callback) {
 
 	const language = originalLanguage.toLowerCase();
 
-	// Prevent downloading langs already downloaded or included in core
+	// Prevent downloading languages already downloaded or included in core
 	if (highlightjs.getLanguage(language)) {
 		callback(undefined, highlightjs.highlight(code, { language }).value);
 

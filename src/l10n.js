@@ -1,119 +1,160 @@
 /** @file Localization Of the site. */
 
-import fileSystem from "fs";
+import { promises as fileSystem } from "fs";
 import path from "path";
 import url from "url";
 
 import { MessageFormatter, pluralTypeHandler } from "@ultraq/icu-message-formatter";
 import accepts from "accepts";
+import matchBrackets from "balanced-match";
 import globby from "globby";
 
 import { logError } from "./errors/index.js";
 
-const BASE_LANG = "en_US",
+const BASE_LANGUAGE = "en_US",
 	/** @type {{ [key: string]: string[] }} */
-	CACHE_CODES = {},
+	LANGUAGE_CODE_CACHE = {},
 	/** @type {{ [key: string]: MessageFormatter }} */
-	CACHE_FORMATTERS = {},
+	FORMATTERS_CACHE = {},
 	/** @type {{ [key: string]: { [key: string]: string } }} */
-	CACHE_MSGS = {},
-	/** @type {string[]} */
-	LANG_CODES = [],
+	MESSAGE_CACHE = {},
 	/** @type {{ [key: string]: { [key: string]: string } }} */
 	MESSAGES = {},
+	/** @type {Promise<string>[]} */
 	messagePromises = [];
 
+/** @type {string[]} */
+export const LANGUAGE_CODES = [];
+
+// Initialize
 for (const filename of await globby("_locales/*.json")) {
-	const [, code = BASE_LANG] = filename.split(".")[0]?.split("/") ?? [];
+	// Get all supported languages
+	const [, code] = /^_locales\/(.*)\.json$/.exec(filename) || [];
 
-	LANG_CODES.push(`${code}`);
+	// Add it to the list
+	LANGUAGE_CODES.push(`${code}`);
 
-	MESSAGES[`${code}`] = {};
-
-	messagePromises.push(
-		fileSystem.readFileSync(url.pathToFileURL(path.resolve(filename)), "utf8"),
-	);
+	// Queue the locales file
+	messagePromises.push(fileSystem.readFile(url.pathToFileURL(path.resolve(filename)), "utf8"));
 }
 
-for (const [index, messages] of (await Promise.all(messagePromises)).entries()) {
-	/** @type {{ [key: string]: { [key: string]: string; string: string } }} */
-	const rawMessages = JSON.parse(messages) || {};
+/**
+ * @param {import("../types").StructuredJSON} messages
+ *
+ * @returns {{ [key: string]: string }}
+ * @todo Support nested properties.
+ */
+function loadTranslations(messages) {
+	/** @type {{ [key: string]: string }} */
+	const returnValue = {};
 
-	for (const item in rawMessages) {
-		if (Object.prototype.hasOwnProperty.call(rawMessages, item)) {
-			if (!rawMessages[`${item}`]?.string) continue;
+	for (const key in messages)
+		if (Object.prototype.hasOwnProperty.call(messages, key)) {
+			// If it's not nested, just add it to the return value.
+			const message = messages[`${key}`];
+			if (typeof message?.string !== "undefined") returnValue[`${key}`] = message.string;
+			// If it's nested, recursively add it to the return value.
+			else
+				for (const subMessageKey in message)
+					if (Object.hasOwnProperty.call(message, subMessageKey)) {
+						// Load nested messages.
+						const subMessages =
+							typeof message[`${subMessageKey}`]?.string === "string"
+								? message[`${subMessageKey}`]?.string
+								: //@ts-expect-error -- It's impossible for `message[`${subMessageKey}`]` to be undefined.
+								  loadTranslations(message[`${subMessageKey}`]);
 
-			MESSAGES[`${LANG_CODES[+index]}`][`${item}`] = `${rawMessages[`${item}`]?.string}`;
+						if (typeof subMessages === "string") {
+							// Add them to the return value.
+							returnValue[`${key}.${subMessageKey}`] = subMessages;
+						} else {
+							// Iterate over all sub-messages and add them to the return value.
+							for (const subMessageKey2 in subMessages) {
+								if (Object.hasOwnProperty.call(subMessages, subMessageKey2)) {
+									// Add them to the return value.
+									//@ts-expect-error -- It's only possible for `subMessages[`${subMessageKey2}`]` to be a string.
+									returnValue[`${key}.${subMessageKey}.${subMessageKey2}`] =
+										subMessages[`${subMessageKey2}`];
+								}
+							}
+						}
+					}
 		}
-	}
+
+	return returnValue;
 }
+
+// Get the translations
+for (const [index, rawMessages] of (await Promise.all(messagePromises)).entries())
+	MESSAGES[`${LANGUAGE_CODES[+index]}`] = loadTranslations(JSON.parse(rawMessages));
 
 /**
  * Expands array of languages to be broader.
  *
- * @param {string[]} langs - Input languages.
- * @param languages
- * @param {boolean} [cache] - Whether languages should be loaded from the cache if possible.
+ * @param {string[]} languages - Input languages.
  *
  * @returns {string[]} - Resulting array.
  */
-export function compileLangs(languages, cache = false) {
-	if (cache) {
-		const retrieved = CACHE_CODES[`${languages}`];
+function compileLanguages(languages) {
+	// Any requests would have to process the whole list. This prevents that for subsequent requests.
+	if (LANGUAGE_CODE_CACHE[`${languages}`]) return LANGUAGE_CODE_CACHE[`${languages}`];
 
-		if (retrieved) return retrieved;
-	}
-
-	CACHE_CODES[`${languages}`] = languages
-
-		// Remove asterisks
+	LANGUAGE_CODE_CACHE[`${languages}`] = languages
+		// Remove asterisks (asterisks mean "any" in the spec)
 		.filter((item) => item !== "*")
 		.flatMap((language) => {
 			// Standardize character between language and country code
-			const standardLanguage = language.replace(/-/g, "_"),
+			const standardizedLanguage = language.replace(/-/g, "_"),
 				// Add language without country code as fallback
-				[noCountryLanguage] = standardLanguage.split("_");
+				[noCountryLanguage] = standardizedLanguage.split("_");
 
 			return [
-				standardLanguage,
+				standardizedLanguage,
 				noCountryLanguage,
 
 				// Add other countries with the same languages' country codes as fallbacks
-				...LANG_CODES.filter(
+				...LANGUAGE_CODES.filter(
 					(languageCode) => languageCode.indexOf(`${noCountryLanguage}`) === 0,
 				),
 			];
 		})
 
 		// Remove duplicates
-		.filter((item, index) => CACHE_CODES[`${languages}`]?.indexOf(item || "") === index)
+		.filter(
+			/**
+			 * If this is the first time the key is found in the array, return true. Otherwise,
+			 * return false, removing the duplicate from the array.
+			 *
+			 * @param {string} item - Key to check.
+			 * @param {number} index - Index of the key.
+			 * @param {string[]} codes - Array to check against.
+			 *
+			 * @returns {boolean} - True if the key is the first time it's found in the array, false
+			 *   otherwise.
+			 */
+			(item, index, codes) => codes.indexOf(item) === index,
+		);
 
-		// Remove undefined values
-		.filter((language) => typeof language === "string");
+	// Add base language as a last resort
+	LANGUAGE_CODE_CACHE[`${languages}`].push(BASE_LANGUAGE);
 
-	// Add base language as fallback to the fallback
-	CACHE_CODES[`${languages}`]?.push(BASE_LANG);
 	// Slice it on the base language because the base has all the strings.
-	CACHE_CODES[`${languages}`]?.splice((CACHE_CODES[`${languages}`]?.indexOf(BASE_LANG) || 0) + 1);
+	LANGUAGE_CODE_CACHE[`${languages}`].splice(
+		LANGUAGE_CODE_CACHE[`${languages}`].indexOf(BASE_LANGUAGE) + 1,
+	);
 
-	return CACHE_CODES[`${languages}`] || [BASE_LANG];
+	return LANGUAGE_CODE_CACHE[`${languages}`];
 }
 
 /**
- * Get messages in the first avilable language.
+ * Get all messages, using the first avilable language for each.
  *
- * @param {string[]} langs - Languages to use when searching for messages.
- * @param languages
- * @param {boolean} [cache] - Whether to load messages from the cache when possible.
+ * @param {string[]} languages - Languages to use when searching for messages.
  *
  * @returns {{ [key: string]: string }} - Retrieved messages.
  */
-export function getMessages(languages, cache = true) {
-	if (cache) {
-		const retrieved = CACHE_MSGS[`${languages}`];
-
-		if (retrieved) return retrieved;
-	}
+function getMessages(languages) {
+	if (MESSAGE_CACHE[`${languages}`]) return MESSAGE_CACHE[`${languages}`];
 
 	/** @type {{ [key: string]: string }} */
 	let messages = {};
@@ -121,145 +162,195 @@ export function getMessages(languages, cache = true) {
 	for (const languageCode of languages)
 		messages = { ...MESSAGES[`${languageCode}`], ...messages };
 
-	CACHE_MSGS[`${languages}`] = messages;
+	return (MESSAGE_CACHE[`${languages}`] = messages);
+}
 
-	return messages;
+/**
+ * @param {string} variable - Variable to parse.
+ * @param {string} language - Language to format plurals with.
+ * @param {{ [key: string]: string }} messages - Messages to translate to.
+ *
+ * @returns {string}
+ */
+function parseNestedVariables(variable, language, messages) {
+	const matched = matchBrackets("[", "]", variable);
+	if (!matched) return variable;
+
+	return (
+		matched.pre +
+		renderMessage(matched.body, language, messages) +
+		parseNestedVariables(matched.post, language, messages)
+	);
 }
 
 /**
  * Generates a plural formatter for a specific language.
  *
- * @param {string} lang - Language to generate the formatter for.
- * @param language
- * @param {boolean} [cache] - Whether formatters should be loaded from the cache if possible.
+ * @param {string} language - Language to generate the formatter for.
  *
  * @returns {MessageFormatter} - The message formater.
  */
-export function getFormatter(language, cache = true) {
-	if (cache) {
-		/** @type {MessageFormatter} */
-		const retrieved = CACHE_FORMATTERS[`${language}`];
+export function getFormatter(language) {
+	// Use a cached formatter if available.
+	if (FORMATTERS_CACHE[`${language}`]) return FORMATTERS_CACHE[`${language}`];
 
-		if (retrieved) return retrieved;
-	}
-
-	CACHE_FORMATTERS[`${language}`] = new MessageFormatter(language, {
+	return (FORMATTERS_CACHE[`${language}`] = new MessageFormatter(language, {
 		plural: pluralTypeHandler,
-	}).format;
-
-	return CACHE_FORMATTERS[`${language}`];
+	}).format);
 }
 
 /**
- * Parses a string into a language code and optional placeholder data. Renders a translation with them.
+ * Split on a character not between other characters.
  *
- * @param {string} inputInfo - String to parse, including a message code and optional placeholders.
- * @param {string} lang - Language code to be used when retreiving a plural formatter.
- * @param language
- * @param {{ [key: string]: string }} msgs - Messages to be used.
- * @param messages
+ * Thanks to @CubeyTheCube for code!
+ *
+ * @param {string} string - String to spltit.
+ * @param {string} splitOn - Character to split on.
+ * @param {string} notStart - Character that marks the start of a "do not split" section.
+ * @param {string} notEnd - Character that marks the end of a "do not split" section.
+ *
+ * @returns {string[]} - The split string.
+ * @todo Handle escaped characters.
+ */
+function splitOnNotBetween(string, splitOn, notStart, notEnd) {
+	let unbalancedParens = 0,
+		currentValue = "";
+
+	return [...string]
+		.reduce((accum, val, index) => {
+			if (currentValue[index - 1] === "\\") {
+				currentValue += val;
+			} else {
+				if (val === notStart) unbalancedParens++;
+				else if (val === notEnd) unbalancedParens--;
+
+				if (val !== splitOn || unbalancedParens) currentValue += val;
+				else if (val === splitOn && !unbalancedParens) {
+					const tmp = currentValue;
+					currentValue = "";
+					return accum.concat(tmp);
+				}
+			}
+			return accum;
+		}, [])
+		.concat(currentValue)
+		.map((string) => string.replace(/\\;/g, ";"));
+}
+
+/**
+ * Renders a string with a language code and optional variables into a trnaslated message.
+ *
+ * @param {string} original - String to parse.
+ * @param {string} language - Language to format plurals with.
+ * @param {{ [key: string]: string }} messages - Messages to translate to.
  *
  * @returns {string} - Rendered message.
- * @todo Move rendering out of this function.
  */
-function parseMessage(inputInfo, language, messages) {
-	const [messageCode, ...placeholders] = inputInfo
+function renderMessage(original, language, messages) {
+	const formatter = getFormatter(language);
+	return splitOnNotBetween(original, ";", "[", "]")
+		.map((splitmessage) => {
+			const [messageCode, ...placeholders] = splitmessage
+				// Trim excess whitespace
+				.trim()
 
-		// Trim excess whitespace
-		.trim()
+				// Condense remaining whitespce
+				.replace(/\s/gu, " ")
 
-		// Condense remaining whitespce
-		.replace(/\s/gu, " ")
+				//Split the string into the message code and variables
+				.split(/(?<![^\\]\[[^\]]+)(?<!\\)\|{3}/iu)
 
-		// Split on `|||`
-		.split(/(?<![^\\]\[[^\]]*)(?<!\\)\|{3}/u)
+				// Handle embedded messages
+				.map((variable) => parseNestedVariables(variable, language, messages))
 
-		.map((parameter) =>
-			parameter.startsWith("[") && parameter.endsWith("]")
-				? parseMessage(parameter.slice(1, -1), language, messages)
-				: parameter,
-		)
+				// Unescape escaped characters
+				.map((parameter) => parameter.replace(/\\\|{3}/gu, "|||").replace(/\\\[/gu, "["));
 
-		// Handle escaping the `|||` and `[` (prefixing them with a `\`)
-		.map((parameter) => parameter.replace(/\\\|{3}/g, "|||").replace(/\\\[/gu, "["));
+			return formatter(
+				// Get message, fallback to the code provided
+				messages[`${messageCode}`] || messageCode,
 
-	return getFormatter(language)(
-		// Get message, fallback to the code provided
-		messages[`${messageCode}`] ?? messageCode,
-
-		// Render it with placeholders
-		placeholders,
-	);
+				// Render it with placeholders
+				placeholders,
+			);
+		})
+		.join(" ")
+		.trim();
 }
 
 /**
- * Function to be used with Mustache.JS to render messages in templates.
+ * Function that can be passed to Mustache.JS to render messages.
  *
- * @param {string[]} langs - Language to be used when formating plurals.
- * @param languages
- * @param {{ [key: string]: string }} [msgs] - Messages to be used.
- * @param messages
+ * @example
+ * 	mustache.render("<p>{{ #message }}aboutClientCount|||{{ clients.length }}</p>", {
+ * 		clients,
+ * 		message: mustacheFunction(request.localization.languages, request.localization.messages),
+ * 	});
+ *
+ * @example
+ * 	response.render(path.resolve(directory, "./index.html"), {
+ * 		message: mustacheFunction(request.localization.languages, request.localization.messages),
+ * 	});
+ *
+ * @param {string[]} languages - Language to be used when formating plurals.
+ * @param {{ [key: string]: string }} [messages] - Messages to be used.
  *
  * @returns {() => (val: string, render: (val: string) => string) => string} - Function to pass to
  *   Mustache.JS.
  */
 export function mustacheFunction(languages, messages = getMessages(languages)) {
-	return () => (value, render) => parseMessage(render(value), `${languages[0]}`, messages);
+	return () => (value, render) => renderMessage(render(value), `${languages[0]}`, messages);
 }
+
 /**
- * Express l10n middleware.
+ * Express localization middleware.
  *
  * @param {import("express").Request} request - Express request object.
  * @param {import("express").Response} response - Express response object.
  * @param {import("express").NextFunction} next - Express continue function.
  */
 export default function localization(request, response, next) {
-	/** @type {string[]} */
-	let languages;
+	const languages = compileLanguages(
+		request.query.language
+			? [
+					// `language` query parameter overrides everything else
+					...`${request.query.language || "*"}`.split("|"),
 
-	if (request.query?.lang) {
-		languages = compileLangs([
-			// `lang` query parameter overrides everything else
-			...(`${request.query?.lang}` ?? "*").split("|"),
+					// Fallback to values in cookie
+					...(request.cookies.languages || "*").split("|"),
 
-			// Fallback to values in cookie
-			...(request.cookies?.langs ?? "*").split("|"),
+					// Fallback to browser language
+					...accepts(request).languages(),
+			  ]
+			: request.cookies?.languages
+			? (request.cookies.languages || "*").split("|")
+			: accepts(request).languages(),
+	);
 
-			// Fallback to browser lang
-			...accepts(request).languages(),
-		]);
-	} else if (request.cookies?.langs) {
-		// The cookie doesn't need to go through `compileLangs` since it already did
-		languages = (request.cookies?.langs ?? "*").split("|");
-	} else {
-		// This is the default, the broswer langauge.
-		languages = compileLangs(accepts(request)?.languages(), true);
-	}
-
+	// Save the language data in a cookie that expires in 1 year.
 	const expires = new Date();
-
 	expires.setFullYear(expires.getFullYear() + 1);
-	response.cookie("langs", languages.join("|"), {
+
+	response.cookie("languages", languages.join("|"), {
 		expires,
 		maxAge: 31536000000,
 		sameSite: false,
 	});
-	// eslint-disable-next-line no-param-reassign -- We need to override the original.
-	request.languages = languages;
 
 	const messages = getMessages(languages);
 
+	// Save the language and message data in `request` so request handlers can access them.
 	// eslint-disable-next-line no-param-reassign -- We need to override the original.
-	request.messages = messages;
+	request.localization = { languages, messages };
 
 	// Grab reference of render
 	const realRender = response.render;
 
 	/**
-	 * Override res.render to ensure `message` is always available.
+	 * Override `res.render` to ensure `message` is always available.
 	 *
 	 * @param {string} view - The file to render.
-	 * @param {{ [key: string]: any } | ((error: Error, str: string) => undefined)} [placeholderCallback]
+	 * @param {{ [key: string]: any } | ((error: Error, str: string) => undefined)} [variablesOrCallback]
 	 *   - Data to render it with or callback to run after render.
 	 *
 	 * @param {(error: Error, str: string) => void} [callback] - Callback to run after render.
@@ -269,25 +360,26 @@ export default function localization(request, response, next) {
 	// eslint-disable-next-line no-param-reassign -- We need to override the original.
 	response.render = function render(
 		view,
-		placeholderCallback = {},
+		variablesOrCallback = {},
 		callback = function (error, string) {
 			if (error) return logError(error);
 
 			return response.send(string);
 		},
 	) {
-		const placeholders = typeof placeholderCallback === "object" ? placeholderCallback : {};
+		const variables = typeof variablesOrCallback === "object" ? variablesOrCallback : {};
 
-		placeholders.message = mustacheFunction(languages, messages);
+		if (variables.message)
+			logError(new ReferenceError(`The message property is reserved. It will be overriden`));
+		variables.message = mustacheFunction(languages, messages);
 
 		// Continue with original render
 		return realRender.call(
 			response,
 			view,
-			placeholders,
-
-			// @ts-expect-error -- TS doesn't like the first param, but it is needed.
-			typeof placeholderCallback === "function" ? placeholderCallback : callback,
+			variables,
+			// @ts-expect-error -- For some reason TS doesn't like the first parameter?
+			typeof variablesOrCallback === "object" ? callback : variablesOrCallback,
 		);
 	};
 	next();
