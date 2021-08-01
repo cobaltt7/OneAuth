@@ -234,9 +234,10 @@ function splitOnNotBetween(string, splitOn, notStart, notEnd) {
 				}
 				return accum;
 			},
-			[""],
+			[]
 		)
-		.concat(currentValue);
+		.concat(currentValue)
+		.map((string) =>  string.replace(/\\;/g, ";"));
 }
 
 /**
