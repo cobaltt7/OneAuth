@@ -27,7 +27,7 @@ jobs:
               uses: stefanzweifel/git-auto-commit-action@master
               with:
                   commit_message: "Install dependencies to prevent deduplication"
-                  branch: main
+                  branch: develop
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com

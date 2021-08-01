@@ -54,8 +54,8 @@ function statusMiddleware(realStatus, request, response, status = response.statu
 		}
 
 		const error = {
-			errorMessage: request.messages[`error${status}Message`],
-			heading: request.messages[`error${status}Heading`],
+			errorMessage: request.localization.messages[`error${status}Message`],
+			heading: request.localization.messages[`error${status}Heading`],
 			status,
 		};
 
@@ -79,21 +79,12 @@ function statusMiddleware(realStatus, request, response, status = response.statu
 
 	setTimeout(() => {
 		if (!response.headersSent) {
-			statusMiddleware(
-				realStatus,
-				request,
-				response,
-				Math.floor(status / 100) === 2 ? 408 : status,
-			);
+			statusMiddleware(realStatus, request, response, `${status}`[0] === "2" ? 408 : status);
 		}
 	}, 3000);
 }
 
-app.get("/old", (request, response) =>
-	response.status(400).render(path.resolve(directory, "old.html"), {
-		all: request.messages.errorOldAll,
-	}),
-);
+app.get("/old", (_, response) => response.render(path.resolve(directory, "old.html")));
 
 app.use((request, response, next) => {
 	const realStatus = response.status;

@@ -18,8 +18,7 @@
 			<section id="about">
 				<h2>{{ #message }}aboutSubHeading{{ /message }}</h2>
 				<p>
-					{{ #message }}aboutIntro{{ /message }} {{ #message }}aboutClientCount|||{{
-					clients.length }}{{ /message }}
+					{{ #message }}aboutIntro;aboutClientCount|||{{ clients.length }}{{ /message }}
 				</p>
 			</section>
 			<section id="clients">
@@ -45,33 +44,35 @@
 			</section>
 			<section id="developers">
 				<h2>{{ #message }}aboutDevelopersHeading{{ /message }}</h2>
-				<p>{{ #message }}aboutImpementation{{ /message }}</p>
+				<p>{{ #message }}aboutSuperEasy;aboutDirectTo{{ /message }}</p>
 				<pre class="hljs lang-http">
-https://auth.onedot.cf/auth?url=&lt;CALLBACK_URL&gt;</pre
+https://auth.onedot.cf/auth?url=&lt;{{ #message }}aboutCallbackUrl{{ /message }}&gt;</pre
 				>
 				<p>
-					{{ #message }}aboutAfterFinish|||<code>&lt;CALLBACK_URL&gt;</code>{{ /message }}
-					{{ #message }}aboutNewParam|||<code>code</code>{{ /message }} {{ #message
-					}}aboutGetInfo{{ /message }}
+					{{ #message
+					}}aboutAfterFinish|||<code>&lt\;[aboutCallbackUrl]&gt\;</code>;aboutNewParam|||<code>code</code>;aboutGetInfo{{
+					/message }}
 				</p>
 				<pre class="hljs lang-http">
-GET https://auth.onedot.cf/auth/backend/get_data/?code=&lt;CODE&gt;</pre
+GET https://auth.onedot.cf/auth/backend/get_data/?code=&lt;{{ #message }}aboutCode{{ /message }}&gt;</pre
 				>
 				<p>
-					{{ #message }}aboutWhatCode|||<code>&lt;CODE&gt;</code>{{ /message }} {{
-					#message }}aboutNoParam{{ /message }}
+					{{ #message }}aboutWhatCode|||<code>&lt\;[aboutCode]&gt\;</code>;aboutNoParam{{
+					/message }}
 				</p>
 				<p class="new">
 					<strong>{{ #message }}aboutLangsHeader{{ /message }}</strong>
-					- {{ #message }}aboutLangsHow|||<code>lang</code>{{ /message }} {{ #message
-					}}aboutLangsValue|||<code>en</code>|||<code>es</code>{{ /message }} {{ #message
-					}}aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>{{ /message }} {{
-					#message }}aboutLangsFallback{{ /message }}
+					- {{ #message
+					}}aboutLangsHow|||<code>language</code>;aboutLangsValue|||<code>en</code>|||<code>es</code>;aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>;aboutLangsFallback{{
+					/message }}
 					<i>
 						{{ #message }}aboutTranslations{{ /message }}
 						<a href="https://www.transifex.com/1dot/1auth/">
 							{{ #message }}aboutHelpTranslate{{ /message }}
 						</a>
+						{{ #message
+						}}aboutCreateTXAcc;aboutTranslateThanks;aboutTranslateRequestLanguage{{
+						/message }}
 					</i>
 				</p>
 				<br />

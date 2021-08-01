@@ -4,7 +4,7 @@ on:
     schedule:
         - cron: "00 23 * * *"
     push:
-        branches: main
+        branches: develop
         paths:
             - _locales/en_US.json
 
@@ -46,7 +46,6 @@ jobs:
               uses: stefanzweifel/git-auto-commit-action@master
               with:
                   commit_message: "Synchronize strings with Transifex"
-                  branch: main
                   commit_options: "--signoff"
                   commit_user_name: wgytbot
                   commit_user_email: 83586655+wgytbot@users.noreply.github.com

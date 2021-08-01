@@ -1,4 +1,4 @@
-name: Deploy wesite
+name: Deploy website
 on:
     workflow_dispatch:
     push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
     run:
-        name: Install dependencies
+        name: Deploy website
         runs-on: ubuntu-latest
 
         steps:
@@ -23,10 +23,10 @@ jobs:
                   cache: "npm"
 
             - name: Install
-              run: npm install
+              run: npm install --force
 
             - name: Build Tailwind
               run: npm run build:tailwind
 
             - name: Deploy
-              run: npx openode deploy -t 696176d07c73c2036b2d5e71a85b1d63 -s oneauth
+              run: npx openode deploy -t ${{ secrets.OPENODE }} -s "auth.onedot.cf"

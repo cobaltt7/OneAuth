@@ -7,7 +7,7 @@
 	"emailSubject": { "string": "1Auth Email Verification" },
 	"emailCodeIs": { "string": "Your code is {0}." },
 	"emailNoShare": { "string": "Don’t share it with anyone else." },
-	"emailNoShareWhy":{"string": "Otherwise, they could be able to act on your behalf."},
+	"emailNoShareWhy": { "string": "Otherwise, they could be able to act on your behalf." },
 	"emailNow": { "string": "What now?" },
 	"emailCopyCode": { "string": "Copy your code." },
 	"emailGoBack": { "string": "Go back to 1Auth." },
@@ -17,11 +17,20 @@
 	"emailReviewInfo": {
 		"string": "Review the information we will send and the site we will send it to, and if all looks good, press “{0}”."
 	},
-	"emailTimeOut": {
-		"string": "If it doesn't work, maybe you waited too long. Try pressing the back button and requesting another code!"
+	"emailDoesntWork": {
+		"string": "Your code will expire after 15 minutes, so if it doesn't work, it might have been too long."
+	},
+	"emailPressBack": {
+		"string": "Try pressing the back button and requesting another code!"
 	},
 	"emailUnexpected": {
-		"string": "Not expecting this email? Just ignore it. Don’t worry, nothing will happen."
+		"string": "Not expecting this email?"
+	},
+	"emailIgnoreIt": {
+		"string": "Just ignore it."
+	},
+	"emailDontWorry": {
+		"string": "Don’t worry, nothing will happen."
 	},
 	"logoAlt": { "string": "1Auth logo" },
 	"replitHeading": { "string": "Sign in with Replit" },
@@ -48,7 +57,10 @@
 	"signinChoose": { "string": "Choose an option to continue" },
 	"signinWith": { "string": "Sign in with {0}" },
 	"allowDataHidden": {
-		"string": "Unfortunately, we can’t show this data right now. Sorry about that!"
+		"string": "Unfortunately, we can’t show this data right now."
+	},
+	"allowDataHiddenSorry": {
+		"string": "Sorry about that!"
 	},
 	"error201Heading": { "string": "Created" },
 	"error202Heading": { "string": "Accepted" },
@@ -203,51 +215,52 @@
 	},
 	"error510Message": {
 		"string": "We can’t show you this page with the information given. Please extend your request."
-	},	"error100Heading": { "string": "Continue" },
+	},
+	"error100Heading": { "string": "Continue" },
 	"error100Message": {
 		"string": "Please continue with your request."
 	},
-	"error101Heading": { "string": "Switching Protocol"},
+	"error101Heading": { "string": "Switching Protocol" },
 	"error101Message": {
 		"string": "Switching from HTTP to HTTPS."
 	},
-	"error102Heading": { "string": "Processing"},
+	"error102Heading": { "string": "Processing" },
 	"error102Message": {
 		"string": "We have received your request. Please wait."
 	},
-	"error103Heading": { "string": "Early Hints"},
+	"error103Heading": { "string": "Early Hints" },
 	"error103Message": {
 		"string": "Here are some resources that you will need. While you wait for the rest of the response, please start loading them."
 	},
-	"error203Heading": { "string": "Non-Authoritative Information"},
+	"error203Heading": { "string": "Non-Authoritative Information" },
 	"error203Message": {
 		"string": "This information is from a backup copy and may not be up-to-date. Please do not rely on it being correct."
 	},
-	"error208Heading": { "string": "Already Reported"},
+	"error208Heading": { "string": "Already Reported" },
 	"error208Message": {
 		"string": "We have already reported this information to you."
 	},
-	"error226Heading": { "string": "IM Used"},
+	"error226Heading": { "string": "IM Used" },
 	"error226Message": {
 		"string": "We used some instance-manipulations on the current instance. Here is the result."
 	},
-	"error422Heading": { "string":"Unprocessable Entity"},
+	"error422Heading": { "string": "Unprocessable Entity" },
 	"error422Message": {
 		"string": "There are semantic errors in your request."
 	},
-	"error423Heading": { "string":"Locked"},
+	"error423Heading": { "string": "Locked" },
 	"error423Message": {
 		"string": "The requested resource is locked."
 	},
-	"error507Heading": { "string":"Insufficient Storage"},
+	"error507Heading": { "string": "Insufficient Storage" },
 	"error507Message": {
 		"string": "Our servers do not have enough storage to store the data needed to complete your request."
 	},
-	"error508Heading": { "string":"Loop Detected"},
+	"error508Heading": { "string": "Loop Detected" },
 	"error508Message": {
 		"string": "Ummm...there's an infinite loop somewhere in the code! As such, we can't complete your request! You may want to contact us on GitHub and let us know about this."
 	},
-	"error511Heading": { "string":"Network Authentication Required"},
+	"error511Heading": { "string": "Network Authentication Required" },
 	"error511Message": {
 		"string": "Please sign in to the network before accessing the Internet."
 	},
@@ -276,8 +289,11 @@
 	},
 	"aboutClientsHeading": { "string": "Supported Clients" },
 	"aboutDevelopersHeading": { "string": "For Developers" },
-	"aboutImpementation": {
-		"string": "We designed 1Auth so that adding it to your site is as streamlined as possible. When your users click “Sign in” on your site, direct them to this URL:"
+	"aboutSuperEasy": {
+		"string": "We designed 1Auth so that adding it to your site is as streamlined as possible."
+	},
+	"aboutDirectTo": {
+		"string": "When a user clicks “Sign in” on your site, direct them to this URL:"
 	},
 	"aboutAfterFinish": {
 		"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
@@ -315,8 +331,47 @@
 		"string": "Please note that we do not have many translations, if any. That will change as our translation team grows."
 	},
 	"aboutHelpTranslate": {
-		"string": "If you would like to help us translate, please click here. Create a Transifex account if you do not already have one, then click “Join team”. Thanks for your eagerness to help! (Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
-		"developer_comment": "Please make sure that you translate “Join team” and “Request language” exactly how Transifex does."
+		"string": "If you would like to help us translate, please click here."
 	},
-	"emailPlaceholder": { "string": "Email address" }
+	"aboutCreateTXAcc": {
+		"string": "Create a Transifex account if you do not already have one, then click “Join team”.",
+		"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
+	},
+	"aboutTranslateThanks": {
+		"string": "Thanks for your eagerness to help!"
+	},
+	"aboutTranslateRequestLanguage": {
+		"string": "(Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
+		"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
+	},
+	"emailPlaceholder": { "string": "Email address" },
+	"aboutCode": {
+		"string": "CODE",
+		"character_limit": 10,
+		"developer_comment": "AKA a token. Please replace spaces with underscores."
+	},
+	"aboutCallbackUrl": {
+		"string": "CALLBACK_URI",
+		"character_limit": 20,
+		"developer_comment": "Please replace spaces with underscores."
+	},
+	"errorOldChrome": {
+		"string": "Google Chrome",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldEdge": {
+		"string": "Microsoft Edge",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldFirefox": {
+		"string": "Mozilla Firefox",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldSafari": {
+		"string": "Apple Safari",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"title": {
+		"string": "{0} | 1Auth"
+	}
 }

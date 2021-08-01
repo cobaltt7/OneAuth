@@ -10,7 +10,7 @@
 ->	{{ #message }}emailGoBack{{ /message }}
 ->	{{ #message }}emailPasteCode|||[emailSubmit]{{ /message }}
 ->	{{ #message }}emailReviewInfo|||[allowButtonA]{{ /message }}
-{{ #message }}emailTimeOut{{ /message }}
+{{ #message }}emailDoesntWork;emailPressBack{{ /message }}
 
 ------------
-{{ #message }}emailUnexpected{{ /message }}
+{{ #message }}emailUnexpected;emailIgnoreIt;emailDontWorry{{ /message }}

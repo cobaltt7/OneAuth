@@ -1,3 +1,5 @@
+import type { Request, Response } from "express";
+
 export type lighthouseResult = {
 	code: string;
 	data: {
@@ -23,9 +25,9 @@ interface AuthObj {
 	rawData?: boolean;
 }
 export type RequestFunction = (
-	request: e.Request,
-	response: e.Response,
-	sendResponse: (tokenOrData: string | { [key: string]: any }, url: string) => void | e.Response,
+	request: Request,
+	response: Response,
+	sendResponse: (tokenOrData: string | { [key: string]: any }, url: string) => void | Response,
 ) => any;
 export interface Page {
 	"backendPage": string;
@@ -54,4 +56,26 @@ export interface Page {
 	"unlock"?: RequestFunction;
 	"unsubscribe"?: RequestFunction;
 }
+
+export type StructuredMessage = {
+	character_limit?: number;
+	context?: string;
+	developer_comment?: string;
+	string: string;
+	[key: string]: undefined;
+};
+
+export type StructuredJSON = {
+	[key: string]:
+		| {
+				[key: string]: StructuredJSON | StructuredMessage | undefined;
+
+				string: undefined;
+				character_limit: undefined;
+				context: undefined;
+				developer_comment: undefined;
+		  }
+		| StructuredMessage;
+};
+
 export type Auth = AuthObj;
