@@ -144,7 +144,7 @@ for (const method of [
 					}
 
 					let data, token;
-
+ 
 					if (
 						clientInfo.rawData &&
 						typeof tokenOrData === "object" &&
