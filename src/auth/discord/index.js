@@ -12,36 +12,36 @@ const client = {
 		{
 			backendPage: "discord",
 			get: async (request, response, sendResponse) => {
-				return sendResponse(request.query.code, request.query.state)
+				return sendResponse(request.query.code, request.query.state);
 			},
 		},
 	],
 	getData: async (token) => {
 		const tokens = await fetch("https://discord.com/api/oauth2/token", {
-					method: "POST",
-					body: new URLSearchParams({
-						client_id: "871197807883739187",
-						client_secret: process.env.DISCORD_SECRET,
-						code: token,
-						grant_type: "authorization_code",
-						scope: "identify connections email",
-						redirect_uri: "https://auth.onedot.cf/auth/discord",
-					}),
-					headers: {
-						"Content-Type": "application/x-www-form-urlencoded",
-					},
-				}).then((result) => result.json());
-				const user = await fetch("https://discord.com/api/users/@me", {
-					headers: {
-						authorization: `${tokens.token_type} ${tokens.access_token}`,
-					},
-				}).then((result) => result.json());
-				user.connections = await fetch("https://discord.com/api/users/@me/connections", {
-					headers: {
-						authorization: `${tokens.token_type} ${tokens.access_token}`,
-					},
-				}).then((result) => result.json());
-				return user
-	}
+			method: "POST",
+			body: new URLSearchParams({
+				client_id: "871197807883739187",
+				client_secret: process.env.DISCORD_SECRET,
+				code: token,
+				grant_type: "authorization_code",
+				scope: "identify connections email",
+				redirect_uri: "https://auth.onedot.cf/auth/discord",
+			}),
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+		}).then((result) => result.json());
+		const user = await fetch("https://discord.com/api/users/@me", {
+			headers: {
+				authorization: `${tokens.token_type} ${tokens.access_token}`,
+			},
+		}).then((result) => result.json());
+		user.connections = await fetch("https://discord.com/api/users/@me/connections", {
+			headers: {
+				authorization: `${tokens.token_type} ${tokens.access_token}`,
+			},
+		}).then((result) => result.json());
+		return user;
+	},
 };
 export default client;
