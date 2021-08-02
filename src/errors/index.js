@@ -133,6 +133,6 @@ app.use(
 	},
 );
 
-app.get("/428", (_, response) => response.status(428));
+app.get("/418", (_, response) => response.status(418));
 
 export default app;

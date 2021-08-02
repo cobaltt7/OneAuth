@@ -4,24 +4,23 @@ import fileSystem from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import ReplitDB from "@replit/database";
 import dotenv from "dotenv";
+import { EmailDatabase } from "../../../lib/mongoose.js";
 import mustache from "mustache";
 import nodemailer from "nodemailer";
 import retronid from "retronid";
 
-import { logError } from "../../errors/index.js";
 import { mustacheFunction } from "../../l10n.js";
 
-const database = new ReplitDB(),
-	directory = path.dirname(fileURLToPath(import.meta.url)),
+dotenv.config();
+
+const directory = path.dirname(fileURLToPath(import.meta.url)),
 	mail = nodemailer.createTransport({
 		auth: { pass: process.env.GMAIL_PASS, user: process.env.GMAIL_EMAIL },
 		service: "gmail",
 	});
 
 dotenv.config();
-
 /** @type {import("../../../types").Auth} Auth */
 const client = {
 	icon: "envelope",
@@ -39,89 +38,62 @@ const client = {
 
 			post: async (request, response, sendResponse) => {
 				if (request.body?.code && request.body?.email) {
-					const { email = "", date = Date.now() - 900001 } = await database.get(
-						`EMAIL_${request.body.code}`,
-					);
+					const { email, date } = await EmailDatabase.findOne({
+						code: request.body.code,
+					}).exec();
 
 					if (Date.now() - date > 900000) {
-						database.delete(`EMAIL_${request.body.code}`);
+						await EmailDatabase.deleteOne({ code: request.body.code }).exec();
 
 						return response.status(410);
 					}
 
 					if (request.body.email !== email) return response.status(401);
+					await EmailDatabase.deleteOne({ code: request.body.code }).exec();
 
-					database.delete(`EMAIL_${request.body.code}`);
-
-					return sendResponse(
-						{
-							email,
-						},
-						`${request.query?.url}`,
-					);
-				}
-
-				if (request.body?.email) {
+					return sendResponse({ email }, `${request.query?.url}`);
+				} else if (request.body?.email) {
 					// Send email
 
 					const code = retronid.generate();
-
-					database.set(`EMAIL_${code}`, {
+					await new EmailDatabase({
+						code,
 						date: Date.now(),
 						email: request.body.email,
+					}).save();
+
+					await mail.sendMail({
+						from: process.env.GMAIL_EMAIL,
+
+						html: mustache.render(
+							fileSystem.readFileSync(path.resolve(directory, "email.html"), "utf8"),
+							{
+								code,
+
+								message: mustacheFunction(
+									request.localization.languages,
+									request.localization.messages,
+								),
+							},
+						),
+
+						subject: request.localization.messages.emailSubject,
+
+						text: mustache.render(
+							fileSystem.readFileSync(path.resolve(directory, "email.txt"), "utf8"),
+							{
+								code,
+								message: mustacheFunction(
+									request.localization.languages,
+									request.localization.messages,
+								),
+							},
+						),
+
+						// eslint-disable-next-line id-length -- We didn't name this.
+						to: request.body.email,
 					});
-
-					return mail.sendMail(
-						{
-							from: process.env.GMAIL_EMAIL,
-
-							html: mustache.render(
-								fileSystem.readFileSync(
-									path.resolve(directory, "email.html"),
-									"utf8",
-								),
-								{
-									code,
-
-									message: mustacheFunction(
-										request.localization.languages,
-										request.localization.messages,
-									),
-								},
-							),
-
-							subject: request.localization.messages.emailSubject,
-
-							text: mustache.render(
-								fileSystem.readFileSync(
-									path.resolve(directory, "email.txt"),
-									"utf8",
-								),
-								{
-									code,
-
-									message: mustacheFunction(
-										request.localization.languages,
-										request.localization.messages,
-									),
-								},
-							),
-
-							// eslint-disable-next-line id-length -- We didn't name this.
-							to: request.body.email,
-						},
-						(error, info) => {
-							logError(info);
-
-							if (error) {
-								logError(error);
-
-								return response.status(500);
-							}
-
-							return response.status(204);
-						},
-					);
+					return response.status(204);
 				}
 
 				return response.status(400);

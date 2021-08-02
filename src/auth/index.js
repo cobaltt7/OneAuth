@@ -3,11 +3,11 @@
 import path from "path";
 import url from "url";
 
-import ReplitDB from "@replit/database";
 import { Router as express } from "express";
-import globby from "globby";
+import { globby } from "globby";
 import retronid from "retronid";
 
+import { AuthDatabase } from "../../lib/mongoose.js";
 import { logError } from "../errors/index.js";
 
 const app = express(),
@@ -25,7 +25,6 @@ const app = express(),
 	/** @type {import("../../types").Auth[]} */
 	authClients = [],
 	clientPromises = [],
-	database = new ReplitDB(),
 	directory = path.dirname(url.fileURLToPath(import.meta.url)),
 	// Idk why this is relative to the root dir but it is
 	paths = await globby("src/auth/*/index.js");
@@ -135,7 +134,7 @@ for (const method of [
 				request,
 				response,
 
-				(tokenOrData, redirect) => {
+				async (tokenOrData, redirect) => {
 					const clientInfo = getClient(request.params?.client || "");
 
 					if (!clientInfo) {
@@ -146,14 +145,23 @@ for (const method of [
 
 					let data, token;
 
-					if (clientInfo.rawData && typeof tokenOrData === "object") {
+					if (
+						clientInfo.rawData &&
+						typeof tokenOrData === "object" &&
+						!clientInfo.getData
+					) {
 						data = tokenOrData;
 						data.client = clientInfo.name;
 						token = retronid.generate();
-						database.set(`RETRIEVE_${token}`, data);
-					} else if (!clientInfo.rawData && typeof tokenOrData === "string") {
+						await new AuthDatabase({ token, data }).save();
+					} else if (
+						!clientInfo.rawData &&
+						typeof tokenOrData === "string" &&
+						clientInfo.getData
+					) {
 						data =
 							request.localization.messages.allowDataHidden +
+							" " +
 							request.localization.messages.allowDataHiddenSorry;
 						token = tokenOrData;
 					} else {
@@ -167,7 +175,7 @@ for (const method of [
 					try {
 						const { host } = new URL(redirect);
 
-						return response.status(300).render(path.resolve(directory, "allow.html"), {
+						response.status(300).render(path.resolve(directory, "allow.html"), {
 							client: request.params?.client,
 							data: JSON.stringify(data),
 							encodedUrl: encodeURIComponent(redirect),
@@ -177,7 +185,8 @@ for (const method of [
 							url: redirect,
 						});
 					} catch {
-						return response.status(400);
+						response.status(400);
+						return;
 					}
 				},
 			);
@@ -212,8 +221,9 @@ app.get("/backend/get_data", async (request, response) => {
 		"Origin, X-Requested-With, Content-Type, Accept",
 	);
 
-	response.status(200).json(await database.get(`RETRIEVE_${request.query?.code}`));
-	database.delete(`RETRIEVE_${request.query?.code}`);
+	response
+		.status(200)
+		.json(await AuthDatabase.findOneAndDelete({ token: request.query?.code }).exec());
 });
 app.get("/backend/send_data", async (request, response) => {
 	if (!request.query) return logError("`request.query` is falsy!");
@@ -221,11 +231,14 @@ app.get("/backend/send_data", async (request, response) => {
 	const { client, url: redirectUrl = "", token } = request.query,
 		clientInfo = getClient(`${client}`);
 
+	if (!clientInfo) {
+		return logError(new ReferenceError(`Invalid client: ${client}`));
+	}
 	let code, redirect;
 
-	if (clientInfo?.rawData) {
+	if (clientInfo.rawData && !clientInfo.getData) {
 		code = token;
-	} else if (clientInfo?.getData) {
+	} else if (!clientInfo.rawData && clientInfo.getData) {
 		code = retronid.generate();
 
 		const data = await clientInfo.getData(`${token}`);
@@ -233,7 +246,7 @@ app.get("/backend/send_data", async (request, response) => {
 		if (!data) return logError("No data available");
 
 		data.client = clientInfo.name;
-		database.set(`RETRIEVE_${code}`, data);
+		await new AuthDatabase({ token: code, data }).save();
 	} else {
 		return logError(new ReferenceError(`Invalid client: ${client}`));
 	}

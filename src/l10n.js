@@ -7,7 +7,7 @@ import url from "url";
 import { MessageFormatter, pluralTypeHandler } from "@ultraq/icu-message-formatter";
 import accepts from "accepts";
 import matchBrackets from "balanced-match";
-import globby from "globby";
+import { globby } from "globby";
 
 import { logError } from "./errors/index.js";
 
@@ -217,7 +217,7 @@ function splitOnNotBetween(string, splitOn, notStart, notEnd) {
 		currentValue = "";
 
 	return [...string]
-		.reduce((accum, val, index) => {
+		.reduce((/** @type {string[]} */ accum, val, index) => {
 			if (currentValue[index - 1] === "\\") {
 				currentValue += val;
 			} else {
