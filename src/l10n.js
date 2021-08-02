@@ -7,7 +7,7 @@ import url from "url";
 import { MessageFormatter, pluralTypeHandler } from "@ultraq/icu-message-formatter";
 import accepts from "accepts";
 import matchBrackets from "balanced-match";
-import {globby} from "globby";
+import { globby } from "globby";
 
 import { logError } from "./errors/index.js";
 

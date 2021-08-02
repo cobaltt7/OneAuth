@@ -51,10 +51,7 @@ const client = {
 					if (request.body.email !== email) return response.status(401);
 					await EmailDatabase.deleteOne({ code: request.body.code }).exec();
 
-					return sendResponse(
-							{email},
-						`${request.query?.url}`,
-					);
+					return sendResponse({ email }, `${request.query?.url}`);
 				} else if (request.body?.email) {
 					// Send email
 
@@ -104,7 +101,7 @@ const client = {
 		},
 	],
 
-	rawData:true
+	rawData: true,
 };
 
 export default client;

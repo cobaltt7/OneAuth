@@ -7,7 +7,7 @@ import { promisify } from "util";
 import { load } from "cheerio";
 import dotenv from "dotenv";
 import { Router as express } from "express";
-import {globby} from "globby";
+import { globby } from "globby";
 
 import { highlight as callbackHighlight } from "../docs/index.js";
 import { logError } from "../errors/index.js";
