@@ -104,13 +104,7 @@ const client = {
 		},
 	],
 
-<<<<<<< HEAD
 	rawData:true
-=======
-	getData(a) {
-		return { email: a };
-	},
->>>>>>> d6543a39e7768a07241026c0debbefa78042e052
 };
 
 export default client;

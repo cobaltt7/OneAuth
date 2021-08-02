@@ -4,7 +4,7 @@ import path from "path";
 import url from "url";
 
 import { Router as express } from "express";
-import globby from "globby";
+import {globby} from "globby";
 import retronid from "retronid";
 
 import { AuthDatabase } from "../../lib/mongoose.js";
