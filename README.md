@@ -11,6 +11,7 @@
 ### Supported Clients
 
 -   Email
+-   Discord
 -   GitHub
 -   Google
 -   Replit
