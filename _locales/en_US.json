@@ -326,7 +326,7 @@
 	"aboutLangsFallback": {
 		"string": "If a language is not available, it will fall back to the non-country-specific language, then to the users’ browser language."
 	},
-	"aboutNew": { "string": "NEW!!!" },
+	"aboutNew": { "string": "NEW!!!", "developer_comment": "Please keep this uppercase." },
 	"aboutTranslations": {
 		"string": "Please note that we do not have many translations, if any. That will change as our translation team grows."
 	},
@@ -348,12 +348,12 @@
 	"aboutCode": {
 		"string": "CODE",
 		"character_limit": 10,
-		"developer_comment": "AKA a token. Please replace spaces with underscores."
+		"developer_comment": "AKA a token. Please replace spaces with underscores. In addition, please keep this uppercase."
 	},
 	"aboutCallbackUrl": {
 		"string": "CALLBACK_URI",
 		"character_limit": 20,
-		"developer_comment": "Please replace spaces with underscores."
+		"developer_comment": "Please replace spaces with underscores. In addition, please keep this uppercase."
 	},
 	"errorOldChrome": {
 		"string": "Google Chrome",

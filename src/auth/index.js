@@ -138,9 +138,9 @@ for (const method of [
 					const clientInfo = getClient(request.params?.client || "");
 
 					if (!clientInfo) {
-						return logError(
-							new ReferenceError(`Invalid client: ${request.params?.client}`),
-						);
+						logError(new ReferenceError(`Invalid client: ${request.params?.client}`));
+
+						return;
 					}
 
 					let data, token;
@@ -153,16 +153,13 @@ for (const method of [
 						data = tokenOrData;
 						data.client = clientInfo.name;
 						token = retronid.generate();
-						await new AuthDatabase({ token, data }).save();
+						await new AuthDatabase({ data, token }).save();
 					} else if (
 						!clientInfo.rawData &&
 						typeof tokenOrData === "string" &&
 						clientInfo.getData
 					) {
-						data =
-							request.localization.messages.allowDataHidden +
-							" " +
-							request.localization.messages.allowDataHiddenSorry;
+						data = `${request.localization.messages.allowDataHidden} ${request.localization.messages.allowDataHiddenSorry}`;
 						token = tokenOrData;
 					} else {
 						logError(
@@ -170,6 +167,8 @@ for (const method of [
 								`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
 							),
 						);
+
+						return;
 					}
 
 					try {
@@ -186,7 +185,6 @@ for (const method of [
 						});
 					} catch {
 						response.status(400);
-						return;
 					}
 				},
 			);
@@ -203,7 +201,7 @@ app.get("/", (request, response) => {
 		if (authButtonsReplaced[+index]) {
 			authButtonsReplaced[+index].link = link.replace(
 				// TODO: Use mustache instead. mustache-format-ignore
-				/{{\s*url\s*}}/g,
+				/{{ \s*url\s* }}/g,
 				encodeURIComponent(`${request.query?.url}`),
 			);
 		}
@@ -231,9 +229,8 @@ app.get("/backend/send_data", async (request, response) => {
 	const { client, url: redirectUrl = "", token } = request.query,
 		clientInfo = getClient(`${client}`);
 
-	if (!clientInfo) {
-		return logError(new ReferenceError(`Invalid client: ${client}`));
-	}
+	if (!clientInfo) return logError(new ReferenceError(`Invalid client: ${client}`));
+
 	let code, redirect;
 
 	if (clientInfo.rawData && !clientInfo.getData) {
@@ -246,7 +243,7 @@ app.get("/backend/send_data", async (request, response) => {
 		if (!data) return logError("No data available");
 
 		data.client = clientInfo.name;
-		await new AuthDatabase({ token: code, data }).save();
+		await new AuthDatabase({ data, token: code }).save();
 	} else {
 		return logError(new ReferenceError(`Invalid client: ${client}`));
 	}

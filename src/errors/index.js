@@ -78,9 +78,8 @@ function statusMiddleware(realStatus, request, response, status = response.statu
 	}
 
 	setTimeout(() => {
-		if (!response.headersSent) {
+		if (!response.headersSent)
 			statusMiddleware(realStatus, request, response, `${status}`[0] === "2" ? 408 : status);
-		}
 	}, 3000);
 }
 

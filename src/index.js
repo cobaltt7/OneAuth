@@ -8,10 +8,10 @@ import cookieParser from "cookie-parser";
 import express, { urlencoded } from "express";
 import mustacheExpress from "mustache-express";
 
+import localization from "../lib/localization.js";
 import auth from "./auth/index.js";
 import documentation from "./docs/index.js";
 import errorPages from "./errors/index.js";
-import localization from "./l10n.js";
 import main from "./main/index.js";
 
 const app = express(),

@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 import { Router as express } from "express";
 import { globby } from "globby";
 
-import { highlight as callbackHighlight } from "../docs/index.js";
+import callbackHighlight from "../../lib/highlighting.js";
 import { logError } from "../errors/index.js";
 
 const app = express(),

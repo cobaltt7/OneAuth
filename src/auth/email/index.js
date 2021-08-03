@@ -5,12 +5,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import dotenv from "dotenv";
-import { EmailDatabase } from "../../../lib/mongoose.js";
 import mustache from "mustache";
 import nodemailer from "nodemailer";
 import retronid from "retronid";
 
-import { mustacheFunction } from "../../l10n.js";
+import { mustacheFunction } from "../../../lib/localization.js";
+import { EmailDatabase } from "../../../lib/mongoose.js";
 
 dotenv.config();
 
@@ -21,6 +21,7 @@ const directory = path.dirname(fileURLToPath(import.meta.url)),
 	});
 
 dotenv.config();
+
 /** @type {import("../../../types").Auth} Auth */
 const client = {
 	icon: "envelope",
@@ -49,13 +50,17 @@ const client = {
 					}
 
 					if (request.body.email !== email) return response.status(401);
+
 					await EmailDatabase.deleteOne({ code: request.body.code }).exec();
 
 					return sendResponse({ email }, `${request.query?.url}`);
-				} else if (request.body?.email) {
+				}
+
+				if (request.body?.email) {
 					// Send email
 
 					const code = retronid.generate();
+
 					await new EmailDatabase({
 						code,
 						date: Date.now(),
@@ -83,6 +88,7 @@ const client = {
 							fileSystem.readFileSync(path.resolve(directory, "email.txt"), "utf8"),
 							{
 								code,
+
 								message: mustacheFunction(
 									request.localization.languages,
 									request.localization.messages,
@@ -93,6 +99,7 @@ const client = {
 						// eslint-disable-next-line id-length -- We didn't name this.
 						to: request.body.email,
 					});
+
 					return response.status(204);
 				}
 
