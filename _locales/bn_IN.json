@@ -326,7 +326,7 @@
 	"aboutLangsFallback": {
 		"string": ""
 	},
-	"aboutNew": { "string": "" },
+	"aboutNew": { "string": "", "developer_comment": "Please keep this uppercase." },
 	"aboutTranslations": {
 		"string": ""
 	},
@@ -348,12 +348,12 @@
 	"aboutCode": {
 		"string": "",
 		"character_limit": 10,
-		"developer_comment": "AKA a token. Please replace spaces with underscores."
+		"developer_comment": "AKA a token. Please replace spaces with underscores. In addition, please keep this uppercase."
 	},
 	"aboutCallbackUrl": {
 		"string": "",
 		"character_limit": 20,
-		"developer_comment": "Please replace spaces with underscores."
+		"developer_comment": "Please replace spaces with underscores. In addition, please keep this uppercase."
 	},
 	"errorOldChrome": {
 		"string": "",
