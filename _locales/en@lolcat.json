@@ -1,24 +1,24 @@
 {
-	"docsTitle": { "string": "{0} | 1Auth Documentos de Desarrollo" },
-	"emailHeading": { "string": "Inicie sesión con su dirección de correo electrónico" },
-	"emailEnterPrompt": { "string": "Para continuar, por favor introduce tu correo electrónico." },
-	"emailSubmit": { "string": "Enviar" },
-	"emailEnterCode": { "string": "Para continuar, por favor introduce el código que te enviamos." },
-	"emailSubject": { "string": "Verificación 1Auth de Correo Electrónico" },
-	"emailCodeIs": { "string": "Tu código es {0}." },
-	"emailNoShare": { "string": "No lo compartas con nadie mas." },
+	"docsTitle": { "string": "" },
+	"emailHeading": { "string": "" },
+	"emailEnterPrompt": { "string": "" },
+	"emailSubmit": { "string": "" },
+	"emailEnterCode": { "string": "" },
+	"emailSubject": { "string": "" },
+	"emailCodeIs": { "string": "" },
+	"emailNoShare": { "string": "" },
 	"emailNoShareWhy": { "string": "" },
-	"emailNow": { "string": "¿Qué ahora?" },
-	"emailCopyCode": { "string": "Copie su código." },
-	"emailGoBack": { "string": "Volver a 1Auth." },
+	"emailNow": { "string": "" },
+	"emailCopyCode": { "string": "" },
+	"emailGoBack": { "string": "" },
 	"emailPasteCode": {
-		"string": "Pegue su código en el caja y haz clic en “{0}”."
+		"string": ""
 	},
 	"emailReviewInfo": {
 		"string": ""
 	},
 	"emailDoesntWork": {
-		"string": "Tù código expirará después 15 minutos, así que si no funciona, podría haber sido demasiado tiempo."
+		"string": ""
 	},
 	"emailPressBack": {
 		"string": ""
@@ -32,11 +32,11 @@
 	"emailDontWorry": {
 		"string": ""
 	},
-	"logoAlt": { "string": "Logotipo de 1Auth" },
-	"replitHeading": { "string": "Iniciar sesión con Replit" },
-	"replitClickAnywhere": { "string": "Haz clic en cualquier lugar para empezar" },
+	"logoAlt": { "string": "" },
+	"replitHeading": { "string": "" },
+	"replitClickAnywhere": { "string": "" },
 	"replitNoClose": {
-		"string": "Si cierras la ventana emergente, ¡nosotros no podemos autenticarte!"
+		"string": ""
 	},
 	"replitReopen": {
 		"string": ""
@@ -44,41 +44,41 @@
 	"replitUnblockPopups": {
 		"string": ""
 	},
-	"allowHeading": { "string": "¿Permitir el acceso?" },
+	"allowHeading": { "string": "" },
 	"allowQuestion": {
 		"string": ""
 	},
-	"allowButtonA": { "string": "Permitir" },
-	"allowButtonD": { "string": "Negar" },
+	"allowButtonA": { "string": "" },
+	"allowButtonD": { "string": "" },
 	"allowDataNote": {
 		"string": ""
 	},
-	"signinHeading": { "string": "Iniciar sesión" },
-	"signinChoose": { "string": "Elija una opción para continuar" },
-	"signinWith": { "string": "Iniciar sesión con {0}" },
+	"signinHeading": { "string": "" },
+	"signinChoose": { "string": "" },
+	"signinWith": { "string": "" },
 	"allowDataHidden": {
-		"string": "Desafortunadamente, no podemos mostrar esto datos ahora."
+		"string": ""
 	},
 	"allowDataHiddenSorry": {
-		"string": "¡Lo siento por eso!"
+		"string": ""
 	},
-	"error201Heading": { "string": "Creado" },
-	"error202Heading": { "string": "Aceptado" },
-	"error204Heading": { "string": "Sin Contenido" },
-	"error205Heading": { "string": "Reajustar Contenido" },
+	"error201Heading": { "string": "" },
+	"error202Heading": { "string": "" },
+	"error204Heading": { "string": "" },
+	"error205Heading": { "string": "" },
 	"error300Heading": { "string": "" },
 	"error304Heading": { "string": "" },
-	"error400Heading": { "string": "Solicitud Incorrecta" },
+	"error400Heading": { "string": "" },
 	"error401Heading": { "string": "" },
 	"error402Heading": { "string": "" },
 	"error403Heading": { "string": "" },
-	"error404Heading": { "string": "No Encontrado" },
-	"error405Heading": { "string": "Método No Permitido" },
-	"error406Heading": { "string": "No Aceptable" },
+	"error404Heading": { "string": "" },
+	"error405Heading": { "string": "" },
+	"error406Heading": { "string": "" },
 	"error407Heading": { "string": "" },
 	"error408Heading": { "string": "" },
 	"error409Heading": { "string": "" },
-	"error410Heading": { "string": "Ya No Disponible" },
+	"error410Heading": { "string": "" },
 	"error411Heading": { "string": "" },
 	"error412Heading": { "string": "" },
 	"error413Heading": { "string": "" },
@@ -86,14 +86,14 @@
 	"error415Heading": { "string": "" },
 	"error416Heading": { "string": "" },
 	"error417Heading": { "string": "" },
-	"error418Heading": { "string": "Soy una tetera" },
+	"error418Heading": { "string": "" },
 	"error421Heading": { "string": "" },
 	"error425Heading": { "string": "" },
 	"error426Heading": { "string": "" },
 	"error428Heading": { "string": "" },
 	"error429Heading": { "string": "" },
 	"error431Heading": { "string": "" },
-	"error451Heading": { "string": "No Disponible Por Razones Legales" },
+	"error451Heading": { "string": "" },
 	"error500Heading": { "string": "" },
 	"error501Heading": { "string": "" },
 	"error502Heading": { "string": "" },
@@ -131,7 +131,7 @@
 		"string": ""
 	},
 	"error404Message": {
-		"string": "¡Uh-oh! ¡No podemos encontrar esa página! ¿Regresa? Si un enlace en este sitio te trajo aquí, es posible que desee ponerse en contacta con nosotros en GitHub y dejar que nosotros sabemos que tenemos un enlance roto."
+		"string": ""
 	},
 	"error405Message": {
 		"string": ""
@@ -155,7 +155,7 @@
 		"string": ""
 	},
 	"error412Message": {
-		"string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!"
+		"string": ""
 	},
 	"error413Message": {
 		"string": ""
@@ -179,7 +179,7 @@
 	"error425Message": {
 		"string": ""
 	},
-	"error426Message": { "string": "Por favor use HTTPS, no HTTP." },
+	"error426Message": { "string": "" },
 	"error428Message": {
 		"string": ""
 	},
@@ -190,7 +190,7 @@
 		"string": ""
 	},
 	"error451Message": {
-		"string": "Desafortunadamente, no podemos proporcionar legalmente esto pagina para ti. ¡Lo siento por eso!"
+		"string": ""
 	},
 	"error500Message": {
 		"string": ""
@@ -202,7 +202,7 @@
 		"string": ""
 	},
 	"error503Message": {
-		"string": "¡Lo siento! ¡Esta página es actualmente fuera de línea! ¡Debería ser retrocede pronto!"
+		"string": ""
 	},
 	"error504Message": {
 		"string": ""
@@ -216,9 +216,9 @@
 	"error510Message": {
 		"string": ""
 	},
-	"error100Heading": { "string": "Continuar" },
+	"error100Heading": { "string": "" },
 	"error100Message": {
-		"string": "Por favor continuar con tu petición."
+		"string": ""
 	},
 	"error101Heading": { "string": "" },
 	"error101Message": {
@@ -248,9 +248,9 @@
 	"error422Message": {
 		"string": ""
 	},
-	"error423Heading": { "string": "Bloqueado" },
+	"error423Heading": { "string": "" },
 	"error423Message": {
-		"string": "El recurso solicitado está bloqueado. "
+		"string": ""
 	},
 	"error507Heading": { "string": "" },
 	"error507Message": {
@@ -264,31 +264,31 @@
 	"error511Message": {
 		"string": ""
 	},
-	"errorOldHeading": { "string": "¡Tu estas usando un navegador obsoleto!" },
+	"errorOldHeading": { "string": "" },
 	"errorOldWhy": {
 		"string": "",
 		"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 	},
 	"errorOldAll": {
-		"string": "todos",
+		"string": "",
 		"developer_comment": "For use in the “errorOldWhy” string."
 	},
-	"errorOldModern": { "string": "Navegadores modernos:" },
+	"errorOldModern": { "string": "" },
 	"errorOldMistake": {
 		"string": ""
 	},
-	"errorOldMore": { "string": "Aprende más" },
-	"aboutPageTitle": { "string": "1Auth | Todos-In-Uno Autenticación" },
-	"aboutMainHeading": { "string": "1Auth Todos-In-Uno Autenticación" },
-	"aboutSubHeading": { "string": "Acerca de" },
+	"errorOldMore": { "string": "" },
+	"aboutPageTitle": { "string": "" },
+	"aboutMainHeading": { "string": "" },
+	"aboutSubHeading": { "string": "" },
 	"aboutIntro": {
 		"string": ""
 	},
 	"aboutClientCount": {
 		"string": ""
 	},
-	"aboutClientsHeading": { "string": "Clientes Soportados" },
-	"aboutDevelopersHeading": { "string": "Para Desarrolladores" },
+	"aboutClientsHeading": { "string": "" },
+	"aboutDevelopersHeading": { "string": "" },
 	"aboutSuperEasy": {
 		"string": ""
 	},
@@ -311,9 +311,9 @@
 		"string": ""
 	},
 	"aboutMoreConfig": {
-		"string": "Màs opciones de configuración están viniendo pronto."
+		"string": ""
 	},
-	"aboutLangsHeader": { "string": "Especificación de idioma" },
+	"aboutLangsHeader": { "string": "" },
 	"aboutLangsHow": {
 		"string": ""
 	},
@@ -326,7 +326,7 @@
 	"aboutLangsFallback": {
 		"string": ""
 	},
-	"aboutNew": { "string": "¡¡¡NUEVO!!!" },
+	"aboutNew": { "string": "" },
 	"aboutTranslations": {
 		"string": ""
 	},
@@ -344,9 +344,9 @@
 		"string": "",
 		"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
 	},
-	"emailPlaceholder": { "string": "Correo electrónico" },
+	"emailPlaceholder": { "string": "" },
 	"aboutCode": {
-		"string": "CÓDIGO",
+		"string": "",
 		"character_limit": 10,
 		"developer_comment": "AKA a token. Please replace spaces with underscores."
 	},
@@ -356,22 +356,22 @@
 		"developer_comment": "Please replace spaces with underscores."
 	},
 	"errorOldChrome": {
-		"string": "Google Chrome",
+		"string": "",
 		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
 	},
 	"errorOldEdge": {
-		"string": "Microsoft Edge",
+		"string": "",
 		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
 	},
 	"errorOldFirefox": {
-		"string": "Mozilla Firefox",
+		"string": "",
 		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
 	},
 	"errorOldSafari": {
-		"string": "Apple Safari",
+		"string": "",
 		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
 	},
 	"title": {
-		"string": "{0} | 1Auth"
+		"string": "{0}| 1Auth"
 	}
 }
