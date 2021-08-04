@@ -12,10 +12,18 @@ jobs:
 
         steps:
             - name: Checkout
+              if: ${{ github.repository_owner == "onedotprojects" }}
               uses: actions/checkout@main
               with:
                   ref: ${{ github.head_ref }}
                   token: ${{ secrets.WGYTBOT }}
+
+            - name: Checkout
+              if: ${{ github.repository_owner != "onedotprojects" }}
+              uses: actions/checkout@main
+              with:
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Setup Node.JS
               uses: actions/setup-node@main
@@ -33,17 +41,13 @@ jobs:
               if: ${{ !cancelled() }}
               run: npm run lint:prettier
 
-            - name: ESLint
-              if: ${{ !cancelled() }}
-              run: npm run lint:eslint
-
             - name: Typescript
               if: ${{ !cancelled() }}
               run: npm run lint:typescript
 
-            - name: Revert
+            - name: ESLint
               if: ${{ !cancelled() }}
-              run: git checkout HEAD -- package-lock.json package.json
+              run: npm run lint:eslint
 
             - name: Commit
               if: ${{ !cancelled() }}
