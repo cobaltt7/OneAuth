@@ -152,7 +152,7 @@ for (const method of [
 					) {
 						data = tokenOrData;
 						data.client = clientInfo.name;
-						token = retronid.generate();
+						token = retronid();
 						await new AuthDatabase({ data, token }).save();
 					} else if (
 						!clientInfo.rawData &&
@@ -234,9 +234,9 @@ app.get("/backend/send_data", async (request, response) => {
 	let code, redirect;
 
 	if (clientInfo.rawData && !clientInfo.getData) {
-		code = token;
+		code = `${token}`;
 	} else if (!clientInfo.rawData && clientInfo.getData) {
-		code = retronid.generate();
+		code = retronid();
 
 		const data = await clientInfo.getData(`${token}`);
 

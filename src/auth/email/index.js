@@ -59,7 +59,7 @@ const client = {
 				if (request.body?.email) {
 					// Send email
 
-					const code = retronid.generate();
+					const code = retronid();
 
 					await new EmailDatabase({
 						code,
