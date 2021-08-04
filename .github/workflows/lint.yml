@@ -1,7 +1,7 @@
 name: Format and lint
 on:
     pull_request:
-        types: [opened]
+    pull_request_target:
     workflow_dispatch:
     push:
 
