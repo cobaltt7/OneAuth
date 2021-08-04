@@ -1,6 +1,7 @@
 name: Format and lint
 on:
     pull_request:
+        types: [opened]
     pull_request_target:
     workflow_dispatch:
     push:
@@ -48,6 +49,10 @@ jobs:
             - name: ESLint
               if: ${{ !cancelled() }}
               run: npm run lint:eslint
+
+            - name: Revert
+              if: ${{ !cancelled() }}
+              run: git checkout HEAD -- package-lock.json package.json
 
             - name: Commit
               if: ${{ !cancelled() }}
