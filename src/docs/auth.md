@@ -15,31 +15,31 @@ Add a file in that folder called `index.js`.
     -   `url` if `icon` is a URL
     -   The FontAwesome style/prefix (`fa`, `fas`, `fab`, etc.) if `icon` is the name of a FontAwesome icon
 -   **`pages[]METHOD`**: Function that runs on a HTTP request to `pages[]backendPage`, where `METHOD` is the HTTP method. Supported methods:
-    <!-- -   all -->
+    <!-- -   `all` -->
 
-    -   checkout
-    -   copy
-    -   delete
-    -   get
-    -   head
-    -   lock
-    -   merge
-    -   mkactivity
-    -   mkcol
-    -   move
-    -   m-search
-    -   notify
-    -   options
-    -   patch
-    -   post
-    -   purge
-    -   put
-    -   report
-    -   search
-    -   subscribe
-    -   trace
-    -   unlock
-    -   unsubscribe
+    -   `checkout`
+    -   `copy`
+    -   `delete`
+    -   `get`
+    -   `head`
+    -   `lock`
+    -   `merge`
+    -   `mkactivity`
+    -   `mkcol`
+    -   `move`
+    -   `m-search`
+    -   `notify`
+    -   `options`
+    -   `patch`
+    -   `post`
+    -   `purge`
+    -   `put`
+    -   `report`
+    -   `search`
+    -   `subscribe`
+    -   `trace`
+    -   `unlock`
+    -   `unsubscribe`
 
     The function takes three arguments:
 
