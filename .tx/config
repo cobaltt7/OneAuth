@@ -5,4 +5,5 @@ host = https://www.transifex.com
 file_filter = _locales/<lang>.json
 source_file = _locales/en_US.json
 source_lang = en
+trans.en@lolcat = _locales/en_US@piglatin.json
 type = STRUCTURED_JSON
