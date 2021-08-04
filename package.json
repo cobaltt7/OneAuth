@@ -20,7 +20,7 @@
 	"main": "src/index.js",
 	"type": "module",
 	"scripts": {
-		"lint": "npm run lint:mustaches && npm run lint:prettier && npm run lint:typescript && npm run lint:eslint",
+		"lint": "npm run lint:mustaches && npm run lint:prettier && npm run lint:typescript && npm run lint:eslint && echo Success",
 		"lint:eslint": "eslint --fix --cache .",
 		"lint:prettier": "prettier --write --ignore-unknown **",
 		"lint:mustaches": "node --trace-warnings --harmony .github/workflows/mustaches.js",
@@ -141,7 +141,8 @@
 		"serve-index": "^1.9.1"
 	},
 	"devDependencies": {
-		"@onedotprojects/eslint-plugin": "^2.0.2",
+		"@markusantonwolf/tailwind-css-plugin-multi-columns": "^1.1.3",
+		"@onedotprojects/eslint-plugin": "^2.0.3",
 		"@tailwindcss/forms": "^0.3.3",
 		"@tailwindcss/typography": "^0.4.0",
 		"@types/accepts": "^1.3.5",
@@ -159,7 +160,6 @@
 		"@types/serve-index": "^1.9.1",
 		"all-contributors-cli": "^6.20.0",
 		"autoprefixer": "^10.3.0",
-		"css-mqpacker": "^7.0.0",
 		"cssnano": "^5.0.7",
 		"eslint": "^7.31.0",
 		"eslint-config-hardcore": "^19.19.4",
@@ -203,13 +203,12 @@
 		"map": false,
 		"parser": "postcss-scss",
 		"plugins": {
+			"tailwindcss": {},
 			"postcss-map-get": {},
 			"postcss-import": {},
-			"tailwindcss": {},
 			"postcss-advanced-variables": {},
 			"postcss-nested": {},
 			"postcss-sort-media-queries": {},
-			"css-mqpacker": {},
 			"cssnano": {
 				"autoprefixer": false,
 				"discardUnused": true,

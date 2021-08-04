@@ -1,9 +1,16 @@
+@charset "UTF-8";
+
+@import "../node_modules/highlight.js/styles/github.css";
+
 /* Import tailwind */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import "../node_modules/highlight.js/styles/github.css";
+* {
+	scroll-behavior: smooth;
+	column-fill: balance-all !important;
+}
 
 main {
 	@apply flex
@@ -22,9 +29,9 @@ main {
 
 	h1 {
 		@apply m-0
-		px-0
-		pt-4
-		pr-2;
+			px-0
+			pt-4
+			pr-2;
 	}
 
 	h1:only-of-type {
@@ -43,6 +50,18 @@ main {
 				@apply m-0;
 			}
 		}
+	}
+}
+
+main a,
+a {
+	@apply text-blue-500
+			no-underline;
+
+	&:hover,
+	&:focus {
+		@apply text-blue-700
+				underline;
 	}
 }
 
@@ -75,11 +94,11 @@ pre {
 
 .new::before {
 	content: "{{ #message }}aboutNew{{ /message }}";
+	background-color: #da17da;
 
 	@apply text-white
 		rounded-lg
 		p-1
-		bg-[#da17da]
 		mr-2;
 }
 
@@ -104,19 +123,19 @@ pre {
 }
 
 .auth-button {
-	@apply h-[40px]
-		m-1
+	@apply m-1
 		font-sans
 		border
-		rounded-full
-		p-[8px]
-		min-h-[30px]
-		min-w-[140px];
+		rounded-full;
 
 	@apply static
 		!important;
 
 	font-family: "Roboto";
+	height: 40px;
+	padding: 8px;
+	min-height: 30px;
+	min-width: 140px;
 
 	&::before {
 		@apply hidden;
@@ -130,7 +149,7 @@ pre {
 			m-0
 			bg-white;
 
-		@apply h-[100%]
+		@apply h-full
 			w-auto
 			!important;
 
@@ -138,12 +157,127 @@ pre {
 	}
 
 	span {
-		@apply text-black
-			text-[14px]
-			pl-[24px];
+		@apply text-black;
+
+		font-size: 14px;
+		padding-left: 24px;
 	}
 
 	/* Per Google's guidlines, the dark mode color needs to be #4285F4 if we ever make a dark mode. but Apple says white or black only… */
+}
+
+footer {
+	@apply fixed
+		w-full
+		border-t
+		border-gray-300
+		z-50
+		duration-500
+		bg-gray-100
+		p-px
+		text-sm
+		bottom-0
+		translate-y-3/4;
+
+	> ul {
+		@apply m-2.5
+			flex
+			justify-center
+			lg:block
+			md:column-3
+			lg:column-4
+			xs:text-center
+			column-gap-0;
+
+		> li {
+			ul {
+				@apply lg:inline-block
+					xs:block;
+
+				li {
+					@apply lg:mt-0;
+
+					line-height: inherit;
+
+					&:first-child {
+						@apply leading-6
+						font-bold
+						mb-2
+						sm:hidden;
+					}
+
+					&:not(:first-child) {
+						@apply mx-0
+						my-1.5;
+					}
+				}
+			}
+
+			&:first-child {
+				@apply w-auto
+					md:hidden;
+			}
+
+			&:not(:first-child) {
+				@apply w-52
+					lg:w-auto;
+			}
+
+			&:last-child {
+				@apply w-80
+					lg:w-full;
+			}
+
+			@apply xs:w-full
+				!important;
+
+			@apply my-2
+			lg:mt-0;
+		}
+	}
+
+	&:hover {
+		@apply translate-y-0;
+	}
+}
+
+#choose-language {
+	min-width: 22em;
+
+	@apply text-center
+		border
+		border-black
+		border-opacity-10
+		h-12
+		bg-gray-300
+		text-sm
+		rounded-lg
+		p-2
+		lg:w-1/2;
+}
+
+.legal {
+	@apply flex
+		justify-center
+		text-xs
+		m-2.5
+		sm:column-2
+		lg:column-5;
+
+	> * {
+		@apply m-1.5
+			w-72
+			lg:w-auto;
+
+		@screen lg {
+			break-inside: avoid;
+		}
+	}
+
+	#copyright2 {
+		@apply hidden
+			md:inline;
+	}
 }
 
 #email-address,
@@ -217,7 +351,6 @@ html,
 body,
 iframe {
 	font-family: "PT Sans", "DejaVu Sans", Arial, sans;
-	scroll-behavior: smooth;
 
 	@apply border-0
 		font-sans

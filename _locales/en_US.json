@@ -371,7 +371,102 @@
 		"string": "Apple Safari",
 		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
 	},
+	"language": {
+		"string": "English (United States)",
+		"developer_comment": "This should be changed to the language you are translating to. For example, if you are translating to “Spanish (United States)”, you would translate this as “Español (Estados Unidos)”. Find out what language you are on up there 👆."
+	},
 	"title": {
 		"string": "{0} | 1Auth"
+	},
+	"dotLogo": {
+		"string": "OneDot Logo"
+	},
+	"1dot": {
+		"string": "1DOT"
+	},
+	"1auth": {
+		"string": "1AUTH"
+	},
+	"footerCopyright": {
+		"string": "© 2021 OneDot Projects"
+	},
+	"footerOneDotHeader": {
+		"string": "OneDot Projects"
+	},
+	"footerWebsite": {
+		"string": "Website"
+	},
+	"footerGitHub": {
+		"string": "GitHub"
+	},
+	"footerTwitter": {
+		"string": "Twitter"
+	},
+	"footerReplit": {
+		"string": "Replit"
+	},
+	"footerNpm": {
+		"string": "npm"
+	},
+	"footerTransifex": {
+		"string": "Transifex"
+	},
+	"footerDiscord": {
+		"string": "Discord"
+	},
+	"footer1Auth": {
+		"string": "1Auth"
+	},
+	"footerDocumentation": {
+		"string": "Documentation"
+	},
+	"footerTranslate": {
+		"string": "Translate"
+	},
+	"footerCredits": {
+		"string": "Credits"
+	},
+	"footerRepository": {
+		"string": "Repository"
+	},
+	"footerDemo": {
+		"string": "Demo"
+	},
+	"footerHosting": {
+		"string": "Cloud hosted on opeNode.io"
+	},
+	"footerLegal": {
+		"string": "Legal"
+	},
+	"footerTOS": {
+		"string": "Terms of Service"
+	},
+	"footerPrivacy": {
+		"string": "Privacy Policy"
+	},
+	"footerLanguage": {
+		"string": "Language"
+	},
+	"footerChooseLanguage": {
+		"string": "Choose a language"
+	},
+	"footerScratchLegal": {
+		"string": "Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab."
+	},
+	"footerSeeOther": { "string": "See {0}." },
+	"footerGoogleLegal": {
+		"string": "Google and the Google logo are registered trademarks of Google LLC in some countries."
+	},
+	"footerReplitLegal": {
+		"string": "Replit and the Replit logo are registered trademarks of Replit, Inc. in some countries."
+	},
+	"footerGitHubLegal": {
+		"string": "GITHUB®, and the GITHUB® logo design are exclusive trademarks registered in the United States by GitHub, Inc."
+	},
+	"footerLicense": {
+		"string": "The source code of 1Auth is available under the {0}."
+	},
+	"mitLicense": {
+		"string": "MIT license"
 	}
 }

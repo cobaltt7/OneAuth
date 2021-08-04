@@ -7,7 +7,7 @@ Add a file in that folder called `index.js`.
 `index.js` should be a module that exports the following:
 
 -   **`name`**: Name of the client
--   **`link`**: Absolute URL that users are directed to when they click the button. `{{ url }}` will be replaced with the URI-encoded URL to be redirected to. Each client is responsible for storing it in some way.
+-   **`link`**: Absolute URL that users are directed to when they click the button. `{{ url }}` will be replaced with the URL-encoded URL to be redirected to. Each client is responsible for storing it in some way.
 -   **`icon`**: Icon of the client. Should be one of
     -   a URL (absolute or relative)
     -   the name of a [free FontAwesome icon](https://fontawesome.com/icons?m=free) (without the `fa-` prefix)

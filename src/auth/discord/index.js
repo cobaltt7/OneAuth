@@ -10,9 +10,7 @@ const client = {
 	getData: async (token) => {
 		const tokens = await fetch("https://discord.com/api/oauth2/token", {
 				body:
-					`client_id=871197807883739187&client_secret=${
-						process.env.DISCORD_SECRET || ""
-					}` +
+					`client_id=871197807883739187&client_secret=${process.env.DISCORD_SECRET}` +
 					`&code=${token}&grant_type=authorization_code&scope=identify+connections+email` +
 					"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fdiscord",
 
