@@ -1,0 +1,377 @@
+{
+	"docsTitle": { "string": "{0} | 1Auth Documentos de Desarrollo" },
+	"emailHeading": { "string": "Inicie sesión con su dirección de correo electrónico" },
+	"emailEnterPrompt": { "string": "Para continuar, por favor introduce tu correo electrónico." },
+	"emailSubmit": { "string": "Enviar" },
+	"emailEnterCode": { "string": "Para continuar, por favor introduce el código que te enviamos." },
+	"emailSubject": { "string": "Verificación 1Auth de Correo Electrónico" },
+	"emailCodeIs": { "string": "Tu código es {0}." },
+	"emailNoShare": { "string": "No lo compartas con nadie mas." },
+	"emailNoShareWhy": { "string": "Otherwise, they could be able to act on your behalf." },
+	"emailNow": { "string": "¿Qué ahora?" },
+	"emailCopyCode": { "string": "Copie su código." },
+	"emailGoBack": { "string": "Volver a 1Auth." },
+	"emailPasteCode": {
+		"string": "Pegue su código en el caja y haz clic en “{0}”."
+	},
+	"emailReviewInfo": {
+		"string": "Review the information we will send and the site we will send it to, and if all looks good, press “{0}”."
+	},
+	"emailDoesntWork": {
+		"string": "Tù código expirará después 15 minutos, así que si no funciona, podría haber sido demasiado tiempo."
+	},
+	"emailPressBack": {
+		"string": "Try pressing the back button and requesting another code!"
+	},
+	"emailUnexpected": {
+		"string": "Not expecting this email?"
+	},
+	"emailIgnoreIt": {
+		"string": "Just ignore it."
+	},
+	"emailDontWorry": {
+		"string": "Don’t worry, nothing will happen."
+	},
+	"logoAlt": { "string": "Logotipo de 1Auth" },
+	"replitHeading": { "string": "Iniciar sesión con Replit" },
+	"replitClickAnywhere": { "string": "Haz clic en cualquier lugar para empezar" },
+	"replitNoClose": {
+		"string": "Si cierras la ventana emergente, ¡nosotros no podemos autenticarte!"
+	},
+	"replitReopen": {
+		"string": "Please close this modal, then reopen the window by clicking anywhere."
+	},
+	"replitUnblockPopups": {
+		"string": "If nothing happens, please make sure pop-ups are not blocked, then reload the page."
+	},
+	"allowHeading": { "string": "¿Permitir el acceso?" },
+	"allowQuestion": {
+		"string": "Do you want {0} to access your information?"
+	},
+	"allowButtonA": { "string": "Permitir" },
+	"allowButtonD": { "string": "Negar" },
+	"allowDataNote": {
+		"string": "If you press “{2}”, then {1} will receive the following information (taken from your {0} account):"
+	},
+	"signinHeading": { "string": "Iniciar sesión" },
+	"signinChoose": { "string": "Elija una opción para continuar" },
+	"signinWith": { "string": "Iniciar sesión con {0}" },
+	"allowDataHidden": {
+		"string": "Desafortunadamente, no podemos mostrar esto datos ahora."
+	},
+	"allowDataHiddenSorry": {
+		"string": "¡Lo siento por eso!"
+	},
+	"error201Heading": { "string": "Creado" },
+	"error202Heading": { "string": "Aceptado" },
+	"error204Heading": { "string": "Sin Contenido" },
+	"error205Heading": { "string": "Reajustar Contenido" },
+	"error300Heading": { "string": "Multiple Choice" },
+	"error304Heading": { "string": "Not Modified" },
+	"error400Heading": { "string": "Solicitud Incorrecta" },
+	"error401Heading": { "string": "Unauthorized" },
+	"error402Heading": { "string": "Payment Required " },
+	"error403Heading": { "string": "Forbidden" },
+	"error404Heading": { "string": "No Encontrado" },
+	"error405Heading": { "string": "Método No Permitido" },
+	"error406Heading": { "string": "No Aceptable" },
+	"error407Heading": { "string": "Proxy Authentication Required" },
+	"error408Heading": { "string": "Request Timeout" },
+	"error409Heading": { "string": "Conflict" },
+	"error410Heading": { "string": "Ya No Disponible" },
+	"error411Heading": { "string": "Length Required" },
+	"error412Heading": { "string": "Precondition Failed" },
+	"error413Heading": { "string": "Payload Too Large" },
+	"error414Heading": { "string": "URI Too Long" },
+	"error415Heading": { "string": "Unsupported Media Type" },
+	"error416Heading": { "string": "Range Not Satisfiable" },
+	"error417Heading": { "string": "Expectation Failed" },
+	"error418Heading": { "string": "Soy una tetera" },
+	"error421Heading": { "string": "Misdirected Request" },
+	"error425Heading": { "string": "Too Early" },
+	"error426Heading": { "string": "Upgrade Required" },
+	"error428Heading": { "string": "Precondition Required" },
+	"error429Heading": { "string": "Too Many Requests" },
+	"error431Heading": { "string": "Request Header Fields Too Large" },
+	"error451Heading": { "string": "No Disponible Por Razones Legales" },
+	"error500Heading": { "string": "Internal Server Error" },
+	"error501Heading": { "string": "Not Implemented" },
+	"error502Heading": { "string": "Bad Gateway" },
+	"error503Heading": { "string": "Service Unavailable" },
+	"error504Heading": { "string": "Gateway Timeout" },
+	"error505Heading": { "string": "HTTP Version Not Supported" },
+	"error506Heading": { "string": "Variant Also Negotiates" },
+	"error510Heading": { "string": "Not Extended" },
+	"error201Message": {
+		"string": "An item in our databases has successfully been created."
+	},
+	"error202Message": {
+		"string": "Your request has been accepted and understood. We forwarded it to another server."
+	},
+	"error204Message": {
+		"string": "Your request was successful. However, we don’t have any information to give you in response."
+	},
+	"error205Message": {
+		"string": "Your request was successful. Reset any pages that use our APIs as the content may have changed."
+	},
+	"error300Message": {
+		"string": "Please pick a redirection method or location to continue."
+	},
+	"error304Message": {
+		"string": "The requested page has not been modified since the last request."
+	},
+	"error400Message": {
+		"string": "Oops! Your request was invalid. Please make sure all needed information is sent, no extra information is sent, and all sent information is valid. If this keeps happening, try contacting us on GitHub."
+	},
+	"error401Message": {
+		"string": "Please login before accessing this resource."
+	},
+	"error402Message": { "string": "Please pay before accessing this page." },
+	"error403Message": {
+		"string": "Sorry, but you are forbidden to access this resource."
+	},
+	"error404Message": {
+		"string": "¡Uh-oh! ¡No podemos encontrar esa página! ¿Regresa? Si un enlace en este sitio te trajo aquí, es posible que desee ponerse en contacta con nosotros en GitHub y dejar que nosotros sabemos que tenemos un enlance roto."
+	},
+	"error405Message": {
+		"string": "That HTTP method isn’t supported on this page! Try a different page and/or method."
+	},
+	"error406Message": {
+		"string": "We can’t match the data requested with the format requested."
+	},
+	"error407Message": {
+		"string": "Please use a proxy to access this resource."
+	},
+	"error408Message": {
+		"string": "Hmm… the page was loading for quite a while and timed out! Perhaps there was an internal error. Try reloading the page. If this keeps happening, you may want to contact us on GitHub so we can fix it."
+	},
+	"error409Message": {
+		"string": "Oops, there was a conflict between the information your browser sent and the information we have! Try reloading the page. If this keeps happening, try contacting us on GitHub so we can fix it."
+	},
+	"error410Message": {
+		"string": "This isn’t here anymore. Unfortunately, it’s never coming back."
+	},
+	"error411Message": {
+		"string": "You didn’t say how much information you wanted! Please repeat the request with a requested length."
+	},
+	"error412Message": {
+		"string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!"
+	},
+	"error413Message": {
+		"string": "You sent so much data that we can’t process it!"
+	},
+	"error414Message": {
+		"string": "That URL is too long for us to understand!"
+	},
+	"error415Message": { "string": "You sent the wrong type of file!" },
+	"error416Message": {
+		"string": "We don’t have any data in the requested range."
+	},
+	"error417Message": {
+		"string": "We expected to receive more information than you sent!"
+	},
+	"error418Message": {
+		"string": "We refuse to try and brew coffee with a teapot."
+	},
+	"error421Message": {
+		"string": "You sent this request to the wrong place!"
+	},
+	"error425Message": {
+		"string": "Please wait before sending this request."
+	},
+	"error426Message": { "string": "Por favor use HTTPS, no HTTP." },
+	"error428Message": {
+		"string": "You can’t do that yet. Please fulfill the requested conditions first."
+	},
+	"error429Message": {
+		"string": "You have sent too many requests in a short amount of time. Please wait before sending more."
+	},
+	"error431Message": {
+		"string": "The headers of your request are too long to be processed."
+	},
+	"error451Message": {
+		"string": "Desafortunadamente, no podemos proporcionar legalmente esto pagina para ti. ¡Lo siento por eso!"
+	},
+	"error500Message": {
+		"string": "Uh-oh, you found a bug! We ran into an unexpected error. Please report it on GitHub so we can stop this from happening again."
+	},
+	"error501Message": {
+		"string": "No part of our website supports that HTTP method. Try a different one!"
+	},
+	"error502Message": {
+		"string": "We got an invalid response from an external service."
+	},
+	"error503Message": {
+		"string": "¡Lo siento! ¡Esta página es actualmente fuera de línea! ¡Debería ser retrocede pronto!"
+	},
+	"error504Message": {
+		"string": "An external server didn’t send us a response fast enough."
+	},
+	"error505Message": {
+		"string": "No part of our website supports that HTTP version. Try a different one!"
+	},
+	"error506Message": {
+		"string": "Error in our internal configuration! Please report this on GitHub so we can prevent it from happening again."
+	},
+	"error510Message": {
+		"string": "We can’t show you this page with the information given. Please extend your request."
+	},
+	"error100Heading": { "string": "Continuar" },
+	"error100Message": {
+		"string": "Por favor continuar con tu petición."
+	},
+	"error101Heading": { "string": "Switching Protocol" },
+	"error101Message": {
+		"string": "Switching from HTTP to HTTPS."
+	},
+	"error102Heading": { "string": "Processing" },
+	"error102Message": {
+		"string": "We have received your request. Please wait."
+	},
+	"error103Heading": { "string": "Early Hints" },
+	"error103Message": {
+		"string": "Here are some resources that you will need. While you wait for the rest of the response, please start loading them."
+	},
+	"error203Heading": { "string": "Non-Authoritative Information" },
+	"error203Message": {
+		"string": "This information is from a backup copy and may not be up-to-date. Please do not rely on it being correct."
+	},
+	"error208Heading": { "string": "Already Reported" },
+	"error208Message": {
+		"string": "We have already reported this information to you."
+	},
+	"error226Heading": { "string": "IM Used" },
+	"error226Message": {
+		"string": "We used some instance-manipulations on the current instance. Here is the result."
+	},
+	"error422Heading": { "string": "Unprocessable Entity" },
+	"error422Message": {
+		"string": "There are semantic errors in your request."
+	},
+	"error423Heading": { "string": "Bloqueado" },
+	"error423Message": {
+		"string": "El recurso solicitado está bloqueado. "
+	},
+	"error507Heading": { "string": "Insufficient Storage" },
+	"error507Message": {
+		"string": "Our servers do not have enough storage to store the data needed to complete your request."
+	},
+	"error508Heading": { "string": "Loop Detected" },
+	"error508Message": {
+		"string": "Ummm...there's an infinite loop somewhere in the code! As such, we can't complete your request! You may want to contact us on GitHub and let us know about this."
+	},
+	"error511Heading": { "string": "Network Authentication Required" },
+	"error511Message": {
+		"string": "Please sign in to the network before accessing the Internet."
+	},
+	"errorOldHeading": { "string": "¡Tu estas usando un navegador obsoleto!" },
+	"errorOldWhy": {
+		"string": "For a better experience on {0} sites (not only on ours), please keep your browser up to date.",
+		"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
+	},
+	"errorOldAll": {
+		"string": "todos",
+		"developer_comment": "For use in the “errorOldWhy” string."
+	},
+	"errorOldModern": { "string": "Navegadores modernos:" },
+	"errorOldMistake": {
+		"string": "If you are using a modern browser, please make sure that you have enabled and allowed JavaScript on this site."
+	},
+	"errorOldMore": { "string": "Aprende más" },
+	"aboutPageTitle": { "string": "1Auth | Todos-In-Uno Autenticación" },
+	"aboutMainHeading": { "string": "1Auth Todos-In-Uno Autenticación" },
+	"aboutSubHeading": { "string": "Acerca de" },
+	"aboutIntro": {
+		"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
+	},
+	"aboutClientCount": {
+		"string": "Right now, we support {0} clients with many more to come."
+	},
+	"aboutClientsHeading": { "string": "Clientes Soportados" },
+	"aboutDevelopersHeading": { "string": "Para Desarrolladores" },
+	"aboutSuperEasy": {
+		"string": "We designed 1Auth so that adding it to your site is as streamlined as possible."
+	},
+	"aboutDirectTo": {
+		"string": "When a user clicks “Sign in” on your site, direct them to this URL:"
+	},
+	"aboutAfterFinish": {
+		"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
+	},
+	"aboutNewParam": {
+		"string": "If they allowed sharing their data, then there will be a new query parameter on that URL:"
+	},
+	"aboutGetInfo": {
+		"string": "To retrieve the user’s information, send the following HTTP request:"
+	},
+	"aboutWhatCode": {
+		"string": "where {0} is the value of the said parameter."
+	},
+	"aboutNoParam": {
+		"string": "If they denied sharing their data, then there will not be any new query parameter."
+	},
+	"aboutMoreConfig": {
+		"string": "Màs opciones de configuración están viniendo pronto."
+	},
+	"aboutLangsHeader": { "string": "Especificación de idioma" },
+	"aboutLangsHow": {
+		"string": "Specify the language to use on pages by adding another parameter to the URL: {0}"
+	},
+	"aboutLangsValue": {
+		"string": "Its value should be a 2-letter language code like {0} or {1}."
+	},
+	"aboutLangsCountry": {
+		"string": "You may follow it by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
+	},
+	"aboutLangsFallback": {
+		"string": "If a language is not available, it will fall back to the non-country-specific language, then to the users’ browser language."
+	},
+	"aboutNew": { "string": "¡¡¡NUEVO!!!", "developer_comment": "Please keep this uppercase." },
+	"aboutTranslations": {
+		"string": "Please note that we do not have many translations, if any. That will change as our translation team grows."
+	},
+	"aboutHelpTranslate": {
+		"string": "If you would like to help us translate, please click here."
+	},
+	"aboutCreateTXAcc": {
+		"string": "Create a Transifex account if you do not already have one, then click “Join team”.",
+		"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
+	},
+	"aboutTranslateThanks": {
+		"string": "Thanks for your eagerness to help!"
+	},
+	"aboutTranslateRequestLanguage": {
+		"string": "(Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
+		"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
+	},
+	"emailPlaceholder": { "string": "Correo electrónico" },
+	"aboutCode": {
+		"string": "CÓDIGO",
+		"character_limit": 10,
+		"developer_comment": "AKA a token. Please replace spaces with underscores. In addition, please keep this uppercase."
+	},
+	"aboutCallbackUrl": {
+		"string": "CALLBACK_URI",
+		"character_limit": 20,
+		"developer_comment": "Please replace spaces with underscores. In addition, please keep this uppercase."
+	},
+	"errorOldChrome": {
+		"string": "Google Chrome",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldEdge": {
+		"string": "Microsoft Edge",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldFirefox": {
+		"string": "Mozilla Firefox",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"errorOldSafari": {
+		"string": "Apple Safari",
+		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
+	},
+	"title": {
+		"string": "{0} | 1Auth"
+	}
+}
