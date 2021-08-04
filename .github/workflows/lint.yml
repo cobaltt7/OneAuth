@@ -12,14 +12,14 @@ jobs:
 
         steps:
             - name: Checkout
-              if: ${{ github.repository_owner == "onedotprojects" }}
+              if: github.repository_owner == 'onedotprojects'
               uses: actions/checkout@main
               with:
                   ref: ${{ github.head_ref }}
                   token: ${{ secrets.WGYTBOT }}
 
             - name: Checkout
-              if: ${{ github.repository_owner != "onedotprojects" }}
+              if: github.repository_owner != 'onedotprojects'
               uses: actions/checkout@main
               with:
                   ref: ${{ github.head_ref }}
