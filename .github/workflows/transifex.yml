@@ -39,7 +39,7 @@ jobs:
               run: tx pull --all --skip --no-interactive --force --mode=onlytranslated
 
             - name: Push
-              run: tx push --source --no-interactive --force --skip
+              run: tx push --source --translations --no-interactive --force --skip
 
             - name: Commit
               id: commit
