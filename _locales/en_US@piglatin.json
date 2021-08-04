@@ -82,7 +82,7 @@
 	"error411Heading": { "string": "Engthlay Equiredray" },
 	"error412Heading": { "string": "Econditionpray Ailedfay" },
 	"error413Heading": { "string": "Ayloadpay Ootay Argelay" },
-	"error414Heading": { "string": "UEI Ootay Onglay" },
+	"error414Heading": { "string": "URI Ootay Onglay" },
 	"error415Heading": { "string": "Unsupportedyay Ediamay Ypetay" },
 	"error416Heading": { "string": "Angeray Otnay Atisfiablesay" },
 	"error417Heading": { "string": "Expectationyay Ailedfay" },
@@ -351,7 +351,7 @@
 		"developer_comment": "AKA a token. Please replace spaces with underscores. In addition, please keep this uppercase."
 	},
 	"aboutCallbackUrl": {
-		"string": "ALLBACKCAY_UEI",
+		"string": "ALLBACKCAY_URI",
 		"character_limit": 20,
 		"developer_comment": "Please replace spaces with underscores. In addition, please keep this uppercase."
 	},
@@ -372,88 +372,88 @@
 		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
 	},
 	"language": {
-		"string": "",
+		"string": "Igpay Atinlay (Englishyay - Untitedyay Atestay)",
 		"developer_comment": "This should be changed to the language you are translating to. For example, if you are translating to “Spanish (United States)”, you would translate this as “Español (Estados Unidos)”. Find out what language you are on up there 👆."
 	},
 	"title": {
 		"string": "{0} | 1Auth"
 	},
 	"dotLogo": {
-		"string": ""
+		"string": "OneDot Ogolay"
 	},
 	"1dot": {
-		"string": ""
+		"string": "1DOT"
 	},
 	"1auth": {
-		"string": ""
+		"string": "1AUTH"
 	},
 	"footerCopyright": {
-		"string": ""
+		"string": "© 2021 OneDot Projects"
 	},
 	"footerOneDotHeader": {
-		"string": ""
+		"string": "OneDot Projects"
 	},
 	"footerWebsite": {
-		"string": ""
+		"string": "Ebsiteway"
 	},
 	"footerGitHub": {
-		"string": ""
+		"string": "GitHub"
 	},
 	"footerTwitter": {
-		"string": ""
+		"string": "Twitter"
 	},
 	"footerReplit": {
-		"string": ""
+		"string": "Replit"
 	},
 	"footerNpm": {
-		"string": ""
+		"string": "npm"
 	},
 	"footerTransifex": {
-		"string": ""
+		"string": "Transifex"
 	},
 	"footerDiscord": {
-		"string": ""
+		"string": "Discord"
 	},
 	"footer1Auth": {
-		"string": ""
+		"string": "1Auth"
 	},
 	"footerDocumentation": {
-		"string": ""
+		"string": "Ocumentationday"
 	},
 	"footerTranslate": {
-		"string": ""
+		"string": "Anslatetray"
 	},
 	"footerCredits": {
-		"string": ""
+		"string": "Editscray"
 	},
 	"footerRepository": {
-		"string": ""
+		"string": "Epositoryray"
 	},
 	"footerDemo": {
-		"string": ""
+		"string": "Emoday"
 	},
 	"footerHosting": {
-		"string": ""
+		"string": "Oudclay ostedhay onyay openNode.io"
 	},
 	"footerLegal": {
-		"string": ""
+		"string": "Egalay"
 	},
 	"footerTOS": {
-		"string": ""
+		"string": "Ermstay ofyay Ervicesay"
 	},
 	"footerPrivacy": {
-		"string": ""
+		"string": "Ivacypray Olicypay"
 	},
 	"footerLanguage": {
-		"string": ""
+		"string": "Anguagelay"
 	},
 	"footerChooseLanguage": {
-		"string": ""
+		"string": "Oosechay ayay anguagelay"
 	},
 	"footerScratchLegal": {
 		"string": ""
 	},
-	"footerSeeOther": { "string": "" },
+	"footerSeeOther": { "string": "Eesay {0}." },
 	"footerGoogleLegal": {
 		"string": ""
 	},
@@ -467,6 +467,6 @@
 		"string": ""
 	},
 	"mitLicense": {
-		"string": ""
+		"string": "MIT icenselay"
 	}
 }

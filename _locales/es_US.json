@@ -372,14 +372,14 @@
 		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
 	},
 	"language": {
-		"string": "",
+		"string": "Español (Estados Unidos)",
 		"developer_comment": "This should be changed to the language you are translating to. For example, if you are translating to “Spanish (United States)”, you would translate this as “Español (Estados Unidos)”. Find out what language you are on up there 👆."
 	},
 	"title": {
 		"string": "{0} | 1Auth"
 	},
 	"dotLogo": {
-		"string": ""
+		"string": "Logotipo de OneDot"
 	},
 	"1dot": {
 		"string": ""
