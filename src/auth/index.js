@@ -57,142 +57,34 @@ function getClient(requestedClient) {
 }
 
 /**
- * Get HTTP request handlers from a page name.
+ * Get HTTP request handlers from a path.
  *
- * @param {string} requestedClient - The page name.
+ * @param {string} requestedClient - The path.
  *
- * @returns {import("../../types").Page} - The HTTP handlers.
+ * @returns {import("../../types").Page | void} - The HTTP handlers.
  */
 function getPageHandler(requestedClient) {
 	for (const currentClient of authClients) {
 		const response = currentClient?.pages?.find(
-			({ backendPage }) => backendPage === requestedClient,
+			({ backendPage }) =>
+				new URL(`./${backendPage}`, "https://auth.onedot.cf/auth/").pathname ===
+				`/${requestedClient}`,
 		);
 
 		if (response) return response;
 	}
 
-	return { backendPage: requestedClient };
+	/**
+	 * Hack to fix lint error.
+	 *
+	 * @type {undefined}
+	 */
+	let nothing;
+
+	return nothing;
 }
 
-for (const method of [
-	// TODO: support "all",
-	"checkout",
-	"copy",
-	"delete",
-	"get",
-	"head",
-	"lock",
-	"merge",
-	"mkactivity",
-	"mkcol",
-	"move",
-	"m-search",
-	"notify",
-	"options",
-	"patch",
-	"post",
-	"purge",
-	"put",
-	"report",
-	"search",
-	"subscribe",
-	"trace",
-	"unlock",
-	"unsubscribe",
-]) {
-	// @ts-expect-error -- TS can't tell that there is a limited set of values for `method`.
-	app[`${method}`](
-		"/:client",
-
-		/**
-		 * Run the appropriate HTTP request handler on a HTTP request, or return a HTTP error code.
-		 *
-		 * @param {import("express").Request} request - Express request object.
-		 * @param {import("express").Response} response - Express response object.
-		 */
-		(request, response) => {
-			const client = getPageHandler(`${request.params?.client}`);
-
-			if (Object.keys(client).length === 1) {
-				response.status(404);
-
-				return;
-			}
-
-			/** @type {import("../../types").RequestFunction | undefined} */
-			// @ts-expect-error -- TS can't tell that there is a limited set of values for `method`.
-			const requestFunction = client[`${method}`];
-
-			if (typeof requestFunction !== "function") {
-				response.status(405);
-
-				return;
-			}
-
-			requestFunction(
-				request,
-				response,
-
-				async (tokenOrData, redirect) => {
-					const clientInfo = getClient(request.params?.client || "");
-
-					if (!clientInfo) {
-						logError(new ReferenceError(`Invalid client: ${request.params?.client}`));
-
-						return;
-					}
-
-					let data, token;
-
-					if (
-						clientInfo.rawData &&
-						typeof tokenOrData === "object" &&
-						!clientInfo.getData
-					) {
-						data = tokenOrData;
-						data.client = clientInfo.name;
-						token = retronid();
-						await new AuthDatabase({ data, token }).save();
-					} else if (
-						!clientInfo.rawData &&
-						typeof tokenOrData === "string" &&
-						clientInfo.getData
-					) {
-						data = `${request.localization.messages.allowDataHidden} ${request.localization.messages.allowDataHiddenSorry}`;
-						token = tokenOrData;
-					} else {
-						logError(
-							new TypeError(
-								`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
-							),
-						);
-
-						return;
-					}
-
-					try {
-						const { host } = new URL(redirect);
-
-						response.status(300).render(path.resolve(directory, "allow.html"), {
-							client: request.params?.client,
-							data: JSON.stringify(data),
-							encodedUrl: encodeURIComponent(redirect),
-							host,
-							name: clientInfo.name,
-							token,
-							url: redirect,
-						});
-					} catch {
-						response.status(400);
-					}
-				},
-			);
-		},
-	);
-}
-
-app.get("/", (request, response) => {
+app.get("/auth", (request, response) => {
 	if (!request.query?.url) return response.status(400);
 
 	const authButtonsReplaced = authButtons;
@@ -257,5 +149,123 @@ app.get("/backend/send_data", async (request, response) => {
 		return response.status(400);
 	}
 });
+
+for (const method of [
+	// TODO: support "all",
+	"checkout",
+	"copy",
+	"delete",
+	"get",
+	"head",
+	"lock",
+	"merge",
+	"mkactivity",
+	"mkcol",
+	"move",
+	"m-search",
+	"notify",
+	"options",
+	"patch",
+	"post",
+	"purge",
+	"put",
+	"report",
+	"search",
+	"subscribe",
+	"trace",
+	"unlock",
+	"unsubscribe",
+]) {
+	// @ts-expect-error -- TS can't tell that there is a limited set of values for `method`.
+	app[`${method}`](
+		"*",
+
+		/**
+		 * Run the appropriate HTTP request handler on a HTTP request, or return a HTTP error code.
+		 *
+		 * @param {import("express").Request} request - Express request object.
+		 * @param {import("express").Response} response - Express response object.
+		 * @param {import("express").NextFunction} next - Express next function.
+		 */
+		(request, response, next) => {
+			const client = getPageHandler(`${request.path.slice(1)}`);
+
+			if (!client) {
+				next();
+
+				return;
+			}
+
+			/** @type {import("../../types").RequestFunction | undefined} */
+			// @ts-expect-error -- TS can't tell that there is a limited set of values for `method`.
+			const requestFunction = client[`${method}`];
+
+			if (typeof requestFunction !== "function") {
+				response.status(405);
+
+				return;
+			}
+
+			requestFunction(
+				request,
+				response,
+
+				async (tokenOrData, redirect) => {
+					const clientInfo = getClient(client.backendPage);
+
+					if (!clientInfo) {
+						logError(new ReferenceError(`Invalid client: ${client.backendPage}`));
+
+						return;
+					}
+
+					let data, token;
+
+					if (
+						clientInfo.rawData &&
+						typeof tokenOrData === "object" &&
+						!clientInfo.getData
+					) {
+						data = tokenOrData;
+						data.client = clientInfo.name;
+						token = retronid();
+						await new AuthDatabase({ data, token }).save();
+					} else if (
+						!clientInfo.rawData &&
+						typeof tokenOrData === "string" &&
+						clientInfo.getData
+					) {
+						data = `${request.localization.messages.allowDataHidden} ${request.localization.messages.allowDataHiddenSorry}`;
+						token = tokenOrData;
+					} else {
+						logError(
+							new TypeError(
+								`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
+							),
+						);
+
+						return;
+					}
+
+					try {
+						const { host } = new URL(redirect);
+
+						response.status(300).render(path.resolve(directory, "allow.html"), {
+							client: client.backendPage,
+							data: JSON.stringify(data),
+							encodedUrl: encodeURIComponent(redirect),
+							host,
+							name: clientInfo.name,
+							token,
+							url: redirect,
+						});
+					} catch {
+						response.status(400);
+					}
+				},
+			);
+		},
+	);
+}
 
 export default app;

@@ -1,39 +1,23 @@
 /** @file Replit Authentication handler. */
 
-import path from "path";
-import { fileURLToPath } from "url";
+import atob from "atob";
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {
 	icon: "https://replit.com/public/images/logo.svg",
 	iconProvider: "url",
-	link: "/auth/replit?url={{ url }}",
+	link: "https://replit.com/auth_with_repl_site?domain=auth.onedot.cf&redirect={{ url }}",
 	name: "Replit",
 
 	pages: [
 		{
-			backendPage: "replit",
+			backendPage: "../__replauth",
 
-			get: (request, response, sendResponse) => {
-				const roles = request.get("X-Replit-User-Roles")?.split(",") || [],
-					userID = request.get("X-Replit-User-Id"),
-					username = request.get("X-Replit-User-Name");
-
-				if (username) {
-					return sendResponse(
-						{
-							roles,
-							userID,
-							username,
-						},
-						`${request.query?.url}`,
-					);
-				}
-
-				return response.render(
-					path.resolve(path.dirname(fileURLToPath(import.meta.url)), "index.html"),
-				);
-			},
+			get: (request, _, sendResponse) =>
+				sendResponse(
+					JSON.parse(atob(`${request.query.token}`.split(".")[1])),
+					`${request.query.redirect}`,
+				),
 		},
 	],
 

@@ -62,7 +62,7 @@ app.use(localization);
 app.use(errorPages);
 app.use("/docs", documentation);
 app.use(main);
-app.use("/auth", auth);
+app.use(auth);
 
 app.use((_, response) => response.status(404));
 

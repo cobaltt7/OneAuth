@@ -56,4 +56,4 @@ You can have multiple of these in the same object as long as the method is diffe
     1. **`token`**: Token that came from `pages[].METHOD.sendResponse` in the `tokenOrData` parameter.
 -   **`rawData`**: Determines if instead of passing a token to `pages[].METHOD.sendResponse` in the `tokenOrData` parameter, you will send the users' data directly. _**Only use this if all the data you are sending can be viewed at the client's website by anyone, at any time!**_
 
-**Protip: when debugging your client, start [here](https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fbackend%2Fget_data). That way it will automatically show you the retrieved data at the end!**
+**Protip: when debugging your client, start [here](https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fget_data). That way it will automatically show you the retrieved data at the end!**
