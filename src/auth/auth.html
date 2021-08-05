@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="display: none" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,12 +11,12 @@
 		{{> head }}
 	</head>
 
-	<body style="display: none">
+	<body>
 		{{> nav }}
 		<main>
 			<h1>{{ #message }}signinHeading{{ /message }}</h1>
 			<p>{{ #message }}signinChoose{{ /message }}</p>
-			<ul id="auth-list">
+			<ul id="auth-list" class="justify-center">
 				{{ #clients }}
 				<a href="{{ link }}">
 					<li class="auth-button">

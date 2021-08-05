@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="display: none" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,7 +11,7 @@
 		{{> head }}
 	</head>
 
-	<body style="display: none">
+	<body>
 		{{> nav }}
 		<main>
 			<h1>{{ #message }}aboutMainHeading{{ /message }}</h1>
@@ -23,7 +23,7 @@
 			</section>
 			<section id="clients">
 				<h2>{{ #message }}aboutClientsHeading{{ /message }}</h2>
-				<ul id="auth-list">
+				<ul id="auth-list" class="justify-start">
 					{{ #clients }}
 					<li class="auth-button">
 						{{ #fontawesome }}
@@ -60,7 +60,16 @@ GET https://auth.onedot.cf/backend/get_data/?code=&lt;{{ #message }}aboutCode{{ 
 					{{ #message }}aboutWhatCode|||<code>&lt\;[aboutCode]&gt\;</code>;aboutNoParam{{
 					/message }}
 				</p>
-				<p class="new">
+				<p
+					data-before="{{ #message }}aboutNew{{ /message }}"
+					class="
+						before:text-white
+						before:rounded-lg
+						before:p-1
+						before:mr-2
+						before:bg-fuchsia-600
+					"
+				>
 					<strong>{{ #message }}aboutLangsHeader{{ /message }}</strong>
 					- {{ #message
 					}}aboutLangsHow|||<code>language</code>;aboutLangsValue|||<code>en</code>|||<code>es</code>;aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>;aboutLangsFallback{{

@@ -2,7 +2,9 @@
 
 /** @file Tailwind Configuration file. */
 
-const columns = require("@markusantonwolf/tailwind-css-plugin-multi-columns"),
+/** @see {@link https://tailwindcss.com/docs/customizing-colors#color-palette-reference} For available colors. */
+const colors = require("tailwindcss/colors"),
+	columns = require("@markusantonwolf/tailwind-css-plugin-multi-columns"),
 	forms = require("@tailwindcss/forms"),
 	typography = require("@tailwindcss/typography");
 
@@ -15,10 +17,10 @@ module.exports = {
 	purge: ["./src/**/**.html", "./src/**/**/**.html", "./src/tailwind.sass"],
 
 	theme: {
-		extend: {
-			colors: {
-				inherit: "inherit",
-			},
+		colors: {
+			...colors,
+			current: "currentColor",
+			transparent: "transparent",
 		},
 
 		screens: {

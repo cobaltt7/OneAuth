@@ -1,5 +1,7 @@
-<header class="z-50 sticky top-0 w-full h-20 bg-gray-100 border-b border-red-900">
+<header class="z-50 sticky top-0 w-full h-20 bg-coolGray-100 border-b border-red-900">
 	<a class="w-full" href="/">
+	<!-- IMPORTANT: `m-auto` is used in email auth, but it is added dynamically, so Tailwind purge can't find it. -->
+	<!-- Remember that before you remove `m-auto` from this. -->
 		<img
 			class="h-20 p-1 m-auto"
 			src="/logo.svg"

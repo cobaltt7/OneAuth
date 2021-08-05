@@ -1,6 +1,32 @@
-<footer>
-	<ul class="xs:column-2">
-		<li>
+<footer
+	class="
+		fixed
+		w-full
+		border-t border-coolGray-300
+		z-50
+		duration-500
+		bg-coolGray-100
+		p-px
+		text-sm
+		bottom-0
+		translate-y-3/4
+		hover:translate-y-0
+	"
+>
+	<ul
+		class="
+			xs:column-2
+			m-2.5
+			flex
+			justify-center
+			lg:block
+			md:column-3
+			lg:column-4
+			xs:text-center
+			column-gap-0
+		"
+	>
+		<li class="w-auto md:hidden">
 			<ul>
 				<li>
 					<img
@@ -99,13 +125,23 @@
 				</li>
 			</ul>
 		</li>
-		<li class="lg:w-full lg:text-center lg:span-all">
+		<li class="w-80 lg:w-full lg:text-center lg:span-all">
 			<ul>
 				<li>{{ #message }}footerLanguage{{ /message }}</li>
 				<li>
 					<form id="language-forum">
 						<select
-							id="choose-language"
+							style="min-width: 22em"
+							class="
+								text-center
+								border border-black border-opacity-10
+								h-12
+								bg-coolGray-300
+								text-sm
+								rounded-lg
+								p-2
+								lg:w-1/2
+							"
 							required=""
 							name="language"
 							title="{{ #message }}footerChooseLanguage{{ /message }}"
@@ -120,7 +156,18 @@
 			</ul>
 		</li>
 	</ul>
-	<div class="legal lg:block lg:column-gap-0">
+	<div
+		class="
+			flex
+			justify-center
+			text-xs
+			m-2.5
+			sm:column-2
+			lg:column-5
+			legal
+			lg:block lg:column-gap-0
+		"
+	>
 		<p>
 			{{ #message }}footerScratchLegal;footerSeeOther|||<a href="https://scratch.mit.edu"
 				>http://scratch.mit.edu</a
@@ -131,7 +178,7 @@
 		<p>{{ #message }}footerGitHubLegal{{ /message }}</p>
 		<p>
 			{{ #message }}footerLicense|||<a href="/docs/license">[mitLicense]</a>{{ /message
-			}}<span id="copyright2"> {{ #message }}footerCopyright{{ /message }}</span>
+			}}<span class="hidden md:inline"> {{ #message }}footerCopyright{{ /message }}</span>
 		</p>
 	</div>
 </footer>

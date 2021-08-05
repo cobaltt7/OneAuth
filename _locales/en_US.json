@@ -1,6 +1,6 @@
 {
 	"docsTitle": { "string": "{0} | 1Auth Development Docs" },
-	"emailHeading": { "string": "Sign in with your email address" },
+	"emailHeading": { "string": "Sign in with your email" },
 	"emailEnterPrompt": { "string": "To continue, please enter your email." },
 	"emailSubmit": { "string": "Submit" },
 	"emailEnterCode": { "string": "To continue, please enter the code we sent you." },
