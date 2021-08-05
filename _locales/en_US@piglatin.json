@@ -18,10 +18,10 @@
 		"string": "Eviewray ethay informationyay eway illway endsay andyay ethay itesay eway illway endsay ityay otay, andyay ifyay allyay ookslay oodgay, esspray “{0}”."
 	},
 	"emailDoesntWork": {
-		"string": ""
+		"string": "Ouryay odecay illway afteryay 15 inutesmay osay ifyay ityay oesn'tday orkway, ityay ightmay avehay eenbay ootay onglay."
 	},
 	"emailPressBack": {
-		"string": ""
+		"string": "Ytray essingpray ethay ackbay uttonbay andyay anotheryay odecay!"
 	},
 	"emailUnexpected": {
 		"string": "Otnay expectingyay isthay emailyay?"
@@ -36,22 +36,22 @@
 	"replitHeading": { "string": "Ignsay inyay ithway Replit" },
 	"replitClickAnywhere": { "string": "Ickclay anywhereyay otay etgay artedstay" },
 	"replitNoClose": {
-		"string": ""
+		"string": "Ifyay ouyay oseclay ethay opay-upyay, eway an'tcay authenticateyay ouyay!"
 	},
 	"replitReopen": {
-		"string": ""
+		"string": "Easeplay oseclay isthay odalmay, enthay eopenray ethay indoway ybay ickingclay anywhereyay."
 	},
 	"replitUnblockPopups": {
 		"string": ""
 	},
 	"allowHeading": { "string": "Allowyay accessyay?" },
 	"allowQuestion": {
-		"string": ""
+		"string": "Oday ouyay antway {0} otay accessyay ouryay informationyay?"
 	},
 	"allowButtonA": { "string": "Alowyay" },
 	"allowButtonD": { "string": "Enyday" },
 	"allowDataNote": {
-		"string": ""
+		"string": "ifyay ouyay esspray \"{2}\", enthay {1} iillway eceiveray ethay ollowingfay informationyay (akentay omfray ouryay {0} accountyay):"
 	},
 	"signinHeading": { "string": "Ignsay insay" },
 	"signinChoose": { "string": "Oosechay anyay optionyay otay ontinuecay" },
