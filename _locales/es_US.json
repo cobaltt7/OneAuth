@@ -1,6 +1,6 @@
 {
 	"docsTitle": { "string": "{0} | 1Auth Documentos de Desarrollo" },
-	"emailHeading": { "string": "Inicie sesión con su dirección de correo electrónico" },
+	"emailHeading": { "string": "" },
 	"emailEnterPrompt": { "string": "Para continuar, por favor introduce tu correo electrónico." },
 	"emailSubmit": { "string": "Enviar" },
 	"emailEnterCode": { "string": "Para continuar, por favor introduce el código que te enviamos." },
