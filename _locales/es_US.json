@@ -91,7 +91,8 @@
 				"string": "1DOT"
 			}
 		},
-		"auth": {"auth": {
+		"auth": {
+			"auth": {
 				"string": "1AUTH"
 			},
 			"logo": { "string": "Logotipo de 1Auth" },
@@ -106,9 +107,7 @@
 				"heading": { "string": "" },
 				"email": { "string": "Para continuar, por favor introduce tu correo electrónico." },
 				"submit": { "string": "Enviar" },
-				"code": {
-					"string": "Para continuar, por favor introduce el código que te enviamos."
-				},
+				"code": { "string": "Para continuar, por favor introduce el código que te enviamos." },
 				"placeholder": { "string": "" }
 			},
 			"email": {
@@ -268,15 +267,11 @@
 		},
 		"101": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"102": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"103": {
 			"heading": { "string": "" },
@@ -286,9 +281,7 @@
 		},
 		"201": {
 			"heading": { "string": "Creado" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"202": {
 			"heading": { "string": "Aceptado" },
@@ -316,9 +309,7 @@
 		},
 		"208": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"226": {
 			"heading": { "string": "" },
@@ -328,9 +319,7 @@
 		},
 		"300": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"304": {
 			"heading": { "string": "" },
@@ -346,21 +335,15 @@
 		},
 		"401": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"402": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"403": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"404": {
 			"heading": { "string": "No Encontrado" },
@@ -376,15 +359,11 @@
 		},
 		"406": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"407": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"408": {
 			"heading": { "string": "" },
@@ -412,57 +391,39 @@
 		},
 		"412": {
 			"heading": { "string": "" },
-			"message": {
-				"string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!"
-			}
+			"message": { "string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!" }
 		},
 		"413": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"414": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"415": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"416": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"417": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"418": {
 			"heading": { "string": "Soy una tetera" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"421": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"422": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"423": {
 			"heading": { "string": "Bloqueado" },
@@ -470,9 +431,7 @@
 		},
 		"425": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"426": {
 			"heading": { "string": "" },
@@ -492,9 +451,7 @@
 		},
 		"431": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"451": {
 			"heading": { "string": "No Disponible Por Razones Legales" },
@@ -516,9 +473,7 @@
 		},
 		"502": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"503": {
 			"heading": { "string": "" },
@@ -528,9 +483,7 @@
 		},
 		"504": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"505": {
 			"heading": { "string": "" },
@@ -564,9 +517,7 @@
 		},
 		"511": {
 			"heading": { "string": "" },
-			"message": {
-				"string": ""
-			}
+			"message": { "string": "" }
 		},
 		"old": {
 			"heading": { "string": "¡Tu estas usando un navegador obsoleto!" },
@@ -574,10 +525,7 @@
 				"string": "",
 				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 			},
-			"all": {
-				"string": "todos",
-				"developer_comment": "For use in the “errorOldWhy” string."
-			},
+			"all": { "string": "todos", "developer_comment": "For use in the “errorOldWhy” string." },
 			"modern": { "string": "Navegadores modernos:" },
 			"mistake": {
 				"string": ""
