@@ -28,7 +28,7 @@ jobs:
             - name: Install
               run: pip install transifex-client
 
-            - name: Setup Transifex
+            - name: Configure
               run:
                   touch .transifexrc; echo "[https://www.transifex.com]" > .transifexrc; echo
                   "api_hostname = https://api.transifex.com" >> .transifexrc; echo "hostname =
