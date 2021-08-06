@@ -5,7 +5,7 @@ WORKDIR /opt/app
 ENV PORT=80
 
 # daemon for cron jobs
-RUN echo 'crond' > /boot.sh
+RUN echo "crond" > /boot.sh
 
 # Install app dependencies
 COPY package*.json ./

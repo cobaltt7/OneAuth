@@ -82,7 +82,7 @@ const client = {
 							},
 						),
 
-						subject: request.localization.messages.emailSubject,
+						subject: request.localization.messages["clients.email.email.subject"],
 
 						text: mustache.render(
 							fileSystem.readFileSync(path.resolve(directory, "email.txt"), "utf8"),

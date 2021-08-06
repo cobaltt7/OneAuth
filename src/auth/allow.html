@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{ #message }}title|||[allowHeading]{{ /message }}</title>
+		<title>{{ #message }}branding.auth.title|||[core.allow.heading]{{ /message }}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -14,23 +14,24 @@
 	<body>
 		{{> nav }}
 		<main>
-			<h1>{{ #message }}allowHeading{{ /message }}</h1>
-			<p>{{ #message }}allowQuestion|||{{ host }}{{ /message }}</p>
+			<h1>{{ #message }}core.allow.heading{{ /message }}</h1>
+			<p>{{ #message }}core.allow.question|||{{ host }}{{ /message }}</p>
 			<div class="inline-flex w-full p-2">
 				<a
 					id="allow"
 					class="mr-4 bg-emerald-500 hover:bg-emerald-600"
 					href="/backend/send_data?client={{ client }}&url={{ encodedUrl }}&token={{ token }}"
-					>{{ #message }}allowButtonA{{ /message }}
+					>{{ #message }}core.allow.allow{{ /message }}
 					<i class="far fa-check-circle"></i>
 				</a>
 				<a id="deny" class="ml-4 bg-red-500 hover:bg-red-600" href="{{ url }}"
-					>{{ #message }}allowButtonD{{ /message }}
+					>{{ #message }}core.allow.deny{{ /message }}
 					<i class="far fa-times-circle"></i>
 				</a>
 			</div>
 			<p>
-				{{ #message }}allowDataNote|||{{ name }}|||{{ host }}|||[allowButtonA]{{ /message }}
+				{{ #message }}core.allow.receive|||{{ name }}|||{{ host }}|||[core.allow.allow]{{
+				/message }}
 			</p>
 			<pre class="hljs lang-json">{{ data }}</pre>
 		</main>

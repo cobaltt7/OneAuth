@@ -1,472 +1,552 @@
 {
-	"docsTitle": { "string": "{0} | 1Auth Development Docs" },
-	"emailHeading": { "string": "Sign in with your email" },
-	"emailEnterPrompt": { "string": "To continue, please enter your email." },
-	"emailSubmit": { "string": "Submit" },
-	"emailEnterCode": { "string": "To continue, please enter the code we sent you." },
-	"emailSubject": { "string": "1Auth Email Verification" },
-	"emailCodeIs": { "string": "Your code is {0}." },
-	"emailNoShare": { "string": "Don’t share it with anyone else." },
-	"emailNoShareWhy": { "string": "Otherwise, they could be able to act on your behalf." },
-	"emailNow": { "string": "What now?" },
-	"emailCopyCode": { "string": "Copy your code." },
-	"emailGoBack": { "string": "Go back to 1Auth." },
-	"emailPasteCode": {
-		"string": "Paste your code in the box and press “{0}”."
-	},
-	"emailReviewInfo": {
-		"string": "Review the information we will send and the site we will send it to, and if all looks good, press “{0}”."
-	},
-	"emailDoesntWork": {
-		"string": "Your code will expire after 15 minutes, so if it doesn't work, it might have been too long."
-	},
-	"emailPressBack": {
-		"string": "Try pressing the back button and requesting another code!"
-	},
-	"emailUnexpected": {
-		"string": "Not expecting this email?"
-	},
-	"emailIgnoreIt": {
-		"string": "Just ignore it."
-	},
-	"emailDontWorry": {
-		"string": "Don’t worry, nothing will happen."
-	},
-	"logoAlt": { "string": "1Auth logo" },
-	"replitHeading": { "string": "Sign in with Replit" },
-	"replitClickAnywhere": { "string": "Click anywhere to get started" },
-	"replitNoClose": {
-		"string": "If you close the pop-up, we can’t authenticate you!"
-	},
-	"replitReopen": {
-		"string": "Please close this modal, then reopen the window by clicking anywhere."
-	},
-	"replitUnblockPopups": {
-		"string": "If nothing happens, please make sure pop-ups are not blocked, then reload the page."
-	},
-	"allowHeading": { "string": "Allow access?" },
-	"allowQuestion": {
-		"string": "Do you want {0} to access your information?"
-	},
-	"allowButtonA": { "string": "Allow" },
-	"allowButtonD": { "string": "Deny" },
-	"allowDataNote": {
-		"string": "If you press “{2}”, then {1} will receive the following information (taken from your {0} account):"
-	},
-	"signinHeading": { "string": "Sign in" },
-	"signinChoose": { "string": "Choose an option to continue" },
-	"signinWith": { "string": "Sign in with {0}" },
-	"allowDataHidden": {
-		"string": "Unfortunately, we can’t show this data right now."
-	},
-	"allowDataHiddenSorry": {
-		"string": "Sorry about that!"
-	},
-	"error201Heading": { "string": "Created" },
-	"error202Heading": { "string": "Accepted" },
-	"error204Heading": { "string": "No Content" },
-	"error205Heading": { "string": "Reset Content" },
-	"error300Heading": { "string": "Multiple Choice" },
-	"error304Heading": { "string": "Not Modified" },
-	"error400Heading": { "string": "Bad Request" },
-	"error401Heading": { "string": "Unauthorized" },
-	"error402Heading": { "string": "Payment Required " },
-	"error403Heading": { "string": "Forbidden" },
-	"error404Heading": { "string": "Not Found" },
-	"error405Heading": { "string": "Method Not Allowed" },
-	"error406Heading": { "string": "Not Acceptable" },
-	"error407Heading": { "string": "Proxy Authentication Required" },
-	"error408Heading": { "string": "Request Timeout" },
-	"error409Heading": { "string": "Conflict" },
-	"error410Heading": { "string": "Gone" },
-	"error411Heading": { "string": "Length Required" },
-	"error412Heading": { "string": "Precondition Failed" },
-	"error413Heading": { "string": "Payload Too Large" },
-	"error414Heading": { "string": "URI Too Long" },
-	"error415Heading": { "string": "Unsupported Media Type" },
-	"error416Heading": { "string": "Range Not Satisfiable" },
-	"error417Heading": { "string": "Expectation Failed" },
-	"error418Heading": { "string": "I’m a teapot" },
-	"error421Heading": { "string": "Misdirected Request" },
-	"error425Heading": { "string": "Too Early" },
-	"error426Heading": { "string": "Upgrade Required" },
-	"error428Heading": { "string": "Precondition Required" },
-	"error429Heading": { "string": "Too Many Requests" },
-	"error431Heading": { "string": "Request Header Fields Too Large" },
-	"error451Heading": { "string": "Unavailable For Legal Reasons" },
-	"error500Heading": { "string": "Internal Server Error" },
-	"error501Heading": { "string": "Not Implemented" },
-	"error502Heading": { "string": "Bad Gateway" },
-	"error503Heading": { "string": "Service Unavailable" },
-	"error504Heading": { "string": "Gateway Timeout" },
-	"error505Heading": { "string": "HTTP Version Not Supported" },
-	"error506Heading": { "string": "Variant Also Negotiates" },
-	"error510Heading": { "string": "Not Extended" },
-	"error201Message": {
-		"string": "An item in our databases has successfully been created."
-	},
-	"error202Message": {
-		"string": "Your request has been accepted and understood. We forwarded it to another server."
-	},
-	"error204Message": {
-		"string": "Your request was successful. However, we don’t have any information to give you in response."
-	},
-	"error205Message": {
-		"string": "Your request was successful. Reset any pages that use our APIs as the content may have changed."
-	},
-	"error300Message": {
-		"string": "Please pick a redirection method or location to continue."
-	},
-	"error304Message": {
-		"string": "The requested page has not been modified since the last request."
-	},
-	"error400Message": {
-		"string": "Oops! Your request was invalid. Please make sure all needed information is sent, no extra information is sent, and all sent information is valid. If this keeps happening, try contacting us on GitHub."
-	},
-	"error401Message": {
-		"string": "Please login before accessing this resource."
-	},
-	"error402Message": { "string": "Please pay before accessing this page." },
-	"error403Message": {
-		"string": "Sorry, but you are forbidden to access this resource."
-	},
-	"error404Message": {
-		"string": "Uh-oh! We can’t find that page! Go back? If a link on this site brought you here, you may want to contact us on GitHub and let us know we have a broken link."
-	},
-	"error405Message": {
-		"string": "That HTTP method isn’t supported on this page! Try a different page and/or method."
-	},
-	"error406Message": {
-		"string": "We can’t match the data requested with the format requested."
-	},
-	"error407Message": {
-		"string": "Please use a proxy to access this resource."
-	},
-	"error408Message": {
-		"string": "Hmm… the page was loading for quite a while and timed out! Perhaps there was an internal error. Try reloading the page. If this keeps happening, you may want to contact us on GitHub so we can fix it."
-	},
-	"error409Message": {
-		"string": "Oops, there was a conflict between the information your browser sent and the information we have! Try reloading the page. If this keeps happening, try contacting us on GitHub so we can fix it."
-	},
-	"error410Message": {
-		"string": "This isn’t here anymore. Unfortunately, it’s never coming back."
-	},
-	"error411Message": {
-		"string": "You didn’t say how much information you wanted! Please repeat the request with a requested length."
-	},
-	"error412Message": {
-		"string": "Unfortunately, we can’t meet your conditions. Too bad!"
-	},
-	"error413Message": {
-		"string": "You sent so much data that we can’t process it!"
-	},
-	"error414Message": {
-		"string": "That URL is too long for us to understand!"
-	},
-	"error415Message": { "string": "You sent the wrong type of file!" },
-	"error416Message": {
-		"string": "We don’t have any data in the requested range."
-	},
-	"error417Message": {
-		"string": "We expected to receive more information than you sent!"
-	},
-	"error418Message": {
-		"string": "We refuse to try and brew coffee with a teapot."
-	},
-	"error421Message": {
-		"string": "You sent this request to the wrong place!"
-	},
-	"error425Message": {
-		"string": "Please wait before sending this request."
-	},
-	"error426Message": { "string": "Please use HTTPS, not HTTP." },
-	"error428Message": {
-		"string": "You can’t do that yet. Please fulfill the requested conditions first."
-	},
-	"error429Message": {
-		"string": "You have sent too many requests in a short amount of time. Please wait before sending more."
-	},
-	"error431Message": {
-		"string": "The headers of your request are too long to be processed."
-	},
-	"error451Message": {
-		"string": "Unfortunately, we cannot legally provide this page to you. Sorry about that!"
-	},
-	"error500Message": {
-		"string": "Uh-oh, you found a bug! We ran into an unexpected error. Please report it on GitHub so we can stop this from happening again."
-	},
-	"error501Message": {
-		"string": "No part of our website supports that HTTP method. Try a different one!"
-	},
-	"error502Message": {
-		"string": "We got an invalid response from an external service."
-	},
-	"error503Message": {
-		"string": "Sorry! This page is currently down! It should be back up soon!"
-	},
-	"error504Message": {
-		"string": "An external server didn’t send us a response fast enough."
-	},
-	"error505Message": {
-		"string": "No part of our website supports that HTTP version. Try a different one!"
-	},
-	"error506Message": {
-		"string": "Error in our internal configuration! Please report this on GitHub so we can prevent it from happening again."
-	},
-	"error510Message": {
-		"string": "We can’t show you this page with the information given. Please extend your request."
-	},
-	"error100Heading": { "string": "Continue" },
-	"error100Message": {
-		"string": "Please continue with your request."
-	},
-	"error101Heading": { "string": "Switching Protocol" },
-	"error101Message": {
-		"string": "Switching from HTTP to HTTPS."
-	},
-	"error102Heading": { "string": "Processing" },
-	"error102Message": {
-		"string": "We have received your request. Please wait."
-	},
-	"error103Heading": { "string": "Early Hints" },
-	"error103Message": {
-		"string": "Here are some resources that you will need. While you wait for the rest of the response, please start loading them."
-	},
-	"error203Heading": { "string": "Non-Authoritative Information" },
-	"error203Message": {
-		"string": "This information is from a backup copy and may not be up-to-date. Please do not rely on it being correct."
-	},
-	"error208Heading": { "string": "Already Reported" },
-	"error208Message": {
-		"string": "We have already reported this information to you."
-	},
-	"error226Heading": { "string": "IM Used" },
-	"error226Message": {
-		"string": "We used some instance-manipulations on the current instance. Here is the result."
-	},
-	"error422Heading": { "string": "Unprocessable Entity" },
-	"error422Message": {
-		"string": "There are semantic errors in your request."
-	},
-	"error423Heading": { "string": "Locked" },
-	"error423Message": {
-		"string": "The requested resource is locked."
-	},
-	"error507Heading": { "string": "Insufficient Storage" },
-	"error507Message": {
-		"string": "Our servers do not have enough storage to store the data needed to complete your request."
-	},
-	"error508Heading": { "string": "Loop Detected" },
-	"error508Message": {
-		"string": "Ummm...there's an infinite loop somewhere in the code! As such, we can't complete your request! You may want to contact us on GitHub and let us know about this."
-	},
-	"error511Heading": { "string": "Network Authentication Required" },
-	"error511Message": {
-		"string": "Please sign in to the network before accessing the Internet."
-	},
-	"errorOldHeading": { "string": "You are using an outdated browser!" },
-	"errorOldWhy": {
-		"string": "For a better experience on {0} sites (not only on ours), please keep your browser up to date.",
-		"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
-	},
-	"errorOldAll": {
-		"string": "all",
-		"developer_comment": "For use in the “errorOldWhy” string."
-	},
-	"errorOldModern": { "string": "Modern browsers:" },
-	"errorOldMistake": {
-		"string": "If you are using a modern browser, please make sure that you have enabled and allowed JavaScript on this site."
-	},
-	"errorOldMore": { "string": "Learn more" },
-	"aboutPageTitle": { "string": "1Auth | All-In-One Authentication" },
-	"aboutMainHeading": { "string": "1Auth All-In-One Authentication" },
-	"aboutSubHeading": { "string": "About" },
-	"aboutIntro": {
-		"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
-	},
-	"aboutClientCount": {
-		"string": "Right now, we support {0} clients with many more to come."
-	},
-	"aboutClientsHeading": { "string": "Supported Clients" },
-	"aboutDevelopersHeading": { "string": "For Developers" },
-	"aboutSuperEasy": {
-		"string": "We designed 1Auth so that adding it to your site is as streamlined as possible."
-	},
-	"aboutDirectTo": {
-		"string": "When a user clicks “Sign in” on your site, direct them to this URL:"
-	},
-	"aboutAfterFinish": {
-		"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
-	},
-	"aboutNewParam": {
-		"string": "If they allowed sharing their data, then there will be a new query parameter on that URL:"
-	},
-	"aboutGetInfo": {
-		"string": "To retrieve the user’s information, send the following HTTP request:"
-	},
-	"aboutWhatCode": {
-		"string": "where {0} is the value of the said parameter."
-	},
-	"aboutNoParam": {
-		"string": "If they denied sharing their data, then there will not be any new query parameter."
-	},
-	"aboutMoreConfig": {
-		"string": "More configuration options are coming soon."
-	},
-	"aboutLangsHeader": { "string": "Language specification" },
-	"aboutLangsHow": {
-		"string": "Specify the language to use on pages by adding another parameter to the URL: {0}"
-	},
-	"aboutLangsValue": {
-		"string": "Its value should be a 2-letter language code like {0} or {1}."
-	},
-	"aboutLangsCountry": {
-		"string": "You may follow it by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
-	},
-	"aboutLangsFallback": {
-		"string": "If a language is not available, it will fall back to the non-country-specific language, then to the users’ browser language."
-	},
-	"aboutNew": { "string": "NEW!!!", "developer_comment": "Please keep this uppercase." },
-	"aboutTranslations": {
-		"string": "Please note that we do not have many translations, if any. That will change as our translation team grows."
-	},
-	"aboutHelpTranslate": {
-		"string": "If you would like to help us translate, please click here."
-	},
-	"aboutCreateTXAcc": {
-		"string": "Create a Transifex account if you do not already have one, then click “Join team”.",
-		"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
-	},
-	"aboutTranslateThanks": {
-		"string": "Thanks for your eagerness to help!"
-	},
-	"aboutTranslateRequestLanguage": {
-		"string": "(Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
-		"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
-	},
-	"emailPlaceholder": { "string": "Email address" },
-	"aboutCode": {
-		"string": "CODE",
-		"character_limit": 10,
-		"developer_comment": "AKA a token. Please replace spaces with underscores. In addition, please keep this uppercase."
-	},
-	"aboutCallbackUrl": {
-		"string": "CALLBACK_URI",
-		"character_limit": 20,
-		"developer_comment": "Please replace spaces with underscores. In addition, please keep this uppercase."
-	},
-	"errorOldChrome": {
-		"string": "Google Chrome",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldEdge": {
-		"string": "Microsoft Edge",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldFirefox": {
-		"string": "Mozilla Firefox",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldSafari": {
-		"string": "Apple Safari",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"language": {
-		"string": "English (United States)",
-		"developer_comment": "This should be changed to the language you are translating to. For example, if you are translating to “Spanish (United States)”, you would translate this as “Español (Estados Unidos)”. Find out what language you are on up there 👆."
-	},
-	"title": {
-		"string": "{0} | 1Auth"
-	},
-	"dotLogo": {
-		"string": "OneDot Logo"
-	},
-	"1dot": {
-		"string": "1DOT"
-	},
-	"1auth": {
-		"string": "1AUTH"
-	},
-	"footerCopyright": {
-		"string": "© 2021 OneDot Projects"
-	},
-	"footerOneDotHeader": {
-		"string": "OneDot Projects"
-	},
-	"footerWebsite": {
-		"string": "Website"
-	},
-	"footerGitHub": {
-		"string": "GitHub"
-	},
-	"footerTwitter": {
-		"string": "Twitter"
-	},
-	"footerReplit": {
-		"string": "Replit"
-	},
-	"footerNpm": {
-		"string": "npm"
-	},
-	"footerTransifex": {
-		"string": "Transifex"
-	},
-	"footerDiscord": {
-		"string": "Discord"
-	},
-	"footer1Auth": {
-		"string": "1Auth"
-	},
-	"footerDocumentation": {
-		"string": "Documentation"
-	},
-	"footerTranslate": {
-		"string": "Translate"
-	},
-	"footerCredits": {
-		"string": "Credits"
-	},
-	"footerRepository": {
-		"string": "Repository"
-	},
-	"footerDemo": {
-		"string": "Demo"
-	},
-	"footerHosting": {
-		"string": "Cloud hosted on opeNode.io"
-	},
-	"footerLegal": {
-		"string": "Legal"
-	},
-	"footerTOS": {
-		"string": "Terms of Service"
-	},
-	"footerPrivacy": {
-		"string": "Privacy Policy"
-	},
-	"footerLanguage": {
-		"string": "Language"
-	},
-	"footerChooseLanguage": {
-		"string": "Choose a language"
-	},
-	"footerScratchLegal": {
-		"string": "Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab."
-	},
-	"footerSeeOther": { "string": "See {0}." },
-	"footerGoogleLegal": {
-		"string": "Google and the Google logo are registered trademarks of Google LLC in some countries."
-	},
-	"footerReplitLegal": {
-		"string": "Replit and the Replit logo are registered trademarks of Replit, Inc. in some countries."
-	},
-	"footerGitHubLegal": {
-		"string": "GITHUB®, and the GITHUB® logo design are exclusive trademarks registered in the United States by GitHub, Inc."
-	},
-	"footerLicense": {
-		"string": "The source code of 1Auth is available under the {0}."
-	},
-	"mitLicense": {
-		"string": "MIT license"
+	"docs": { "string": "{0} | 1Auth Development Docs" },
+	"about": {
+		"about": {
+			"title": { "string": "1Auth | All-In-One Authentication" },
+			"heading": { "string": "1Auth All-In-One Authentication" },
+			"about": { "string": "About" },
+			"description": {
+				"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
+			},
+			"clients": {
+				"string": "{0, plural, one {We support {0} client with many more to come.} other {We support {0} clients with many more to come.}}"
+			},
+			"supported": { "string": "Supported Clients" }
+		},
+		"developers": {
+			"heading": { "string": "For Developers" },
+			"streamlined": {
+				"string": "We designed 1Auth so that adding it to your site is as streamlined as possible."
+			},
+			"initiate": {
+				"string": "When a user clicks “Sign in” on your site, direct them to this URL:"
+			},
+			"after": {
+				"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
+			},
+			"parameter": {
+				"string": "If they allowed sharing their data, then there will be a new query parameter on that URL, {0}."
+			},
+			"get": {
+				"string": "To retrieve the user’s information, send the following HTTP request, where {0} is the value of the said parameter:"
+			},
+			"denied": {
+				"string": "If they denied sharing their data, then there will not be any new query parameter."
+			},
+			"configuration": {
+				"string": "More configuration options are coming soon."
+			},
+			"CODE": {
+				"string": "<CODE>",
+				"character_limit": 10,
+				"developer_comment": "AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+			},
+			"CALLBACK": {
+				"string": "<CALLBACK_URI>",
+				"character_limit": 20,
+				"developer_comment": "This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+			}
+		},
+		"localization": {
+			"heading": { "string": "Language specification" },
+			"basics": {
+				"string": "Specify the language to use on pages by adding another parameter to the URL: {0}"
+			},
+			"code": {
+				"string": "Its value should be a 2-letter language code like {0} or {1}."
+			},
+			"country": {
+				"string": "You may follow it by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
+			},
+			"fallback": {
+				"string": "If a language is not available, it will fall back to the non-country-specific language, then to the users’ browser language."
+			},
+			"new": { "string": "NEW!!!", "developer_comment": "Please keep this uppercase." },
+			"few": {
+				"string": "Please note that we do not have many translations, if any."
+			},
+			"grows": { "string": "That will change as our translation team grows." },
+			"help": {
+				"string": "If you would like to help us translate, please click here."
+			},
+			"account": {
+				"string": "Create a Transifex account if you do not already have one, then click “Join team”.",
+				"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
+			},
+			"thanks": {
+				"string": "Thanks for your eagerness to help!"
+			},
+			"request": {
+				"string": "(Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
+				"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
+			}
+		}
+	},
+	"branding": {
+		"dot": {
+			"logo": {
+				"string": "OneDot Logo"
+			},
+			"dot": {
+				"string": "1DOT"
+			}
+		},
+		"auth": {
+			"auth": {
+				"string": "1AUTH"
+			},
+			"logo": { "string": "1Auth logo" },
+			"title": {
+				"string": "{0} | 1Auth"
+			}
+		}
+	},
+	"clients": {
+		"email": {
+			"page": {
+				"heading": { "string": "Sign in with your email" },
+				"email": { "string": "To continue, please enter your email." },
+				"submit": { "string": "Submit" },
+				"code": { "string": "To continue, please enter the code we sent you." },
+				"placeholder": { "string": "you@example.com" }
+			},
+			"email": {
+				"subject": { "string": "1Auth Email Verification" },
+				"code": { "string": "Your code is {0}." },
+				"share": { "string": "Don’t share it with anyone else." },
+				"act": { "string": "Otherwise, they could be able to act on your behalf." },
+				"next": { "string": "What now?" },
+				"copy": { "string": "Copy your code." },
+				"back": { "string": "Go back to 1Auth." },
+				"paste": {
+					"string": "Paste your code in the box and press “{0}”."
+				},
+				"review": {
+					"string": "Review the information we will send and the site we will send it to, and if all looks good, press “{0}”."
+				},
+				"expire": {
+					"string": "Your code will expire after 15 minutes, so if it doesn’t work, it might have been too long."
+				},
+				"rerequest": {
+					"string": "Try pressing the back button and requesting another code!"
+				},
+				"unexpected": {
+					"string": "Not expecting this email?"
+				},
+				"ignore": {
+					"string": "Just ignore it."
+				},
+				"nothing": {
+					"string": "Don’t worry, nothing will happen."
+				}
+			}
+		}
+	},
+	"core": {
+		"allow": {
+			"heading": { "string": "Allow access?" },
+			"question": {
+				"string": "Do you want {0} to access your information?"
+			},
+			"allow": { "string": "Allow" },
+			"deny": { "string": "Deny" },
+			"recieve": {
+				"string": "If you press “{2}”, then {1} will receive the following information (taken from your {0} account):"
+			},
+			"hidden": {
+				"string": "Unfortunately, we can’t show this data right now."
+			},
+			"sorry": {
+				"string": "Sorry about that!"
+			}
+		},
+		"signin": {
+			"heading": { "string": "Sign in" },
+			"choose": { "string": "Choose an option to continue" },
+			"with": { "string": "Sign in with {0}" }
+		}
+	},
+	"footer": {
+		"localization": {
+			"thisLanguage": {
+				"string": "English (United States)",
+				"developer_comment": "This should be changed to the language you are translating to. For example, if you are translating to “Spanish (United States)”, you would translate this as “Español (Estados Unidos)”. Find out what language you are on up there 👆."
+			},
+			"language": {
+				"string": "Language"
+			},
+			"choose": {
+				"string": "Choose a language"
+			}
+		},
+		"links": {
+			"onedot": {
+				"string": "OneDot Projects"
+			},
+			"website": {
+				"string": "Website"
+			},
+			"github": {
+				"string": "GitHub"
+			},
+			"twitter": {
+				"string": "Twitter"
+			},
+			"replit": {
+				"string": "Replit"
+			},
+			"npm": {
+				"string": "npm"
+			},
+			"transifex": {
+				"string": "Transifex"
+			},
+			"discord": {
+				"string": "Discord"
+			},
+			"auth": {
+				"string": "1Auth"
+			},
+			"docs": {
+				"string": "Documentation"
+			},
+			"credits": {
+				"string": "Credits"
+			},
+			"translate": {
+				"string": "Translate"
+			},
+			"repo": {
+				"string": "Repository"
+			},
+			"demo": {
+				"string": "Demo"
+			},
+			"openode": {
+				"string": "Cloud hosted on opeNode.io"
+			}
+		},
+		"legal": {
+			"heading": {
+				"string": "Legal"
+			},
+			"tos": {
+				"string": "Terms of Service"
+			},
+			"privacy": {
+				"string": "Privacy Policy"
+			},
+			"scratch": {
+				"string": "Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab."
+			},
+			"see": { "string": "See {0}." },
+			"google": {
+				"string": "Google and the Google logo are registered trademarks of Google LLC in some countries."
+			},
+			"copyright": {
+				"string": "© 2021 OneDot Projects"
+			},
+			"replit": {
+				"string": "Replit and the Replit logo are registered trademarks of Replit, Inc. in some countries."
+			},
+			"github": {
+				"string": "GITHUB®, and the GITHUB® logo design are exclusive trademarks registered in the United States by GitHub, Inc."
+			},
+			"license": {
+				"string": "The source code of 1Auth is available under the {0}."
+			},
+			"mit": {
+				"string": "MIT license"
+			}
+		}
+	},
+	"errors": {
+		"100": {
+			"heading": { "string": "Continue" },
+			"message": { "string": "Please continue with your request." }
+		},
+		"101": {
+			"heading": { "string": "Switching Protocol" },
+			"message": { "string": "Switching from HTTP to HTTPS." }
+		},
+		"102": {
+			"heading": { "string": "Processing" },
+			"message": { "string": "We have received your request. Please wait." }
+		},
+		"103": {
+			"heading": { "string": "Early Hints" },
+			"message": {
+				"string": "Here are some resources that you will need. While you wait for the rest of the response, please start loading them."
+			}
+		},
+		"201": {
+			"heading": { "string": "Created" },
+			"message": { "string": "An item in our databases has successfully been created." }
+		},
+		"202": {
+			"heading": { "string": "Accepted" },
+			"message": {
+				"string": "Your request has been accepted and understood. We forwarded it to another server."
+			}
+		},
+		"203": {
+			"heading": { "string": "Non-Authoritative Information" },
+			"message": {
+				"string": "This information is from a backup copy and may not be up-to-date. Please do not rely on it being correct."
+			}
+		},
+		"204": {
+			"heading": { "string": "No Content" },
+			"message": {
+				"string": "Your request was successful. However, we don’t have any information to give you in response."
+			}
+		},
+		"205": {
+			"heading": { "string": "Reset Content" },
+			"message": {
+				"string": "Your request was successful. Reset any pages that use our APIs as the content may have changed."
+			}
+		},
+		"208": {
+			"heading": { "string": "Already Reported" },
+			"message": { "string": "We have already reported this information to you." }
+		},
+		"226": {
+			"heading": { "string": "IM Used" },
+			"message": {
+				"string": "We used some instance-manipulations on the current instance. Here is the result."
+			}
+		},
+		"300": {
+			"heading": { "string": "Multiple Choice" },
+			"message": { "string": "Please pick a redirection method or location to continue." }
+		},
+		"304": {
+			"heading": { "string": "Not Modified" },
+			"message": {
+				"string": "The requested page has not been modified since the last request."
+			}
+		},
+		"400": {
+			"heading": { "string": "Bad Request" },
+			"message": {
+				"string": "Oops! Your request was invalid. Please make sure all needed information is sent, no extra information is sent, and all sent information is valid. If this keeps happening, try contacting us on GitHub."
+			}
+		},
+		"401": {
+			"heading": { "string": "Unauthorized" },
+			"message": { "string": "Please login before accessing this resource." }
+		},
+		"402": {
+			"heading": { "string": "Payment Required " },
+			"message": { "string": "Please pay before accessing this page." }
+		},
+		"403": {
+			"heading": { "string": "Forbidden" },
+			"message": { "string": "Sorry, but you are forbidden to access this resource." }
+		},
+		"404": {
+			"heading": { "string": "Not Found" },
+			"message": {
+				"string": "Uh-oh! We can’t find that page! Go back? If a link on this site brought you here, you may want to contact us on GitHub and let us know we have a broken link."
+			}
+		},
+		"405": {
+			"heading": { "string": "Method Not Allowed" },
+			"message": {
+				"string": "That HTTP method isn’t supported on this page! Try a different page and/or method."
+			}
+		},
+		"406": {
+			"heading": { "string": "Not Acceptable" },
+			"message": { "string": "We can’t match the data requested with the format requested." }
+		},
+		"407": {
+			"heading": { "string": "Proxy Authentication Required" },
+			"message": { "string": "Please use a proxy to access this resource." }
+		},
+		"408": {
+			"heading": { "string": "Request Timeout" },
+			"message": {
+				"string": "Hmm… the page was loading for quite a while and timed out! Perhaps there was an internal error. Try reloading the page. If this keeps happening, you may want to contact us on GitHub so we can fix it."
+			}
+		},
+		"409": {
+			"heading": { "string": "Conflict" },
+			"message": {
+				"string": "Oops, there was a conflict between the information your browser sent and the information we have! Try reloading the page. If this keeps happening, try contacting us on GitHub so we can fix it."
+			}
+		},
+		"410": {
+			"heading": { "string": "Gone" },
+			"message": {
+				"string": "This isn’t here anymore. Unfortunately, it’s never coming back."
+			}
+		},
+		"411": {
+			"heading": { "string": "Length Required" },
+			"message": {
+				"string": "You didn’t say how much information you wanted! Please repeat the request with a requested length."
+			}
+		},
+		"412": {
+			"heading": { "string": "Precondition Failed" },
+			"message": { "string": "Unfortunately, we can’t meet your conditions. Too bad!" }
+		},
+		"413": {
+			"heading": { "string": "Payload Too Large" },
+			"message": { "string": "You sent so much data that we can’t process it!" }
+		},
+		"414": {
+			"heading": { "string": "URI Too Long" },
+			"message": { "string": "That URL is too long for us to understand!" }
+		},
+		"415": {
+			"heading": { "string": "Unsupported Media Type" },
+			"message": { "string": "You sent the wrong type of file!" }
+		},
+		"416": {
+			"heading": { "string": "Range Not Satisfiable" },
+			"message": { "string": "We don’t have any data in the requested range." }
+		},
+		"417": {
+			"heading": { "string": "Expectation Failed" },
+			"message": { "string": "We expected to receive more information than you sent!" }
+		},
+		"418": {
+			"heading": { "string": "I’m a teapot" },
+			"message": { "string": "We refuse to try and brew coffee with a teapot." }
+		},
+		"421": {
+			"heading": { "string": "Misdirected Request" },
+			"message": { "string": "You sent this request to the wrong place!" }
+		},
+		"422": {
+			"heading": { "string": "Unprocessable Entity" },
+			"message": { "string": "There are semantic errors in your request." }
+		},
+		"423": {
+			"heading": { "string": "Locked" },
+			"message": { "string": "The requested resource is locked." }
+		},
+		"425": {
+			"heading": { "string": "Too Early" },
+			"message": { "string": "Please wait before sending this request." }
+		},
+		"426": {
+			"heading": { "string": "Upgrade Required" },
+			"message": { "string": "Please use HTTPS, not HTTP." }
+		},
+		"428": {
+			"heading": { "string": "Precondition Required" },
+			"message": {
+				"string": "You can’t do that yet. Please fulfill the requested conditions first."
+			}
+		},
+		"429": {
+			"heading": { "string": "Too Many Requests" },
+			"message": {
+				"string": "You have sent too many requests in a short amount of time. Please wait before sending more."
+			}
+		},
+		"431": {
+			"heading": { "string": "Request Header Fields Too Large" },
+			"message": { "string": "The headers of your request are too long to be processed." }
+		},
+		"451": {
+			"heading": { "string": "Unavailable For Legal Reasons" },
+			"message": {
+				"string": "Unfortunately, we cannot legally provide this page to you. Sorry about that!"
+			}
+		},
+		"500": {
+			"heading": { "string": "Internal Server Error" },
+			"message": {
+				"string": "Uh-oh, you found a bug! We ran into an unexpected error. Please report it on GitHub so we can stop this from happening again."
+			}
+		},
+		"501": {
+			"heading": { "string": "Not Implemented" },
+			"message": {
+				"string": "No part of our website supports that HTTP method. Try a different one!"
+			}
+		},
+		"502": {
+			"heading": { "string": "Bad Gateway" },
+			"message": { "string": "We got an invalid response from an external service." }
+		},
+		"503": {
+			"heading": { "string": "Service Unavailable" },
+			"message": {
+				"string": "Sorry! This page is currently down! It should be back up soon!"
+			}
+		},
+		"504": {
+			"heading": { "string": "Gateway Timeout" },
+			"message": { "string": "An external server didn’t send us a response fast enough." }
+		},
+		"505": {
+			"heading": { "string": "HTTP Version Not Supported" },
+			"message": {
+				"string": "No part of our website supports that HTTP version. Try a different one!"
+			}
+		},
+		"506": {
+			"heading": { "string": "Variant Also Negotiates" },
+			"message": {
+				"string": "Error in our internal configuration! Please report this on GitHub so we can prevent it from happening again."
+			}
+		},
+		"507": {
+			"heading": { "string": "Insufficient Storage" },
+			"message": {
+				"string": "Our servers do not have enough storage to store the data needed to complete your request."
+			}
+		},
+		"508": {
+			"heading": { "string": "Loop Detected" },
+			"message": {
+				"string": "Ummm...there’s an infinite loop somewhere in the code! As such, we can’t complete your request! You may want to contact us on GitHub and let us know about this."
+			}
+		},
+		"510": {
+			"heading": { "string": "Not Extended" },
+			"message": {
+				"string": "We can’t show you this page with the information given. Please extend your request."
+			}
+		},
+		"511": {
+			"heading": { "string": "Network Authentication Required" },
+			"message": { "string": "Please sign in to the network before accessing the Internet." }
+		},
+		"old": {
+			"heading": { "string": "You are using an outdated browser!" },
+			"why": {
+				"string": "For a better experience on {0} sites (not only on ours), please keep your browser up to date.",
+				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
+			},
+			"all": { "string": "all", "developer_comment": "For use in the “errorOldWhy” string." },
+			"modern": { "string": "Modern browsers:" },
+			"mistake": {
+				"string": "If you are using a modern browser, please make sure that you have enabled and allowed JavaScript on this site."
+			},
+			"more": { "string": "Learn more" },
+			"chrome": {
+				"string": "Google Chrome",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"edge": {
+				"string": "Microsoft Edge",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"firefox": {
+				"string": "Mozilla Firefox",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"safari": {
+				"string": "Apple Safari",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			}
+		}
 	}
 }

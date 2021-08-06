@@ -28,7 +28,7 @@ jobs:
                       https://auth.onedot.cf,
                       https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2F,
                       https://auth.onedot.cf/auth/email?url=https%3A%2F%2Fauth.onedot.cf%2F,
-                      https://auth.onedot.cf/auth/replit?url=https%3A%2F%2Fauth.onedot.cf%2F
+                      https://auth.onedot.cf/auth/docs/auth
 
             - name: Setup Node.JS
               if: ${{ !cancelled() }}

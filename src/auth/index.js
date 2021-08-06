@@ -235,7 +235,7 @@ for (const method of [
 						typeof tokenOrData === "string" &&
 						clientInfo.getData
 					) {
-						data = `${request.localization.messages.allowDataHidden} ${request.localization.messages.allowDataHiddenSorry}`;
+						data = `${request.localization.messages["core.allow.hidden"]} ${request.localization.messages["core.allow.sorry"]}`;
 						token = tokenOrData;
 					} else {
 						logError(

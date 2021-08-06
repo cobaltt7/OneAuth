@@ -54,8 +54,8 @@ function statusMiddleware(realStatus, request, response, status = response.statu
 		}
 
 		const error = {
-			errorMessage: request.localization.messages[`error${status}Message`],
-			heading: request.localization.messages[`error${status}Heading`],
+			errorMessage: request.localization.messages[`errors.${status}.message`],
+			heading: request.localization.messages[`errors.${status}.heading`],
 			status,
 		};
 

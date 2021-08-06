@@ -30,104 +30,108 @@
 			<ul>
 				<li>
 					<img
-						title="{{ #message }}1dot{{ /message }}"
-						alt="{{ #message }}dotLogo{{ /message }}"
+						title="{{ #message }}branding.dot.dot{{ /message }}"
+						alt="{{ #message }}branding.dot.logo{{ /message }}"
 						class="pr-2"
 						width="230"
 						src="https://cdn.onedot.cf/brand/SVG/NoPadding/1Dot%20NoPad.svg"
 					/>
 				</li>
 				<li>
-					<p>{{ #message }}footerCopyright{{ /message }}</p>
+					<p>{{ #message }}footer.legal.copyright{{ /message }}</p>
 				</li>
 			</ul>
 		</li>
 		<li>
 			<ul>
-				<li>{{ #message }}footerOneDotHeader{{ /message }}</li>
+				<li>{{ #message }}footer.links.onedot{{ /message }}</li>
 				<li class="xs:hidden">
-					<a href="https://onedot.cf">{{ #message }}footerWebsite{{ /message }}</a>
+					<a href="https://onedot.cf">{{ #message }}footer.links.website{{ /message }}</a>
 				</li>
 				<li class="hidden xs:block">
-					<a href="https://onedot.cf">{{ #message }}footerOneDotHeader{{ /message }}</a>
+					<a href="https://onedot.cf">{{ #message }}footer.links.onedot{{ /message }}</a>
 				</li>
 				<li class="xs:hidden">
 					<a href="https://github.com/onedotprojects"
-						>{{ #message }}footerGitHub{{ /message }}</a
+						>{{ #message }}footer.links.github{{ /message }}</a
 					>
 				</li>
 				<li class="xs:hidden">
 					<a href="https://twitter.com/onedotprojects"
-						>{{ #message }}footerTwitter{{ /message }}</a
+						>{{ #message }}footer.links.twitter{{ /message }}</a
 					>
 				</li>
 				<li class="xs:hidden">
 					<a href="https://replit.com/@onedotprojects"
-						>{{ #message }}footerReplit{{ /message }}</a
+						>{{ #message }}footer.links.replit{{ /message }}</a
 					>
 				</li>
 				<li class="xs:hidden">
 					<a href="https://www.npmjs.com/org/onedotprojects"
-						>{{ #message }}footerNpm{{ /message }}</a
+						>{{ #message }}footer.links.npm{{ /message }}</a
 					>
 				</li>
 				<li>
 					<a href="https://www.transifex.com/1dot/public/"
-						>{{ #message }}footerTransifex{{ /message }}</a
+						>{{ #message }}footer.links.transifex{{ /message }}</a
 					>
 				</li>
 				<li>
 					<a href="https://discord.gg/aFEvHxDZ9R"
-						>{{ #message }}footerDiscord{{ /message }}</a
+						>{{ #message }}footer.links.discord{{ /message }}</a
 					>
 				</li>
 			</ul>
 		</li>
 		<li>
 			<ul>
-				<li>{{ #message }}footer1Auth{{ /message }}</li>
+				<li>{{ #message }}footer.links.auth{{ /message }}</li>
 				<li>
-					<a href="/docs">{{ #message }}footerDocumentation{{ /message }}</a>
+					<a href="/docs">{{ #message }}footer.links.docs{{ /message }}</a>
 				</li>
 				<li>
-					<a href="/docs/credits">{{ #message }}footerCredits{{ /message }}</a>
+					<a href="/docs/credits">{{ #message }}footer.links.credits{{ /message }}</a>
 				</li>
 				<li>
 					<a href="https://www.transifex.com/1dot/1auth/"
-						>{{ #message }}footerTranslate{{ /message }}</a
+						>{{ #message }}footer.links.translate{{ /message }}</a
 					>
 				</li>
 				<li>
 					<a href="https://github.com/onedotprojects/auth"
-						>{{ #message }}footerRepository{{ /message }}</a
+						>{{ #message }}footer.links.repo{{ /message }}</a
 					>
 				</li>
 				<li>
 					<a
 						href="https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fget_data"
-						>{{ #message }}footerDemo{{ /message }}</a
+						>{{ #message }}footer.links.demo{{ /message }}</a
 					>
 				</li>
 				<li>
-					<a href="https://www.openode.io/">{{ #message }}footerHosting{{ /message }}</a>
+					<a href="https://www.openode.io/"
+						>{{ #message }}footer.links.openode{{ /message }}</a
+					>
 				</li>
 			</ul>
 		</li>
 		<li>
 			<ul>
-				<li>{{ #message }}footerLegal{{ /message }}</li>
+				<li>{{ #message }}footer.legal.heading{{ /message }}</li>
 				<li>
-					<a href="https://onedot.cf/legal">{{ #message }}footerTOS{{ /message }}</a>
+					<a href="https://onedot.cf/legal"
+						>{{ #message }}footer.legal.tos{{ /message }}</a
+					>
 				</li>
 				<li>
 					<!--TODO: make a privacy page-->
-					<a href="/privacy">{{ #message }}footerPrivacy{{ /message }}</a>
+					<a href="/privacy">{{ #message }}footer.legal.privacy{{ /message }}</a>
 				</li>
 			</ul>
 		</li>
 		<li class="w-80 lg:w-full lg:text-center lg:span-all">
 			<ul>
-				<li>{{ #message }}footerLanguage{{ /message }}</li>
+				<li>{{ #message }}footer.localization.language{{ /message }}</li>
 				<li>
 					<form id="language-forum">
 						<select
@@ -144,7 +148,7 @@
 							"
 							required=""
 							name="language"
-							title="{{ #message }}footerChooseLanguage{{ /message }}"
+							title="{{ #message }}footer.localization.choose{{ /message }}"
 							onchange="document.getElementById('language-forum').submit()"
 						>
 							{{ #languages }}
@@ -169,16 +173,18 @@
 		"
 	>
 		<p>
-			{{ #message }}footerScratchLegal;footerSeeOther|||<a href="https://scratch.mit.edu"
+			{{ #message }}footer.legal.scratch;footer.legal.see|||<a href="https://scratch.mit.edu"
 				>http://scratch.mit.edu</a
 			>{{ /message }}
 		</p>
-		<p>{{ #message }}footerGoogleLegal{{ /message }}</p>
-		<p>{{ #message }}footerReplitLegal{{ /message }}</p>
-		<p>{{ #message }}footerGitHubLegal{{ /message }}</p>
+		<p>{{ #message }}footer.legal.google{{ /message }}</p>
+		<p>{{ #message }}footer.legal.replit{{ /message }}</p>
+		<p>{{ #message }}footer.legal.github{{ /message }}</p>
 		<p>
-			{{ #message }}footerLicense|||<a href="/docs/license">[mitLicense]</a>{{ /message
-			}}<span class="hidden md:inline"> {{ #message }}footerCopyright{{ /message }}</span>
+			{{ #message }}footer.legal.license|||<a href="/docs/license">[footer.legal.mit]</a>{{
+			/message }}<span class="hidden md:inline">
+				{{ #message }}footer.legal.copyright{{ /message }}</span
+			>
 		</p>
 	</div>
 </footer>
