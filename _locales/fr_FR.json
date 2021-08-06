@@ -9,7 +9,7 @@
 				"string": ""
 			},
 			"clients": {
-				"string": "{0, plural, other {}}"
+				"string": "{0, plural, one {} other {}}"
 			},
 			"supported": { "string": "" }
 		},
@@ -97,7 +97,7 @@
 			},
 			"logo": { "string": "" },
 			"title": {
-				"string": "{0} | 1Auth"
+				"string": ""
 			}
 		}
 	},
