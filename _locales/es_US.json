@@ -107,7 +107,9 @@
 				"heading": { "string": "" },
 				"email": { "string": "Para continuar, por favor introduce tu correo electrónico." },
 				"submit": { "string": "Enviar" },
-				"code": { "string": "Para continuar, por favor introduce el código que te enviamos." },
+				"code": {
+					"string": "Para continuar, por favor introduce el código que te enviamos."
+				},
 				"placeholder": { "string": "" }
 			},
 			"email": {
@@ -391,7 +393,9 @@
 		},
 		"412": {
 			"heading": { "string": "" },
-			"message": { "string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!" }
+			"message": {
+				"string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!"
+			}
 		},
 		"413": {
 			"heading": { "string": "" },
@@ -525,7 +529,10 @@
 				"string": "",
 				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 			},
-			"all": { "string": "todos", "developer_comment": "For use in the “errorOldWhy” string." },
+			"all": {
+				"string": "todos",
+				"developer_comment": "For use in the “errorOldWhy” string."
+			},
 			"modern": { "string": "Navegadores modernos:" },
 			"mistake": {
 				"string": ""

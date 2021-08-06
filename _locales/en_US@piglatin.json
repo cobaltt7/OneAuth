@@ -107,14 +107,18 @@
 				"heading": { "string": "" },
 				"email": { "string": "Otay ontinuecay, easeplay enteryay ouryay emailyay." },
 				"submit": { "string": "Ubmityay" },
-				"code": { "string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay." },
+				"code": {
+					"string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay."
+				},
 				"placeholder": { "string": "" }
 			},
 			"email": {
 				"subject": { "string": "1Auth Emailyay Erificationvay" },
 				"code": { "string": "Ouryay odecay isyay {0}." },
 				"share": { "string": "On'tday areshay ithway anyoneyay elseyay." },
-				"act": { "string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay." },
+				"act": {
+					"string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay."
+				},
 				"next": { "string": "Atwhay ownay?" },
 				"copy": { "string": "Opycay ouryay odecay." },
 				"back": { "string": "Ogay ackbay otay 1Auth." },
@@ -525,7 +529,10 @@
 				"string": "",
 				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 			},
-			"all": { "string": "allyay", "developer_comment": "For use in the “errorOldWhy” string." },
+			"all": {
+				"string": "allyay",
+				"developer_comment": "For use in the “errorOldWhy” string."
+			},
 			"modern": { "string": "Odernmay owsersbray:" },
 			"mistake": {
 				"string": ""
