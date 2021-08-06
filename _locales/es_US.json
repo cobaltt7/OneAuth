@@ -37,20 +37,20 @@
 				"string": "Màs opciones de configuración están viniendo pronto."
 			},
 			"CODE": {
-				"string": "",
+				"string": "<CÓDIGO>",
 				"character_limit": 10,
-				"developer_comment": "AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
 			},
 			"CALLBACK": {
 				"string": "",
 				"character_limit": 20,
-				"developer_comment": "This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
 			}
 		},
 		"localization": {
 			"heading": { "string": "Especificación de idioma" },
 			"basics": {
-				"string": "Specify the language to use on pages by adding another parameter to the URL: {0}"
+				"string": ""
 			},
 			"code": {
 				"string": ""
@@ -104,12 +104,10 @@
 	"clients": {
 		"email": {
 			"page": {
-				"heading": { "string": "" },
+				"heading": { "string": "Inicie sesión con su correo electrónico" },
 				"email": { "string": "Para continuar, por favor introduce tu correo electrónico." },
 				"submit": { "string": "Enviar" },
-				"code": {
-					"string": "Para continuar, por favor introduce el código que te enviamos."
-				},
+				"code": { "string": "Para continuar, por favor introduce el código que te enviamos." },
 				"placeholder": { "string": "" }
 			},
 			"email": {
@@ -175,10 +173,10 @@
 				"developer_comment": "This should be changed to the language you are translating to. For example, if you are translating to “Spanish (United States)”, you would translate this as “Español (Estados Unidos)”. Find out what language you are on up there 👆."
 			},
 			"language": {
-				"string": ""
+				"string": "Idioma"
 			},
 			"choose": {
-				"string": ""
+				"string": "Elija una idioma"
 			}
 		},
 		"links": {
@@ -189,22 +187,22 @@
 				"string": ""
 			},
 			"github": {
-				"string": ""
+				"string": "GitHub"
 			},
 			"twitter": {
-				"string": ""
+				"string": "Twitter"
 			},
 			"replit": {
-				"string": ""
+				"string": "Replit"
 			},
 			"npm": {
-				"string": ""
+				"string": "npm"
 			},
 			"transifex": {
-				"string": ""
+				"string": "Transifex"
 			},
 			"discord": {
-				"string": ""
+				"string": "Discord"
 			},
 			"auth": {
 				"string": "1Auth"
@@ -241,7 +239,7 @@
 			"scratch": {
 				"string": ""
 			},
-			"see": { "string": "" },
+			"see": { "string": "Ver {0}." },
 			"google": {
 				"string": ""
 			},
@@ -393,9 +391,7 @@
 		},
 		"412": {
 			"heading": { "string": "" },
-			"message": {
-				"string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!"
-			}
+			"message": { "string": "Desafortunadamente, no podemos cumple tus condiciones. ¡Qué pena!" }
 		},
 		"413": {
 			"heading": { "string": "" },
@@ -529,10 +525,7 @@
 				"string": "",
 				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 			},
-			"all": {
-				"string": "todos",
-				"developer_comment": "For use in the “errorOldWhy” string."
-			},
+			"all": { "string": "todos", "developer_comment": "For use in the “errorOldWhy” string." },
 			"modern": { "string": "Navegadores modernos:" },
 			"mistake": {
 				"string": ""

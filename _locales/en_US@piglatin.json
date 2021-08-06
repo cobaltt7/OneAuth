@@ -6,60 +6,60 @@
 			"heading": { "string": "1Auth Allyay-Inyay-Oneyay Authenticationyay" },
 			"about": { "string": "Aboutyay" },
 			"description": {
-				"string": ""
+				"string": "1Auth isyay anyay allyay-inyay-oneyay authenticationyay ientclay atthay eway esigneday otay orkway eamlesslysay ithway anyay ebsiteway."
 			},
 			"clients": {
-				"string": "{0, plural, one {} other {}}"
+				"string": "{0, plural, one {Eway upportsay {0} ientclay ithway anymay oremay otay omecay.} other {Eway upportsay {0} ientsclay ithway anymay oremay otay omecay.}}"
 			},
 			"supported": { "string": "Upportedsay Ientsclay" }
 		},
 		"developers": {
 			"heading": { "string": "Orfay Evelopersday" },
 			"streamlined": {
-				"string": ""
+				"string": "Eway esigneday 1Auth osay atthay addingyay ityay otay ouryay itesay isyay asyay eamlinesstray asyay ossiblepay."
 			},
 			"initiate": {
-				"string": ""
+				"string": "Enwhay ayay useryay icksclay “Ignsay inyay” onyay ouryay itesay, irectday emthay otay isthay URL:"
 			},
 			"after": {
-				"string": ""
+				"string": "Afteryay ehtay useryay icksclay onyay ethay inklay andyay inishesfay authenticationyay ithway usyay, eway illway edirectray emthay otay ateverwhay URL ouyay usedyay inyay aceplay ofyay {0} above."
 			},
 			"parameter": {
-				"string": ""
+				"string": "Ifyay eythay allowedyay aringshay eirthay ataday enthay erethay illway ebay ayay ewnay eryquay arameterpay onyay atthay URL, {0}."
 			},
 			"get": {
-				"string": ""
+				"string": "Otay etrieveray ethay useryay's informationyay, endsay ethay ollowingfay HTTP equestray, erewhay {0} isyay ethay aluevay ofyay ethay aidsay arameterpray:"
 			},
 			"denied": {
-				"string": ""
+				"string": "Ifyay ethay enieday aringshay eirthay ataday, enthay erethay illway otnay ebay anyay ewnay eryquay arameterpay."
 			},
 			"configuration": {
-				"string": ""
+				"string": "Oremay onfigurationcay optionsyay areyay omingcay oonsay."
 			},
 			"CODE": {
 				"string": "<ODECAY>",
 				"character_limit": 10,
-				"developer_comment": "AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
 			},
 			"CALLBACK": {
-				"string": "",
+				"string": "<ALLBACKCAY_URL>",
 				"character_limit": 20,
-				"developer_comment": "This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
 			}
 		},
 		"localization": {
 			"heading": { "string": "Anguagelay ecifcationspay" },
 			"basics": {
-				"string": ""
+				"string": "Ecifyspay ethay anguagelay otay useyay onyay agespay ybay addingyay anotheryay arameterpay otay ethay URL: {0}"
 			},
 			"code": {
-				"string": ""
+				"string": "Itsyay aluevay ouldshay ebay ayay 2-etterlay anguagelay odecay ikelay {0} oryay {1}."
 			},
 			"country": {
 				"string": ""
 			},
 			"fallback": {
-				"string": ""
+				"string": "iIfyay ayay anguagelay isyay otnay availableyay, ityay illway allfay ackbay otay ethay onay-ountrycay-ecificspay anguagelay, enthay otay ethay useryays' owserbray anguagelay."
 			},
 			"new": { "string": "EWNAY!!!", "developer_comment": "Please keep this uppercase." },
 			"few": {
@@ -104,21 +104,17 @@
 	"clients": {
 		"email": {
 			"page": {
-				"heading": { "string": "" },
+				"heading": { "string": "Ignsay inyay ithway ouryay emailyay" },
 				"email": { "string": "Otay ontinuecay, easeplay enteryay ouryay emailyay." },
 				"submit": { "string": "Ubmityay" },
-				"code": {
-					"string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay."
-				},
-				"placeholder": { "string": "" }
+				"code": { "string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay." },
+				"placeholder": { "string": "ouyay@exampleyay.com" }
 			},
 			"email": {
 				"subject": { "string": "1Auth Emailyay Erificationvay" },
 				"code": { "string": "Ouryay odecay isyay {0}." },
-				"share": { "string": "On'tday areshay ithway anyoneyay elseyay." },
-				"act": {
-					"string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay."
-				},
+				"share": { "string": "Oday otnay areshay ithway anyoneyay elseyay." },
+				"act": { "string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay." },
 				"next": { "string": "Atwhay ownay?" },
 				"copy": { "string": "Opycay ouryay odecay." },
 				"back": { "string": "Ogay ackbay otay 1Auth." },
@@ -129,7 +125,7 @@
 					"string": "Eviewray ethay informationyay eway illway endsay andyay ethay itesay eway illway endsay ityay otay, andyay ifyay allyay ookslay oodgay, esspray “{0}”."
 				},
 				"expire": {
-					"string": ""
+					"string": "Ouryay odecay illway expireyay afteryay 15 inutesmay, osay ifyay ityay oesday otnay orkway, ityay ightmay avehay eenbay ootay onglay."
 				},
 				"rerequest": {
 					"string": "Ytray essingpray ethay ackbay uttonbay andyay anotheryay odecay!"
@@ -141,7 +137,7 @@
 					"string": "Ustjay ignoreyay ityay."
 				},
 				"nothing": {
-					"string": "On'tday orryway, othingnay illway appenhay."
+					"string": "Oday otnay orryway, othingnay illway appenhay."
 				}
 			}
 		}
@@ -158,7 +154,7 @@
 				"string": "ifyay ouyay esspray “{2}”, enthay {1} iillway eceiveray ethay ollowingfay informationyay (akentay omfray ouryay {0} accountyay):"
 			},
 			"hidden": {
-				"string": ""
+				"string": "Unfortunatelyay, eway ancay otnay owshay isthay ataday ightray ownay."
 			},
 			"sorry": {
 				"string": "Orrysay aboutyay atthay!"
@@ -302,7 +298,7 @@
 		"204": {
 			"heading": { "string": "Onay Ontentcay" },
 			"message": {
-				"string": ""
+				"string": "Ouryay equestray asway uccessfulsay. Oweverhay, eway oday ontany avehay anyay informationyay otay ivegay ouyay inyay esponseray."
 			}
 		},
 		"205": {
@@ -343,7 +339,7 @@
 		},
 		"402": {
 			"heading": { "string": "Aymentpay Equiredray" },
-			"message": { "string": "" }
+			"message": { "string": "Easeplay aypay eforebay accessingyay isthay agepay." }
 		},
 		"403": {
 			"heading": { "string": "Orbiddenfay" },
@@ -372,7 +368,7 @@
 		"408": {
 			"heading": { "string": "Equestray Imeoutay" },
 			"message": {
-				"string": ""
+				"string": "Hmm… ethay agepay asway oadinglay orfay itequay ayay ilewhay andyay imedtay outyay! Erhapspay erethay asway anyay internalyay erroryay. Ytray eloadingray ethay agepay. Ifyay isthay eepskay appeninghay, ouyay aymay antway otay ontactcay usyay onyay GitHub osay eway ancay ixfay ityay."
 			}
 		},
 		"409": {
@@ -403,7 +399,7 @@
 		},
 		"414": {
 			"heading": { "string": "URI Ootay Onglay" },
-			"message": { "string": "Atthay UEO isyay ootay onglay orfay usyay otay understandyay!" }
+			"message": { "string": "Atthay URL isyay ootay onglay orfay usyay otay understandyay!" }
 		},
 		"415": {
 			"heading": { "string": "Unsupportedyay Ediamay Ypetay" },
@@ -418,7 +414,7 @@
 			"message": { "string": "" }
 		},
 		"418": {
-			"heading": { "string": "I'myay ayay eapottay" },
+			"heading": { "string": "Iyay amaya ayay eapottay" },
 			"message": { "string": "" }
 		},
 		"421": {
@@ -516,7 +512,7 @@
 		"510": {
 			"heading": { "string": "Otnay Extendedyay" },
 			"message": {
-				"string": ""
+				"string": "Eway ancy otnay owshay ouyay isthay agepay ithway ethay informationyay ivengay. Easeplay extendyay ouryay equstray."
 			}
 		},
 		"511": {
@@ -529,10 +525,7 @@
 				"string": "",
 				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 			},
-			"all": {
-				"string": "allyay",
-				"developer_comment": "For use in the “errorOldWhy” string."
-			},
+			"all": { "string": "allyay", "developer_comment": "For use in the “errorOldWhy” string." },
 			"modern": { "string": "Odernmay owsersbray:" },
 			"mistake": {
 				"string": ""

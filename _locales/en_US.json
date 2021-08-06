@@ -39,12 +39,12 @@
 			"CODE": {
 				"string": "<CODE>",
 				"character_limit": 10,
-				"developer_comment": "AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
 			},
 			"CALLBACK": {
 				"string": "<CALLBACK_URI>",
 				"character_limit": 20,
-				"developer_comment": "This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
 			}
 		},
 		"localization": {
@@ -56,7 +56,7 @@
 				"string": "Its value should be a 2-letter language code like {0} or {1}."
 			},
 			"country": {
-				"string": "You may follow it by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
+				"string": "You may follow it by an underscore and a 2-letter country code, e.g. {0} or {1} (optional)."
 			},
 			"fallback": {
 				"string": "If a language is not available, it will fall back to the non-country-specific language, then to the users’ browser language."
@@ -506,7 +506,7 @@
 		"508": {
 			"heading": { "string": "Loop Detected" },
 			"message": {
-				"string": "Ummm...there’s an infinite loop somewhere in the code! As such, we can’t complete your request! You may want to contact us on GitHub and let us know about this."
+				"string": "Ummm… there’s an infinite loop somewhere in the code! As such, we can’t complete your request! You may want to contact us on GitHub and let us know about this."
 			}
 		},
 		"510": {
