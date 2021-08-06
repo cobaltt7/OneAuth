@@ -6,7 +6,7 @@
 			"heading": { "string": "1Auth Allyay-Inyay-Oneyay Authenticationyay" },
 			"about": { "string": "Aboutyay" },
 			"description": {
-				"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
+				"string": ""
 			},
 			"clients": {
 				"string": "{0, plural, one {} other {}}"
@@ -16,13 +16,13 @@
 		"developers": {
 			"heading": { "string": "Orfay Evelopersday" },
 			"streamlined": {
-				"string": "We designed 1Auth so that adding it to your site is as streamlined as possible."
+				"string": ""
 			},
 			"initiate": {
-				"string": "When a user clicks “Sign in” on your site, direct them to this URL:"
+				"string": ""
 			},
 			"after": {
-				"string": "After the user clicks on the link and finishes authentication with us, we will redirect them to whatever URL you used in place of {0} above."
+				"string": ""
 			},
 			"parameter": {
 				"string": ""
@@ -31,10 +31,10 @@
 				"string": ""
 			},
 			"denied": {
-				"string": "If they denied sharing their data, then there will not be any new query parameter."
+				"string": ""
 			},
 			"configuration": {
-				"string": "More configuration options are coming soon."
+				"string": ""
 			},
 			"CODE": {
 				"string": "",
@@ -50,16 +50,16 @@
 		"localization": {
 			"heading": { "string": "Anguagelay ecifcationspay" },
 			"basics": {
-				"string": "Specify the language to use on pages by adding another parameter to the URL: {0}"
+				"string": ""
 			},
 			"code": {
-				"string": "Its value should be a 2-letter language code like {0} or {1}."
+				"string": ""
 			},
 			"country": {
-				"string": "You may follow it by an underscore and a 2-letter country code, IE {0} or {1} (optional)."
+				"string": ""
 			},
 			"fallback": {
-				"string": "If a language is not available, it will fall back to the non-country-specific language, then to the users’ browser language."
+				"string": ""
 			},
 			"new": { "string": "EWNAY!!!", "developer_comment": "Please keep this uppercase." },
 			"few": {
@@ -67,17 +67,17 @@
 			},
 			"grows": { "string": "" },
 			"help": {
-				"string": "If you would like to help us translate, please click here."
+				"string": ""
 			},
 			"account": {
-				"string": "Create a Transifex account if you do not already have one, then click “Join team”.",
+				"string": "",
 				"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
 			},
 			"thanks": {
 				"string": "Anksthay orfay ouryay eagernessyay otay elphay!"
 			},
 			"request": {
-				"string": "(Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
+				"string": "",
 				"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
 			}
 		}
@@ -85,7 +85,7 @@
 	"branding": {
 		"dot": {
 			"logo": {
-				"string": "OneDot Ogolay"
+				"string": "OneDot ogolay"
 			},
 			"dot": {
 				"string": "1DOT"
@@ -107,14 +107,18 @@
 				"heading": { "string": "" },
 				"email": { "string": "Otay ontinuecay, easeplay enteryay ouryay emailyay." },
 				"submit": { "string": "Ubmityay" },
-				"code": { "string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay." },
+				"code": {
+					"string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay."
+				},
 				"placeholder": { "string": "" }
 			},
 			"email": {
 				"subject": { "string": "1Auth Emailyay Erificationvay" },
 				"code": { "string": "Ouryay odecay isyay {0}." },
 				"share": { "string": "On'tday areshay ithway anyoneyay elseyay." },
-				"act": { "string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay." },
+				"act": {
+					"string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay."
+				},
 				"next": { "string": "Atwhay ownay?" },
 				"copy": { "string": "Opycay ouryay odecay." },
 				"back": { "string": "Ogay ackbay otay 1Auth." },
@@ -154,7 +158,7 @@
 				"string": "ifyay ouyay esspray \"{2}\", enthay {1} iillway eceiveray ethay ollowingfay informationyay (akentay omfray ouryay {0} accountyay):"
 			},
 			"hidden": {
-				"string": "Unfortunately, we can’t show this data right now."
+				"string": ""
 			},
 			"sorry": {
 				"string": "Orrysay aboutyay atthay!"
@@ -271,131 +275,119 @@
 		},
 		"102": {
 			"heading": { "string": "Ocessingpray" },
-			"message": { "string": "We have received your request. Please wait." }
+			"message": { "string": "" }
 		},
 		"103": {
 			"heading": { "string": "Earlyay Intshay" },
 			"message": {
-				"string": "Here are some resources that you will need. While you wait for the rest of the response, please start loading them."
+				"string": ""
 			}
 		},
 		"201": {
 			"heading": { "string": "Eatedcray" },
-			"message": { "string": "An item in our databases has successfully been created." }
+			"message": { "string": "" }
 		},
 		"202": {
 			"heading": { "string": "Acceptedyay" },
 			"message": {
-				"string": "Your request has been accepted and understood. We forwarded it to another server."
+				"string": ""
 			}
 		},
 		"203": {
 			"heading": { "string": "Onay-Authoritativeyay Informationyay" },
 			"message": {
-				"string": "This information is from a backup copy and may not be up-to-date. Please do not rely on it being correct."
+				"string": ""
 			}
 		},
 		"204": {
 			"heading": { "string": "Onay Ontentcay" },
 			"message": {
-				"string": "Your request was successful. However, we don’t have any information to give you in response."
+				"string": ""
 			}
 		},
 		"205": {
 			"heading": { "string": "Esetray Ontentcay" },
 			"message": {
-				"string": "Your request was successful. Reset any pages that use our APIs as the content may have changed."
+				"string": ""
 			}
 		},
 		"208": {
 			"heading": { "string": "Alreadyay Eportedray" },
-			"message": { "string": "We have already reported this information to you." }
+			"message": { "string": "" }
 		},
 		"226": {
 			"heading": { "string": "IA Usedyay" },
 			"message": {
-				"string": "We used some instance-manipulations on the current instance. Here is the result."
+				"string": ""
 			}
 		},
 		"300": {
 			"heading": { "string": "Ultiplemay Oicechay" },
-			"message": { "string": "Please pick a redirection method or location to continue." }
+			"message": { "string": "" }
 		},
 		"304": {
 			"heading": { "string": "Otnay Odifiedmay" },
 			"message": {
-				"string": "The requested page has not been modified since the last request."
+				"string": ""
 			}
 		},
 		"400": {
 			"heading": { "string": "Adbay Equestray" },
 			"message": {
-				"string": "Oops! Your request was invalid. Please make sure all needed information is sent, no extra information is sent, and all sent information is valid. If this keeps happening, try contacting us on GitHub."
+				"string": ""
 			}
 		},
 		"401": {
 			"heading": { "string": "Unauthorizedyay" },
-			"message": { "string": "Please login before accessing this resource." }
+			"message": { "string": "" }
 		},
 		"402": {
 			"heading": { "string": "Aymentpay Equiredray" },
-			"message": { "string": "Easeplay aypay eforebay accessingyay isthay agepay." }
+			"message": { "string": "" }
 		},
 		"403": {
 			"heading": { "string": "Orbiddenfay" },
-			"message": { "string": "Sorry, but you are forbidden to access this resource." }
+			"message": { "string": "" }
 		},
 		"404": {
 			"heading": { "string": "Otnay Oundfay" },
-			"message": {
-				"string": "Uh-oh! We can’t find that page! Go back? If a link on this site brought you here, you may want to contact us on GitHub and let us know we have a broken link."
-			}
+			"message": { "string": "" }
 		},
 		"405": {
 			"heading": { "string": "Ethodmay Otnay Allowedyay" },
-			"message": {
-				"string": "That HTTP method isn’t supported on this page! Try a different page and/or method."
-			}
+			"message": { "string": "" }
 		},
 		"406": {
 			"heading": { "string": "Otnay Acceptableyay" },
-			"message": { "string": "We can’t match the data requested with the format requested." }
+			"message": { "string": "" }
 		},
 		"407": {
 			"heading": { "string": "Oxypray Authenticationyay Equiredray" },
-			"message": { "string": "Please use a proxy to access this resource." }
+			"message": { "string": "" }
 		},
 		"408": {
 			"heading": { "string": "Equestray Imeoutay" },
-			"message": {
-				"string": "Hmm… the page was loading for quite a while and timed out! Perhaps there was an internal error. Try reloading the page. If this keeps happening, you may want to contact us on GitHub so we can fix it."
-			}
+			"message": { "string": "" }
 		},
 		"409": {
 			"heading": { "string": "Onflictcay" },
-			"message": {
-				"string": "Oops, there was a conflict between the information your browser sent and the information we have! Try reloading the page. If this keeps happening, try contacting us on GitHub so we can fix it."
-			}
+			"message": { "string": "" }
 		},
 		"410": {
 			"heading": { "string": "Onegay" },
-			"message": {
-				"string": "This isn’t here anymore. Unfortunately, it’s never coming back."
-			}
+			"message": { "string": "" }
 		},
 		"411": {
 			"heading": { "string": "Engthlay Equiredray" },
-			"message": {
-				"string": "You didn’t say how much information you wanted! Please repeat the request with a requested length."
-			}
+			"message": { "string": "" }
 		},
 		"412": {
 			"heading": { "string": "Econditionpray Ailedfay" },
-			"message": { "string": "Unfortunately, we can’t meet your conditions. Too bad!" }
+			"message": { "string": "" }
 		},
 		"413": {
 			"heading": { "string": "Ayloadpay Ootay Argelay" },
-			"message": { "string": "You sent so much data that we can’t process it!" }
+			"message": { "string": "" }
 		},
 		"414": {
 			"heading": { "string": "URI Ootay Onglay" },
@@ -407,15 +399,15 @@
 		},
 		"416": {
 			"heading": { "string": "Angeray Otnay Atisfiablesay" },
-			"message": { "string": "We don’t have any data in the requested range." }
+			"message": { "string": "" }
 		},
 		"417": {
 			"heading": { "string": "Expectationyay Ailedfay" },
-			"message": { "string": "We expected to receive more information than you sent!" }
+			"message": { "string": "" }
 		},
 		"418": {
 			"heading": { "string": "I'myay ayay eapottay" },
-			"message": { "string": "We refuse to try and brew coffee with a teapot." }
+			"message": { "string": "" }
 		},
 		"421": {
 			"heading": { "string": "Isdirectedmay Equestray" },
@@ -439,69 +431,51 @@
 		},
 		"428": {
 			"heading": { "string": "Econditionpray Equiredray" },
-			"message": {
-				"string": "You can’t do that yet. Please fulfill the requested conditions first."
-			}
+			"message": { "string": "" }
 		},
 		"429": {
 			"heading": { "string": "Ootay Anymay Equestsray" },
-			"message": {
-				"string": "You have sent too many requests in a short amount of time. Please wait before sending more."
-			}
+			"message": { "string": "" }
 		},
 		"431": {
 			"heading": { "string": "Equestray Eaderhay Ieldsfay Ootay Argelay" },
-			"message": { "string": "The headers of your request are too long to be processed." }
+			"message": { "string": "" }
 		},
 		"451": {
 			"heading": { "string": "Unavailableyay Orfay Egalay Easonsray" },
-			"message": {
-				"string": "Unfortunately, we cannot legally provide this page to you. Sorry about that!"
-			}
+			"message": { "string": "" }
 		},
 		"500": {
 			"heading": { "string": "Internalyay Erversay Erroryay" },
-			"message": {
-				"string": "Uh-oh, you found a bug! We ran into an unexpected error. Please report it on GitHub so we can stop this from happening again."
-			}
+			"message": { "string": "" }
 		},
 		"501": {
 			"heading": { "string": "Otnay Implementedyay" },
-			"message": {
-				"string": "No part of our website supports that HTTP method. Try a different one!"
-			}
+			"message": { "string": "" }
 		},
 		"502": {
 			"heading": { "string": "Adbay Atewaygay" },
-			"message": { "string": "We got an invalid response from an external service." }
+			"message": { "string": "" }
 		},
 		"503": {
 			"heading": { "string": "Ervicesay Unavailableyay" },
-			"message": {
-				"string": "Sorry! This page is currently down! It should be back up soon!"
-			}
+			"message": { "string": "" }
 		},
 		"504": {
 			"heading": { "string": "Atewaygay Imeoutay" },
-			"message": { "string": "An external server didn’t send us a response fast enough." }
+			"message": { "string": "" }
 		},
 		"505": {
 			"heading": { "string": "HTTP Ersionvay Otnay Upportedsay" },
-			"message": {
-				"string": "No part of our website supports that HTTP version. Try a different one!"
-			}
+			"message": { "string": "" }
 		},
 		"506": {
 			"heading": { "string": "Ariantvay Alsoyay Egotiatesnay" },
-			"message": {
-				"string": "Error in our internal configuration! Please report this on GitHub so we can prevent it from happening again."
-			}
+			"message": { "string": "" }
 		},
 		"507": {
 			"heading": { "string": "Insufficientyay Oragestay" },
-			"message": {
-				"string": "Our servers do not have enough storage to store the data needed to complete your request."
-			}
+			"message": { "string": "" }
 		},
 		"508": {
 			"heading": { "string": "Ooplay Etecteday" },
@@ -511,24 +485,25 @@
 		},
 		"510": {
 			"heading": { "string": "Otnay Extendedyay" },
-			"message": {
-				"string": "We can’t show you this page with the information given. Please extend your request."
-			}
+			"message": { "string": "" }
 		},
 		"511": {
 			"heading": { "string": "Etworknay Authenticationyay Equiredray" },
-			"message": { "string": "Please sign in to the network before accessing the Internet." }
+			"message": { "string": "" }
 		},
 		"old": {
 			"heading": { "string": "Ouyay areyay usingyay anyay outdatedyay owserbray!" },
 			"why": {
-				"string": "For a better experience on {0} sites (not only on ours), please keep your browser up to date.",
+				"string": "",
 				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
 			},
-			"all": { "string": "allyay", "developer_comment": "For use in the “errorOldWhy” string." },
+			"all": {
+				"string": "allyay",
+				"developer_comment": "For use in the “errorOldWhy” string."
+			},
 			"modern": { "string": "Odernmay owsersbray:" },
 			"mistake": {
-				"string": "If you are using a modern browser, please make sure that you have enabled and allowed JavaScript on this site."
+				"string": ""
 			},
 			"more": { "string": "Earnlay Oremay" },
 			"chrome": {

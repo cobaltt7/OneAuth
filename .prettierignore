@@ -9,7 +9,7 @@ plugin_packages/
 .nvm
 .eslintcache
 .node_repl_history
-_locales/*.json
+# _locales/*.json
 !_locales/en_US.json
 package-lock.json
 package.json
