@@ -14,7 +14,17 @@ module.exports = {
 
 	plugins: [columns, forms, typography],
 
-	purge: ["./src/**/**.html", "./src/**/**/**.html", "./src/tailwind.sass"],
+	purge: {
+		content: ["./src/**/**.html", "./src/**/**/**.html", "./src/tailwind.sass"],
+		mode: "all",
+
+		options: {
+			fontFace: true,
+			keyframes: true,
+		},
+
+		safelist: ["m-auto"],
+	},
 
 	theme: {
 		colors: {
