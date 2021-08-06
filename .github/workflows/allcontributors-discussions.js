@@ -17,7 +17,6 @@ const REPO_NAME = "ScratchAddons",
  */
 function graphql(query, ...placeholderValues) {
 	return (
-		// eslint-disable-next-line unicorn/no-array-reduce -- reduce is the best way to do this.
 		placeholderValues.reduce(
 			(last, placeholder, index) => `${last}${placeholder}${query[index + 1]}`,
 			query[0],

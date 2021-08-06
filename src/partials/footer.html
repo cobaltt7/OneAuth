@@ -1,0 +1,190 @@
+<footer
+	class="
+		fixed
+		w-full
+		border-t border-coolGray-300
+		z-50
+		duration-500
+		bg-coolGray-100
+		p-px
+		text-sm
+		bottom-0
+		translate-y-3/4
+		hover:translate-y-0
+	"
+>
+	<ul
+		class="
+			xs:column-2
+			m-2.5
+			flex
+			justify-center
+			lg:block
+			md:column-3
+			lg:column-4
+			xs:text-center
+			column-gap-0
+		"
+	>
+		<li class="w-auto md:hidden">
+			<ul>
+				<li>
+					<img
+						title="{{ #message }}branding.dot.dot{{ /message }}"
+						alt="{{ #message }}branding.dot.logo{{ /message }}"
+						class="pr-2"
+						width="230"
+						src="https://cdn.onedot.cf/brand/SVG/NoPadding/1Dot%20NoPad.svg"
+					/>
+				</li>
+				<li>
+					<p>{{ #message }}footer.legal.copyright{{ /message }}</p>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<ul>
+				<li>{{ #message }}footer.links.onedot{{ /message }}</li>
+				<li class="xs:hidden">
+					<a href="https://onedot.cf">{{ #message }}footer.links.website{{ /message }}</a>
+				</li>
+				<li class="hidden xs:block">
+					<a href="https://onedot.cf">{{ #message }}footer.links.onedot{{ /message }}</a>
+				</li>
+				<li class="xs:hidden">
+					<a href="https://github.com/onedotprojects"
+						>{{ #message }}footer.links.github{{ /message }}</a
+					>
+				</li>
+				<li class="xs:hidden">
+					<a href="https://twitter.com/onedotprojects"
+						>{{ #message }}footer.links.twitter{{ /message }}</a
+					>
+				</li>
+				<li class="xs:hidden">
+					<a href="https://replit.com/@onedotprojects"
+						>{{ #message }}footer.links.replit{{ /message }}</a
+					>
+				</li>
+				<li class="xs:hidden">
+					<a href="https://www.npmjs.com/org/onedotprojects"
+						>{{ #message }}footer.links.npm{{ /message }}</a
+					>
+				</li>
+				<li>
+					<a href="https://www.transifex.com/1dot/public/"
+						>{{ #message }}footer.links.transifex{{ /message }}</a
+					>
+				</li>
+				<li>
+					<a href="https://discord.gg/aFEvHxDZ9R"
+						>{{ #message }}footer.links.discord{{ /message }}</a
+					>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<ul>
+				<li>{{ #message }}footer.links.auth{{ /message }}</li>
+				<li>
+					<a href="/docs">{{ #message }}footer.links.docs{{ /message }}</a>
+				</li>
+				<li>
+					<a href="/docs/credits">{{ #message }}footer.links.credits{{ /message }}</a>
+				</li>
+				<li>
+					<a href="https://www.transifex.com/1dot/1auth/"
+						>{{ #message }}footer.links.translate{{ /message }}</a
+					>
+				</li>
+				<li>
+					<a href="https://github.com/onedotprojects/auth"
+						>{{ #message }}footer.links.repo{{ /message }}</a
+					>
+				</li>
+				<li>
+					<a
+						href="https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fget_data"
+						>{{ #message }}footer.links.demo{{ /message }}</a
+					>
+				</li>
+				<li>
+					<a href="https://www.openode.io/"
+						>{{ #message }}footer.links.openode{{ /message }}</a
+					>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<ul>
+				<li>{{ #message }}footer.legal.heading{{ /message }}</li>
+				<li>
+					<a href="https://onedot.cf/legal"
+						>{{ #message }}footer.legal.tos{{ /message }}</a
+					>
+				</li>
+				<li>
+					<!--TODO: make a privacy page-->
+					<a href="/privacy">{{ #message }}footer.legal.privacy{{ /message }}</a>
+				</li>
+			</ul>
+		</li>
+		<li class="w-80 lg:w-full lg:text-center lg:span-all">
+			<ul>
+				<li>{{ #message }}footer.localization.language{{ /message }}</li>
+				<li>
+					<form id="language-forum">
+						<select
+							style="min-width: 22em"
+							class="
+								text-center
+								border border-black border-opacity-10
+								h-12
+								bg-coolGray-300
+								text-sm
+								rounded-lg
+								p-2
+								lg:w-1/2
+							"
+							required=""
+							name="language"
+							title="{{ #message }}footer.localization.choose{{ /message }}"
+							onchange="document.getElementById('language-forum').submit()"
+						>
+							{{ #languages }}
+							<option value="{{ code }}">{{ language }}</option>
+							{{ /languages }}
+						</select>
+					</form>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div
+		class="
+			flex
+			justify-center
+			text-xs
+			m-2.5
+			sm:column-2
+			lg:column-5
+			legal
+			lg:block lg:column-gap-0
+		"
+	>
+		<p>
+			{{ #message }}footer.legal.scratch;footer.legal.see|||<a href="https://scratch.mit.edu"
+				>http://scratch.mit.edu</a
+			>{{ /message }}
+		</p>
+		<p>{{ #message }}footer.legal.google{{ /message }}</p>
+		<p>{{ #message }}footer.legal.replit{{ /message }}</p>
+		<p>{{ #message }}footer.legal.github{{ /message }}</p>
+		<p>
+			{{ #message }}footer.legal.license|||<a href="/docs/license">[footer.legal.mit]</a>{{
+			/message }}<span class="hidden md:inline">
+				{{ #message }}footer.legal.copyright{{ /message }}</span
+			>
+		</p>
+	</div>
+</footer>

@@ -3,6 +3,7 @@
 .transifexrc
 .DS_STORE
 .git/
+.replit
 
 # this is generated file
 src/main/style.css

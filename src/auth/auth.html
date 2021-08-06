@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="display: none" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{ #message }}title|||[signinHeading]{{ /message }}</title>
+		<title>{{ #message }}branding.auth.title|||[core.signing.heading]{{ /message }}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -11,12 +11,12 @@
 		{{> head }}
 	</head>
 
-	<body style="display: none">
+	<body>
 		{{> nav }}
 		<main>
-			<h1>{{ #message }}signinHeading{{ /message }}</h1>
-			<p>{{ #message }}signinChoose{{ /message }}</p>
-			<ul id="auth-list">
+			<h1>{{ #message }}core.signin.heading{{ /message }}</h1>
+			<p>{{ #message }}core.signin.choose{{ /message }}</p>
+			<ul id="auth-list" class="justify-center">
 				{{ #clients }}
 				<a href="{{ link }}">
 					<li class="auth-button">
@@ -31,11 +31,12 @@
 							name="{{ name }}"
 						/>
 						{{ /url }}
-						<span>{{ #message }}signinWith|||{{ name }}{{ /message }}</span>
+						<span>{{ #message }}core.signin.with|||{{ name }}{{ /message }}</span>
 					</li>
 				</a>
 				{{ /clients }}
 			</ul>
 		</main>
+		{{> footer }}
 	</body>
 </html>

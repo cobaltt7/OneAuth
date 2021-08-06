@@ -9,7 +9,7 @@
 				"string": ""
 			},
 			"clients": {
-				"string": "{0, plural, other {}}"
+				"string": "{0, plural, zero {} one {} two {} few {} many {} other {}}"
 			},
 			"supported": { "string": "" }
 		},
@@ -190,7 +190,7 @@
 				"string": "GitHub"
 			},
 			"twitter": {
-				"string": "Twitter"
+				"string": "تويتر"
 			},
 			"replit": {
 				"string": "Replit"

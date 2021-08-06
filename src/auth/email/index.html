@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="display: none" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{ #message }}title|||[emailHeading]{{ /message }}</title>
+		<title>
+			{{ #message }}branding.auth.title|||[clients.email.email.page.heading]{{ /message }}
+		</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<link rel="preload" href="/image/loading.svg" as="image" />
 		<noscript>
@@ -12,12 +14,12 @@
 		{{> head }}
 	</head>
 
-	<body style="display: none">
+	<body>
 		{{> nav }}
 		<main>
-			<h1>{{ #message }}emailHeading{{ /message }}</h1>
+			<h1>{{ #message }}clients.email.page.heading{{ /message }}</h1>
 			<label id="note" for="email-address"
-				>{{ #message }}emailEnterPrompt{{ /message }}</label
+				>{{ #message }}clients.email.page.email{{ /message }}</label
 			>
 			<form action method="POST">
 				<input
@@ -26,11 +28,14 @@
 					type="email"
 					autocomplete="email"
 					required="true"
-					placeholder="{{ #message }}emailPlaceholder{{ /message }}"
+					placeholder="{{ #message }}clients.email.page.placeholder{{ /message }}"
 				/>
-				<button id="submit" type="submit">{{ #message }}emailSubmit{{ /message }}</button>
+				<button id="submit" type="submit">
+					{{ #message }}clients.email.page.submit{{ /message }}
+				</button>
 			</form>
 		</main>
+		{{> footer }}
 		<script>
 			"use strict";
 			(function forumHandler() {
@@ -49,7 +54,8 @@
 					submit.firstChild.remove();
 					submit.append(
 						Object.assign(document.createElement("img"), {
-							src: "/image/loading.svg"
+							src: "/image/loading.svg",
+							className: "m-auto"
 						})
 					);
 
@@ -96,7 +102,7 @@
 
 							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "submit",
-							innerText: "{{ #message }}emailSubmit{{ /message }}",
+							innerText: "{{ #message }}clients.email.page.submit{{ /message }}",
 							type: "submit"
 						})
 					);
@@ -107,7 +113,7 @@
 							htmlFor: "code",
 							// eslint-disable-next-line id-length -- We didn't name this.
 							id: "note",
-							innerText: "{{ #message }}emailEnterCode{{ /message }}"
+							innerText: "{{ #message }}clients.email.page.code{{ /message }}"
 						}),
 						codeForm
 					);

@@ -1,377 +1,552 @@
 {
-	"docsTitle": { "string": "" },
-	"emailHeading": { "string": "" },
-	"emailEnterPrompt": { "string": "" },
-	"emailSubmit": { "string": "" },
-	"emailEnterCode": { "string": "" },
-	"emailSubject": { "string": "" },
-	"emailCodeIs": { "string": "" },
-	"emailNoShare": { "string": "" },
-	"emailNoShareWhy": { "string": "" },
-	"emailNow": { "string": "" },
-	"emailCopyCode": { "string": "" },
-	"emailGoBack": { "string": "" },
-	"emailPasteCode": {
-		"string": ""
-	},
-	"emailReviewInfo": {
-		"string": ""
-	},
-	"emailDoesntWork": {
-		"string": ""
-	},
-	"emailPressBack": {
-		"string": ""
-	},
-	"emailUnexpected": {
-		"string": ""
-	},
-	"emailIgnoreIt": {
-		"string": ""
-	},
-	"emailDontWorry": {
-		"string": ""
-	},
-	"logoAlt": { "string": "" },
-	"replitHeading": { "string": "" },
-	"replitClickAnywhere": { "string": "" },
-	"replitNoClose": {
-		"string": ""
-	},
-	"replitReopen": {
-		"string": ""
-	},
-	"replitUnblockPopups": {
-		"string": ""
-	},
-	"allowHeading": { "string": "" },
-	"allowQuestion": {
-		"string": ""
-	},
-	"allowButtonA": { "string": "" },
-	"allowButtonD": { "string": "" },
-	"allowDataNote": {
-		"string": ""
-	},
-	"signinHeading": { "string": "" },
-	"signinChoose": { "string": "" },
-	"signinWith": { "string": "" },
-	"allowDataHidden": {
-		"string": ""
-	},
-	"allowDataHiddenSorry": {
-		"string": ""
-	},
-	"error201Heading": { "string": "" },
-	"error202Heading": { "string": "" },
-	"error204Heading": { "string": "" },
-	"error205Heading": { "string": "" },
-	"error300Heading": { "string": "" },
-	"error304Heading": { "string": "" },
-	"error400Heading": { "string": "" },
-	"error401Heading": { "string": "" },
-	"error402Heading": { "string": "" },
-	"error403Heading": { "string": "" },
-	"error404Heading": { "string": "" },
-	"error405Heading": { "string": "" },
-	"error406Heading": { "string": "" },
-	"error407Heading": { "string": "" },
-	"error408Heading": { "string": "" },
-	"error409Heading": { "string": "" },
-	"error410Heading": { "string": "" },
-	"error411Heading": { "string": "" },
-	"error412Heading": { "string": "" },
-	"error413Heading": { "string": "" },
-	"error414Heading": { "string": "" },
-	"error415Heading": { "string": "" },
-	"error416Heading": { "string": "" },
-	"error417Heading": { "string": "" },
-	"error418Heading": { "string": "" },
-	"error421Heading": { "string": "" },
-	"error425Heading": { "string": "" },
-	"error426Heading": { "string": "" },
-	"error428Heading": { "string": "" },
-	"error429Heading": { "string": "" },
-	"error431Heading": { "string": "" },
-	"error451Heading": { "string": "" },
-	"error500Heading": { "string": "" },
-	"error501Heading": { "string": "" },
-	"error502Heading": { "string": "" },
-	"error503Heading": { "string": "" },
-	"error504Heading": { "string": "" },
-	"error505Heading": { "string": "" },
-	"error506Heading": { "string": "" },
-	"error510Heading": { "string": "" },
-	"error201Message": {
-		"string": ""
-	},
-	"error202Message": {
-		"string": ""
-	},
-	"error204Message": {
-		"string": ""
-	},
-	"error205Message": {
-		"string": ""
-	},
-	"error300Message": {
-		"string": ""
-	},
-	"error304Message": {
-		"string": ""
-	},
-	"error400Message": {
-		"string": ""
-	},
-	"error401Message": {
-		"string": ""
-	},
-	"error402Message": { "string": "" },
-	"error403Message": {
-		"string": ""
-	},
-	"error404Message": {
-		"string": ""
-	},
-	"error405Message": {
-		"string": ""
-	},
-	"error406Message": {
-		"string": ""
-	},
-	"error407Message": {
-		"string": ""
-	},
-	"error408Message": {
-		"string": ""
-	},
-	"error409Message": {
-		"string": ""
-	},
-	"error410Message": {
-		"string": ""
-	},
-	"error411Message": {
-		"string": ""
-	},
-	"error412Message": {
-		"string": ""
-	},
-	"error413Message": {
-		"string": ""
-	},
-	"error414Message": {
-		"string": ""
-	},
-	"error415Message": { "string": "" },
-	"error416Message": {
-		"string": ""
-	},
-	"error417Message": {
-		"string": ""
-	},
-	"error418Message": {
-		"string": ""
-	},
-	"error421Message": {
-		"string": ""
-	},
-	"error425Message": {
-		"string": ""
-	},
-	"error426Message": { "string": "" },
-	"error428Message": {
-		"string": ""
-	},
-	"error429Message": {
-		"string": ""
-	},
-	"error431Message": {
-		"string": ""
-	},
-	"error451Message": {
-		"string": ""
-	},
-	"error500Message": {
-		"string": ""
-	},
-	"error501Message": {
-		"string": ""
-	},
-	"error502Message": {
-		"string": ""
-	},
-	"error503Message": {
-		"string": ""
-	},
-	"error504Message": {
-		"string": ""
-	},
-	"error505Message": {
-		"string": ""
-	},
-	"error506Message": {
-		"string": ""
-	},
-	"error510Message": {
-		"string": ""
-	},
-	"error100Heading": { "string": "" },
-	"error100Message": {
-		"string": ""
-	},
-	"error101Heading": { "string": "" },
-	"error101Message": {
-		"string": ""
-	},
-	"error102Heading": { "string": "" },
-	"error102Message": {
-		"string": ""
-	},
-	"error103Heading": { "string": "" },
-	"error103Message": {
-		"string": ""
-	},
-	"error203Heading": { "string": "" },
-	"error203Message": {
-		"string": ""
-	},
-	"error208Heading": { "string": "" },
-	"error208Message": {
-		"string": ""
-	},
-	"error226Heading": { "string": "" },
-	"error226Message": {
-		"string": ""
-	},
-	"error422Heading": { "string": "" },
-	"error422Message": {
-		"string": ""
-	},
-	"error423Heading": { "string": "" },
-	"error423Message": {
-		"string": ""
-	},
-	"error507Heading": { "string": "" },
-	"error507Message": {
-		"string": ""
-	},
-	"error508Heading": { "string": "" },
-	"error508Message": {
-		"string": ""
-	},
-	"error511Heading": { "string": "" },
-	"error511Message": {
-		"string": ""
-	},
-	"errorOldHeading": { "string": "" },
-	"errorOldWhy": {
-		"string": "",
-		"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
-	},
-	"errorOldAll": {
-		"string": "",
-		"developer_comment": "For use in the “errorOldWhy” string."
-	},
-	"errorOldModern": { "string": "" },
-	"errorOldMistake": {
-		"string": ""
-	},
-	"errorOldMore": { "string": "" },
-	"aboutPageTitle": { "string": "" },
-	"aboutMainHeading": { "string": "" },
-	"aboutSubHeading": { "string": "" },
-	"aboutIntro": {
-		"string": ""
-	},
-	"aboutClientCount": {
-		"string": ""
-	},
-	"aboutClientsHeading": { "string": "" },
-	"aboutDevelopersHeading": { "string": "" },
-	"aboutSuperEasy": {
-		"string": ""
-	},
-	"aboutDirectTo": {
-		"string": ""
-	},
-	"aboutAfterFinish": {
-		"string": ""
-	},
-	"aboutNewParam": {
-		"string": ""
-	},
-	"aboutGetInfo": {
-		"string": ""
-	},
-	"aboutWhatCode": {
-		"string": ""
-	},
-	"aboutNoParam": {
-		"string": ""
-	},
-	"aboutMoreConfig": {
-		"string": ""
-	},
-	"aboutLangsHeader": { "string": "" },
-	"aboutLangsHow": {
-		"string": ""
-	},
-	"aboutLangsValue": {
-		"string": ""
-	},
-	"aboutLangsCountry": {
-		"string": ""
-	},
-	"aboutLangsFallback": {
-		"string": ""
-	},
-	"aboutNew": { "string": "" },
-	"aboutTranslations": {
-		"string": ""
-	},
-	"aboutHelpTranslate": {
-		"string": ""
-	},
-	"aboutCreateTXAcc": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
-	},
-	"aboutTranslateThanks": {
-		"string": ""
-	},
-	"aboutTranslateRequestLanguage": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
-	},
-	"emailPlaceholder": { "string": "" },
-	"aboutCode": {
-		"string": "",
-		"character_limit": 10,
-		"developer_comment": "AKA a token. Please replace spaces with underscores."
-	},
-	"aboutCallbackUrl": {
-		"string": "",
-		"character_limit": 20,
-		"developer_comment": "Please replace spaces with underscores."
-	},
-	"errorOldChrome": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldEdge": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldFirefox": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"errorOldSafari": {
-		"string": "",
-		"developer_comment": "Please make sure that you translate this exactly how it appears on the browser's website."
-	},
-	"title": {
-		"string": ""
+	"docs": { "string": "" },
+	"about": {
+		"about": {
+			"title": { "string": "" },
+			"heading": { "string": "" },
+			"about": { "string": "" },
+			"description": {
+				"string": ""
+			},
+			"clients": {
+				"string": "{0, plural, one {} other {}}"
+			},
+			"supported": { "string": "" }
+		},
+		"developers": {
+			"heading": { "string": "" },
+			"streamlined": {
+				"string": ""
+			},
+			"initiate": {
+				"string": ""
+			},
+			"after": {
+				"string": ""
+			},
+			"parameter": {
+				"string": ""
+			},
+			"get": {
+				"string": ""
+			},
+			"denied": {
+				"string": ""
+			},
+			"configuration": {
+				"string": ""
+			},
+			"CODE": {
+				"string": "",
+				"character_limit": 10,
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+			},
+			"CALLBACK": {
+				"string": "",
+				"character_limit": 20,
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+			}
+		},
+		"localization": {
+			"heading": { "string": "" },
+			"basics": {
+				"string": ""
+			},
+			"code": {
+				"string": ""
+			},
+			"country": {
+				"string": ""
+			},
+			"fallback": {
+				"string": ""
+			},
+			"new": { "string": "", "developer_comment": "Please keep this uppercase." },
+			"few": {
+				"string": ""
+			},
+			"grows": { "string": "" },
+			"help": {
+				"string": ""
+			},
+			"account": {
+				"string": "",
+				"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
+			},
+			"thanks": {
+				"string": ""
+			},
+			"request": {
+				"string": "",
+				"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
+			}
+		}
+	},
+	"branding": {
+		"dot": {
+			"logo": {
+				"string": ""
+			},
+			"dot": {
+				"string": "1DOT"
+			}
+		},
+		"auth": {
+			"auth": {
+				"string": "1AUTH"
+			},
+			"logo": { "string": "" },
+			"title": {
+				"string": "{0} | 1Auth"
+			}
+		}
+	},
+	"clients": {
+		"email": {
+			"page": {
+				"heading": { "string": "" },
+				"email": { "string": "" },
+				"submit": { "string": "" },
+				"code": { "string": "" },
+				"placeholder": { "string": "" }
+			},
+			"email": {
+				"subject": { "string": "" },
+				"code": { "string": "" },
+				"share": { "string": "" },
+				"act": { "string": "" },
+				"next": { "string": "" },
+				"copy": { "string": "" },
+				"back": { "string": "" },
+				"paste": {
+					"string": ""
+				},
+				"review": {
+					"string": ""
+				},
+				"expire": {
+					"string": ""
+				},
+				"rerequest": {
+					"string": ""
+				},
+				"unexpected": {
+					"string": ""
+				},
+				"ignore": {
+					"string": ""
+				},
+				"nothing": {
+					"string": ""
+				}
+			}
+		}
+	},
+	"core": {
+		"allow": {
+			"heading": { "string": "" },
+			"question": {
+				"string": ""
+			},
+			"allow": { "string": "" },
+			"deny": { "string": "" },
+			"recieve": {
+				"string": ""
+			},
+			"hidden": {
+				"string": ""
+			},
+			"sorry": {
+				"string": ""
+			}
+		},
+		"signin": {
+			"heading": { "string": "" },
+			"choose": { "string": "" },
+			"with": { "string": "" }
+		}
+	},
+	"footer": {
+		"localization": {
+			"thisLanguage": {
+				"string": "",
+				"developer_comment": "This should be changed to the language you are translating to. For example, if you are translating to “Spanish (United States)”, you would translate this as “Español (Estados Unidos)”. Find out what language you are on up there 👆."
+			},
+			"language": {
+				"string": ""
+			},
+			"choose": {
+				"string": ""
+			}
+		},
+		"links": {
+			"onedot": {
+				"string": "OneDot Projects"
+			},
+			"website": {
+				"string": ""
+			},
+			"github": {
+				"string": "GitHub"
+			},
+			"twitter": {
+				"string": "Twitter"
+			},
+			"replit": {
+				"string": "Replit"
+			},
+			"npm": {
+				"string": "npm"
+			},
+			"transifex": {
+				"string": "Transifex"
+			},
+			"discord": {
+				"string": "Discord"
+			},
+			"auth": {
+				"string": "1Auth"
+			},
+			"docs": {
+				"string": ""
+			},
+			"credits": {
+				"string": ""
+			},
+			"translate": {
+				"string": ""
+			},
+			"repo": {
+				"string": ""
+			},
+			"demo": {
+				"string": ""
+			},
+			"openode": {
+				"string": ""
+			}
+		},
+		"legal": {
+			"heading": {
+				"string": ""
+			},
+			"tos": {
+				"string": ""
+			},
+			"privacy": {
+				"string": ""
+			},
+			"scratch": {
+				"string": ""
+			},
+			"see": { "string": "" },
+			"google": {
+				"string": ""
+			},
+			"copyright": {
+				"string": "© 2021 OneDot Projects"
+			},
+			"replit": {
+				"string": ""
+			},
+			"github": {
+				"string": ""
+			},
+			"license": {
+				"string": ""
+			},
+			"mit": {
+				"string": ""
+			}
+		}
+	},
+	"errors": {
+		"100": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"101": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"102": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"103": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"201": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"202": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"203": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"204": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"205": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"208": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"226": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"300": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"304": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"400": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"401": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"402": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"403": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"404": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"405": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"406": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"407": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"408": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"409": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"410": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"411": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"412": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"413": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"414": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"415": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"416": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"417": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"418": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"421": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"422": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"423": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"425": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"426": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"428": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"429": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"431": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"451": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"500": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"501": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"502": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"503": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"504": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"505": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"506": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"507": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"508": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"510": {
+			"heading": { "string": "" },
+			"message": {
+				"string": ""
+			}
+		},
+		"511": {
+			"heading": { "string": "" },
+			"message": { "string": "" }
+		},
+		"old": {
+			"heading": { "string": "" },
+			"why": {
+				"string": "",
+				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
+			},
+			"all": { "string": "", "developer_comment": "For use in the “errorOldWhy” string." },
+			"modern": { "string": "" },
+			"mistake": {
+				"string": ""
+			},
+			"more": { "string": "" },
+			"chrome": {
+				"string": "",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"edge": {
+				"string": "",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"firefox": {
+				"string": "",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"safari": {
+				"string": "",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			}
+		}
 	}
 }

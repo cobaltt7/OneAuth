@@ -57,23 +57,98 @@ function getClient(requestedClient) {
 }
 
 /**
- * Get HTTP request handlers from a page name.
+ * Get HTTP request handlers from a path.
  *
- * @param {string} requestedClient - The page name.
+ * @param {string} requestedClient - The path.
  *
- * @returns {import("../../types").Page} - The HTTP handlers.
+ * @returns {import("../../types").Page | void} - The HTTP handlers.
  */
 function getPageHandler(requestedClient) {
 	for (const currentClient of authClients) {
 		const response = currentClient?.pages?.find(
-			({ backendPage }) => backendPage === requestedClient,
+			({ backendPage }) =>
+				new URL(`./${backendPage}`, "https://auth.onedot.cf/auth/").pathname ===
+				`/${requestedClient}`,
 		);
 
 		if (response) return response;
 	}
 
-	return { backendPage: requestedClient };
+	/**
+	 * Hack to fix lint error.
+	 *
+	 * @type {undefined}
+	 */
+	let nothing;
+
+	return nothing;
 }
+
+app.get("/auth", (request, response) => {
+	if (!request.query?.url) return response.status(400);
+
+	const authButtonsReplaced = authButtons;
+
+	for (const [index, { link }] of authButtons.entries()) {
+		if (authButtonsReplaced[+index]) {
+			authButtonsReplaced[+index].link = link.replace(
+				// TODO: Use mustache instead. mustache-format-ignore
+				/{{ \s*url\s* }}/g,
+				encodeURIComponent(`${request.query?.url}`),
+			);
+		}
+	}
+
+	return response.render(path.resolve(directory, "auth.html"), {
+		clients: authButtonsReplaced,
+	});
+});
+
+app.get("/backend/get_data", async (request, response) => {
+	response.setHeader("Access-Control-Allow-Origin", "*");
+	response.setHeader(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept",
+	);
+
+	response
+		.status(200)
+		.json(await AuthDatabase.findOneAndDelete({ token: request.query?.code }).exec());
+});
+app.get("/backend/send_data", async (request, response) => {
+	if (!request.query) return logError("`request.query` is falsy!");
+
+	const { client, url: redirectUrl = "", token } = request.query,
+		clientInfo = getClient(`${client}`);
+
+	if (!clientInfo) return logError(new ReferenceError(`Invalid client: ${client}`));
+
+	let code, redirect;
+
+	if (clientInfo.rawData && !clientInfo.getData) {
+		code = `${token}`;
+	} else if (!clientInfo.rawData && clientInfo.getData) {
+		code = retronid();
+
+		const data = await clientInfo.getData(`${token}`);
+
+		if (!data) return logError("No data available");
+
+		data.client = clientInfo.name;
+		await new AuthDatabase({ data, token: code }).save();
+	} else {
+		return logError(new ReferenceError(`Invalid client: ${client}`));
+	}
+
+	try {
+		redirect = new URL(`${redirectUrl}`);
+		redirect.searchParams.set("code", code);
+
+		return response.status(303).redirect(redirect.href);
+	} catch {
+		return response.status(400);
+	}
+});
 
 for (const method of [
 	// TODO: support "all",
@@ -103,19 +178,20 @@ for (const method of [
 ]) {
 	// @ts-expect-error -- TS can't tell that there is a limited set of values for `method`.
 	app[`${method}`](
-		"/:client",
+		"*",
 
 		/**
 		 * Run the appropriate HTTP request handler on a HTTP request, or return a HTTP error code.
 		 *
 		 * @param {import("express").Request} request - Express request object.
 		 * @param {import("express").Response} response - Express response object.
+		 * @param {import("express").NextFunction} next - Express next function.
 		 */
-		(request, response) => {
-			const client = getPageHandler(`${request.params?.client}`);
+		(request, response, next) => {
+			const client = getPageHandler(`${request.path.slice(1)}`);
 
-			if (Object.keys(client).length === 1) {
-				response.status(404);
+			if (!client) {
+				next();
 
 				return;
 			}
@@ -135,12 +211,12 @@ for (const method of [
 				response,
 
 				async (tokenOrData, redirect) => {
-					const clientInfo = getClient(request.params?.client || "");
+					const clientInfo = getClient(client.backendPage);
 
 					if (!clientInfo) {
-						return logError(
-							new ReferenceError(`Invalid client: ${request.params?.client}`),
-						);
+						logError(new ReferenceError(`Invalid client: ${client.backendPage}`));
+
+						return;
 					}
 
 					let data, token;
@@ -152,17 +228,14 @@ for (const method of [
 					) {
 						data = tokenOrData;
 						data.client = clientInfo.name;
-						token = retronid.generate();
-						await new AuthDatabase({ token, data }).save();
+						token = retronid();
+						await new AuthDatabase({ data, token }).save();
 					} else if (
 						!clientInfo.rawData &&
 						typeof tokenOrData === "string" &&
 						clientInfo.getData
 					) {
-						data =
-							request.localization.messages.allowDataHidden +
-							" " +
-							request.localization.messages.allowDataHiddenSorry;
+						data = `${request.localization.messages["core.allow.hidden"]} ${request.localization.messages["core.allow.sorry"]}`;
 						token = tokenOrData;
 					} else {
 						logError(
@@ -170,13 +243,15 @@ for (const method of [
 								`Invalid type passed to sendResponse tokenOrData: ${typeof tokenOrData}`,
 							),
 						);
+
+						return;
 					}
 
 					try {
 						const { host } = new URL(redirect);
 
 						response.status(300).render(path.resolve(directory, "allow.html"), {
-							client: request.params?.client,
+							client: client.backendPage,
 							data: JSON.stringify(data),
 							encodedUrl: encodeURIComponent(redirect),
 							host,
@@ -186,79 +261,11 @@ for (const method of [
 						});
 					} catch {
 						response.status(400);
-						return;
 					}
 				},
 			);
 		},
 	);
 }
-
-app.get("/", (request, response) => {
-	if (!request.query?.url) return response.status(400);
-
-	const authButtonsReplaced = authButtons;
-
-	for (const [index, { link }] of authButtons.entries()) {
-		if (authButtonsReplaced[+index]) {
-			authButtonsReplaced[+index].link = link.replace(
-				// TODO: Use mustache instead. mustache-format-ignore
-				/{{\s*url\s*}}/g,
-				encodeURIComponent(`${request.query?.url}`),
-			);
-		}
-	}
-
-	return response.render(path.resolve(directory, "auth.html"), {
-		clients: authButtonsReplaced,
-	});
-});
-
-app.get("/backend/get_data", async (request, response) => {
-	response.setHeader("Access-Control-Allow-Origin", "*");
-	response.setHeader(
-		"Access-Control-Allow-Headers",
-		"Origin, X-Requested-With, Content-Type, Accept",
-	);
-
-	response
-		.status(200)
-		.json(await AuthDatabase.findOneAndDelete({ token: request.query?.code }).exec());
-});
-app.get("/backend/send_data", async (request, response) => {
-	if (!request.query) return logError("`request.query` is falsy!");
-
-	const { client, url: redirectUrl = "", token } = request.query,
-		clientInfo = getClient(`${client}`);
-
-	if (!clientInfo) {
-		return logError(new ReferenceError(`Invalid client: ${client}`));
-	}
-	let code, redirect;
-
-	if (clientInfo.rawData && !clientInfo.getData) {
-		code = token;
-	} else if (!clientInfo.rawData && clientInfo.getData) {
-		code = retronid.generate();
-
-		const data = await clientInfo.getData(`${token}`);
-
-		if (!data) return logError("No data available");
-
-		data.client = clientInfo.name;
-		await new AuthDatabase({ token: code, data }).save();
-	} else {
-		return logError(new ReferenceError(`Invalid client: ${client}`));
-	}
-
-	try {
-		redirect = new URL(`${redirectUrl}`);
-		redirect.searchParams.set("code", code);
-
-		return response.status(303).redirect(redirect.href);
-	} catch {
-		return response.status(400);
-	}
-});
 
 export default app;

@@ -28,7 +28,7 @@ https://auth.onedot.cf/auth?url=<CALLBACK_URL>
 After the user clicks on the link and finishes authentication with us, we will redirect them to `<CALLBACK_URL>`. There will be a new query parameter: `code`. To retrieve the user's information, send the following HTTP request:
 
 ```http
-GET https://auth.onedot.cf/auth/backend/get_data/?code=<CODE>
+GET https://auth.onedot.cf/backend/get_data/?code=<CODE>
 ```
 
 where `<CODE>` is the value of the new search parameter.

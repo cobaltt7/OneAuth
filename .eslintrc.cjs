@@ -9,7 +9,7 @@ module.exports = {
 		{
 			extends: ["plugin:@onedotprojects/node"],
 			files: ["**.js", "**.cjs"],
-			parserOptions: { ecmaVersion: 11 },
+			parserOptions: { ecmaVersion: 12 },
 		},
 		{
 			extends: ["plugin:@onedotprojects/esm"],
@@ -17,7 +17,8 @@ module.exports = {
 		},
 		{
 			extends: ["plugin:@onedotprojects/cli"],
-			files: [".github/**"],
+
+			files: [".github/workflows/*.js"],
 
 			rules: {
 				"import/no-extraneous-dependencies": [
@@ -30,18 +31,6 @@ module.exports = {
 					},
 				],
 			},
-		},
-		{
-			extends: ["plugin:@onedotprojects/config"],
-			files: ["**.config.js", "**rc.js"],
-		},
-		{
-			extends: ["plugin:@onedotprojects/sample"],
-			files: ["**.md/**", "**.md"],
-		},
-		{
-			extends: ["plugin:@onedotprojects/browser"],
-			files: ["**.html", "**.htm"],
 		},
 	],
 };

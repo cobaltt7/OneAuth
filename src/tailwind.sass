@@ -1,9 +1,28 @@
+@charset "UTF-8";
+
+@import "../node_modules/highlight.js/styles/github.css";
+
 /* Import tailwind */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import "../node_modules/highlight.js/styles/github.css";
+/* GLOBAL STYLES */
+
+* {
+	scroll-behavior: smooth;
+	column-fill: balance-all !important;
+
+	@apply selection:bg-red-900;
+}
+
+[data-before] {
+	@apply before:content-[attr(data-before)] !important;
+}
+
+[data-after] {
+	@apply after:content-[attr(data-after)] !important;
+}
 
 main {
 	@apply flex
@@ -22,13 +41,10 @@ main {
 
 	h1 {
 		@apply m-0
-		px-0
-		pt-4
-		pr-2;
-	}
-
-	h1:only-of-type {
-		@apply text-3xl;
+			px-0
+			pt-4
+			pr-2
+			only-of-type:text-3xl;
 	}
 
 	:first-child,
@@ -43,6 +59,18 @@ main {
 				@apply m-0;
 			}
 		}
+	}
+}
+
+* a {
+	/* todo */
+	@apply text-blue-500
+			no-underline;
+
+	&:hover,
+	&:focus {
+		@apply text-blue-700
+				underline;
 	}
 }
 
@@ -63,7 +91,7 @@ pre {
 		@apply m-0
 			p-0
 			bg-transparent
-			overflow-x-auto;
+			overflow-x-visible;
 
 		code {
 			@apply rounded-md
@@ -73,54 +101,79 @@ pre {
 	}
 }
 
-.new::before {
-	content: "{{ #message }}aboutNew{{ /message }}";
+footer {
+	> ul {
+		> li {
+			ul {
+				@apply lg:inline-block
+					xs:block;
 
-	@apply text-white
-		rounded-lg
-		p-1
-		bg-[#da17da]
-		mr-2;
+				li {
+					@apply lg:mt-0;
+
+					line-height: inherit;
+
+					&:first-child {
+						@apply leading-6
+						font-bold
+						mb-2
+						sm:hidden;
+					}
+
+					&:not(:first-child) {
+						@apply mx-0
+						my-1.5;
+					}
+				}
+			}
+
+			&:not(:first-child) {
+				@apply w-52
+					lg:w-auto;
+			}
+
+			@apply my-2
+				xs:!w-full
+				lg:mt-0;
+		}
+	}
 }
+
+.legal {
+	> * {
+		@apply m-1.5
+			w-72
+			lg:w-auto;
+
+		@screen lg {
+			break-inside: avoid;
+		}
+	}
+}
+
+/* AUTH LIST */
 
 #auth-list {
 	@apply flex
 		flex-wrap
-		justify-center
 		w-full;
 
 	a {
 		@apply font-normal
 			no-underline
-			cursor-pointer
-			text-inherit;
-	}
-}
+			cursor-pointer;
 
-#clients {
-	#auth-list {
-		@apply justify-start;
+		color: inherit;
 	}
 }
 
 .auth-button {
-	@apply h-[40px]
-		m-1
+	@apply m-1
 		font-sans
 		border
 		rounded-full
-		p-[8px]
-		min-h-[30px]
-		min-w-[140px];
-
-	@apply static
-		!important;
-
-	font-family: "Roboto";
-
-	&::before {
-		@apply hidden;
-	}
+		!static
+		before:hidden;
 
 	svg,
 	img {
@@ -128,27 +181,34 @@ pre {
 
 		@apply inline
 			m-0
-			bg-white;
-
-		@apply h-[100%]
-			w-auto
-			!important;
+			bg-white
+			!h-full
+			!w-auto;
 
 		/* Per Google's guidlines, the background color always has to be #fff, even in dark mode */
 	}
 
 	span {
-		@apply text-black
-			text-[14px]
-			pl-[24px];
+		@apply text-black;
+
+		font-size: 14px;
+		padding-left: 24px;
 	}
 
 	/* Per Google's guidlines, the dark mode color needs to be #4285F4 if we ever make a dark mode. but Apple says white or black only… */
+
+	/* Google guidline stuffs */
+	font-family: "Roboto";
+	height: 40px;
+	padding: 8px;
+	min-height: 30px;
+	min-width: 140px;
 }
+
+/* EMAIL AUTH */
 
 #email-address,
 #code,
-input[type="submit"],
 button {
 	@apply w-full
 		py-3
@@ -164,22 +224,15 @@ button {
 		rounded-full;
 }
 
-input[type="submit"],
 button {
 	@apply h-10
-		text-white;
-
-	img {
-		@apply h-full
-			m-auto;
-	}
+		text-white
+		mr-4
+		bg-emerald-500
+		hover:bg-emerald-600;
 }
 
-.buttons-container {
-	@apply inline-flex
-		w-full
-		p-2;
-}
+/* ALLOW PAGE */
 
 #allow,
 #deny {
@@ -194,36 +247,11 @@ button {
 		h-14;
 }
 
-#allow,
-[type="submit"] {
-	@apply mr-4
-		bg-green-500;
+/* GLOBAL STYLES */
 
-	&:hover {
-		@apply bg-green-600;
-	}
-}
-
-#deny {
-	@apply ml-4
-		bg-red-500;
-
-	&:hover {
-		@apply bg-red-600;
-	}
-}
-
-html,
-body,
-iframe {
+html {
 	font-family: "PT Sans", "DejaVu Sans", Arial, sans;
-	scroll-behavior: smooth;
 
-	@apply border-0
-		font-sans
-		border-white
-		border-solid;
-
-	@apply block
-		!important;
+	@apply font-sans
+	 !block;
 }

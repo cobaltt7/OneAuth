@@ -1,8 +1,8 @@
-<html lang="en">
+<html style="display: none" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{ #message }}emailSubject{{ /message }}</title>
+		<title>{{ #message }}clients.email.email.subject{{ /message }}</title>
 		<style>
 			body {
 				font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -23,24 +23,35 @@
 	<body>
 		<img
 			src="https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg"
-			alt="{{ #message }}logoAlt{{ /message }}"
+			alt="{{ #message }}branding.auth.logo{{ /message }}"
 		/>
 		<div>
-			<h1>{{ #message }}emailSubject{{ /message }}</h1>
+			<h1>{{ #message }}clients.email.email.subject{{ /message }}</h1>
 			<h2>
-				{{ #message }}emailCodeIs|||{{ code }}{{ /message }}
-				<u>{{ #message }}emailNoShare{{ /message }}</u> {{ #message }}emailNoShareWhy{{
-				/message }}
+				{{ #message }}clients.email.email.code|||{{ code }}{{ /message }}
+				<u>{{ #message }}clients.email.email.share{{ /message }}</u> {{ #message
+				}}clients.email.email.act{{ /message }}
 			</h2>
-			<h3>{{ #message }}emailNow{{ /message }}</h3>
+			<h3>{{ #message }}clients.email.email.next{{ /message }}</h3>
 			<ul>
-				<li>{{ #message }}emailCopyCode{{ /message }}</li>
-				<li>{{ #message }}emailGoBack{{ /message }}</li>
-				<li>{{ #message }}emailPasteCode|||[emailSubmit]{{ /message }}</li>
-				<li>{{ #message }}emailReviewInfo|||[allowButtonA]{{ /message }}</li>
+				<li>{{ #message }}clients.email.email.copy{{ /message }}</li>
+				<li>{{ #message }}clients.email.email.back{{ /message }}</li>
+				<li>
+					{{ #message }}clients.email.email.paste|||[clients.email.email.submit]{{
+					/message }}
+				</li>
+				<li>{{ #message }}clients.email.email.review|||[core.allow.allow]{{ /message }}</li>
 			</ul>
-			<p>{{ #message }}emailDoesntWork;emailPressBack{{ /message }}</p>
+			<p>
+				{{ #message }}clients.email.email.expire;clients.email.email.rerequest{{ /message }}
+			</p>
 		</div>
-		<b><i>{{ #message }}emailUnexpected;emailIgnoreIt;emailDontWorry{{ /message }}</i></b>
+		<b
+			><i
+				>{{ #message
+				}}clients.email.email.unexpected;clients.email.email.ignore;clients.email.email.nothing{{
+				/message }}</i
+			></b
+		>
 	</body>
 </html>

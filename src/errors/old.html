@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="display: none" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{ #message }}title|||[errorOldHeading]{{ /message }}</title>
+		<title>{{ #message }}branding.auth.title|||[errors.old.heading]{{ /message }}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		{{> head }}
 	</head>
-	<body style="display: none">
+	<body>
 		<!-- Google Tag Manager -->
 		<noscript>
 			<iframe
@@ -20,35 +20,36 @@
 		<!-- End Google Tag Manager -->
 		{{> nav }}
 		<main>
-			<h1>{{ #message }}errorOldHeading{{ /message }}</h1>
-			<p>{{ #message }}errorOldWhy|||<u>[errorOldAll]</u>{{ /message }}</p>
-			<h2>{{ #message }}errorOldModern{{ /message }}</h2>
+			<h1>{{ #message }}errors.old.heading{{ /message }}</h1>
+			<p>{{ #message }}errors.old.why|||<u>[errors.old.all]</u>{{ /message }}</p>
+			<h2>{{ #message }}errors.old.modern{{ /message }}</h2>
 			<ul>
 				<li>
 					<a href="https://www.google.com/chrome/"
-						>{{ #message }}errorOldChrome{{ /message }}</a
+						>{{ #message }}errors.old.chrome{{ /message }}</a
 					>
 				</li>
 				<li>
 					<a href="https://www.microsoft.com/en-us/edge?r=1"
-						>{{ #message }}errorOldEdge{{ /message }}</a
+						>{{ #message }}errors.old.edge{{ /message }}</a
 					>
 				</li>
 				<li>
 					<a href="https://www.mozilla.org/en-US/firefox/"
-						>{{ #message }}errorOldFirefox{{ /message }}</a
+						>{{ #message }}errors.old.firefox{{ /message }}</a
 					>
 				</li>
 				<li>
 					<a href="https://www.apple.com/safari/"
-						>{{ #message }}errorOldSafari{{ /message }}</a
+						>{{ #message }}errors.old.safari{{ /message }}</a
 					>
 				</li>
 			</ul>
-			<p>{{ #message }}errorOldMistake{{ /message }}</p>
+			<p>{{ #message }}errors.old.mistake{{ /message }}</p>
 			<p>
-				<a href="https://browsehappy.com/">{{ #message }}errorOldMore{{ /message }}</a>
+				<a href="https://browsehappy.com/">{{ #message }}errors.old.more{{ /message }}</a>
 			</p>
 		</main>
+		{{> footer }}
 	</body>
 </html>

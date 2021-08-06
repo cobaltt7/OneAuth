@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="display: none" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{ #message }}aboutPageTitle{{ /message }}</title>
+		<title>{{ #message }}about.about.title{{ /message }}</title>
 		<meta name="robots" content="index, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -11,19 +11,20 @@
 		{{> head }}
 	</head>
 
-	<body style="display: none">
+	<body>
 		{{> nav }}
 		<main>
-			<h1>{{ #message }}aboutMainHeading{{ /message }}</h1>
+			<h1>{{ #message }}about.about.heading{{ /message }}</h1>
 			<section id="about">
-				<h2>{{ #message }}aboutSubHeading{{ /message }}</h2>
+				<h2>{{ #message }}about.about.about{{ /message }}</h2>
 				<p>
-					{{ #message }}aboutIntro;aboutClientCount|||{{ clients.length }}{{ /message }}
+					{{ #message }}about.about.description;about.about.clients|||{{ clients.length
+					}}{{ /message }}
 				</p>
 			</section>
 			<section id="clients">
-				<h2>{{ #message }}aboutClientsHeading{{ /message }}</h2>
-				<ul id="auth-list">
+				<h2>{{ #message }}about.about.supported{{ /message }}</h2>
+				<ul id="auth-list" class="justify-start">
 					{{ #clients }}
 					<li class="auth-button">
 						{{ #fontawesome }}
@@ -43,41 +44,51 @@
 				</ul>
 			</section>
 			<section id="developers">
-				<h2>{{ #message }}aboutDevelopersHeading{{ /message }}</h2>
-				<p>{{ #message }}aboutSuperEasy;aboutDirectTo{{ /message }}</p>
+				<h2>{{ #message }}about.developers.heading{{ /message }}</h2>
+				<p>
+					{{ #message }}about.developers.streamlined;about.developers.initiate{{ /message
+					}}
+				</p>
 				<pre class="hljs lang-http">
-https://auth.onedot.cf/auth?url=&lt;{{ #message }}aboutCallbackUrl{{ /message }}&gt;</pre
+https://auth.onedot.cf/auth?url={{ #message }}about.developers.CALLBACK{{ /message }}</pre
 				>
 				<p>
 					{{ #message
-					}}aboutAfterFinish|||<code>&lt\;[aboutCallbackUrl]&gt\;</code>;aboutNewParam|||<code>code</code>;aboutGetInfo{{
+					}}about.developers.after|||<code>[about.developers.CALLBACK]</code>;about.developers.parameter|||<code>code</code>;about.developers.get|||<code>[about.developers.CODE]</code>{{
 					/message }}
 				</p>
 				<pre class="hljs lang-http">
-GET https://auth.onedot.cf/auth/backend/get_data/?code=&lt;{{ #message }}aboutCode{{ /message }}&gt;</pre
+GET https://auth.onedot.cf/backend/get_data/?code={{ #message }}about.developers.CODE{{ /message }}</pre
 				>
-				<p>
-					{{ #message }}aboutWhatCode|||<code>&lt\;[aboutCode]&gt\;</code>;aboutNoParam{{
-					/message }}
-				</p>
-				<p class="new">
-					<strong>{{ #message }}aboutLangsHeader{{ /message }}</strong>
+				<p>{{ #message }}about.developers.denied{{ /message }}</p>
+				<p
+					data-before="{{ #message }}about.localization.new{{ /message }}"
+					class="
+						before:text-white
+						before:rounded-lg
+						before:p-1
+						before:mr-2
+						before:bg-fuchsia-600
+					"
+				>
+					<strong>{{ #message }}about.localization.heading{{ /message }}</strong>
 					- {{ #message
-					}}aboutLangsHow|||<code>language</code>;aboutLangsValue|||<code>en</code>|||<code>es</code>;aboutLangsCountry|||<code>en_GB</code>|||<code>es_AR</code>;aboutLangsFallback{{
+					}}about.localization.basics|||<code>language</code>;about.localization.code|||<code>en</code>|||<code>es</code>;about.localization.country|||<code>en_GB</code>|||<code>es_AR</code>;about.localization.fallback{{
 					/message }}
 					<i>
-						{{ #message }}aboutTranslations{{ /message }}
+						{{ #message }}about.localization.few;about.localization.grows{{ /message }}
 						<a href="https://www.transifex.com/1dot/1auth/">
-							{{ #message }}aboutHelpTranslate{{ /message }}
+							{{ #message }}about.localization.help{{ /message }}
 						</a>
 						{{ #message
-						}}aboutCreateTXAcc;aboutTranslateThanks;aboutTranslateRequestLanguage{{
+						}}about.localization.account;about.localization.thanks;about.localization.request{{
 						/message }}
 					</i>
 				</p>
 				<br />
-				<p>{{ #message }}aboutMoreConfig{{ /message }}</p>
+				<p>{{ #message }}about.developers.configuration{{ /message }}</p>
 			</section>
 		</main>
+		{{> footer }}
 	</body>
 </html>

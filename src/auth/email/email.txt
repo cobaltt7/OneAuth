@@ -1,16 +1,16 @@
---- 1AUTH ---
+--- {{ #message }}branding.auth.logo{{ /message }} ---
 
-{{ #message }}emailSubject{{ /message }}
+{{ #message }}clients.email.email.subject{{ /message }}
 -------------
 
-{{ #message }}emailCodeIs|||{{ code }}{{ /message }} **{{ #message }}emailNoShare{{ /message }}** {{ #message }}emailNoShareWhy{{ /message }}
+{{ #message }}clients.email.email.code|||{{ code }}{{ /message }} **{{ #message }}clients.email.email.share{{ /message }}** {{ #message }}clients.email.email.act{{ /message }}
 
-{{ #message }}emailNow{{ /message }}
-->	{{ #message }}emailCopyCode{{ /message }}
-->	{{ #message }}emailGoBack{{ /message }}
-->	{{ #message }}emailPasteCode|||[emailSubmit]{{ /message }}
-->	{{ #message }}emailReviewInfo|||[allowButtonA]{{ /message }}
-{{ #message }}emailDoesntWork;emailPressBack{{ /message }}
+{{ #message }}clients.email.email.next{{ /message }}
+->	{{ #message }}clients.email.email.copy{{ /message }}
+->	{{ #message }}clients.email.email.back{{ /message }}
+->	{{ #message }}clients.email.email.paste|||[clients.email.email.submit]{{ /message }}
+->	{{ #message }}clients.email.email.review|||[core.allow.allow]{{ /message }}
+{{ #message }}clients.email.email.expire;clients.email.email.rerequest{{ /message }}
 
 ------------
-{{ #message }}emailUnexpected;emailIgnoreIt;emailDontWorry{{ /message }}
+{{ #message }}clients.email.email.unexpected;clients.email.email.ignore;clients.email.email.nothing{{ /message }}

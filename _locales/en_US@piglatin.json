@@ -1,0 +1,552 @@
+{
+	"docs": { "string": "{0} | 1Auth Evelopmentday Ocsday" },
+	"about": {
+		"about": {
+			"title": { "string": "1Auth | Allyay-Inyay-Oneyay Authenticationyay" },
+			"heading": { "string": "1Auth Allyay-Inyay-Oneyay Authenticationyay" },
+			"about": { "string": "Aboutyay" },
+			"description": {
+				"string": "1Auth isyay anyay allyay-inyay-oneyay authenticationyay ientclay atthay eway esigneday otay orkway eamlesslysay ithway anyay ebsiteway."
+			},
+			"clients": {
+				"string": "{0, plural, one {Eway upportsay {0} ientclay ithway anymay oremay otay omecay.} other {Eway upportsay {0} ientsclay ithway anymay oremay otay omecay.}}"
+			},
+			"supported": { "string": "Upportedsay Ientsclay" }
+		},
+		"developers": {
+			"heading": { "string": "Orfay Evelopersday" },
+			"streamlined": {
+				"string": "Eway esigneday 1Auth osay atthay addingyay ityay otay ouryay itesay isyay asyay eamlinesstray asyay ossiblepay."
+			},
+			"initiate": {
+				"string": "Enwhay ayay useryay icksclay “Ignsay inyay” onyay ouryay itesay, irectday emthay otay isthay URL:"
+			},
+			"after": {
+				"string": "Afteryay ehtay useryay icksclay onyay ethay inklay andyay inishesfay authenticationyay ithway usyay, eway illway edirectray emthay otay ateverwhay URL ouyay usedyay inyay aceplay ofyay {0} above."
+			},
+			"parameter": {
+				"string": "Ifyay eythay allowedyay aringshay eirthay ataday enthay erethay illway ebay ayay ewnay eryquay arameterpay onyay atthay URL, {0}."
+			},
+			"get": {
+				"string": "Otay etrieveray ethay useryay's informationyay, endsay ethay ollowingfay HTTP equestray, erewhay {0} isyay ethay aluevay ofyay ethay aidsay arameterpray:"
+			},
+			"denied": {
+				"string": "Ifyay ethay enieday aringshay eirthay ataday, enthay erethay illway otnay ebay anyay ewnay eryquay arameterpay."
+			},
+			"configuration": {
+				"string": "Oremay onfigurationcay optionsyay areyay omingcay oonsay."
+			},
+			"CODE": {
+				"string": "<ODECAY>",
+				"character_limit": 10,
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. AKA a token. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+			},
+			"CALLBACK": {
+				"string": "<ALLBACKCAY_URL>",
+				"character_limit": 20,
+				"developer_comment": "You will have to switch to raw editor mode to translate this string. This is surrounded by angle brackets to indicate that this is a placeholder value. If your language uses different symbols to indicate placeholders, please use them instead. Please replace spaces with underscores. In addition, please keep this uppercase."
+			}
+		},
+		"localization": {
+			"heading": { "string": "Anguagelay ecifcationspay" },
+			"basics": {
+				"string": "Ecifyspay ethay anguagelay otay useyay onyay agespay ybay addingyay anotheryay arameterpay otay ethay URL: {0}"
+			},
+			"code": {
+				"string": "Itsyay aluevay ouldshay ebay ayay 2-etterlay anguagelay odecay ikelay {0} oryay {1}."
+			},
+			"country": {
+				"string": ""
+			},
+			"fallback": {
+				"string": "iIfyay ayay anguagelay isyay otnay availableyay, ityay illway allfay ackbay otay ethay onay-ountrycay-ecificspay anguagelay, enthay otay ethay useryays' owserbray anguagelay."
+			},
+			"new": { "string": "EWNAY!!!", "developer_comment": "Please keep this uppercase." },
+			"few": {
+				"string": ""
+			},
+			"grows": { "string": "" },
+			"help": {
+				"string": ""
+			},
+			"account": {
+				"string": "",
+				"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
+			},
+			"thanks": {
+				"string": "Anksthay orfay ouryay eagernessyay otay elphay!"
+			},
+			"request": {
+				"string": "",
+				"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
+			}
+		}
+	},
+	"branding": {
+		"dot": {
+			"logo": {
+				"string": "OneDot ogolay"
+			},
+			"dot": {
+				"string": "1DOT"
+			}
+		},
+		"auth": {
+			"auth": {
+				"string": "1AUTH"
+			},
+			"logo": { "string": "1Auth ogolay" },
+			"title": {
+				"string": "{0} | 1Auth"
+			}
+		}
+	},
+	"clients": {
+		"email": {
+			"page": {
+				"heading": { "string": "Ignsay inyay ithway ouryay emailyay" },
+				"email": { "string": "Otay ontinuecay, easeplay enteryay ouryay emailyay." },
+				"submit": { "string": "Ubmityay" },
+				"code": { "string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay." },
+				"placeholder": { "string": "ouyay@exampleyay.com" }
+			},
+			"email": {
+				"subject": { "string": "1Auth Emailyay Erificationvay" },
+				"code": { "string": "Ouryay odecay isyay {0}." },
+				"share": { "string": "Oday otnay areshay ithway anyoneyay elseyay." },
+				"act": { "string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay." },
+				"next": { "string": "Atwhay ownay?" },
+				"copy": { "string": "Opycay ouryay odecay." },
+				"back": { "string": "Ogay ackbay otay 1Auth." },
+				"paste": {
+					"string": "Astepay ouryay odecay inyay ethay oxbay andyay esspray “{0}”."
+				},
+				"review": {
+					"string": "Eviewray ethay informationyay eway illway endsay andyay ethay itesay eway illway endsay ityay otay, andyay ifyay allyay ookslay oodgay, esspray “{0}”."
+				},
+				"expire": {
+					"string": "Ouryay odecay illway expireyay afteryay 15 inutesmay, osay ifyay ityay oesday otnay orkway, ityay ightmay avehay eenbay ootay onglay."
+				},
+				"rerequest": {
+					"string": "Ytray essingpray ethay ackbay uttonbay andyay anotheryay odecay!"
+				},
+				"unexpected": {
+					"string": "Otnay expectingyay isthay emailyay?"
+				},
+				"ignore": {
+					"string": "Ustjay ignoreyay ityay."
+				},
+				"nothing": {
+					"string": "Oday otnay orryway, othingnay illway appenhay."
+				}
+			}
+		}
+	},
+	"core": {
+		"allow": {
+			"heading": { "string": "Allowyay accessyay?" },
+			"question": {
+				"string": "Oday ouyay antway {0} otay accessyay ouryay informationyay?"
+			},
+			"allow": { "string": "Alowyay" },
+			"deny": { "string": "Enyday" },
+			"recieve": {
+				"string": "ifyay ouyay esspray “{2}”, enthay {1} iillway eceiveray ethay ollowingfay informationyay (akentay omfray ouryay {0} accountyay):"
+			},
+			"hidden": {
+				"string": "Unfortunatelyay, eway ancay otnay owshay isthay ataday ightray ownay."
+			},
+			"sorry": {
+				"string": "Orrysay aboutyay atthay!"
+			}
+		},
+		"signin": {
+			"heading": { "string": "Ignsay insay" },
+			"choose": { "string": "Oosechay anyay optionyay otay ontinuecay" },
+			"with": { "string": "Ignsay inyay ithway {0}" }
+		}
+	},
+	"footer": {
+		"localization": {
+			"thisLanguage": {
+				"string": "Igpay Atinlay (Englishyay - Untitedyay Atestay)",
+				"developer_comment": "This should be changed to the language you are translating to. For example, if you are translating to “Spanish (United States)”, you would translate this as “Español (Estados Unidos)”. Find out what language you are on up there 👆."
+			},
+			"language": {
+				"string": "Anguagelay"
+			},
+			"choose": {
+				"string": "Oosechay ayay anguagelay"
+			}
+		},
+		"links": {
+			"onedot": {
+				"string": "OneDot Projects"
+			},
+			"website": {
+				"string": "Ebsiteway"
+			},
+			"github": {
+				"string": "GitHub"
+			},
+			"twitter": {
+				"string": "Twitter"
+			},
+			"replit": {
+				"string": "Replit"
+			},
+			"npm": {
+				"string": "npm"
+			},
+			"transifex": {
+				"string": "Transifex"
+			},
+			"discord": {
+				"string": "Discord"
+			},
+			"auth": {
+				"string": "1Auth"
+			},
+			"docs": {
+				"string": "Ocumentationday"
+			},
+			"credits": {
+				"string": "Editscray"
+			},
+			"translate": {
+				"string": "Anslatetray"
+			},
+			"repo": {
+				"string": "Epositoryray"
+			},
+			"demo": {
+				"string": "Emoday"
+			},
+			"openode": {
+				"string": "Oudclay ostedhay onyay openNode.io"
+			}
+		},
+		"legal": {
+			"heading": {
+				"string": "Egalay"
+			},
+			"tos": {
+				"string": "Ermstay ofyay Ervicesay"
+			},
+			"privacy": {
+				"string": "Ivacypray Olicypay"
+			},
+			"scratch": {
+				"string": ""
+			},
+			"see": { "string": "Eesay {0}." },
+			"google": {
+				"string": ""
+			},
+			"copyright": {
+				"string": "© 2021 OneDot Projects"
+			},
+			"replit": {
+				"string": ""
+			},
+			"github": {
+				"string": ""
+			},
+			"license": {
+				"string": ""
+			},
+			"mit": {
+				"string": "MIT icenselay"
+			}
+		}
+	},
+	"errors": {
+		"100": {
+			"heading": { "string": "Ontinuecay" },
+			"message": { "string": "Easepray ontinuecay ithway ouryay equestray." }
+		},
+		"101": {
+			"heading": { "string": "Itchingsway Otocolpray" },
+			"message": { "string": "Itchingsway omfray HTTP otay HTTPS." }
+		},
+		"102": {
+			"heading": { "string": "Ocessingpray" },
+			"message": { "string": "" }
+		},
+		"103": {
+			"heading": { "string": "Earlyay Intshay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"201": {
+			"heading": { "string": "Eatedcray" },
+			"message": { "string": "" }
+		},
+		"202": {
+			"heading": { "string": "Acceptedyay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"203": {
+			"heading": { "string": "Onay-Authoritativeyay Informationyay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"204": {
+			"heading": { "string": "Onay Ontentcay" },
+			"message": {
+				"string": "Ouryay equestray asway uccessfulsay. Oweverhay, eway oday ontany avehay anyay informationyay otay ivegay ouyay inyay esponseray."
+			}
+		},
+		"205": {
+			"heading": { "string": "Esetray Ontentcay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"208": {
+			"heading": { "string": "Alreadyay Eportedray" },
+			"message": { "string": "" }
+		},
+		"226": {
+			"heading": { "string": "IA Usedyay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"300": {
+			"heading": { "string": "Ultiplemay Oicechay" },
+			"message": { "string": "" }
+		},
+		"304": {
+			"heading": { "string": "Otnay Odifiedmay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"400": {
+			"heading": { "string": "Adbay Equestray" },
+			"message": {
+				"string": ""
+			}
+		},
+		"401": {
+			"heading": { "string": "Unauthorizedyay" },
+			"message": { "string": "" }
+		},
+		"402": {
+			"heading": { "string": "Aymentpay Equiredray" },
+			"message": { "string": "Easeplay aypay eforebay accessingyay isthay agepay." }
+		},
+		"403": {
+			"heading": { "string": "Orbiddenfay" },
+			"message": { "string": "" }
+		},
+		"404": {
+			"heading": { "string": "Otnay Oundfay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"405": {
+			"heading": { "string": "Ethodmay Otnay Allowedyay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"406": {
+			"heading": { "string": "Otnay Acceptableyay" },
+			"message": { "string": "" }
+		},
+		"407": {
+			"heading": { "string": "Oxypray Authenticationyay Equiredray" },
+			"message": { "string": "" }
+		},
+		"408": {
+			"heading": { "string": "Equestray Imeoutay" },
+			"message": {
+				"string": "Hmm… ethay agepay asway oadinglay orfay itequay ayay ilewhay andyay imedtay outyay! Erhapspay erethay asway anyay internalyay erroryay. Ytray eloadingray ethay agepay. Ifyay isthay eepskay appeninghay, ouyay aymay antway otay ontactcay usyay onyay GitHub osay eway ancay ixfay ityay."
+			}
+		},
+		"409": {
+			"heading": { "string": "Onflictcay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"410": {
+			"heading": { "string": "Onegay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"411": {
+			"heading": { "string": "Engthlay Equiredray" },
+			"message": {
+				"string": ""
+			}
+		},
+		"412": {
+			"heading": { "string": "Econditionpray Ailedfay" },
+			"message": { "string": "" }
+		},
+		"413": {
+			"heading": { "string": "Ayloadpay Ootay Argelay" },
+			"message": { "string": "" }
+		},
+		"414": {
+			"heading": { "string": "URI Ootay Onglay" },
+			"message": { "string": "Atthay URL isyay ootay onglay orfay usyay otay understandyay!" }
+		},
+		"415": {
+			"heading": { "string": "Unsupportedyay Ediamay Ypetay" },
+			"message": { "string": "Ouyay entsay ethay ongwray ypetay ofyay ilefay!" }
+		},
+		"416": {
+			"heading": { "string": "Angeray Otnay Atisfiablesay" },
+			"message": { "string": "" }
+		},
+		"417": {
+			"heading": { "string": "Expectationyay Ailedfay" },
+			"message": { "string": "" }
+		},
+		"418": {
+			"heading": { "string": "Iyay amaya ayay eapottay" },
+			"message": { "string": "" }
+		},
+		"421": {
+			"heading": { "string": "Isdirectedmay Equestray" },
+			"message": { "string": "Ouyay entsay isthay equestray otay ethay ongwray aceplay!" }
+		},
+		"422": {
+			"heading": { "string": "Unprocessableyay Enityay" },
+			"message": { "string": "Erethay areyay emanticsay errorsyay inyay ouryay equestray." }
+		},
+		"423": {
+			"heading": { "string": "Ockedlay" },
+			"message": { "string": "Ethay equestedray esourcery isyay ockedlay." }
+		},
+		"425": {
+			"heading": { "string": "Ootay Earlyay" },
+			"message": { "string": "Easeplay aitway eforebay endingsay isthay equestray." }
+		},
+		"426": {
+			"heading": { "string": "Upgradeyay Equiredray" },
+			"message": { "string": "Easeplay useyay HTPS, otnay HTTP." }
+		},
+		"428": {
+			"heading": { "string": "Econditionpray Equiredray" },
+			"message": {
+				"string": ""
+			}
+		},
+		"429": {
+			"heading": { "string": "Ootay Anymay Equestsray" },
+			"message": {
+				"string": ""
+			}
+		},
+		"431": {
+			"heading": { "string": "Equestray Eaderhay Ieldsfay Ootay Argelay" },
+			"message": { "string": "" }
+		},
+		"451": {
+			"heading": { "string": "Unavailableyay Orfay Egalay Easonsray" },
+			"message": {
+				"string": ""
+			}
+		},
+		"500": {
+			"heading": { "string": "Internalyay Erversay Erroryay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"501": {
+			"heading": { "string": "Otnay Implementedyay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"502": {
+			"heading": { "string": "Adbay Atewaygay" },
+			"message": { "string": "" }
+		},
+		"503": {
+			"heading": { "string": "Ervicesay Unavailableyay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"504": {
+			"heading": { "string": "Atewaygay Imeoutay" },
+			"message": { "string": "" }
+		},
+		"505": {
+			"heading": { "string": "HTTP Ersionvay Otnay Upportedsay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"506": {
+			"heading": { "string": "Ariantvay Alsoyay Egotiatesnay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"507": {
+			"heading": { "string": "Insufficientyay Oragestay" },
+			"message": {
+				"string": ""
+			}
+		},
+		"508": {
+			"heading": { "string": "Ooplay Etecteday" },
+			"message": {
+				"string": ""
+			}
+		},
+		"510": {
+			"heading": { "string": "Otnay Extendedyay" },
+			"message": {
+				"string": "Eway ancy otnay owshay ouyay isthay agepay ithway ethay informationyay ivengay. Easeplay extendyay ouryay equstray."
+			}
+		},
+		"511": {
+			"heading": { "string": "Etworknay Authenticationyay Equiredray" },
+			"message": { "string": "" }
+		},
+		"old": {
+			"heading": { "string": "Ouyay areyay usingyay anyay outdatedyay owserbray!" },
+			"why": {
+				"string": "",
+				"developer_comment": "The placeholder is always the word “all”. (I had to move it out into a separate string so that I could underline it.)"
+			},
+			"all": { "string": "allyay", "developer_comment": "For use in the “errorOldWhy” string." },
+			"modern": { "string": "Odernmay owsersbray:" },
+			"mistake": {
+				"string": ""
+			},
+			"more": { "string": "Earnlay Oremay" },
+			"chrome": {
+				"string": "Google Chrome",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"edge": {
+				"string": "Microsoft Edge",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"firefox": {
+				"string": "Mozilla Firefox",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			},
+			"safari": {
+				"string": "Apple Safari",
+				"developer_comment": "Please make sure that you translate this exactly how it appears on the browser’s website."
+			}
+		}
+	}
+}
