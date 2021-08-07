@@ -9,11 +9,23 @@
 
 /* GLOBAL STYLES */
 
-* {
+*,
+::after,
+::before {
 	scroll-behavior: smooth;
 	column-fill: balance-all !important;
 
-	@apply selection:bg-red-900;
+	@apply selection:bg-red-500;
+	a {
+		@apply text-blue-500
+			no-underline;
+
+		&:hover,
+		&:focus {
+			@apply text-blue-700
+				underline;
+		}
+	}
 }
 
 [data-before] {
@@ -35,8 +47,10 @@ main {
 		max-w-none
 		mb-28;
 
-	section h2 {
-		@apply mt-0;
+	section {
+		h2 {
+			@apply mt-0;
+		}
 	}
 
 	h1 {
@@ -47,9 +61,9 @@ main {
 			only-of-type:text-3xl;
 	}
 
-	:first-child,
-	h1:first-of-type,
-	p:only-of-type {
+	> :first-child,
+	> h1:first-of-type,
+	> p:only-of-type {
 		@apply self-center;
 	}
 
@@ -59,18 +73,6 @@ main {
 				@apply m-0;
 			}
 		}
-	}
-}
-
-* a {
-	/* todo */
-	@apply text-blue-500
-			no-underline;
-
-	&:hover,
-	&:focus {
-		@apply text-blue-700
-				underline;
 	}
 }
 
