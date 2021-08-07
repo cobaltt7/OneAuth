@@ -1,34 +1,218 @@
-<html style="display: none" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{{ #message }}clients.email.email.subject{{ /message }}</title>
 		<style>
+			::-moz-selection {
+				background-color: hsl(359deg 58% 57%);
+			}
+
+			::selection {
+				background-color: hsl(359deg 58% 57%);
+			}
+
+			*,
+			:after,
+			:before {
+				border: 0 solid;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				--tw-border-opacity: 1;
+				border-color: rgba(228, 228, 231, var(--tw-border-opacity));
+				-webkit-column-fill: balance-all !important;
+				-moz-column-fill: balance-all !important;
+				column-fill: balance-all !important;
+				scroll-behavior: smooth;
+			}
+
+			html {
+				-webkit-text-size-adjust: 100%;
+				line-height: 1.15;
+				-moz-tab-size: 4;
+				-o-tab-size: 4;
+				tab-size: 4;
+				font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+					Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+					Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+				line-height: 1.5;
+			}
+
 			body {
-				font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-					Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-					"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+				font-family: inherit;
+				line-height: inherit;
+				margin: 75px;
+				-webkit-border-radius: 0 0 0.25rem 0.25rem;
+				-moz-border-radius: 0 0 0.25rem 0.25rem;
+				border-radius: 0 0 0.25rem 0.25rem;
+				-webkit-box-shadow: 0 20px 25px 20px rgb(0 0 0/10%), 0 10px 10px -5px rgb(0 0 0/4%);
+				-moz-box-shadow: 0 20px 25px 20px rgb(0 0 0/10%), 0 10px 10px -5px rgb(0 0 0/4%);
+				box-shadow: 0 20px 25px 20px rgb(0 0 0/10%), 0 10px 10px -5px rgb(0 0 0/4%);
 			}
+
+			header {
+				height: 5rem;
+				width: 100%;
+				border-width: 1px;
+				--tw-border-opacity: 1;
+				border-color: rgba(127, 29, 29, var(--tw-border-opacity));
+				--tw-bg-opacity: 1;
+				background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+			}
+
+			* a {
+				--tw-text-opacity: 1;
+				color: rgba(59, 130, 246, var(--tw-text-opacity));
+				text-decoration: none;
+				width: 100%;
+			}
+
 			img {
-				max-width: 550px;
+				border-style: solid;
+				display: block;
+				vertical-align: middle;
+				max-width: 100%;
+				margin: auto;
+				padding: 0.25rem;
+				height: 5rem;
 			}
-			div {
-				font-size: 1.3em;
+
+			main {
+				color: #3f3f46;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -moz-box;
+				display: -ms-flexbox;
+				display: flex;
+				font-size: 1rem;
+				line-height: 1.75;
+				height: 100%;
+				max-width: none;
+				padding: 0.75rem;
+				-webkit-box-orient: vertical;
+				-webkit-box-direction: normal;
+				-webkit-flex-direction: column;
+				-moz-box-orient: vertical;
+				-moz-box-direction: normal;
+				-ms-flex-direction: column;
+				flex-direction: column;
+				border-width: 1px;
+				border-top-width: 0;
+				--tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+					0 10px 10px -5px rgba(0, 0, 0, 0.04);
+				-webkit-border-radius: 0 0 0.25rem 0.25rem;
+				-moz-border-radius: 0 0 0.25rem 0.25rem;
+				border-radius: 0 0 0.25rem 0.25rem;
 			}
+
+			h1 {
+				color: #18181b;
+				margin: 0;
+				padding-left: 0;
+				padding-right: 0.5rem;
+				padding-top: 1rem;
+				margin-top: 0;
+				font-size: 1.875rem;
+				line-height: 2.25rem;
+				-webkit-align-self: center;
+				-ms-flex-item-align: center;
+				-ms-grid-row-align: center;
+				align-self: center;
+			}
+
+			h2 {
+				color: #18181b;
+				font-size: 1.5em;
+				font-weight: 700;
+				line-height: 1.3333333;
+				margin-bottom: 1em;
+				margin-top: 2em;
+			}
+
+			code {
+				font-size: 0.875em;
+				color: #18181b;
+				font-weight: 600;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
+					Courier New, monospace;
+			}
+
+			code:before,
+			code:after {
+				content: "`";
+			}
+
+			main h2 + * {
+				margin-top: 0;
+			}
+
+			h3 {
+				margin: 0;
+				color: #18181b;
+				font-size: 1.25em;
+				font-weight: 600;
+				line-height: 1.6;
+				margin-bottom: 0.6em;
+			}
+
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				margin-bottom: 1.25em;
+			}
+
+			li {
+				padding-left: 1.75em;
+				position: relative;
+				margin-bottom: 0.5em;
+				margin-top: 0.5em;
+			}
+
+			li:before {
+				background-color: #d4d4d8;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+				content: "";
+				height: 0.375em;
+				left: 0.25em;
+				position: absolute;
+				top: 0.6875em;
+				width: 0.375em;
+			}
+
+			p {
+				-webkit-align-self: center;
+				-ms-flex-item-align: center;
+				-ms-grid-row-align: center;
+				align-self: center;
+				margin-bottom: 1.25em;
+				margin-top: 1.25em;
+				margin: 0;
+			}
+
 			b {
-				font-size: 1.1em;
+				font-weight: bolder;
+				margin-bottom: 0;
 			}
 		</style>
 	</head>
 	<body>
-		<img
-			src="https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg"
-			alt="{{ #message }}branding.auth.logo{{ /message }}"
-		/>
-		<div>
+		<header>
+			<a href="https://auth.onedot.cf">
+				<img
+					src="https://auth.onedot.cf/logo.svg"
+					alt="{{ #message }}branding.auth.alt{{ /message }}"
+					title="{{ #message }}branding.auth.logo{{ /message }}"
+			/></a>
+		</header>
+		<main>
 			<h1>{{ #message }}clients.email.email.subject{{ /message }}</h1>
 			<h2>
-				{{ #message }}clients.email.email.code|||{{ code }}{{ /message }}
+				{{ #message }}clients.email.email.code|||<code>{{ code }}</code>{{ /message }}
 				<u>{{ #message }}clients.email.email.share{{ /message }}</u> {{ #message
 				}}clients.email.email.act{{ /message }}
 			</h2>
@@ -45,13 +229,13 @@
 			<p>
 				{{ #message }}clients.email.email.expire;clients.email.email.rerequest{{ /message }}
 			</p>
-		</div>
-		<b
-			><i
-				>{{ #message
-				}}clients.email.email.unexpected;clients.email.email.ignore;clients.email.email.nothing{{
-				/message }}</i
-			></b
-		>
+			<b
+				><i
+					>{{ #message
+					}}clients.email.email.unexpected;clients.email.email.ignore;clients.email.email.nothing{{
+					/message }}</i
+				></b
+			>
+		</main>
 	</body>
 </html>
