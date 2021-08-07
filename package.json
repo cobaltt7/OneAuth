@@ -174,6 +174,7 @@
 		"eslint-plugin-regexp": "^0.13.2",
 		"eslint-plugin-switch-case": "^1.1.2",
 		"eslint-plugin-unicorn": "^34.0.1",
+		"openode": "^2.1.2",
 		"postcss": "^8.3.6",
 		"postcss-advanced-variables": "^3.0.1",
 		"postcss-cli": "^8.3.1",

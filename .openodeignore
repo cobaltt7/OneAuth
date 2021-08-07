@@ -1,0 +1,15 @@
+.github/
+.tx/
+.vscode/
+.all-contributorsrc
+.eslintcache
+.eslintrc.cjs
+.prettierignore
+declare.d.ts
+global.d.ts
+jsconfig.json
+src/tailwind.sass
+LICENSE
+PAGE_TEMPLATE.html
+tailwind.config.cjs
+types.d.ts

@@ -28,5 +28,8 @@ jobs:
             - name: Build Tailwind
               run: npm run build:tailwind
 
+            - name: Configure
+              run: npx openode ci-conf "${{ secrets.OPENODE }}" "auth.onedot.cf"
+
             - name: Deploy
-              run: npx openode deploy -t ${{ secrets.OPENODE }} -s "auth.onedot.cf"
+              run: npx openode deploy
