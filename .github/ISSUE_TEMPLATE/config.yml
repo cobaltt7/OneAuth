@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Discord
+    url: https://discord.gg/KUtrVKapTW
+    about: Get support in our Discord server
+
+  - name: Discussions
+    url: https://github.com/onedotprojects/auth/discussions/new
+    about: "Ask for help, chat, and share what you've made here"
