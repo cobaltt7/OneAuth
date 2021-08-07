@@ -163,7 +163,11 @@
 		"signin": {
 			"heading": { "string": "Sign in" },
 			"choose": { "string": "Choose an option to continue" },
-			"with": { "string": "Sign in with {0}" }
+			"with": { "string": "Sign in with {0}" },
+			"logo": {
+				"string": "{0} icon",
+				"developer_comment": "Alt text of a logo image. Example: “Google icon”, “Email icon”, etc."
+			}
 		}
 	},
 	"footer": {

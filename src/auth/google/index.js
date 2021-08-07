@@ -56,7 +56,6 @@ const client = {
 	},
 
 	icon: "/image/google.svg",
-	iconProvider: "url",
 
 	link:
 		"https://accounts.google.com/o/oauth2/v2/auth" +
@@ -71,13 +70,15 @@ const client = {
 
 	pages: [
 		{
-			backendPage: "google",
+			backendPage: "./google",
 
 			get: (request, _, sendResponse) => {
 				sendResponse(`${request.query?.code}`, `${request.query?.state}`);
 			},
 		},
 	],
+
+	website: "https://google.com/",
 };
 
 export default client;

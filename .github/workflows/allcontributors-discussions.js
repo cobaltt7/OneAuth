@@ -51,7 +51,7 @@ async function getPage(hash = "") {
 	 */
 	const { data } = await fetch("https://api.github.com/graphql", {
 			body: JSON.stringify({
-				// Hmmst… query strings break prettier formatting...mustache? maybe
+				// TODO: Hmmst… query strings break prettier formatting...mustache? maybe
 				query: graphql`{
 
 

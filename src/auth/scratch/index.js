@@ -3,7 +3,6 @@
 /** @type {import("../../../types").Auth} Auth */
 const client = {
 	icon: "https://scratch.mit.edu/favicon.ico",
-	iconProvider: "url",
 
 	link:
 		"https://scratch.auth.onedot.cf" +
@@ -13,7 +12,7 @@ const client = {
 
 	pages: [
 		{
-			backendPage: "scratch",
+			backendPage: "./scratch",
 
 			get: (request, response, sendResponse) => {
 				if (request.query?.verified) {
@@ -29,6 +28,7 @@ const client = {
 	],
 
 	rawData: true,
+	website: "https://scratch.mit.edu/",
 };
 
 export default client;

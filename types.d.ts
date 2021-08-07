@@ -15,11 +15,9 @@ export type lighthouseResult = {
 	}[];
 };
 
-interface AuthObj {
-	icon: string;
-	iconProvider?: "url" | "far" | "fab" | "fas";
-	link: string;
-	name: string;
+export type Auth = {
+	link: string; //
+	name: string; //
 	pages?: Page[];
 	getData?: (
 		token: string,
@@ -30,7 +28,10 @@ interface AuthObj {
 		| null
 		| void;
 	rawData?: boolean;
-}
+	icon: string; //
+	fontAwesome?: "far" | "fab" | "fas"; //
+	website?: string;
+};
 export type RequestFunction = (
 	request: Request,
 	response: Response,
@@ -84,5 +85,3 @@ export type StructuredJSON = {
 		  }
 		| StructuredMessage;
 };
-
-export type Auth = AuthObj;

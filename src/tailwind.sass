@@ -8,7 +8,6 @@
 @import "tailwindcss/utilities";
 
 /* GLOBAL STYLES */
-
 *,
 ::after,
 ::before {
@@ -16,15 +15,16 @@
 	column-fill: balance-all !important;
 
 	@apply selection:bg-red-500;
-	a {
-		@apply text-blue-500
-			no-underline;
+}
 
-		&:hover,
-		&:focus {
-			@apply text-blue-700
-				underline;
-		}
+* a {
+	@apply text-blue-500
+		no-underline;
+
+	&:hover,
+	&:focus {
+		@apply text-blue-700
+			underline;
 	}
 }
 
@@ -154,61 +154,64 @@ footer {
 }
 
 /* AUTH LIST */
-
 #auth-list {
 	@apply flex
 		flex-wrap
 		w-full;
 
 	a {
-		@apply font-normal
-			no-underline
-			cursor-pointer;
-
-		color: inherit;
+		@apply no-underline
+			cursor-pointer
+		m-0;
 	}
-}
 
-.auth-button {
-	@apply m-1
-		font-sans
+	li {
+		@apply before:hidden;
+
+		&.auth-button {
+			@apply ml-7;
+		}
+	}
+
+	.auth-button {
+		@apply font-sans
 		border
 		rounded-full
-		!static
-		before:hidden;
+		block;
 
-	svg,
-	img {
-		vertical-align: sub;
+		svg,
+		img {
+			vertical-align: sub;
 
-		@apply inline
+			@apply inline
 			m-0
 			bg-white
-			!h-full
-			!w-auto;
+			h-full
+			w-auto;
 
-		/* Per Google's guidlines, the background color always has to be #fff, even in dark mode */
+			/* Per Google's guidlines, the background color always has to be #fff, even in dark mode */
+		}
+
+		span {
+			@apply text-black
+		font-medium;
+
+			font-size: 14px;
+			padding-left: 24px;
+		}
+
+		/* Per Google's guidlines, the dark mode color needs to be #4285F4 if we ever make a dark mode. but Apple says white or black only… */
+
+		/* Google guidline stuffs */
+		font-family: "Roboto";
+		height: 40px;
+		padding: 8px;
+		min-height: 30px;
+		min-width: 140px;
 	}
-
-	span {
-		@apply text-black;
-
-		font-size: 14px;
-		padding-left: 24px;
-	}
-
-	/* Per Google's guidlines, the dark mode color needs to be #4285F4 if we ever make a dark mode. but Apple says white or black only… */
-
-	/* Google guidline stuffs */
-	font-family: "Roboto";
-	height: 40px;
-	padding: 8px;
-	min-height: 30px;
-	min-width: 140px;
 }
 
 /* EMAIL AUTH */
-
 #email-address,
 #code,
 button {
@@ -235,9 +238,7 @@ button {
 }
 
 /* ALLOW PAGE */
-
-#allow,
-#deny {
+.alllow-button {
 	@apply w-full
 		p-4
 		text-white
@@ -250,10 +251,7 @@ button {
 }
 
 /* GLOBAL STYLES */
-
 html {
-	font-family: "PT Sans", "DejaVu Sans", Arial, sans;
-
 	@apply font-sans
 	 !block;
 }

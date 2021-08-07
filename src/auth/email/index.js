@@ -24,14 +24,14 @@ dotenv.config();
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {
+	fontAwesome: "fas",
 	icon: "envelope",
-	iconProvider: "fas",
 	link: "/auth/email?url={{ url }}",
 	name: "Email",
 
 	pages: [
 		{
-			backendPage: "email",
+			backendPage: "./email",
 
 			get: (_, response) => {
 				response.render(path.resolve(directory, "index.html"));

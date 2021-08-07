@@ -6,6 +6,8 @@ import { logError } from "../../errors/index.js";
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {
+	fontAwesome: "fab",
+
 	getData: (token) =>
 		fetch("https://api.github.com/user", {
 			headers: {
@@ -15,7 +17,6 @@ const client = {
 		}).then((result) => result.json()),
 
 	icon: "github",
-	iconProvider: "fab",
 
 	link:
 		"https://github.com/login/oauth/authorize" +
@@ -27,7 +28,7 @@ const client = {
 
 	pages: [
 		{
-			backendPage: "github",
+			backendPage: "./github",
 
 			get: async (request, response, sendResponse) => {
 				const info = await fetch("https://github.com/login/oauth/access_token", {
@@ -54,6 +55,8 @@ const client = {
 			},
 		},
 	],
+
+	website: "https://github.com/",
 };
 
 export default client;
