@@ -162,7 +162,7 @@ footer {
 	a {
 		@apply no-underline
 			cursor-pointer
-		m-0;
+			m-0;
 	}
 
 	li {
@@ -181,20 +181,20 @@ footer {
 
 		svg,
 		img {
-			vertical-align: sub;
+			height: 18px;
 
 			@apply inline
 				m-0
 				bg-white
-				h-full
-				w-auto;
+				align-baseline;
 
 			/* Per Google's guidlines, the background color always has to be #fff, even in dark mode */
 		}
 
 		span {
 			@apply text-black
-				font-medium;
+				font-medium
+				align-top;
 
 			font-size: 14px;
 			padding-left: 24px;
