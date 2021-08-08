@@ -26,19 +26,24 @@
 				<h2>{{ #message }}about.about.supported{{ /message }}</h2>
 				<ul id="auth-list" class="justify-start">
 					{{ #clients }}
-					<li class="auth-button">
-						{{ #fontawesome }}
-						<i class="{{ iconProvider }} fa-{{ icon }}"></i>
-						{{ /fontawesome }} {{ #url }}
-						<img
-							src="{{ icon }}"
-							alt="{{ name }}"
-							height="18"
-							width="18"
-							name="{{ name }}"
-						/>
-						{{ /url }}
-						<span>{{ name }}</span>
+					<li class="{{ ^website }}auth-button{{ /website }}">
+						{{ #website }}
+						<a href="{{ website }}" class="auth-button">
+							{{ /website }} {{ #fontAwesome }}
+							<i class="{{ fontAwesome }} fa-{{ icon }}"></i>
+							{{ /fontAwesome }} {{ ^fontAwesome }}
+							<img
+								src="{{ icon }}"
+								title="{{ #message }}core.signin.logo|||{{ name }}{{ /message }}"
+								alt="{{ name }}"
+								height="18"
+								width="18"
+							/>
+							{{ /fontAwesome }}
+							<span>{{ name }}</span>
+							{{ #website }}
+						</a>
+						{{ /website }}
 					</li>
 					{{ /clients }}
 				</ul>

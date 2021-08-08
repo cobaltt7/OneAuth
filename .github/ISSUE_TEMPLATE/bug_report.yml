@@ -1,0 +1,106 @@
+name: Bug Report
+description: Create a report and help us improve
+labels: ['status: needs triage', 'type: bug']
+
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to fill out this bug report! We will try to fix this ASAP.
+
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues and none does.
+          required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: To reproduce
+      description: Steps to reproduce the behavior.
+      value: |
+        1. Go to…
+        2. Click on…
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what should have happened.
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Branch
+      description: Are you on `develop` (the main branch) or `release` (current state of https://auth.onedot.cf)?
+      options:
+        - "develop"
+        - "release"
+        - "Other (specify below)"
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Browser
+      description: What browser(s) are you seeing the problem on?
+      multiple: true
+      options:
+        - Chromium
+        - Firefox
+        - Internet Explorer or Legacy Edge
+        - Safari
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: OS
+      description: What OS(es) are you seeing the problem on?
+      multiple: true
+      options:
+        - Apple (mobile)
+        - Android
+        - ChromeOS
+        - Mac (desktop)
+        - Windows
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output.
+      render: shell
+
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: Put any other context and/or screenshots about the bug here.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Agree to our policies
+      description: By submitting this issue, you agree to follow our policies.
+      options:
+        - label: I agree to follow the [Code of Conduct](https://github.com/onedotprojects/auth/blob/issues/.github/CODE_OF_CONDUCT.md).
+          required: true
+
+        - label: I agree to follow the [Contributing Guidelines](https://github.com/onedotprojects/auth/blob/issues/.github/CONTRIBUTING.md).
+          required: true
+
+        - label: I am willing to submit a PR to fix this (optional).
+          required: false

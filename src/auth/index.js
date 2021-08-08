@@ -4,44 +4,15 @@ import path from "path";
 import url from "url";
 
 import { Router as express } from "express";
-import { globby } from "globby";
+import mustache from "mustache";
 import retronid from "retronid";
 
+import authClients from "../../lib/clients.js";
 import { AuthDatabase } from "../../lib/mongoose.js";
 import { logError } from "../errors/index.js";
 
 const app = express(),
-	/**
-	 * @type {{
-	 * 	fontawesome: boolean;
-	 * 	icon: string;
-	 * 	iconProvider: string;
-	 * 	link: string;
-	 * 	name: string;
-	 * 	url: boolean;
-	 * }[]}
-	 */
-	authButtons = [],
-	/** @type {import("../../types").Auth[]} */
-	authClients = [],
-	clientPromises = [],
-	directory = path.dirname(url.fileURLToPath(import.meta.url)),
-	// Idk why this is relative to the root dir but it is
-	paths = await globby("src/auth/*/index.js");
-
-for (const filepath of paths) clientPromises.push(import(`../../${filepath}`));
-
-for (const { default: client } of await Promise.all(clientPromises)) {
-	authClients.push(client);
-	authButtons.push({
-		fontawesome: client.iconProvider.indexOf("fa") === 0,
-		icon: client.icon,
-		iconProvider: client.iconProvider,
-		link: client.link,
-		name: client.name,
-		url: client.iconProvider === "url",
-	});
-}
+	directory = path.dirname(url.fileURLToPath(import.meta.url));
 
 /**
  * Returns information about a authentication client.
@@ -87,20 +58,17 @@ function getPageHandler(requestedClient) {
 app.get("/auth", (request, response) => {
 	if (!request.query?.url) return response.status(400);
 
-	const authButtonsReplaced = authButtons;
-
-	for (const [index, { link }] of authButtons.entries()) {
-		if (authButtonsReplaced[+index]) {
-			authButtonsReplaced[+index].link = link.replace(
-				// TODO: Use mustache instead. mustache-format-ignore
-				/{{ \s*url\s* }}/g,
-				encodeURIComponent(`${request.query?.url}`),
-			);
-		}
-	}
-
 	return response.render(path.resolve(directory, "auth.html"), {
-		clients: authButtonsReplaced,
+		clients: authClients.map((client) => ({
+			...client,
+
+			link: mustache.render(client.link, {
+				// #34
+				nonce: "TODO",
+
+				url: encodeURIComponent(`${request.query?.url}`),
+			}),
+		})),
 	});
 });
 

@@ -173,14 +173,7 @@
 	"grammarly.emotions": ["neutral", "confident", "friendly"],
 	"grammarly.goals": ["inform"],
 	"grammarly.showExamples": true,
-	"grammarly.userWords": [
-		"iconProvider",
-		"url",
-		"mkactivity",
-		"mkcol",
-		"sendResponse",
-		"rawData"
-	],
+	"grammarly.userWords": ["fontAwesome", "url", "mkactivity", "mkcol", "sendResponse", "rawData"],
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"github-actions.workflows.pinned.workflows": [".github/workflows/lint.yml"],
 	"github-actions.workflows.pinned.refresh.enabled": true,

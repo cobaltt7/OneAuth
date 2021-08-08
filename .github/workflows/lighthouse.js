@@ -29,7 +29,7 @@ function graphql(query, ...placeholderValues) {
 function commentOnDiscussion(body) {
 	return fetch("https://api.github.com/graphql", {
 		body: JSON.stringify({
-			// Hmmst… query strings break prettier formatting...mustache? maybe
+			// TODO: Hmmst… query strings break prettier formatting...mustache? maybe
 			query: graphql`mutation {
 					addDiscussionComment(
 						input: {discussionId: "MDEwOkRpc2N1c3Npb24zNDEwNDA2", body: ${JSON.stringify(body)}}

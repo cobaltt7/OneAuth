@@ -7,8 +7,8 @@ import { promisify } from "util";
 import { load } from "cheerio";
 import dotenv from "dotenv";
 import { Router as express } from "express";
-import { globby } from "globby";
 
+import authClients from "../../lib/clients.js";
 import callbackHighlight from "../../lib/highlighting.js";
 import { logError } from "../errors/index.js";
 
@@ -17,32 +17,6 @@ const app = express(),
 	highlight = promisify(callbackHighlight);
 
 dotenv.config();
-
-/**
- * @type {{
- * 	fontawesome: boolean;
- * 	icon: string;
- * 	iconProvider: string;
- * 	name: string;
- * 	url: boolean;
- * }[]}
- */
-const authClients = [],
-	clientPromises = [],
-	// Idk why this is relative to the root dir but it is
-	paths = await globby("src/auth/*/index.js");
-
-for (const filepath of paths) clientPromises.push(import(`../../${filepath}`));
-
-for (const { default: client } of await Promise.all(clientPromises)) {
-	authClients.push({
-		fontawesome: client.iconProvider.indexOf("fa") === 0,
-		icon: client.icon,
-		iconProvider: client.iconProvider,
-		name: client.name,
-		url: client.iconProvider === "url",
-	});
-}
 
 // Highlighting
 app.use((_, response, next) => {

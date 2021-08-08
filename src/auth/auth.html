@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{{ #message }}branding.auth.title|||[core.signing.heading]{{ /message }}</title>
+		<title>{{ #message }}branding.auth.title|||[core.signin.heading]{{ /message }}</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
@@ -18,22 +18,22 @@
 			<p>{{ #message }}core.signin.choose{{ /message }}</p>
 			<ul id="auth-list" class="justify-center">
 				{{ #clients }}
-				<a href="{{ link }}">
-					<li class="auth-button">
-						{{ #fontawesome }}
-						<i class="{{ iconProvider }} fa-{{ icon }}"></i>
-						{{ /fontawesome }} {{ #url }}
+				<li>
+					<a href="{{ link }}" class="auth-button">
+						{{ #fontAwesome }}
+						<i class="{{ fontAwesome }} fa-{{ icon }}"></i>
+						{{ /fontAwesome }} {{ ^fontAwesome }}
 						<img
 							src="{{ icon }}"
+							title="{{ #message }}core.signin.logo|||{{ name }}{{ /message }}"
 							alt="{{ name }}"
 							height="18"
 							width="18"
-							name="{{ name }}"
 						/>
-						{{ /url }}
+						{{ /fontAwesome }}
 						<span>{{ #message }}core.signin.with|||{{ name }}{{ /message }}</span>
-					</li>
-				</a>
+					</a>
+				</li>
 				{{ /clients }}
 			</ul>
 		</main>

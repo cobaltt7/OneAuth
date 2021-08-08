@@ -5,7 +5,6 @@ import atob from "atob";
 /** @type {import("../../../types").Auth} Auth */
 const client = {
 	icon: "https://replit.com/public/images/logo.svg",
-	iconProvider: "url",
 	link: "https://replit.com/auth_with_repl_site?domain=auth.onedot.cf&redirect={{ url }}",
 	name: "Replit",
 
@@ -22,6 +21,7 @@ const client = {
 	],
 
 	rawData: true,
+	website: "https://replit.com/",
 };
 
 export default client;

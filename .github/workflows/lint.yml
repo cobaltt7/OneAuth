@@ -50,6 +50,10 @@ jobs:
               if: ${{ !cancelled() }}
               run: npm run lint:eslint
 
+            - name: Revert
+              if: ${{ !cancelled() }}
+              run: git checkout HEAD -- package-lock.json package.json
+
             - name: Commit
               if: ${{ !cancelled() }}
               uses: stefanzweifel/git-auto-commit-action@master
