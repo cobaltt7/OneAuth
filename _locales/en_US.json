@@ -87,12 +87,12 @@
 			"logo": {
 				"string": "OneDot logo"
 			},
-			"dot": {
+			"alt": {
 				"string": "1DOT"
 			}
 		},
 		"auth": {
-			"auth": {
+			"alt": {
 				"string": "1AUTH"
 			},
 			"logo": { "string": "1Auth logo" },
@@ -150,7 +150,7 @@
 			},
 			"allow": { "string": "Allow" },
 			"deny": { "string": "Deny" },
-			"recieve": {
+			"receive": {
 				"string": "If you press “{2}”, then {1} will receive the following information (taken from your {0} account):"
 			},
 			"hidden": {
