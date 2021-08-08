@@ -87,13 +87,13 @@
 			"logo": {
 				"string": ""
 			},
-			"dot": {
-				"string": "1DOT"
+			"alt": {
+				"string": ""
 			}
 		},
 		"auth": {
-			"auth": {
-				"string": "1AUTH"
+			"alt": {
+				"string": ""
 			},
 			"logo": { "string": "" },
 			"title": {
@@ -150,7 +150,7 @@
 			},
 			"allow": { "string": "" },
 			"deny": { "string": "" },
-			"recieve": {
+			"receive": {
 				"string": ""
 			},
 			"hidden": {
@@ -163,7 +163,11 @@
 		"signin": {
 			"heading": { "string": "" },
 			"choose": { "string": "" },
-			"with": { "string": "" }
+			"with": { "string": "" },
+			"logo": {
+				"string": "",
+				"developer_comment": "Alt text of a logo image. Example: “Google icon”, “Email icon”, etc."
+			}
 		}
 	},
 	"footer": {

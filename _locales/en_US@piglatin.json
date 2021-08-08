@@ -87,13 +87,13 @@
 			"logo": {
 				"string": "OneDot ogolay"
 			},
-			"dot": {
-				"string": "1DOT"
+			"alt": {
+				"string": ""
 			}
 		},
 		"auth": {
-			"auth": {
-				"string": "1AUTH"
+			"alt": {
+				"string": ""
 			},
 			"logo": { "string": "1Auth ogolay" },
 			"title": {
@@ -150,8 +150,8 @@
 			},
 			"allow": { "string": "Alowyay" },
 			"deny": { "string": "Enyday" },
-			"recieve": {
-				"string": "ifyay ouyay esspray “{2}”, enthay {1} iillway eceiveray ethay ollowingfay informationyay (akentay omfray ouryay {0} accountyay):"
+			"receive": {
+				"string": ""
 			},
 			"hidden": {
 				"string": "Unfortunatelyay, eway ancay otnay owshay isthay ataday ightray ownay."
@@ -163,7 +163,11 @@
 		"signin": {
 			"heading": { "string": "Ignsay insay" },
 			"choose": { "string": "Oosechay anyay optionyay otay ontinuecay" },
-			"with": { "string": "Ignsay inyay ithway {0}" }
+			"with": { "string": "Ignsay inyay ithway {0}" },
+			"logo": {
+				"string": "",
+				"developer_comment": "Alt text of a logo image. Example: “Google icon”, “Email icon”, etc."
+			}
 		}
 	},
 	"footer": {
