@@ -28,7 +28,7 @@
 				"string": "Ifyay eythay allowedyay aringshay eirthay ataday enthay erethay illway ebay ayay ewnay eryquay arameterpay onyay atthay URL, {0}."
 			},
 			"get": {
-				"string": "Otay etrieveray ethay useryay's informationyay, endsay ethay ollowingfay HTTP equestray, erewhay {0} isyay ethay aluevay ofyay ethay aidsay arameterpray:"
+				"string": "Otay etrieveray ethay useryay’s informationyay, endsay ethay ollowingfay HTTP equestray, erewhay {0} isyay ethay aluevay ofyay ethay aidsay arameterpray:"
 			},
 			"denied": {
 				"string": "Ifyay ethay enieday aringshay eirthay ataday, enthay erethay illway otnay ebay anyay ewnay eryquay arameterpay."
@@ -59,7 +59,7 @@
 				"string": ""
 			},
 			"fallback": {
-				"string": "iIfyay ayay anguagelay isyay otnay availableyay, ityay illway allfay ackbay otay ethay onay-ountrycay-ecificspay anguagelay, enthay otay ethay useryays' owserbray anguagelay."
+				"string": "Ifyay ayay anguagelay isyay otnay availableyay, ityay illway allfay ackbay otay ethay onay-ountrycay-ecificspay anguagelay, enthay otay ethay useryays’ owserbray anguagelay."
 			},
 			"new": { "string": "EWNAY!!!", "developer_comment": "Please keep this uppercase." },
 			"few": {
