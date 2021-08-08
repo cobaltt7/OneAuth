@@ -17,7 +17,7 @@
 	@apply selection:bg-red-500;
 }
 
-* a {
+* a:not(.auth-button) {
 	@apply text-blue-500
 		no-underline;
 
@@ -124,7 +124,7 @@ footer {
 
 					&:not(:first-child) {
 						@apply mx-0
-						my-1.5;
+							my-1.5;
 					}
 				}
 			}
@@ -175,26 +175,26 @@ footer {
 
 	.auth-button {
 		@apply font-sans
-		border
-		rounded-full
-		block;
+			border
+			rounded-full
+			block;
 
 		svg,
 		img {
 			vertical-align: sub;
 
 			@apply inline
-			m-0
-			bg-white
-			h-full
-			w-auto;
+				m-0
+				bg-white
+				h-full
+				w-auto;
 
 			/* Per Google's guidlines, the background color always has to be #fff, even in dark mode */
 		}
 
 		span {
 			@apply text-black
-		font-medium;
+				font-medium;
 
 			font-size: 14px;
 			padding-left: 24px;
