@@ -55,7 +55,7 @@ const client = {
 		return filteredInfo;
 	},
 
-	icon: "/image/google.svg",
+	icon: "https://developers.google.com/identity/images/g-logo.png",
 
 	link:
 		"https://accounts.google.com/o/oauth2/v2/auth" +
