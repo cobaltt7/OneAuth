@@ -1,12 +1,12 @@
 {
-	"docs": { "string": "{0} | 1Auth Development Docs" },
+	"docs": { "string": "{0} | OneAuth Development Docs" },
 	"about": {
 		"about": {
-			"title": { "string": "1Auth | All-In-One Authentication" },
-			"heading": { "string": "1Auth All-In-One Authentication" },
+			"title": { "string": "OneAuth | All-In-One Authentication" },
+			"heading": { "string": "OneAuth All-In-One Authentication" },
 			"about": { "string": "About" },
 			"description": {
-				"string": "1Auth is an all-in-one authentication client that we designed to work seamlessly with any website."
+				"string": "OneAuth is an all-in-one authentication client that we designed to work seamlessly with any website."
 			},
 			"clients": {
 				"string": "{0, plural, one {We support {0} client with many more to come.} other {We support {0} clients with many more to come.}}"
@@ -16,7 +16,7 @@
 		"developers": {
 			"heading": { "string": "For Developers" },
 			"streamlined": {
-				"string": "We designed 1Auth so that adding it to your site is as streamlined as possible."
+				"string": "We designed OneAuth so that adding it to your site is as streamlined as possible."
 			},
 			"initiate": {
 				"string": "When a user clicks “Sign in” on your site, direct them to this URL:"
@@ -85,19 +85,19 @@
 	"branding": {
 		"dot": {
 			"logo": {
-				"string": "OneDot logo"
+				"string": "OneDot Projects logo"
 			},
 			"alt": {
-				"string": "1DOT"
+				"string": "ONEDOT PROJECTS"
 			}
 		},
 		"auth": {
 			"alt": {
-				"string": "1AUTH"
+				"string": "ONEAUTH"
 			},
-			"logo": { "string": "1Auth logo" },
+			"logo": { "string": "OneAuth logo" },
 			"title": {
-				"string": "{0} | 1Auth"
+				"string": "{0} | OneAuth"
 			}
 		}
 	},
@@ -111,13 +111,13 @@
 				"placeholder": { "string": "you@example.com" }
 			},
 			"email": {
-				"subject": { "string": "1Auth Email Verification" },
+				"subject": { "string": "OneAuth Email Verification" },
 				"code": { "string": "Your code is {0}." },
 				"share": { "string": "Don’t share it with anyone else." },
 				"act": { "string": "Otherwise, they could be able to act on your behalf." },
 				"next": { "string": "What now?" },
 				"copy": { "string": "Copy your code." },
-				"back": { "string": "Go back to 1Auth." },
+				"back": { "string": "Go back to OneAuth." },
 				"paste": {
 					"string": "Paste your code in the box and press “{0}”."
 				},
@@ -209,7 +209,7 @@
 				"string": "Discord"
 			},
 			"auth": {
-				"string": "1Auth"
+				"string": "OneAuth"
 			},
 			"docs": {
 				"string": "Documentation"
@@ -257,7 +257,7 @@
 				"string": "GITHUB®, and the GITHUB® logo design are exclusive trademarks registered in the United States by GitHub, Inc."
 			},
 			"license": {
-				"string": "The source code of 1Auth is available under the {0}."
+				"string": "The source code of OneAuth is available under the {0}."
 			},
 			"mit": {
 				"string": "MIT license"

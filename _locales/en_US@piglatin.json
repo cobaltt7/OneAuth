@@ -1,12 +1,12 @@
 {
-	"docs": { "string": "{0} | 1Auth Evelopmentday Ocsday" },
+	"docs": { "string": "{0} | OneAuth Evelopmentday Ocsday" },
 	"about": {
 		"about": {
-			"title": { "string": "1Auth | Allyay-Inyay-Oneyay Authenticationyay" },
-			"heading": { "string": "1Auth Allyay-Inyay-Oneyay Authenticationyay" },
+			"title": { "string": "OneAuth | Allyay-Inyay-Oneyay Authenticationyay" },
+			"heading": { "string": "OneAuthllyay-Inyay-Oneyay Authenticationyay" },
 			"about": { "string": "Aboutyay" },
 			"description": {
-				"string": "1Auth isyay anyay allyay-inyay-oneyay authenticationyay ientclay atthay eway esigneday otay orkway eamlesslysay ithway anyay ebsiteway."
+				"string": "OneAuthsyay anyay allyay-inyay-oneyay authenticationyay ientclay atthay eway esigneday otay orkway eamlesslysay ithway anyay ebsiteway."
 			},
 			"clients": {
 				"string": "{0, plural, one {Eway upportsay {0} ientclay ithway anymay oremay otay omecay.} other {Eway upportsay {0} ientsclay ithway anymay oremay otay omecay.}}"
@@ -16,7 +16,7 @@
 		"developers": {
 			"heading": { "string": "Orfay Evelopersday" },
 			"streamlined": {
-				"string": "Eway esigneday 1Auth osay atthay addingyay ityay otay ouryay itesay isyay asyay eamlinesstray asyay ossiblepay."
+				"string": "Eway esigneday OneAuthsay atthay addingyay ityay otay ouryay itesay isyay asyay eamlinesstray asyay ossiblepay."
 			},
 			"initiate": {
 				"string": "Enwhay ayay useryay icksclay “Ignsay inyay” onyay ouryay itesay, irectday emthay otay isthay URL:"
@@ -85,7 +85,7 @@
 	"branding": {
 		"dot": {
 			"logo": {
-				"string": "OneDot ogolay"
+				"string": "OneDot Projects ogolay"
 			},
 			"alt": {
 				"string": ""
@@ -95,9 +95,9 @@
 			"alt": {
 				"string": ""
 			},
-			"logo": { "string": "1Auth ogolay" },
+			"logo": { "string": "OneAuthgolay" },
 			"title": {
-				"string": "{0} | 1Auth"
+				"string": "{0} | OneAuth
 			}
 		}
 	},
@@ -111,13 +111,13 @@
 				"placeholder": { "string": "ouyay@exampleyay.com" }
 			},
 			"email": {
-				"subject": { "string": "1Auth Emailyay Erificationvay" },
+				"subject": { "string": "OneAuthmailyay Erificationvay" },
 				"code": { "string": "Ouryay odecay isyay {0}." },
 				"share": { "string": "Oday otnay areshay ithway anyoneyay elseyay." },
 				"act": { "string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay." },
 				"next": { "string": "Atwhay ownay?" },
 				"copy": { "string": "Opycay ouryay odecay." },
-				"back": { "string": "Ogay ackbay otay 1Auth." },
+				"back": { "string": "Ogay ackbay otay OneAuth },
 				"paste": {
 					"string": "Astepay ouryay odecay inyay ethay oxbay andyay esspray “{0}”."
 				},
@@ -209,7 +209,7 @@
 				"string": "Discord"
 			},
 			"auth": {
-				"string": "1Auth"
+				"string": "OneAuth
 			},
 			"docs": {
 				"string": "Ocumentationday"
