@@ -35,6 +35,8 @@
 						class="pr-2"
 						width="230"
 						src="https://onedot.cf/brand/OneDot.svg"
+						loading="lazy"
+						height="53"
 					/>
 				</li>
 				<li>
@@ -151,6 +153,7 @@
 							title="{{ #message }}footer.localization.choose{{ /message }}"
 							onchange="document.getElementById('language-forum').submit()"
 						>
+							<!-- TODO: The first child option element of a select element with a required attribute, and without a multiple attribute, and without a size attribute whose value is greater than 1, must have either an empty value attribute, or must have no text content. Consider either adding a placeholder option label, or adding a size attribute with a value equal to the number of option elements. -->
 							{{ #languages }}
 							<option value="{{ code }}">{{ language }}</option>
 							{{ /languages }}

@@ -14,7 +14,7 @@
 	<body>
 		{{> nav }}
 		<main>
-			<h1>{{ status }} {{ heading }}</h1>
+			<h1>{{ #message }}errors.page.message|||{{ status }}|||{{ heading }}{{ /message }}</h1>
 			<p>{{ errorMessage }}</p>
 		</main>
 		{{> footer }}
