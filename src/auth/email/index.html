@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>
-			{{ #message }}branding.auth.title|||[clients.email.email.page.heading]{{ /message }}
+			{{ #message }}branding.auth.title|||[clients.email.page.heading]{{ /message }}
 		</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<link rel="preload" href="/image/loading.svg" as="image" />
@@ -21,13 +21,13 @@
 			<label id="note" for="email-address"
 				>{{ #message }}clients.email.page.email{{ /message }}</label
 			>
-			<form action method="POST">
+			<form method="POST">
 				<input
 					id="email-address"
 					name="email"
 					type="email"
 					autocomplete="email"
-					required="true"
+					required
 					placeholder="{{ #message }}clients.email.page.placeholder{{ /message }}"
 				/>
 				<button id="submit" type="submit">
@@ -87,7 +87,7 @@
 							id: "code",
 							name: "code",
 							placeholder: "abcde12345",
-							required: "true",
+							required: "",
 							type: "password"
 						}),
 						Object.assign(document.createElement("input"), {

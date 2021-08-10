@@ -523,6 +523,12 @@
 			"heading": { "string": "Network Authentication Required" },
 			"message": { "string": "Please sign in to the network before accessing the Internet." }
 		},
+		"page": {
+			"message": {
+				"string": "Error: {0} {1}",
+				"developer_comments": "{0} is the HTTP status code (ie “404”) and {1} is a 1-5 word description (ie “Not Found”)"
+			}
+		},
 		"old": {
 			"heading": { "string": "You are using an outdated browser!" },
 			"why": {
