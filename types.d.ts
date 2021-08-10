@@ -16,8 +16,8 @@ export type lighthouseResult = {
 };
 
 export type Auth = {
-	link: string; //
-	name: string; //
+	link: string;
+	name: string;
 	pages?: Page[];
 	getData?: (
 		token: string,
@@ -28,14 +28,17 @@ export type Auth = {
 		| null
 		| void;
 	rawData?: boolean;
-	icon: string; //
-	fontAwesome?: "far" | "fab" | "fas"; //
+	icon: string;
+	fontAwesome?: "far" | "fab" | "fas";
 	website?: string;
 };
 export type RequestFunction = (
 	request: Request,
 	response: Response,
-	sendResponse: (tokenOrData: string | { [key: string]: any }, url: string) => Promise<void>,
+	sendResponse: (
+		tokenOrData: string | { [key: string]: any },
+		psuedoNonce: string,
+	) => Promise<void>,
 ) => any;
 export interface Page {
 	"backendPage": string;

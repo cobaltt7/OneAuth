@@ -22,7 +22,7 @@ const client = {
 		"https://github.com/login/oauth/authorize" +
 		"?client_id=7b64414fe57e07d1e969" +
 		"&redirect_uri=https://auth.onedot.cf/auth/github" +
-		"&state={{ url }}",
+		"&state={{ nonce }}",
 
 	name: "GitHub",
 

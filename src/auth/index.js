@@ -8,7 +8,7 @@ import mustache from "mustache";
 import retronid from "retronid";
 
 import authClients from "../../lib/clients.js";
-import { AuthDatabase } from "../../lib/mongoose.js";
+import { AuthDatabase, NonceDatabase } from "../../lib/mongoose.js";
 import { logError } from "../errors/index.js";
 
 const app = express(),
@@ -55,18 +55,29 @@ function getPageHandler(requestedClient) {
 	return nothing;
 }
 
-app.get("/auth", (request, response) => {
+app.get("/auth", async (request, response) => {
 	if (!request.query?.url) return response.status(400);
+
+	const expires = new Date(),
+		nonce = retronid(),
+		psuedoNonce = retronid();
+
+	expires.setMinutes(expires.getMinutes() + 15);
+
+	await new NonceDatabase({
+		nonce,
+		psuedoNonce,
+		redirect: request.query.url,
+	}).save();
+
+	response.cookie("nonce", psuedoNonce, {});
 
 	return response.render(path.resolve(directory, "auth.html"), {
 		clients: authClients.map((client) => ({
 			...client,
 
 			link: mustache.render(client.link, {
-				// #34
-				nonce: "TODO",
-
-				url: encodeURIComponent(`${request.query?.url}`),
+				nonce,
 			}),
 		})),
 	});
@@ -178,11 +189,27 @@ for (const method of [
 				request,
 				response,
 
-				async (tokenOrData, redirect) => {
+				async (tokenOrData, nonce) => {
 					const clientInfo = getClient(client.backendPage);
 
 					if (!clientInfo) {
 						logError(new ReferenceError(`Invalid client: ${client.backendPage}`));
+
+						return;
+					}
+
+					const { psuedoNonce, redirect } = await NonceDatabase.findOneAndDelete({
+						nonce,
+					}).exec();
+
+					if (!request.cookies.nonce) {
+						response.status(401);
+
+						return;
+					}
+
+					if (request.cookies.nonce !== psuedoNonce) {
+						response.status(403);
 
 						return;
 					}
@@ -203,6 +230,8 @@ for (const method of [
 						typeof tokenOrData === "string" &&
 						clientInfo.getData
 					) {
+						// TODO: JWT
+
 						data = `${request.localization.messages["core.allow.hidden"]} ${request.localization.messages["core.allow.sorry"]}`;
 						token = tokenOrData;
 					} else {
@@ -225,9 +254,9 @@ for (const method of [
 							host,
 							name: clientInfo.name,
 							token,
-							url: redirect,
 						});
 					} catch {
+						logError(new SyntaxError(`Invalid URL: ${redirect}`));
 						response.status(400);
 					}
 				},

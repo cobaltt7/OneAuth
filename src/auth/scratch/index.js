@@ -6,7 +6,7 @@ const client = {
 
 	link:
 		"https://scratch.auth.onedot.cf" +
-		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Furl={{ url }}",
+		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Fnonce={{nonce}}",
 
 	name: "Scratch",
 
@@ -18,7 +18,7 @@ const client = {
 				if (request.query?.verified) {
 					return sendResponse(
 						{ username: request.query?.username },
-						`${request.query?.url}`,
+						`${request.query?.nonce}`,
 					);
 				}
 

@@ -26,7 +26,7 @@ dotenv.config();
 const client = {
 	fontAwesome: "fas",
 	icon: "envelope",
-	link: "/auth/email?url={{ url }}",
+	link: "/auth/email?nonce={{ nonce }}",
 	name: "Email",
 
 	pages: [
@@ -53,7 +53,7 @@ const client = {
 
 					await EmailDatabase.deleteOne({ code: request.body.code }).exec();
 
-					return sendResponse({ email }, `${request.query?.url}`);
+					return sendResponse({ email }, `${request.query?.nonce}`);
 				}
 
 				if (request.body?.email) {
