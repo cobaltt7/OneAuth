@@ -97,7 +97,7 @@
 			},
 			"logo": { "string": "OneAuthgolay" },
 			"title": {
-				"string": "{0} | OneAuth
+				"string": "{0} | OneAuth"
 			}
 		}
 	},
@@ -117,7 +117,7 @@
 				"act": { "string": "Otherwiseyay, eythay ouldcay ebay ableyay otay actyay onyay ouryay ehalfbay." },
 				"next": { "string": "Atwhay ownay?" },
 				"copy": { "string": "Opycay ouryay odecay." },
-				"back": { "string": "Ogay ackbay otay OneAuth },
+				"back": { "string": "Ogay ackbay otay OneAuth" },
 				"paste": {
 					"string": "Astepay ouryay odecay inyay ethay oxbay andyay esspray “{0}”."
 				},
@@ -209,7 +209,7 @@
 				"string": "Discord"
 			},
 			"auth": {
-				"string": "OneAuth
+				"string": "OneAuth"
 			},
 			"docs": {
 				"string": "Ocumentationday"
