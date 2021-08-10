@@ -88,12 +88,12 @@
 				"string": ""
 			},
 			"alt": {
-				"string": ""
+				"string": "ONEDOT PROJECTS"
 			}
 		},
 		"auth": {
 			"alt": {
-				"string": ""
+				"string": "ONEAUTH"
 			},
 			"logo": { "string": "" },
 			"title": {

@@ -88,12 +88,12 @@
 				"string": "Logotipo de OneDot Projects"
 			},
 			"alt": {
-				"string": ""
+				"string": "ONEDOT PROJECTS"
 			}
 		},
 		"auth": {
 			"alt": {
-				"string": ""
+				"string": "ONEAUTH"
 			},
 			"logo": { "string": "Logotipo de OneAuth" },
 			"title": {
