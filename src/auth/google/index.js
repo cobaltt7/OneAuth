@@ -63,8 +63,7 @@ const client = {
 		"&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com" +
 		"&scope=openid%20email%20profile" +
 		"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
-		"&state={{ url }}" +
-		"&nonce={{ nonce }}",
+		"&state={{ nonce }}",
 
 	name: "Google",
 
@@ -72,9 +71,8 @@ const client = {
 		{
 			backendPage: "./google",
 
-			get: (request, _, sendResponse) => {
-				sendResponse(`${request.query?.code}`, `${request.query?.state}`);
-			},
+			get: (request, _, sendResponse) =>
+				sendResponse(`${request.query?.code}`, `${request.query?.state}`),
 		},
 	],
 
