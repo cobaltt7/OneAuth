@@ -6,7 +6,7 @@ const client = {
 
 	link:
 		"https://scratch.auth.onedot.cf" +
-		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Fnonce={{nonce}}",
+		"?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fscratch%3Fnonce={{ nonce }}",
 
 	name: "Scratch",
 
