@@ -83,10 +83,10 @@ app.use((_, response, next) => {
 
 // Logos
 app.get("/logo.svg", (_, response) =>
-	response.status(302).redirect("https://http://onedot.cf/brand/OneAuth.svg"),
+	response.status(302).redirect("https://onedot.cf/brand/OneAuth.svg"),
 );
 app.get("/favicon.ico", (_, response) =>
-	response.status(302).redirect("https://http://onedot.cf/brand/Auth.svg"),
+	response.status(302).redirect("https://onedot.cf/brand/Auth.svg"),
 );
 app.get("/", (_, response) =>
 	response.render(path.resolve(directory, "about.html"), {
