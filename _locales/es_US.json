@@ -523,6 +523,12 @@
 			"heading": { "string": "" },
 			"message": { "string": "" }
 		},
+		"page": {
+			"message": {
+				"string": "",
+				"developer_comments": "{0} is the HTTP status code (ie “404”) and {1} is a 1-5 word description (ie “Not Found”)"
+			}
+		},
 		"old": {
 			"heading": { "string": "¡Tu estas usando un navegador obsoleto!" },
 			"why": {
