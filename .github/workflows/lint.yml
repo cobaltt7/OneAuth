@@ -1,10 +1,5 @@
 name: Format and lint
-on:
-    pull_request:
-        types: [opened]
-    pull_request_target:
-    workflow_dispatch:
-    push:
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
     run:
@@ -13,13 +8,13 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@main
+              uses: actions/checkout@v2.3.4
               with:
                   ref: ${{ github.head_ref }}
                   token: ${{ secrets.WGYTBOT || github.token }}
 
             - name: Setup Node.JS
-              uses: actions/setup-node@main
+              uses: actions/setup-node@v2.4.0
               with:
                   node-version: 14
                   cache: "npm"
@@ -48,7 +43,7 @@ jobs:
 
             - name: Commit
               if: ${{ !cancelled() }}
-              uses: stefanzweifel/git-auto-commit-action@master
+              uses: stefanzweifel/git-auto-commit-action@v4.11.0
               with:
                   commit_message: "Lint and format code"
                   branch: ${{ github.head_ref }}
