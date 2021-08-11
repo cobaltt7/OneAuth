@@ -19,12 +19,12 @@ const app = express(),
 	mustacheEngine = mustacheExpress(path.resolve(directory, "partials"), ".html");
 
 app.disable("case sensitive routing");
-app.engine("html", mustacheEngine)
-app.engine("css", mustacheEngine)
-app.enable("json escape")
+app.engine("html", mustacheEngine);
+app.engine("css", mustacheEngine);
+app.enable("json escape");
 app.disable("strict routing");
 app.set("views", directory);
-app.disable("x-powered-by")
+app.disable("x-powered-by");
 
 app.use(
 	express.static(path.resolve(directory, "static"), {
