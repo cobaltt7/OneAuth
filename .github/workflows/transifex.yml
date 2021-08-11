@@ -36,9 +36,11 @@ jobs:
                   secrets.TRANSIFEX }}" >> .transifexrc; echo "username = api" >> .transifexrc;
 
             - name: Pull
+              continue-on-error: true
               run: tx pull --all --skip --no-interactive --force --mode=onlytranslated
 
             - name: Push
+              continue-on-error: true
               run: tx push --source --no-interactive --force --skip
 
             - name: Commit
