@@ -1,5 +1,6 @@
 {
-	"docs": { "string": "{0} | OneAuth Development Docs" },	"about": {
+	"docs": { "string": "{0} | OneAuth Development Docs" },
+	"about": {
 		"about": {
 			"title": { "string": "OneAuth | All-In-One Authentication" },
 			"heading": { "string": "OneAuth All-In-One Authentication" },
