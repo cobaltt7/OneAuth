@@ -19,6 +19,7 @@ jobs:
             - name: Analyze
               uses: foo-software/lighthouse-check-action@v4.0.0
               id: lighthouse
+              continue-on-error: true
               with:
                   emulatedFormFactor: all
                   locale: en
@@ -31,24 +32,22 @@ jobs:
                       https://auth.onedot.cf/docs/auth
 
             - name: Setup Node.JS
-              if: ${{ !cancelled() }}
               uses: actions/setup-node@v2.4.0
               with:
                   node-version: 14
                   cache: "npm"
 
             - name: Install
-              if: ${{ !cancelled() }}
               run: npm install --force
 
             - name: Comment
-              if: success()
+              if: steps.lighthouse.outcome == 'success'
               run:
                   node --trace-warnings --harmony .github/workflows/lighthouse.js '${{
                   secrets.WGYTBOT }}' '${{ join(steps.lighthouse.outputs.*, '\n') }}' ''
 
             - name: Comment
-              if: failure()
+              if: steps.lighthouse.outcome != 'success'
               run:
                   node --trace-warnings --harmony .github/workflows/lighthouse.js '${{
                   secrets.WGYTBOT }}' '{}' '1'
