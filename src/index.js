@@ -5,14 +5,17 @@ import { fileURLToPath } from "url";
 
 import compression from "compression";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 import express, { urlencoded } from "express";
 import mustacheExpress from "mustache-express";
 
 import localization from "../lib/localization.js";
 import auth from "./auth/index.js";
 import documentation from "./docs/index.js";
-import errorPages from "./errors/index.js";
+import errors from "./errors/index.js";
 import main from "./main/index.js";
+
+dotenv.config();
 
 const app = express(),
 	directory = path.dirname(fileURLToPath(import.meta.url)),
@@ -26,6 +29,7 @@ app.disable("strict routing");
 app.set("views", directory);
 app.disable("x-powered-by");
 
+app.use(compression());
 app.use(
 	express.static(path.resolve(directory, "static"), {
 		dotfiles: "allow",
@@ -33,7 +37,6 @@ app.use(
 		maxAge: 31536000,
 	}),
 );
-app.use(compression());
 
 app.use((request, response, next) => {
 	let directive;
@@ -49,21 +52,21 @@ app.use((request, response, next) => {
 });
 
 // Information parsing
+
+// Not exculded on assets because of localization.
+app.use(cookieParser());
+
 const bodyParser = urlencoded({
 	extended: true,
 });
 
-// Not exculded on assets because of localization.
-app.use(cookieParser());
-app.use((request, response, next) => {
-	if (request.path.includes(".")) return next();
-
-	return bodyParser(request, response, next);
-});
+app.use((request, response, next) =>
+	request.path.includes(".") ? next() : bodyParser(request, response, next),
+);
 
 // Pages
 app.use(localization);
-app.use(errorPages);
+app.use(errors);
 app.use("/docs", documentation);
 app.use(main);
 app.use(auth);

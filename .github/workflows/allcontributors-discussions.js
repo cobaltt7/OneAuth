@@ -81,7 +81,7 @@ async function getPage(hash = "") {
 			},
 
 			method: "POST",
-		}).then((response) => response.json()),
+		}).then((apiResult) => apiResult.json()),
 		/** @type {{ cursor: string; username?: string }[]} */
 		processedDiscussions = data.repository.discussions.edges.map((discussion) => ({
 			cursor: discussion.cursor,

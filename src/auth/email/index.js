@@ -29,15 +29,12 @@ const client = {
 	link: "/auth/email?nonce={{ nonce }}",
 	name: "Email",
 
-	pages: [
-		{
-			backendPage: "./email",
+	pages: {
+		"./email": {
+			async all(request, response) {
+				if (request.method !== "POST")
+					return response.render(path.resolve(directory, "index.html"));
 
-			get: (_, response) => {
-				response.render(path.resolve(directory, "index.html"));
-			},
-
-			post: async (request, response, sendResponse) => {
 				if (request.body?.code && request.body?.email) {
 					const { email, date } = await EmailDatabase.findOne({
 						code: request.body.code,
@@ -53,7 +50,7 @@ const client = {
 
 					await EmailDatabase.deleteOne({ code: request.body.code }).exec();
 
-					return sendResponse({ email }, `${request.query?.nonce}`);
+					return this.sendResponse({ email }, `${request.query?.nonce}`);
 				}
 
 				if (request.body?.email) {
@@ -106,9 +103,7 @@ const client = {
 				return response.status(400);
 			},
 		},
-	],
-
-	rawData: true,
+	},
 };
 
 export default client;

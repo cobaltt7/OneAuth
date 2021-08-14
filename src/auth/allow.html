@@ -19,17 +19,17 @@
 			<div class="inline-flex w-full p-2">
 				<a
 					class="allow-button mr-4 bg-emerald-500 hover:bg-emerald-600"
-					href="/backend/send_data?client={{ client }}&url={{ encodedUrl }}&token={{ token }}"
+					href="{{ allowUrl }}"
 					>{{ #message }}core.allow.allow{{ /message }}
 					<i class="far fa-check-circle"></i>
 				</a>
-				<a class="allow-button ml-4 bg-red-500 hover:bg-red-600" href="{{ url }}"
+				<a class="allow-button ml-4 bg-red-500 hover:bg-red-600" href="{{ denyUrl }}"
 					>{{ #message }}core.allow.deny{{ /message }}
 					<i class="far fa-times-circle"></i>
 				</a>
 			</div>
 			<p>
-				{{ #message }}core.allow.receive|||{{ name }}|||{{ host }}|||[core.allow.allow]{{
+				{{ #message }}core.allow.receive|||{{ client }}|||{{ host }}|||[core.allow.allow]{{
 				/message }}
 			</p>
 			<pre class="hljs lang-json">{{ data }}</pre>

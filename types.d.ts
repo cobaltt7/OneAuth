@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { Request, Response, NextFunction } from "express";
 
 export type lighthouseResult = {
 	code: string;
@@ -18,54 +18,50 @@ export type lighthouseResult = {
 export type Auth = {
 	link: string;
 	name: string;
-	pages?: Page[];
-	getData?: (
-		token: string,
-	) =>
-		| Promise<{ [key: string]: string } | undefined | null | void>
-		| { [key: string]: string }
-		| undefined
-		| null
-		| void;
-	rawData?: boolean;
+	pages: { [key: string]: Page };
 	icon: string;
 	fontAwesome?: "far" | "fab" | "fas";
 	website?: string;
 };
-export type RequestFunction = (
+
+export function SendResponse(
+	tokenOrData: { [key: string]: any },
+	nonce: string,
+): Promise<Response | void>;
+
+export function RequestFunction(
+	this: {
+		sendResponse: SendResponse;
+	},
 	request: Request,
 	response: Response,
-	sendResponse: (
-		tokenOrData: string | { [key: string]: any },
-		psuedoNonce: string,
-	) => Promise<void>,
-) => any;
+	next: NextFunction,
+): unknown;
 export interface Page {
-	"backendPage": string;
-	// "all"?: RequestFunction;
-	"checkout"?: RequestFunction;
-	"copy"?: RequestFunction;
-	"delete"?: RequestFunction;
-	"get"?: RequestFunction;
-	"head"?: RequestFunction;
-	"lock"?: RequestFunction;
-	"merge"?: RequestFunction;
-	"mkactivity"?: RequestFunction;
-	"mkcol"?: RequestFunction;
-	"move"?: RequestFunction;
-	"m-search"?: RequestFunction;
-	"notify"?: RequestFunction;
-	"options"?: RequestFunction;
-	"patch"?: RequestFunction;
-	"post"?: RequestFunction;
-	"purge"?: RequestFunction;
-	"put"?: RequestFunction;
-	"report"?: RequestFunction;
-	"search"?: RequestFunction;
-	"subscribe"?: RequestFunction;
-	"trace"?: RequestFunction;
-	"unlock"?: RequestFunction;
-	"unsubscribe"?: RequestFunction;
+	"all"?: typeof RequestFunction;
+	"checkout"?: typeof RequestFunction;
+	"copy"?: typeof RequestFunction;
+	"delete"?: typeof RequestFunction;
+	"get"?: typeof RequestFunction;
+	"head"?: typeof RequestFunction;
+	"lock"?: typeof RequestFunction;
+	"merge"?: typeof RequestFunction;
+	"mkactivity"?: typeof RequestFunction;
+	"mkcol"?: typeof RequestFunction;
+	"move"?: typeof RequestFunction;
+	"m-search"?: typeof RequestFunction;
+	"notify"?: typeof RequestFunction;
+	"options"?: typeof RequestFunction;
+	"patch"?: typeof RequestFunction;
+	"post"?: typeof RequestFunction;
+	"purge"?: typeof RequestFunction;
+	"put"?: typeof RequestFunction;
+	"report"?: typeof RequestFunction;
+	"search"?: typeof RequestFunction;
+	"subscribe"?: typeof RequestFunction;
+	"trace"?: typeof RequestFunction;
+	"unlock"?: typeof RequestFunction;
+	"unsubscribe"?: typeof RequestFunction;
 }
 
 export type StructuredMessage = {

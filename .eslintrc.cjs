@@ -5,15 +5,17 @@
 module.exports = {
 	extends: ["plugin:@onedotprojects/recommended"],
 
+	ignorePatterns: ["*.ts", "**.ts"],
+
 	overrides: [
 		{
 			extends: ["plugin:@onedotprojects/node"],
-			files: ["**.js", "**.cjs"],
+			files: ["*.js", "*.cjs", "**.js", "**.cjs"],
 			parserOptions: { ecmaVersion: 12 },
 		},
 		{
 			extends: ["plugin:@onedotprojects/esm"],
-			files: ["**.js"],
+			files: ["**.js", "*.js"],
 		},
 		{
 			extends: ["plugin:@onedotprojects/cli"],

@@ -38,7 +38,7 @@ app.use(
 	}),
 );
 
-app.get(/^[^.]+\.md$/m, (request, response) =>
+app.all(/^[^.]+\.md$/m, (request, response) =>
 	response.redirect(`/docs/${/^\/(?<file>.+).md$/m.exec(request.path)?.groups?.file}`),
 );
 app.use(async (request, response, next) => {
