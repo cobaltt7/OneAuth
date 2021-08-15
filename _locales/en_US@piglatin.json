@@ -152,12 +152,6 @@
 			"deny": { "string": "Enyday" },
 			"receive": {
 				"string": ""
-			},
-			"hidden": {
-				"string": "Unfortunatelyay, eway ancay otnay owshay isthay ataday ightray ownay."
-			},
-			"sorry": {
-				"string": "Orrysay aboutyay atthay!"
 			}
 		},
 		"signin": {

@@ -152,12 +152,6 @@
 			"deny": { "string": "" },
 			"receive": {
 				"string": ""
-			},
-			"hidden": {
-				"string": ""
-			},
-			"sorry": {
-				"string": ""
 			}
 		},
 		"signin": {
