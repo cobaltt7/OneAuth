@@ -1,0 +1,169 @@
+name: All Contributors
+on:
+    discussion:
+        types: [answered, labeled]
+    pull_request_review:
+        types: [submitted]
+    pull_request:
+        types: [labeled]
+    issues:
+        types: [labeled]
+    push:
+        branches: [develop]
+
+jobs:
+    answer:
+        name: Answered
+        runs-on: ubuntu-20.04
+        if: github.event.action == 'answered'
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2.3.4
+              with:
+                  ref: ${{ github.ref }}
+                  token: ${{ secrets.WGYTBOT }}
+
+            - name: Setup Node.JS
+              uses: actions/setup-node@v2.4.0
+              with:
+                  node-version: 16
+                  cache: "npm"
+
+            - name: Setup Git
+              run: |
+                  git config user.email "83586655+wgytbot@users.noreply.github.com"
+                  git config user.name "wgytbot"
+
+            - name: Install
+              run: npm install --force
+
+            - name: Add
+              run: npx all-contributors-cli add ${{ github.event.answer.user.login }} question
+
+            - name: Push
+              run: git push
+
+    review:
+        name: Reviewed
+        runs-on: ubuntu-20.04
+        if: github.event.action == 'submitted'
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2.3.4
+              with:
+                  ref: ${{ github.ref }}
+                  token: ${{ secrets.WGYTBOT }}
+
+            - name: Setup Node.JS
+              uses: actions/setup-node@v2.4.0
+              with:
+                  node-version: 16
+                  cache: "npm"
+
+            - name: Setup Git
+              run: |
+                  git config user.email "83586655+wgytbot@users.noreply.github.com"
+                  git config user.name "wgytbot"
+
+            - name: Install
+              run: npm install --force
+
+            - name: Add
+              run: npx all-contributors-cli add ${{ github.event.review.user.login }} review
+
+            - name: Push
+              run: git push
+
+    label:
+        name: Labeled issue, PR, or discussion
+        runs-on: ubuntu-20.04
+        if: github.event.action == 'labeled'
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2.3.4
+              with:
+                  ref: "refs/heads/${{ github.event.repository.default_branch }}"
+                  token: ${{ secrets.WGYTBOT }}
+
+            - name: Setup Node.JS
+              uses: actions/setup-node@v2.4.0
+              with:
+                  node-version: 16
+                  cache: "npm"
+
+            - name: Setup Git
+              run: |
+                  git config user.email "83586655+wgytbot@users.noreply.github.com"
+                  git config user.name "wgytbot"
+
+            - name: Install
+              run: npm install --force
+
+            - name: Add
+              continue-on-error: true
+              run: |
+                  OUTPUT="$(node --trace-warnings --harmony .github/workflows/all-contributors-label.js '${{ github.event.label.name }}' ${{ github.event.pull_request.user.login  }} ${{
+                  github.event.discussion.user.login  }} ${{ github.event.issue.user.login }})"
+                  echo $OUTPUT
+                  eval $OUTPUT
+
+            - name: Push
+              run: |
+                  git pull
+                  git push
+
+            - name: Setup PR
+              if: ${{ failure() }}
+              id: date
+              run: |
+                  git reset --merge
+                  echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
+
+            - name: PR
+              if: ${{ failure() }}
+              uses: gr2m/create-or-update-pull-request-action@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.WGYTBOT }}
+              with:
+                  branch: add-contributor-${{ steps.date.outputs.date }}
+                  author: "wgytbot <83586655+wgytbot@users.noreply.github.com>"
+                  labels: "'scope: documentation','type: enhancement','priority: 4'"
+
+    push:
+        name: Pushed code
+        runs-on: ubuntu-20.04
+        if: github.event.commits
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2.3.4
+              with:
+                  fetch-depth: 0
+                  ref: ${{ github.ref }}
+                  token: ${{ secrets.WGYTBOT || secrets.GITHUB_TOKEN }}
+
+            - name: Setup Node.JS
+              uses: actions/setup-node@v2.4.0
+              with:
+                  node-version: 16
+                  cache: "npm"
+
+            - name: Setup Git
+              run: |
+                  git config user.email "83586655+wgytbot@users.noreply.github.com"
+                  git config user.name "wgytbot"
+
+            - name: Install
+              run: npm install --force
+
+            - name: Add
+              continue-on-error: true
+              run: |
+                  OUTPUT="$(node --trace-warnings --harmony .github/workflows/all-contributors-push.js ${{ secrets.WGYTBOT }} `git log --pretty=%H --no-merges ${{ github.event.before }}..${{ github.event.after }}`)"
+                  echo $OUTPUT
+                  eval $OUTPUT
+
+            - name: Push
+              run: git push

@@ -87,8 +87,7 @@
 			{
 				"files": [
 					"**.json",
-					"**.map",
-					"**.all-contributorsrc"
+					"**.map"
 				],
 				"options": {
 					"parser": "json"

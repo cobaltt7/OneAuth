@@ -84,7 +84,22 @@ function addEmoji(number) {
 	return `${number < 50 ? "🔴" : number < 90 ? "🟡" : "🟢"} ${number}`;
 }
 
-/** @type {import("../../types").lighthouseResult} */
+/**
+ * @type {{
+ * 	code: string;
+ * 	data: {
+ * 		url: string;
+ * 		emulatedFormFactor: string;
+ * 		scores: {
+ * 			accessibility: number;
+ * 			bestPractices: number;
+ * 			performance: number;
+ * 			progressiveWebApp: number;
+ * 			seo: number;
+ * 		};
+ * 	}[];
+ * }}
+ */
 let data;
 
 try {
