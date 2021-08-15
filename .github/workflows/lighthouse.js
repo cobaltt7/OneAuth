@@ -121,6 +121,8 @@ try {
 		getAverage,
 	);
 
+	allScores.splice(3, 1)
+
 	commentOnDiscussion(
 		`${
 			"<h2>Today’s Lighthouse scores</h2><br /> <br />" +
@@ -129,7 +131,6 @@ try {
 			"<th>Accessibility</th>" +
 			"<th>Best Practices</th>" +
 			"<th>Performace</th>" +
-			"<th>Progressive Web App</th>" +
 			"<th>SEO</th>" +
 			"<th>Overall</th>" +
 			"<th>PageSpeed Insights</th></tr></thead><tbody>"
@@ -137,16 +138,16 @@ try {
 			const scores = Object.values(result.scores);
 
 			return (
-				`${accumulated}<tr><td><a href="//${result.url.trim()}">${
+				`${accumulated}<tr><td><a href="${result.url.trim()}">${
 					(result.url[result.url.length - 1] === "/" ? result.url : `${result.url}/`)
 						.trim()
-						.split(/^(?:https?:\/\/)?.+\..+?(?=\/)/iu)[1]
+						.split("https://auth.onedot.cf/")[1]
 				}</a></td>` +
 				`<td>${result.emulatedFormFactor}</td>` +
 				`<td>${scores.map(addEmoji).join("</td><td>")}</td>` +
 				`<td>${addEmoji(getAverage(scores))}</td><td>` +
 				`<a href="//developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
-					`//${result.url.trim()}`,
+					`${result.url.trim()}`,
 				)}&tab=${result.emulatedFormFactor}">More information</a></td></tr>`
 			);
 		}, "")}</tbody><tfoot><tr><td colspan="2"><b>Overall</b></td>` +
