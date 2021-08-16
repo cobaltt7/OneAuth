@@ -66,11 +66,7 @@ app.all("/auth", async (request, response) => {
 });
 
 /** @type {{ [key: string]: import("../../types").Page }} */
-const clientsByPage = Object.assign(
-	{},
-	...authClients.map(({ pages }) => pages),
-)
-
+const clientsByPage = Object.assign({}, ...authClients.map(({ pages }) => pages));
 
 for (const [page, handlers] of Object.entries(clientsByPage)) {
 	app.all(new URL(page, "https://auth.onedot.cf/auth/").pathname, (request, response, next) => {
