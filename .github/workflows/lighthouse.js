@@ -121,7 +121,7 @@ try {
 		getAverage,
 	);
 
-	allScores.splice(3, 1)
+	allScores.splice(2, 1)
 
 	commentOnDiscussion(
 		`${
