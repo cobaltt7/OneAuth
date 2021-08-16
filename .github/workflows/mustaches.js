@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import replace from "replace-in-file";
 
 const commentRegex =
-		/(?<!(?:\/\/|\/\*|#|<!--|{[^\S\n]{[^\S\n]!)?(?:.+[^\S\n]+)?[^\S\n]*?mustache-format-ignore[^\S\n]*?(?:[^\S\n]*.+)?(?:\*\/|-->|}[^\S\n]})?.*\n+)/
+		/(?<!(?:\/\/|\/\*|#|<!--|{[^\S\n]{[^\S\n]!)?(?:.+[^\S\n]+)?[^\S\n]*?mustache-format-ignore[^\S\n]*.*(?:\*\/|-->|}[^\S\n]})?.*\n+)/
 			.source,
 	ignore = ["node_modules/**", ".git/**", ".github/workflows/mustaches.js"],
 	repoRoot = `${path.resolve(fileURLToPath(import.meta.url), "../../../")}\\`;
