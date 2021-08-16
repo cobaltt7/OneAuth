@@ -66,11 +66,11 @@ app.all("/auth", async (request, response) => {
 });
 
 /** @type {{ [key: string]: import("../../types").Page }} */
-// eslint-disable-next-line unicorn/prefer-object-from-entries -- sindresorhus/eslint-plugin-unicorn#1485
-const clientsByPage = authClients.reduce(
-	(accumulated, client) => ({ ...accumulated, ...client.pages }),
+const clientsByPage = Object.assign(
 	{},
-);
+	...authClients.map(({ pages }) => pages),
+)
+
 
 for (const [page, handlers] of Object.entries(clientsByPage)) {
 	app.all(new URL(page, "https://auth.onedot.cf/auth/").pathname, (request, response, next) => {
