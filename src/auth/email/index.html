@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>
-			{{ #message }}branding.auth.title|||[clients.email.email.page.heading]{{ /message }}
+			{{ #message }}branding.auth.title|||[clients.email.page.heading]{{ /message }}
 		</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
 		<link rel="preload" href="/image/loading.svg" as="image" />
@@ -21,13 +21,13 @@
 			<label id="note" for="email-address"
 				>{{ #message }}clients.email.page.email{{ /message }}</label
 			>
-			<form action method="POST">
+			<form method="POST">
 				<input
 					id="email-address"
 					name="email"
 					type="email"
 					autocomplete="email"
-					required="true"
+					required
 					placeholder="{{ #message }}clients.email.page.placeholder{{ /message }}"
 				/>
 				<button id="submit" type="submit">
@@ -38,8 +38,10 @@
 		{{> footer }}
 		<script>
 			"use strict";
+
 			(function forumHandler() {
 				const form = document.querySelector("form");
+
 				/**
 				 * Code that submits the form in the background.
 				 *
@@ -51,6 +53,7 @@
 
 					// Show loading icon
 					const submit = document.querySelector('[type="submit"]');
+
 					submit.firstChild.remove();
 					submit.append(
 						Object.assign(document.createElement("img"), {
@@ -65,19 +68,21 @@
 					// Send the email
 					await fetch("", {
 						body: `email=${email}`,
+
 						headers: {
 							"content-type": "application/x-www-form-urlencoded; charset=UTF-8"
 						},
+
 						method: "POST"
 					});
 
 					// Create new form
 					const codeForm = Object.assign(document.createElement("form"), {
 						// Create form element
-						action: "",
 						autocomplete: "off",
 						method: "POST"
 					});
+
 					codeForm.append(
 						Object.assign(document.createElement("input"), {
 							// Code box
@@ -87,7 +92,7 @@
 							id: "code",
 							name: "code",
 							placeholder: "abcde12345",
-							required: "true",
+							required: "",
 							type: "password"
 						}),
 						Object.assign(document.createElement("input"), {
@@ -118,6 +123,7 @@
 						codeForm
 					);
 				}
+
 				form.addEventListener("submit", onSubmit);
 			})();
 		</script>

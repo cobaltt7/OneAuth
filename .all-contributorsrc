@@ -1,12 +1,150 @@
 {
-	"projectName": "auth",
-	"projectOwner": "onedotprojects",
-	"repoType": "github",
-	"repoHost": "https://github.com",
-	"files": ["src/docs/credits.md"],
-	"imageSize": 100,
-	"commit": true,
-	"commitConvention": "gitmoji",
-	"contributors": [],
-	"contributorsPerLine": 7
+  "projectName": "auth",
+  "projectOwner": "onedotprojects",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "src/docs/credits.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "gitmoji",
+  "contributors": [
+    {
+      "login": "wgyt",
+      "name": "William Horning",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68466727?v=4",
+      "profile": "https://github.com/wgyt",
+      "contributions": [
+        "review",
+        "translation",
+        "bug",
+        "ideas",
+        "design",
+        "code",
+        "infra",
+        "business"
+      ]
+    },
+    {
+      "login": "RedGuy12",
+      "name": "Paul Reid",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61329810?v=4",
+      "profile": "https://paul-s-reid.com/web-dev",
+      "contributions": [
+        "design",
+        "ideas",
+        "maintenance",
+        "bug",
+        "review",
+        "security",
+        "translation",
+        "infra",
+        "business"
+      ]
+    },
+    {
+      "login": "wgytbot",
+      "name": "wgytbot",
+      "avatar_url": "https://avatars.githubusercontent.com/u/83586655?v=4",
+      "profile": "https://wgyt.tk/",
+      "contributions": [
+        "a11y",
+        "ideas",
+        "code",
+        "translation",
+        "data",
+        "infra",
+        "content",
+        "doc",
+        "design",
+        "business"
+      ]
+    },
+    {
+      "login": "retronbv",
+      "name": "retronbv",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49005044?v=4",
+      "profile": "https://retronbv.github.io/",
+      "contributions": [
+        "translation",
+        "ideas",
+        "code",
+        "business"
+      ]
+    },
+    {
+      "login": "dependabot[bot]",
+      "name": "dependabot[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "profile": "https://github.com/apps/dependabot",
+      "contributions": [
+        "maintenance",
+        "doc",
+        "code",
+        "translation"
+      ]
+    },
+    {
+      "login": "transifex-integration[bot]",
+      "name": "transifex-integration[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/18568?v=4",
+      "profile": "https://github.com/apps/transifex-integration",
+      "contributions": [
+        "doc",
+        "code",
+        "translation"
+      ]
+    },
+    {
+      "login": "GrahamSH-LLK",
+      "name": "GrahamSH",
+      "avatar_url": "https://avatars.githubusercontent.com/u/64214252?v=4",
+      "profile": "https://grahamsh.com/",
+      "contributions": [
+        "design",
+        "infra",
+        "business"
+      ]
+    },
+    {
+      "login": "thecrewmate876",
+      "name": "thecrewmate876",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76265544?v=4",
+      "profile": "https://thecrewmate876.github.io/",
+      "contributions": [
+        "content",
+        "business"
+      ]
+    },
+    {
+      "login": "lint-action",
+      "name": "Lint Action",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59283862?v=4",
+      "profile": "https://github.com/samuelmeuli/lint-action",
+      "contributions": [
+        "infra"
+      ]
+    },
+    {
+      "login": "devxan",
+      "name": "-Xanimation-",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57809064?v=4",
+      "profile": "https://github.com/devxan",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "Touchcreator",
+      "name": "TouchIsNotAGoodCoder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/64277067?v=4",
+      "profile": "https://github.com/Touchcreator",
+      "contributions": [
+        "business"
+      ]
+    }
+  ],
+  "contributorsPerLine": 5,
+  "contributorsSortAlphabetically":true
 }

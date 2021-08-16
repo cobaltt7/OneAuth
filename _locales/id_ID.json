@@ -87,13 +87,13 @@
 			"logo": {
 				"string": ""
 			},
-			"dot": {
-				"string": "1DOT"
+			"alt": {
+				"string": ""
 			}
 		},
 		"auth": {
-			"auth": {
-				"string": "1AUTH"
+			"alt": {
+				"string": ""
 			},
 			"logo": { "string": "" },
 			"title": {
@@ -150,20 +150,18 @@
 			},
 			"allow": { "string": "" },
 			"deny": { "string": "" },
-			"recieve": {
-				"string": ""
-			},
-			"hidden": {
-				"string": ""
-			},
-			"sorry": {
+			"receive": {
 				"string": ""
 			}
 		},
 		"signin": {
 			"heading": { "string": "" },
 			"choose": { "string": "" },
-			"with": { "string": "" }
+			"with": { "string": "" },
+			"logo": {
+				"string": "",
+				"developer_comment": "Alt text of a logo image. Example: “Google icon”, “Email icon”, etc."
+			}
 		}
 	},
 	"footer": {
@@ -518,6 +516,12 @@
 		"511": {
 			"heading": { "string": "" },
 			"message": { "string": "" }
+		},
+		"page": {
+			"message": {
+				"string": "",
+				"developer_comments": "{0} is the HTTP status code (ie “404”) and {1} is a 1-5 word description (ie “Not Found”)"
+			}
 		},
 		"old": {
 			"heading": { "string": "" },

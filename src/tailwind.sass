@@ -8,23 +8,21 @@
 @import "tailwindcss/utilities";
 
 /* GLOBAL STYLES */
-*,
-::after,
-::before {
+* {
 	scroll-behavior: smooth;
 	column-fill: balance-all !important;
 
 	@apply selection:bg-red-500;
-}
-
-* a:not(.auth-button) {
-	@apply text-blue-500
+	
+	a:not(.auth-button) {
+		@apply text-blue-700
 		no-underline;
 
-	&:hover,
-	&:focus {
-		@apply text-blue-700
+		&:hover,
+		&:focus {
+			@apply text-blue-900
 			underline;
+		}
 	}
 }
 

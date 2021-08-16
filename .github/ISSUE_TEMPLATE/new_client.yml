@@ -1,59 +1,64 @@
 name: New client
 description: Suggest the addition of a new authenication client
-labels: ['status: needs triage', 'type: enhancement - new client']
+labels: ["status: needs triage", "type: enhancement - new client"]
 
 body:
-  - type: markdown
-    attributes:
-      value: Thanks for suggesting the addition of another client! How many will we end up with? :P
+    - type: markdown
+      attributes:
+          value:
+              Thanks for suggesting the addition of another client! How many will we end up with? :P
 
-  - type: checkboxes
-    attributes:
-      label: Is there an existing issue for this?
-      description: Please search to see if an issue already exists for the bug you encountered.
-      options:
-        - label: I have searched the existing issues and none does.
+    - type: checkboxes
+      attributes:
+          label: Is there an existing issue for this?
+          description: Please search to see if an issue already exists for the bug you encountered.
+          options:
+              - label: I have searched the existing issues and none does.
+                required: true
+
+    - type: input
+      attributes:
+          label: Website
+          description: The website of the new client.
+      validations:
           required: true
 
-  - type: input
-    attributes:
-      label: Webiste
-      description: The website of the new client.
-    validations:
-      required: true
-
-  - type: input
-    attributes:
-      label: Docs
-      description: The client's OAuth2 docs.
-    validations:
-      required: false
-
-  - type: textarea
-    attributes:
-      label: About it
-      description: What is this thing anyway?
-    validations:
-      required: false
-
-  - type: textarea
-    attributes:
-      label: Anything else?
-      description: Put any other context and/or screenshots about the client here.
-    validations:
-      required: false
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Agree to our policies
-      description: By submitting this issue, you agree to follow our policies.
-      options:
-        - label: I agree to follow the [Code of Conduct](https://github.com/onedotprojects/auth/blob/issues/.github/CODE_OF_CONDUCT.md).
-          required: true
-
-        - label: I agree to follow the [Contributing Guidelines](https://github.com/onedotprojects/auth/blob/issues/.github/CONTRIBUTING.md).
-          required: true
-
-        - label: I am willing to submit a PR to add it.
+    - type: input
+      attributes:
+          label: Docs
+          description: The client's OAuth2 docs.
+      validations:
           required: false
+
+    - type: textarea
+      attributes:
+          label: About it
+          description: What is this thing anyway?
+      validations:
+          required: false
+
+    - type: textarea
+      attributes:
+          label: Anything else?
+          description: Put any other context and/or screenshots about the client here.
+      validations:
+          required: false
+
+    - type: checkboxes
+      id: terms
+      attributes:
+          label: Agree to our policies
+          description: By submitting this issue, you agree to follow our policies.
+          options:
+              - label:
+                    I agree to follow the [Code of
+                    Conduct](https://github.com/onedotprojects/auth/blob/issues/.github/CODE_OF_CONDUCT.md).
+                required: true
+
+              - label:
+                    I agree to follow the [Contributing
+                    Guidelines](https://github.com/onedotprojects/auth/blob/issues/.github/CONTRIBUTING.md).
+                required: true
+
+              - label: I am willing to submit a PR to add it.
+                required: false

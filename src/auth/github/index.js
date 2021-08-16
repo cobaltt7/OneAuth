@@ -8,29 +8,19 @@ import { logError } from "../../errors/index.js";
 const client = {
 	fontAwesome: "fab",
 
-	getData: (token) =>
-		fetch("https://api.github.com/user", {
-			headers: {
-				Authorization: `token ${token}`,
-				accept: "application/json",
-			},
-		}).then((result) => result.json()),
-
 	icon: "github",
 
 	link:
 		"https://github.com/login/oauth/authorize" +
 		"?client_id=7b64414fe57e07d1e969" +
 		"&redirect_uri=https://auth.onedot.cf/auth/github" +
-		"&state={{ url }}",
+		"&state={{ nonce }}",
 
 	name: "GitHub",
 
-	pages: [
-		{
-			backendPage: "./github",
-
-			get: async (request, response, sendResponse) => {
+	pages: {
+		"./github": {
+			async all(request, response) {
 				const info = await fetch("https://github.com/login/oauth/access_token", {
 					body:
 						"client_id=7b64414fe57e07d1e969" +
@@ -51,10 +41,18 @@ const client = {
 						logError(error);
 					});
 
-				sendResponse(info.access_token, `${request.query?.state}`);
+				return this.sendResponse(
+					await fetch("https://api.github.com/user", {
+						headers: {
+							Authorization: `token ${info.access_token}`,
+							accept: "application/json",
+						},
+					}).then((result) => result.json()),
+					`${request.query?.state}`,
+				);
 			},
 		},
-	],
+	},
 
 	website: "https://github.com/",
 };

@@ -34,6 +34,7 @@
 						alt="{{ #message }}branding.dot.alt{{ /message }}"
 						class="pr-2"
 						width="230"
+						loading="lazy"
 						src="https://cdn.onedot.cf/brand/SVG/NoPadding/1Dot%20NoPad.svg"
 					/>
 				</li>
@@ -104,7 +105,7 @@
 				</li>
 				<li>
 					<a
-						href="https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fget_data"
+						href="https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fbackend%2Fget_data"
 						>{{ #message }}footer.links.demo{{ /message }}</a
 					>
 				</li>
@@ -124,7 +125,7 @@
 					>
 				</li>
 				<li>
-					<!--TODO: make a privacy page-->
+					<!-- TODO: make a privacy page -->
 					<a href="/privacy">{{ #message }}footer.legal.privacy{{ /message }}</a>
 				</li>
 			</ul>
@@ -151,6 +152,7 @@
 							title="{{ #message }}footer.localization.choose{{ /message }}"
 							onchange="document.getElementById('language-forum').submit()"
 						>
+							<!-- TODO: The first child option element of a select element with a required attribute, and without a multiple attribute, and without a size attribute whose value is greater than 1, must have either an empty value attribute, or must have no text content. Consider either adding a placeholder option label, or adding a size attribute with a value equal to the number of option elements. -->
 							{{ #languages }}
 							<option value="{{ code }}">{{ language }}</option>
 							{{ /languages }}

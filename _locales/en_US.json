@@ -152,12 +152,6 @@
 			"deny": { "string": "Deny" },
 			"receive": {
 				"string": "If you press “{2}”, then {1} will receive the following information (taken from your {0} account):"
-			},
-			"hidden": {
-				"string": "Unfortunately, we can’t show this data right now."
-			},
-			"sorry": {
-				"string": "Sorry about that!"
 			}
 		},
 		"signin": {
@@ -522,6 +516,12 @@
 		"511": {
 			"heading": { "string": "Network Authentication Required" },
 			"message": { "string": "Please sign in to the network before accessing the Internet." }
+		},
+		"page": {
+			"message": {
+				"string": "Error: {0} {1}",
+				"developer_comments": "{0} is the HTTP status code (ie “404”) and {1} is a 1-5 word description (ie “Not Found”)"
+			}
 		},
 		"old": {
 			"heading": { "string": "You are using an outdated browser!" },
