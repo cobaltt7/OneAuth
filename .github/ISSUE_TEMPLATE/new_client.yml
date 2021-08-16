@@ -18,7 +18,7 @@ body:
 
     - type: input
       attributes:
-          label: Webiste
+          label: Website
           description: The website of the new client.
       validations:
           required: true
