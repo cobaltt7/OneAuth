@@ -8,7 +8,7 @@ import fetch from "node-fetch";
 
 /** @type {import("../../types").AllContributosRc} */
 const { contributors = [] } = JSON.parse(
-		fileSystem.readFileSync(url.pathToFileURL(path.resolve(".all-contributrsrc")), "utf8"),
+		fileSystem.readFileSync(url.pathToFileURL(path.resolve(".all-contributorsrc")), "utf8"),
 	),
 	/** @type {{ [key: string]: string[] }} */
 	NEW_CONTRIBUTORS = {},
