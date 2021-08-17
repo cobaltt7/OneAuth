@@ -83,7 +83,7 @@ function statusMiddleware(realStatus, request, response, status = response.statu
 	}, 3000);
 }
 
-app.get("/old", (_, response) => response.render(path.resolve(directory, "old.html")));
+app.all("/old", (_, response) => response.render(path.resolve(directory, "old.html")));
 
 app.use((request, response, next) => {
 	const realStatus = response.status;
@@ -95,7 +95,6 @@ app.use((request, response, next) => {
 	 *
 	 * @returns {import("express").Response} - Express response object.
 	 */
-	// eslint-disable-next-line no-param-reassign -- We need to override the original.
 	response.status = function status(statusCode) {
 		statusMiddleware(realStatus, request, response, statusCode);
 
@@ -132,6 +131,6 @@ app.use(
 	},
 );
 
-app.get("/418", (_, response) => response.status(418));
+app.all("/418", (_, response) => response.status(418));
 
 export default app;

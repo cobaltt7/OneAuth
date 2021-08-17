@@ -8,23 +8,21 @@
 @import "tailwindcss/utilities";
 
 /* GLOBAL STYLES */
-*,
-::after,
-::before {
+* {
 	scroll-behavior: smooth;
 	column-fill: balance-all !important;
 
 	@apply selection:bg-red-500;
-}
 
-* a:not(.auth-button) {
-	@apply text-blue-500
-		no-underline;
-
-	&:hover,
-	&:focus {
+	a:not(.auth-button) {
 		@apply text-blue-700
-			underline;
+			no-underline;
+
+		&:hover,
+		&:focus {
+			@apply text-blue-900
+				underline;
+		}
 	}
 }
 
@@ -96,9 +94,7 @@ pre {
 			overflow-x-visible;
 
 		code {
-			@apply rounded-md
-				py-3.5
-				px-5;
+			@apply rounded-md;
 		}
 	}
 }
@@ -250,8 +246,31 @@ button {
 		h-14;
 }
 
+#contributors-wrapper {
+	table {
+		@apply text-center;
+	}
+
+	tbody {
+		@apply inline;
+	}
+
+	tr {
+		@apply contents;
+	}
+
+	td {
+		@apply inline-block
+		w-1/6
+		break-words;
+
+		min-width: 6rem;
+		max-width: 14rem;
+	}
+}
+
 /* GLOBAL STYLES */
 html {
 	@apply font-sans
-	 !block;
+		!block;
 }

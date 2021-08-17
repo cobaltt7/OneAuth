@@ -152,12 +152,6 @@
 			"deny": { "string": "Negar" },
 			"receive": {
 				"string": ""
-			},
-			"hidden": {
-				"string": "Desafortunadamente, no podemos mostrar esto datos ahora."
-			},
-			"sorry": {
-				"string": "¡Lo siento por eso!"
 			}
 		},
 		"signin": {

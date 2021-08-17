@@ -7,7 +7,7 @@ on:
 jobs:
     run:
         name: Deploy website
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
 
         steps:
             - name: Checkout
@@ -19,7 +19,7 @@ jobs:
             - name: Setup Node.JS
               uses: actions/setup-node@v2.4.0
               with:
-                  node-version: 14
+                  node-version: 16
                   cache: "npm"
 
             - name: Install

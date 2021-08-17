@@ -29,7 +29,7 @@ function graphql(query, ...placeholderValues) {
 function commentOnDiscussion(body) {
 	return fetch("https://api.github.com/graphql", {
 		body: JSON.stringify({
-			// TODO: Hmmst… query strings break prettier formatting...mustache? maybe
+			// TODO: use gh action
 			query: graphql`mutation {
 					addDiscussionComment(
 						input: {discussionId: "MDEwOkRpc2N1c3Npb24zNDEwNDA2", body: ${JSON.stringify(body)}}
@@ -47,9 +47,7 @@ function commentOnDiscussion(body) {
 		},
 
 		method: "POST",
-	})
-		.then((response) => response.text())
-		.then(JSON.stringify);
+	}).then((result) => result.text());
 }
 
 /**
@@ -86,7 +84,22 @@ function addEmoji(number) {
 	return `${number < 50 ? "🔴" : number < 90 ? "🟡" : "🟢"} ${number}`;
 }
 
-/** @type {import("../../types").lighthouseResult} */
+/**
+ * @type {{
+ * 	code: string;
+ * 	data: {
+ * 		url: string;
+ * 		emulatedFormFactor: string;
+ * 		scores: {
+ * 			accessibility: number;
+ * 			bestPractices: number;
+ * 			performance: number;
+ * 			progressiveWebApp: number;
+ * 			seo: number;
+ * 		};
+ * 	}[];
+ * }}
+ */
 let data;
 
 try {
@@ -104,9 +117,9 @@ try {
 }
 
 try {
-	const allScores = transpose(data.data.map(({ scores }) => Object.values(scores))).map(
-		getAverage,
-	);
+	const allScores = transpose(data.data.map(({ scores }) => Object.values(scores)))
+		.map(getAverage)
+		.splice(2, 1);
 
 	commentOnDiscussion(
 		`${
@@ -116,7 +129,6 @@ try {
 			"<th>Accessibility</th>" +
 			"<th>Best Practices</th>" +
 			"<th>Performace</th>" +
-			"<th>Progressive Web App</th>" +
 			"<th>SEO</th>" +
 			"<th>Overall</th>" +
 			"<th>PageSpeed Insights</th></tr></thead><tbody>"
@@ -124,16 +136,16 @@ try {
 			const scores = Object.values(result.scores);
 
 			return (
-				`${accumulated}<tr><td><a href="//${result.url.trim()}">${
+				`${accumulated}<tr><td><a href="${result.url.trim()}">${
 					(result.url[result.url.length - 1] === "/" ? result.url : `${result.url}/`)
 						.trim()
-						.split(/^(?:https?:\/\/)?.+\..+?(?=\/)/iu)[1]
+						.split("https://auth.onedot.cf/")[1]
 				}</a></td>` +
 				`<td>${result.emulatedFormFactor}</td>` +
 				`<td>${scores.map(addEmoji).join("</td><td>")}</td>` +
 				`<td>${addEmoji(getAverage(scores))}</td><td>` +
 				`<a href="//developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
-					`//${result.url.trim()}`,
+					`${result.url.trim()}`,
 				)}&tab=${result.emulatedFormFactor}">More information</a></td></tr>`
 			);
 		}, "")}</tbody><tfoot><tr><td colspan="2"><b>Overall</b></td>` +

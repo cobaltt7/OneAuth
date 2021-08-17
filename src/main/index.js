@@ -28,7 +28,6 @@ app.use((_, response, next) => {
 	 * @param {any} text -- Data to send.
 	 */
 	// @ts-expect-error -- Yes, it no longer returns `Response`. But, unfortunately, it can't anymore.
-	// eslint-disable-next-line no-param-reassign -- We need to override the original functions.
 	response.send = (text) => {
 		if (typeof text !== "string") {
 			realSend.call(response, text);
@@ -87,14 +86,15 @@ app.get("/logo.svg", (_, response) =>
 );
 app.get("/favicon.ico", (_, response) =>
 	response.status(302).redirect("https://onedot.cf/brand/Auth.svg"),
+
 );
-app.get("/", (_, response) =>
+app.all("/", (_, response) =>
 	response.render(path.resolve(directory, "about.html"), {
 		clients: authClients,
 	}),
 );
 
-app.get("/.well-known/security.txt", (_, response) =>
+app.all("/.well-known/security.txt", (_, response) =>
 	response.status(303).send(`Contact: mailto:${process.env.GMAIL_EMAIL}
 Expires: 2107-10-07T05:13:00.000Z
 Acknowledgments: https://auth.onedot.cf/docs/credits
@@ -102,12 +102,12 @@ Preferred-Languages: en_US
 Canonical: https://auth.onedot.cf/.well-known/security.txt`),
 );
 
-app.get("/humans.txt", (_, response) =>
+app.all("/humans.txt", (_, response) =>
 	response.status(301).redirect("https://github.com/onedotprojects/auth/people"),
 );
 
 // CSS
-app.get("/style.css", (_, response) => {
+app.all("/style.css", (_, response) => {
 	response.setHeader("content-type", "text/css");
 
 	return response.render(path.resolve(directory, "style.css"));

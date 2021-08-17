@@ -10,13 +10,11 @@ const client = {
 
 	name: "Scratch",
 
-	pages: [
-		{
-			backendPage: "./scratch",
-
-			get: (request, response, sendResponse) => {
+	pages: {
+		"./scratch": {
+			all(request, response) {
 				if (request.query?.verified) {
-					return sendResponse(
+					return this.sendResponse(
 						{ username: request.query?.username },
 						`${request.query?.nonce}`,
 					);
@@ -25,9 +23,8 @@ const client = {
 				return response.status(403);
 			},
 		},
-	],
+	},
 
-	rawData: true,
 	website: "https://scratch.mit.edu/",
 };
 

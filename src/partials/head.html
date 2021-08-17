@@ -8,10 +8,14 @@
 			"event": "gtm.js",
 			"gtm.start": Date.now()
 		});
+
 		const gtmScriptTag = document.createElement("script");
+
 		gtmScriptTag.async = true;
 		gtmScriptTag.src = "https://www.googletagmanager.com/gtm.js?id=GTM-5WN6THR";
+
 		const firstScript = document.querySelector("script");
+
 		firstScript.parentNode.insertBefore(gtmScriptTag, firstScript);
 	})();
 </script>

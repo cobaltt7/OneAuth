@@ -38,8 +38,10 @@
 		{{> footer }}
 		<script>
 			"use strict";
+
 			(function forumHandler() {
 				const form = document.querySelector("form");
+
 				/**
 				 * Code that submits the form in the background.
 				 *
@@ -51,6 +53,7 @@
 
 					// Show loading icon
 					const submit = document.querySelector('[type="submit"]');
+
 					submit.firstChild.remove();
 					submit.append(
 						Object.assign(document.createElement("img"), {
@@ -65,19 +68,21 @@
 					// Send the email
 					await fetch("", {
 						body: `email=${email}`,
+
 						headers: {
 							"content-type": "application/x-www-form-urlencoded; charset=UTF-8"
 						},
+
 						method: "POST"
 					});
 
 					// Create new form
 					const codeForm = Object.assign(document.createElement("form"), {
 						// Create form element
-						action: "",
 						autocomplete: "off",
 						method: "POST"
 					});
+
 					codeForm.append(
 						Object.assign(document.createElement("input"), {
 							// Code box
@@ -118,6 +123,7 @@
 						codeForm
 					);
 				}
+
 				form.addEventListener("submit", onSubmit);
 			})();
 		</script>
