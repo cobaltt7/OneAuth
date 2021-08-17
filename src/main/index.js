@@ -86,7 +86,6 @@ app.get("/logo.svg", (_, response) =>
 );
 app.get("/favicon.ico", (_, response) =>
 	response.status(302).redirect("https://onedot.cf/brand/Auth.svg"),
-
 );
 app.all("/", (_, response) =>
 	response.render(path.resolve(directory, "about.html"), {
