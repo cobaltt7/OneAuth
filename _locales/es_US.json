@@ -1,9 +1,9 @@
 {
-	"docs": { "string": "{0} | 1Auth Documentos de Desarrollo" },
+	"docs": { "string": "{0} | OneAuth Documentos de Desarrollo" },
 	"about": {
 		"about": {
-			"title": { "string": "1Auth | Todos-In-Uno Autenticación" },
-			"heading": { "string": "1Auth Todos-In-Uno Autenticación" },
+			"title": { "string": "OneAuth | Todos-In-Uno Autenticación" },
+			"heading": { "string": "OneAuth Todos-In-Uno Autenticación" },
 			"about": { "string": "Acerca de" },
 			"description": {
 				"string": ""
@@ -88,16 +88,16 @@
 				"string": "Logotipo de OneDot"
 			},
 			"alt": {
-				"string": ""
+				"string": "ONEDOT"
 			}
 		},
 		"auth": {
 			"alt": {
-				"string": ""
+				"string": "ONEAUTH"
 			},
-			"logo": { "string": "Logotipo de 1Auth" },
+			"logo": { "string": "Logotipo de OneAuth" },
 			"title": {
-				"string": "{0} | 1Auth"
+				"string": "{0} | OneAuth"
 			}
 		}
 	},
@@ -111,13 +111,13 @@
 				"placeholder": { "string": "" }
 			},
 			"email": {
-				"subject": { "string": "Verificación 1Auth de Correo Electrónico" },
+				"subject": { "string": "Verificación OneAuth de Correo Electrónico" },
 				"code": { "string": "Tu código es {0}." },
 				"share": { "string": "No lo compartas con nadie mas." },
 				"act": { "string": "" },
 				"next": { "string": "¿Qué ahora?" },
 				"copy": { "string": "Copie su código." },
-				"back": { "string": "Volver a 1Auth." },
+				"back": { "string": "Volver a OneAuth." },
 				"paste": {
 					"string": "Pegue su código en el caja y haz clic en “{0}”."
 				},
@@ -203,7 +203,7 @@
 				"string": "Discord"
 			},
 			"auth": {
-				"string": "1Auth"
+				"string": "OneAuth"
 			},
 			"docs": {
 				"string": ""

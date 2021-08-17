@@ -1,6 +1,6 @@
 # Credits
 
-1Auth could not be possible without help.
+OneAuth could not be possible without help.
 
 ## Contributors
 

@@ -85,10 +85,10 @@
 	"branding": {
 		"dot": {
 			"logo": {
-				"string": "OneDot Projects logo"
+				"string": "OneDot logo"
 			},
 			"alt": {
-				"string": "ONEDOT PROJECTS"
+				"string": "ONEDOT"
 			}
 		},
 		"auth": {
