@@ -16,7 +16,7 @@
 		"email": "1auth.wgyt@gmail.com"
 	},
 	"license": "MIT",
-	"author": "OneDot Projects",
+	"author": "OneDot",
 	"main": "src/index.js",
 	"type": "module",
 	"scripts": {

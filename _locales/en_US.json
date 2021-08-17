@@ -179,7 +179,7 @@
 		},
 		"links": {
 			"onedot": {
-				"string": "OneDot Projects"
+				"string": "OneDot"
 			},
 			"website": {
 				"string": "Website"
@@ -242,7 +242,7 @@
 				"string": "Google and the Google logo are registered trademarks of Google LLC in some countries."
 			},
 			"copyright": {
-				"string": "© 2021 OneDot Projects"
+				"string": "© 2021 OneDot"
 			},
 			"replit": {
 				"string": "Replit and the Replit logo are registered trademarks of Replit, Inc. in some countries."

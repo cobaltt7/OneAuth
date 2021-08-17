@@ -102,7 +102,7 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 			const jwt = await new SignJWT({ ...data, client: client.name })
 				.setExpirationTime("15 minutes")
 				.setIssuedAt()
-				.setIssuer("OneDot Projects")
+				.setIssuer("OneDot")
 				.setProtectedHeader({ alg: "ES256" })
 				.sign(createPrivateKey(process.env.EC_PRIVATE_KEY || ""));
 
@@ -170,7 +170,7 @@ app.all("/backend/get_data", (request, response) => {
 
 	jwtVerify(`${request.query.token}`, createPublicKey(process.env.EC_PUBLIC_KEY || ""), {
 		algorithms: ["ES256"],
-		issuer: "OneDot Projects",
+		issuer: "OneDot",
 		maxTokenAge: "15 minutes",
 	})
 		.then(response.status(200).send)

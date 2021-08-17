@@ -179,7 +179,7 @@
 		},
 		"links": {
 			"onedot": {
-				"string": "OneDot Projects"
+				"string": "OneDot"
 			},
 			"website": {
 				"string": ""
@@ -242,7 +242,7 @@
 				"string": ""
 			},
 			"copyright": {
-				"string": "© 2021 OneDot Projects"
+				"string": "© 2021 OneDot"
 			},
 			"replit": {
 				"string": ""
