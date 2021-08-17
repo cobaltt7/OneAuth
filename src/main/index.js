@@ -81,11 +81,12 @@ app.use((_, response, next) => {
 });
 
 // Logos
-app.all("/logo.svg", (_, response) =>
-	response.status(302).redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg"),
+app.get("/logo.svg", (_, response) =>
+	response.status(302).redirect("https://onedot.cf/brand/OneAuth.svg"),
 );
-app.all("/favicon.ico", (_, response) =>
-	response.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg"),
+app.get("/favicon.ico", (_, response) =>
+	response.status(302).redirect("https://onedot.cf/brand/Auth.svg"),
+
 );
 app.all("/", (_, response) =>
 	response.render(path.resolve(directory, "about.html"), {

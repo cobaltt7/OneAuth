@@ -88,16 +88,16 @@
 				"string": ""
 			},
 			"alt": {
-				"string": ""
+				"string": "ONEDOT PROJECTS"
 			}
 		},
 		"auth": {
 			"alt": {
-				"string": ""
+				"string": "ONEAUTH"
 			},
 			"logo": { "string": "" },
 			"title": {
-				"string": "{0} | 1Auth"
+				"string": "{0} | OneAuth"
 			}
 		}
 	},
@@ -203,7 +203,7 @@
 				"string": "Discord"
 			},
 			"auth": {
-				"string": "1Auth"
+				"string": "OneAuth"
 			},
 			"docs": {
 				"string": ""
