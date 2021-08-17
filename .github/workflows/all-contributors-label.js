@@ -1,33 +1,45 @@
 /**
- * @file Workflow To add commiters to the credits page when their issue is labeled for the related
+ * @file Workflow To add commiters to the credits page when their issue is process.argv[2]ed for the related
  *   contribution types.
  */
 
-const isPull = process.env.GITHUB_EVENT_NAME === "pull_request",
-	label = process.argv[2],
-	username = process.argv[3] || process.argv[4] || process.argv[5];
+ import fileSystem from "fs";
+ import path from "path";
+import url from "url";
 
-if (label === "scope: a11y") console.log(`npx all-contributors-cli add ${username} a11y`);
+const
+ username = process.argv[3] || process.argv[4] || process.argv[5],
+/** @type {import("../../types").AllContributosRc} */ config = JSON.parse(
+		fileSystem.readFileSync(url.pathToFileURL(path.resolve(".all-contributorsrc")), "utf8"),
+		),contributions = config.contributors?.find(({ login }) => login === username)?.contributions || [];
 
-if (label === "type: security") console.log(`npx all-contributors-cli add ${username} security`);
+if (process.argv[2] === "scope: a11y") contributions.push("a11y");
 
-if (label === "scope: i18n") console.log(`npx all-contributors-cli add ${username} translation`);
+else if (process.argv[2] === "type: security") contributions.push("security");
 
-if (label === "type: announcement" || label === "scope: dependencies")
-	console.log(`npx all-contributors-cli add ${username} maintenance`);
+else if (process.argv[2] === "scope: i18n") contributions.push("translation");
 
-if (label.startsWith("type: bug")) console.log(`npx all-contributors-cli add ${username} bug`);
+else if (process.argv[2] === "type: announcement" || process.argv[2] === "scope: dependencies")
+	contributions.push("maintenance");
 
-if (isPull) {
-	if (label === "scope: documentation")
-		console.log(`npx all-contributors-cli add ${username} doc`);
+else if (process.argv[2].startsWith("type: bug")) contributions.push("bug");
 
-	if (label === "scope: meta") console.log(`npx all-contributors-cli add ${username} infra`);
+else if (process.env.GITHUB_EVENT_NAME === "pull_request") {
+	if (process.argv[2] === "scope: documentation")
+		contributions.push("doc");
 
-	if (label === "language: sass" || label === "scope: design")
-		console.log(`npx all-contributors-cli add ${username} design`);
-} else if (label.startsWith("type: enhancement")) {
-	console.log(`npx all-contributors-cli add ${username} ideas`);
+	else if (process.argv[2] === "scope: meta") contributions.push("infra");
+
+	else if (process.argv[2] === "language: sass" || process.argv[2] === "scope: design")
+		contributions.push("design");
+} else if (process.argv[2].startsWith("type: enhancement")) {
+	contributions.push("ideas");
 }
+
+console.log(
+	`npx all-contributors-cli add ${username} "${contributions.join(
+		",",
+	)}"`,
+)
 
 export default undefined;
