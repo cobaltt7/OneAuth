@@ -6,6 +6,7 @@
 
 Thanks to all these wonderful people for their support. ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
+<div id="contributors-wrapper">
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -33,5 +34,6 @@ Thanks to all these wonderful people for their support. ([emoji key](https://all
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+</div>
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

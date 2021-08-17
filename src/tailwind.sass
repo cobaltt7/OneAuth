@@ -246,6 +246,29 @@ button {
 		h-14;
 }
 
+#contributors-wrapper {
+	table {
+		@apply text-center;
+	}
+
+	tbody {
+		@apply inline;
+	}
+
+	tr {
+		@apply contents;
+	}
+
+	td {
+		@apply inline-block
+		w-1/6
+		break-words;
+
+		min-width: 6rem;
+		max-width: 14rem;
+	}
+}
+
 /* GLOBAL STYLES */
 html {
 	@apply font-sans
