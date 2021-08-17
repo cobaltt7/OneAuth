@@ -117,9 +117,9 @@ try {
 }
 
 try {
-	const allScores = transpose(data.data.map(({ scores }) => Object.values(scores))).map(
-		getAverage,
-	).splice(2, 1)
+	const allScores = transpose(data.data.map(({ scores }) => Object.values(scores)))
+		.map(getAverage)
+		.splice(2, 1);
 
 	commentOnDiscussion(
 		`${
