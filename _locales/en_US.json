@@ -11,7 +11,8 @@
 			"clients": {
 				"string": "{0, plural, one {We support {0} client with many more to come.} other {We support {0} clients with many more to come.}}"
 			},
-			"supported": { "string": "Supported Clients" }
+			"supported": { "string": "Supported Clients" },
+			"demo": { "string": "If you like, you may demo the different clients here." }
 		},
 		"developers": {
 			"heading": { "string": "For Developers" },
@@ -108,9 +109,15 @@
 				"email": { "string": "To continue, please enter your email." },
 				"submit": { "string": "Submit" },
 				"code": { "string": "To continue, please enter the code we sent you." },
-				"placeholder": { "string": "you@example.com" }
+				"placeholder": { "string": "you@example.com" },
+				"didnt": { "string": "Didn’t get it?" },
+				"resend": { "string": "Send it again" },
+				"wait": {
+					"string": "{0, plural, one {You may try again in {0} minute.} other {You may try again in {0} minutes.}}"
+				}
 			},
 			"email": {
+				"from": { "string": "OneAuth" },
 				"subject": { "string": "OneAuth Email Verification" },
 				"code": { "string": "Your code is {0}." },
 				"share": { "string": "Don’t share it with anyone else." },

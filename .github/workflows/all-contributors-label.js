@@ -7,6 +7,10 @@ import fileSystem from "fs";
 import path from "path";
 import url from "url";
 
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const username = process.argv[3] || process.argv[4] || process.argv[5];
 /** @type {import("../../types").AllContributosRc} */
 // eslint-disable-next-line one-var -- `contributions` depends on `username`.

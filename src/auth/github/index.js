@@ -1,8 +1,11 @@
 /** @file GitHub Authentication handler. */
 
+import dotenv from "dotenv";
 import fetch from "node-fetch";
 
 import { logError } from "../../errors/index.js";
+
+dotenv.config();
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {

@@ -7,7 +7,7 @@
 			{{ #message }}branding.auth.title|||[clients.email.page.heading]{{ /message }}
 		</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
-		<link rel="preload" href="/image/loading.svg" as="image" />
+		<link rel="preload" href="/loading.svg" as="image" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
@@ -18,7 +18,7 @@
 		{{> nav }}
 		<main>
 			<h1>{{ #message }}clients.email.page.heading{{ /message }}</h1>
-			<label id="note" for="email-address"
+			<label id="next-step" for="email-address"
 				>{{ #message }}clients.email.page.email{{ /message }}</label
 			>
 			<form method="POST">
@@ -30,52 +30,133 @@
 					required
 					placeholder="{{ #message }}clients.email.page.placeholder{{ /message }}"
 				/>
+				<div id="recaptcha" class="mt-2"></div>
 				<button id="submit" type="submit">
 					{{ #message }}clients.email.page.submit{{ /message }}
 				</button>
 			</form>
 		</main>
-		{{> footer }}
+		<div
+			id="floating-captcha"
+			class="flex fixed align-center justify-center inset-0 z-50 b6-gray-400 bg-opacity-50"
+		></div>
+
+		<!-- todo: &hl=language-->
+		<script
+			src="https://www.google.com/recaptcha/api.js?onload=onCaptchaLoad&render=explicit"
+			async
+			defer
+		></script>
+
 		<script>
 			"use strict";
 
+			function onCaptchaLoad() {
+				grecaptcha.render(document.querySelector("#recaptcha"), {
+					sitekey: "6LfNhw0cAAAAAK5PC6gh8R4iQBzZzNZ8O--P-UdB",
+					theme: "light" // or dark
+				});
+			}
+
 			(function forumHandler() {
-				const form = document.querySelector("form");
-
-				/**
-				 * Code that submits the form in the background.
-				 *
-				 * @param {Event} event - The Submit event.
-				 */
-				async function onSubmit(event) {
-					form.removeEventListener("submit", onSubmit);
-					event.preventDefault();
-
-					// Show loading icon
-					const submit = document.querySelector('[type="submit"]');
-
-					submit.firstChild.remove();
-					submit.append(
-						Object.assign(document.createElement("img"), {
-							src: "/image/loading.svg",
-							className: "m-auto"
-						})
-					);
-
-					// Save email address for later
-					const email = document.querySelector("input").value;
-
+				async function sendEmail(
+					email,
+					captcha = document.querySelector("textarea").value
+				) {
 					// Send the email
-					await fetch("", {
-						body: `email=${email}`,
+					const result = await fetch("", {
+						body: `email=${email}&captcha=${captcha}`,
 
 						headers: {
+							"accept": "application/json",
 							"content-type": "application/x-www-form-urlencoded; charset=UTF-8"
 						},
 
 						method: "POST"
 					});
 
+					if (result.status !== 204) {
+						const error = (result.error = await result.json());
+						document.querySelector(
+							"h1"
+						).textContent = `{{ #message }}errors.page.message|||${error.status}|||${error.heading}{{ /message }}`;
+						document
+							.querySelectorAll("main > * + *")
+							.forEach((element) => element.remove());
+						document.querySelector("main").append(
+							Object.assign(document.createElement("p"), {
+								innerText: error.errorMessage
+							})
+						);
+
+						if (result.status === 429) {
+							const timeLeft = error.moreInfo - Date.now();
+							document.querySelector("main").append(
+								Object.assign(document.createElement("p"), {
+									innerText: `{{ #message }}clients.email.page.wait|||${Math.ceil(
+										timeLeft / 60000
+									)}{{ /message }}` //todo: plurals dont work
+								})
+							);
+
+							setTimeout(
+								() =>
+									document.querySelector("main").append(
+										createResendLink(email, false, () => {
+											document.querySelector("h1").textContent =
+												"{{ #message }}clients.email.page.heading{{ /message }}";
+											document
+												.querySelector("main")
+												.append(...createCodeForm(email));
+										})
+									),
+								timeLeft
+							);
+						}
+					}
+
+					return result;
+				}
+
+				function createResendLink(email, showDidnt = true, customOnClick = () => {}) {
+					const resend = Object.assign(document.createElement("i"), {
+							// Create form element
+							innerText: showDidnt
+								? "{{ #message }}clients.email.page.didnt{{ /message }} "
+								: ""
+						}),
+						resendLink = Object.assign(document.createElement("a"), {
+							href: "#",
+							innerText: "{{ #message }}clients.email.page.resend{{ /message }}"
+						});
+
+					resendLink.addEventListener("click", async (event) => {
+						const floatingCaptcha = document.querySelector("#floating-captcha");
+						grecaptcha.render(floatingCaptcha, {
+							sitekey: "6LfNhw0cAAAAAK5PC6gh8R4iQBzZzNZ8O--P-UdB",
+							theme: "light", // or dark
+							callback: function (captcha) {
+								customOnClick.call(resendLink, event, captcha);
+
+								// Remove old captcha
+								document.body.replaceChild(
+									floatingCaptcha.cloneNode(false),
+									floatingCaptcha
+								);
+
+								return sendEmail(email, captcha);
+							}
+						});
+
+						return false;
+					});
+
+					resend.append(resendLink);
+
+					return resend;
+				}
+
+				function createCodeForm(email) {
 					// Create new form
 					const codeForm = Object.assign(document.createElement("form"), {
 						// Create form element
@@ -111,21 +192,59 @@
 							type: "submit"
 						})
 					);
-					form.remove();
-					document.querySelector("#note").remove();
-					document.querySelector("main").append(
+
+					return [
 						Object.assign(document.createElement("label"), {
 							htmlFor: "code",
 							// eslint-disable-next-line id-length -- We didn't name this.
-							id: "note",
+							id: "next-step",
 							innerText: "{{ #message }}clients.email.page.code{{ /message }}"
 						}),
 						codeForm
-					);
+					];
 				}
 
-				form.addEventListener("submit", onSubmit);
+				/**
+				 * Code that submits the form in the background.
+				 *
+				 * @param {Event} event - The Submit event.
+				 * @this {HTMLFormElement}
+				 */
+				async function onSubmit(event) {
+					event.preventDefault();
+					this.removeEventListener("submit", onSubmit);
+
+					// Show loading icon
+					const submit = document.querySelector('[type="submit"]');
+
+					submit.firstChild.remove();
+					submit.append(
+						Object.assign(document.createElement("img"), {
+							src: "/loading.svg",
+							className: "m-auto h-full"
+						})
+					);
+
+					// Save email address for later
+					const email = document.querySelector("input").value;
+
+					const result = await sendEmail(email);
+					if (result.error) return;
+
+					document.querySelector("main").append(...createCodeForm(email));
+
+					setTimeout(
+						() => document.querySelector("main").append(createResendLink(email)),
+						300000
+					);
+
+					this.remove();
+					document.querySelector("#next-step").remove();
+				}
+
+				document.querySelector("form").addEventListener("submit", onSubmit);
 			})();
 		</script>
+		{{> footer }}
 	</body>
 </html>
