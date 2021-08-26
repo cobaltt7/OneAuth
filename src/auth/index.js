@@ -173,7 +173,7 @@ app.all("/backend/get_data", (request, response) => {
 		issuer: "OneDot",
 		maxTokenAge: "15 minutes",
 	})
-		.then(response.status(200).send)
+		.then(response.send)
 		.catch((error) => {
 			logError(error);
 			response.status(401);
