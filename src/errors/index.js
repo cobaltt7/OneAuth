@@ -25,62 +25,69 @@ export function logError(error) {
 /**
  * Function to run once status is sent.
  *
- * @param {(status: number) => import("express").Response} realStatus - Original Express `status` function.
+ * @param {(status: number) => import("express").Response} setStatus - Original Express `status` function.
  * @param {import("express").Request} request - Express request object.
  * @param {import("express").Response} response - Express response object.
- * @param {number} status - HTTP status code.
+ * @param {number} statusCode - HTTP status code.
+ * @param {string} [message] - Optioal error message.
+ *
+ * @returns {import("express").Response} - Express response object.
+ * @todo Show the `message` to the user.
  */
-function statusMiddleware(realStatus, request, response, status = response.statusCode) {
+function statusMiddleware(
+	setStatus,
+	request,
+	response,
+	statusCode = response.statusCode,
+	message = "",
+) {
 	if (
 		// If no content has already been sent
 		!response.headersSent &&
 		// And it's not a redirect
-		(status < 301 ||
-			status > 399 ||
+		(statusCode < 301 ||
+			statusCode > 399 ||
 			// Allow 300 (above) and 304 (below) since they aren't actually redirects.
-			status === 304)
+			statusCode === 304)
 	) {
 		// Then it's an error code, send error page.
-		if (changeTo[+status]) {
+		if (changeTo[+statusCode]) {
 			logError(
 				new RangeError(
-					`Do not use the HTTP status code ${status}. Instead, use ${changeTo[+status]}.`,
+					`Do not use the HTTP status code ${statusCode}. Instead, use ${
+						changeTo[+statusCode]
+					}.`,
 				),
 			);
 
-			statusMiddleware(realStatus, request, response, changeTo[+status]);
-
-			return;
+			return statusMiddleware(setStatus, request, response, changeTo[+statusCode]);
 		}
 
 		const error = {
-			errorMessage: request.localization.messages[`errors.${status}.message`],
-			heading: request.localization.messages[`errors.${status}.heading`],
-			status,
+			errorMessage: request.localization.messages[`errors.${statusCode}.message`],
+			heading: request.localization.messages[`errors.${statusCode}.heading`],
+			moreInfo: message,
+			status: statusCode,
 		};
 
 		// @ts-expect-error -- We *want* to check `.includes(undefined)`.
-		if (Object.keys(error).includes()) {
-			statusMiddleware(realStatus, request, response, 500);
+		if (Object.keys(error).includes())
+			return statusMiddleware(setStatus, request, response, 500);
 
-			return;
-		}
+		const returnValue = setStatus.call(response, statusCode);
 
-		setTimeout(() => {
-			if (response.headersSent) return;
+		if (request.accepts("html")) response.render(path.resolve(directory, "error.html"), error);
+		else response.json(error);
 
-			if (request.accepts("text/html"))
-				response.render(path.resolve(directory, "error.html"), error);
-			else response.json(error);
-		}, 3000);
-
-		realStatus.call(response, status);
+		return returnValue;
 	}
 
+	// Timeout all requests after 5 secconds.
 	setTimeout(() => {
-		if (!response.headersSent)
-			statusMiddleware(realStatus, request, response, `${status}`[0] === "2" ? 408 : status);
-	}, 3000);
+		if (!response.headersSent) statusMiddleware(setStatus, request, response, 408);
+	}, 5000);
+
+	return response;
 }
 
 app.all("/old", (_, response) => response.render(path.resolve(directory, "old.html")));
@@ -89,17 +96,24 @@ app.use((request, response, next) => {
 	const realStatus = response.status;
 
 	/**
-	 * Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use `send` internally.
+	 * Set HTTP response status code.
 	 *
-	 * @param {number} statusCode - The HTTP status code to send.
+	 * @param {number} statusCode - HTTP status code.
 	 *
 	 * @returns {import("express").Response} - Express response object.
 	 */
-	response.status = function status(statusCode) {
-		statusMiddleware(realStatus, request, response, statusCode);
+	response.status = (statusCode) => statusMiddleware(realStatus, request, response, statusCode);
 
-		return response;
-	};
+	/**
+	 * Set HTTP response status code and send an error message.
+	 *
+	 * @param {number} statusCode - HTTP status code.
+	 * @param {string} message - Error message.
+	 *
+	 * @returns {import("express").Response} - Express response object.
+	 */
+	response.sendError = (statusCode, message) =>
+		statusMiddleware(realStatus, request, response, statusCode, message);
 
 	return next();
 });
