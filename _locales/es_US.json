@@ -11,7 +11,8 @@
 			"clients": {
 				"string": "{0, plural, one {} other {}}"
 			},
-			"supported": { "string": "Clientes Soportados" }
+			"supported": { "string": "Clientes Soportados" },
+			"demo": { "string": "" }
 		},
 		"developers": {
 			"heading": { "string": "Para Desarrolladores" },
@@ -108,9 +109,15 @@
 				"email": { "string": "Para continuar, por favor introduce tu correo electrónico." },
 				"submit": { "string": "Enviar" },
 				"code": { "string": "Para continuar, por favor introduce el código que te enviamos." },
-				"placeholder": { "string": "" }
+				"placeholder": { "string": "" },
+				"didnt": { "string": "" },
+				"resend": { "string": "" },
+				"wait": {
+					"string": "{0, plural, one {} other {}}"
+				}
 			},
 			"email": {
+				"from": { "string": "" },
 				"subject": { "string": "Verificación OneAuth de Correo Electrónico" },
 				"code": { "string": "Tu código es {0}." },
 				"share": { "string": "No lo compartas con nadie mas." },
