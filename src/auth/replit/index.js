@@ -7,7 +7,7 @@ import { logError } from "../../errors/index.js";
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {
-	icon: "https://replit.com/public/images/logo.svg",
+	icon: "https://replit.com/public/images/icon-square.png",
 	link: "https://replit.com/auth_with_repl_site?domain=auth.onedot.cf&redirect={{ nonce }}",
 	name: "Replit",
 
