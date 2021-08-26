@@ -12,7 +12,7 @@ import mailjet from "node-mailjet";
 import retronid from "retronid";
 
 import { mustacheFunction } from "../../../lib/localization.js";
-import { EmailItem } from "../../../lib/mongoose.js";
+import { EmailDatabase } from "../../../lib/mongoose.js";
 import { logError } from "../../errors/index.js";
 
 dotenv.config();
@@ -67,13 +67,21 @@ const client = {
 						{ method: "POST" },
 					).then((result) => result.json());
 
+					if (
+						!recaptcha.success ||
 						recaptcha["error-codes"]?.length ||
 						recaptcha.hostname !== request.hostname
 					) {
 						logError(recaptcha);
 
+						return response.status(403);
+					}
+
+					// Send email
+					const code = retronid();
+
 					try {
-						await new EmailItem({
+						await new EmailDatabase({
 							code,
 							date: Date.now(),
 							email: request.body.email,
@@ -90,6 +98,16 @@ const client = {
 									Email: `${process.env.GMAIL_EMAIL}`,
 									Name: request.localization.messages["clients.email.email.from"],
 								},
+
+								HTMLPart: mustache.render(email.html, {
+									code,
+
+									message: mustacheFunction(
+										request.localization.languages,
+										request.localization.messages,
+									),
+								}),
+
 								Subject:
 									request.localization.messages["clients.email.email.subject"],
 
@@ -125,7 +143,7 @@ const client = {
 				}
 
 				if (request.body.code && request.body.email && request.query.nonce) {
-					const data = await EmailItem.findOne({
+					const data = await EmailDatabase.findOne({
 						code: request.body.code,
 						email: request.body.email,
 						nonce: request.query.nonce,
@@ -134,12 +152,12 @@ const client = {
 					if (!data) return response.status(403);
 
 					if (Date.now() - data.date > 900000) {
-						await EmailItem.deleteOne({ code: request.body.code }).exec();
+						await EmailDatabase.deleteOne({ code: request.body.code }).exec();
 
 						return response.status(410);
 					}
 
-					await EmailItem.deleteOne({ code: request.body.code }).exec();
+					await EmailDatabase.deleteOne({ code: request.body.code }).exec();
 
 					return this.sendResponse(data, data.nonce);
 				}
