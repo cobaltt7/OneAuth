@@ -26,6 +26,9 @@ app.engine("html", mustacheEngine);
 app.engine("css", mustacheEngine);
 app.enable("json escape");
 app.disable("strict routing");
+
+if (process.env.NODE_ENV === "development") app.set("view cache", false);
+
 app.set("views", directory);
 app.disable("x-powered-by");
 
