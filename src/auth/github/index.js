@@ -25,8 +25,8 @@ const client = {
 					body:
 						"client_id=7b64414fe57e07d1e969" +
 						`&client_secret=${process.env.githubSECRET}` +
-						`&state=${request.query?.state}` +
-						`&code=${request.query?.code}`,
+						`&state=${request.query.state}` +
+						`&code=${request.query.code}`,
 
 					headers: {
 						"Content-Type": "application/x-www-form-urlencoded",
@@ -48,7 +48,7 @@ const client = {
 							accept: "application/json",
 						},
 					}).then((result) => result.json()),
-					`${request.query?.state}`,
+					`${request.query.state}`,
 				);
 			},
 		},

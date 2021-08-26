@@ -29,7 +29,7 @@ const client = {
 					"https://oauth2.googleapis.com/token",
 					{
 						body:
-							`code=${request.query?.code}` +
+							`code=${request.query.code}` +
 							`&client_id=${process.env.googleAppUrl}` +
 							`&client_secret=${process.env.googleSecret}` +
 							"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
@@ -46,7 +46,7 @@ const client = {
 				if (error || !idToken) {
 					logError(new Error(error));
 
-					return this.sendResponse({ error }, `${request.query?.state}`);
+					return this.sendResponse({ error }, `${request.query.state}`);
 				}
 
 				/** @type {{ [key: string]: string }} */
@@ -56,7 +56,7 @@ const client = {
 				if (info.error) {
 					logError(new Error(info.error));
 
-					return this.sendResponse({ error: info.error }, `${request.query?.state}`);
+					return this.sendResponse({ error: info.error }, `${request.query.state}`);
 				}
 
 				for (const item in info) {
@@ -76,7 +76,7 @@ const client = {
 						filteredInfo[`${item}`] = info[`${item}`];
 				}
 
-				return this.sendResponse(filteredInfo, `${request.query?.state}`);
+				return this.sendResponse(filteredInfo, `${request.query.state}`);
 			},
 		},
 	},
