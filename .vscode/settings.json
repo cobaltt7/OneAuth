@@ -57,7 +57,6 @@
 		"*.sass": "scss",
 		"*.draw": "json",
 		".all-contributorsrc": "json",
-		"*.html": "handlebars",
 		"LICENSE": "markdown",
 		"email.txt": "handlebars"
 	},
