@@ -12,7 +12,7 @@ import mustache from "mustache";
 import retronid from "retronid";
 
 import authClients from "../../lib/clients.js";
-import { NonceDatabase } from "../../lib/mongoose.js";
+import { NonceItem } from "../../lib/mongoose.js";
 import { logError } from "../errors/index.js";
 
 dotenv.config();
@@ -35,7 +35,7 @@ app.all("/auth", async (request, response) => {
 		psuedoNonce = retronid();
 
 	// Save the nonces to the database
-	await new NonceDatabase({
+	await new NonceItem({
 		nonce,
 		psuedoNonce,
 		redirect: request.query.url,
@@ -84,7 +84,7 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 		const sendResponse = async (data, nonce) => {
 			// Check nonce
 			const { psuedoNonce, redirect } =
-				(await NonceDatabase.findOneAndDelete({
+				(await NonceItem.findOneAndDelete({
 					nonce,
 				}).exec()) || {};
 

@@ -10,7 +10,7 @@ import nodemailer from "nodemailer";
 import retronid from "retronid";
 
 import { mustacheFunction } from "../../../lib/localization.js";
-import { EmailDatabase } from "../../../lib/mongoose.js";
+import { EmailItem } from "../../../lib/mongoose.js";
 
 dotenv.config();
 
@@ -36,19 +36,19 @@ const client = {
 					return response.render(path.resolve(directory, "index.html"));
 
 				if (request.body?.code && request.body?.email) {
-					const { email, date } = await EmailDatabase.findOne({
+					const { email, date } = await EmailItem.findOne({
 						code: request.body.code,
 					}).exec();
 
 					if (Date.now() - date > 900000) {
-						await EmailDatabase.deleteOne({ code: request.body.code }).exec();
+						await EmailItem.deleteOne({ code: request.body.code }).exec();
 
 						return response.status(410);
 					}
 
 					if (request.body.email !== email) return response.status(401);
 
-					await EmailDatabase.deleteOne({ code: request.body.code }).exec();
+					await EmailItem.deleteOne({ code: request.body.code }).exec();
 
 					return this.sendResponse({ email }, `${request.query?.nonce}`);
 				}
@@ -58,7 +58,7 @@ const client = {
 
 					const code = retronid();
 
-					await new EmailDatabase({
+					await new EmailItem({
 						code,
 						date: Date.now(),
 						email: request.body.email,
