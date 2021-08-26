@@ -133,7 +133,7 @@ try {
 			"<th>Overall</th>" +
 			"<th>PageSpeed Insights</th></tr></thead><tbody>"
 		}${data.data.reduce((accumulated, result) => {
-			const scores = Object.values(result.scores);
+			const scores = Object.values(result.scores).splice(2, 1);
 
 			return (
 				`${accumulated}<tr><td><a href="${result.url.trim()}">${
