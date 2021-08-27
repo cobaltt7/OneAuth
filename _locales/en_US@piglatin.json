@@ -109,7 +109,7 @@
 				"email": { "string": "Otay ontinuecay, easeplay enteryay ouryay emailyay." },
 				"submit": { "string": "Ubmityay" },
 				"code": { "string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay." },
-				"placeholder": { "string": "ouyay@exampleyay.com" },
+				"placeholder": { "string": "ouyay@exampleyay.com" , "developer_comment": "You SHOULD translate the words ’you’ and ’example’. Please also change ’.com’ to the country’s top-level domain. Transifex will alert you, but that can be safely dismissed." },
 				"didnt": { "string": "Iday otnay etgay ityay?" },
 				"resend": { "string": "Endsay ityay againyay" },
 				"wait": {
@@ -259,9 +259,11 @@
 			},
 			"license": {
 				"string": ""
+				,"developer_comment":"The placeholder is ’MIT license’. I moved it out so I could link it."
 			},
 			"mit": {
-				"string": "MIT icenselay"
+				"string": "MIT icenselay",
+				"developer_comment":"Only ever used in the ’license’ string."
 			}
 		}
 	},
