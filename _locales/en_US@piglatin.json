@@ -11,7 +11,8 @@
 			"clients": {
 				"string": "{0, plural, one {Eway upportsay {0} ientclay ithway anymay oremay otay omecay.} other {Eway upportsay {0} ientsclay ithway anymay oremay otay omecay.}}"
 			},
-			"supported": { "string": "Upportedsay Ientsclay" }
+			"supported": { "string": "Upportedsay Ientsclay" },
+			"demo": { "string": "" }
 		},
 		"developers": {
 			"heading": { "string": "Orfay Evelopersday" },
@@ -108,9 +109,15 @@
 				"email": { "string": "Otay ontinuecay, easeplay enteryay ouryay emailyay." },
 				"submit": { "string": "Ubmityay" },
 				"code": { "string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay." },
-				"placeholder": { "string": "ouyay@exampleyay.com" }
+				"placeholder": { "string": "ouyay@exampleyay.com" },
+				"didnt": { "string": "" },
+				"resend": { "string": "" },
+				"wait": {
+					"string": "{0, plural, one {} other {}}"
+				}
 			},
 			"email": {
+				"from": { "string": "" },
 				"subject": { "string": "OneAuth Emailyay Erificationvay" },
 				"code": { "string": "Ouryay odecay isyay {0}." },
 				"share": { "string": "Oday otnay areshay ithway anyoneyay elseyay." },
