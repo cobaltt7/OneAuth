@@ -82,7 +82,8 @@
         "maintenance",
         "doc",
         "code",
-        "translation"
+        "translation",
+        "infra"
       ]
     },
     {
