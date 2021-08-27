@@ -113,7 +113,7 @@ try {
 		`An error occurred while retrieving the data from Lighthouse.\n\`\`\`js\n${error}\n\`\`\``,
 	);
 
-	throw new Error(error);
+	throw error;
 }
 
 try {
