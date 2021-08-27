@@ -117,7 +117,7 @@
 				}
 			},
 			"email": {
-				"from": { "string": "" },
+				"from": { "string": "OneAuth" },
 				"subject": { "string": "" },
 				"code": { "string": "" },
 				"share": { "string": "" },

@@ -110,14 +110,14 @@
 				"submit": { "string": "Ubmityay" },
 				"code": { "string": "Otay ontinuecay, easeplay enteryay ethay odecay eway entsay ouyay." },
 				"placeholder": { "string": "ouyay@exampleyay.com" },
-				"didnt": { "string": "" },
-				"resend": { "string": "" },
+				"didnt": { "string": "Iday otnay etgay ityay?" },
+				"resend": { "string": "Endsay ityay againyay" },
 				"wait": {
-					"string": "{0, plural, one {} other {}}"
+					"string": "{0, plural, one {Ouyay aymay rytay againyay inyay {0} inutemay.} other {Ouyay aymay rytay againyay inyay {0} inutesmay.}}"
 				}
 			},
 			"email": {
-				"from": { "string": "" },
+				"from": { "string": "OneAuth" },
 				"subject": { "string": "OneAuth Emailyay Erificationvay" },
 				"code": { "string": "Ouryay odecay isyay {0}." },
 				"share": { "string": "Oday otnay areshay ithway anyoneyay elseyay." },
@@ -166,7 +166,7 @@
 			"choose": { "string": "Oosechay anyay optionyay otay ontinuecay" },
 			"with": { "string": "Ignsay inyay ithway {0}" },
 			"logo": {
-				"string": "",
+				"string": "{0} iconyay",
 				"developer_comment": "Alt text of a logo image. Example: “Google icon”, “Email icon”, etc."
 			}
 		}
@@ -317,7 +317,7 @@
 			"message": { "string": "" }
 		},
 		"226": {
-			"heading": { "string": "IA Usedyay" },
+			"heading": { "string": "IM Usedyay" },
 			"message": {
 				"string": ""
 			}
@@ -440,7 +440,7 @@
 		},
 		"426": {
 			"heading": { "string": "Upgradeyay Equiredray" },
-			"message": { "string": "Easeplay useyay HTPS, otnay HTTP." }
+			"message": { "string": "Easeplay useyay HTTPS, otnay HTTP." }
 		},
 		"428": {
 			"heading": { "string": "Econditionpray Equiredray" },
@@ -526,7 +526,7 @@
 		},
 		"page": {
 			"message": {
-				"string": "",
+				"string": "Erroryay: {0} {1}",
 				"developer_comments": "{0} is the HTTP status code (ie “404”) and {1} is a 1-5 word description (ie “Not Found”)"
 			}
 		},
