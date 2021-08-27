@@ -83,7 +83,8 @@
         "doc",
         "code",
         "translation",
-        "infra"
+        "infra",
+        "design"
       ]
     },
     {
