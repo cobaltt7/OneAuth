@@ -68,14 +68,14 @@
 			},
 			"grows": { "string": "" },
 			"help": {
-				"string": ""
+				"string": "Si desea ayudarnos traducir, por favor haga clic aquí."
 			},
 			"account": {
 				"string": "",
 				"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
 			},
 			"thanks": {
-				"string": ""
+				"string": "¡Gracias por tu entusiasmo por ayudar!"
 			},
 			"request": {
 				"string": "",
@@ -109,15 +109,18 @@
 				"email": { "string": "Para continuar, por favor introduce tu correo electrónico." },
 				"submit": { "string": "Enviar" },
 				"code": { "string": "Para continuar, por favor introduce el código que te enviamos." },
-				"placeholder": { "string": "" },
-				"didnt": { "string": "" },
-				"resend": { "string": "" },
+				"placeholder": {
+					"string": "tu@ejemplo.com",
+					"developer_comment": "You SHOULD translate the words ’you’ and ’example’. Please also change ’.com’ to the country’s top-level domain. Transifex will alert you, but that can be safely dismissed."
+				},
+				"didnt": { "string": "¿No lo entendiste?" },
+				"resend": { "string": "Mándalo de nuevo" },
 				"wait": {
 					"string": "{0, plural, one {} other {}}"
 				}
 			},
 			"email": {
-				"from": { "string": "" },
+				"from": { "string": "OneAuth" },
 				"subject": { "string": "Verificación OneAuth de Correo Electrónico" },
 				"code": { "string": "Tu código es {0}." },
 				"share": { "string": "No lo compartas con nadie mas." },
@@ -141,10 +144,10 @@
 					"string": ""
 				},
 				"ignore": {
-					"string": ""
+					"string": "Simplemente ignóralo."
 				},
 				"nothing": {
-					"string": ""
+					"string": "No te preocupes, no pasará nada."
 				}
 			}
 		}
@@ -153,7 +156,7 @@
 		"allow": {
 			"heading": { "string": "¿Permitir el acceso?" },
 			"question": {
-				"string": ""
+				"string": "¿Quieres que {0} acceda a tu información?"
 			},
 			"allow": { "string": "Permitir" },
 			"deny": { "string": "Negar" },
@@ -166,7 +169,7 @@
 			"choose": { "string": "Elija una opción para continuar" },
 			"with": { "string": "Iniciar sesión con {0}" },
 			"logo": {
-				"string": "",
+				"string": "{0} icono",
 				"developer_comment": "Alt text of a logo image. Example: “Google icon”, “Email icon”, etc."
 			}
 		}
@@ -189,7 +192,7 @@
 				"string": "OneDot"
 			},
 			"website": {
-				"string": ""
+				"string": "Sito web"
 			},
 			"github": {
 				"string": "GitHub"
@@ -213,33 +216,33 @@
 				"string": "OneAuth"
 			},
 			"docs": {
-				"string": ""
+				"string": "Documentación"
 			},
 			"credits": {
-				"string": ""
+				"string": "Créditos"
 			},
 			"translate": {
-				"string": ""
+				"string": "Traducir"
 			},
 			"repo": {
-				"string": ""
+				"string": "Repositorio"
 			},
 			"demo": {
-				"string": ""
+				"string": "Manifestación"
 			},
 			"openode": {
-				"string": ""
+				"string": "Nube alojada en opeNode.io"
 			}
 		},
 		"legal": {
 			"heading": {
-				"string": ""
+				"string": "Legal"
 			},
 			"tos": {
-				"string": ""
+				"string": "Términos de Servicio"
 			},
 			"privacy": {
-				"string": ""
+				"string": "Política de Privacidad"
 			},
 			"scratch": {
 				"string": ""
@@ -258,10 +261,12 @@
 				"string": ""
 			},
 			"license": {
-				"string": ""
+				"string": "",
+				"developer_comment": "The placeholder is ’MIT license’. I moved it out so I could link it."
 			},
 			"mit": {
-				"string": ""
+				"string": "Licencia de MIT",
+				"developer_comment": "Only ever used in the ’license’ string."
 			}
 		}
 	},
