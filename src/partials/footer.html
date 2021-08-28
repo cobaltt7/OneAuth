@@ -158,13 +158,17 @@
 							{{ /languages }}
 						</select>
 					</form>
-						<script>(function languageHandler(){
-							document.getElementById('language-forum').addEventListener('change', function(e){
-								const url = new URL(location.href)
-url.searchParams.set("language",e.target.value)
-location.replace(url.href)
-							})
-							})()</script>
+					<script>
+						(function languageHandler() {
+							document
+								.getElementById("language-forum")
+								.addEventListener("change", function (e) {
+									const url = new URL(location.href);
+									url.searchParams.set("language", e.target.value);
+									location.replace(url.href);
+								});
+						})();
+					</script>
 				</li>
 			</ul>
 		</li>
