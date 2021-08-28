@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html style="display: none" lang="en">
+	<!-- todo: don't hardcode the html lang attribute -->
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{{ #message }}branding.auth.title|||[about.privacy.heading]{{ /message }}</title>
+		<meta name="robots" content="index, follow, archive, snippet" />
+		<noscript>
+			<meta http-equiv="refresh" content="0; url=/old/" />
+		</noscript>
+		{{> head }}
+	</head>
+
+	<body>
+		{{> nav }}
+		<main>
+			<h1>{{ #message }}about.privacy.heading{{ /message }}</h1>
+			<p>
+				{{ #message }}about.privacy.why;about.privacy.pii;about.privacy.carefully{{ /message
+				}}
+			</p>
+			<p>
+				{{ #message
+				}}about.privacy.what;about.privacy.minimal;about.privacy.cookies;about.privacy.languages;about.privacy.jwt|||<a
+					href="#jwt-info"
+					>[about.privacy.below]</a
+				>;about.privacy.assets{{ /message }}
+			</p>
+			<p>{{ #message }}about.privacy.direct;about.privacy.controlless{{ /message }}</p>
+			<p id="jwt-info">
+				{{ #message
+				}}about.privacy.receive;about.privacy.store;about.privacy.encode;about.privacy.share;about.privacy.permission{{
+				/message }}
+			</p>
+			<p>
+				{{ #message
+				}}about.privacy.email;about.privacy.logs;about.privacy.recaptcha;about.privacy.governed|||<a
+					href="https://policies.google.com/technologies/partner-sites"
+					>[about.privacy.own]</a
+				>;about.privacy.ip{{ /message }}
+			</p>
+		</main>
+		{{> footer }}
+	</body>
+</html>

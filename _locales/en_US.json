@@ -81,6 +81,125 @@
 				"string": "(Please note that if your language is not in the list, you will have to scroll down to the bottom and click “Request language” first.)",
 				"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
 			}
+		},
+		"privacy": {
+			"heading": { "string": "Privacy Policy" },
+			"why": {
+				"string": "This privacy policy has been compiled to better serve those who are concerned with how their Personal Identifiable Information (PII) is being used online."
+			},
+			"pii": {
+				"string": "PII, as used in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context."
+			},
+			"carefully": {
+				"string": "Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your PII as you use our website."
+			},
+			"what": {
+				"string": "OneAuth is a service that provides websites with an easy way to authenticate users."
+			},
+			"minimal": { "string": "We aim to store as minimal data as possible on our servers." },
+			"cookies": {
+				"string": "Instead, OneAuth may store data on your device in the form of cookies."
+			},
+			"languages": {
+				"string": "We always store a cookie so we can remember your preferred language to view OneAuth in."
+			},
+			"jwt": {
+				"string": "At times, we may also save a cookie containing your personal information, obtained through a third-party service {0}.",
+				"developer_comment": "The placeholder is “(detailed below)”. I moved it out so I could link it."
+			},
+			"below": {
+				"string": "(detailed below)",
+				"developer_comment": "Only ever used in the “jwt” string."
+			},
+			"assets": {
+				"string": "We may also use images, JavaScript files, and styling files from other websites, and they may also store cookies on your device."
+			},
+			"direct": {
+				"string": "OneAuth may direct you to third-party websites that are governed by their own privacy policies."
+			},
+			"controlless": { "string": "We do not have access to or control over those services." },
+			"receive": {
+				"string": "OneAuth may receive private information about you from various third-party websites when you click on their icon."
+			},
+			"store": {
+				"string": "We do not store that information. We encode it and store it on your device in a cookie."
+			},
+			"encode": { "string": "If you allow, we may share it with a third-party website." },
+			"share": { "string": "We will never save your information in our database." },
+			"permission": {
+				"string": "We will never share your information with anyone without your permission."
+			},
+			"email": {
+				"string": "When you use email auth, you provide us with your email address, and we may send you an email there."
+			},
+			"logs": { "string": "We reserve the right to keep logs of sent emails." },
+			"recaptcha": {
+				"string": "Email auth is protected by reCAPTCHA to avoid automated spamming of somebody's email inbox."
+			},
+			"governed": {
+				"string": "It is governed by {0}.",
+				"developer_comment": "The placeholder is “its own privacy policy”. I moved it out so I could link it."
+			},
+			"own": {
+				"string": "its own privacy policy",
+				"developer_comment": "Only ever used in the “governed” string."
+			},
+			"ip": {
+				"string": "In addition, we may read your IP address, encode it using a one-way encoding, and temporarily store the encoded result so we can stagger manual spamming attempts."
+			}
+		},
+		"logo": {
+			"heading": { "string": "Logo Guidelines" },
+			"logos": { "string": "The logos" },
+			"ratio": { "string": "No changing the logos' aspect ratio." },
+			"selfhost": {
+				"string": "Never selfhost the logo, you can only use it from our website."
+			},
+			"cover": { "string": "You may not put other content over the logo." },
+			"background": {
+				"string": "The background color should be a shade of gray {0} or lighter."
+			},
+			"specific": {
+				"string": "Follow any guidelines specific to the logo you choose (found below)."
+			},
+			"full": { "string": "Full logo" },
+			"padding": { "string": "At least 3 pixels of padding on all sides." },
+			"height": { "string": "Minimum height of 25 pixels." },
+			"mini": { "string": "Mini logo" },
+			"spaced": {
+				"string": "The padding on each side of the logo should be at least 30% the width of the icon, and the padding on each side should all be equal."
+			},
+			"size": {
+				"string": "The minimum size of the logo's content (not including padding, margin, border, outline, etcetera) is 15 by 15 pixels."
+			},
+			"dont": { "string": "If possible, you should always use the full logo." },
+			"unless": {
+				"string": "You may use this mini logo only if you have the text “OneAuth” nearby or if the big logo is also shown somewhere on the page."
+			},
+			"button": { "string": "The “Sign in” button/link" },
+			"text": {
+				"string": "The text on the button should be somethng like “Sign in with OneAuth”."
+			},
+			"tooltip": {
+				"string": "Alternatively, you can just have the text “Sign in” with “powered by OneAuth” nearby or as a tooltip."
+			},
+			"external": {
+				"string": "The button should indicate that clicking on it will direct your users off of your site."
+			},
+			"affiliation": {
+				"string": "There should be no indidication of sponsorship or affiliation between us."
+			},
+			"logo": {
+				"string": "If possible, please use one of our logos on the button (optional)."
+			},
+			"brand": { "string": "Wherever you use the brand name “OneAuth”" },
+			"cursive": { "string": "It should not be in a cursive font." },
+			"readable": { "string": "The text size should be 14 pixels or more." },
+			"contrast": { "string": "The text color and background should meet {0}." },
+			"aa": { "string": "WCAG AA contrast guidelines" },
+			"get": { "string": "Get the logos" },
+			"svg": { "string": "SVG version" },
+			"png": { "string": "PNG version" }
 		}
 	},
 	"branding": {
@@ -111,7 +230,7 @@
 				"code": { "string": "To continue, please enter the code we sent you." },
 				"placeholder": {
 					"string": "you@example.com",
-					"developer_comment": "You SHOULD translate the words ’you’ and ’example’. Please also change ’.com’ to the country’s top-level domain. Transifex will alert you, but that can be safely dismissed."
+					"developer_comment": "You SHOULD translate the words “you” and “example”. Please also change “.com” to the appropriate top-level domain. Transifex will alert you, but that can be safely dismissed."
 				},
 				"didnt": { "string": "Didn’t get it?" },
 				"resend": { "string": "Send it again" },
@@ -244,6 +363,9 @@
 			"privacy": {
 				"string": "Privacy Policy"
 			},
+			"logo": {
+				"string": "Logo Guidelines"
+			},
 			"scratch": {
 				"string": "Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab."
 			},
@@ -262,11 +384,11 @@
 			},
 			"license": {
 				"string": "The source code of OneAuth is available under the {0}.",
-				"developer_comment": "The placeholder is ’MIT license’. I moved it out so I could link it."
+				"developer_comment": "The placeholder is “MIT license”. I moved it out so I could link it."
 			},
 			"mit": {
 				"string": "MIT license",
-				"developer_comment": "Only ever used in the ’license’ string."
+				"developer_comment": "Only ever used in the “license” string."
 			}
 		}
 	},

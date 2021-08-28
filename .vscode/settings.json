@@ -180,5 +180,6 @@
 	"github-actions.org-features": true,
 	"scss.validate": false,
 	"less.validate": false,
-	"css.validate": false
+	"css.validate": false,
+	"html.format.templating": true
 }

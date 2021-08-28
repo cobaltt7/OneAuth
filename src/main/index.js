@@ -80,13 +80,8 @@ app.all("/", (_, response) =>
 	}),
 );
 
-app.all("/.well-known/security.txt", (_, response) =>
-	response.send(`Contact: mailto:${process.env.GMAIL_EMAIL}
-Expires: 2107-10-07T05:13:00.000Z
-Acknowledgments: https://auth.onedot.cf/docs/credits
-Preferred-Languages: en_US
-Canonical: https://auth.onedot.cf/.well-known/security.txt`),
-);
+app.all("/privacy", (_, response) => response.render(path.resolve(directory, "privacy.html")));
+app.all("/logo", (_, response) => response.render(path.resolve(directory, "logo.html")));
 
 app.all("/humans.txt", (_, response) =>
 	response.status(301).redirect("https://github.com/onedotprojects/auth/people"),
