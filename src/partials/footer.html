@@ -151,7 +151,6 @@
 							required=""
 							name="language"
 							title="{{ #message }}footer.localization.choose{{ /message }}"
-							onchange="document.getElementById('language-forum').submit()"
 						>
 							<!-- TODO: The first child option element of a select element with a required attribute, and without a multiple attribute, and without a size attribute whose value is greater than 1, must have either an empty value attribute, or must have no text content. Consider either adding a placeholder option label, or adding a size attribute with a value equal to the number of option elements. -->
 							{{ #languages }}
@@ -159,6 +158,13 @@
 							{{ /languages }}
 						</select>
 					</form>
+						<script>(function languageHandler(){
+							document.getElementById('language-forum').addEventListener('change', function(e){
+								const url = new URL(location.href)
+url.searchParams.set("language",e.target.value)
+location.replace(url.href)
+							})
+							})()</script>
 				</li>
 			</ul>
 		</li>
