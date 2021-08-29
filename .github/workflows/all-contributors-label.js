@@ -3,31 +3,75 @@
  *   contribution types.
  */
 
-const isPull = process.env.GITHUB_EVENT_NAME === "pull_request",
-	label = process.argv[2],
-	username = process.argv[3] || process.argv[4] || process.argv[5];
+import fileSystem from "fs";
+import path from "path";
+import url from "url";
 
-if (label === "scope: a11y") console.log(`npx all-contributors-cli add ${username} a11y`);
+import dotenv from "dotenv";
 
-if (label === "type: security") console.log(`npx all-contributors-cli add ${username} security`);
+dotenv.config();
 
-if (label === "scope: i18n") console.log(`npx all-contributors-cli add ${username} translation`);
+const username = process.argv[3] || process.argv[4] || process.argv[5];
+/** @type {import("../../types").AllContributosRc} */
+// eslint-disable-next-line one-var -- `contributions` depends on `username`.
+const config = JSON.parse(
+		fileSystem.readFileSync(url.pathToFileURL(path.resolve(".all-contributorsrc")), "utf8"),
+	),
+	contributions =
+		config.contributors?.find(({ login }) => login === username)?.contributions || [];
 
-if (label === "type: announcement" || label === "scope: dependencies")
-	console.log(`npx all-contributors-cli add ${username} maintenance`);
+switch (process.argv[2]) {
+	case "scope: a11y": {
+		contributions.push("a11y");
 
-if (label.startsWith("type: bug")) console.log(`npx all-contributors-cli add ${username} bug`);
+		break;
+	}
 
-if (isPull) {
-	if (label === "scope: documentation")
-		console.log(`npx all-contributors-cli add ${username} doc`);
+	case "type: security": {
+		contributions.push("security");
 
-	if (label === "scope: meta") console.log(`npx all-contributors-cli add ${username} infra`);
+		break;
+	}
 
-	if (label === "language: sass" || label === "scope: design")
-		console.log(`npx all-contributors-cli add ${username} design`);
-} else if (label.startsWith("type: enhancement")) {
-	console.log(`npx all-contributors-cli add ${username} ideas`);
+	case "scope: i18n": {
+		contributions.push("translation");
+
+		break;
+	}
+
+	case "type: announcement":
+	case "scope: dependencies": {
+		contributions.push("maintenance");
+	}
 }
+
+if (process.argv[2].startsWith("type: bug")) {
+	contributions.push("bug");
+} else if (process.env.GITHUB_EVENT_NAME === "pull_request") {
+	switch (process.argv[2]) {
+		case "scope: documentation": {
+			contributions.push("doc");
+
+			break;
+		}
+
+		case "scope: meta": {
+			contributions.push("infra");
+
+			break;
+		}
+
+		case "language: sass":
+		case "scope: design": {
+			contributions.push("design");
+
+			break;
+		}
+	}
+} else if (process.argv[2].startsWith("type: enhancement")) {
+	contributions.push("ideas");
+}
+
+console.log(`npx all-contributors-cli add ${username} "${contributions.join(",")}"`);
 
 export default undefined;

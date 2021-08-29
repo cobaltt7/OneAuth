@@ -8,7 +8,7 @@
   ],
   "imageSize": 100,
   "commit": true,
-  "commitConvention": "gitmoji",
+  "commitConvention": "none",
   "contributors": [
     {
       "login": "wgyt",
@@ -82,7 +82,9 @@
         "maintenance",
         "doc",
         "code",
-        "translation"
+        "translation",
+        "infra",
+        "design"
       ]
     },
     {
@@ -114,7 +116,9 @@
       "profile": "https://thecrewmate876.github.io/",
       "contributions": [
         "content",
-        "business"
+        "business",
+        "maintenance",
+        "ideas"
       ]
     },
     {
@@ -146,5 +150,5 @@
     }
   ],
   "contributorsPerLine": 5,
-  "contributorsSortAlphabetically":true
+  "contributorsSortAlphabetically": true
 }

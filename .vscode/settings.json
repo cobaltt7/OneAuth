@@ -57,7 +57,6 @@
 		"*.sass": "scss",
 		"*.draw": "json",
 		".all-contributorsrc": "json",
-		"*.html": "handlebars",
 		"LICENSE": "markdown",
 		"email.txt": "handlebars"
 	},
@@ -181,5 +180,6 @@
 	"github-actions.org-features": true,
 	"scss.validate": false,
 	"less.validate": false,
-	"css.validate": false
+	"css.validate": false,
+	"html.format.templating": true
 }

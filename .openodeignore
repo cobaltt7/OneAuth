@@ -13,3 +13,4 @@ LICENSE
 PAGE_TEMPLATE.html
 tailwind.config.cjs
 types.d.ts
+.openode

@@ -77,7 +77,8 @@
 				max-width: 100%;
 				margin: auto;
 				padding: 0.25rem;
-				height: 5rem;
+				height: 100%;
+				width: auto;
 			}
 
 			main {
@@ -224,8 +225,8 @@
 				<li>{{ #message }}clients.email.email.copy{{ /message }}</li>
 				<li>{{ #message }}clients.email.email.back{{ /message }}</li>
 				<li>
-					{{ #message }}clients.email.email.paste|||[clients.email.email.submit]{{
-					/message }}
+					{{ #message }}clients.email.email.paste|||[clients.email.page.submit]{{ /message
+					}}
 				</li>
 				<li>{{ #message }}clients.email.email.review|||[core.allow.allow]{{ /message }}</li>
 			</ul>

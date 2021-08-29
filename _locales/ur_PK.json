@@ -11,7 +11,8 @@
 			"clients": {
 				"string": "{0, plural, one {} other {}}"
 			},
-			"supported": { "string": "" }
+			"supported": { "string": "" },
+			"demo": { "string": "" }
 		},
 		"developers": {
 			"heading": { "string": "" },
@@ -80,6 +81,125 @@
 				"string": "",
 				"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
 			}
+		},
+		"privacy": {
+			"heading": { "string": "" },
+			"why": {
+				"string": ""
+			},
+			"pii": {
+				"string": ""
+			},
+			"carefully": {
+				"string": ""
+			},
+			"what": {
+				"string": ""
+			},
+			"minimal": { "string": "" },
+			"cookies": {
+				"string": ""
+			},
+			"languages": {
+				"string": ""
+			},
+			"jwt": {
+				"string": "",
+				"developer_comment": "The placeholder is “(detailed below)”. I moved it out so I could link it."
+			},
+			"below": {
+				"string": "",
+				"developer_comment": "Only ever used in the “jwt” string."
+			},
+			"assets": {
+				"string": ""
+			},
+			"direct": {
+				"string": ""
+			},
+			"controlless": { "string": "" },
+			"receive": {
+				"string": ""
+			},
+			"store": {
+				"string": ""
+			},
+			"encode": { "string": "" },
+			"share": { "string": "" },
+			"permission": {
+				"string": ""
+			},
+			"email": {
+				"string": ""
+			},
+			"logs": { "string": "" },
+			"recaptcha": {
+				"string": ""
+			},
+			"governed": {
+				"string": "",
+				"developer_comment": "The placeholder is “its own privacy policy”. I moved it out so I could link it."
+			},
+			"own": {
+				"string": "",
+				"developer_comment": "Only ever used in the “governed” string."
+			},
+			"ip": {
+				"string": ""
+			}
+		},
+		"logo": {
+			"heading": { "string": "" },
+			"logos": { "string": "" },
+			"ratio": { "string": "" },
+			"selfhost": {
+				"string": ""
+			},
+			"cover": { "string": "" },
+			"background": {
+				"string": ""
+			},
+			"specific": {
+				"string": ""
+			},
+			"full": { "string": "" },
+			"padding": { "string": "" },
+			"height": { "string": "" },
+			"mini": { "string": "" },
+			"spaced": {
+				"string": ""
+			},
+			"size": {
+				"string": ""
+			},
+			"dont": { "string": "" },
+			"unless": {
+				"string": ""
+			},
+			"button": { "string": "" },
+			"text": {
+				"string": ""
+			},
+			"tooltip": {
+				"string": ""
+			},
+			"external": {
+				"string": ""
+			},
+			"affiliation": {
+				"string": ""
+			},
+			"logo": {
+				"string": ""
+			},
+			"brand": { "string": "" },
+			"cursive": { "string": "" },
+			"readable": { "string": "" },
+			"contrast": { "string": "" },
+			"aa": { "string": "" },
+			"get": { "string": "" },
+			"svg": { "string": "" },
+			"png": { "string": "" }
 		}
 	},
 	"branding": {
@@ -88,16 +208,16 @@
 				"string": ""
 			},
 			"alt": {
-				"string": ""
+				"string": "ONEDOT"
 			}
 		},
 		"auth": {
 			"alt": {
-				"string": ""
+				"string": "ONEAUTH"
 			},
 			"logo": { "string": "" },
 			"title": {
-				"string": "{0} | 1Auth"
+				"string": "{0} | OneAuth"
 			}
 		}
 	},
@@ -108,9 +228,18 @@
 				"email": { "string": "" },
 				"submit": { "string": "" },
 				"code": { "string": "" },
-				"placeholder": { "string": "" }
+				"placeholder": {
+					"string": "",
+					"developer_comment": "You SHOULD translate the words “you” and “example”. Please also change “.com” to the appropriate top-level domain. Transifex will alert you, but that can be safely dismissed."
+				},
+				"didnt": { "string": "" },
+				"resend": { "string": "" },
+				"wait": {
+					"string": "{0, plural, one {} other {}}"
+				}
 			},
 			"email": {
+				"from": { "string": "OneAuth" },
 				"subject": { "string": "" },
 				"code": { "string": "" },
 				"share": { "string": "" },
@@ -179,7 +308,7 @@
 		},
 		"links": {
 			"onedot": {
-				"string": "OneDot Projects"
+				"string": "OneDot"
 			},
 			"website": {
 				"string": ""
@@ -203,7 +332,7 @@
 				"string": "Discord"
 			},
 			"auth": {
-				"string": "1Auth"
+				"string": "OneAuth"
 			},
 			"docs": {
 				"string": ""
@@ -234,6 +363,9 @@
 			"privacy": {
 				"string": ""
 			},
+			"logo": {
+				"string": ""
+			},
 			"scratch": {
 				"string": ""
 			},
@@ -242,7 +374,7 @@
 				"string": ""
 			},
 			"copyright": {
-				"string": "© 2021 OneDot Projects"
+				"string": "© 2021 OneDot"
 			},
 			"replit": {
 				"string": ""
@@ -251,10 +383,12 @@
 				"string": ""
 			},
 			"license": {
-				"string": ""
+				"string": "",
+				"developer_comment": "The placeholder is “MIT license”. I moved it out so I could link it."
 			},
 			"mit": {
-				"string": ""
+				"string": "",
+				"developer_comment": "Only ever used in the “license” string."
 			}
 		}
 	},

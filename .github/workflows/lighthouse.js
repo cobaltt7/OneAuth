@@ -113,15 +113,13 @@ try {
 		`An error occurred while retrieving the data from Lighthouse.\n\`\`\`js\n${error}\n\`\`\``,
 	);
 
-	throw new Error(error);
+	throw error;
 }
 
 try {
-	const allScores = transpose(data.data.map(({ scores }) => Object.values(scores))).map(
-		getAverage,
-	);
-
-	allScores.splice(3, 1)
+	const allScores = transpose(data.data.map(({ scores }) => Object.values(scores)))
+		.map(getAverage)
+		.splice(2, 1);
 
 	commentOnDiscussion(
 		`${
@@ -135,7 +133,7 @@ try {
 			"<th>Overall</th>" +
 			"<th>PageSpeed Insights</th></tr></thead><tbody>"
 		}${data.data.reduce((accumulated, result) => {
-			const scores = Object.values(result.scores);
+			const scores = Object.values(result.scores).splice(2, 1);
 
 			return (
 				`${accumulated}<tr><td><a href="${result.url.trim()}">${

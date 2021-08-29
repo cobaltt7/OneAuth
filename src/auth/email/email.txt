@@ -8,7 +8,7 @@
 {{ #message }}clients.email.email.next{{ /message }}
 ->	{{ #message }}clients.email.email.copy{{ /message }}
 ->	{{ #message }}clients.email.email.back{{ /message }}
-->	{{ #message }}clients.email.email.paste|||[clients.email.email.submit]{{ /message }}
+->	{{ #message }}clients.email.email.paste|||[clients.email.page.submit]{{ /message }}
 ->	{{ #message }}clients.email.email.review|||[core.allow.allow]{{ /message }}
 {{ #message }}clients.email.email.expire;clients.email.email.rerequest{{ /message }}
 

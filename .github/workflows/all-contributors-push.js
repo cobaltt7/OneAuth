@@ -8,7 +8,7 @@ import fetch from "node-fetch";
 
 /** @type {import("../../types").AllContributosRc} */
 const { contributors = [] } = JSON.parse(
-		fileSystem.readFileSync(url.pathToFileURL(path.resolve(".all-contributrsrc")), "utf8"),
+		fileSystem.readFileSync(url.pathToFileURL(path.resolve(".all-contributorsrc")), "utf8"),
 	),
 	/** @type {{ [key: string]: string[] }} */
 	NEW_CONTRIBUTORS = {},
@@ -26,7 +26,7 @@ for (const commit of await Promise.all(commitPromises)) {
 
 	const authors = commit.author?.login ? [commit.author.login] : [],
 		matchUsername =
-			/^(?:signed-off|co-authored)-by: (?<username>[\da-z](?:[\da-z]|-(?=[\da-z])){0,38}) </gimu;
+			/^(?:co-authored|signed-off)-by: (?<username>[\da-z](?:[\da-z]|-(?=[\da-z])){0,38}) </gimu;
 
 	let username;
 

@@ -1,9 +1,9 @@
 {
-	"docs": { "string": "{0} | 1Auth Documentos de Desarrollo" },
+	"docs": { "string": "{0} | OneAuth Documentos de Desarrollo" },
 	"about": {
 		"about": {
-			"title": { "string": "1Auth | Todos-In-Uno Autenticación" },
-			"heading": { "string": "1Auth Todos-In-Uno Autenticación" },
+			"title": { "string": "OneAuth | Todos-In-Uno Autenticación" },
+			"heading": { "string": "OneAuth Todos-In-Uno Autenticación" },
 			"about": { "string": "Acerca de" },
 			"description": {
 				"string": ""
@@ -11,7 +11,8 @@
 			"clients": {
 				"string": "{0, plural, one {} other {}}"
 			},
-			"supported": { "string": "Clientes Soportados" }
+			"supported": { "string": "Clientes Soportados" },
+			"demo": { "string": "" }
 		},
 		"developers": {
 			"heading": { "string": "Para Desarrolladores" },
@@ -67,19 +68,138 @@
 			},
 			"grows": { "string": "" },
 			"help": {
-				"string": ""
+				"string": "Si desea ayudarnos traducir, por favor haga clic aquí."
 			},
 			"account": {
 				"string": "",
 				"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
 			},
 			"thanks": {
-				"string": ""
+				"string": "¡Gracias por tu entusiasmo por ayudar!"
 			},
 			"request": {
 				"string": "",
 				"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
 			}
+		},
+		"privacy": {
+			"heading": { "string": "" },
+			"why": {
+				"string": ""
+			},
+			"pii": {
+				"string": ""
+			},
+			"carefully": {
+				"string": ""
+			},
+			"what": {
+				"string": ""
+			},
+			"minimal": { "string": "" },
+			"cookies": {
+				"string": ""
+			},
+			"languages": {
+				"string": ""
+			},
+			"jwt": {
+				"string": "",
+				"developer_comment": "The placeholder is “(detailed below)”. I moved it out so I could link it."
+			},
+			"below": {
+				"string": "",
+				"developer_comment": "Only ever used in the “jwt” string."
+			},
+			"assets": {
+				"string": ""
+			},
+			"direct": {
+				"string": ""
+			},
+			"controlless": { "string": "" },
+			"receive": {
+				"string": ""
+			},
+			"store": {
+				"string": ""
+			},
+			"encode": { "string": "" },
+			"share": { "string": "" },
+			"permission": {
+				"string": ""
+			},
+			"email": {
+				"string": ""
+			},
+			"logs": { "string": "" },
+			"recaptcha": {
+				"string": ""
+			},
+			"governed": {
+				"string": "",
+				"developer_comment": "The placeholder is “its own privacy policy”. I moved it out so I could link it."
+			},
+			"own": {
+				"string": "",
+				"developer_comment": "Only ever used in the “governed” string."
+			},
+			"ip": {
+				"string": ""
+			}
+		},
+		"logo": {
+			"heading": { "string": "" },
+			"logos": { "string": "" },
+			"ratio": { "string": "" },
+			"selfhost": {
+				"string": ""
+			},
+			"cover": { "string": "" },
+			"background": {
+				"string": ""
+			},
+			"specific": {
+				"string": ""
+			},
+			"full": { "string": "" },
+			"padding": { "string": "" },
+			"height": { "string": "" },
+			"mini": { "string": "" },
+			"spaced": {
+				"string": ""
+			},
+			"size": {
+				"string": ""
+			},
+			"dont": { "string": "" },
+			"unless": {
+				"string": ""
+			},
+			"button": { "string": "" },
+			"text": {
+				"string": ""
+			},
+			"tooltip": {
+				"string": ""
+			},
+			"external": {
+				"string": ""
+			},
+			"affiliation": {
+				"string": ""
+			},
+			"logo": {
+				"string": ""
+			},
+			"brand": { "string": "" },
+			"cursive": { "string": "" },
+			"readable": { "string": "" },
+			"contrast": { "string": "" },
+			"aa": { "string": "" },
+			"get": { "string": "" },
+			"svg": { "string": "" },
+			"png": { "string": "" }
 		}
 	},
 	"branding": {
@@ -88,16 +208,16 @@
 				"string": "Logotipo de OneDot"
 			},
 			"alt": {
-				"string": ""
+				"string": "ONEDOT"
 			}
 		},
 		"auth": {
 			"alt": {
-				"string": ""
+				"string": "ONEAUTH"
 			},
-			"logo": { "string": "Logotipo de 1Auth" },
+			"logo": { "string": "Logotipo de OneAuth" },
 			"title": {
-				"string": "{0} | 1Auth"
+				"string": "{0} | OneAuth"
 			}
 		}
 	},
@@ -108,16 +228,25 @@
 				"email": { "string": "Para continuar, por favor introduce tu correo electrónico." },
 				"submit": { "string": "Enviar" },
 				"code": { "string": "Para continuar, por favor introduce el código que te enviamos." },
-				"placeholder": { "string": "" }
+				"placeholder": {
+					"string": "tu@ejemplo.com",
+					"developer_comment": "You SHOULD translate the words “you” and “example”. Please also change “.com” to the appropriate top-level domain. Transifex will alert you, but that can be safely dismissed."
+				},
+				"didnt": { "string": "¿No lo entendiste?" },
+				"resend": { "string": "Mándalo de nuevo" },
+				"wait": {
+					"string": "{0, plural, one {} other {}}"
+				}
 			},
 			"email": {
-				"subject": { "string": "Verificación 1Auth de Correo Electrónico" },
+				"from": { "string": "OneAuth" },
+				"subject": { "string": "Verificación OneAuth de Correo Electrónico" },
 				"code": { "string": "Tu código es {0}." },
 				"share": { "string": "No lo compartas con nadie mas." },
 				"act": { "string": "" },
 				"next": { "string": "¿Qué ahora?" },
 				"copy": { "string": "Copie su código." },
-				"back": { "string": "Volver a 1Auth." },
+				"back": { "string": "Volver a OneAuth." },
 				"paste": {
 					"string": "Pegue su código en el caja y haz clic en “{0}”."
 				},
@@ -134,10 +263,10 @@
 					"string": ""
 				},
 				"ignore": {
-					"string": ""
+					"string": "Simplemente ignóralo."
 				},
 				"nothing": {
-					"string": ""
+					"string": "No te preocupes, no pasará nada."
 				}
 			}
 		}
@@ -146,7 +275,7 @@
 		"allow": {
 			"heading": { "string": "¿Permitir el acceso?" },
 			"question": {
-				"string": ""
+				"string": "¿Quieres que {0} acceda a tu información?"
 			},
 			"allow": { "string": "Permitir" },
 			"deny": { "string": "Negar" },
@@ -159,7 +288,7 @@
 			"choose": { "string": "Elija una opción para continuar" },
 			"with": { "string": "Iniciar sesión con {0}" },
 			"logo": {
-				"string": "",
+				"string": "{0} icono",
 				"developer_comment": "Alt text of a logo image. Example: “Google icon”, “Email icon”, etc."
 			}
 		}
@@ -179,10 +308,10 @@
 		},
 		"links": {
 			"onedot": {
-				"string": "OneDot Projects"
+				"string": "OneDot"
 			},
 			"website": {
-				"string": ""
+				"string": "Sito web"
 			},
 			"github": {
 				"string": "GitHub"
@@ -203,35 +332,38 @@
 				"string": "Discord"
 			},
 			"auth": {
-				"string": "1Auth"
+				"string": "OneAuth"
 			},
 			"docs": {
-				"string": ""
+				"string": "Documentación"
 			},
 			"credits": {
-				"string": ""
+				"string": "Créditos"
 			},
 			"translate": {
-				"string": ""
+				"string": "Traducir"
 			},
 			"repo": {
-				"string": ""
+				"string": "Repositorio"
 			},
 			"demo": {
-				"string": ""
+				"string": "Manifestación"
 			},
 			"openode": {
-				"string": ""
+				"string": "Nube alojada en opeNode.io"
 			}
 		},
 		"legal": {
 			"heading": {
-				"string": ""
+				"string": "Legal"
 			},
 			"tos": {
-				"string": ""
+				"string": "Términos de Servicio"
 			},
 			"privacy": {
+				"string": "Política de Privacidad"
+			},
+			"logo": {
 				"string": ""
 			},
 			"scratch": {
@@ -242,7 +374,7 @@
 				"string": ""
 			},
 			"copyright": {
-				"string": "© 2021 OneDot Projects"
+				"string": "© 2021 OneDot"
 			},
 			"replit": {
 				"string": ""
@@ -251,10 +383,12 @@
 				"string": ""
 			},
 			"license": {
-				"string": ""
+				"string": "",
+				"developer_comment": "The placeholder is “MIT license”. I moved it out so I could link it."
 			},
 			"mit": {
-				"string": ""
+				"string": "Licencia de MIT",
+				"developer_comment": "Only ever used in the “license” string."
 			}
 		}
 	},

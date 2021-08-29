@@ -1,0 +1,5 @@
+Contact: mailto:auth@onedot.cf
+Expires: 2107-10-07T05:13:00.000Z
+Acknowledgments: https://auth.onedot.cf/docs/credits
+Preferred-Languages: en_US
+Canonical: https://auth.onedot.cf/.well-known/security.txt

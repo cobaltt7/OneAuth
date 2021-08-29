@@ -13,10 +13,10 @@ const client = {
 	pages: {
 		"./scratch": {
 			all(request, response) {
-				if (request.query?.verified) {
+				if (request.query.verified) {
 					return this.sendResponse(
-						{ username: request.query?.username },
-						`${request.query?.nonce}`,
+						{ username: request.query.username },
+						`${request.query.nonce}`,
 					);
 				}
 

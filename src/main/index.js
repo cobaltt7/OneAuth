@@ -10,7 +10,6 @@ import { Router as express } from "express";
 
 import authClients from "../../lib/clients.js";
 import callbackHighlight from "../../lib/highlighting.js";
-import { logError } from "../errors/index.js";
 
 const app = express(),
 	directory = path.dirname(fileURLToPath(import.meta.url)),
@@ -26,6 +25,8 @@ app.use((_, response, next) => {
 	 * Also applys to `sendFile`, `sendStatus`, `render`, and ect., which all use`send` internally.
 	 *
 	 * @param {any} text -- Data to send.
+	 *
+	 * @returns {void}
 	 */
 	// @ts-expect-error -- Yes, it no longer returns `Response`. But, unfortunately, it can't anymore.
 	response.send = (text) => {
@@ -45,47 +46,33 @@ app.use((_, response, next) => {
 			return;
 		}
 
-		codeblocks.map(
-			/**
-			 * Highlight a code block using highlight.js.
-			 *
-			 * @param {number} index - Iteration of the loop.
-			 *
-			 * @returns {number} - The index of the loop.
-			 */
-			(index) => {
-				const code = codeblocks.eq(index),
-					[fullClass, language = "plaintext"] =
-						/lang(?:uage)?-(?<language>\w+)/u.exec(code.attr("class") || "") || [];
+		codeblocks.map(async (index) => {
+			const code = codeblocks.eq(index),
+				[fullClass, language = "plaintext"] =
+					/lang(?:uage)?-(?<language>\w+)/u.exec(code.attr("class") || "") || [];
 
-				code.removeClass(fullClass);
-				highlight(code.text(), language)
-					.then((highlighted) => {
-						code.html(highlighted).wrapInner(
-							jQuery(`<code class="language-${language}"></code>`),
-						);
+			code.removeClass(fullClass);
 
-						if (index + 1 === codeblocks.length)
-							return realSend.call(response, jQuery.html());
+			code.html(
+				`<code class="language-${language}">${await highlight(
+					code.text(),
+					language,
+				)}</code>`,
+			);
 
-						return response;
-					})
-					.catch(logError);
-
-				return index;
-			},
-		);
+			if (index + 1 === codeblocks.length) realSend.call(response, jQuery.html());
+		});
 	};
 
 	return next();
 });
 
 // Logos
-app.all("/logo.svg", (_, response) =>
-	response.status(302).redirect("https://cdn.onedot.cf/brand/SVG/NoPadding/1Auth%20NoPad.svg"),
+app.get("/logo.svg", (_, response) =>
+	response.status(302).redirect("https://onedot.cf/brand/OneAuth.svg"),
 );
-app.all("/favicon.ico", (_, response) =>
-	response.status(302).redirect("https://cdn.onedot.cf/brand/SVG/Transparent/Auth.svg"),
+app.get("/favicon.ico", (_, response) =>
+	response.status(302).redirect("https://onedot.cf/brand/Auth.svg"),
 );
 app.all("/", (_, response) =>
 	response.render(path.resolve(directory, "about.html"), {
@@ -93,13 +80,8 @@ app.all("/", (_, response) =>
 	}),
 );
 
-app.all("/.well-known/security.txt", (_, response) =>
-	response.status(303).send(`Contact: mailto:${process.env.GMAIL_EMAIL}
-Expires: 2107-10-07T05:13:00.000Z
-Acknowledgments: https://auth.onedot.cf/docs/credits
-Preferred-Languages: en_US
-Canonical: https://auth.onedot.cf/.well-known/security.txt`),
-);
+app.all("/privacy", (_, response) => response.render(path.resolve(directory, "privacy.html")));
+app.all("/logo", (_, response) => response.render(path.resolve(directory, "logo.html")));
 
 app.all("/humans.txt", (_, response) =>
 	response.status(301).redirect("https://github.com/onedotprojects/auth/people"),
