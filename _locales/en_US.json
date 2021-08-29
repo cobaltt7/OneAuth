@@ -150,7 +150,9 @@
 		},
 		"logo": {
 			"heading": { "string": "“Sign-In” Button Guidelines" },
-			"intro": { "string": "We ask you to follow the below guidelines when creating buttons to sign in with OneAuth." },
+			"intro": {
+				"string": "We ask you to follow the below guidelines when creating buttons to sign in with OneAuth."
+			},
 			"text": {
 				"string": "The text on the button should be something like “Sign in with OneAuth”."
 			},
