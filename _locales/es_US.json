@@ -150,7 +150,9 @@
 		},
 		"logo": {
 			"heading": { "string": "" },
-			"intro": { "string": "" },
+			"intro": {
+				"string": ""
+			},
 			"text": {
 				"string": ""
 			},
