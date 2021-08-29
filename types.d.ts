@@ -113,6 +113,7 @@ export type Auth = {
 	icon: string;
 	fontAwesome?: "far" | "fab" | "fas";
 	website?: string;
+	disabled?: boolean;
 };
 
 export function SendResponse(

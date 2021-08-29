@@ -81,7 +81,7 @@ app.all("/", (_, response) =>
 );
 
 app.all("/privacy", (_, response) => response.render(path.resolve(directory, "privacy.html")));
-app.all("/logo", (_, response) => response.render(path.resolve(directory, "logo.html")));
+app.all("/branding", (_, response) => response.render(path.resolve(directory, "branding.html")));
 
 app.all("/humans.txt", (_, response) =>
 	response.status(301).redirect("https://github.com/onedotprojects/auth/people"),

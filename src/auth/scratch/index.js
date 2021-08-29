@@ -2,6 +2,7 @@
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {
+	disabled: true,
 	icon: "https://scratch.mit.edu/favicon.ico",
 
 	link:
