@@ -150,33 +150,9 @@
 		},
 		"logo": {
 			"heading": { "string": "" },
-			"logos": { "string": "" },
-			"ratio": { "string": "" },
-			"selfhost": {
+			"intro": {
 				"string": ""
 			},
-			"cover": { "string": "" },
-			"background": {
-				"string": ""
-			},
-			"specific": {
-				"string": ""
-			},
-			"full": { "string": "" },
-			"padding": { "string": "" },
-			"height": { "string": "" },
-			"mini": { "string": "" },
-			"spaced": {
-				"string": ""
-			},
-			"size": {
-				"string": ""
-			},
-			"dont": { "string": "" },
-			"unless": {
-				"string": ""
-			},
-			"button": { "string": "" },
 			"text": {
 				"string": ""
 			},
@@ -192,14 +168,18 @@
 			"logo": {
 				"string": ""
 			},
-			"brand": { "string": "" },
-			"cursive": { "string": "" },
-			"readable": { "string": "" },
-			"contrast": { "string": "" },
-			"aa": { "string": "" },
 			"get": { "string": "" },
 			"svg": { "string": "" },
-			"png": { "string": "" }
+			"50": { "string": "" },
+			"100": { "string": "" },
+			"200": { "string": "" },
+			"300": { "string": "" },
+			"400": { "string": "" },
+			"500": { "string": "" },
+			"16": { "string": "" },
+			"32": { "string": "" },
+			"64": { "string": "" },
+			"128": { "string": "" }
 		}
 	},
 	"branding": {

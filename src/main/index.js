@@ -69,10 +69,10 @@ app.use((_, response, next) => {
 
 // Logos
 app.get("/logo.svg", (_, response) =>
-	response.status(302).redirect("https://onedot.cf/brand/OneAuth.svg"),
+	response.status(302).redirect("https://onedot.cf/brand/auth/full.svg"),
 );
 app.get("/favicon.ico", (_, response) =>
-	response.status(302).redirect("https://onedot.cf/brand/Auth.svg"),
+	response.status(302).redirect("https://onedot.cf/brand/auth/mini.svg"),
 );
 app.all("/", (_, response) =>
 	response.render(path.resolve(directory, "about.html"), {
@@ -81,7 +81,7 @@ app.all("/", (_, response) =>
 );
 
 app.all("/privacy", (_, response) => response.render(path.resolve(directory, "privacy.html")));
-app.all("/logo", (_, response) => response.render(path.resolve(directory, "logo.html")));
+app.all("/branding", (_, response) => response.render(path.resolve(directory, "branding.html")));
 
 app.all("/humans.txt", (_, response) =>
 	response.status(301).redirect("https://github.com/onedotprojects/auth/people"),

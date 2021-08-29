@@ -149,36 +149,12 @@
 			}
 		},
 		"logo": {
-			"heading": { "string": "Logo Guidelines" },
-			"logos": { "string": "The logos" },
-			"ratio": { "string": "No changing the logos' aspect ratio." },
-			"selfhost": {
-				"string": "Never selfhost the logo, you can only use it from our website."
+			"heading": { "string": "“Sign-In” Button Guidelines" },
+			"intro": {
+				"string": "We ask you to follow the below guidelines when creating buttons to sign in with OneAuth."
 			},
-			"cover": { "string": "You may not put other content over the logo." },
-			"background": {
-				"string": "The background color should be a shade of gray {0} or lighter."
-			},
-			"specific": {
-				"string": "Follow any guidelines specific to the logo you choose (found below)."
-			},
-			"full": { "string": "Full logo" },
-			"padding": { "string": "At least 3 pixels of padding on all sides." },
-			"height": { "string": "Minimum height of 25 pixels." },
-			"mini": { "string": "Mini logo" },
-			"spaced": {
-				"string": "The padding on each side of the logo should be at least 30% the width of the icon, and the padding on each side should all be equal."
-			},
-			"size": {
-				"string": "The minimum size of the logo's content (not including padding, margin, border, outline, etcetera) is 15 by 15 pixels."
-			},
-			"dont": { "string": "If possible, you should always use the full logo." },
-			"unless": {
-				"string": "You may use this mini logo only if you have the text “OneAuth” nearby or if the big logo is also shown somewhere on the page."
-			},
-			"button": { "string": "The “Sign in” button/link" },
 			"text": {
-				"string": "The text on the button should be somethng like “Sign in with OneAuth”."
+				"string": "The text on the button should be something like “Sign in with OneAuth”."
 			},
 			"tooltip": {
 				"string": "Alternatively, you can just have the text “Sign in” with “powered by OneAuth” nearby or as a tooltip."
@@ -187,19 +163,23 @@
 				"string": "The button should indicate that clicking on it will direct your users off of your site."
 			},
 			"affiliation": {
-				"string": "There should be no indidication of sponsorship or affiliation between us."
+				"string": "There should be no indication of sponsorship or affiliation between us."
 			},
 			"logo": {
-				"string": "If possible, please use one of our logos on the button (optional)."
+				"string": "If possible, and if it fits in with your app’s style, please use one of our logos on the button (optional)."
 			},
-			"brand": { "string": "Wherever you use the brand name “OneAuth”" },
-			"cursive": { "string": "It should not be in a cursive font." },
-			"readable": { "string": "The text size should be 14 pixels or more." },
-			"contrast": { "string": "The text color and background should meet {0}." },
-			"aa": { "string": "WCAG AA contrast guidelines" },
 			"get": { "string": "Get the logos" },
 			"svg": { "string": "SVG version" },
-			"png": { "string": "PNG version" }
+			"50": { "string": "PNG version 50 pixels tall" },
+			"100": { "string": "PNG version 100 pixels tall" },
+			"200": { "string": "PNG version 200 pixels tall" },
+			"300": { "string": "PNG version 300 pixels tall" },
+			"400": { "string": "PNG version 400 pixels tall" },
+			"500": { "string": "PNG version 500 pixels tall" },
+			"16": { "string": "PNG version 16x16 pixels square" },
+			"32": { "string": "PNG version 32x32 pixels square" },
+			"64": { "string": "PNG version 64x64 pixels square" },
+			"128": { "string": "PNG version 128x128 pixels square" }
 		}
 	},
 	"branding": {
