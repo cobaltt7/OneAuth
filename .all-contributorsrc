@@ -137,7 +137,8 @@
       "profile": "https://github.com/devxan",
       "contributions": [
         "design",
-        "ideas"
+        "ideas",
+        "business"
       ]
     },
     {
@@ -151,5 +152,6 @@
     }
   ],
   "contributorsPerLine": 5,
-  "contributorsSortAlphabetically": true
+  "contributorsSortAlphabetically": true,
+  "skipCi": false
 }
