@@ -249,6 +249,30 @@
 					"string": "No te preocupes, no pasará nada."
 				}
 			}
+		},
+		"scratch": {
+			"heading": { "string": "" },
+			"studio": { "string": "" },
+			"comment": { "string": "" },
+			"done": { "string": "" },
+			"didnt": { "string": "" },
+			"few": { "string": "" },
+			"signed": { "string": "" },
+			"muted": { "string": "" },
+			"reasons": {
+				"string": ""
+			},
+			"reply": { "string": "" },
+			"top": { "string": "" },
+			"context": {
+				"string": ""
+			},
+			"example": { "string": "" },
+			"nothing": { "string": "" },
+			"expire": {
+				"string": ""
+			},
+			"reload": { "string": "" }
 		}
 	},
 	"core": {

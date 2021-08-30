@@ -51,7 +51,7 @@
 		"localization": {
 			"heading": { "string": "Anguagelay ecifcationspay" },
 			"basics": {
-				"string": ""
+				"string": "Ecifyspay ethay anguagelay otay useyay onyay agespay ybay addingyay anotheryay arameterpay otay ethay URL: {0}."
 			},
 			"code": {
 				"string": "Itsyay aluevay ouldshay ebay ayay 2-etterlay anguagelay odecay ikelay {0} oryay {1}."
@@ -249,6 +249,30 @@
 					"string": "Oday otnay orryway, othingnay illway appenhay."
 				}
 			}
+		},
+		"scratch": {
+			"heading": { "string": "" },
+			"studio": { "string": "" },
+			"comment": { "string": "" },
+			"done": { "string": "" },
+			"didnt": { "string": "" },
+			"few": { "string": "" },
+			"signed": { "string": "" },
+			"muted": { "string": "" },
+			"reasons": {
+				"string": ""
+			},
+			"reply": { "string": "" },
+			"top": { "string": "" },
+			"context": {
+				"string": ""
+			},
+			"example": { "string": "" },
+			"nothing": { "string": "" },
+			"expire": {
+				"string": ""
+			},
+			"reload": { "string": "" }
 		}
 	},
 	"core": {
