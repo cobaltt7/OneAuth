@@ -142,7 +142,7 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 
 				redirectUrl.searchParams.set("token", jwt);
 
-				return response.status(300).render(path.resolve(directory, "allow.html"), {
+				return response._status(300).render(path.resolve(directory, "allow.html"), {
 					allowUrl: redirectUrl,
 					client: client.name,
 

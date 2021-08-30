@@ -25,7 +25,6 @@ export function logError(error) {
 /**
  * Function to run once status is sent.
  *
- * @param {(status: number) => import("express").Response} setStatus - Original Express `status` function.
  * @param {import("express").Request} request - Express request object.
  * @param {import("express").Response} response - Express response object.
  * @param {number} statusCode - HTTP status code.
@@ -34,12 +33,7 @@ export function logError(error) {
  * @returns {import("express").Response} - Express response object.
  * @todo Show the `message` to the user.
  */
-function statusMiddleware(
-	request,
-	response,
-	statusCode = response.statusCode,
-	message = "",
-) {
+function statusMiddleware(request, response, statusCode = response.statusCode, message = "") {
 	if (
 		// If no content has already been sent
 		!response.headersSent &&
@@ -70,12 +64,11 @@ function statusMiddleware(
 		};
 
 		// @ts-expect-error -- We *want* to check `.includes(undefined)`.
-		if (Object.keys(error).includes())
-			return statusMiddleware(request, response, 500);
+		if (Object.keys(error).includes()) return statusMiddleware(request, response, 500);
 
 		const returnValue = response._status(statusCode);
 
-logError(statusCode+" at "+request.url+(message?" with message "+message:''));
+		logError(`${statusCode} at ${request.url}${message ? ` with message ${message}` : ""}`);
 
 		if (request.accepts("html")) response.render(path.resolve(directory, "error.html"), error);
 		else response.json(error);
@@ -87,12 +80,12 @@ logError(statusCode+" at "+request.url+(message?" with message "+message:''));
 }
 
 app.use((request, response, next) => {
-	next()
+	next();
 	// Timeout all requests after 5 secconds.
 	setTimeout(() => {
 		if (!response.headersSent) statusMiddleware(request, response, 408);
 	}, 5000);
-})
+});
 
 app.all("/old", (_, response) => response.render(path.resolve(directory, "old.html")));
 
@@ -117,7 +110,7 @@ app.use((request, response, next) => {
 	 * @returns {import("express").Response} - Express response object.
 	 */
 	response.sendError = (statusCode, message) =>
-		statusMiddleware( request, response, statusCode, message);
+		statusMiddleware(request, response, statusCode, message);
 
 	return next();
 });
