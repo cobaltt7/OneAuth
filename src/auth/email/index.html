@@ -7,7 +7,7 @@
 			{{ #message }}branding.auth.title|||[clients.email.page.heading]{{ /message }}
 		</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
-		<link rel="preload" href="/loading.svg" as="image" />
+		<link rel="preload" href="/auth/email/loading.svg" as="image" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
@@ -220,7 +220,7 @@
 					submit.firstChild.remove();
 					submit.append(
 						Object.assign(document.createElement("img"), {
-							src: "/loading.svg",
+							src: "/auth/email/loading.svg",
 							className: "m-auto h-full"
 						})
 					);
