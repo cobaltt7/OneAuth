@@ -119,7 +119,7 @@ try {
 try {
 	const allScores = transpose(data.data.map(({ scores }) => Object.values(scores)))
 		.map(getAverage)
-		.splice(2, 1);
+		.splice(2);
 
 	commentOnDiscussion(
 		`${
@@ -133,7 +133,7 @@ try {
 			"<th>Overall</th>" +
 			"<th>PageSpeed Insights</th></tr></thead><tbody>"
 		}${data.data.reduce((accumulated, result) => {
-			const scores = Object.values(result.scores).splice(2, 1);
+			const scores = Object.values(result.scores).splice(2);
 
 			return (
 				`${accumulated}<tr><td><a href="${result.url.trim()}">${
