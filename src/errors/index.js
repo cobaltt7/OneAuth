@@ -143,7 +143,7 @@ app.use(
 			userAgent.includes("Netscape") ||
 			userAgent.includes("Navigator")
 		)
-			return response.status(400).render(path.resolve(directory, "old.html"));
+			return response._status(400).render(path.resolve(directory, "old.html"));
 
 		return next();
 	},
