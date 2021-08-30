@@ -8,17 +8,48 @@ import dotenv from "dotenv";
 import { Router as express } from "express";
 import SignJWT from "jose-node-esm-runtime/jwt/sign";
 import jwtVerify from "jose-node-esm-runtime/jwt/verify";
+import mongoose from "mongoose";
 import mustache from "mustache";
 import retronid from "retronid";
 
 import authClients from "../../lib/clients.js";
-import { NonceDatabase } from "../../lib/mongoose.js";
 import { logError } from "../errors/index.js";
 
 dotenv.config();
 
 const app = express(),
 	directory = path.dirname(url.fileURLToPath(import.meta.url));
+
+	await mongoose.connect(process.env.MONGO_URL || "", {
+		appName: "OneAuth",
+	});
+
+	 mongoose.connection.on("error", logError);
+
+	const
+		NonceDatabase = mongoose.model(
+			"Nonce",
+			new mongoose.Schema({
+				nonce: {
+					match: /^[\da-z]{10}$/,
+					required: true,
+					type: String,
+					unique: true,
+				},
+
+				psuedoNonce: {
+					match: /^[\da-z]{10}$/,
+					required: true,
+					type: String,
+					unique: true,
+				},
+
+				redirect: {
+					required: true,
+					type: String,
+				},
+			}),
+		);
 
 app.all("/auth", async (request, response) => {
 	try {
