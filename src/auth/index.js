@@ -20,36 +20,35 @@ dotenv.config();
 const app = express(),
 	directory = path.dirname(url.fileURLToPath(import.meta.url));
 
-	await mongoose.connect(process.env.MONGO_URL || "", {
-		appName: "OneAuth",
-	});
+await mongoose.connect(process.env.MONGO_URL || "", {
+	appName: "OneAuth",
+});
 
-	 mongoose.connection.on("error", logError);
+mongoose.connection.on("error", logError);
 
-	const
-		NonceDatabase = mongoose.model(
-			"Nonce",
-			new mongoose.Schema({
-				nonce: {
-					match: /^[\da-z]{10}$/,
-					required: true,
-					type: String,
-					unique: true,
-				},
+const Database = mongoose.model(
+	"Nonce",
+	new mongoose.Schema({
+		nonce: {
+			match: /^[\da-z]{10}$/,
+			required: true,
+			type: String,
+			unique: true,
+		},
 
-				psuedoNonce: {
-					match: /^[\da-z]{10}$/,
-					required: true,
-					type: String,
-					unique: true,
-				},
+		psuedoNonce: {
+			match: /^[\da-z]{10}$/,
+			required: true,
+			type: String,
+			unique: true,
+		},
 
-				redirect: {
-					required: true,
-					type: String,
-				},
-			}),
-		);
+		redirect: {
+			required: true,
+			type: String,
+		},
+	}),
+);
 
 app.all("/auth", async (request, response) => {
 	try {
@@ -66,7 +65,7 @@ app.all("/auth", async (request, response) => {
 		psuedoNonce = retronid();
 
 	// Save the nonces to the database
-	await new NonceDatabase({
+	await new Database({
 		nonce,
 		psuedoNonce,
 		redirect: request.query.url,
@@ -115,7 +114,7 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 		const sendResponse = async (data, nonce) => {
 			// Check nonce
 			const { psuedoNonce, redirect } =
-				(await NonceDatabase.findOneAndDelete({
+				(await Database.findOneAndDelete({
 					nonce,
 				}).exec()) || {};
 
