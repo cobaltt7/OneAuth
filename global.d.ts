@@ -21,6 +21,8 @@ declare global {
 			 * @param message - A message to send along with the error information.
 			 */
 			sendError(code: number, message: string): this;
+
+			_status(code: number): this;
 			/**
 			 * @returns - Technically returns `Response` in basic Express but since syntax
 			 *   highlighting has to be asyncronous, it can't anymore.

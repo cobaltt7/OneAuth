@@ -35,7 +35,6 @@ export function logError(error) {
  * @todo Show the `message` to the user.
  */
 function statusMiddleware(
-	setStatus,
 	request,
 	response,
 	statusCode = response.statusCode,
@@ -60,7 +59,7 @@ function statusMiddleware(
 				),
 			);
 
-			return statusMiddleware(setStatus, request, response, changeTo[+statusCode]);
+			return statusMiddleware(request, response, changeTo[+statusCode]);
 		}
 
 		const error = {
@@ -72,9 +71,11 @@ function statusMiddleware(
 
 		// @ts-expect-error -- We *want* to check `.includes(undefined)`.
 		if (Object.keys(error).includes())
-			return statusMiddleware(setStatus, request, response, 500);
+			return statusMiddleware(request, response, 500);
 
-		const returnValue = setStatus.call(response, statusCode);
+		const returnValue = response._status(statusCode);
+
+logError(statusCode+" at "+request.url+(message?" with message "+message:''));
 
 		if (request.accepts("html")) response.render(path.resolve(directory, "error.html"), error);
 		else response.json(error);
@@ -82,18 +83,21 @@ function statusMiddleware(
 		return returnValue;
 	}
 
-	// Timeout all requests after 5 secconds.
-	setTimeout(() => {
-		if (!response.headersSent) statusMiddleware(setStatus, request, response, 408);
-	}, 5000);
-
 	return response;
 }
+
+app.use((request, response, next) => {
+	next()
+	// Timeout all requests after 5 secconds.
+	setTimeout(() => {
+		if (!response.headersSent) statusMiddleware(request, response, 408);
+	}, 5000);
+})
 
 app.all("/old", (_, response) => response.render(path.resolve(directory, "old.html")));
 
 app.use((request, response, next) => {
-	const realStatus = response.status;
+	response._status = response.status;
 
 	/**
 	 * Set HTTP response status code.
@@ -102,7 +106,7 @@ app.use((request, response, next) => {
 	 *
 	 * @returns {import("express").Response} - Express response object.
 	 */
-	response.status = (statusCode) => statusMiddleware(realStatus, request, response, statusCode);
+	response.status = (statusCode) => statusMiddleware(request, response, statusCode);
 
 	/**
 	 * Set HTTP response status code and send an error message.
@@ -113,7 +117,7 @@ app.use((request, response, next) => {
 	 * @returns {import("express").Response} - Express response object.
 	 */
 	response.sendError = (statusCode, message) =>
-		statusMiddleware(realStatus, request, response, statusCode, message);
+		statusMiddleware( request, response, statusCode, message);
 
 	return next();
 });
