@@ -117,13 +117,13 @@ export type Auth = {
 };
 
 export function SendResponse(
-	tokenOrData: { [key: string]: any },
+	data: { [key: string]: any },
 	nonce: string,
 ): Promise<Response | void>;
 
 export function RequestFunction(
 	this: {
-		sendResponse: SendResponse;
+		sendResponse: typeof SendResponse;
 	},
 	request: Request,
 	response: Response,
