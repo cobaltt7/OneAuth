@@ -447,7 +447,7 @@
 		},
 		"401": {
 			"heading": { "string": "Unauthorized" },
-			"message": { "string": "Please login before accessing this resource." }
+			"message": { "string": "Please login before accessing this page." }
 		},
 		"402": {
 			"heading": { "string": "Payment Required " },
@@ -455,7 +455,7 @@
 		},
 		"403": {
 			"heading": { "string": "Forbidden" },
-			"message": { "string": "Sorry, but you are forbidden to access this resource." }
+			"message": { "string": "Sorry, but you are forbidden to access this page." }
 		},
 		"404": {
 			"heading": { "string": "Not Found" },
@@ -475,7 +475,7 @@
 		},
 		"407": {
 			"heading": { "string": "Proxy Authentication Required" },
-			"message": { "string": "Please use a proxy to access this resource." }
+			"message": { "string": "Please use a proxy to access this page." }
 		},
 		"408": {
 			"heading": { "string": "Request Timeout" },
