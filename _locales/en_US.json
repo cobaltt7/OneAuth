@@ -51,7 +51,7 @@
 		"localization": {
 			"heading": { "string": "Language specification" },
 			"basics": {
-				"string": "Specify the language to use on pages by adding another parameter to the URL: {0}"
+				"string": "Specify the language to use on pages by adding another parameter to the URL: {0}."
 			},
 			"code": {
 				"string": "Its value should be a 2-letter language code like {0} or {1}."
