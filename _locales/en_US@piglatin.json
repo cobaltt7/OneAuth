@@ -12,7 +12,7 @@
 				"string": "{0, plural, one {Eway upportsay {0} ientclay ithway anymay oremay otay omecay.} other {Eway upportsay {0} ientsclay ithway anymay oremay otay omecay.}}"
 			},
 			"supported": { "string": "Upportedsay Ientsclay" },
-			"demo": { "string": "" }
+			"demo": { "string": "Ifyay ouyay ikelay, ouyay aymay emoday ethay ifferentday ientsclay erehay. " }
 		},
 		"developers": {
 			"heading": { "string": "Orfay Evelopersday" },
@@ -64,37 +64,37 @@
 			},
 			"new": { "string": "EWNAY!!!", "developer_comment": "Please keep this uppercase." },
 			"few": {
-				"string": ""
+				"string": "Easeplay otenay atthay eway oday otnay avehay anymay anslationstray, ifyay anyyay."
 			},
-			"grows": { "string": "" },
+			"grows": { "string": "Atthay illway angechay asyay ouryay anslationtray eamtay owsgray." },
 			"help": {
-				"string": ""
+				"string": "Ifyay ouyay ouldway ikelay otay elphay usyay anslatetray, easeplay ickclay erehay."
 			},
 			"account": {
-				"string": "",
+				"string": "Eatecray ayay Transifex accountyay ifyay ouyay oday otnay alreadyay avehay oneyay, enthay ickclay “Join team”.",
 				"developer_comment": "Please make sure that you translate “Join team” exactly it appears on Transifex."
 			},
 			"thanks": {
 				"string": "Anksthay orfay ouryay eagernessyay otay elphay!"
 			},
 			"request": {
-				"string": "",
+				"string": "(Easeplay otenay atthay ifyay ouryay anguagelay isyay otnay inyay ethay istlay, ouyay illway avehay otay ollscray ownday otay ethay ottombay andyay ickclay “Request language” irstfay.)",
 				"developer_comment": "Please make sure that you translate “Request language” exactly how it appears on Transifex."
 			}
 		},
 		"privacy": {
-			"heading": { "string": "" },
+			"heading": { "string": "Ivacypray Olicypay" },
 			"why": {
-				"string": ""
+				"string": "Isthay ivacypray olicypay ashay eenbay ompiledcay otay etterbay ervesay osethay owhay areyay oncernedcay ithway owhay eirthay Ersonalpay Identifiableyay Informationyay (EII) isyay eingbay usedyay onlineyay. "
 			},
 			"pii": {
-				"string": ""
+				"string": "EII, asyay usedyay inyay UA ivacypray awlay andyay informationyay ecuritysay, isyay informationyay atthay ancay ebay usedyay onyay itsyay ownyay oryay ithway otheryay informationyay otay identifyyay, ontactcay, oryay ocatelay ayay inglesay ersonpay, oryay otay identifyyay anyay individualyay inyay ontextcay. "
 			},
 			"carefully": {
-				"string": ""
+				"string": "Easeplay eadray ouryay ivacypray olicypay arefullycay otay etgay ayay earclay understandingyay ofyay owhay eway ollectcay, useyay, otectpray oryay otherwiseyay andlehay ouryay EII asyay ouyay useyay ouryay ebsiteway. "
 			},
 			"what": {
-				"string": ""
+				"string": "OneAuth isyay ayay ervicesay atthay ovidespray ebsitesway ithway anyay easyyay ayway otay authenticateyay usersyay. "
 			},
 			"minimal": { "string": "" },
 			"cookies": {
