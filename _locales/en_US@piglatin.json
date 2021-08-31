@@ -108,7 +108,7 @@
 				"developer_comment": "The placeholder is “(detailed below)”. I moved it out so I could link it."
 			},
 			"below": {
-				"string": "",
+				"string": "(etaileday elowbay)",
 				"developer_comment": "Only ever used in the “jwt” string."
 			},
 			"assets": {
@@ -125,23 +125,23 @@
 				"string": ""
 			},
 			"encode": { "string": "" },
-			"share": { "string": "" },
+			"share": { "string": "Eway illway evernay avesay ouryay informationyay inyay ouryay atabaseday." },
 			"permission": {
 				"string": ""
 			},
 			"email": {
 				"string": ""
 			},
-			"logs": { "string": "" },
+			"logs": { "string": "Eway eserveray ethay ightray otay eepkay ogslay ofyay sentsay emailsyay." },
 			"recaptcha": {
 				"string": ""
 			},
 			"governed": {
-				"string": "",
+				"string": "Ityay isyay overnedgay by {0}.",
 				"developer_comment": "The placeholder is “its own privacy policy”. I moved it out so I could link it."
 			},
 			"own": {
-				"string": "",
+				"string": "itsyay ownyay ivacypray olicypay",
 				"developer_comment": "Only ever used in the “governed” string."
 			},
 			"ip": {
@@ -149,7 +149,7 @@
 			}
 		},
 		"logo": {
-			"heading": { "string": "" },
+			"heading": { "string": "“Ignsay-Inyay” Uttonbay Uidelinesgay" },
 			"intro": {
 				"string": ""
 			},
@@ -168,18 +168,18 @@
 			"logo": {
 				"string": ""
 			},
-			"get": { "string": "" },
-			"svg": { "string": "" },
-			"50": { "string": "" },
-			"100": { "string": "" },
-			"200": { "string": "" },
-			"300": { "string": "" },
-			"400": { "string": "" },
-			"500": { "string": "" },
-			"16": { "string": "" },
-			"32": { "string": "" },
-			"64": { "string": "" },
-			"128": { "string": "" }
+			"get": { "string": "Etgay ethay ogoslay" },
+			"svg": { "string": "SVG ersionvay" },
+			"50": { "string": "PNG ersionvay 50 ixelspay alltay" },
+			"100": { "string": "PNG ersionvay 100 ixelspay alltay" },
+			"200": { "string": "PNG ersionvay 200 ixelspay alltay" },
+			"300": { "string": "PNG ersionvay 300 ixelspay alltay" },
+			"400": { "string": "PNG ersionvay 400 ixelspay alltay" },
+			"500": { "string": "PNG ersionvay 500 ixelspay alltay" },
+			"16": { "string": "PNG ersionvay 16x16 ixelspay quaresay" },
+			"32": { "string": "PNG ersionvay 32x32 ixelspay quaresay" },
+			"64": { "string": "PNG ersionvay 64x64 ixelspay quaresay" },
+			"128": { "string": "PNG ersionvay 128x128 ixelspay quaresay" }
 		}
 	},
 	"branding": {
@@ -251,24 +251,24 @@
 			}
 		},
 		"scratch": {
-			"heading": { "string": "" },
-			"studio": { "string": "" },
-			"comment": { "string": "" },
-			"done": { "string": "" },
-			"didnt": { "string": "" },
-			"few": { "string": "" },
+			"heading": { "string": "Ignsay inyay ithway ouryay Scratch accountyay" },
+			"studio": { "string": "Ickclay erehay otay isitvay ethay udiostay." },
+			"comment": { "string": "Ommentcay ouryay odecay." },
+			"done": { "string": "Ickclay erehay enwhay ouyay areyay oneday." },
+			"didnt": { "string": "Ityay iday otnay orkway!" },
+			"few": { "string": "Erethay areyay ayay ewfay easonsray orfay ityay otay otnay orkway." },
 			"signed": { "string": "" },
 			"muted": { "string": "" },
 			"reasons": {
 				"string": ""
 			},
-			"reply": { "string": "" },
-			"top": { "string": "" },
+			"reply": { "string": "Oday otnay eplyray otay anotheryay ommentcay." },
+			"top": { "string": "Akemay uresay ityay isyay ayay optay-evelay ommentcay." },
 			"context": {
 				"string": ""
 			},
-			"example": { "string": "" },
-			"nothing": { "string": "" },
+			"example": { "string": "Orfay exampleyay, oday OTNAY aysay “Ymay odecay isyay:”." },
+			"nothing": { "string": "Onlyay ommentcay ethay odecay, othingnay elseyay." },
 			"expire": {
 				"string": ""
 			},
@@ -368,7 +368,7 @@
 				"string": "Ivacypray Olicypay"
 			},
 			"logo": {
-				"string": ""
+				"string": "Ogolay Uidelinesgay"
 			},
 			"scratch": {
 				"string": ""
@@ -471,7 +471,7 @@
 		},
 		"401": {
 			"heading": { "string": "Unauthorizedyay" },
-			"message": { "string": "" }
+			"message": { "string": "Easeplay oginlay eforebay accessingyay isthay agepay." }
 		},
 		"402": {
 			"heading": { "string": "Aymentpay Equiredray" },
@@ -499,7 +499,7 @@
 		},
 		"407": {
 			"heading": { "string": "Oxypray Authenticationyay Equiredray" },
-			"message": { "string": "" }
+			"message": { "string": "Easeplay useyay ayay oxypray otay accessyay isthay agepay." }
 		},
 		"408": {
 			"heading": { "string": "Equestray Imeoutay" },
