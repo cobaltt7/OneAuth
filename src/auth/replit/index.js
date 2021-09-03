@@ -1,7 +1,7 @@
 /** @file Replit Authentication handler. */
 
 import atob from "atob";
-import fetch from "node-fetch";
+import "whatwg-fetch";
 
 import { logError } from "../../errors/index.js";
 

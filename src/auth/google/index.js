@@ -2,7 +2,7 @@
 
 import atob from "atob";
 import dotenv from "dotenv";
-import fetch from "node-fetch";
+import "whatwg-fetch";
 
 import { logError } from "../../errors/index.js";
 

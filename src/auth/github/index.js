@@ -1,7 +1,7 @@
 /** @file GitHub Authentication handler. */
 
 import dotenv from "dotenv";
-import fetch from "node-fetch";
+import "whatwg-fetch";
 
 import { logError } from "../../errors/index.js";
 

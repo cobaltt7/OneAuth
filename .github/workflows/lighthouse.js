@@ -1,6 +1,6 @@
 /** @file Format And post data retrieved from Lighthouse. */
 
-import fetch from "node-fetch";
+import "whatwg-fetch";
 
 /**
  * Join two arrays. (Just so syntax highlighting & prettier formatting work).
