@@ -4,7 +4,7 @@ import fileSystem from "fs";
 import path from "path";
 import url from "url";
 
-import "whatwg-fetch";
+import fetch from "node-fetch";
 
 /** @type {import("../../types").AllContributosRc} */
 const { contributors = [] } = JSON.parse(

@@ -1,7 +1,7 @@
 /** @file Discord Authentication handler. */
 
 import dotenv from "dotenv";
-import "whatwg-fetch";
+import fetch from "node-fetch";
 
 dotenv.config();
 

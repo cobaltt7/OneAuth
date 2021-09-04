@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import "whatwg-fetch";
+import fetch from "node-fetch";
 import retronid from "retronid";
 
 import { logError } from "../../errors/index.js";
