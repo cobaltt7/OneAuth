@@ -15,6 +15,9 @@ import documentation from "./docs/index.js";
 import errors from "./errors/index.js";
 import main from "./main/index.js";
 
+// eslint-disable-next-line import/no-unassigned-import -- whatwg-fetch adds to global object
+import "whatwg-fetch"
+
 dotenv.config();
 
 const app = express(),
