@@ -5,7 +5,6 @@ import { fileURLToPath } from "url";
 
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-
 import retronid from "retronid";
 
 import { logError } from "../../errors/index.js";
