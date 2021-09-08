@@ -29,11 +29,11 @@
 }
 
 [data-before] {
-	@apply before:content-[attr(data-before)] !important;
+	@apply before:!content-[attr(data-before)];
 }
 
 [data-after] {
-	@apply after:content-[attr(data-after)] !important;
+	@apply after:!content-[attr(data-after)];
 }
 
 main {
