@@ -1,7 +1,5 @@
 /** @file Format And post data retrieved from Lighthouse. */
 
-import fs from 'fs';
-
 import "whatwg-fetch";
 
 /**
@@ -29,8 +27,6 @@ function graphql(query, ...placeholderValues) {
  * @returns {Promise<string>} - Result from GitHub's GraphQL API.
  */
 function commentOnDiscussion(body) {
-	return fs.writeFileSync("t.md", body);
-
 	return fetch("https://api.github.com/graphql", {
 		body: JSON.stringify({
 			// TODO: use gh action
@@ -51,7 +47,7 @@ function commentOnDiscussion(body) {
 		},
 
 		method: "POST",
-	}).then((result) => text());
+	}).then((result) => result.text());
 }
 
 /**
@@ -109,7 +105,7 @@ let data;
 try {
 	if (process.argv[4]) throw new Error(process.argv[4]);
 
-	data = JSON.parse(`${process.argv[3]||'{"code":"SUCCESS","data":[{"url":"auth.onedot.cf","emulatedFormFactor":"desktop","scores":{"accessibility":100,"bestPractices":80,"performance":100,"progressiveWebApp":33,"seo":92}},{"url":"auth.onedot.cf","emulatedFormFactor":"mobile","scores":{"accessibility":100,"bestPractices":80,"performance":99,"progressiveWebApp":33,"seo":92}},{"url":" auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2F","emulatedFormFactor":"desktop","scores":{"accessibility":100,"bestPractices":80,"performance":100,"progressiveWebApp":42,"seo":85}},{"url":" auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2F","emulatedFormFactor":"mobile","scores":{"accessibility":100,"bestPractices":80,"performance":97,"progressiveWebApp":42,"seo":85}},{"url":" auth.onedot.cf/auth/email?url=https%3A%2F%2Fauth.onedot.cf%2F","emulatedFormFactor":"desktop","scores":{"accessibility":97,"bestPractices":100,"performance":100,"progressiveWebApp":33,"seo":85}},{"url":" auth.onedot.cf/auth/email?url=https%3A%2F%2Fauth.onedot.cf%2F","emulatedFormFactor":"mobile","scores":{"accessibility":97,"bestPractices":100,"performance":87,"progressiveWebApp":33,"seo":85}},{"url":" auth.onedot.cf/docs/auth","emulatedFormFactor":"desktop","scores":{"accessibility":100,"bestPractices":100,"performance":100,"progressiveWebApp":42,"seo":85}},{"url":" auth.onedot.cf/docs/auth","emulatedFormFactor":"mobile","scores":{"accessibility":100,"bestPractices":100,"performance":97,"progressiveWebApp":42,"seo":85}}]}'}`);
+	data = JSON.parse(`${process.argv[3]}`);
 
 	if (data.code !== "SUCCESS") throw new Error(`code: ${data.code}`);
 } catch (error) {
@@ -121,11 +117,14 @@ try {
 }
 
 try {
-	const allScores = transpose(data.data.map(({ scores }) => [scores.accessibility,
-	scores.bestPractices,
-	scores.performance,
-	scores.seo]))
-		.map(getAverage);
+	const allScores = transpose(
+		data.data.map(({ scores }) => [
+			scores.accessibility,
+			scores.bestPractices,
+			scores.performance,
+			scores.seo,
+		]),
+	).map(getAverage);
 
 	commentOnDiscussion(
 		`${
@@ -139,7 +138,7 @@ try {
 			"<th>Overall</th>" +
 			"<th>PageSpeed Insights</th></tr></thead><tbody>"
 		}${data.data.reduce((accumulated, result) => {
-			const { scores ,url ,emulatedFormFactor } = result;
+			const { scores, url, emulatedFormFactor } = result;
 
 			return (
 				`${accumulated}<tr><td><a href="${url.trim()}">${
@@ -152,7 +151,14 @@ try {
 				`<td>${addEmoji(scores.bestPractices)}</td>` +
 				`<td>${addEmoji(scores.performance)}</td>` +
 				`<td>${addEmoji(scores.seo)}</td>` +
-				`<td>${addEmoji(getAverage([scores.accessibility, scores.bestPractices, scores.performance, scores.seo]))}</td><td>` +
+				`<td>${addEmoji(
+					getAverage([
+						scores.accessibility,
+						scores.bestPractices,
+						scores.performance,
+						scores.seo,
+					]),
+				)}</td><td>` +
 				`<a href="https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
 					`https://${url.trim()}`,
 				)}&tab=${emulatedFormFactor}">More information</a></td></tr>`

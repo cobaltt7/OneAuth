@@ -35,14 +35,14 @@ export function logError(error) {
  */
 function statusMiddleware(request, response, statusCode = response.statusCode, message = "") {
 	// If content has already been sent return immediately
-	if(response.headersSent) return response;
+	if (response.headersSent) return response;
 
 	if (
 		// And it's not a redirect
-		(statusCode < 301 ||
-			statusCode > 399 ||
-			// Allow 300 (above) and 304 (below) since they aren't actually redirects.
-			statusCode === 304)
+		statusCode < 301 ||
+		statusCode > 399 ||
+		// Allow 300 (above) and 304 (below) since they aren't actually redirects.
+		statusCode === 304
 	) {
 		// Then it's an error code, send error page.
 		if (changeTo[+statusCode]) {
@@ -93,10 +93,10 @@ app.all("/old", (_, response) => response.render(path.resolve(directory, "old.ht
 app.use((request, response, next) => {
 	response._status = response.status;
 
+	const originalHeader = response.setHeader;
 
-	const originalHeader = response.setHeader
-
-	response.setHeader = (header,value)=> response.headersSent ? response : originalHeader.call(response,header,value);
+	response.setHeader = (header, value) =>
+		response.headersSent ? response : originalHeader.call(response, header, value);
 
 	/**
 	 * Set HTTP response status code.
