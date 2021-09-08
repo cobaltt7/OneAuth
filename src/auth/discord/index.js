@@ -7,7 +7,7 @@ dotenv.config();
 
 /** @type {import("../../../types").Auth} Auth */
 const client = {
-	icon: "https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg",
+	icon: "/auth/discord/logo.svg",
 	link: "https://discord.com/api/oauth2/authorize?client_id=871197807883739187&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fdiscord&response_type=code&scope=identify%20connections%20email&state={{ nonce }}",
 	name: "Discord",
 
