@@ -34,9 +34,10 @@ export function logError(error) {
  * @todo Show the `message` to the user.
  */
 function statusMiddleware(request, response, statusCode = response.statusCode, message = "") {
+	// If content has already been sent return immediately
+	if(response.headersSent) return response;
+
 	if (
-		// If no content has already been sent
-		!response.headersSent &&
 		// And it's not a redirect
 		(statusCode < 301 ||
 			statusCode > 399 ||
@@ -76,12 +77,12 @@ function statusMiddleware(request, response, statusCode = response.statusCode, m
 		return returnValue;
 	}
 
-	return response;
+	return response._status(statusCode);
 }
 
+// Timeout all requests after 5 secconds.
 app.use((request, response, next) => {
 	next();
-	// Timeout all requests after 5 secconds.
 	setTimeout(() => {
 		if (!response.headersSent) statusMiddleware(request, response, 408);
 	}, 5000);
@@ -91,6 +92,11 @@ app.all("/old", (_, response) => response.render(path.resolve(directory, "old.ht
 
 app.use((request, response, next) => {
 	response._status = response.status;
+
+
+	const originalHeader = response.setHeader
+
+	response.setHeader = (header,value)=> response.headersSent ? response : originalHeader.call(response,header,value);
 
 	/**
 	 * Set HTTP response status code.
