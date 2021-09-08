@@ -79,7 +79,7 @@ app.all("/auth", async (request, response) => {
 		expires,
 		httpOnly: true,
 		maxAge: 900000,
-		sameSite: "lax",
+		sameSite: "none",
 		secure: true,
 		signed: false,
 	});
