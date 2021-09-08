@@ -140,7 +140,7 @@
 		"rate-limit-mongo": "^2.3.1",
 		"retronid": "^3.0.0",
 		"serve-index": "^1.9.1",
-		"whatwg-fetch": "^3.6.2"
+		"isomorphic-fetch": "^3.0.0"
 	},
 	"devDependencies": {
 		"@markusantonwolf/tailwind-css-plugin-multi-columns": "^1.1.3",

@@ -15,7 +15,7 @@ import documentation from "./docs/index.js";
 import errors from "./errors/index.js";
 import main from "./main/index.js";
 
-import "whatwg-fetch";
+import "isomorphic-fetch";
 
 dotenv.config();
 
