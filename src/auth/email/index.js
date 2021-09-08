@@ -8,7 +8,6 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import mustache from "mustache";
-import fetch from "node-fetch";
 import mailjet from "node-mailjet";
 import retronid from "retronid";
 
