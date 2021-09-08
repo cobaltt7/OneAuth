@@ -4,8 +4,7 @@ import fileSystem from "fs";
 import path from "path";
 import url from "url";
 
-// eslint-disable-next-line import/no-unassigned-import -- whatwg-fetch adds to global object
-import "whatwg-fetch"
+import "whatwg-fetch";
 
 /** @type {import("../../types").AllContributosRc} */
 const { contributors = [] } = JSON.parse(

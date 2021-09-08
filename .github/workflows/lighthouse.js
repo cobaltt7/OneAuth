@@ -1,7 +1,6 @@
 /** @file Format And post data retrieved from Lighthouse. */
 
-// eslint-disable-next-line import/no-unassigned-import -- whatwg-fetch adds to global object
-import "whatwg-fetch"
+import "whatwg-fetch";
 
 /**
  * Join two arrays. (Just so syntax highlighting & prettier formatting work).
