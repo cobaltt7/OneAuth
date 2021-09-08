@@ -260,10 +260,10 @@
 			"signed": { "string": "Are you signed in to your Scratch account?" },
 			"muted": { "string": "You might have been muted by the Scratch Team." },
 			"reasons": {
-				"string": "This could be because you haven’t verified your email address, or possibly becasue you spammed or maybe shared a link to an external chat website."
+				"string": "This could be because you haven’t verified your email address, or possibly because you spammed or maybe shared a link to an external chat website."
 			},
 			"reply": { "string": "Don’t reply to another comment." },
-			"top": { "string": "Make sure it's a top-level comment." },
+			"top": { "string": "Make sure it’s a top-level comment." },
 			"context": {
 				"string": "Make sure that you don’t comment anything else with your code."
 			},
