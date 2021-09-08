@@ -38,7 +38,7 @@
 		</main>
 		<div
 			id="floating-captcha"
-			class="flex fixed align-center justify-center inset-0 z-50 b6-gray-400 bg-opacity-50"
+			class="fixed align-center justify-center inset-0 z-50 b6-gray-400 bg-opacity-50 hidden"
 		></div>
 
 		<!-- todo: &hl=language-->
@@ -132,10 +132,14 @@
 
 					resendLink.addEventListener("click", async (event) => {
 						const floatingCaptcha = document.querySelector("#floating-captcha");
+						floatingCaptcha.classList.remove("hidden");
+						floatingCaptcha.classList.add("flex");
 						grecaptcha.render(floatingCaptcha, {
 							sitekey: "6LfNhw0cAAAAAK5PC6gh8R4iQBzZzNZ8O--P-UdB",
 							theme: "light", // or dark
 							callback: function (captcha) {
+						floatingCaptcha.classList.remove("flex");
+						floatingCaptcha.classList.add("hidden");
 								customOnClick.call(resendLink, event, captcha);
 
 								// Remove old captcha

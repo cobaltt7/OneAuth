@@ -23,7 +23,7 @@ module.exports = {
 			keyframes: true,
 		},
 
-		safelist: ["m-auto", "h-full"],
+		safelist: ["m-auto", "h-full", "flex", "hidden"],
 	},
 
 	theme: {
