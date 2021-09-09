@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html style="display: none" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{{ #message }}branding.auth.title|||[clients.scratch.heading]{{ /message }}</title>
+		<meta name="robots" content="noindex, follow, archive, snippet" />
+		<noscript>
+			<meta http-equiv="refresh" content="0; url=/old/" />
+		</noscript>
+		{{> head }}
+	</head>
+
+	<body>
+		{{> nav }}
+		<main>
+			<h1>{{ #message }}clients.scratch.heading{{ /message }}</h1>
+			<h2>
+				{{ #message }}clients.email.email.code|||<code>{{ code }}</code>{{ /message }}
+				<u>{{ #message }}clients.email.email.share{{ /message }}</u> {{ #message
+				}}clients.email.email.act{{ /message }}
+			</h2>
+			<section>
+				<h3>{{ #message }}clients.email.email.next{{ /message }}</h3>
+				<ul>
+					<li><p>{{ #message }}clients.email.email.copy{{ /message }}</p></li>
+					<li>
+						<p>
+							<a
+								target="_blank"
+								href="https://scratch.mit.edu/studios/30228832/comments"
+								>{{ #message }}clients.scratch.studio{{ /message }}</a
+							>
+						</p>
+					</li>
+					<li>
+						<p>{{ #message }}clients.scratch.comment{{ /message }}</p>
+						<img src="./good.jpg" />
+					</li>
+					<li>
+						<p>
+							<a href="./verify?nonce={{ nonce }}"
+								>{{ #message }}clients.scratch.done{{ /message }}</a
+							>
+						</p>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h3>{{ #message }}clients.scratch.didnt{{ /message }}</h3>
+				<p>{{ #message }}clients.scratch.few{{ /message }}</p>
+				<ul>
+					<li>
+						<p>{{ #message }}clients.scratch.signed{{ /message }}</p>
+						<img src="./signed-out.jpg" />
+					</li>
+					<li>
+						<p>
+							{{ #message }}clients.scratch.muted;clients.scratch.reasons{{ /message
+							}}
+						</p>
+						<img src="./muted.jpg" />
+					</li>
+					<li>
+						<p>{{ #message }}clients.scratch.reply;clients.scratch.top{{ /message }}</p>
+						<img src="./reply.jpg" />
+					</li>
+					<li>
+						<p>
+							{{ #message
+							}}clients.scratch.context;clients.scratch.example;clients.scratch.nothing{{
+							/message }}
+						</p>
+						<img src="./context.jpg" />
+					</li>
+					<li>
+						<p>
+							{{ #message }}clients.scratch.expire;clients.scratch.reload{{ /message
+							}}
+						</p>
+					</li>
+				</ul>
+			</section>
+		</main>
+		{{> footer }}
+	</body>
+</html>

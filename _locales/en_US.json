@@ -51,7 +51,7 @@
 		"localization": {
 			"heading": { "string": "Language specification" },
 			"basics": {
-				"string": "Specify the language to use on pages by adding another parameter to the URL: {0}"
+				"string": "Specify the language to use on pages by adding another parameter to the URL: {0}."
 			},
 			"code": {
 				"string": "Its value should be a 2-letter language code like {0} or {1}."
@@ -134,7 +134,7 @@
 			},
 			"logs": { "string": "We reserve the right to keep logs of sent emails." },
 			"recaptcha": {
-				"string": "Email auth is protected by reCAPTCHA to avoid automated spamming of somebody's email inbox."
+				"string": "Email auth is protected by reCAPTCHA to avoid automated spamming of somebody’s email inbox."
 			},
 			"governed": {
 				"string": "It is governed by {0}.",
@@ -249,6 +249,30 @@
 					"string": "Don’t worry, nothing will happen."
 				}
 			}
+		},
+		"scratch": {
+			"heading": { "string": "Sign in with your Scratch account" },
+			"studio": { "string": "Click here to visit the studio." },
+			"comment": { "string": "Comment your code." },
+			"done": { "string": "Click here when you are done." },
+			"didnt": { "string": "It didn’t work!" },
+			"few": { "string": "There are a few reasons for it to not work." },
+			"signed": { "string": "Are you signed in to your Scratch account?" },
+			"muted": { "string": "You might have been muted by the Scratch Team." },
+			"reasons": {
+				"string": "This could be because you haven’t verified your email address, or possibly because you spammed or maybe shared a link to an external chat website."
+			},
+			"reply": { "string": "Don’t reply to another comment." },
+			"top": { "string": "Make sure it’s a top-level comment." },
+			"context": {
+				"string": "Make sure that you don’t comment anything else with your code."
+			},
+			"example": { "string": "For example, do NOT say “My code is:”." },
+			"nothing": { "string": "Only comment the code, nothing else." },
+			"expire": {
+				"string": "Your code will expire after 15 minutes, so it might have been too long."
+			},
+			"reload": { "string": "Try reloading the page and requesting another code!" }
 		}
 	},
 	"core": {
@@ -447,7 +471,7 @@
 		},
 		"401": {
 			"heading": { "string": "Unauthorized" },
-			"message": { "string": "Please login before accessing this resource." }
+			"message": { "string": "Please login before accessing this page." }
 		},
 		"402": {
 			"heading": { "string": "Payment Required " },
@@ -455,7 +479,7 @@
 		},
 		"403": {
 			"heading": { "string": "Forbidden" },
-			"message": { "string": "Sorry, but you are forbidden to access this resource." }
+			"message": { "string": "Sorry, but you are forbidden to access this page." }
 		},
 		"404": {
 			"heading": { "string": "Not Found" },
@@ -475,7 +499,7 @@
 		},
 		"407": {
 			"heading": { "string": "Proxy Authentication Required" },
-			"message": { "string": "Please use a proxy to access this resource." }
+			"message": { "string": "Please use a proxy to access this page." }
 		},
 		"408": {
 			"heading": { "string": "Request Timeout" },

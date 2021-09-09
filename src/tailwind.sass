@@ -9,12 +9,14 @@
 
 /* GLOBAL STYLES */
 * {
-	scroll-behavior: smooth;
+	/* display */
 	column-fill: balance-all !important;
 
+	/* manipulation */
+	scroll-behavior: smooth;
 	@apply selection:bg-red-500;
 
-	a:not(.auth-button) {
+	a:not(.auth-button):not(.allow-button) {
 		@apply text-blue-700
 			no-underline;
 
@@ -27,11 +29,11 @@
 }
 
 [data-before] {
-	@apply before:content-[attr(data-before)] !important;
+	@apply before:!content-[attr(data-before)];
 }
 
 [data-after] {
-	@apply after:content-[attr(data-after)] !important;
+	@apply after:!content-[attr(data-after)];
 }
 
 main {
@@ -107,9 +109,8 @@ footer {
 					xs:block;
 
 				li {
-					@apply lg:mt-0;
-
 					line-height: inherit;
+					@apply lg:mt-0;
 
 					&:first-child {
 						@apply leading-6
@@ -170,6 +171,16 @@ footer {
 	}
 
 	.auth-button {
+		/* box */
+		/* Per Google's guidlines, the dark mode bg color needs to be #4285F4 if we ever make a dark mode */
+		min-width: 140px;
+		min-height: 30px;
+		height: 40px;
+		padding: 8px;
+
+		/* typography */
+		font-family: "Roboto";
+
 		@apply font-sans
 			border
 			rounded-full
@@ -178,7 +189,6 @@ footer {
 		svg,
 		img {
 			height: 18px;
-
 			@apply inline
 				m-0
 				bg-white
@@ -188,22 +198,15 @@ footer {
 		}
 
 		span {
+			/* box */
+			padding-left: 24px;
+
+			/* typography */
+			font-size: 14px;
 			@apply text-black
 				font-medium
 				align-top;
-
-			font-size: 14px;
-			padding-left: 24px;
 		}
-
-		/* Per Google's guidlines, the dark mode color needs to be #4285F4 if we ever make a dark mode. but Apple says white or black only… */
-
-		/* Google guidline stuffs */
-		font-family: "Roboto";
-		height: 40px;
-		padding: 8px;
-		min-height: 30px;
-		min-width: 140px;
 	}
 }
 
@@ -234,7 +237,7 @@ button {
 }
 
 /* ALLOW PAGE */
-.alllow-button {
+.allow-button {
 	@apply w-full
 		p-4
 		text-white
@@ -260,12 +263,11 @@ button {
 	}
 
 	td {
+		min-width: 6rem;
+		max-width: 14rem;
 		@apply inline-block
 		w-1/6
 		break-words;
-
-		min-width: 6rem;
-		max-width: 14rem;
 	}
 }
 

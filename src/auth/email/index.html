@@ -7,7 +7,7 @@
 			{{ #message }}branding.auth.title|||[clients.email.page.heading]{{ /message }}
 		</title>
 		<meta name="robots" content="noindex, follow, archive, snippet" />
-		<link rel="preload" href="/loading.svg" as="image" />
+		<link rel="preload" href="/auth/email/loading.svg" as="image" />
 		<noscript>
 			<meta http-equiv="refresh" content="0; url=/old/" />
 		</noscript>
@@ -38,7 +38,7 @@
 		</main>
 		<div
 			id="floating-captcha"
-			class="flex fixed align-center justify-center inset-0 z-50 b6-gray-400 bg-opacity-50"
+			class="fixed align-center justify-center inset-0 z-50 b6-gray-400 bg-opacity-50 hidden"
 		></div>
 
 		<!-- todo: &hl=language-->
@@ -132,10 +132,14 @@
 
 					resendLink.addEventListener("click", async (event) => {
 						const floatingCaptcha = document.querySelector("#floating-captcha");
+						floatingCaptcha.classList.remove("hidden");
+						floatingCaptcha.classList.add("flex");
 						grecaptcha.render(floatingCaptcha, {
 							sitekey: "6LfNhw0cAAAAAK5PC6gh8R4iQBzZzNZ8O--P-UdB",
 							theme: "light", // or dark
 							callback: function (captcha) {
+								floatingCaptcha.classList.remove("flex");
+								floatingCaptcha.classList.add("hidden");
 								customOnClick.call(resendLink, event, captcha);
 
 								// Remove old captcha
@@ -220,7 +224,7 @@
 					submit.firstChild.remove();
 					submit.append(
 						Object.assign(document.createElement("img"), {
-							src: "/loading.svg",
+							src: "/auth/email/loading.svg",
 							className: "m-auto h-full"
 						})
 					);

@@ -4,7 +4,7 @@ import fileSystem from "fs";
 import path from "path";
 import url from "url";
 
-import fetch from "node-fetch";
+import "isomorphic-fetch";
 
 /** @type {import("../../types").AllContributosRc} */
 const { contributors = [] } = JSON.parse(
@@ -50,8 +50,6 @@ for (const commit of await Promise.all(commitPromises)) {
 			filename === "src/l10n.js"
 		)
 			values.push("translation");
-
-		if (filename === "lib/mongoose.js") values.push("data");
 
 		if (filename === "src/tailwind.sass") values.push("design");
 

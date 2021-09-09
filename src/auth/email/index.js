@@ -6,13 +6,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 import mustache from "mustache";
-import fetch from "node-fetch";
 import mailjet from "node-mailjet";
 import retronid from "retronid";
 
 import { mustacheFunction } from "../../../lib/localization.js";
-import { EmailDatabase } from "../../../lib/mongoose.js";
 import { logError } from "../../errors/index.js";
 
 dotenv.config();
@@ -29,7 +28,40 @@ const directory = path.dirname(fileURLToPath(import.meta.url)),
 	requestLog = {},
 	uncapped = 6000 / new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 
-dotenv.config();
+await mongoose.connect(process.env.MONGO_URL || "", {
+	appName: "OneAuth",
+});
+mongoose.connection.on("error", logError);
+
+const Database = mongoose.model(
+	"Email",
+	new mongoose.Schema({
+		code: {
+			match: /^[\da-z]{10}$/,
+			required: true,
+			type: String,
+			unique: true,
+		},
+
+		date: {
+			default: Date.now(),
+			type: Date,
+		},
+
+		email: {
+			match: /^(?=[\w!#$%&'*+./=?@^{|}~\-]{6,254}$)(?=[\w!#$%&'*+./=?^{|}~\-]{1,64}@)[\w!#$%&'*+/=?^{|}~\-]+(?:\.[\w!#$%&'*+/=?^{|}~\-]+)*@(?:(?=[\da-z\-]{1,63}\.)[\da-z](?:[\da-z\-]*[\da-z])?\.)+(?=[\da-z\-]{1,63}$)[\da-z](?:[\da-z\-]*[\da-z])?$/gim,
+			required: true,
+			type: String,
+		},
+
+		nonce: {
+			match: /^[\da-z]{10}$/,
+			required: true,
+			type: String,
+			unique: true,
+		},
+	}),
+);
 
 let emailsLeftToday = uncapped > 200 ? 200 : uncapped,
 	nextSendAt = Date.now();
@@ -38,7 +70,7 @@ let emailsLeftToday = uncapped > 200 ? 200 : uncapped,
 const client = {
 	fontAwesome: "fas",
 	icon: "envelope",
-	link: "/auth/email?nonce={{ nonce }}",
+	link: "./email?nonce={{ nonce }}",
 	name: "Email",
 
 	pages: {
@@ -81,7 +113,7 @@ const client = {
 					const code = retronid();
 
 					try {
-						await new EmailDatabase({
+						await new Database({
 							code,
 							date: Date.now(),
 							email: request.body.email,
@@ -143,7 +175,7 @@ const client = {
 				}
 
 				if (request.body.code && request.body.email && request.query.nonce) {
-					const data = await EmailDatabase.findOne({
+					const data = await Database.findOne({
 						code: request.body.code,
 						email: request.body.email,
 						nonce: request.query.nonce,
@@ -152,12 +184,12 @@ const client = {
 					if (!data) return response.status(403);
 
 					if (Date.now() - data.date > 900000) {
-						await EmailDatabase.deleteOne({ code: request.body.code }).exec();
+						await Database.deleteOne({ code: request.body.code }).exec();
 
 						return response.status(410);
 					}
 
-					await EmailDatabase.deleteOne({ code: request.body.code }).exec();
+					await Database.deleteOne({ code: request.body.code }).exec();
 
 					return this.sendResponse(data, data.nonce);
 				}

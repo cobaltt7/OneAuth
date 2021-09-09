@@ -1,8 +1,10 @@
 name: Run Lighthouse
 on:
     workflow_dispatch:
-    schedule:
-        - cron: "48 08 * * *"
+    workflow_run:
+        workflows: ["Deploy website"]
+        types:
+            - completed
 
 jobs:
     run:
@@ -27,9 +29,11 @@ jobs:
                   verbose: true
                   urls: >-
                       https://auth.onedot.cf,
-                      https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2F,
-                      https://auth.onedot.cf/auth/email?url=https%3A%2F%2Fauth.onedot.cf%2F,
-                      https://auth.onedot.cf/docs/auth
+                      https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fbackend%2Fget_data,
+                      https://auth.onedot.cf/auth/email?nonce=1234qwer,
+                      https://auth.onedot.cf/auth/scratch?nonce=1234qwer,
+                      https://auth.onedot.cf/docs/auth, https://auth.onedot.cf/docs/l10n,
+                      https://auth.onedot.cf/docs/credits
 
             - name: Setup Node.JS
               uses: actions/setup-node@v2.4.0

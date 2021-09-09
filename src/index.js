@@ -15,6 +15,8 @@ import documentation from "./docs/index.js";
 import errors from "./errors/index.js";
 import main from "./main/index.js";
 
+import "isomorphic-fetch";
+
 dotenv.config();
 
 const app = express(),

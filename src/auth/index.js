@@ -8,17 +8,47 @@ import dotenv from "dotenv";
 import { Router as express } from "express";
 import SignJWT from "jose-node-esm-runtime/jwt/sign";
 import jwtVerify from "jose-node-esm-runtime/jwt/verify";
+import mongoose from "mongoose";
 import mustache from "mustache";
 import retronid from "retronid";
 
 import authClients from "../../lib/clients.js";
-import { NonceDatabase } from "../../lib/mongoose.js";
 import { logError } from "../errors/index.js";
 
 dotenv.config();
 
 const app = express(),
 	directory = path.dirname(url.fileURLToPath(import.meta.url));
+
+await mongoose.connect(process.env.MONGO_URL || "", {
+	appName: "OneAuth",
+});
+
+mongoose.connection.on("error", logError);
+
+const Database = mongoose.model(
+	"Nonce",
+	new mongoose.Schema({
+		nonce: {
+			match: /^[\da-z]{10}$/,
+			required: true,
+			type: String,
+			unique: true,
+		},
+
+		psuedoNonce: {
+			match: /^[\da-z]{10}$/,
+			required: true,
+			type: String,
+			unique: true,
+		},
+
+		redirect: {
+			required: true,
+			type: String,
+		},
+	}),
+);
 
 app.all("/auth", async (request, response) => {
 	try {
@@ -35,7 +65,7 @@ app.all("/auth", async (request, response) => {
 		psuedoNonce = retronid();
 
 	// Save the nonces to the database
-	await new NonceDatabase({
+	await new Database({
 		nonce,
 		psuedoNonce,
 		redirect: request.query.url,
@@ -49,7 +79,7 @@ app.all("/auth", async (request, response) => {
 		expires,
 		httpOnly: true,
 		maxAge: 900000,
-		sameSite: "lax",
+		sameSite: "none",
 		secure: true,
 		signed: false,
 	});
@@ -84,7 +114,7 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 		const sendResponse = async (data, nonce) => {
 			// Check nonce
 			const { psuedoNonce, redirect } =
-				(await NonceDatabase.findOneAndDelete({
+				(await Database.findOneAndDelete({
 					nonce,
 				}).exec()) || {};
 
@@ -112,7 +142,7 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 
 				redirectUrl.searchParams.set("token", jwt);
 
-				return response.status(300).render(path.resolve(directory, "allow.html"), {
+				return response._status(300).render(path.resolve(directory, "allow.html"), {
 					allowUrl: redirectUrl,
 					client: client.name,
 

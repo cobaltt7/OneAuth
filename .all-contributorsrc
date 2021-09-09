@@ -8,7 +8,7 @@
   ],
   "imageSize": 100,
   "commit": true,
-  "commitConvention": "none",
+  "commitConvention": "gitmoji",
   "contributors": [
     {
       "login": "wgyt",
@@ -106,7 +106,8 @@
       "contributions": [
         "design",
         "infra",
-        "business"
+        "business",
+        "bug"
       ]
     },
     {
@@ -118,7 +119,9 @@
         "content",
         "business",
         "maintenance",
-        "ideas"
+        "ideas",
+        "translation",
+        "bug"
       ]
     },
     {
@@ -136,7 +139,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/57809064?v=4",
       "profile": "https://github.com/devxan",
       "contributions": [
-        "design"
+        "design",
+        "ideas",
+        "business"
       ]
     },
     {
@@ -147,8 +152,27 @@
       "contributions": [
         "business"
       ]
+    },
+    {
+      "login": "allcontributors[bot]",
+      "name": "allcontributors[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/23186?v=4",
+      "profile": "https://github.com/apps/allcontributors",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Ascor8522",
+      "name": "Ascor8522",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17651422?v=4",
+      "profile": "https://scratch.mit.edu/users/ascor",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 5,
-  "contributorsSortAlphabetically": true
+  "contributorsSortAlphabetically": true,
+  "skipCi": false
 }

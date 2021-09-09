@@ -5,6 +5,10 @@
 module.exports = {
 	extends: ["plugin:@onedotprojects/recommended"],
 
+	globals: {
+		fetch: "readonly",
+	},
+
 	ignorePatterns: ["*.ts", "**.ts"],
 
 	overrides: [
@@ -12,10 +16,14 @@ module.exports = {
 			extends: ["plugin:@onedotprojects/node"],
 			files: ["*.js", "*.cjs", "**.js", "**.cjs"],
 			parserOptions: { ecmaVersion: 12 },
+
+			rules: {
+				"node/no-unsupported-features/es-syntax": 0,
+			},
 		},
 		{
 			extends: ["plugin:@onedotprojects/esm"],
-			files: ["**.js", "*.js"],
+			files: ["**.js", "*.js", "**.mjs", "*.mjs"],
 		},
 		{
 			extends: ["plugin:@onedotprojects/cli"],

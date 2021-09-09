@@ -1,7 +1,6 @@
 /** @file Replit Authentication handler. */
 
 import atob from "atob";
-import fetch from "node-fetch";
 
 import { logError } from "../../errors/index.js";
 

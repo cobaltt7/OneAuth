@@ -1,5 +1,5 @@
-logs
 !**
+logs
 .git/
 src/main/style.css
 node_modules/

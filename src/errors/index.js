@@ -25,7 +25,6 @@ export function logError(error) {
 /**
  * Function to run once status is sent.
  *
- * @param {(status: number) => import("express").Response} setStatus - Original Express `status` function.
  * @param {import("express").Request} request - Express request object.
  * @param {import("express").Response} response - Express response object.
  * @param {number} statusCode - HTTP status code.
@@ -34,21 +33,16 @@ export function logError(error) {
  * @returns {import("express").Response} - Express response object.
  * @todo Show the `message` to the user.
  */
-function statusMiddleware(
-	setStatus,
-	request,
-	response,
-	statusCode = response.statusCode,
-	message = "",
-) {
+function statusMiddleware(request, response, statusCode = response.statusCode, message = "") {
+	// If content has already been sent return immediately
+	if (response.headersSent) return response;
+
 	if (
-		// If no content has already been sent
-		!response.headersSent &&
 		// And it's not a redirect
-		(statusCode < 301 ||
-			statusCode > 399 ||
-			// Allow 300 (above) and 304 (below) since they aren't actually redirects.
-			statusCode === 304)
+		statusCode < 301 ||
+		statusCode > 399 ||
+		// Allow 300 (above) and 304 (below) since they aren't actually redirects.
+		statusCode === 304
 	) {
 		// Then it's an error code, send error page.
 		if (changeTo[+statusCode]) {
@@ -60,7 +54,7 @@ function statusMiddleware(
 				),
 			);
 
-			return statusMiddleware(setStatus, request, response, changeTo[+statusCode]);
+			return statusMiddleware(request, response, changeTo[+statusCode]);
 		}
 
 		const error = {
@@ -71,10 +65,11 @@ function statusMiddleware(
 		};
 
 		// @ts-expect-error -- We *want* to check `.includes(undefined)`.
-		if (Object.keys(error).includes())
-			return statusMiddleware(setStatus, request, response, 500);
+		if (Object.keys(error).includes()) return statusMiddleware(request, response, 500);
 
-		const returnValue = setStatus.call(response, statusCode);
+		const returnValue = response._status(statusCode);
+
+		logError(`${statusCode} at ${request.url}${message ? ` with message ${message}` : ""}`);
 
 		if (request.accepts("html")) response.render(path.resolve(directory, "error.html"), error);
 		else response.json(error);
@@ -82,18 +77,26 @@ function statusMiddleware(
 		return returnValue;
 	}
 
-	// Timeout all requests after 5 secconds.
-	setTimeout(() => {
-		if (!response.headersSent) statusMiddleware(setStatus, request, response, 408);
-	}, 5000);
-
-	return response;
+	return response._status(statusCode);
 }
+
+// Timeout all requests after 5 secconds.
+app.use((request, response, next) => {
+	next();
+	setTimeout(() => {
+		if (!response.headersSent) statusMiddleware(request, response, 408);
+	}, 5000);
+});
 
 app.all("/old", (_, response) => response.render(path.resolve(directory, "old.html")));
 
 app.use((request, response, next) => {
-	const realStatus = response.status;
+	response._status = response.status;
+
+	const originalHeader = response.setHeader;
+
+	response.setHeader = (header, value) =>
+		response.headersSent ? response : originalHeader.call(response, header, value);
 
 	/**
 	 * Set HTTP response status code.
@@ -102,7 +105,7 @@ app.use((request, response, next) => {
 	 *
 	 * @returns {import("express").Response} - Express response object.
 	 */
-	response.status = (statusCode) => statusMiddleware(realStatus, request, response, statusCode);
+	response.status = (statusCode) => statusMiddleware(request, response, statusCode);
 
 	/**
 	 * Set HTTP response status code and send an error message.
@@ -113,7 +116,7 @@ app.use((request, response, next) => {
 	 * @returns {import("express").Response} - Express response object.
 	 */
 	response.sendError = (statusCode, message) =>
-		statusMiddleware(realStatus, request, response, statusCode, message);
+		statusMiddleware(request, response, statusCode, message);
 
 	return next();
 });
@@ -139,7 +142,7 @@ app.use(
 			userAgent.includes("Netscape") ||
 			userAgent.includes("Navigator")
 		)
-			return response.status(400).render(path.resolve(directory, "old.html"));
+			return response._status(400).render(path.resolve(directory, "old.html"));
 
 		return next();
 	},

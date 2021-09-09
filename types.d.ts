@@ -116,14 +116,11 @@ export type Auth = {
 	disabled?: boolean;
 };
 
-export function SendResponse(
-	tokenOrData: { [key: string]: any },
-	nonce: string,
-): Promise<Response | void>;
+export function SendResponse(data: { [key: string]: any }, nonce: string): Promise<Response | void>;
 
 export function RequestFunction(
 	this: {
-		sendResponse: SendResponse;
+		sendResponse: typeof SendResponse;
 	},
 	request: Request,
 	response: Response,
