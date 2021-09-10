@@ -14,7 +14,7 @@ const client = {
 
 	link:
 		"https://github.com/login/oauth/authorize" +
-		"?client_id=7b64414fe57e07d1e969" +
+		`?client_id=${process.env.GITHUB_ID}` +
 		"&redirect_uri=https://auth.onedot.cf/auth/github" +
 		"&state={{ nonce }}",
 
@@ -25,8 +25,8 @@ const client = {
 			async all(request, response) {
 				const info = await fetch("https://github.com/login/oauth/access_token", {
 					body:
-						"client_id=7b64414fe57e07d1e969" +
-						`&client_secret=${process.env.githubSECRET}` +
+						`client_id=${process.env.GITHUB_ID}` +
+						`&client_secret=${process.env.GITHUB_SECRET}` +
 						`&state=${request.query.state}` +
 						`&code=${request.query.code}`,
 

@@ -22,13 +22,13 @@ const directory = path.dirname(fileURLToPath(import.meta.url)),
 		text: fileSystem.readFileSync(path.resolve(directory, "email.txt"), "utf8"),
 	},
 	mail = mailjet
-		.connect(process.env.MAILJET_ID || "", process.env.MAILJET_PASSWORD || "")
+		.connect(process.env.MAILJET_ID || "", process.env.MAILJET_SECRET || "")
 		.post("send", { version: "v3.1" }),
 	/** @type {{ [key: string]: number }} */
 	requestLog = {},
 	uncapped = 6000 / new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 
-await mongoose.connect(process.env.MONGO_URL || "", {
+await mongoose.connect(`${process.env.MONGO_URL}?retryWrites=true&w=majority`, {
 	appName: "OneAuth",
 });
 mongoose.connection.on("error", logError);
@@ -127,7 +127,7 @@ const client = {
 						Messages: [
 							{
 								From: {
-									Email: `${process.env.GMAIL_EMAIL}`,
+									Email: "auth@onedot.cf",
 									Name: request.localization.messages["clients.email.email.from"],
 								},
 

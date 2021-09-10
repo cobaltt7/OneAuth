@@ -30,6 +30,7 @@ app.enable("json escape");
 app.disable("strict routing");
 
 if (process.env.NODE_ENV === "development") app.set("view cache", false);
+else app.set("view cache", true);
 
 app.set("views", directory);
 app.disable("x-powered-by");

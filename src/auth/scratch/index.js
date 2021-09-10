@@ -11,7 +11,9 @@ import { logError } from "../../errors/index.js";
 
 dotenv.config();
 
-await mongoose.connect(process.env.MONGO_URL || "", {
+const STUDIO = 30228832;
+
+await mongoose.connect(`${process.env.MONGO_URL}?retryWrites=true&w=majority`, {
 	appName: "OneAuth",
 });
 
@@ -69,6 +71,7 @@ const Database = mongoose.model(
 					return response.render(path.resolve(directory, "index.html"), {
 						code,
 						nonce: request.query.nonce,
+						studio: STUDIO,
 					});
 				},
 			},
@@ -105,7 +108,7 @@ const Database = mongoose.model(
 					 * }[]}
 					 */
 					const comments = await fetch(
-							"https://api.scratch.mit.edu/studios/30228832/comments",
+							`https://api.scratch.mit.edu/studios/${STUDIO}/comments`,
 						).then((result) => result.json()),
 						// eslint-disable-next-line sort-vars -- `comment` depends on `comments`.
 						comment = comments.find(({ content }) => content.includes(code));

@@ -14,7 +14,7 @@ const client = {
 	link:
 		"https://accounts.google.com/o/oauth2/v2/auth" +
 		"?response_type=code" +
-		"&client_id=808400069481-nfa73dlrelv8rmtibnenjsdk4n0aj32r.apps.googleusercontent.com" +
+		`&client_id=${process.env.GOOGLE_ID}.apps.googleusercontent.com` +
 		"&scope=openid%20email%20profile" +
 		"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
 		"&state={{ nonce }}",
@@ -29,8 +29,8 @@ const client = {
 					{
 						body:
 							`code=${request.query.code}` +
-							`&client_id=${process.env.googleAppUrl}` +
-							`&client_secret=${process.env.googleSecret}` +
+							`&client_id=${process.env.GOOGLE_ID}.apps.googleusercontent.com` +
+							`&client_secret=${process.env.GOOGLE_SECRET}` +
 							"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fgoogle" +
 							"&grant_type=authorization_code",
 
