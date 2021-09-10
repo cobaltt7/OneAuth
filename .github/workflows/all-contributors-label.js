@@ -39,7 +39,6 @@ switch (process.argv[2]) {
 		break;
 	}
 
-	case "type: announcement":
 	case "scope: dependencies": {
 		contributions.push("maintenance");
 	}
@@ -55,6 +54,7 @@ if (process.argv[2].startsWith("type: bug")) {
 			break;
 		}
 
+		case "type: tech debt":
 		case "scope: meta": {
 			contributions.push("infra");
 
@@ -73,5 +73,3 @@ if (process.argv[2].startsWith("type: bug")) {
 }
 
 console.log(`npx all-contributors-cli add ${username} "${contributions.join(",")}"`);
-
-export default undefined;
