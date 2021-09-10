@@ -86,7 +86,7 @@ app.all("/auth", async (request, response) => {
 		expires,
 		httpOnly: true,
 		maxAge: 900000,
-		sameSite: process.env.NODE_ENV === "production"?"none":"lax",
+		sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
 		secure: process.env.NODE_ENV === "production",
 		signed: false,
 	});

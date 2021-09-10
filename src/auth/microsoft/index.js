@@ -8,9 +8,7 @@ dotenv.config();
 const client = {
 	icon: "https://www.microsoft.com/favicon.ico",
 
-	link:
-		`https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${process.env.MICROSOFT_ID}&response_type=code` +
-		"&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fmicrosoft&scope=User.Read%20User.ReadBasic.All&response_mode=form_post&state={{ nonce }}",
+	link: `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${process.env.MICROSOFT_ID}&response_type=code&redirect_uri=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fmicrosoft&scope=User.Read%20User.ReadBasic.All&response_mode=form_post&state={{ nonce }}`,
 
 	name: "Microsoft",
 
