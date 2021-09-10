@@ -170,6 +170,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "imgbot[bot]",
+      "name": "imgbot[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/4706?v=4",
+      "profile": "https://github.com/apps/imgbot",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 5,
