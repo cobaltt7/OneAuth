@@ -44,7 +44,9 @@ const client = {
 		},
 	},
 
-	website: "https://scratch.mit.edu/",
+	website: "https://www.microsoft.com/",
 };
 
 export default client;
+
+// Note: can't run on http, even on localhost
