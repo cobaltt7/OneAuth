@@ -20,35 +20,42 @@ dotenv.config();
 const app = express(),
 	directory = path.dirname(url.fileURLToPath(import.meta.url));
 
-await mongoose.connect(process.env.MONGO_URL || "", {
+await mongoose.connect(`${process.env.MONGO_URL}?retryWrites=true&w=majority`, {
 	appName: "OneAuth",
 });
 
 mongoose.connection.on("error", logError);
 
 const Database = mongoose.model(
-	"Nonce",
-	new mongoose.Schema({
-		nonce: {
-			match: /^[\da-z]{10}$/,
-			required: true,
-			type: String,
-			unique: true,
-		},
+		"Nonce",
+		new mongoose.Schema({
+			nonce: {
+				match: /^[\da-z]{10}$/,
+				required: true,
+				type: String,
+				unique: true,
+			},
 
-		psuedoNonce: {
-			match: /^[\da-z]{10}$/,
-			required: true,
-			type: String,
-			unique: true,
-		},
+			psuedoNonce: {
+				match: /^[\da-z]{10}$/,
+				required: true,
+				type: String,
+				unique: true,
+			},
 
-		redirect: {
-			required: true,
-			type: String,
-		},
-	}),
-);
+			redirect: {
+				required: true,
+				type: String,
+			},
+		}),
+	),
+	JWT_ALGORITHM = "ES256",
+	PRIVATE_KEY = createPrivateKey(
+		`${process.env.EC_PRIVATE_KEY_0}\n${process.env.EC_PRIVATE_KEY_1}\n${process.env.EC_PRIVATE_KEY_2}\n${process.env.EC_PRIVATE_KEY_3}\n${process.env.EC_PRIVATE_KEY_4}`,
+	),
+	PUBLIC_KEY = createPublicKey(
+		`${process.env.EC_PUBLIC_KEY_0}\n${process.env.EC_PUBLIC_KEY_1}\n${process.env.EC_PUBLIC_KEY_2}\n${process.env.EC_PUBLIC_KEY_3}`,
+	);
 
 app.all("/auth", async (request, response) => {
 	try {
@@ -79,8 +86,8 @@ app.all("/auth", async (request, response) => {
 		expires,
 		httpOnly: true,
 		maxAge: 900000,
-		sameSite: "none",
-		secure: true,
+		sameSite: process.env.NODE_ENV === "production"?"none":"lax",
+		secure: process.env.NODE_ENV === "production",
 		signed: false,
 	});
 
@@ -113,14 +120,13 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 		 */
 		const sendResponse = async (data, nonce) => {
 			// Check nonce
-			const { psuedoNonce, redirect } =
+			const { redirect } =
 				(await Database.findOneAndDelete({
 					nonce,
+					psuedoNonce: request.cookies.nonce,
 				}).exec()) || {};
 
-			if (!request.cookies.nonce || !psuedoNonce) return response.status(401);
-
-			if (request.cookies.nonce !== psuedoNonce) return response.status(403);
+			if (!redirect) return response.status(403);
 
 			// Get client info
 			const client = authClients.find(({ pages }) => pages[`${page}`]);
@@ -133,8 +139,8 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 				.setExpirationTime("15 minutes")
 				.setIssuedAt()
 				.setIssuer("OneDot")
-				.setProtectedHeader({ alg: "ES256" })
-				.sign(createPrivateKey(process.env.EC_PRIVATE_KEY || ""));
+				.setProtectedHeader({ alg: JWT_ALGORITHM })
+				.sign(PRIVATE_KEY);
 
 			// Render allow page
 			try {
@@ -148,7 +154,7 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 
 					data: JSON.stringify({
 						payload: { ...data, client: client.name },
-						protectedHeader: { alg: "ES256" },
+						protectedHeader: { alg: JWT_ALGORITHM },
 					}),
 
 					denyUrl: redirectUrl,
@@ -198,8 +204,8 @@ app.all("/backend/get_data", (request, response) => {
 		"Origin, X-Requested-With, Content-Type, Accept",
 	);
 
-	jwtVerify(`${request.query.token}`, createPublicKey(process.env.EC_PUBLIC_KEY || ""), {
-		algorithms: ["ES256"],
+	jwtVerify(`${request.query.token}`, PUBLIC_KEY, {
+		algorithms: [JWT_ALGORITHM],
 		issuer: "OneDot",
 		maxTokenAge: "15 minutes",
 	})
