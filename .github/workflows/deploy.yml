@@ -1,8 +1,8 @@
 name: Deploy website
 on:
     workflow_dispatch:
-    push:
-        branches: release
+    release:
+        types: [published]
 
 jobs:
     run:
