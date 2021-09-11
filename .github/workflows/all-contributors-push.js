@@ -43,7 +43,7 @@ for (const commit of await Promise.all(commitPromises)) {
 
 		if (filename.endsWith("js") || filename.endsWith("html")) values.push("code");
 
-		if ((!filename.includes("/"))&&(!filename.startsWith("package")) ) values.push("infra");
+		if (!filename.includes("/") && !filename.startsWith("package")) values.push("infra");
 
 		if (
 			(filename.startsWith("_locales/") && filename !== "_/locales/en_US.json") ||

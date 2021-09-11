@@ -6,14 +6,12 @@
 		fill="none"
 		stroke-dasharray="72.257 72.257"
 		stroke-linecap="round"
-		stroke-width="5"
-	>
+		stroke-width="5">
 		<animateTransform
 			attributeName="transform"
 			dur="1.3333333333333333s"
 			repeatCount="indefinite"
 			type="rotate"
-			values="0 50 50;360 50 50"
-		/>
+			values="0 50 50;360 50 50" />
 	</circle>
 </svg>

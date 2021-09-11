@@ -28,8 +28,7 @@
 					type="email"
 					autocomplete="email"
 					required
-					placeholder="{{ #message }}clients.email.page.placeholder{{ /message }}"
-				/>
+					placeholder="{{ #message }}clients.email.page.placeholder{{ /message }}" />
 				<div id="recaptcha" class="mt-2"></div>
 				<button id="submit" type="submit">
 					{{ #message }}clients.email.page.submit{{ /message }}
@@ -38,16 +37,23 @@
 		</main>
 		<div
 			id="floating-captcha"
-			class="fixed align-center justify-center inset-0 z-50 b6-gray-400 bg-opacity-50 hidden"
-		></div>
+			class="
+				fixed
+				align-center
+				justify-center
+				inset-0
+				z-50
+				b6-gray-400
+				bg-opacity-50
+				hidden
+			"></div>
 
 		<!-- todo: &hl=language-->
 		<script
 			src="https://www.google.com/recaptcha/api.js?onload=onCaptchaLoad&render=explicit"
 			async
 			crossorigin="anonymous"
-			defer
-		></script>
+			defer></script>
 
 		<script>
 			"use strict";

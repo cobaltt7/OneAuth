@@ -106,7 +106,7 @@ jobs:
             - name: Add
               continue-on-error: true
               run: |
-                  OUTPUT="$(node --trace-warnings --harmony .github/workflows/all-contributors-label.js '${{ github.event.label.name }}' ${{ github.event.pull_request.user.login }} ${{
+                  OUTPUT="$(node --trace-warnings --harmony .github/workflows/all-contributors-label.js '${{ github.event.label.name }}' ${{ github.event.pull_request.user.login }} ${{ 
                   github.event.discussion.user.login }} ${{ github.event.issue.user.login }})"
                   echo $OUTPUT
                   eval $OUTPUT

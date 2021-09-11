@@ -39,7 +39,7 @@
 		"jsdocDescriptionWithDot": true,
 		"jsdocPrintWidth": 100,
 		"jsdocSeparateReturnsFromParam": true,
-		"jsxBracketSameLine": false,
+		"bracketSameLine": false,
 		"vueIndentScriptAndStyle": true,
 		"overrides": [
 			{
@@ -61,7 +61,7 @@
 				"options": {
 					"trailingComma": "none",
 					"parser": "html",
-					"jsxBracketSameLine": true
+					"bracketSameLine": true
 				}
 			},
 			{
