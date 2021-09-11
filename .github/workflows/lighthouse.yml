@@ -30,8 +30,8 @@ jobs:
                   urls: >-
                       https://auth.onedot.cf,
                       https://auth.onedot.cf/auth?url=https%3A%2F%2Fauth.onedot.cf%2Fauth%2Fbackend%2Fget_data,
-                      https://auth.onedot.cf/auth/email?nonce=1234qwer,
-                      https://auth.onedot.cf/auth/scratch?nonce=1234qwer,
+                      https://auth.onedot.cf/auth/email?nonce=abcde12345,
+                      https://auth.onedot.cf/auth/scratch?nonce=abcde12345,
                       https://auth.onedot.cf/docs/auth, https://auth.onedot.cf/docs/l10n,
                       https://auth.onedot.cf/docs/credits
 
