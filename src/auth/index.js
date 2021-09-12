@@ -102,7 +102,7 @@ app.all("/auth", async (request, response) => {
 	});
 });
 
-/** @type {{ [key: string]: import("../../types").Page }} */
+/** @type {{ [key: string]: undefined | import("../../types").Page }} */
 const clientsByPage = Object.assign({}, ...authClients.map(({ pages }) => pages));
 
 for (const [page, handlers] of Object.entries(clientsByPage)) {
@@ -180,7 +180,7 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 				// @ts-expect-error -- TS doesn't know that there is a limited set of values for `request.method`.
 				const nextHandler = handlers[`${request.method.toLowerCase()}`];
 
-				if (handlers.all && nextHandler) {
+				if (handlers?.all && nextHandler) {
 					return nextHandler.call(
 						{
 							sendResponse,

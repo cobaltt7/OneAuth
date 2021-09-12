@@ -43,4 +43,6 @@ module.exports = {
 			},
 		},
 	],
+
+	root: true,
 };

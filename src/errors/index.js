@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import { Router as express } from "express";
 
 const app = express(),
-	/** @type {{ [key: number]: number }} */
+	/** @type {{ [key: number]: undefined | number }} */
 	changeTo = { 206: 204 },
 	directory = path.dirname(fileURLToPath(import.meta.url));
 

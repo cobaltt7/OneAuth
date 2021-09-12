@@ -9,7 +9,7 @@ declare global {
 				/** The client's prefered languages in order of preferation. */
 				languages: string[];
 				/** The messages translated to the first language in the client's prefered languages. */
-				messages: { [key: string]: string };
+				messages: { [key: string]: undefined | string };
 			};
 		}
 		interface Response {

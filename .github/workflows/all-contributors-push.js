@@ -10,7 +10,7 @@ import "isomorphic-fetch";
 const { contributors = [] } = JSON.parse(
 		fileSystem.readFileSync(url.pathToFileURL(path.resolve(".all-contributorsrc")), "utf8"),
 	),
-	/** @type {{ [key: string]: string[] }} */
+	/** @type {{ [key: string]: string[] | undefined }} */
 	NEW_CONTRIBUTORS = {},
 	/** @type {Promise<import("../../types").Commit>[]} */
 	commitPromises = process.argv[3].split(/\s+/g).map((hash) =>
@@ -66,19 +66,21 @@ for (const commit of await Promise.all(commitPromises)) {
 				contributors.find(({ login }) => login === author)?.contributions || [];
 		}
 
-		NEW_CONTRIBUTORS[`${author}`] = [...NEW_CONTRIBUTORS[`${author}`], ...contributions].filter(
-			(item, index, codes) => item && codes.indexOf(item) === index,
-		);
+		NEW_CONTRIBUTORS[`${author}`] = (
+			typeof NEW_CONTRIBUTORS[`${author}`] === "undefined"
+				? contributions
+				: NEW_CONTRIBUTORS[`${author}`]?.concat(contributions)
+		)?.filter((item, index, codes) => item && codes.indexOf(item) === index);
 	}
 }
 
 for (const username in NEW_CONTRIBUTORS) {
 	if (
 		Object.hasOwnProperty.call(NEW_CONTRIBUTORS, username) &&
-		NEW_CONTRIBUTORS[`${username}`].length > 0
+		(NEW_CONTRIBUTORS[`${username}`]?.length || 0) > 0
 	) {
 		console.log(
-			`npx all-contributors-cli add ${username} "${NEW_CONTRIBUTORS[`${username}`].join(
+			`npx all-contributors-cli add ${username} "${NEW_CONTRIBUTORS[`${username}`]?.join(
 				",",
 			)}"`,
 		);

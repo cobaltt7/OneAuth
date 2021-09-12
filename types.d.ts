@@ -15,11 +15,13 @@ export interface AllContributosRc {
 	contributorTemplate?: string;
 	skipCi?: boolean;
 	types: {
-		[key: string]: {
-			symbol: string;
-			description: string;
-			link: string;
-		};
+		[key: string]:
+			| {
+					symbol: string;
+					description: string;
+					link: string;
+			  }
+			| undefined;
 	};
 	contributors?: {
 		login: string;
@@ -109,7 +111,7 @@ interface Committer {
 export type Auth = {
 	link: string;
 	name: string;
-	pages: { [key: string]: Page };
+	pages: { [key: string]: undefined | Page };
 	icon: string;
 	fontAwesome?: "far" | "fab" | "fas";
 	website?: string;
@@ -171,5 +173,6 @@ export type StructuredJSON = {
 				context: undefined;
 				developer_comment: undefined;
 		  }
-		| StructuredMessage;
+		| StructuredMessage
+		| undefined;
 };

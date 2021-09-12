@@ -13,4 +13,3 @@ _locales/*.json
 !_locales/en_US.json
 package-lock.json
 package.json
-src/static/googleb9551735479dd7b0.html

@@ -24,7 +24,7 @@ const directory = path.dirname(fileURLToPath(import.meta.url)),
 	mail = mailjet
 		.connect(process.env.MAILJET_ID || "", process.env.MAILJET_SECRET || "")
 		.post("send", { version: "v3.1" }),
-	/** @type {{ [key: string]: number }} */
+	/** @type {{ [key: string]: undefined | number }} */
 	requestLog = {},
 	uncapped = 6000 / new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 
@@ -85,7 +85,7 @@ const client = {
 
 					const ipHash = crypto.createHash("sha256").update(request.ip).digest("hex");
 
-					if (requestLog[`${ipHash}`] > Date.now()) {
+					if ((requestLog[`${ipHash}`] || Date.now() - 1) > Date.now()) {
 						logError("Email blocked to avoid spam");
 
 						return response.sendError(429, `${requestLog[`${ipHash}`]}`);

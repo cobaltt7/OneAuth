@@ -48,7 +48,7 @@ const client = {
 					return this.sendResponse({ error }, `${request.query.state}`);
 				}
 
-				/** @type {{ [key: string]: string }} */
+				/** @type {{ [key: string]: undefined | string }} */
 				const filteredInfo = {},
 					info = JSON.parse(atob(idToken.split(".")[1]));
 
