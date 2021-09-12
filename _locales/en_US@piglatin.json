@@ -1,6 +1,6 @@
 {
-	"docs": { "string": "{0} | OneAuth Evelopmentday Ocsday" },
 	"about": {
+		"docs": { "string": "{0} | OneAuth Evelopmentday Ocsday" },
 		"about": {
 			"title": { "string": "OneAuth | Allyay-Inyay-Oneyay Authenticationyay" },
 			"heading": { "string": "OneAuth Allyay-Inyay-Oneyay Authenticationyay" },
@@ -57,7 +57,7 @@
 				"string": "Itsyay aluevay ouldshay ebay ayay 2-etterlay anguagelay odecay ikelay {0} oryay {1}."
 			},
 			"country": {
-				"string": ""
+				"string": "Ouyay aymay ollowfay ityay ybay anyay underscoreyay andyay ayay 2-etterlay ountrycay odecay, e.g. {0} oryay {1} (optionalyay)."
 			},
 			"fallback": {
 				"string": "Ifyay ayay anguagelay isyay otnay availableyay, ityay illway allfay ackbay otay ethay onay-ountrycay-ecificspay anguagelay, enthay otay ethay useryays’ owserbray anguagelay."
@@ -257,7 +257,7 @@
 			"done": { "string": "Ickclay erehay enwhay ouyay areyay oneday." },
 			"didnt": { "string": "Ityay iday otnay orkway!" },
 			"few": { "string": "Erethay areyay ayay ewfay easonsray orfay ityay otay otnay orkway." },
-			"signed": { "string": "" },
+			"signed": { "string": "Areyay ouyay ignedsay inyay otay ouryay Scratch accountyay?" },
 			"muted": { "string": "" },
 			"reasons": {
 				"string": ""
