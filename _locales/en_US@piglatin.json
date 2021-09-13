@@ -1,6 +1,6 @@
 {
+	"docs": { "string": "" },
 	"about": {
-		"docs": { "string": "{0} | OneAuth Evelopmentday Ocsday" },
 		"about": {
 			"title": { "string": "OneAuth | Allyay-Inyay-Oneyay Authenticationyay" },
 			"heading": { "string": "OneAuth Allyay-Inyay-Oneyay Authenticationyay" },
