@@ -6,7 +6,7 @@
 
 ### About
 
-OneAuth is an all-in-one authentication client that we designed to work seamlessly with any website. We support 6 clients with many more to come.
+OneAuth is an all-in-one authentication client that we designed to work seamlessly with any website. We support 7 clients with many more to come.
 
 ### Supported Clients
 
@@ -14,6 +14,7 @@ OneAuth is an all-in-one authentication client that we designed to work seamless
 -   Email
 -   GitHub
 -   Google
+-   Microsoft
 -   Replit
 -   Scratch
 

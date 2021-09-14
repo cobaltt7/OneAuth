@@ -121,7 +121,9 @@
         "maintenance",
         "ideas",
         "translation",
-        "bug"
+        "bug",
+        "doc",
+        "infra"
       ]
     },
     {
