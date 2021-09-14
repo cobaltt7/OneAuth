@@ -180,7 +180,7 @@
 		"postcss-map-get": "^0.3.0",
 		"postcss-nested": "^5.0.6",
 		"postcss-scss": "^4.0.0",
-		"postcss-sort-media-queries": "^3.9.10",
+		"postcss-sort-media-queries": "^4.1.0",
 		"prettier": "^2.4.0",
 		"prettier-plugin-ini": "^0.3.1",
 		"prettier-plugin-jsdoc": "^0.3.24",
