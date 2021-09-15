@@ -1,6 +1,6 @@
 {
+	"docs": { "string": "{0} | OneAuth Evelopmentday Ocsday" },
 	"about": {
-		"docs": { "string": "{0} | OneAuth Evelopmentday Ocsday" },
 		"about": {
 			"title": { "string": "OneAuth | Allyay-Inyay-Oneyay Authenticationyay" },
 			"heading": { "string": "OneAuth Allyay-Inyay-Oneyay Authenticationyay" },
@@ -96,9 +96,9 @@
 			"what": {
 				"string": "OneAuth isyay ayay ervicesay atthay ovidespray ebsitesway ithway anyay easyyay ayway otay authenticateyay usersyay. "
 			},
-			"minimal": { "string": "" },
+			"minimal": { "string": "Eway aimyay otay orestay asyay inimalmay ataday asyay ossiblepay onyay ouryay erversay." },
 			"cookies": {
-				"string": ""
+				"string": "Insteadyay, OneAuth aymay orestay ataday onyay ouryay eviceday inyay ethay ormfay ofyay ookiescay."
 			},
 			"languages": {
 				"string": ""
@@ -117,17 +117,17 @@
 			"direct": {
 				"string": ""
 			},
-			"controlless": { "string": "" },
+			"controlless": { "string": "Eway oday otnay avehay accessyay otay oryay ontrolcay overyay osethay ervicesay." },
 			"receive": {
 				"string": ""
 			},
 			"store": {
 				"string": ""
 			},
-			"encode": { "string": "" },
+			"encode": { "string": "Ifyay ouyay allowyay, eway aymay areshay ityay ithway ayay irdthay-artypay ebsiteway." },
 			"share": { "string": "Eway illway evernay avesay ouryay informationyay inyay ouryay atabaseday." },
 			"permission": {
-				"string": ""
+				"string": "Eway illway evernay areshay ouryay informationyay ithway anyoneyay ithoutway ouryay ermissionpay."
 			},
 			"email": {
 				"string": ""
@@ -263,16 +263,16 @@
 				"string": ""
 			},
 			"reply": { "string": "Oday otnay eplyray otay anotheryay ommentcay." },
-			"top": { "string": "" },
+			"top": { "string": "Akemay uresay ityay isyay ayay optay-evelay ommentcay." },
 			"context": {
 				"string": ""
 			},
 			"example": { "string": "Orfay exampleyay, oday OTNAY aysay “Ymay odecay isyay:”." },
 			"nothing": { "string": "Onlyay ommentcay ethay odecay, othingnay elseyay." },
 			"expire": {
-				"string": ""
+				"string": "Ouryay odecay illway expireyay afteryay 15 inutesmay, osay ityay ightmay avehay eenbay ootay onglay."
 			},
-			"reload": { "string": "" }
+			"reload": { "string": "Ytray eloadingray ethay agepay andyay anotheryay odecay!" }
 		}
 	},
 	"core": {
@@ -284,7 +284,7 @@
 			"allow": { "string": "Alowyay" },
 			"deny": { "string": "Enyday" },
 			"receive": {
-				"string": ""
+				"string": "ifyay ouyay esspray “{2}”, enthay {1} iillway eceiveray ethay ollowingfay informationyay (akentay omfray ouryay {0} accountyay):"
 			}
 		},
 		"signin": {
