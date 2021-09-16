@@ -40,7 +40,8 @@ const client = {
 					.then((fetchResult) => fetchResult.json())
 					.catch((error) => {
 						response.status(502);
-						logError(error);
+
+						return logError(error);
 					});
 
 				return this.sendResponse(

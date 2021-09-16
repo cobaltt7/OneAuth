@@ -104,9 +104,9 @@ const client = {
 						recaptcha["error-codes"]?.length ||
 						recaptcha.hostname !== request.hostname
 					) {
-						logError(recaptcha);
+						response.status(403);
 
-						return response.status(403);
+						return logError(recaptcha);
 					}
 
 					// Send email

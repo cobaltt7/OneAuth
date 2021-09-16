@@ -111,7 +111,8 @@
 										createResendLink(email, false, () => {
 											document.querySelector("h1").textContent =
 												"{{ #message }}clients.email.page.heading{{ /message }}";
-											document
+
+											return document
 												.querySelector("main")
 												.append(...createCodeForm(email));
 										})
@@ -124,7 +125,13 @@
 					return result;
 				}
 
-				function createResendLink(email, showDidnt = true, customOnClick = () => {}) {
+				function createResendLink(
+					email,
+					showDidnt = true,
+					customOnClick = () => {
+						return;
+					}
+				) {
 					const resend = Object.assign(document.createElement("i"), {
 							// Create form element
 							innerText: showDidnt

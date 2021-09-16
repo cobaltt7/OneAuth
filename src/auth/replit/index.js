@@ -15,7 +15,7 @@ const client = {
 			async all(request) {
 				const isValid = await fetch(
 					`https://Replit-Auth.onedotprojects.repl.co/__replauth?token=${request.query.token}`,
-				).then((response) => response.text());
+				).then((result) => result.text());
 
 				// Valid JWT
 				if (isValid === "Auth Error: request hostname does not match claim host\n") {

@@ -45,12 +45,11 @@ app.use(
 );
 
 app.use((request, response, next) => {
-	let directive;
+	let directive = "";
 
 	if (request.path.includes(".css")) directive = "public, max-age=86400";
 	else if (request.path.includes(".")) directive = "public, max-age=31536000, immutable";
 	else if (request.path.includes("/auth")) directive = "no-store, max-age=0";
-	else directive = "";
 
 	if (directive) response.setHeader("Cache-Control", directive);
 

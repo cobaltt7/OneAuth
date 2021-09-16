@@ -83,7 +83,8 @@ function statusMiddleware(request, response, statusCode = response.statusCode, m
 // Timeout all requests after 5 secconds.
 app.use((request, response, next) => {
 	next();
-	setTimeout(() => {
+
+	return setTimeout(() => {
 		if (!response.headersSent) statusMiddleware(request, response, 408);
 	}, 5000);
 });

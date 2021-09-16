@@ -62,9 +62,9 @@ app.all("/auth", async (request, response) => {
 		// eslint-disable-next-line no-new -- There are no side-effects here.
 		new URL(`${request.query.url}`);
 	} catch {
-		logError(new URIError(`Invalid URL: ${request.query.url}`));
+		response.status(400);
 
-		return response.status(400);
+		return logError(new URIError(`Invalid URL: ${request.query.url}`));
 	}
 
 	// Set a nonce and a psuedo nonce
@@ -161,9 +161,9 @@ for (const [page, handlers] of Object.entries(clientsByPage)) {
 					host: redirectUrl.host,
 				});
 			} catch {
-				logError(new URIError(`Invalid URL: ${redirect}`));
+				response.status(400);
 
-				return response.status(400);
+				return logError(new URIError(`Invalid URL: ${redirect}`));
 			}
 		};
 
@@ -204,15 +204,16 @@ app.all("/backend/get_data", (request, response) => {
 		"Origin, X-Requested-With, Content-Type, Accept",
 	);
 
-	jwtVerify(`${request.query.token}`, PUBLIC_KEY, {
+	return jwtVerify(`${request.query.token}`, PUBLIC_KEY, {
 		algorithms: [JWT_ALGORITHM],
 		issuer: "OneDot",
 		maxTokenAge: "15 minutes",
 	})
 		.then(response.send)
 		.catch((error) => {
-			logError(error);
 			response.status(401);
+
+			return logError(error);
 		});
 });
 

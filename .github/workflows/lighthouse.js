@@ -137,10 +137,8 @@ try {
 			"<th>SEO</th>" +
 			"<th>Overall</th>" +
 			"<th>PageSpeed Insights</th></tr></thead><tbody>"
-		}${data.data.reduce((accumulated, result) => {
-			const { scores, url, emulatedFormFactor } = result;
-
-			return (
+		}${data.data.reduce(
+			(accumulated, { scores, url, emulatedFormFactor }) =>
 				`${accumulated}<tr><td><a href="${url.trim()}">${
 					(url[url.length - 1] === "/" ? url : `${url}/`)
 						.trim()
@@ -161,9 +159,9 @@ try {
 				)}</td><td>` +
 				`<a href="https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
 					`https://${url.trim()}`,
-				)}&tab=${emulatedFormFactor}">More information</a></td></tr>`
-			);
-		}, "")}</tbody><tfoot><tr><td colspan="2"><b>Overall</b></td>` +
+				)}&tab=${emulatedFormFactor}">More information</a></td></tr>`,
+			"",
+		)}</tbody><tfoot><tr><td colspan="2"><b>Overall</b></td>` +
 			`<td><b>${allScores.map(addEmoji).join("</b></td><td><b>")}</b></td>` +
 			`<td colspan="2"><b><i>${addEmoji(
 				getAverage(allScores),
