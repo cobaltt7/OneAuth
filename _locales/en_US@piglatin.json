@@ -101,10 +101,10 @@
 				"string": "Insteadyay, OneAuth aymay orestay ataday onyay ouryay eviceday inyay ethay ormfay ofyay ookiescay."
 			},
 			"languages": {
-				"string": ""
+				"string": "Eway alwaysyay orestay ayay ookiecay osay eway ancay ememberray ouryay eferredpray anguagelay otay iewvay OneAuth inyay. "
 			},
 			"jwt": {
-				"string": "",
+				"string": "Atyay imestay, eway aymay alsoyay avesay ayay ookiecay ontainingcay ouryay ersonalpay informationyay, obtainedyay oughthray ayay ird-partythay ervicesay {0}.",
 				"developer_comment": "The placeholder is “(detailed below)”. I moved it out so I could link it."
 			},
 			"below": {
@@ -112,14 +112,14 @@
 				"developer_comment": "Only ever used in the “jwt” string."
 			},
 			"assets": {
-				"string": ""
+				"string": "Eway aymay alsoyay useyay imagesyay, JavaScript ilesfay, andyay ingstylay ilesfay omfray otheryay ebsitesway, andyay eythay aymay alsoyay orestay ookiescay onyay ouryay eviceday. "
 			},
 			"direct": {
-				"string": ""
+				"string": "OneAuth aymay irectday ouyay otay ird-partythay ebsitesway atthay areyay overnedgay ybay eirthay ownyay ivacypray oliciespay. "
 			},
 			"controlless": { "string": "Eway oday otnay avehay accessyay otay oryay ontrolcay overyay osethay ervicesay." },
 			"receive": {
-				"string": ""
+				"string": "OneAuth aymay eceiveray ivatepray informationyay aboutyay ouyay omfray ariousvay ird-partythay ebsitesway enwhay ouyay ickclay onyay eirthay iconyay. "
 			},
 			"store": {
 				"string": ""
