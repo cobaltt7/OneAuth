@@ -130,7 +130,7 @@
 		"globby": "^12.0.2",
 		"highlight.js": "^11.2.0",
 		"isomorphic-fetch": "^3.0.0",
-		"jose-node-esm-runtime": "^3.17.0",
+		"jose-node-esm-runtime": "^3.18.0",
 		"live-plugin-manager": "^0.16.0",
 		"marked": "^3.0.4",
 		"mongoose": "^6.0.7",
