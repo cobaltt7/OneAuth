@@ -26,7 +26,7 @@ jobs:
                   token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Node.JS
-              uses: actions/setup-node@v2.4.0
+              uses: actions/setup-node@v2.4.1
               with:
                   node-version: 16
                   cache: "npm"
@@ -58,7 +58,7 @@ jobs:
                   token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Node.JS
-              uses: actions/setup-node@v2.4.0
+              uses: actions/setup-node@v2.4.1
               with:
                   node-version: 16
                   cache: "npm"
@@ -90,7 +90,7 @@ jobs:
                   token: ${{ secrets.WGYTBOT }}
 
             - name: Setup Node.JS
-              uses: actions/setup-node@v2.4.0
+              uses: actions/setup-node@v2.4.1
               with:
                   node-version: 16
                   cache: "npm"
@@ -146,7 +146,7 @@ jobs:
                   token: ${{ secrets.WGYTBOT || secrets.GITHUB_TOKEN }}
 
             - name: Setup Node.JS
-              uses: actions/setup-node@v2.4.0
+              uses: actions/setup-node@v2.4.1
               with:
                   node-version: 16
                   cache: "npm"
