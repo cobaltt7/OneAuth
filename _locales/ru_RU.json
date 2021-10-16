@@ -4,18 +4,18 @@
 		"about": {
 			"title": { "string": "" },
 			"heading": { "string": "" },
-			"about": { "string": "" },
+			"about": { "string": "О проекте" },
 			"description": {
 				"string": ""
 			},
 			"clients": {
-				"string": "{0, plural, one {} few {} many {} other {}}"
+				"string": "{0, plural, one {Мы поддерживаем {0} клиент, и в будущем появятся ещё.} few {Мы поддерживаем {0} клиентов, и в будущем появятся ещё.} many {Мы поддерживаем {0} клиентов, и в будущем появятся ещё.} other {Мы поддерживаем {0} клиентов, и в будущем появятся ещё.}}"
 			},
-			"supported": { "string": "" },
+			"supported": { "string": "Поддерживаемые клиенты" },
 			"demo": { "string": "" }
 		},
 		"developers": {
-			"heading": { "string": "" },
+			"heading": { "string": "Для разработчиков" },
 			"streamlined": {
 				"string": ""
 			},
