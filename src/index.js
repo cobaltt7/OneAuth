@@ -28,9 +28,7 @@ app.engine("html", mustacheEngine);
 app.engine("css", mustacheEngine);
 app.enable("json escape");
 app.disable("strict routing");
-
-if (process.env.NODE_ENV === "development") app.set("view cache", false);
-else app.set("view cache", true);
+app.set("view cache", process.env.NODE_ENV === "production");
 
 app.set("views", directory);
 app.disable("x-powered-by");
@@ -47,8 +45,13 @@ app.use(
 app.use((request, response, next) => {
 	let directive = "";
 
-	if (request.path.includes(".css")) directive = "public, max-age=86400";
-	else if (request.path.includes(".")) directive = "public, max-age=31536000, immutable";
+	// No cache on development server
+	if (process.env.NODE_ENV !== "production") directive = "no-store, max-age=0";
+	// 14 days
+	else if (request.path.includes(".css")) directive = "public, max-age=1209600000";
+	// 50 days
+	else if (request.path.includes(".")) directive = "public, max-age=30240000000, immutable";
+	// No cache
 	else if (request.path.includes("/auth")) directive = "no-store, max-age=0";
 
 	if (directive) response.setHeader("Cache-Control", directive);
