@@ -19,7 +19,7 @@ jobs:
                   token: ${{ secrets.WGYTBOT }}
 
             - name: Analyze
-              uses: foo-software/lighthouse-check-action@v4.0.0
+              uses: foo-software/lighthouse-check-action@v5.0.0
               id: lighthouse
               continue-on-error: true
               with:
