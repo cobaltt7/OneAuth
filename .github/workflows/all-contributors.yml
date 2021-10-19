@@ -40,9 +40,11 @@ jobs:
               run: npm install --force
 
             - name: Add
+              continue-on-error: true
               run: npx all-contributors-cli add ${{ github.event.answer.user.login }} question
 
             - name: Push
+              continue-on-error: true
               run: git push
 
     review:
@@ -72,9 +74,11 @@ jobs:
               run: npm install --force
 
             - name: Add
+              continue-on-error: true
               run: npx all-contributors-cli add ${{ github.event.review.user.login }} review
 
             - name: Push
+              continue-on-error: true
               run: git push
 
     label:
@@ -106,8 +110,7 @@ jobs:
             - name: Add
               continue-on-error: true
               run: |
-                  OUTPUT="$(node --trace-warnings --harmony .github/workflows/all-contributors-label.js '${{ github.event.label.name }}' ${{ github.event.pull_request.user.login }} ${{
-                  github.event.discussion.user.login }} ${{ github.event.issue.user.login }})"
+                  OUTPUT="$(node --trace-warnings --harmony .github/workflows/all-contributors-label.js '${{ github.event.label.name }}' ${{ github.event.pull_request.user.login }} ${{ github.event.discussion.user.login }} ${{ github.event.issue.user.login }})"
                   echo $OUTPUT
                   eval $OUTPUT
 
@@ -160,6 +163,7 @@ jobs:
               run: npm install --force
 
             - name: Add
+              continue-on-error: true
               run: |
                   OUTPUT="$(node --trace-warnings --harmony .github/workflows/all-contributors-push.js ${{ secrets.WGYTBOT }} `git log --pretty=%H --no-merges ${{ github.event.before }}..${{ github.event.after }}`)"
                   echo $OUTPUT
