@@ -126,6 +126,8 @@ try {
 		]),
 	).map(getAverage);
 
+	console.log(data.data[0].emulatedFormFactor)
+
 	commentOnDiscussion(
 		`${
 			"<h2>Today’s Lighthouse scores</h2><br /> <br />" +

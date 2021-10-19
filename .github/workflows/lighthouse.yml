@@ -23,7 +23,7 @@ jobs:
               id: lighthouse
               continue-on-error: true
               with:
-                  emulatedFormFactor: all
+                  device: all
                   locale: en
                   prCommentEnabled: false
                   verbose: true
