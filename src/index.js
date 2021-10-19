@@ -43,18 +43,19 @@ app.use(
 );
 
 app.use((request, response, next) => {
-	let directive = "";
+	// Default: 4 weeks
+	let directive = "public, max-age=2419200000";
 
 	// No cache on development server
 	if (process.env.NODE_ENV !== "production") directive = "no-store, max-age=0";
-	// 14 days
+	// 2 weeks
 	else if (request.path.includes(".css")) directive = "public, max-age=1209600000";
-	// 50 days
-	else if (request.path.includes(".")) directive = "public, max-age=30240000000, immutable";
+	// 6 weeks
+	else if (request.path.includes(".")) directive = "public, max-age=3628800000, immutable";
 	// No cache
 	else if (request.path.includes("/auth")) directive = "no-store, max-age=0";
 
-	if (directive) response.setHeader("Cache-Control", directive);
+	response.setHeader("Cache-Control", directive);
 
 	return next();
 });
