@@ -13,13 +13,13 @@ const { contributors = [] } = JSON.parse(
 	/** @type {{ [key: string]: string[] | undefined }} */
 	NEW_CONTRIBUTORS = {},
 	/** @type {Promise<import("../../types").Commit>[]} */
-	commitPromises = process.argv[3].split(/\s+/g).map((hash) =>
+	commitPromises =( process.argv[3]?.split(/\s+/g).map((hash) =>
 		fetch(`https://api.github.com/repos/onedotprojects/auth/commits/${hash}`, {
 			headers: {
 				Authorization: `token ${process.argv[2]}`,
 			},
 		}).then((result) => result.json()),
-	);
+	))||[];
 
 for (const commit of await Promise.all(commitPromises)) {
 	if (!commit.commit) continue;
