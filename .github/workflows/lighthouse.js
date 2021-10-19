@@ -89,7 +89,7 @@ function addEmoji(number) {
  * 	code: string;
  * 	data: {
  * 		url: string;
- * 		emulatedFormFactor: string;
+ * 		device: string;
  * 		scores: {
  * 			accessibility: number;
  * 			bestPractices: number;
@@ -126,8 +126,6 @@ try {
 		]),
 	).map(getAverage);
 
-	console.log(data.data[0].emulatedFormFactor)
-
 	commentOnDiscussion(
 		`${
 			"<h2>Today’s Lighthouse scores</h2><br /> <br />" +
@@ -140,13 +138,11 @@ try {
 			"<th>Overall</th>" +
 			"<th>PageSpeed Insights</th></tr></thead><tbody>"
 		}${data.data.reduce(
-			(accumulated, { scores, url, emulatedFormFactor }) =>
+			(accumulated, { scores, url, device }) =>
 				`${accumulated}<tr><td><a href="${url.trim()}">${
-					(url[url.length - 1] === "/" ? url : `${url}/`)
-						.trim()
-						.split("auth.onedot.cf")[1]
+					url.trim().split("auth.onedot.cf")[1]
 				}</a></td>` +
-				`<td>${emulatedFormFactor}</td>` +
+				`<td>${device}</td>` +
 				`<td>${addEmoji(scores.accessibility)}</td>` +
 				`<td>${addEmoji(scores.bestPractices)}</td>` +
 				`<td>${addEmoji(scores.performance)}</td>` +
@@ -160,8 +156,8 @@ try {
 					]),
 				)}</td><td>` +
 				`<a href="https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
-					`https://${url.trim()}`,
-				)}&tab=${emulatedFormFactor}">More information</a></td></tr>`,
+					url.trim(),
+				)}&tab=${device}">More information</a></td></tr>`,
 			"",
 		)}</tbody><tfoot><tr><td colspan="2"><b>Overall</b></td>` +
 			`<td><b>${allScores.map(addEmoji).join("</b></td><td><b>")}</b></td>` +
