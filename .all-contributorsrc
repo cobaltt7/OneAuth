@@ -40,7 +40,8 @@
         "security",
         "translation",
         "infra",
-        "business"
+        "business",
+        "code"
       ]
     },
     {

@@ -128,7 +128,7 @@
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
 		"globby": "^12.0.2",
-		"highlight.js": "^11.2.0",
+		"highlight.js": "^11.3.1",
 		"isomorphic-fetch": "^3.0.0",
 		"jose-node-esm-runtime": "^3.20.1",
 		"live-plugin-manager": "^0.16.0",
@@ -184,7 +184,7 @@
 		"prettier": "^2.4.1",
 		"prettier-plugin-ini": "^0.3.1",
 		"prettier-plugin-jsdoc": "^0.3.24",
-		"replace-in-file": "^6.2.0",
+		"replace-in-file": "^6.3.1",
 		"tailwindcss": "^2.2.17",
 		"typescript": "^4.4.4"
 	},
