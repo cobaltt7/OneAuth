@@ -126,7 +126,7 @@ try {
 		]),
 	).map(getAverage);
 
-	console.log(data.data[0].emulatedFormFactor)
+	console.log(data.data[0].emulatedFormFactor);
 
 	commentOnDiscussion(
 		`${

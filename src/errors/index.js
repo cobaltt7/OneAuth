@@ -69,7 +69,7 @@ function statusMiddleware(request, response, statusCode = response.statusCode, m
 
 		const returnValue = response._status(statusCode);
 
-		logError(`${statusCode} at ${request.url}${message ? ` with message ${message}` : ""}`);
+		logError(`${statusCode} at ${request.path}${message ? ` with message ${message}` : ""}`);
 
 		if (request.accepts("html")) response.render(path.resolve(directory, "error.html"), error);
 		else response.json(error);
