@@ -138,16 +138,16 @@ const ConfigDatabase = mongoose.model(
 		`${process.env.EC_PUBLIC_KEY_0}\n${process.env.EC_PUBLIC_KEY_1}\n${process.env.EC_PUBLIC_KEY_2}\n${process.env.EC_PUBLIC_KEY_3}`,
 	);
 
-// new ConfigDatabase({
-// 	customClients: [{icon:"https://discord.com/favicon.ico",name:"disc",link:"https://discord.com"}]
+// New ConfigDatabase({
+// 	CustomClients: [{icon:"https://discord.com/favicon.ico",name:"disc",link:"https://discord.com"}]
 // 	, disabledClients: ["Scratch"],
-// 	logo:"",redirect:"http://localhost:3000/backend/get_data",
-// 	identifier:retronid()
+// 	Logo:"",redirect:"http://localhost:3000/backend/get_data",
+// 	Identifier:retronid()
 // }).save().then(console.log);
 
 app.all("/auth", async (request, response) => {
 	const config = request.query.id
-		? await ConfigDatabase.findOne({ identifier:`${ request.query.id}` })
+		? await ConfigDatabase.findOne({ identifier: `${request.query.id}` })
 		: { customClients: [], disabledClients: [], redirect: request.query.url };
 
 	try {
