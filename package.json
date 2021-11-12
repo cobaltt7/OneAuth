@@ -118,7 +118,7 @@
 		]
 	},
 	"dependencies": {
-		"@ultraq/icu-message-formatter": "^0.11.1",
+		"@ultraq/icu-message-formatter": "^0.12.0",
 		"accepts": "^1.3.7",
 		"atob": "^2.1.2",
 		"balanced-match": "^2.0.0",
