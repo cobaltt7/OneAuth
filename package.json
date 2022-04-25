@@ -179,7 +179,7 @@
 		"postcss-import": "^14.0.2",
 		"postcss-map-get": "^0.3.0",
 		"postcss-nested": "^5.0.6",
-		"postcss-scss": "^4.0.1",
+		"postcss-scss": "^4.0.4",
 		"postcss-sort-media-queries": "^4.1.0",
 		"prettier": "^2.4.1",
 		"prettier-plugin-ini": "^0.3.1",
