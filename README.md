@@ -1,5 +1,7 @@
 # [![OneAuth logo](https://auth.onedot.cf/logo.svg)](https://auth.onedot.cf/)
 
+**This is currently unmaintained.** Maybe someday I'll come back to this.
+
 ## OneAuth All-In-One Authentication
 
 [Cloud hosted on opeNode.io](https://www.openode.io/)
