@@ -26,7 +26,7 @@
 		"lint:mustaches": "node --trace-warnings --harmony .github/workflows/mustaches.js",
 		"lint:typescript": "tsc --project jsconfig.json",
 		"start": "node --trace-warnings --harmony src/index.js",
-		"build:tailwind": "postcss src/tailwind.sass --output src/main/style.css"
+		"build:tailwind": "postcss src/tailwind.scss --output src/main/style.css"
 	},
 	"prettier": {
 		"iniSpaceAroundEquals": true,
@@ -66,7 +66,7 @@
 			},
 			{
 				"files": [
-					"**.sass",
+					"**.scss",
 					"**.scss",
 					"**.css"
 				],
@@ -116,6 +116,10 @@
 			"prettier-plugin-jsdoc",
 			"prettier-plugin-ini"
 		]
+	},
+	"repository": {
+	  "type": "git",
+	  "url": "git+https://github.com/onedotprojects/auth.git"
 	},
 	"dependencies": {
 		"@ultraq/icu-message-formatter": "^0.11.1",

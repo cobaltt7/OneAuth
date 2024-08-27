@@ -56,7 +56,7 @@ for (const commit of await Promise.all(commitPromises)) {
 		)
 			values.push("translation");
 
-		if (filename === "src/tailwind.sass") values.push("design");
+		if (filename === "src/tailwind.scss") values.push("design");
 
 		if (filename === "_locales/en_US.json") values.push("content");
 

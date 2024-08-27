@@ -8,7 +8,7 @@
 declare.d.ts
 global.d.ts
 jsconfig.json
-src/tailwind.sass
+src/tailwind.scss
 LICENSE
 PAGE_TEMPLATE.html
 tailwind.config.cjs

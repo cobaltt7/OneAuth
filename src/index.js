@@ -10,6 +10,7 @@ import express, { urlencoded } from "express";
 import mustacheExpress from "mustache-express";
 
 import localization from "../lib/localization.js";
+import accounts from "./accounts/index.js";
 import auth from "./auth/index.js";
 import documentation from "./docs/index.js";
 import errors from "./errors/index.js";
@@ -49,7 +50,8 @@ app.use((request, response, next) => {
 
 	if (request.path.includes(".css")) directive = "public, max-age=86400";
 	else if (request.path.includes(".")) directive = "public, max-age=31536000, immutable";
-	else if (request.path.includes("/auth")) directive = "no-store, max-age=0";
+	else if (request.path.startsWith("/auth") || request.path.startsWith("/accounts"))
+		directive = "no-store, max-age=0";
 
 	if (directive) response.setHeader("Cache-Control", directive);
 
@@ -75,6 +77,7 @@ app.use(errors);
 app.use("/docs", documentation);
 app.use(main);
 app.use(auth);
+app.use(accounts);
 
 app.use((_, response) => response.status(404));
 

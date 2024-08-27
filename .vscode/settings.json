@@ -54,7 +54,7 @@
 		"*.txt": "plaintext",
 		"config": "ini",
 		".transifexrc": "ini",
-		"*.sass": "scss",
+		"*.scss": "scss",
 		"*.draw": "json",
 		".all-contributorsrc": "json",
 		"LICENSE": "markdown",

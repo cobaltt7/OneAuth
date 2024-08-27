@@ -15,7 +15,7 @@ module.exports = {
 	plugins: [columns, forms, typography],
 
 	purge: {
-		content: ["./src/**/**.html", "./src/**/**/**.html", "./src/tailwind.sass"],
+		content: ["./src/**/**.html", "./src/**/**/**.html", "./src/tailwind.scss"],
 		mode: "all",
 
 		options: {

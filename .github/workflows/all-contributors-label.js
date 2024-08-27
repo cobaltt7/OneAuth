@@ -61,7 +61,7 @@ if (process.argv[2].startsWith("type: bug")) {
 			break;
 		}
 
-		case "language: sass":
+		case "language: scss":
 		case "scope: design": {
 			contributions.push("design");
 
